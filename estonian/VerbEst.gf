@@ -1,6 +1,6 @@
---1 Verb Phrases in Finnish
+--1 Verb Phrases in Estonian
 
-concrete VerbFin of Verb = CatFin ** open Prelude, ResFin in {
+concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
 
   flags optimize=all_subs ;
 
@@ -119,7 +119,7 @@ concrete VerbFin of Verb = CatFin ** open Prelude, ResFin in {
 --2 The object case
 --
 -- The rules involved are ComplV2 and ComplVV above.
--- The work is done jointly in ResFin.infVP and appCompl. 
+-- The work is done jointly in ResEst.infVP and appCompl. 
 -- Cases to test: l -table (to see negated forms)
 --```
 --   minun täytyy ostaa auto

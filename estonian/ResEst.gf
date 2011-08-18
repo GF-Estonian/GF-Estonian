@@ -7,7 +7,7 @@
 -- implement $Test$, it moreover contains regular lexical
 -- patterns needed for $Lex$.
 
-resource ResFin = ParamX ** open Prelude in {
+resource ResEst = ParamX ** open Prelude in {
 
   flags optimize=all ;
 

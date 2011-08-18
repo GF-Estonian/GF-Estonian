@@ -1,4 +1,4 @@
-concrete RelativeFin of Relative = CatFin ** open Prelude, ResFin, MorphoFin in {
+concrete RelativeEst of Relative = CatEst ** open Prelude, ResEst, MorphoEst in {
 
   flags optimize=all_subs ;
 

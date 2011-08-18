@@ -1,19 +1,19 @@
 --# -path=.:../abstract:../common:prelude
 
-concrete GrammarFin of Grammar = 
-  NounFin, 
-  VerbFin, 
-  AdjectiveFin,
-  AdverbFin,
-  NumeralFin,
-  SentenceFin,
-  QuestionFin,
-  RelativeFin,
-  ConjunctionFin,
-  PhraseFin,
+concrete GrammarEst of Grammar = 
+  NounEst, 
+  VerbEst, 
+  AdjectiveEst,
+  AdverbEst,
+  NumeralEst,
+  SentenceEst,
+  QuestionEst,
+  RelativeEst,
+  ConjunctionEst,
+  PhraseEst,
   TextX,
-  IdiomFin,
-  StructuralFin,
+  IdiomEst,
+  StructuralEst,
   TenseX
   ** {
 

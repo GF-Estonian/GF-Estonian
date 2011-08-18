@@ -1,4 +1,4 @@
-concrete NounFin of Noun = CatFin ** open ResFin, MorphoFin, Prelude in {
+concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
 
   flags optimize=all_subs ;
 

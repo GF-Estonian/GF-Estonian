@@ -1,4 +1,4 @@
-concrete AdjectiveFin of Adjective = CatFin ** open ResFin, Prelude in {
+concrete AdjectiveEst of Adjective = CatEst ** open ResEst, Prelude in {
 
   flags optimize=all_subs ; -- gfc size from 2864336 to 6786 - i.e. factor 422
 

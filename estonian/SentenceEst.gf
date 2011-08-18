@@ -1,4 +1,4 @@
-concrete SentenceFin of Sentence = CatFin ** open Prelude, ResFin in {
+concrete SentenceEst of Sentence = CatEst ** open Prelude, ResEst in {
 
   flags optimize=all_subs ;
 

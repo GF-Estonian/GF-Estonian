@@ -1,5 +1,5 @@
-concrete StructuralFin of Structural = CatFin ** 
-  open MorphoFin, ParadigmsFin, (X = ConstructX), MakeStructuralFin, Prelude in {
+concrete StructuralEst of Structural = CatEst ** 
+  open MorphoEst, ParadigmsEst, (X = ConstructX), MakeStructuralEst, Prelude in {
 
   flags optimize=all ;
 
@@ -98,11 +98,11 @@ concrete StructuralFin of Structural = CatFin **
     } ;
   somewhere_Adv = ss "jossain" ;
   that_Quant = heavyQuant {
-    s1 = table (MorphoFin.Number) {
-          Sg => table (MorphoFin.Case) {
+    s1 = table (MorphoEst.Number) {
+          Sg => table (MorphoEst.Case) {
             c => (mkPronoun "tuo" "tuon" "tuota" "tuona" "tuohon" Sg P3).s ! NPCase c
             } ;
-          Pl => table (MorphoFin.Case) {
+          Pl => table (MorphoEst.Case) {
             c => (mkPronoun "nuo" "noiden" "noita" "noina" "noihin" Sg P3).s ! NPCase c
             }
           } ;
@@ -115,11 +115,11 @@ concrete StructuralFin of Structural = CatFin **
   therefore_PConj = ss "siksi" ;
   they_Pron = mkPronoun "he" "heid‰n" "heit‰" "hein‰" "heihin"  Pl P3 ; --- ne
   this_Quant = heavyQuant {
-    s1 = table (MorphoFin.Number) {
-          Sg => table (MorphoFin.Case) {
+    s1 = table (MorphoEst.Number) {
+          Sg => table (MorphoEst.Case) {
             c => (mkPronoun "t‰m‰" "t‰m‰n" "t‰t‰" "t‰n‰" "t‰h‰n" Sg P3).s ! NPCase c
             } ;
-          Pl => table (MorphoFin.Case) {
+          Pl => table (MorphoEst.Case) {
             c => (mkPronoun "n‰m‰" "n‰iden" "n‰it‰" "n‰in‰" "n‰ihin" Sg P3).s ! NPCase c
             }
           } ;
@@ -165,7 +165,7 @@ concrete StructuralFin of Structural = CatFin **
     {s = p.s ; a = AgPol} ;
 
 oper
-  jokuPron : MorphoFin.Number => (MorphoFin.Case) => Str =
+  jokuPron : MorphoEst.Number => (MorphoEst.Case) => Str =
     let 
       kui = mkN "kuu" 
     in
@@ -181,7 +181,7 @@ oper
         }
       } ;
 
-  jokinPron : MorphoFin.Number => (MorphoFin.Case) => Str =
+  jokinPron : MorphoEst.Number => (MorphoEst.Case) => Str =
     table {
       Sg => table {
         Nom => "jokin" ;
@@ -194,7 +194,7 @@ oper
         }
       } ;
 
-  mikaInt : MorphoFin.Number => (MorphoFin.Case) => Str = 
+  mikaInt : MorphoEst.Number => (MorphoEst.Case) => Str = 
     let {
       mi  = mkN "mi"
     } in
@@ -213,7 +213,7 @@ oper
         }
       } ;
 
-  kukaInt : MorphoFin.Number => (MorphoFin.Case) => Str = 
+  kukaInt : MorphoEst.Number => (MorphoEst.Case) => Str = 
     let 
       kuka = mkN "kuka" "kenen" "ket‰" "ken‰" "keneen" 
                  "keiden" "keit‰" "kein‰" "keiss‰" "keihin" ;
@@ -227,7 +227,7 @@ oper
         c   => kuka.s ! NCase Pl c
         }
       } ;
-  mikaanPron : MorphoFin.Number => (MorphoFin.Case) => Str = \\n,c =>
+  mikaanPron : MorphoEst.Number => (MorphoEst.Case) => Str = \\n,c =>
     case <n,c> of {
         <Sg,Nom> => "mik‰‰n" ;
         <_,Part> => "mit‰‰n" ;
@@ -242,7 +242,7 @@ oper
         _   => mikaInt ! n ! c + "k‰‰n"
        } ; 
 
-  kukaanPron : MorphoFin.Number => (MorphoFin.Case) => Str =
+  kukaanPron : MorphoEst.Number => (MorphoEst.Case) => Str =
     table {
       Sg => table {
         Nom => "kukaan" ;
@@ -269,7 +269,7 @@ oper
 
 
 oper
-  makeNP  : N -> MorphoFin.Number -> CatFin.NP ; 
+  makeNP  : N -> MorphoEst.Number -> CatEst.NP ; 
   makeNP noun num = {
     s = \\c => noun.s ! NCase num (npform2case num c) ; 
     a = agrP3 num ;

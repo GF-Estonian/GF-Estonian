@@ -1,4 +1,4 @@
-concrete QuestionFin of Question = CatFin ** open ResFin, Prelude in {
+concrete QuestionEst of Question = CatEst ** open ResEst, Prelude in {
 
   flags optimize=all_subs ;
 
@@ -45,7 +45,7 @@ concrete QuestionFin of Question = CatFin ** open ResFin, Prelude in {
       n = ip.n
       } ;
 
--- The computation of $ncase$ is a special case of that in $NounFin.DetCN$,
+-- The computation of $ncase$ is a special case of that in $NounEst.DetCN$,
 -- since we don't have possessive suffixes or definiteness. 
 --- It could still be nice to have a common oper...
 

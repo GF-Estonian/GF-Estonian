@@ -1,5 +1,5 @@
-concrete ConjunctionFin of Conjunction = 
-  CatFin ** open ResFin, Coordination, Prelude in {
+concrete ConjunctionEst of Conjunction = 
+  CatEst ** open ResEst, Coordination, Prelude in {
 
   flags optimize=all_subs ;
 

@@ -1,4 +1,4 @@
-concrete NumeralFin of Numeral = CatFin [Numeral,Digits] **  open Prelude, ParadigmsFin, MorphoFin in {
+concrete NumeralEst of Numeral = CatEst [Numeral,Digits] **  open Prelude, ParadigmsEst, MorphoEst in {
 
 -- Notice: possessive forms are not used. They get wrong, since every
 -- part is made to agree in them.
@@ -6,9 +6,9 @@ concrete NumeralFin of Numeral = CatFin [Numeral,Digits] **  open Prelude, Parad
 flags optimize = all_subs ;
 
 lincat 
-  Sub1000000 = {s : CardOrd => Str ; n : MorphoFin.Number} ;
+  Sub1000000 = {s : CardOrd => Str ; n : MorphoEst.Number} ;
   Digit = {s : CardOrd => Str} ;
-  Sub10, Sub100, Sub1000 = {s : NumPlace => CardOrd => Str ; n : MorphoFin.Number} ;
+  Sub10, Sub100, Sub1000 = {s : NumPlace => CardOrd => Str ; n : MorphoEst.Number} ;
 
 lin 
   num x = x ;
@@ -123,7 +123,7 @@ oper
       }
     } ;
 
-  sataaN : {s : MorphoFin.Number => CardOrd => Str} = {s = table {
+  sataaN : {s : MorphoEst.Number => CardOrd => Str} = {s = table {
     Sg => sataN.s ;
     Pl => table {
       NCard (NCase Sg Nom) => "sataa" ;
@@ -154,7 +154,7 @@ oper
     } ;
 
     D_0 = mkDig "0" ;
-    D_1 = mk3Dig "1" "1." MorphoFin.Sg ;
+    D_1 = mk3Dig "1" "1." MorphoEst.Sg ;
     D_2 = mkDig "2" ;
     D_3 = mkDig "3" ;
     D_4 = mkDig "4" ;
@@ -165,16 +165,16 @@ oper
     D_9 = mkDig "9" ;
 
   oper
-    mk2Dig : Str -> Str -> TDigit = \c,o -> mk3Dig c o MorphoFin.Pl ;
+    mk2Dig : Str -> Str -> TDigit = \c,o -> mk3Dig c o MorphoEst.Pl ;
     mkDig : Str -> TDigit = \c -> mk2Dig c (c + ".") ;
 
-    mk3Dig : Str -> Str -> MorphoFin.Number -> TDigit = \c,o,n -> {
+    mk3Dig : Str -> Str -> MorphoEst.Number -> TDigit = \c,o,n -> {
       s = table {NCard _ => c ; NOrd _ => o} ;
       n = n
       } ;
 
     TDigit = {
-      n : MorphoFin.Number ;
+      n : MorphoEst.Number ;
       s : CardOrd => Str
     } ;
 

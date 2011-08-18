@@ -1,5 +1,5 @@
-concrete IdiomFin of Idiom = CatFin ** 
-  open MorphoFin, ParadigmsFin, Prelude in {
+concrete IdiomEst of Idiom = CatEst ** 
+  open MorphoEst, ParadigmsEst, Prelude in {
 
   flags optimize=all_subs ;
 

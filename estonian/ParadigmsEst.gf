@@ -1,6 +1,6 @@
 --# -path=.:../abstract:../common:../../prelude
 
---1 Finnish Lexical Paradigms
+--1 Estnish Lexical Paradigms
 --
 -- Aarne Ranta 2003--2008
 --
@@ -11,21 +11,21 @@
 -- Closed categories (determiners, pronouns, conjunctions) are
 -- accessed through the resource syntax API and $Structural.gf$. 
 --
--- The main difference with $MorphoFin.gf$ is that the types
+-- The main difference with $MorphoEst.gf$ is that the types
 -- referred to are compiled resource grammar types. We have moreover
 -- had the design principle of always having existing forms, rather
 -- than stems, as string arguments of the paradigms.
 --
 -- The structure of functions for each word class $C$ is the following:
 -- there is a polymorphic constructor $mkC$, which takes one or
--- a few arguments. In Finnish, one argument is enough in 80-90% of
+-- a few arguments. In Estnish, one argument is enough in 80-90% of
 -- cases in average.
 
-resource ParadigmsFin = open 
+resource ParadigmsEst = open 
   (Predef=Predef), 
   Prelude, 
-  MorphoFin,
-  CatFin
+  MorphoEst,
+  CatEst
   in {
 
   flags optimize=noexpand ;
@@ -35,7 +35,7 @@ resource ParadigmsFin = open
 -- To abstract over gender, number, and (some) case names, 
 -- we define the following identifiers. The application programmer
 -- should always use these constants instead of the constructors
--- defined in $ResFin$.
+-- defined in $ResEst$.
 
 oper
   Number   : Type ;
@@ -69,10 +69,10 @@ oper
   postGenPrep :         Str -> Prep ;  -- genitive postposition, e.g. "takana"
   casePrep    : Case ->        Prep ;  -- just case, e.g. adessive
 
-  NK : Type ;   -- Noun from DictFin (Kotus)
-  AK : Type ;   -- Adjective from DictFin (Kotus)
-  VK : Type ;   -- Verb from DictFin (Kotus)
-  AdvK : Type ; -- Adverb from DictFin (Kotus)
+  NK : Type ;   -- Noun from DictEst (Kotus)
+  AK : Type ;   -- Adjective from DictEst (Kotus)
+  VK : Type ;   -- Verb from DictEst (Kotus)
+  AdvK : Type ; -- Adverb from DictEst (Kotus)
 
 --2 Nouns
 
@@ -102,7 +102,7 @@ oper
     mkN : (olo,n,a,na,oon,jen,ja,ina,issa,ihin : Str) -> N ; -- worst case, 10 forms
     mkN : (pika : Str) -> (juna  : N) -> N ; -- compound with invariable prefix
     mkN : (oma : N)    -> (tunto : N) -> N ; -- compound with inflecting prefix
-    mkN : NK -> N ;  -- noun from DictFin (Kotus)
+    mkN : NK -> N ;  -- noun from DictEst (Kotus)
   } ;
 
 -- Nouns used as functions need a case, of which the default is
@@ -137,7 +137,7 @@ oper
     mkA : N -> A ;    -- any noun made into adjective
     mkA : N -> (kivempi,kivin : Str) -> A ; -- deviating comparison forms
     mkA : (hyva,prmpi,pras : N) -> (hyvin,pmmin,prhten : Str) -> A ; -- worst case adj
-    mkA : AK -> A ;  -- adjective from DictFin (Kotus)
+    mkA : AK -> A ;  -- adjective from DictEst (Kotus)
   } ;
 
 -- Two-place adjectives need a case for the second argument.
@@ -159,7 +159,7 @@ oper
     mkV : (huutaa,huusi : Str) -> V ; -- deviating past 3sg
     mkV : (huutaa,huudan,huusi : Str) -> V ; -- also deviating pres. 1sg
     mkV : (huutaa,dan,taa,tavat,takaa,detaan,sin,si,sisi,tanut,dettu,tanee : Str) -> V ; -- worst-case verb
-    mkV : VK -> V ;  -- verb from DictFin (Kotus)
+    mkV : VK -> V ;  -- verb from DictEst (Kotus)
   } ;
 
 -- All the patterns above have $nominative$ as subject case.
@@ -231,8 +231,8 @@ oper
 -- The definitions should not bother the user of the API. So they are
 -- hidden from the document.
 
-  Case = MorphoFin.Case ;
-  Number = MorphoFin.Number ;
+  Case = MorphoEst.Case ;
+  Number = MorphoEst.Number ;
 
   singular = Sg ;
   plural = Pl ;

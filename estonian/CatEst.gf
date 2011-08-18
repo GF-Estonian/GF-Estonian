@@ -1,4 +1,4 @@
-concrete CatFin of Cat = CommonX ** open ResFin, Prelude in {
+concrete CatEst of Cat = CommonX ** open ResEst, Prelude in {
 
   flags optimize=all_subs ;
 
@@ -13,13 +13,13 @@ concrete CatFin of Cat = CommonX ** open ResFin, Prelude in {
 
 -- Sentence
 
-    Cl    = {s : ResFin.Tense => Anteriority => Polarity => SType => Str} ;
-    ClSlash = {s : ResFin.Tense => Anteriority => Polarity => Str ; c2 : Compl} ;
+    Cl    = {s : ResEst.Tense => Anteriority => Polarity => SType => Str} ;
+    ClSlash = {s : ResEst.Tense => Anteriority => Polarity => Str ; c2 : Compl} ;
     Imp   = {s : Polarity => Agr => Str} ;
 
 -- Question
 
-    QCl    = {s : ResFin.Tense => Anteriority => Polarity => Str} ;
+    QCl    = {s : ResEst.Tense => Anteriority => Polarity => Str} ;
     IP     = {s : NPForm => Str ; n : Number} ;
     IComp  = {s : Agr => Str} ; 
     IDet   = {s : Case => Str ; n : Number ; isNum : Bool} ;
@@ -27,13 +27,13 @@ concrete CatFin of Cat = CommonX ** open ResFin, Prelude in {
 
 -- Relative
 
-    RCl   = {s : ResFin.Tense => Anteriority => Polarity => Agr => Str ; c : NPForm} ;
+    RCl   = {s : ResEst.Tense => Anteriority => Polarity => Agr => Str ; c : NPForm} ;
     RP    = {s : Number => NPForm => Str ; a : RAgr} ;
 
 -- Verb
 
-    VP   = ResFin.VP ;
-    VPSlash = ResFin.VP ** {c2 : Compl} ; 
+    VP   = ResEst.VP ;
+    VPSlash = ResEst.VP ** {c2 : Compl} ; 
     Comp = {s : Agr => Str} ; 
 
 -- Adjective

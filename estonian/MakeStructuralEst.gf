@@ -1,9 +1,9 @@
 --# -path=.:../common:../abstract
 
-resource MakeStructuralFin = open CatFin, ParadigmsFin, MorphoFin, Prelude in {
+resource MakeStructuralEst = open CatEst, ParadigmsEst, MorphoEst, Prelude in {
 
 oper 
-  mkConj : Str -> Str -> ParadigmsFin.Number -> Conj = \x,y,n -> 
+  mkConj : Str -> Str -> ParadigmsEst.Number -> Conj = \x,y,n -> 
     {s1 = x ; s2 = y ; n = n ; lock_Conj = <>} ;
   mkSubj : Str -> Subj = \x -> 
     {s = x ; lock_Subj = <>} ;
