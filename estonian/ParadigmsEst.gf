@@ -314,7 +314,7 @@ oper
       rake = strongGrade ukko ;
     in
     case ukko of {
-      _ + "nen" => dNainen ukko ;
+      _ + "ne" => dNaine ukko ;
       _ + ("aa" | "ee" | "ii" | "oo" | "uu" | "yy" |"ää"|"öö") => dPuu ukko ;
       _ + ("ai" | "ei" | "oi" | "ui" | "yi" | "äi" | "öi") => dPuu ukko ;
       _ + ("ie" | "uo" | "yö") => dSuo ukko ;
