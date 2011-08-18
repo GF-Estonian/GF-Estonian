@@ -1,14 +1,14 @@
 --# -path=.:../common:prelude
 
---1 A Simple Finnish Resource Morphology
+--1 A Simple Estonian Resource Morphology
 --
--- Aarne Ranta 2002 -- 2005
+-- Inari Listenmaa, Kaarel Kaljurand
 --
 -- This resource morphology contains definitions needed in the resource
--- syntax. To build a lexicon, it is better to use $ParadigmsFin$, which
+-- syntax. To build a lexicon, it is better to use $ParadigmsEst$, which
 -- gives a higher-level access to this module.
 
-resource MorphoFin = ResFin ** open Prelude in {
+resource MorphoEst = ResEst ** open Prelude in {
 
   flags optimize=all ;
 
@@ -25,14 +25,18 @@ resource MorphoFin = ResFin ** open Prelude in {
       (lujuuksi + "en") (lujuuksi + a) 
       (lujuuksi + "n" + a) (lujuuksi + "ss" + a) (lujuuksi + "in") ; 
 
-  dNainen : Str -> NForms = \nainen ->
+
+  --Estonian paradigm!
+  dNaine : Str -> NForms = \naine ->
     let 
-      a = vowHarmony nainen ;
-      nais = Predef.tk 3 nainen + "s"
+     -- a = vowHarmony nainen ;
+      nais = Predef.tk 2 naine + "s"
     in nForms10
-      nainen (nais + "en") (nais + "t" + a) (nais + "en" + a) (nais + "een")
-      (nais + "ten") (nais + "i" + a) 
-      (nais + "in" + a) (nais + "iss" + a) (nais + "iin") ; 
+      naine (nais + "e") (nais + "t") (nais + "ena") (nais + "esse")
+      (nais + "te") (nais + "i") -- pl gen, pl part
+      (nais + "tena") (nais + "tes") (nais + "tesse") ; -- pl ess, ine, ill
+   --end Estonian paradigm
+
 
   dPaluu : Str -> NForms = \paluu ->
     let
@@ -243,15 +247,17 @@ resource MorphoFin = ResFin ** open Prelude in {
       (piennar + "ten") (pientar + "i" + a) (pientar + "in" + a)
       (pientar + "iss" + a) (pientar + "iin") ;
 
-  dUnix : (_ : Str) -> NForms = \unix ->
+  --Estonian paradigm!
+  dSeminar : (_ : Str) -> NForms = \seminar ->
     let 
-      a = vowHarmony unix ;
-      unixi = unix + "i" ; 
-      unixe = unix + "e" ; 
+      seminari = seminar + "i" ; 
+      --seminare = seminar + "e" ; 
     in nForms10
-      unix (unixi + "n") (unixi + a) (unixi + "n" + a) (unixi + "in")
-      (unixi + "en") (unixe + "j" + a) (unixe + "in" + a)
-      (unixe + "iss" + a) (unixe + "ihin") ;
+      seminar seminari seminari (seminari + "na") (seminari + "sse")
+      (seminari + "de") (seminari + "sid") (seminari + "dena") -- pl gen, part???, ess
+      (seminari + "des") (seminari + "desse") ; -- pl ine, ill
+  --end Estonian paradigm
+
 
   dNukke : (_,_ : Str) -> NForms = \nukke,nuken ->
     let
@@ -344,6 +350,7 @@ resource MorphoFin = ResFin ** open Prelude in {
       (ottane + "iden") (ottane + "it" + a) 
       (ottane + "in" + a) (ottane + "iss" + a) (ottane + "isiin") ; 
 
+
 -------------------
 -- auxiliaries ----
 -------------------
@@ -352,78 +359,80 @@ resource MorphoFin = ResFin ** open Prelude in {
 
     NForms : Type = Predef.Ints 9 => Str ;
 
+    --Estonian
     nForms10 : (x1,_,_,_,_,_,_,_,_,x10 : Str) -> NForms = 
-      \Ukko,ukon,ukkoa,ukkona,ukkoon,
-       ukkojen,ukkoja,ukkoina,ukoissa,ukkoihin -> table {
-      0 => Ukko ;
-      1 => ukon ;
-      2 => ukkoa ;
-      3 => ukkona ;
-      4 => ukkoon ;
-      5 => ukkojen ;
-      6 => ukkoja ;
-      7 => ukkoina ;
-      8 => ukoissa ;
-      9 => ukkoihin
+      \jogi,joe,joge,joena,joesse, -- sg nom, gen, part, ess, ill
+       jogede,jogesid,jogedena,jogedes,jogedesse -> table { -- pl gen, part, ess, ine, ill
+      0 => jogi ;
+      1 => joe ;
+      2 => joge ;
+      3 => joena ;
+      4 => joesse ;
+      5 => jogede ;
+      6 => jogesid ;
+      7 => jogedena ;
+      8 => jogedes ;
+      9 => jogedesse
       } ;
 
     Noun = {s : NForm => Str; lock_N : {}} ;
 
     nForms2N : NForms -> Noun = \f -> 
       let
-        Ukko = f ! 0 ;
-        ukon = f ! 1 ;
-        ukkoa = f ! 2 ;
-        ukkona = f ! 3 ;
-        ukkoon = f ! 4 ;
-        ukkojen = f ! 5 ;
-        ukkoja = f ! 6 ;
-        ukkoina = f ! 7 ;
-        ukoissa = f ! 8 ;
-        ukkoihin = f ! 9 ;
-        a     = last ukkoja ;
-        uko   = init ukon ;
-        ukko  = Predef.tk 2 ukkona ;
-        ukkoi = Predef.tk 2 ukkoina ;
-        ukoi  = Predef.tk 3 ukoissa ;
+        jogi = f ! 0 ;
+        joe = f ! 1 ;
+        joge = f ! 2 ;
+        joena = f ! 3 ;
+        joesse = f ! 4 ;
+        jogede = f ! 5 ;
+        jogesid = f ! 6 ;
+        jogedena = f ! 7 ;
+        jogedes = f ! 8 ;
+        jogedesse = f ! 9 ;
+        --a     = last ukkoja ; -- no vowel harmony,no need
+        --uko   = init ukon ; -- genetive is already the stem
+        jog  = Predef.tk 1 joge ; --???
+       --  = Predef.tk 2 ukkoina ;
+       -- ukoi  = Predef.tk 3 ukoissa ;
       in 
     {s = table {
-      NCase Sg Nom    => Ukko ;
-      NCase Sg Gen    => uko + "n" ;
-      NCase Sg Part   => ukkoa ;
-      NCase Sg Transl => uko + "ksi" ;
-      NCase Sg Ess    => ukkona ;
-      NCase Sg Iness  => uko + ("ss" + a) ;
-      NCase Sg Elat   => uko + ("st" + a) ;
-      NCase Sg Illat  => ukkoon ;
-      NCase Sg Adess  => uko + ("ll" + a) ;
-      NCase Sg Ablat  => uko + ("lt" + a) ;
-      NCase Sg Allat  => uko + "lle" ;
-      NCase Sg Abess  => uko + ("tt" + a) ;
+      NCase Sg Nom    => jogi ;
+      NCase Sg Gen    => joe ;
+      NCase Sg Part   => joge ;
+      NCase Sg Transl => joe + "ks" ;
+      NCase Sg Ess    => joena ;
+      NCase Sg Iness  => joe + "s" ;
+      NCase Sg Elat   => joe + "st" ;
+      NCase Sg Illat  => joesse ;
+      NCase Sg Adess  => joe + "l" ;
+      NCase Sg Ablat  => joe + "lt" ;
+      NCase Sg Allat  => joe + "le" ;
+      NCase Sg Abess  => joe + "ta" ;
 
-      NCase Pl Nom    => uko + "t" ;
-      NCase Pl Gen    => ukkojen ;
-      NCase Pl Part   => ukkoja ;
-      NCase Pl Transl => ukoi + "ksi" ;
-      NCase Pl Ess    => ukkoina ;
-      NCase Pl Iness  => ukoissa ;
-      NCase Pl Elat   => ukoi + ("st" + a) ;
-      NCase Pl Illat  => ukkoihin ;
-      NCase Pl Adess  => ukoi + ("ll" + a) ;
-      NCase Pl Ablat  => ukoi + ("lt" + a) ;
-      NCase Pl Allat  => ukoi + "lle" ;
-      NCase Pl Abess  => ukoi + ("tt" + a) ;
+      NCase Pl Nom    => joe + "d" ;
+      NCase Pl Gen    => jogede ;
+      NCase Pl Part   => jogesid ;
+      NCase Pl Transl => jogede + "ks" ;
+      NCase Pl Ess    => jogedena ;
+      NCase Pl Iness  => jogede + "s" ;
+      NCase Pl Elat   => jogede + "st" ;
+      NCase Pl Illat  => jogedesse ;
+      NCase Pl Adess  => jogede + "l" ;
+      NCase Pl Ablat  => jogede + "lt" ;
+      NCase Pl Allat  => jogede + "le" ;
+      NCase Pl Abess  => jogede + "ta" ;
 
-      NComit    => ukkoi + "ne" ;
-      NInstruct => ukoi + "n" ;
+      NComit    => jogede + "ga" ; --Different comitative from Finnish!
+      NInstruct => joe + "n" ; --Does not exist
 
-      NPossNom _     => ukko ;
-      NPossGen Sg    => ukko ;
-      NPossGen Pl    => init ukkojen ;
-      NPossTransl Sg => uko + "kse" ;
-      NPossTransl Pl => ukoi + "kse" ;
-      NPossIllat Sg  => init ukkoon ;
-      NPossIllat Pl  => init ukkoihin
+      -- This is just nonsense, not in Estonian
+      NPossNom _     => joe ;
+      NPossGen Sg    => joe ;
+      NPossGen Pl    => init jogede ;
+      NPossTransl Sg => joe + "kse" ;
+      NPossTransl Pl => joe + "kse" ;
+      NPossIllat Sg  => init joesse ;
+      NPossIllat Pl  => init jogedesse
       } ;
     lock_N = <>
     } ;
