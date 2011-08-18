@@ -1,0 +1,11 @@
+--# -path=.:alltenses
+
+concrete DictFin of DictFinAbs = open MorphoFin, Kotus, Prelude in {
+
+-- extracted from http://kaino.kotus.fi/sanat/nykysuomi/, licensed under LGPL
+-- compounds in DictCompFin
+
+flags coding = utf8 ;
+
+lincat NK = {s : NForms} ; AK = {s : NForms} ; VK = {s : VForms} ; AdvK = {s : Str} ;
+
