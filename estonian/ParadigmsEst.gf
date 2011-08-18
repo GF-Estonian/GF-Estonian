@@ -355,7 +355,7 @@ oper
       _ + "i" => dPaatti ukko ukon ;
       _ + ("ar" | "är") => dPiennar ukko (renka + "ren") ;
       _ + "e" + ("l" | "n") => dPiennar ukko (ukko + "en") ;
-      _ => dUnix ukko
+      _ => dSeminar ukko
     } ;   
 
 
@@ -381,7 +381,7 @@ oper
         <_ + ("ut" | "yt"),_ + ("uita" | "yitä")>  => dRae ukko (init ukko + "en") ;
         <_ + "e", nuk + ("eja" | "ejä")> => 
           dNukke ukko ukon ;
-        <_ + ("l" | "n" | "r" | "s"), _ + ("eja" | "ejä")> => dUnix ukko ;
+        <_ + ("l" | "n" | "r" | "s"), _ + ("eja" | "ejä")> => dSeminar ukko ;
         <_, _ + ("a" | "ä")> => ukot ;
         _ => 
           Predef.error 
