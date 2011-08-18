@@ -221,7 +221,7 @@ lin
   window_N = mk2N "ikkuna" "ikkunoita" ;
   wine_N = mkN "viini" ;
   win_V2 = mkV2 (mkV "voittaa") ;
-  woman_N = mkN "nainen" ;
+  woman_N = mkN "naine" ;
   wonder_VQ = mkVQ (mkV "ihmetellä") ;
   wood_N = mkN "puu" ;
   write_V2 = mkV2 (mkV "kirjoittaa") ;

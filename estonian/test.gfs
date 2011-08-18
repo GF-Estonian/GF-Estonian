@@ -1,0 +1,14 @@
+
+import -retain MorphoEst.gf
+
+-- generate_trees -depth=4 | l -lang=LangEst
+
+-- parse "tere" | visualize_tree -view="eog"
+
+-- ! dot -Tpng _grph.dot > mytree.png
+
+cc -table nForms2N (dSeminar "buss")
+
+-- parse -lang=LangEst -tr "naine on vanha"
+
+--parse -lang=LangEst -tr "naine on vanha" | linearize -lang=LangEst
