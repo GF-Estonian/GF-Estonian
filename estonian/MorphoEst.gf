@@ -408,6 +408,8 @@ resource MorphoEst = ResEst ** open Prelude in {
       NCase Sg Ablat  => joe + "lt" ;
       NCase Sg Allat  => joe + "le" ;
       NCase Sg Abess  => joe + "ta" ;
+      NCase Sg Comit  => joe + "ga" ;
+      NCase Sg Termin => joe + "ni" ;
 
       NCase Pl Nom    => joe + "d" ;
       NCase Pl Gen    => jogede ;
@@ -421,11 +423,13 @@ resource MorphoEst = ResEst ** open Prelude in {
       NCase Pl Ablat  => jogede + "lt" ;
       NCase Pl Allat  => jogede + "le" ;
       NCase Pl Abess  => jogede + "ta" ;
+      NCase Pl Comit  => jogede + "ga" ;
+      NCase Pl Termin => jogede + "ni" 
 
-      NComit    => jogede + "ga" ; --Different comitative from Finnish!
-      NInstruct => joe + "n" ; --Does not exist
+{-      --Not in Estonian
+      NComit    => jogede + "ga" ;
 
-      -- This is just nonsense, not in Estonian
+      NInstruct => joe + "n" ; 
       NPossNom _     => joe ;
       NPossGen Sg    => joe ;
       NPossGen Pl    => init jogede ;
@@ -433,6 +437,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       NPossTransl Pl => joe + "kse" ;
       NPossIllat Sg  => init joesse ;
       NPossIllat Pl  => init jogedesse
+-}
       } ;
     lock_N = <>
     } ;
@@ -885,6 +890,8 @@ caseTable : Number -> CommonNoun -> Case => Str = \n,cn ->
       NPCase Ablat  => minu + ("lt" + a) ;
       NPCase Allat  => minu + "lle" ;
       NPCase Abess  => minu + ("tt" + a) ;
+      NPCase Comit  => minu + "ga" ;
+      NPCase Termin => minu + "ni" ;
       NPAcc         => Predef.tk 1 minun + "t"
       } ;
      a = Ag n p
@@ -925,35 +932,39 @@ oper
 
   pronSe : ProperName  = {
     s = table {
-      Nom    => "se" ;
-      Gen    => "sen" ;
-      Part   => "sitä" ;
-      Transl => "siksi" ;
-      Ess    => "sinä" ;
-      Iness  => "siinä" ;
-      Elat   => "siitä" ;
-      Illat  => "siihen" ;
-      Adess  => "sillä" ;
-      Ablat  => "siltä" ;
-      Allat  => "sille" ;
-      Abess  => "sittä"
+      Nom    => "see" ;
+      Gen    => "selle" ;
+      Part   => "seda" ;
+      Transl => "selleks" ;
+      Ess    => "sellena" ;
+      Iness  => "selles" ;
+      Elat   => "sellest" ;
+      Illat  => "sellesse" ;
+      Adess  => "sellel" ;
+      Ablat  => "sellelt" ;
+      Allat  => "sellele" ;
+      Abess  => "selleta" ;
+      Comit  => "sellega" ;
+      Termin => "selleni"
       } ;
     } ;
 
   pronNe : ProperName  = {
     s = table {
-      Nom    => "ne" ;
-      Gen    => "niiden" ;
-      Part   => "niitä" ;
-      Transl => "niiksi" ;
-      Ess    => "niinä" ;
-      Iness  => "niissä" ;
-      Elat   => "niitä" ;
-      Illat  => "niihin" ;
-      Adess  => "niillä" ;
-      Ablat  => "niiltä" ;
-      Allat  => "niille" ;
-      Abess  => "niittä"
+      Nom    => "need" ;
+      Gen    => "nende" ;
+      Part   => "neid" ;
+      Transl => "nendeks" ;
+      Ess    => "nendena" ;
+      Iness  => "nendes" ;
+      Elat   => "nendest" ;
+      Illat  => "nendesse" ;
+      Adess  => "nendel" ;
+      Ablat  => "nendelt" ;
+      Allat  => "nendele" ;
+      Abess  => "nendeta" ;
+      Comit  => "nendega" ;
+      Termin => "nendeni" 
       } ;
     } ;
 

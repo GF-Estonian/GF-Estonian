@@ -486,7 +486,8 @@ oper
     regAdjective 
       suuri 
       (init (suuri.s ! NCase Sg Gen) + "mpi")  ---- to check
-      (suuri.s ! NInstruct) ; ----
+      (init (suuri.s ! NCase Sg Gen) + "n") ; ----
+--      (suuri.s ! NInstruct) ; ----
     
 
 

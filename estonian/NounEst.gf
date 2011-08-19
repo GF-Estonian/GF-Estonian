@@ -21,11 +21,13 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
             <_, NPCase Nom,  True,_,_>  => <Nom,NCase Sg Part> ; -- kolme kytkintä(ni)
             <_, _, True,False,_>        => <k,  NCase Sg k> ;    -- kolmeksi kytkimeksi
             <Pl,NPCase Nom,  _,_,False> => <k,  NCase Pl Part> ; -- kytkimiä
+
+{-          --Not in Estonian
             <_, NPCase Nom,_,True,_>    => <k,  NPossNom n> ;    -- kytkime+ni on/ovat...
             <_, NPCase Gen,_,True,_>    => <k,  NPossNom n> ;    -- kytkime+ni vika
             <_, NPCase Transl,_,True,_> => <k,  NPossTransl n> ; -- kytkim(e|i)kse+ni
             <_, NPCase Illat,_,True,_>  => <k,  NPossIllat n> ;  -- kytkim(ee|ii)+ni
- 
+-} 
             _                           => <k,  NCase n k>       -- kytkin, kytkimen,...
             }
       in {

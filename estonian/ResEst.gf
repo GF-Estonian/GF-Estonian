@@ -1,6 +1,6 @@
 --# -path=.:../abstract:../common:../../prelude
 
---1 Finnish auxiliary operations.
+--1 Estonian auxiliary operations.
 
 -- This module contains operations that are needed to make the
 -- resource syntax work. To define everything that is needed to
@@ -19,12 +19,16 @@ resource ResEst = ParamX ** open Prelude in {
   param
     Case = Nom | Gen | Part | Transl | Ess 
          | Iness | Elat | Illat | Adess | Ablat | Allat 
-         | Abess ;  -- Comit, Instruct in NForm 
+         | Abess | Comit | Termin ;
 
-    NForm = NCase Number Case 
-          | NComit | NInstruct  -- no number dist
+    NForm = NCase Number Case ; 
+
+
+--Not in Estonian
+{-          | NComit  | NInstruct  -- no number dist
           | NPossNom Number | NPossGen Number --- number needed for syntax of AdjCN
           | NPossTransl Number | NPossIllat Number ;
+-}
 
 -- Agreement of $NP$ has number*person and the polite second ("te olette valmis").
 
@@ -76,14 +80,16 @@ oper
       <NPAcc,Pl>   => Nom
     } ;
 
-  n2nform : NForm -> NForm = \nf -> case nf of {
+  n2nform : NForm -> NForm = \nf -> nf ; 
+{-
+\nf -> case nf of {
     NPossNom n => NCase n Nom ; ----
     NPossGen n  => NCase n Gen ;
     NPossTransl n => NCase n Transl ;
     NPossIllat n => NCase n Illat ;
     _ => nf
     } ;
-
+-}
 
 --2 For $Verb$
 
@@ -567,7 +573,7 @@ oper
      vesia = nh.vesia ;
      vesiin = nh.vesiin
     in
-    {s = table {
+    {s = table { 
       NCase Sg Nom    => vesi ;
       NCase Sg Gen    => vede + "n" ;
       NCase Sg Part   => vetta ;
@@ -580,6 +586,8 @@ oper
       NCase Sg Ablat  => vede + ("lt" + a) ;
       NCase Sg Allat  => vede + "lle" ;
       NCase Sg Abess  => vede + ("tt" + a) ;
+      NCase Sg Comit  => vede + "ga" ;
+      NCase Sg Termin => vede + "ni" ;
 
       NCase Pl Nom    => vede + "t" ;
       NCase Pl Gen    => vesien ;
@@ -593,8 +601,11 @@ oper
       NCase Pl Ablat  => vesii + ("lt" + a) ;
       NCase Pl Allat  => vesii + "lle" ;
       NCase Pl Abess  => vesii + ("tt" + a) ;
+      NCase Pl Comit  => vesii + "ga" ;
+      NCase Pl Termin => vesii + "ni" 
 
-      NComit    => vetii + "ne" ;
+{-    --Not in Estonian
+      NComit    => vede + "ga" ;
       NInstruct => vesii + "n" ;
 
       NPossNom _     => vete ;
@@ -604,9 +615,10 @@ oper
       NPossTransl Pl => vesii + "kse" ;
       NPossIllat Sg  => Predef.tk 1 veteen ;
       NPossIllat Pl  => Predef.tk 1 vesiin
+-}
       }
     } ;
--- Surpraisingly, making the test for the partitive, this not only covers
+-- Surprisingly, making the test for the partitive, this not only covers
 -- "rae", "perhe", "savuke", but also "rengas", "lyhyt" (except $Sg Illat$), etc.
 
   sRae : (_,_ : Str) -> NounH = \rae,rakeena ->
@@ -660,15 +672,16 @@ oper
 --- Possessive could be shared with the more general $NounFin.DetCN$.
 
 oper
+  --Estonian version started
   reflPron : Agr -> NP = \agr -> 
     let 
       itse = (nhn (sKukko "itse" "itsen" "itsejä")).s ;
       nsa  = possSuffixFront agr
     in {
       s = table {
-        NPCase (Nom | Gen) | NPAcc => itse ! NPossNom Sg + nsa ;
-        NPCase Transl      => itse ! NPossTransl Sg + nsa ;
-        NPCase Illat       => itse ! NPossIllat Sg + nsa ;
+        NPCase (Nom | Gen) | NPAcc => itse ! NCase Sg Nom + nsa ;   -- NPossNom Sg
+        NPCase Transl      => itse ! NCase Sg Transl + nsa ;        -- NPossTransl etc.
+        NPCase Illat       => itse ! NCase Sg Illat  + nsa ;
         NPCase c           => itse ! NCase Sg c + nsa
         } ;
       a = agr ;
