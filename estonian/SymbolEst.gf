@@ -1,6 +1,6 @@
 --# -path=.:../abstract:../common
 
-concrete SymbolFin of Symbol = CatFin ** open Prelude, NounFin, ResFin in {
+concrete SymbolEst of Symbol = CatEst ** open Prelude, NounEst, ResEst in {
 
 lin
   SymbPN i = {s = \\c => i.s} ; --- c
@@ -13,7 +13,7 @@ lin
     a = agrP3 Sg ;
     isPron = False
     } ;
-  CNSymbNP det cn xs = let detcn = NounFin.DetCN det cn in {
+  CNSymbNP det cn xs = let detcn = NounEst.DetCN det cn in {
     s = \\c => detcn.s ! c ++ xs.s ;
     a = detcn.a ;
     isPron = False

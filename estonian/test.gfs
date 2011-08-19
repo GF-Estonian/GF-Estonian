@@ -1,5 +1,6 @@
 
-import -retain MorphoEst.gf
+--import -retain MorphoEst.gf
+import -v LangEst.gf
 
 -- generate_trees -depth=4 | l -lang=LangEst
 
@@ -7,8 +8,8 @@ import -retain MorphoEst.gf
 
 -- ! dot -Tpng _grph.dot > mytree.png
 
-cc -table nForms2N (dSeminar "buss")
+-- cc -table nForms2N (dSeminar "buss")
 
--- parse -lang=LangEst -tr "naine on vanha"
+parse -lang=LangEst -tr "naine on vanha"
 
 --parse -lang=LangEst -tr "naine on vanha" | linearize -lang=LangEst
