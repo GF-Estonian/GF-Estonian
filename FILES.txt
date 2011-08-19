@@ -1,0 +1,47 @@
+./estonian: core grammar
+./common: syntax
+./abstract: abstract syntax
+./api: ???
+./prelude: helper functions
+
+Files in estonian/:
+
+AdjectiveEst
+AdverbEst
+CatEst
+ConjunctionEst
+GrammarEst: wrapper
+IdiomEst: idioms
+IrregEst: irregular words
+LangEst: wrapper; concrete of Lang {Grammar + Lexicon}
+LexiconEst: ~300 words
+MakeStructuralEst: a few opers
+MorphoEst: A Simple Estonian Resource Morphology
+NounEst: noun phrases
+NumeralEst: number words
+ParadigmsEst: morphology ???
+PhraseEst: a few phrases
+QuestionEst
+RelativeEst
+ResEst: noun cases, ...
+SentenceEst
+StructuralEst: many words to be translated
+SymbolEst: not used?
+VerbEst: verb phrases
+
+
+Extensions and larger lexicons (deleted for now, might look at them later):
+
+ExtraEstAbs.gf
+ExtraEst.gf
+AllEstAbs.gf
+AllEst.gf
+CompatibilityEst.gf
+DictCompEstAbs.gf
+DictCompEst.gf
+DictEstAbs.gf
+DictEst.gf
+Kotus.gf
+
+./estonian/frequency/
+./estonian/kotus/
