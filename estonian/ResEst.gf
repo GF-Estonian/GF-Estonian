@@ -209,12 +209,14 @@ oper
           } ; 
 
         eiv : Str = case agr of {
-          {n = Sg ; p = P1} => "en" ;
+          _ => "ei"
+{-          {n = Sg ; p = P1} => "en" ;
           {n = Sg ; p = P2} => "et" ;
           {n = Sg ; p = P3} => "ei" ;
           {n = Pl ; p = P1} => "emme" ;
           {n = Pl ; p = P2} => "ette" ;
           {n = Pl ; p = P3} => "eivät"
+-}
           } ;
 
         einegole : Str * Str * Str = case <vi,agr.n> of {

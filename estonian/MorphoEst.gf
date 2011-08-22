@@ -2,7 +2,7 @@
 
 --1 A Simple Estonian Resource Morphology
 --
--- Inari Listenmaa, Kaarel Kaljurand
+-- Aarne Ranta (, Inari Listenmaa, Kaarel Kaljurand)
 --
 -- This resource morphology contains definitions needed in the resource
 -- syntax. To build a lexicon, it is better to use $ParadigmsEst$, which
@@ -36,6 +36,15 @@ resource MorphoEst = ResEst ** open Prelude in {
       (nais + "te") (nais + "i") -- pl gen, pl part
       (nais + "tena") (nais + "tes") (nais + "tesse") ; -- pl ess, ine, ill
    --end Estonian paradigm
+
+  dSoolane : Str -> NForms = \naine ->
+    let 
+     -- a = vowHarmony nainen ;
+      nais = Predef.tk 2 naine + "s"
+    in nForms10
+      naine (nais + "e") (nais + "t") (nais + "ena") (nais + "esse")
+      (nais + "te") (nais + "eid") -- pl gen, pl part
+      (nais + "tena") (nais + "tes") (nais + "tesse") ; -- pl ess, ine, ill
 
 
   dPaluu : Str -> NForms = \paluu ->
@@ -257,6 +266,14 @@ resource MorphoEst = ResEst ** open Prelude in {
       (seminari + "de") (seminari + "sid") (seminari + "dena") -- pl gen, part???, ess
       (seminari + "des") (seminari + "desse") ; -- pl ine, ill
   --end Estonian paradigm
+ --- Estonian paradigm
+  dOun : (_ : Str) -> NForms = \oun ->
+    let 
+      ouna = oun + "a" ;
+    in nForms10
+      oun ouna ouna (ouna + "na") (ouna + "sse")
+      (oun + "te") (oun + "u") (oun + "tena") -- pl gen, part???, ess
+      (oun + "tes") (oun + "tesse") ; -- pl ine, ill
 
 
   dNukke : (_,_ : Str) -> NForms = \nukke,nuken ->
