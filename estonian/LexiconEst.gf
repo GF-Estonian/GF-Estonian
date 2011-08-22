@@ -1,4 +1,4 @@
---# -path=.:prelude
+--# -path=.:prelude:../abstract:../common
 
 concrete LexiconEst of Lexicon = CatEst ** open MorphoEst, ParadigmsEst in {
 
@@ -7,50 +7,49 @@ flags
 
 
 lin
-  airplane_N = mkN "lentokone" ;
+  airplane_N = mkN "lennuk" "lennuki" "lennukit" "lennukeid";
   answer_V2S = mkV2 (mkV "vastata") (casePrep allative) ;
-  apartment_N = mkN "asunto" ;
-  apple_N = mkN "omena" ; --- omenia, not omenoita
-  art_N = mkN "taide" ;
+  apartment_N = mkN "korter" "korteri" "korterit" "kortereid";
+  apple_N = mkN "õun" "õuna" "õuna" "õunu";
+  art_N = mkN "kunst" "kunsti" "kunsti" "kunste";
   ask_V2Q = mkV2 (mkV "kysyä") (casePrep ablative) ;
-  baby_N = mkN "vauva" ;
+  baby_N = mkN "beebi" "beebi" "beebit" "beebisid";
   bad_A = mkA (mkN "paha") "pahempi" "pahin" ;
-  bank_N = mkN "pankki" ;
+  bank_N = mkN "pank" "panga" "panka" "panku";
   beautiful_A = mkA (mkN "kaunis") "kauniimpi" "kaunein" ;
   become_VA = mkVA (mkV "tulla") (casePrep translative) ;
-  beer_N = mkN "olut" "oluita" ;
+  beer_N = mkN "õlu" "õlu" "õlut" "õlusid";
   beg_V2V = mkV2V (mk2V "pyytää" "pyysi") (casePrep partitive) ;
   big_A = mkA (mkN "suuri" "suuria") "suurempi" "suurin" ;
-  bike_N = mkN "polkupyörä" ; --- for correct vowel harmony
-  bird_N = mkN "lintu" ;
+  bike_N = mkN "ratas" "ratta" "ratast" "rattaid";
+  bird_N = mkN "lind" "linnu" "lindu" "linde";
   black_A = mkA (mkN "musta") "mustempi" "mustin" ;
   blue_A = mkA (mkN "sininen") "sinisempi" "sinisin" ;
-  boat_N = mkN "vene" ;
-  book_N = mkN "kirja" ;
-  boot_N = mkN "saapas" ;
-  boss_N = mkN "pomo" ;
-  boy_N = mkN "poika" "pojan" "poikia" ;
-  bread_N = mkN "leipä" ;
+  boat_N = mkN "paat" "paadi" "paati" "paate";
+  book_N = mkN "raamat" "raamatu" "raamatut" "raamatuid" ;
+  boot_N = mkN "saabas" "saapa" "saabast" "saapaid";
+  boss_N = mkN "boss" "bossi" "bossi" "bosse" ;
+  boy_N = mkN "poiss" "poisi" "poissi" "poisse";
+  bread_N = mkN "leib" "leiva" "leiba" "leibu";
   break_V2 = mkV2 (mkV "rikkoa") ;
   broad_A = mkA (mkN "leveä") "leveämpi" "levein" ;
-  brother_N2 = mkN2 (
-    mkN "veli" "veljen" "veljenä" "veljeä" "veljeen" 
-        "veljinä" "veljissä" "veljien" "veljiä" "veljiin") ;
+  brother_N = mkN "vend" "venna" "venda" "vendasid";
   brown_A = mkA (mkN "ruskea") "ruskeampi" "ruskein" ;
-  butter_N = mk3N "voi" "voin" "voita" ;  ---- errors in Part
+  butter_N = mkN "või" "või" "võid" "võisid";
   buy_V2 = mkV2 (mkV "ostaa") ;
-  camera_N = mkN "kamera" ;
-  cap_N = mkN "lakki" ;
-  car_N = mkN "auto" "auton" "autoja" ; -- mkN: audon
-  carpet_N = mkN "matto" ;
-  cat_N = mkN "kissa" ;
-  ceiling_N = mkN "katto" ;
-  chair_N = mkN "tuoli" ;
-  cheese_N = mkN "juusto" ;
-  child_N = mkN "lapsi" "lapsen" "lasta" "lapsena" "lapseen" 
-              "lasten" "lapsia" "lapsina" "lapsissa" "lapsiin" ;
-  church_N = mkN "kirkko" ;
-  city_N = mkN "kaupunki" ;
+  camera_N = mkN "kaamera" "kaamera" "kaamerat" "kaameraid";
+  cap_N = mkN "müts" "mütsi" "mütsi" "mütse";
+  car_N = mkN "auto" "auto" "autot" "autosid";
+  carpet_N = mkN "vaip" "vaiba" "vaipa" "vaipu";
+  cat_N = mkN "kass" "kassi" "kassi" "kasse";
+  ceiling_N = mkN "lagi" "lae" "lage" "lagesid";
+  chair_N = mkN "tool" "tooli" "tooli" "toole";
+  cheese_N = mkN "juust" "juustu" "juustu" "juuste";
+  child_N = mkN "laps" "lapse" "last" "lapsi" ;
+  church_N = mkN "kirik" "kiriku" "kirikut" "kirikuid";
+  city_N = mkN "linn" "linna" "linna" "linnu" ;
+  -- above this line the N-words have been translated into Estonian
+
   clean_A = mkA (mkN "puhdas") ;
   clever_A = mkA (mkN "viisas") ;
   close_V2 = mkV2 (mkV "sulkea") ;
@@ -138,7 +137,7 @@ lin
   open_V2 = mkV2 (mkV "avata" "avasi") ;
   paint_V2A = mkV2A (mkV "maalata") accPrep (casePrep translative) ;
   paper_N = mk2N "paperi" "papereita" ;
-  paris_PN = mkPN (mkN "Pariisi") ;
+  paris_PN = mkPN (mkN "Pariis") ;
   peace_N = mkN "rauha" ;
   pen_N = mkN "kynä" ;
   planet_N = mkN "planeetta" ;
@@ -152,7 +151,7 @@ lin
   radio_N = mk2N "radio" "radioita" ;
   rain_V0 = mkV0 (mk2V "sataa" "satoi") ;
   read_V2 = mkV2 (mkV "lukea") ;
-  red_A = mkA "punainen" ;
+  red_A = mkA "punane" ;
   religion_N = mkN "uskonto" ;
   restaurant_N = mkN "ravintola" ;
   river_N = mkN "joki" "jokia" ;
@@ -232,7 +231,7 @@ lin
     mkV "tehdä" "teen" "tekee" "tekevät" "tehkää" "tehdään"
       "tein" "teki" "tekisi" "tehnyt" "tehty" "tehdyn") ; 
 
-  now_Adv = mkAdv "nyt" ;
+  now_Adv = mkAdv "nyyd" ;
   already_Adv = mkAdv "jo" ;
   song_N = mkN "laulu" ;
   add_V3 = mkV3 (mkV "lisätä") accPrep (casePrep illative) ;

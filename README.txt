@@ -25,3 +25,19 @@ PhrUtt NoPConj (UttS (UseCl (TTAnt TFut ASimul) PPos (PredVP (MassNP (UseN woman
 PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant DefArt NumSg) (UseN woman_N)) (UseComp (CompAP (PositA old_A)))))) NoVoc
 PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant IndefArt NumSg) (UseN woman_N)) (UseComp (CompAP (PositA old_A)))))) NoVoc
 PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (MassNP (UseN woman_N)) (UseComp (CompAP (PositA old_A)))))) NoVoc
+
+
+Checking the morpho:
+
+Lang> i -retain LexiconEst.gf
+
+Lang> cc paris_PN
+{s = table ResEst.Case ["Pariis"; "Pariiin"; "Pariista";
+                        "Pariiinks"; "Pariiina"; "Pariiins"; "Pariiinst"; "Pariiiseen";
+                        "Pariiinl"; "Pariiinlt"; "Pariiinle"; "Pariiinta"; "Pariiinga";
+                        "Pariiinni"];
+ lock_PN : {} = <>}
+10 msec
+Lang> cc now_Adv 
+{s = "nyyd"; lock_Adv : {} = <>}
+10 msec
