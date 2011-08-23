@@ -57,7 +57,37 @@ resource MorphoEst = ResEst ** open Prelude in {
       suvi suve suve (suve + "sse")                   -- sg nom, gen, part, ill
       (suve + "de") (suve + "sid") (suve + "desse") ; -- pl      gen, part, ill
 
+  --5 later
 
+  --6: loan words, stem vowel always i, sg nom ends in consonant
+  dSeminar : Str -> NForms = \seminar ->
+    let 
+      seminari = seminar + "i" ; 
+    in nForms7
+      seminar seminari seminari (seminari + "sse")
+      (seminari + "de") (seminari + "sid") (seminari + "desse") ; -- pl gen, part, ill
+
+  --7: stem vowel in sg nom, -t in sg part
+  dRatsu : Str -> NForms = \ratsu ->
+    nForms7
+      ratsu ratsu (ratsu + "t") (ratsu + "sse")
+      (ratsu + "de") (ratsu + "sid") (ratsu + "desse") ;
+
+  --8: sg.gen not predictable:  õpik-õpiku,  ohutu-ohutu  or kindel-kindla
+  --   pl.part is just concatenated, no stem changes
+  dKindel : (_,_ : Str) -> NForms = \kindel,kindla ->
+    nForms7
+      kindel kindla (kindla + "t") (kindla + "sse")
+      (kindla + "te") (kindla + "id") (kindla + "tesse");
+
+  --9: like 8, e.g. redel-redeli, väeti-väeti  or  number-numbri
+  --   stem vowel i, difference in pl.part: i~eid
+  dNumber : (_,_ : Str) -> NForms = \number,numbri ->
+    let
+      numbr = Predef.tk 1 numbri --the consonant stem
+    in nForms7
+      number numbri (numbri + "t") (numbri + "sse")
+      (numbri + "te") (numbr + "eid") (numbri + "tesse") ;
 
   dNaine : Str -> NForms = \naine ->
     let 
@@ -72,16 +102,6 @@ resource MorphoEst = ResEst ** open Prelude in {
     in nForms7
       soolane (soolas + "e") (soolas + "t") (soolas + "esse")
       (soolas + "te") (soolas + "eid") (soolas + "tesse") ; -- pl gen, part, ill
-
-
-
-  dSeminar : Str -> NForms = \seminar ->
-    let 
-      seminari = seminar + "i" ; 
-      --seminare = seminar + "e" ; 
-    in nForms7
-      seminar seminari seminari (seminari + "sse")
-      (seminari + "de") (seminari + "sid") (seminari + "desse") ; -- pl gen, part, ill
 
 
   dOun : Str -> NForms = \oun ->
