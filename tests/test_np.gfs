@@ -1,5 +1,40 @@
-
 import -retain ../estonian/MorphoEst.gf
-cc -table nForms2N (dSeminar "buss")
-cc -table nForms2N (dSeminar "naine")
-cc -table nForms2N (dSeminar "pesa")
+
+-- Test cases are taken from:
+-- http://www.eki.ee/dict/qs/tyypsonad.html
+
+-- 1
+cc -table nForms2N (dKoi "koi")
+cc -table nForms2N (dKoi "partii")
+
+-- 2
+cc -table nForms2N (dLuu "luu")
+cc -table nForms2N (dLuu "trofee")
+
+-- 3
+cc -table nForms2N (dPesa "pesa" "pesi")
+cc -table nForms2N (dPesa "saba" "sabasid")
+cc -table nForms2N (dPesa "arutelu" "arutelusid")
+
+-- 4
+cc -table nForms2N (dSuvi "suvi")
+
+-- 5 (later)
+
+-- 6
+cc -table nForms2N (dSeminar "seminar")
+
+-- 7
+cc -table nForms2N (dRatsu "ratsu")
+
+-- 8
+cc -table nForms2N (dKindel "kindel" "kindla")
+
+-- 9
+cc -table nForms2N (dNumber "number" "numbri")
+
+-- 12
+cc -table nForms2N (dNaine "naine")
+
+-- 13
+cc -table nForms2N (dSoolane "soolane")
