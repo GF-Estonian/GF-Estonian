@@ -86,14 +86,15 @@ oper
 
 -- Too much trouble to infer vowel, cf. "kuudes" vs. "viides".
 
-  ordN : Str -> Str -> {s : NForm => Str} = \a,sadas -> 
+  ordN : Str -> Str -> N = \a,sadas ->  --{s : NForms => Str} = \a,sadas -> 
     let
       sada = init sadas
     in
     mkN 
-      sadas (sada + "nnen") (sada + "tt" + a) (sada + "nten" + a) (sada + "nteen")
-      (sada + "nsien") (sada + "nsi" + a) (sada + "nsin" + a)
-      (sada + "nsiss" + a) (sada + "nsiin") ;
+      sadas (sada + "nnen") (sada + "tt" + a) (sada + "nsia") ;
+  -- (sada + "nten" + a) (sada + "nteen")
+  --    (sada + "nsien") (sada + "nsi" + a)  (sada + "nsin" + a)
+     -- (sada + "nsiss" + a) (sada + "nsiin") ;
 
 param 
   NumPlace = NumIndep | NumAttr  ;
@@ -112,8 +113,8 @@ oper
     (ordN "a" "sadas") ;
 
   tuhatN = co
-    (mkN "tuhat" "tuhannen" "tuhatta" "ruhantena" "tuhanteen"
-    "tuhansien" "tuhansia" "tuhansina" "tuhansissa" "tuhansiin")
+    (mkN "tuhat" "tuhannen" "tuhatta" "tuhansia")--"tuhantena" "tuhanteen"
+  --  "tuhansien" "tuhansia" "tuhansina" "tuhansissa" "tuhansiin")
     (ordN "a" "tuhannes")  ;
 
   kymmentaN =

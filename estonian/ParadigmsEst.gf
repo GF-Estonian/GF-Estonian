@@ -98,9 +98,9 @@ oper
     mkN : (kukko : Str) -> N ;  -- predictable nouns, covers 82%
     mkN : (savi,savia : Str) -> N ; -- different pl.part
     mkN : (vesi,veden,vesiä : Str) -> N ; -- also different sg.gen
-    mkN : (pank,panga,panka,panku : Str) -> N ; -- sg nom,gen,part, plpart
+    mkN : (pank,panga,panka,panku : Str) -> N ; -- sg nom,gen,part, pl.part
 --    mkN : (vesi,veden,vesiä,vettä : Str) -> N ; -- also different sg.part
-    mkN : (olo,n,a,na,oon,jen,ja,ina,issa,ihin : Str) -> N ; -- worst case, 10 forms
+--    mkN : (olo,n,a,na,oon,jen,ja,ina,issa,ihin : Str) -> N ; -- worst case, 10 forms
     mkN : (pika : Str) -> (juna  : N) -> N ; -- compound with invariable prefix
     mkN : (oma : N)    -> (tunto : N) -> N ; -- compound with inflecting prefix
     mkN : NK -> N ;  -- noun from DictEst (Kotus)
@@ -280,9 +280,9 @@ oper
 
     -- mkN : (talo,talon,taloja,taloa : Str) -> N = mk4N ;
     --  \s,t,u,v -> nForms2N (nForms4 s t u v) ;
-    mkN : 
-      (talo,talon,taloa,talona,taloon,talojen,taloja,taloina,taloissa,taloihin
-        : Str) -> N = mk10N ;
+--    mkN : 
+--      (talo,talon,taloa,talona,taloon,talojen,taloja,taloina,taloissa,taloihin
+--        : Str) -> N = mk10N ;
     mkN : (sora : Str) -> (tie : N) -> N = mkStrN ;
     mkN : (oma,tunto : N) -> N = mkNN ;
     mkN : (sana : NK) -> N = \w -> nForms2N w.s ;
@@ -294,14 +294,15 @@ oper
   mk1N : (talo : Str) -> N = \s -> nForms2N (nForms1 s) ;
   mk2N : (talo,talon : Str) -> N = \s,t -> nForms2N (nForms2 s t) ;
   mk3N : (talo,talon,taloja : Str) -> N = \s,t,u -> nForms2N (nForms3 s t u) ;
-
   mk4N : (talo,talon,taloa,taloja : Str) -> N = \s,t,u,v -> 
       nForms2N (nForms4 s t u v) ;
+
 
   mk10N : 
       (talo,talon,taloa,talona,taloon,talojen,taloja,taloina,taloissa,taloihin
         : Str) -> N = \a,b,c,d,e,f,g,h,i,j -> 
         nForms2N (nForms10 a b c d e f g h i j) ;
+
 
   mkStrN : Str -> N -> N = \sora,tie -> {
     s = \\c => sora + tie.s ! c ; lock_N = <>
@@ -321,6 +322,7 @@ oper
     in
     case ukko of {
       _ + "ne" => dNaine ukko ;
+{------------
       _ + ("aa" | "ee" | "ii" | "oo" | "uu" | "yy" |"ää"|"öö") => dPuu ukko ;
       _ + ("ai" | "ei" | "oi" | "ui" | "yi" | "äi" | "öi") => dPuu ukko ;
       _ + ("ie" | "uo" | "yö") => dSuo ukko ;
@@ -361,11 +363,16 @@ oper
       _ + "i" => dPaatti ukko ukon ;
       _ + ("ar" | "är") => dPiennar ukko (renka + "ren") ;
       _ + "e" + ("l" | "n") => dPiennar ukko (ukko + "en") ;
+----------------} 
+
       _ => dSeminar ukko
     } ;   
 
 
     nForms2 : (_,_ : Str) -> NForms = \ukko,ukkoja -> 
+      dNaine ukko  ;
+
+{-------------------
       let
         ukot = nForms1 ukko ; 
         ukon = weakGrade ukko + "n" ;
@@ -392,9 +399,13 @@ oper
         _ => 
           Predef.error 
            (["last argument should end in a/ä, not"] ++ ukkoja)
-      } ;
+-}
 
+       
     nForms3 : (_,_,_ : Str) -> NForms = \ukko,ukon,ukkoja -> 
+      dOun ukko ;
+
+{-
       let
         ukk = init ukko ;
         ukot = nForms2 ukko ukkoja ;
@@ -420,29 +431,20 @@ oper
         _ => 
           Predef.error (["second argument should end in n, not"] ++ ukon)
        } ;
+-------------------}
 
     nForms4 : (_,_,_,_ : Str) -> NForms = \paat,paadi,paati,paate -> 
-    let
-     paadid = paadi + "d" ;    -- sg nom
-     paatide = paat + "ide" ;  -- pl gen
-     -- ukk = init ukko ;
-     -- uko = weakGrade ukko ;
-     -- ukon = uko + "n" ;
-     -- o = case last ukko of {"ä" => "ö" ; "a" => "o"} ; -- only used then 
-     -- renka = strongGrade (init ukko) ;
-     -- rake = strongGrade ukko ;
-    in
     case <paat,paadi,paati,paate> of {
       <_ + "ne", _+ "se", _+"st", _ + "si"> => dNaine paat ;
       <_ + "ne", _+ "se", _+"st", _ + "seid"> => dSoolane paat ;
       <_ + ("n"|"l"|"r"), _ + V@("a" | "u" | "e"),  _ + V,  _ + "u"> => dOun paat ; 
       <_ + C@("r" | "n" | "l" | "m" | "s" | "t" |"k"), _ + C + "i", 
        _ + C + "i", _> => dSeminar paat ;
-      _  => dSeminar paat 
+      _  => dSuvi paat 
       } ;
 
 
-{-
+{--------------------------------------
     nForms4 : (_,_,_,_ : Str) -> NForms = \ukko,ukon,ukkoja,ukkoa -> 
       let
         ukot = nForms3 ukko ukon ukkoja ;
@@ -459,7 +461,7 @@ oper
             ukon ++ ukkoja ++ ukkoa)
       } ;
 
--}
+-----------------------------------------}
 
   mkN2 = overload {
     mkN2 : N -> N2 = \n -> mmkN2 n (casePrep genitive) ;

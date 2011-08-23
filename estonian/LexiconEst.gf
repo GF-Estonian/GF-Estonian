@@ -120,8 +120,8 @@ lin
   lose_V2 = mkV2 (mkV "h‰vit‰" "h‰visi") ; --- hukata
   love_N = mk3N "rakkaus" "rakkauden" "rakkauksia" ;
   love_V2 = mkV2 (mkV "rakastaa") partitive ;
-  man_N = mkN "mies" "miehen" "miest‰" "miehen‰" "mieheen" 
-              "miesten" "miehi‰" "miehin‰" "miehiss‰" "miehiin" ; 
+  man_N = mkN "mies" "miehen" "miest‰" "miehi‰" ; -- "miehen‰" "mieheen" 
+            --  "miesten" "miehi‰" "miehin‰" "miehiss‰" "miehiin" ; 
   married_A2 = mkA2 (mkA "avioitunut") (postPrep genitive "kanssa") ; ---- infl
   meat_N = mkN "liha" ;
   milk_N = mkN "maito" ;
@@ -209,9 +209,9 @@ lin
   wait_V2 = mkV2 (mkV "odottaa") partitive ;
   walk_V = mkV "k‰vell‰" "k‰veli" ;
   warm_A = mkA 
-    (mkN "l‰mmin" "l‰mpim‰n" "l‰mmint‰" "l‰mpim‰n‰" "l‰mpim‰‰n" 
-         "l‰mpimin‰" "l‰mpimi‰" "l‰mpimien" "l‰mpimiss‰" "l‰mpimiin"
-	 ) 
+    (mkN "l‰mmin" "l‰mpim‰n" "l‰mmint‰" "l‰mpimi‰" ) --"l‰mpim‰n‰" "l‰mpim‰‰n" 
+--         "l‰mpimin‰" "l‰mpimi‰" "l‰mpimien" "l‰mpimiss‰" "l‰mpimiin"
+--	 ) 
     "l‰mpim‰mpi" "l‰mpimin" ;
   war_N = mkN "sota" ;
   watch_V2 = mkV2 (mkV "katsella") cpartitive ;
@@ -283,11 +283,11 @@ lin
   hair_N = mkN "hius" ;
   hand_N = mk3N "k‰si" "k‰den" "k‰si‰" ;
   head_N = mkN "p‰‰" ;
-  heart_N = mkN "syd‰n" "syd‰men" "syd‰nt‰" "syd‰men‰" "syd‰meen"
-                "syd‰nten" "syd‰mi‰" "syd‰min‰" "syd‰miss‰" "syd‰miin" ;
+  heart_N = mkN "syd‰n" ;  -- "syd‰men" "syd‰nt‰" "syd‰men‰" "syd‰meen"
+               -- "syd‰nten" "syd‰mi‰" "syd‰min‰" "syd‰miss‰" "syd‰miin" ;
   horn_N = mk2N "sarvi" "sarvia" ;
-  husband_N = mkN "mies" "miehen" "miest‰" "miehen‰" "mieheen" 
-                  "miesten" "miehi‰" "miehin‰" "miehiss‰" "miehiin" ; 
+  husband_N = man_N ; --mkN "mies" "miehen" "miest‰" "miehen‰" "mieheen" 
+                      --"miesten" "miehi‰" "miehin‰" "miehiss‰" "miehiin" ; 
   ice_N = mkN "j‰‰" ;
   knee_N = mk2N "polvi" "polvia" ;
   leaf_N = mk2N "lehti" "lehti‰" ;

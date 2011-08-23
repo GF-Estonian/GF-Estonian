@@ -13,6 +13,86 @@ resource MorphoEst = ResEst ** open Prelude in {
   flags optimize=all ;
 
   oper
+  --Estonian paradigms
+
+  --Inflection paradigms from tüüpsõnad 
+
+  --tüüpsõnad 1
+  dKoi : Str -> NForms = \koi ->
+    nForms7
+      koi koi (koi + "d") (koi + "sse")            -- sg nom, gen, part, ill
+      (koi + "de") (koi + "sid") (koi + "desse") ; -- pl      gen, part, ill
+
+  --tüüpsõnad 2
+  -- luu, luu, luud, .luusse, (.)luude, luid ja  .luusid, (.)luudesse ja .luisse
+{-  dLuu : Str -> NForms = \luu ->
+    let 
+      lui = (Predef.tk 1 luu) + "i" ;
+    in nForms7
+      luu luu (luu + "d") (luu + "sse")        -- sg nom, gen, part, ill
+      (luu + "de") (lui + "d") (lui + "sse") ; -- pl      gen, part, ill
+-}
+
+  --tüüpsõnad 3: short sg illative; non-predictable vowel in pl part and ill
+{-  dPesa : (_,_ Str) -> NForms = \pesa,pesi ->
+    let 
+      pes   = Predef.tk 1 pesa ;
+      s     = last pes ;
+      pessa = pes + s + last pesa ;
+    in nForms7
+      pesa pesa pesa pessa                -- sg nom, gen, part, ill
+      (pesa + "de") pesi (pesi + "sse") ; -- pl      gen, part, ill
+
+
+--pesa, pesa, pesa, .pessa ja pesasse, pesade, pesasid ja pesi, pesadesse ja pesisse
+--saba, saba, saba, .sappa ja sabasse, sabade, sabasid ja sabu, sabadesse ja sabusse
+--arutelu, arutelu, arutelu, aru.tellu ja arutelusse, arutelude, arutelusid, aruteludesse
+-}
+
+  --tüüpsõnad 4: i-e change, otherwise regular
+  dSuvi : Str -> NForms = \suvi ->
+    let 
+      suve = Predef.tk 1 suvi + "e" 
+    in nForms7
+      suvi suve suve (suve + "sse")                   -- sg nom, gen, part, ill
+      (suve + "de") (suve + "sid") (suve + "desse") ; -- pl      gen, part, ill
+
+
+
+  dNaine : Str -> NForms = \naine ->
+    let 
+      nais = Predef.tk 2 naine + "s"
+    in nForms7
+      naine (nais + "e") (nais + "t") (nais + "esse")
+      (nais + "te") (nais + "i") (nais + "tesse") ; -- pl gen, part, ill
+ 
+  dSoolane : Str -> NForms = \soolane ->
+    let 
+      soolas = Predef.tk 2 soolane + "s"
+    in nForms7
+      soolane (soolas + "e") (soolas + "t") (soolas + "esse")
+      (soolas + "te") (soolas + "eid") (soolas + "tesse") ; -- pl gen, part, ill
+
+
+
+  dSeminar : Str -> NForms = \seminar ->
+    let 
+      seminari = seminar + "i" ; 
+      --seminare = seminar + "e" ; 
+    in nForms7
+      seminar seminari seminari (seminari + "sse")
+      (seminari + "de") (seminari + "sid") (seminari + "desse") ; -- pl gen, part, ill
+
+
+  dOun : Str -> NForms = \oun ->
+    let 
+      ouna = oun + "a" ;
+    in nForms7
+      oun ouna ouna (ouna + "sse")
+      (oun + "te") (oun + "u") (oun + "tesse") ; -- pl gen, part, ill
+
+
+----- Finnish paradigms
 
   dLujuus : Str -> NForms = \lujuus -> 
     let
@@ -24,27 +104,6 @@ resource MorphoEst = ResEst ** open Prelude in {
       (lujuu + "ten" + a) (lujuu + "teen")
       (lujuuksi + "en") (lujuuksi + a) 
       (lujuuksi + "n" + a) (lujuuksi + "ss" + a) (lujuuksi + "in") ; 
-
-
-  --Estonian paradigm!
-  dNaine : Str -> NForms = \naine ->
-    let 
-     -- a = vowHarmony nainen ;
-      nais = Predef.tk 2 naine + "s"
-    in nForms10
-      naine (nais + "e") (nais + "t") (nais + "ena") (nais + "esse")
-      (nais + "te") (nais + "i") -- pl gen, pl part
-      (nais + "tena") (nais + "tes") (nais + "tesse") ; -- pl ess, ine, ill
-   --end Estonian paradigm
-
-  dSoolane : Str -> NForms = \naine ->
-    let 
-     -- a = vowHarmony nainen ;
-      nais = Predef.tk 2 naine + "s"
-    in nForms10
-      naine (nais + "e") (nais + "t") (nais + "ena") (nais + "esse")
-      (nais + "te") (nais + "eid") -- pl gen, pl part
-      (nais + "tena") (nais + "tes") (nais + "tesse") ; -- pl ess, ine, ill
 
 
   dPaluu : Str -> NForms = \paluu ->
@@ -256,25 +315,6 @@ resource MorphoEst = ResEst ** open Prelude in {
       (piennar + "ten") (pientar + "i" + a) (pientar + "in" + a)
       (pientar + "iss" + a) (pientar + "iin") ;
 
-  --Estonian paradigm!
-  dSeminar : (_ : Str) -> NForms = \seminar ->
-    let 
-      seminari = seminar + "i" ; 
-      --seminare = seminar + "e" ; 
-    in nForms10
-      seminar seminari seminari (seminari + "na") (seminari + "sse")
-      (seminari + "de") (seminari + "sid") (seminari + "dena") -- pl gen, part???, ess
-      (seminari + "des") (seminari + "desse") ; -- pl ine, ill
-  --end Estonian paradigm
- --- Estonian paradigm
-  dOun : (_ : Str) -> NForms = \oun ->
-    let 
-      ouna = oun + "a" ;
-    in nForms10
-      oun ouna ouna (ouna + "na") (ouna + "sse")
-      (oun + "te") (oun + "u") (oun + "tena") -- pl gen, part???, ess
-      (oun + "tes") (oun + "tesse") ; -- pl ine, ill
-
 
   dNukke : (_,_ : Str) -> NForms = \nukke,nuken ->
     let
@@ -374,10 +414,82 @@ resource MorphoEst = ResEst ** open Prelude in {
 
 -- the maximal set of technical stems
 
-    NForms : Type = Predef.Ints 9 => Str ;
+    NForms : Type = Predef.Ints 6 => Str ;
 
     --Estonian
-    nForms10 : (x1,_,_,_,_,_,_,_,_,x10 : Str) -> NForms = 
+    nForms7 : (x1,_,_,_,_,_,x7 : Str) -> NForms = 
+      \jogi,joe,joge,joesse, -- sg nom, gen, part, ill
+       jogede,jogesid,jogedesse -> table { -- pl gen, part, ill
+      0 => jogi ;
+      1 => joe ;
+      2 => joge ;
+      3 => joesse ;
+      4 => jogede ;
+      5 => jogesid ;
+      6 => jogedesse
+      } ;
+
+  n2nforms : Noun -> NForms = \ukko -> table {
+    0 => ukko.s ! NCase Sg Nom ;
+    1 => ukko.s ! NCase Sg Gen ;
+    2 => ukko.s ! NCase Sg Part ;
+    3 => ukko.s ! NCase Sg Illat ;
+    4 => ukko.s ! NCase Pl Gen ;
+    5 => ukko.s ! NCase Pl Part ;
+    6 => ukko.s ! NCase Pl Illat
+  } ;
+  --end Estonian
+    Noun = {s : NForm => Str; lock_N : {}} ;
+
+    nForms2N : NForms -> Noun = \f -> 
+      let
+        jogi = f ! 0 ;
+        joe = f ! 1 ;
+        joge = f ! 2 ;
+        joesse = f ! 3 ;
+        jogede = f ! 4 ;
+        jogesid = f ! 5 ;
+        jogedesse = f ! 6 ;
+      in 
+    {s = table {
+      NCase Sg Nom    => jogi ;
+      NCase Sg Gen    => joe ;
+      NCase Sg Part   => joge ;
+      NCase Sg Transl => joe + "ks" ;
+      NCase Sg Ess    => joe + "na" ;
+      NCase Sg Iness  => joe + "s" ;
+      NCase Sg Elat   => joe + "st" ;
+      NCase Sg Illat  => joesse ;
+      NCase Sg Adess  => joe + "l" ;
+      NCase Sg Ablat  => joe + "lt" ;
+      NCase Sg Allat  => joe + "le" ;
+      NCase Sg Abess  => joe + "ta" ;
+      NCase Sg Comit  => joe + "ga" ;
+      NCase Sg Termin => joe + "ni" ;
+
+      NCase Pl Nom    => joe + "d" ;
+      NCase Pl Gen    => jogede ;
+      NCase Pl Part   => jogesid ;
+      NCase Pl Transl => jogede + "ks" ;
+      NCase Pl Ess    => jogede + "na" ;
+      NCase Pl Iness  => jogede + "s" ;
+      NCase Pl Elat   => jogede + "st" ;
+      NCase Pl Illat  => jogedesse ;
+      NCase Pl Adess  => jogede + "l" ;
+      NCase Pl Ablat  => jogede + "lt" ;
+      NCase Pl Allat  => jogede + "le" ;
+      NCase Pl Abess  => jogede + "ta" ;
+      NCase Pl Comit  => jogede + "ga" ;
+      NCase Pl Termin => jogede + "ni" 
+
+      } ;
+    lock_N = <>
+    } ;
+
+    -- not needed, just for not breaking things now
+    NFormsFin : Type = Predef.Ints 9 => Str ;
+
+    nForms10 : (x1,_,_,_,_,_,_,_,_,x10 : Str) -> NFormsFin = 
       \jogi,joe,joge,joena,joesse, -- sg nom, gen, part, ess, ill
        jogede,jogesid,jogedena,jogedes,jogedesse -> table { -- pl gen, part, ess, ine, ill
       0 => jogi ;
@@ -391,6 +503,9 @@ resource MorphoEst = ResEst ** open Prelude in {
       8 => jogedes ;
       9 => jogedesse
       } ;
+
+
+{------------------------ FINNISH 
 
     Noun = {s : NForm => Str; lock_N : {}} ;
 
@@ -441,20 +556,9 @@ resource MorphoEst = ResEst ** open Prelude in {
       NCase Pl Allat  => jogede + "le" ;
       NCase Pl Abess  => jogede + "ta" ;
       NCase Pl Comit  => jogede + "ga" ;
-      NCase Pl Termin => jogede + "ni" 
+      NCase Pl Termin => jogede + "ni"    
+   --Not in Estonian
 
-{-      --Not in Estonian
-      NComit    => jogede + "ga" ;
-
-      NInstruct => joe + "n" ; 
-      NPossNom _     => joe ;
-      NPossGen Sg    => joe ;
-      NPossGen Pl    => init jogede ;
-      NPossTransl Sg => joe + "kse" ;
-      NPossTransl Pl => joe + "kse" ;
-      NPossIllat Sg  => init joesse ;
-      NPossIllat Pl  => init jogedesse
--}
       } ;
     lock_N = <>
     } ;
@@ -471,7 +575,7 @@ resource MorphoEst = ResEst ** open Prelude in {
     8 => ukko.s ! NCase Pl Iness ;
     9 => ukko.s ! NCase Pl Illat
   } ;
-
+-----------------------------------------------}
 -- Adjective forms
 
     AForms : Type = {

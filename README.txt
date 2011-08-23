@@ -41,3 +41,21 @@ Lang> cc paris_PN
 Lang> cc now_Adv 
 {s = "nyyd"; lock_Adv : {} = <>}
 10 msec
+
+
+------
+EmbedVP is weird already in Finnish:
+Lang> gr -tr MassNP (SentCN (UseN apple_N) (EmbedVP ?)) | l
+MassNP (SentCN (UseN apple_N) (EmbedVP (ProgrVP (PassV2 close_V2))))
+
+apple to be being closed
+õun olla suljetaan
+
+
+12 msec
+Lang> gr -tr MassNP (SentCN (UseN apple_N) (EmbedVP ?)) | l
+MassNP (SentCN (UseN apple_N) (EmbedVP (UseComp (CompAdv everywhere_Adv))))
+
+apple to be everywhere
+õun olla kaikkialla
+
