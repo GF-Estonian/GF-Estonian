@@ -1,0 +1,5 @@
+
+import -retain ../estonian/MorphoEst.gf
+cc -table nForms2N (dSeminar "buss")
+cc -table nForms2N (dSeminar "naine")
+cc -table nForms2N (dSeminar "pesa")
