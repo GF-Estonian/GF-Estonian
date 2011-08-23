@@ -18,7 +18,7 @@
 --
 -- The structure of functions for each word class $C$ is the following:
 -- there is a polymorphic constructor $mkC$, which takes one or
--- a few arguments. In Estnish, one argument is enough in 80-90% of
+-- a few arguments. In Estonian, one argument is enough in ??? % of
 -- cases in average.
 
 resource ParadigmsEst = open 
@@ -99,8 +99,9 @@ oper
     mkN : (savi,savia : Str) -> N ; -- different pl.part
     mkN : (vesi,veden,vesiä : Str) -> N ; -- also different sg.gen
     mkN : (pank,panga,panka,panku : Str) -> N ; -- sg nom,gen,part, pl.part
---    mkN : (vesi,veden,vesiä,vettä : Str) -> N ; -- also different sg.part
+
 --    mkN : (olo,n,a,na,oon,jen,ja,ina,issa,ihin : Str) -> N ; -- worst case, 10 forms
+    mkN : (oun,ouna,ouna,ounasse,ounte,ounu,ountesse : Str) -> N ; -- worst case, 7 forms
     mkN : (pika : Str) -> (juna  : N) -> N ; -- compound with invariable prefix
     mkN : (oma : N)    -> (tunto : N) -> N ; -- compound with inflecting prefix
     mkN : NK -> N ;  -- noun from DictEst (Kotus)
@@ -280,6 +281,7 @@ oper
 
     -- mkN : (talo,talon,taloja,taloa : Str) -> N = mk4N ;
     --  \s,t,u,v -> nForms2N (nForms4 s t u v) ;
+    mkN : (oun,ouna,ouna,ounasse,ounte,ounu,ountesse : Str) -> N = mk7N ;
 --    mkN : 
 --      (talo,talon,taloa,talona,taloon,talojen,taloja,taloina,taloissa,taloihin
 --        : Str) -> N = mk10N ;
@@ -296,6 +298,9 @@ oper
   mk3N : (talo,talon,taloja : Str) -> N = \s,t,u -> nForms2N (nForms3 s t u) ;
   mk4N : (talo,talon,taloa,taloja : Str) -> N = \s,t,u,v -> 
       nForms2N (nForms4 s t u v) ;
+
+  mk7N : (oun,ouna,ouna,ounasse,ounte,ounu,ountesse : Str) -> N = 
+      \a,b,c,d,e,f,g -> nForms2N (nForms7 a b c d e f g) ;
 
 
   mk10N : 

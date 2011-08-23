@@ -215,15 +215,15 @@ oper
 
   kukaInt : MorphoEst.Number => (MorphoEst.Case) => Str = 
     let 
-      kuka = mkN "kes" "kelle" "keda" "asdfaf" ; -- "kenä" "keneen" 
-               --  "keiden" "keitä" "keinä" "keissä" "keihin" ;
+      kuka = mkN "kes" "kelle" "keda" "kellesse"
+                 "kellede" "keda" "kelledesse" ;
     in
     table {
       Sg => table {
         c   => kuka.s ! NCase Sg c
        } ; 
       Pl => table {
-        Nom => "ketkä" ;
+        Nom => "kes" ;
         c   => kuka.s ! NCase Pl c
         }
       } ;

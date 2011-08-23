@@ -25,29 +25,28 @@ resource MorphoEst = ResEst ** open Prelude in {
 
   --tüüpsõnad 2
   -- luu, luu, luud, .luusse, (.)luude, luid ja  .luusid, (.)luudesse ja .luisse
-{-  dLuu : Str -> NForms = \luu ->
+  dLuu : Str -> NForms = \luu ->
     let 
       lui = (Predef.tk 1 luu) + "i" ;
     in nForms7
       luu luu (luu + "d") (luu + "sse")        -- sg nom, gen, part, ill
-      (luu + "de") (lui + "d") (lui + "sse") ; -- pl      gen, part, ill
--}
+      (luu + "de") (lui + "d") (luu + "desse") ; -- pl      gen, part, ill
+
 
   --tüüpsõnad 3: short sg illative; non-predictable vowel in pl part and ill
-{-  dPesa : (_,_ Str) -> NForms = \pesa,pesi ->
+  dPesa : (_,_ : Str) -> NForms = \pesa,pesi ->
     let 
       pes   = Predef.tk 1 pesa ;
       s     = last pes ;
       pessa = pes + s + last pesa ;
     in nForms7
-      pesa pesa pesa pessa                -- sg nom, gen, part, ill
-      (pesa + "de") pesi (pesi + "sse") ; -- pl      gen, part, ill
-
+      pesa pesa pesa pessa                  -- sg nom, gen, part, ill
+      (pesa + "de") pesi (pesa + "desse") ; -- pl      gen, part, ill
 
 --pesa, pesa, pesa, .pessa ja pesasse, pesade, pesasid ja pesi, pesadesse ja pesisse
 --saba, saba, saba, .sappa ja sabasse, sabade, sabasid ja sabu, sabadesse ja sabusse
 --arutelu, arutelu, arutelu, aru.tellu ja arutelusse, arutelude, arutelusid, aruteludesse
--}
+
 
   --tüüpsõnad 4: i-e change, otherwise regular
   dSuvi : Str -> NForms = \suvi ->
@@ -89,6 +88,9 @@ resource MorphoEst = ResEst ** open Prelude in {
       number numbri (numbri + "t") (numbri + "sse")
       (numbri + "te") (numbr + "eid") (numbri + "tesse") ;
 
+
+  --12: -se in stem, pl.part -si
+  --     sg.nom can be -ne or -s (oluline ; peegeldus)
   dNaine : Str -> NForms = \naine ->
     let 
       nais = Predef.tk 2 naine + "s"
@@ -96,6 +98,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       naine (nais + "e") (nais + "t") (nais + "esse")
       (nais + "te") (nais + "i") (nais + "tesse") ; -- pl gen, part, ill
  
+  --13: -se in stem, pl.part -eid
   dSoolane : Str -> NForms = \soolane ->
     let 
       soolas = Predef.tk 2 soolane + "s"
