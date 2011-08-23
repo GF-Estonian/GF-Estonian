@@ -88,12 +88,19 @@ resource MorphoEst = ResEst ** open Prelude in {
       number numbri (numbri + "t") (numbri + "sse")
       (numbri + "te") (numbr + "eid") (numbri + "tesse") ;
 
+  --10: ase, aseme
+
+  --11: -se in stem, pl.part -eid. Like 13, but vowel insertion in part,gen etc.
+  --dRaudne : Str -> NForms
 
   --12: -se in stem, pl.part -si
   --     sg.nom can be -ne or -s (oluline ; peegeldus)
   dNaine : Str -> NForms = \naine ->
     let 
-      nais = Predef.tk 2 naine + "s"
+      nais : Str = case naine of {
+        _ + "ne" => Predef.tk 2 naine + "s" ;
+        _ + "s"  => naine    -- if nominative ends in s already
+      } 
     in nForms7
       naine (nais + "e") (nais + "t") (nais + "esse")
       (nais + "te") (nais + "i") (nais + "tesse") ; -- pl gen, part, ill
@@ -101,11 +108,16 @@ resource MorphoEst = ResEst ** open Prelude in {
   --13: -se in stem, pl.part -eid
   dSoolane : Str -> NForms = \soolane ->
     let 
-      soolas = Predef.tk 2 soolane + "s"
+      soolas : Str = case soolane of {
+        _ + "ne" => Predef.tk 2 soolane + "s" ;
+        _ + "s"  => soolane
+      } ;
+      soolase : Str = soolas + "e"
     in nForms7
-      soolane (soolas + "e") (soolas + "t") (soolas + "esse")
-      (soolas + "te") (soolas + "eid") (soolas + "tesse") ; -- pl gen, part, ill
+      soolane soolase (soolas + "t") (soolas + "esse")
+      (soolas + "te") (soolase + "id") (soolas + "tesse") ; -- pl gen, part, ill
 
+  
 
   dOun : Str -> NForms = \oun ->
     let 
