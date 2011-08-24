@@ -97,7 +97,7 @@ oper
   mkN : overload {
     mkN : (kukko : Str) -> N ;  -- predictable nouns, covers 82%
     mkN : (savi,savia : Str) -> N ; -- different pl.part
-    mkN : (vesi,veden,vesiä : Str) -> N ; -- also different sg.gen
+    mkN : (vesi,veden,vesia : Str) -> N ; -- also different sg.gen
     mkN : (pank,panga,panka,panku : Str) -> N ; -- sg nom,gen,part, pl.part
 
 --    mkN : (olo,n,a,na,oon,jen,ja,ina,issa,ihin : Str) -> N ; -- worst case, 10 forms
