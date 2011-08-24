@@ -19,22 +19,35 @@ cc -table nForms2N (dPesa "arutelu" "arutelusid")
 -- 4
 cc -table nForms2N (dSuvi "suvi")
 
--- 5 (later)
+-- 5 tuli
 
 -- 6
 cc -table nForms2N (dSeminar "seminar")
+cc -table nForms2N (dSeminar "akvaarium")
 
 -- 7
 cc -table nForms2N (dRatsu "ratsu")
+cc -table nForms2N (dRatsu "kere")
 
 -- 8
 cc -table nForms2N (dKindel "kindel" "kindla")
+cc -table nForms2N (dKindel "õpik" "õpiku")
+cc -table nForms2N (dKindel "ohutu" "ohutu")
 
 -- 9
 cc -table nForms2N (dNumber "number" "numbri")
+cc -table nForms2N (dNumber "redel" "redeli")
+cc -table nForms2N (dNumber "väeti" "väeti")
+
+-- 10 ase
+-- 11 raudne, primaarne
 
 -- 12
+cc -table nForms2N (dNaine "oluline")
+cc -table nForms2N (dNaine "peegeldus")
+cc -table nForms2N (dNaine "üldine")
 cc -table nForms2N (dNaine "naine")
 
 -- 13
 cc -table nForms2N (dSoolane "soolane")
+cc -table nForms2N (dSoolane "tehas")

@@ -1,0 +1,4 @@
+s . ResEst.NCase ParamX.Sg ResEst.Illat => sabba
+should be: sabasse or sappa
+
+akvaarium/pl: maybe better: akvaariumite, akvaariumeid, akvaariumitesse, ...
