@@ -23,6 +23,7 @@ cc -table nForms2N (dSuvi "suvi")
 
 -- 6
 cc -table nForms2N (dSeminar "seminar")
+cc -table nForms2N (dSeminar "banaan")
 cc -table nForms2N (dSeminar "akvaarium")
 
 -- 7
@@ -40,7 +41,7 @@ cc -table nForms2N (dNumber "redel" "redeli")
 cc -table nForms2N (dNumber "väeti" "väeti")
 
 -- 10 ase
--- 11 raudne, primaarne
+-- 11 raudne, primaarne; covered in 13, no need for own paradigm
 
 -- 12
 cc -table nForms2N (dNaine "oluline")
@@ -50,4 +51,5 @@ cc -table nForms2N (dNaine "naine")
 
 -- 13
 cc -table nForms2N (dSoolane "soolane")
+cc -table nForms2N (dSoolane "raudne")
 cc -table nForms2N (dSoolane "tehas")
