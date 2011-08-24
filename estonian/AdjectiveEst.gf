@@ -1,6 +1,7 @@
 concrete AdjectiveEst of Adjective = CatEst ** open ResEst, Prelude in {
 
-  flags optimize=all_subs ; -- gfc size from 2864336 to 6786 - i.e. factor 422
+  -- gfc size from 2864336 to 6786 - i.e. factor 422
+  flags optimize=all_subs ; coding=utf8;
 
   lin
 
@@ -10,7 +11,7 @@ concrete AdjectiveEst of Adjective = CatEst ** open ResEst, Prelude in {
     ComparA a np = {
       s = \\isMod,af => case isMod of {
         True => np.s ! NPCase Part ++ a.s ! Compar ! AN af ;        -- minua isompi
-        _    => a.s ! Compar ! AN af ++ "kuin" ++ np.s ! NPCase Nom -- isompi kuin min‰
+        _    => a.s ! Compar ! AN af ++ "kuin" ++ np.s ! NPCase Nom -- isompi kuin min√§
         } 
       } ;
     CAdvAP ad ap np = {

@@ -1,6 +1,6 @@
 concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
 
-  flags optimize=all_subs ;
+  flags optimize=all_subs ; coding=utf8;
 
   lin
 
@@ -17,10 +17,10 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
           let k = npform2case n c 
           in 
           case <n, c, det.isNum, det.isPoss, det.isDef> of {
-            <_, NPAcc,       True,_,_>  => <Nom,NCase Sg Part> ; -- kolme kytkint‰(ni)
-            <_, NPCase Nom,  True,_,_>  => <Nom,NCase Sg Part> ; -- kolme kytkint‰(ni)
+            <_, NPAcc,       True,_,_>  => <Nom,NCase Sg Part> ; -- kolme kytkint√§(ni)
+            <_, NPCase Nom,  True,_,_>  => <Nom,NCase Sg Part> ; -- kolme kytkint√§(ni)
             <_, _, True,False,_>        => <k,  NCase Sg k> ;    -- kolmeksi kytkimeksi
-            <Pl,NPCase Nom,  _,_,False> => <k,  NCase Pl Part> ; -- kytkimi‰
+            <Pl,NPCase Nom,  _,_,False> => <k,  NCase Pl Part> ; -- kytkimi√§
 
 {-          --Not in Estonian
             <_, NPCase Nom,_,True,_>    => <k,  NPossNom n> ;    -- kytkime+ni on/ovat...
@@ -74,13 +74,13 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
     PPartNP np v2 = {
       s = \\c => np.s ! c ++ v2.s ! PastPartPass (AN (NCase (complNumAgr np.a) Ess)) ;
       a = np.a ;
-      isPron = np.isPron  -- minun t‰‰ll‰ - ni
+      isPron = np.isPron  -- minun t√§√§ll√§ - ni
       } ;
 
     AdvNP np adv = {
       s = \\c => np.s ! c ++ adv.s ;
       a = np.a ;
-      isPron = np.isPron  -- minun t‰‰ll‰ - ni
+      isPron = np.isPron  -- minun t√§√§ll√§ - ni
       } ;
 
     DetQuantOrd quant num ord = {
@@ -146,8 +146,8 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
     IndefArt = {
       s1 = \\_,_ => [] ; -- Nom is Part in Pl: use isDef in DetCN
       sp = \\n,c => 
-         (nhn (mkSubst "‰" "yksi" "yhde" "yhte" "yht‰" "yhteen" "yksi" "yksi" 
-         "yksien" "yksi‰" "yksiin")).s ! NCase n c ;
+         (nhn (mkSubst "√§" "yksi" "yhde" "yhte" "yht√§" "yhteen" "yksi" "yksi" 
+         "yksien" "yksi√§" "yksiin")).s ! NCase n c ;
       s2 = [] ; 
       isNum,isPoss,isDef = False -- autoja on
       } ;

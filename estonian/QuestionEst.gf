@@ -1,6 +1,6 @@
 concrete QuestionEst of Question = CatEst ** open ResEst, Prelude in {
 
-  flags optimize=all_subs ;
+  flags optimize=all_subs ; coding=utf8;
 
   lin
 
@@ -54,9 +54,9 @@ concrete QuestionEst of Question = CatEst ** open ResEst, Prelude in {
         let 
           k = npform2case n c ;
           ncase = case <k,idet.isNum> of {
-            <Nom,  True> => NCase Sg Part ; -- mitk‰ kolme kytkint‰
+            <Nom,  True> => NCase Sg Part ; -- mitk√§ kolme kytkint√§
             <_,    True> => NCase Sg k ;    -- miksi kolmeksi kytkimeksi
-            _            => NCase n  k      -- mitk‰ kytkimet
+            _            => NCase n  k      -- mitk√§ kytkimet
             }
         in
         idet.s ! k ++ cn.s ! ncase ; 
@@ -80,9 +80,9 @@ concrete QuestionEst of Question = CatEst ** open ResEst, Prelude in {
         s = \\k => 
         let 
           ncase = case <k,isn> of {
-            <Nom,  True> => NCase Sg Part ; -- mitk‰ kolme kytkint‰
+            <Nom,  True> => NCase Sg Part ; -- mitk√§ kolme kytkint√§
             <_,    True> => NCase Sg k ;    -- miksi kolmeksi kytkimeksi
-            _            => NCase n  k      -- mitk‰ kytkimet
+            _            => NCase n  k      -- mitk√§ kytkimet
             }
         in
         idet.s ! n ! k ++ num.s ! Sg ! k ; 

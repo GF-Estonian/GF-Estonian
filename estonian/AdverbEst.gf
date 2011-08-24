@@ -1,5 +1,7 @@
 concrete AdverbEst of Adverb = CatEst ** open ResEst, Prelude in {
 
+  flags coding=utf8;
+
   lin
     PositAdvAdj a = {s = a.s ! Posit ! AAdv} ;
     ComparAdvAdj cadv a np = {
@@ -13,7 +15,7 @@ concrete AdverbEst of Adverb = CatEst ** open ResEst, Prelude in {
 
     AdAdv = cc2 ;
 
-    PositAdAAdj a = {s = a.s ! Posit ! AN (NCase Sg Gen)} ; -- älyttömän
+    PositAdAAdj a = {s = a.s ! Posit ! AN (NCase Sg Gen)} ; -- Ã¤lyttÃ¶mÃ¤n
 
     SubjS = cc2 ;
 ----b    AdvSC s = s ;

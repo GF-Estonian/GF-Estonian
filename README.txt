@@ -59,3 +59,6 @@ MassNP (SentCN (UseN apple_N) (EmbedVP (UseComp (CompAdv everywhere_Adv))))
 apple to be everywhere
 õun olla kaikkialla
 
+Resources:
+  * http://www.eki.ee/dict/qs/tyypsonad.html
+  * [http://www.filosoft.ee/gene_et/ Estonian morph synthesizer]

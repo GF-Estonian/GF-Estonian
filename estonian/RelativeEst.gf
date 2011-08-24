@@ -1,11 +1,11 @@
 concrete RelativeEst of Relative = CatEst ** open Prelude, ResEst, MorphoEst in {
 
-  flags optimize=all_subs ;
+  flags optimize=all_subs ; coding=utf8;
 
   lin
 
     RelCl cl = {
-      s = \\t,a,p,_ => "siten" ++ "ett‰" ++ cl.s ! t ! a ! p ! SDecl ;
+      s = \\t,a,p,_ => "siten" ++ "ett√§" ++ cl.s ! t ! a ! p ! SDecl ;
       ---- sellainen
       c = NPCase Nom
       } ;

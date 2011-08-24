@@ -1,7 +1,9 @@
 
+flags coding=utf8;
+
 kayda_V = 
   let kay = Predef.tk 2 s ; kavi = init kay + "vi" in
-      vForms12 s (kay + "n") kay (kay + "v‰t") (kay + "k‰‰") (kay + "d‰‰n")
+      vForms12 s (kay + "n") kay (kay + "v√§t") (kay + "k√§√§") (kay + "d√§√§n")
         (kavi + "n") kavi (kavi + "si") (kay + "nyt") (kay + "tty")
         (kay + "nee") ;
 tuntea_V =

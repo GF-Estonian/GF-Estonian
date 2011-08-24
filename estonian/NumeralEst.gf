@@ -3,7 +3,7 @@ concrete NumeralEst of Numeral = CatEst [Numeral,Digits] **  open Prelude, Parad
 -- Notice: possessive forms are not used. They get wrong, since every
 -- part is made to agree in them.
 
-flags optimize = all_subs ;
+flags optimize=all_subs ; coding=utf8;
 
 lincat 
   Sub1000000 = {s : CardOrd => Str ; n : MorphoEst.Number} ;
@@ -20,23 +20,23 @@ lin
     (nhn (mkSubst "a" "kolme" "kolme" "kolme" "kolmea" "kolmeen" "kolmi" "kolmi"
     "kolmien" "kolmia" "kolmiin"))
     (ordN "a" "kolmas") ;
-  n4 = co (mkN "neljä") (ordN "ä" "neljäs") ;
-  n5 = co (mkN "viisi" "viiden" "viisiä") (ordN "ä" "viides") ;
+  n4 = co (mkN "neljÃ¤") (ordN "Ã¤" "neljÃ¤s") ;
+  n5 = co (mkN "viisi" "viiden" "viisiÃ¤") (ordN "Ã¤" "viides") ;
   n6 = co (mkN "kuusi" "kuuden" "kuusia") (ordN "a" "kuudes") ; 
   n7 = co 
-    (nhn (mkSubst "ä" "seitsemän" "seitsemä" "seitsemä" "seitsemää" 
-    "seitsemään" "seitsemi" "seitsemi" "seitsemien" "seitsemiä"
+    (nhn (mkSubst "Ã¤" "seitsemÃ¤n" "seitsemÃ¤" "seitsemÃ¤" "seitsemÃ¤Ã¤" 
+    "seitsemÃ¤Ã¤n" "seitsemi" "seitsemi" "seitsemien" "seitsemiÃ¤"
     "seitsemiin"))
-    (ordN "ä" "seitsemäs") ;
+    (ordN "Ã¤" "seitsemÃ¤s") ;
   n8 = co 
     (nhn (mkSubst "a" "kahdeksan" "kahdeksa" "kahdeksa" "kahdeksaa" 
     "kahdeksaan" "kahdeksi" "kahdeksi" "kahdeksien" "kahdeksia"
     "kahdeksiin"))
     (ordN "a" "kahdeksas") ;
   n9 = co
-     (nhn (mkSubst "ä" "yhdeksän" "yhdeksä" "yhdeksä" "yhdeksää" 
-    "yhdeksään" "yhdeksi" "yhdeksi" "yhdeksien" "yhdeksiä" "yhdeksiin"))
-     (ordN "ä" "yhdeksäs") ;
+     (nhn (mkSubst "Ã¤" "yhdeksÃ¤n" "yhdeksÃ¤" "yhdeksÃ¤" "yhdeksÃ¤Ã¤" 
+    "yhdeksÃ¤Ã¤n" "yhdeksi" "yhdeksi" "yhdeksien" "yhdeksiÃ¤" "yhdeksiin"))
+     (ordN "Ã¤" "yhdeksÃ¤s") ;
 
   pot01 = 
    {s = table {
@@ -101,13 +101,13 @@ param
 
 oper
   yksiN = co 
-    (nhn (mkSubst "ä" "yksi" "yhde" "yhte" "yhtä" "yhteen" "yksi" "yksi" 
-     "yksien" "yksiä" "yksiin")) 
-    (ordN "ä" "yhdes") ; ---- ensimmäinen
+    (nhn (mkSubst "Ã¤" "yksi" "yhde" "yhte" "yhtÃ¤" "yhteen" "yksi" "yksi" 
+     "yksien" "yksiÃ¤" "yksiin")) 
+    (ordN "Ã¤" "yhdes") ; ---- ensimmÃ¤inen
   kymmenenN = co 
-    (nhn (mkSubst "ä" "kymmenen" "kymmene" "kymmene" "kymmentä" 
-    "kymmeneen" "kymmeni" "kymmeni" "kymmenien" "kymmeniä" "kymmeniin")) 
-    (ordN "ä" "kymmenes") ;
+    (nhn (mkSubst "Ã¤" "kymmenen" "kymmene" "kymmene" "kymmentÃ¤" 
+    "kymmeneen" "kymmeni" "kymmeni" "kymmenien" "kymmeniÃ¤" "kymmeniin")) 
+    (ordN "Ã¤" "kymmenes") ;
   sataN = co 
     (mkN "sata") 
     (ordN "a" "sadas") ;
@@ -119,7 +119,7 @@ oper
 
   kymmentaN =
    {s = table {
-      NCard (NCase Sg Nom) => "kymmentä" ;
+      NCard (NCase Sg Nom) => "kymmentÃ¤" ;
       k => kymmenenN.s ! k
       }
     } ;

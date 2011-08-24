@@ -1,6 +1,6 @@
 concrete SentenceEst of Sentence = CatEst ** open Prelude, ResEst in {
 
-  flags optimize=all_subs ;
+  flags optimize=all_subs ; coding=utf8;
 
   lin
 
@@ -37,7 +37,7 @@ concrete SentenceEst of Sentence = CatEst ** open Prelude, ResEst in {
     SlashVS np vs slash = { 
       s = \\t,a,p => 
         (mkClause (subjForm np vs.sc) np.a 
-          (insertExtrapos ("ett‰" ++ slash.s) 
+          (insertExtrapos ("ett√§" ++ slash.s) 
              (predV vs))
         ).s ! t ! a ! p ! SDecl ;
       c2 = slash.c2
@@ -62,6 +62,6 @@ concrete SentenceEst of Sentence = CatEst ** open Prelude, ResEst in {
     AdvS a s = {s = a.s ++ s.s} ;
     ExtAdvS a s = {s = a.s ++ "," ++ s.s} ;
 
-    RelS s r = {s = s.s ++ "," ++ r.s ! agrP3 Sg} ; ---- mik‰
+    RelS s r = {s = s.s ++ "," ++ r.s ! agrP3 Sg} ; ---- mik√§
 
 }

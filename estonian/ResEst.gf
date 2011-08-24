@@ -150,11 +150,11 @@ param
     let
       c = case co.c of {
         NPAcc => case b of {
-          Neg => NPCase Part ; -- en n‰e taloa/sinua
+          Neg => NPCase Part ; -- en n√§e taloa/sinua
           Pos => case isFin of {
-               True => NPAcc ; -- n‰en/t‰ytyy n‰hd‰ sinut
+               True => NPAcc ; -- n√§en/t√§ytyy n√§hd√§ sinut
                _ => case np.isPron of {
-                  False => NPCase Nom ;  -- t‰ytyy n‰hd‰ talo
+                  False => NPCase Nom ;  -- t√§ytyy n√§hd√§ talo
                   _ => NPAcc
                   }
                }
@@ -163,9 +163,9 @@ param
         } ;
 {-
       c = case <isFin, b, co.c, np.isPron> of {
-        <_,    Neg, NPAcc,_>      => NPCase Part ; -- en n‰e taloa/sinua
-        <_,    Pos, NPAcc,True>   => NPAcc ;       -- n‰en/t‰ytyy sinut
-        <False,Pos, NPAcc,False>  => NPCase Nom ;  -- t‰ytyy n‰hd‰ talo
+        <_,    Neg, NPAcc,_>      => NPCase Part ; -- en n√§e taloa/sinua
+        <_,    Pos, NPAcc,True>   => NPAcc ;       -- n√§en/t√§ytyy sinut
+        <False,Pos, NPAcc,False>  => NPCase Nom ;  -- t√§ytyy n√§hd√§ talo
         <_,_,coc,_>               => coc
         } ;
 -}
@@ -215,7 +215,7 @@ oper
           {n = Sg ; p = P3} => "ei" ;
           {n = Pl ; p = P1} => "emme" ;
           {n = Pl ; p = P2} => "ette" ;
-          {n = Pl ; p = P3} => "eiv‰t"
+          {n = Pl ; p = P3} => "eiv√§t"
 -}
           } ;
 
@@ -225,8 +225,8 @@ oper
           <VIFin Cond,        _>  => <eiv, verbs ! Condit Sg P3, "olisi"> ;  --# notpresent
           <VIFin Past,        Sg> => <eiv, part,                 "ollut"> ;  --# notpresent
           <VIFin Past,        Pl> => <eiv, part,                 "olleet"> ;  --# notpresent
-          <VIImper,           Sg> => <"‰l‰", verbs ! Imper Sg,   "ole"> ;
-          <VIImper,           Pl> => <"‰lk‰‰", verbs ! ImpNegPl, "olko"> ;
+          <VIImper,           Sg> => <"√§l√§", verbs ! Imper Sg,   "ole"> ;
+          <VIImper,           Pl> => <"√§lk√§√§", verbs ! ImpNegPl, "olko"> ;
           <VIPass,            _>  => <"ei", verbs ! Pass False,  "ole"> ;
           <VIInf i,           _>  => <"ei", verbs ! Inf i, "olla"> ----
           } ;
@@ -324,7 +324,7 @@ oper
         let 
           agrfin = case vp.sc of {
                     NPCase Nom => <agr,True> ;
-                    _ => <agrP3 Sg,False>      -- minun t‰ytyy, minulla on
+                    _ => <agrP3 Sg,False>      -- minun t√§ytyy, minulla on
                     } ;
           verb  = vp.s ! VIFin t ! a ! b ! agrfin.p1 ;
         in {subj = sub b ; 
@@ -365,7 +365,7 @@ oper
      } ;
 
   kin : Polarity -> Bool -> Str  = 
-    \p,b -> case p of {Pos => (mkPart "kin" "kin").s ! b ; Neg => (mkPart "kaan" "k‰‰n").s ! b} ;
+    \p,b -> case p of {Pos => (mkPart "kin" "kin").s ! b ; Neg => (mkPart "kaan" "k√§√§n").s ! b} ;
 
   mkPart : Str -> Str -> {s : Bool => Str} = \ko,koe ->
     {s = table {True => glueTok ko ; False => glueTok koe}} ;
@@ -378,14 +378,14 @@ oper
   subjForm : NP -> NPForm -> Polarity -> Str = \np,sc,b -> 
     appCompl False b {s = [] ; c = sc ; isPre = True} np ;
 
-  questPart : Bool -> Str = \b -> if_then_Str b "ko" "kˆ" ;
+  questPart : Bool -> Str = \b -> if_then_Str b "ko" "k√∂" ;
 
   selectPart : VP -> Anteriority -> Polarity -> Bool = \vp,a,p -> 
     case p of {
-      Neg => False ;  -- eikˆ tule
+      Neg => False ;  -- eik√∂ tule
       _ => case a of {
         Anter => True ; -- onko mennyt --# notpresent
-        _ => vp.qp  -- tuleeko, meneekˆ
+        _ => vp.qp  -- tuleeko, meneek√∂
         }
       } ;
 
@@ -393,8 +393,8 @@ oper
     \sc,pol,agr,vp,vi ->
         let 
           fin = case sc of {     -- subject case
-            NPCase Nom => True ; -- min‰ tahdon n‰hd‰ auton
-            _ => False           -- minun t‰ytyy n‰hd‰ auto
+            NPCase Nom => True ; -- min√§ tahdon n√§hd√§ auton
+            _ => False           -- minun t√§ytyy n√§hd√§ auto
             } ;
           verb  = vp.s ! VIInf vi ! Simul ! Pos ! agr ; -- no "ei"
           compl = vp.s2 ! fin ! pol ! agr ++ vp.ext     -- but compl. case propagated
@@ -425,8 +425,8 @@ oper
 -- Unfortunately not enough (without complicated processes).
 -- We moreover give grade alternation forms as arguments, since it does not
 -- happen automatically.
---- A problem remains with the verb "seist‰", where the infinitive
---- stem has vowel harmony "‰" but the others "a", thus "seisoivat" but "seisk‰‰".
+--- A problem remains with the verb "seist√§", where the infinitive
+--- stem has vowel harmony "√§" but the others "a", thus "seisoivat" but "seisk√§√§".
 
 
   mkVerb : (_,_,_,_,_,_,_,_,_,_,_,_ : Str) -> Verb = 
@@ -453,7 +453,7 @@ oper
       tuje = init tulen ;
       tuji = init tulin ;
       a = Predef.dp 1 tulkaa ;
-      tulko = Predef.tk 2 tulkaa + (ifTok Str a "a" "o" "ˆ") ;
+      tulko = Predef.tk 2 tulkaa + (ifTok Str a "a" "o" "√∂") ;
       o = last tulko ;
       tulleena = Predef.tk 2 tullut + ("een" + a) ;
       tulleen = (noun2adj (nhn (sRae tullut tulleena))).s ;
@@ -642,9 +642,9 @@ oper
             (rakei + "den") 
             (rakei + ("t" + a))
             (rakei + "siin") ;
--- Nouns with partitive "a"/"‰" ; 
+-- Nouns with partitive "a"/"√§" ; 
 -- to account for grade and vowel alternation, three forms are usually enough
--- Examples: "talo", "kukko", "huippu", "koira", "kukka", "syyl‰",...
+-- Examples: "talo", "kukko", "huippu", "koira", "kukka", "syyl√§",...
 
   sKukko : (_,_,_ : Str) -> NounH = \kukko,kukon,kukkoja ->
     let {
@@ -677,7 +677,7 @@ oper
   --Estonian version started
   reflPron : Agr -> NP = \agr -> 
     let 
-      itse = (nhn (sKukko "itse" "itsen" "itsej‰")).s ;
+      itse = (nhn (sKukko "itse" "itsen" "itsej√§")).s ;
       nsa  = possSuffixFront agr
     in {
       s = table {
@@ -691,7 +691,7 @@ oper
       } ;
 
   possSuffixFront : Agr -> Str = \agr -> 
-    table Agr ["ni" ; "si" ; "ns‰" ; "mme" ; "nne" ; "ns‰" ; "nne"] ! agr ;
+    table Agr ["ni" ; "si" ; "ns√§" ; "mme" ; "nne" ; "ns√§" ; "nne"] ! agr ;
   possSuffix : Agr -> Str = \agr -> 
     table Agr ["ni" ; "si" ; "nsa" ; "mme" ; "nne" ; "nsa" ; "nne"] ! agr ;
 
@@ -702,7 +702,7 @@ oper
     isPron = False  -- has no special accusative
     } ;
 
-  etta_Conj : Str = "ett‰" ;
+  etta_Conj : Str = "ett√§" ;
 
     heavyDet : PDet -> PDet ** {sp : Case => Str} = \d -> d ** {sp = d.s1} ;
     PDet : Type = {

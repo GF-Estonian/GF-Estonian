@@ -1,6 +1,6 @@
 concrete CatEst of Cat = CommonX ** open ResEst, Prelude in {
 
-  flags optimize=all_subs ;
+  flags optimize=all_subs ; coding=utf8;
 
   lincat
 
@@ -39,7 +39,7 @@ concrete CatEst of Cat = CommonX ** open ResEst, Prelude in {
 -- Adjective
 
 -- The $Bool$ tells whether usage is modifying (as opposed to
--- predicative), e.g. "x on suurempi kuin y" vs. "y:tä suurempi luku".
+-- predicative), e.g. "x on suurempi kuin y" vs. "y:tÃ¤ suurempi luku".
 
     AP = {s : Bool => NForm => Str} ; 
 

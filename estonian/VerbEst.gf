@@ -2,7 +2,7 @@
 
 concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
 
-  flags optimize=all_subs ;
+  flags optimize=all_subs ; coding=utf8;
 
   lin
     UseV = predV ;
@@ -21,8 +21,8 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
         (\\_,b,a => infVP v.sc b a vp v.vi) 
         (predV {s = v.s ; 
                 sc = case vp.sc of {
-                  NPCase Nom => v.sc ;   -- minun t‰ytyy pest‰ auto
-                  c => c                 -- minulla t‰ytyy olla auto
+                  NPCase Nom => v.sc ;   -- minun t√§ytyy pest√§ auto
+                  c => c                 -- minulla t√§ytyy olla auto
                   } ;
                 qp = v.qp
                }
@@ -60,8 +60,8 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
         (\\_,b,a => infVP v.sc b a vp v.vi) 
         (predV {s = v.s ; 
                 sc = case vp.sc of {
-                  NPCase Nom => v.sc ;   -- minun t‰ytyy pest‰ auto
-                  c => c                 -- minulla t‰ytyy olla auto
+                  NPCase Nom => v.sc ;   -- minun t√§ytyy pest√§ auto
+                  c => c                 -- minulla t√§ytyy olla auto
                   } ;
                 qp = v.qp
                }
@@ -95,7 +95,7 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
           let
             n = complNumAgr agr ;
             c = case n of {
-              Sg => Nom ;  -- min‰ olen iso ; te olette iso
+              Sg => Nom ;  -- min√§ olen iso ; te olette iso
               Pl => Part   -- me olemme isoja ; te olette isoja
               }            --- definiteness of NP ?
           in ap.s ! False ! (NCase n c)
@@ -105,7 +105,7 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
           let
             n = complNumAgr agr ;
             c = case n of {
-              Sg => Nom ;  -- min‰ olen iso ; te olette iso
+              Sg => Nom ;  -- min√§ olen iso ; te olette iso
               Pl => Part   -- me olemme isoja ; te olette isoja
               }            --- definiteness of NP ?
           in cn.s ! (NCase n c)
@@ -122,13 +122,13 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
 -- The work is done jointly in ResEst.infVP and appCompl. 
 -- Cases to test: l -table (to see negated forms)
 --```
---   minun t‰ytyy ostaa auto
+--   minun t√§ytyy ostaa auto
 --   PredVP (UsePron i_Pron) (ComplVV must_VV 
 --     (ComplV2 buy_V2 (DetCN (DetSg (SgQuant DefArt) NoOrd) (UseN car_N))))
---   min‰ tahdon ostaa auton
+--   min√§ tahdon ostaa auton
 --   PredVP (UsePron i_Pron) (ComplVV want_VV 
 --     (ComplV2 buy_V2 (DetCN (DetSg (SgQuant DefArt) NoOrd) (UseN car_N))))
---   minulla t‰ytyy olla auto
+--   minulla t√§ytyy olla auto
 --   PredVP (UsePron i_Pron) (ComplVV must_VV 
 --     (ComplV2 have_V2 (DetCN (DetSg (SgQuant DefArt) NoOrd) (UseN car_N))))
 --```

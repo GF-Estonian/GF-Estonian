@@ -1,7 +1,7 @@
 concrete IdiomEst of Idiom = CatEst ** 
   open MorphoEst, ParadigmsEst, Prelude in {
 
-  flags optimize=all_subs ;
+  flags optimize=all_subs ; coding=utf8;
 
   lin
     ExistNP np = 
@@ -23,7 +23,7 @@ concrete IdiomEst of Idiom = CatEst **
         s = \\t,a,p => cl.s ! t ! a ! p ! SDecl
         } ;
 
--- Notice the nominative in the cleft $NP$: "se on Matti josta Liisa pitää"
+-- Notice the nominative in the cleft $NP$: "se on Matti josta Liisa pitÃ¤Ã¤"
 
     CleftNP np rs = mkClause (\_ -> "se") (agrP3 Sg) 
       (insertExtrapos (rs.s ! np.a)
