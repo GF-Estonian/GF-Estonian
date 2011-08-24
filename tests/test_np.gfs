@@ -51,5 +51,16 @@ cc -table nForms2N (dNaine "naine")
 
 -- 13
 cc -table nForms2N (dSoolane "soolane")
-cc -table nForms2N (dSoolane "raudne")
 cc -table nForms2N (dSoolane "tehas")
+-- 11 (covered by 13)
+cc -table nForms2N (dSoolane "raudne")
+cc -table nForms2N (dSoolane "primaarne")
+
+-- 19
+cc -table nForms2N (dKasulik "kasulik")
+cc -table nForms2N (dKasulik "õnnelik")
+
+-- 25
+cc -table nForms2N (dOun "hein")
+cc -table nForms2N (dOun "vits")
+cc -table nForms2N (dOun "õun")
