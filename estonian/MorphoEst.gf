@@ -57,6 +57,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       suvi suve suve (suve + "sse")                   -- sg nom, gen, part, ill
       (suve + "de") (suve + "sid") (suve + "desse") ; -- pl      gen, part, ill
 
+
   --5: tuli-tule-tuld
   dTuli : Str -> NForms = \tuli ->
     let
@@ -165,7 +166,7 @@ resource MorphoEst = ResEst ** open Prelude in {
 
   --24: pood-poe-poodi. seems irregular, implement later.
 
-  --25: 
+  --25: oun-ouna, pl.gen -te instead of -de. Might have some gradation, not yet implemented.
   dOun : Str -> NForms = \oun ->
     let 
       ouna = oun + "a" ;
@@ -173,9 +174,25 @@ resource MorphoEst = ResEst ** open Prelude in {
       oun ouna ouna (ouna + "sse")
       (oun + "te") (oun + "u") (oun + "tesse") ; -- pl gen, part, ill
 
+  --26: käsi-käe-kätt
 
------ Finnish paradigms
+  --27: uus-uue-uut ; 28: vars-varre-vart ; 29: kaas-kaane-kaant ; 30: suur-suure-suurt
+  --distinctive features for 2-place mkN: sg nom and gen
+  --default case for noun ending in s probably dSoolane?
+  dKaas : (_,_ : Str) -> NForms = \kaas,kaane ->
+    let
+      kaan : Str = Predef.tk 1 kaane ;
+      var  : Str = case kaan of {
+        _ + ("ll"|"rr"|"nn")  => Predef.tk 1 kaan ; -- V@? + C@? + C 
+        _ => kaan  
+      }
+    in nForms7
+      kaas (kaan + "e") (var + "t") (kaan + "esse")
+      (var + "te") (kaas + "i") (var + "tesse") ;
 
+    
+
+-- Finnish paradigms, here only for not to break ParadigmsEst
   dLujuus : Str -> NForms = \lujuus -> 
     let
       lujuu = init lujuus ;
@@ -186,6 +203,9 @@ resource MorphoEst = ResEst ** open Prelude in {
       (lujuu + "ten" + a) (lujuu + "teen")
       (lujuuksi + "en") (lujuuksi + a) 
       (lujuuksi + "n" + a) (lujuuksi + "ss" + a) (lujuuksi + "in") ; 
+
+
+
 
 
   dPaluu : Str -> NForms = \paluu ->
@@ -262,7 +282,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       (onnettom + "in" + a) (onnettom + "iss" + a) 
       (onnettom + "iin") ;
 
-  -- 2-syllable a/ä, o/ö, u/y
+  -- 2-syllable a/A, o/O, u/y
   dUkko : (_,_ : Str) -> NForms = \ukko,ukon ->
       let
         o   = last ukko ;
@@ -271,8 +291,8 @@ resource MorphoEst = ResEst ** open Prelude in {
         uko = init ukon ;
         uk  = init uko ;
         ukkoja = case <ukko : Str> of {
-          _ + "ä" =>                        -- kylä,kyliä,kylien,kylissä,kyliin 
-             <ukk + "iä", ukk + "ien", ukk, uk, ukk + "iin"> ;
+          _ + "A" =>                        -- kylA,kyliA,kylien,kylissA,kyliin 
+             <ukk + "iA", ukk + "ien", ukk, uk, ukk + "iin"> ;
           _ + ("au" | "eu") + _ + "a" =>    -- kauhojen,seurojen
              <ukk + "oja",ukk + "ojen",ukk + "o", uk + "o", ukk + "oihin"> ;
           _ + ("o" | "u") + _ + "a" =>      -- pula,pulia,pulien,pulissa,puliin
@@ -289,7 +309,7 @@ resource MorphoEst = ResEst ** open Prelude in {
         ukkoja.p2 ukkoja.p1
         ukkoina ukoissa ukkoja.p5 ; 
 
-  -- 3-syllable a/ä/o/ö
+  -- 3-syllable a/A/o/O
   dSilakka : (_,_,_ : Str) -> NForms = \silakka,silakan,silakoita ->
     let
       o = last silakka ;
@@ -298,15 +318,15 @@ resource MorphoEst = ResEst ** open Prelude in {
       silaka = init silakan ;
       silak  = init silaka ;
       silakkaa = silakka + case o of {
-        "o" | "ö" => "t" + a ;  -- radiota
+        "o" | "O" => "t" + a ;  -- radiota
         _ => a                  -- sammakkoa
         } ;
       silakoiden = case <silakoita : Str> of {
-        _ + "i" + ("a" | "ä") =>                    -- asemia
+        _ + "i" + ("a" | "A") =>                    -- asemia
           <silakka+a, silakk + "ien", silakk, silak, silakk + "iin"> ;
-        _ + O@("o" | "ö" | "u" | "y" | "e") + ("ja" | "jä") =>        -- pasuunoja
+        _ + O@("o" | "O" | "u" | "y" | "e") + ("ja" | "jA") =>        -- pasuunoja
           <silakka+a,silakk+O+"jen",silakk+O, silak+O, silakk +O+ "ihin"> ;
-        _ + O@("o" | "ö" | "u" | "y" | "e") + ("ita" | "itä") =>      -- silakoita
+        _ + O@("o" | "O" | "u" | "y" | "e") + ("ita" | "itA") =>      -- silakoita
           <silakkaa, silak+O+"iden",silakk+O, silak+O, silakk +O+ "ihin"> ;
         _   => Predef.error silakoita                    
         } ;
@@ -325,7 +345,7 @@ resource MorphoEst = ResEst ** open Prelude in {
         ar  = init arp ;
         arpe = case last arp of {
          "s" => case last arv of {
-            "d" | "l" | "n" | "r" =>   -- suden,sutta ; jälsi ; kansi ; hirsi
+            "d" | "l" | "n" | "r" =>   -- suden,sutta ; jAlsi ; kansi ; hirsi
                <ar + "tt" + a, arpi + "en",arpi,ar + "t"> ;
             _ =>                                     -- kuusta,kuusien
                <arp + "t" + a,arp + "ien",arpi, arp>
@@ -336,7 +356,7 @@ resource MorphoEst = ResEst ** open Prelude in {
                <arp + "t" + a,arp + "ien",arpi, arp>; 
           _   =>                                -- arpea,arpien,arvissa
                <arp + "e" + a,arp + "ien",arv+"i",arp>   
-          } ;                                   ---- pieni,pientä; uni,unta
+          } ;                                   ---- pieni,pientA; uni,unta
         in nForms10
             arpi arven arpe.p1 (arpe.p4 + "en" + a) (arpe.p4 + "een")
             arpe.p2 (arpi + a)
@@ -428,23 +448,23 @@ resource MorphoEst = ResEst ** open Prelude in {
         "A" => 
            <"n","ta","na","han","iden","ita","ina","issa","ihin"> ;
         "B" | "C" | "D" | "E" | "G" | "P" | "T" | "V" | "W" => 
-           <"n","tä","nä","hen","iden","itä","inä","issä","ihin"> ;
+           <"n","tA","nA","hen","iden","itA","inA","issA","ihin"> ;
         "F" | "L" | "M" | "N" | "R" | "S" | "X" => 
-           <"n","ää","nä","ään","ien","iä","inä","issä","iin"> ;
-        "H" | "K" | "O" | "Å" => 
+           <"n","AA","nA","AAn","ien","iA","inA","issA","iin"> ;
+        "H" | "K" | "O" | "A" => 
            <"n","ta","na","hon","iden","ita","ina","issa","ihin"> ;
         "I" | "J" => 
-           <"n","tä","nä","hin","iden","itä","inä","issä","ihin"> ;
+           <"n","tA","nA","hin","iden","itA","inA","issA","ihin"> ;
         "Q" | "U" => 
            <"n","ta","na","hun","iden","ita","ina","issa","ihin"> ;
         "Z" => 
            <"n","aa","na","aan","ojen","oja","oina","oissa","oihin"> ;
-        "Ä" => 
-           <"n","tä","nä","hän","iden","itä","inä","issä","ihin"> ;
-        "Ö" => 
-           <"n","tä","nä","hön","iden","itä","inä","issä","ihin"> ;
+        "A" => 
+           <"n","tA","nA","hAn","iden","itA","inA","issA","ihin"> ;
+        "O" => 
+           <"n","tA","nA","hOn","iden","itA","inA","issA","ihin"> ;
         "Y" => 
-           <"n","tä","nä","hyn","iden","itä","inä","issä","ihin"> ;
+           <"n","tA","nA","hyn","iden","itA","inA","issA","ihin"> ;
         _ => Predef.error (["illegal abbreviation"] ++ SDP)
         } ;
     in nForms10
@@ -1118,7 +1138,7 @@ caseTable : Number -> CommonNoun -> Case => Str = \n,cn ->
 
 oper
   relPron : Number => Case => Str =
-    let {jo = nForms2N (dSuo "jo")} in
+    let {jo = nForms2N (dLuu "jo")} in
     table {
       Sg => table {
         Nom => "joka" ;
