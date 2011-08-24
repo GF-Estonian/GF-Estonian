@@ -1,4 +1,4 @@
---# -path=.:../common:prelude
+--# -path=.:../common:../prelude
 
 --1 A Simple Estonian Resource Morphology
 --
@@ -34,6 +34,7 @@ resource MorphoEst = ResEst ** open Prelude in {
 
 
   --tüüpsõnad 3: short sg illative; non-predictable vowel in pl part and ill
+  --consonant gradation doesn't work currently
   dPesa : (_,_ : Str) -> NForms = \pesa,pesi ->
     let 
       pes   = Predef.tk 1 pesa ;
@@ -56,7 +57,14 @@ resource MorphoEst = ResEst ** open Prelude in {
       suvi suve suve (suve + "sse")                   -- sg nom, gen, part, ill
       (suve + "de") (suve + "sid") (suve + "desse") ; -- pl      gen, part, ill
 
-  --5 later
+  --5: tuli-tule-tuld
+  dTuli : Str -> NForms = \tuli ->
+    let
+      tul  : Str = Predef.tk 1 tuli;
+      tule : Str = tul + "e"
+    in nForms7
+      tuli tule (tul + "d") (tule + "sse")
+      (tule + "de") (tule + "sid") (tule + "desse") ;
 
   --6: loan words, stem vowel always i, sg nom ends in consonant
   dSeminar : Str -> NForms = \seminar ->
@@ -80,7 +88,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       (kindla + "te") (kindla + "id") (kindla + "tesse");
 
   --9: like 8, e.g. redel-redeli, väeti-väeti  or  number-numbri
-  --   stem vowel i, difference in pl.part: i~eid
+  --   stem vowel changes in pl.part: i-eid
   dNumber : (_,_ : Str) -> NForms = \number,numbri ->
     let
       numbr = Predef.tk 1 numbri --the consonant stem
@@ -88,10 +96,15 @@ resource MorphoEst = ResEst ** open Prelude in {
       number numbri (numbri + "t") (numbri + "sse")
       (numbri + "te") (numbr + "eid") (numbri + "tesse") ;
 
-  --10: ase, aseme
+  --10: ase-aseme-aset ; -me in stem, not in sg.nom and sg.part
+  dAse : Str -> NForms = \ase ->
+    let
+      aseme : Str = ase + "me"
+    in nForms7
+      ase aseme (ase + "t") (aseme + "sse")
+      (aseme + "te") (aseme + "id") (aseme + "tesse") ; 
 
-  --11: -se in stem, pl.part -eid. Like 13, but vowel insertion in part,gen etc.
-  --dRaudne : Str -> NForms
+  --11: like 13, but vowel insertion. Covered in 13.
 
   --12: -se in stem, pl.part -si
   --     sg.nom can be -ne or -s (oluline ; peegeldus)
@@ -106,19 +119,53 @@ resource MorphoEst = ResEst ** open Prelude in {
       (nais + "te") (nais + "i") (nais + "tesse") ; -- pl gen, part, ill
  
   --13: -se in stem, pl.part -eid
+  --     soolane, tehas as in 12. vowel insertion in raudne-raudse-raudset.
   dSoolane : Str -> NForms = \soolane ->
     let 
       soolas : Str = case soolane of {
         _ + "ne" => Predef.tk 2 soolane + "s" ;
         _ + "s"  => soolane
       } ;
-      soolase : Str = soolas + "e"
+      raudse : Str = case soolas of {
+        _ + ("r"|"l"|"d"|"t"|"m"|"p"|"k"|"g") + "s"  => soolas +"e" ;
+        _ => soolas
+      }
     in nForms7
-      soolane soolase (soolas + "t") (soolas + "esse")
-      (soolas + "te") (soolase + "id") (soolas + "tesse") ; -- pl gen, part, ill
+      soolane (soolas + "e") (raudse + "t") (soolas + "esse")
+      (raudse + "te") (soolas + "eid") (raudse + "tesse") ; -- pl gen, part, ill
 
-  
+  --14 and 15 are covered by 12 and 13. 
 
+  --16: rida-rea
+
+  --17: jogi-joe
+
+  --18: nali-nalja; sober-sobra-sopra. consonant gradation and other stuff.
+
+  --19: -lik-liku-likku
+  dKasulik : Str -> NForms = \kasulik ->
+    nForms7
+      kasulik (kasulik + "u") (kasulik + "ku") (kasulik + "usse")
+      (kasulik + "e") (kasulik + "ke") (kasulik + "esse") ;
+
+
+  --20: stem vowel not predictable. e in pl.part.
+  --dPaks : (_,_ : Str) -> NForms = \paks,paksu ->
+
+  --21: like 20, i in pl.part.
+  --dTaht : (_,_ : Str) -> NForms = \taht,tahe ->
+
+  --22: like 20, u in pl.part.
+  --dLeib : (_,_ : Str) -> NForms = \leib,leiva ->
+
+  --23:	sai, saia, .saia, .saia ja saiasse, .saiade, .saiu ja .saiasid, .saiadesse ja saiusse
+  --    like 20-22, but sg.nom ends in vowel
+  --20-23 could also be one oper that takes sg.nom, sg.gen and pl.part
+
+
+  --24: pood-poe-poodi. seems irregular, implement later.
+
+  --25: 
   dOun : Str -> NForms = \oun ->
     let 
       ouna = oun + "a" ;
