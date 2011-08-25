@@ -17,59 +17,45 @@ resource MorphoEst = ResEst ** open Prelude in {
 
   --Inflection paradigms from tüüpsõnad 
 
-  --tüüpsõnad 1
+  --1: stem vowel in nom, regular endings, concatenative
+  -- can combine with 7, only difference is sg.part
+  -- can combine with 2, only difference is pl.part
+  -- (but maybe not with both)
   dKoi : Str -> NForms = \koi ->
     nForms7
       koi koi (koi + "d") (koi + "sse")            -- sg nom, gen, part, ill
       (koi + "de") (koi + "sid") (koi + "desse") ; -- pl      gen, part, ill
 
-  --tüüpsõnad 2
-  -- luu, luu, luud, .luusse, (.)luude, luid ja  .luusid, (.)luudesse ja .luisse
+
+  --2: like 1, but pl.part irregular.
   dLuu : Str -> NForms = \luu ->
     let 
       lui = (Predef.tk 1 luu) + "i" ;
     in nForms7
-      luu luu (luu + "d") (luu + "sse")        -- sg nom, gen, part, ill
-      (luu + "de") (lui + "d") (luu + "desse") ; -- pl      gen, part, ill
+      luu luu (luu + "d") (luu + "sse")
+      (luu + "de") (lui + "d") (luu + "desse") ;
 
 
-  --tüüpsõnad 3: short sg illative; non-predictable vowel in pl part and ill
-  --consonant gradation doesn't work currently
+  --3: sg nom,gen,part identical. non-predictable vowel in pl.part.
   dPesa : (_,_ : Str) -> NForms = \pesa,pesi ->
-    let 
-      pes   = Predef.tk 1 pesa ;
-      s     = last pes ;
-      pessa = pes + s + last pesa ;
-    in nForms7
-      pesa pesa pesa pessa                  -- sg nom, gen, part, ill
+    nForms7
+      pesa pesa pesa (pesa + "sse")         -- sg nom, gen, part, ill
       (pesa + "de") pesi (pesa + "desse") ; -- pl      gen, part, ill
 
---pesa, pesa, pesa, .pessa ja pesasse, pesade, pesasid ja pesi, pesadesse ja pesisse
---saba, saba, saba, .sappa ja sabasse, sabade, sabasid ja sabu, sabadesse ja sabusse
---arutelu, arutelu, arutelu, aru.tellu ja arutelusse, arutelude, arutelusid, aruteludesse
 
-
-  --tüüpsõnad 4: i-e change, otherwise regular
-  dSuvi : Str -> NForms = \suvi ->
-    let 
-      suve = Predef.tk 1 suvi + "e" 
-    in nForms7
-      suvi suve suve (suve + "sse")                   -- sg nom, gen, part, ill
-      (suve + "de") (suve + "sid") (suve + "desse") ; -- pl      gen, part, ill
-
-
-  --5: tuli-tule-tuld
-  dTuli : Str -> NForms = \tuli ->
+  --4: i-e change, sg.part has e (suvi-suve-suve).
+  --5: i-e change, sg.part has d (tuli-tule-tuld).
+  --   sg.part needed to distinguish between tuld and suve.
+  dTuli : (_,_ : Str) -> NForms = \tuli,tuld ->
     let
-      tul  : Str = Predef.tk 1 tuli;
-      tule : Str = tul + "e"
+      tule  : Str = Predef.tk 1 tuli + "e" 
     in nForms7
-      tuli tule (tul + "d") (tule + "sse")
+      tuli tule tuld (tule + "sse")
       (tule + "de") (tule + "sid") (tule + "desse") ;
 
-  --6: loan words, stem vowel always i, sg nom ends in consonant
+  --6: loan words, stem vowel always i, sg.nom ends in consonant
   dSeminar : Str -> NForms = \seminar ->
-    let 
+    let
       seminari = seminar + "i" ; 
     in nForms7
       seminar seminari seminari (seminari + "sse")
@@ -135,7 +121,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       soolane (soolas + "e") (raudse + "t") (soolas + "esse")
       (raudse + "te") (soolas + "eid") (raudse + "tesse") ; -- pl gen, part, ill
 
-  --14 and 15 are covered by 12 and 13. 
+  --14 and 15 are covered in 12 and 13. 
 
   --16: rida-rea
 
@@ -152,6 +138,9 @@ resource MorphoEst = ResEst ** open Prelude in {
 
   --20: stem vowel not predictable. e in pl.part.
   --dPaks : (_,_ : Str) -> NForms = \paks,paksu ->
+  --kabinet', kabineti, kabi.netti, kabi.netti ja kabinetisse, kabi.nettide, kabi.net'te (ja 
+  --kabi.nettisid), kabi.nettidesse ja  kabinet'esse
+  -- vs. sepp-sepa-seppa. Maybe some kind of regexp "if V+C@(p|t|k) in nom, treat as V+C+C"
 
   --21: like 20, i in pl.part.
   --dTaht : (_,_ : Str) -> NForms = \taht,tahe ->
@@ -190,8 +179,32 @@ resource MorphoEst = ResEst ** open Prelude in {
       kaas (kaan + "e") (var + "t") (kaan + "esse")
       (var + "te") (kaas + "i") (var + "tesse") ;
 
-    
+  --31: mote-motte, hinne-hinde. reverse consonant gradation, stem vowel in sg.nom.
+  dHinne : Str -> NForms = \hinne ->
+    let
+      hinde : Str = strongGrade hinne 
+    in nForms7
+      hinne hinde (hinne + "t") (hinde + "sse")
+      (hinne + "te") (hinde + "id") (hinne + "tesse") ;
 
+  --32: ranne-randme, paase-paasme
+  -- like 10, but -me is added to consonant stem.
+  -- as a side effect, consonant gradation is handled too by giving sg.nom and sg.gen
+  -- diff between 10 and 32: whether (ranne == Predef.tk 2 randme)?
+  dRanne : (_,_ : Str) -> NForms = \ranne,randme ->
+    let
+      rand : Str = Predef.tk 2 randme 
+    in nForms7
+      ranne randme (ranne + "t") (randme + "sse")
+      (randme + "te") (randme + "id") (randme + "tesse") ;
+
+  --33: ratas-ratta-ratast 34: rukis-rukki-rukist 35: armas-armsa-armast
+
+  --36: torges-torksa-torksat~torgest (sober-sobra-sopra? number-numbri-numbrit?)
+  --37: kyynel-kyynla-kyynelt
+  --38: aken-akna-akent.
+
+  
 -- Finnish paradigms, here only for not to break ParadigmsEst
   dLujuus : Str -> NForms = \lujuus -> 
     let
@@ -607,77 +620,6 @@ resource MorphoEst = ResEst ** open Prelude in {
       } ;
 
 
-{------------------------ FINNISH 
-
-    Noun = {s : NForm => Str; lock_N : {}} ;
-
-    nForms2N : NForms -> Noun = \f -> 
-      let
-        jogi = f ! 0 ;
-        joe = f ! 1 ;
-        joge = f ! 2 ;
-        joena = f ! 3 ;
-        joesse = f ! 4 ;
-        jogede = f ! 5 ;
-        jogesid = f ! 6 ;
-        jogedena = f ! 7 ;
-        jogedes = f ! 8 ;
-        jogedesse = f ! 9 ;
-        --a     = last ukkoja ; -- no vowel harmony,no need
-        --uko   = init ukon ; -- genetive is already the stem
-        jog  = Predef.tk 1 joge ; --???
-       --  = Predef.tk 2 ukkoina ;
-       -- ukoi  = Predef.tk 3 ukoissa ;
-      in 
-    {s = table {
-      NCase Sg Nom    => jogi ;
-      NCase Sg Gen    => joe ;
-      NCase Sg Part   => joge ;
-      NCase Sg Transl => joe + "ks" ;
-      NCase Sg Ess    => joena ;
-      NCase Sg Iness  => joe + "s" ;
-      NCase Sg Elat   => joe + "st" ;
-      NCase Sg Illat  => joesse ;
-      NCase Sg Adess  => joe + "l" ;
-      NCase Sg Ablat  => joe + "lt" ;
-      NCase Sg Allat  => joe + "le" ;
-      NCase Sg Abess  => joe + "ta" ;
-      NCase Sg Comit  => joe + "ga" ;
-      NCase Sg Termin => joe + "ni" ;
-
-      NCase Pl Nom    => joe + "d" ;
-      NCase Pl Gen    => jogede ;
-      NCase Pl Part   => jogesid ;
-      NCase Pl Transl => jogede + "ks" ;
-      NCase Pl Ess    => jogedena ;
-      NCase Pl Iness  => jogede + "s" ;
-      NCase Pl Elat   => jogede + "st" ;
-      NCase Pl Illat  => jogedesse ;
-      NCase Pl Adess  => jogede + "l" ;
-      NCase Pl Ablat  => jogede + "lt" ;
-      NCase Pl Allat  => jogede + "le" ;
-      NCase Pl Abess  => jogede + "ta" ;
-      NCase Pl Comit  => jogede + "ga" ;
-      NCase Pl Termin => jogede + "ni"    
-   --Not in Estonian
-
-      } ;
-    lock_N = <>
-    } ;
-
-  n2nforms : Noun -> NForms = \ukko -> table {
-    0 => ukko.s ! NCase Sg Nom ;
-    1 => ukko.s ! NCase Sg Gen ;
-    2 => ukko.s ! NCase Sg Part ;
-    3 => ukko.s ! NCase Sg Ess ;
-    4 => ukko.s ! NCase Sg Illat ;
-    5 => ukko.s ! NCase Pl Gen ;
-    6 => ukko.s ! NCase Pl Part ;
-    7 => ukko.s ! NCase Pl Ess ;
-    8 => ukko.s ! NCase Pl Iness ;
-    9 => ukko.s ! NCase Pl Illat
-  } ;
------------------------------------------------}
 -- Adjective forms
 
     AForms : Type = {
@@ -1036,7 +978,31 @@ resource MorphoEst = ResEst ** open Prelude in {
 
 -- This is used to analyse nouns "rae", "hake", "rengas", "laidun", etc.
 
-  strongGrade : Str -> Str = \hanke ->
+  strongGrade : Str -> Str = \hinne ->
+    let
+      hi = Predef.tk 3 hinne ;
+      nne = Predef.dp 3 hinne ; 
+    in 
+    hi + case nne of {
+--      "ng" + a => "nk" + a ;
+      "nn" + e => "nd" + e ;
+--      "mm" + e => "mp" + e ;
+--      "rr" + e => "rt" + e ;
+--      "ll" + a => "lt" + a ;
+--      h@("h" | "l") + "je" + e => h + "ke" ; -- pohje/lahje impossible
+--      ("tk" | "hk" | "sk" | "sp" | "st") + _ => nke ;       -- viuhke,kuiske 
+      a + k@("k"|"p"|"t") + e@("e"|"a"|"ä"|"u"|"y"|"i"|"o"|"ö")  => a + k + k + e ;
+--      a + "d" + e@("e"|"a"|"ä"|"u"|"i"|"o"|"ö")  => a + "t" + e ; 
+--      s + a@("a" | "ä") + "e" => s + a + "ke" ;       -- säe, tae
+--      s + "ui"                      => s + "uki" ;     -- ruis
+--      s + "aa"                      => s + "aka" ;       -- taata
+--      s + "i" + a@("a" | "e" | "i") => s + "ik" + a ;       -- liata, siitä, pietä
+--      a + "v" + e@("e"|"a"|"ä"|"u"|"i") => a + "p" + e ;  -- taive/toive imposs
+      ase => ase
+      } ;
+
+
+  strongGradeFin : Str -> Str = \hanke ->
     let
       ha = Predef.tk 3 hanke ;
       nke = Predef.dp 3 hanke ; 

@@ -270,7 +270,7 @@ oper
 
 
   mkN = overload {
-    mkN : (talo : Str) -> N = mk1N ;
+    mkN : (nisu : Str) -> N = mk1N ;
     --  \s -> nForms2N (nForms1 s) ;
     mkN : (talo,talon : Str) -> N = mk2N ;
     --  \s,t -> nForms2N (nForms2 s t) ;
@@ -326,7 +326,9 @@ oper
       rake = strongGrade ukko ;
     in
     case ukko of {
-      _ + "ne" => dNaine ukko ;
+      _ + "lik"        => dKasulik ukko ;
+      _ + ("s"|"ne")   => dSoolane ukko ;
+--      _ + ("pp"|"kk"|"tt") => 
 {------------
       _ + ("aa" | "ee" | "ii" | "oo" | "uu" | "yy" |"ää"|"öö") => dPuu ukko ;
       _ + ("ai" | "ei" | "oi" | "ui" | "yi" | "äi" | "öi") => dPuu ukko ;
@@ -445,7 +447,7 @@ oper
       <_ + ("n"|"l"|"r"), _ + V@("a" | "u" | "e"),  _ + V,  _ + "u"> => dOun paat ; 
       <_ + C@("r" | "n" | "l" | "m" | "s" | "t" |"k"), _ + C + "i", 
        _ + C + "i", _> => dSeminar paat ;
-      _  => dSuvi paat 
+      _  => dTuli paat paadi 
       } ;
 
 
