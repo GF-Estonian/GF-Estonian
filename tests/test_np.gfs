@@ -5,7 +5,9 @@ import -retain ../estonian/MorphoEst.gf
 
 -- 1
 cc -table nForms2N (dKoi "koi")
-cc -table nForms2N (dKoi "partii")
+cc -table nForms2N (dKoi "saba")
+cc -table nForms2N (dKoi "arutelu")
+
 
 -- 2
 cc -table nForms2N (dLuu "luu")
@@ -13,13 +15,15 @@ cc -table nForms2N (dLuu "trofee")
 
 -- 3
 cc -table nForms2N (dPesa "pesa" "pesi")
-cc -table nForms2N (dPesa "saba" "sabasid")
-cc -table nForms2N (dPesa "arutelu" "arutelusid")
+--cc -table nForms2N (dPesa "saba" "sabasid")
+--cc -table nForms2N (dPesa "arutelu" "arutelusid")
+--moved saba and arutelu to dKoi; only difference is the sg.illative, and that can be done as a separate oper that replaces the regular sg.illative.
 
--- 4
-cc -table nForms2N (dSuvi "suvi")
+-- 4 suvi, 5 tuli, both covered by dTuli.
 
--- 5 tuli
+cc -table nForms2N (dTuli "suvi" "suve")
+cc -table nForms2N (dTuli "tuli" "tuld")
+
 
 -- 6
 cc -table nForms2N (dSeminar "seminar")
@@ -41,6 +45,8 @@ cc -table nForms2N (dNumber "redel" "redeli")
 cc -table nForms2N (dNumber "väeti" "väeti")
 
 -- 10 ase
+cc -table nForms2N (dAse "ase")
+
 -- 11 raudne, primaarne; covered in 13, no need for own paradigm
 
 -- 12
@@ -55,6 +61,7 @@ cc -table nForms2N (dSoolane "tehas")
 -- 11 (covered by 13)
 cc -table nForms2N (dSoolane "raudne")
 cc -table nForms2N (dSoolane "primaarne")
+cc -table nForms2N (dSoolane "vaikne")
 
 -- 19
 cc -table nForms2N (dKasulik "kasulik")
@@ -64,3 +71,5 @@ cc -table nForms2N (dKasulik "õnnelik")
 cc -table nForms2N (dOun "hein")
 cc -table nForms2N (dOun "vits")
 cc -table nForms2N (dOun "õun")
+--cc -table nForms2N (dOun "kaer")
+--cc -table nForms2N (dOun "saks")
