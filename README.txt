@@ -63,3 +63,4 @@ Resources:
   * [http://www.eki.ee/teemad/tabel_tyybid.html VVS types]
   * http://www.eki.ee/dict/qs/tyypsonad.html
   * [http://www.filosoft.ee/gene_et/ Estonian morph synthesizer]
+  * [http://cslipublications.stanford.edu/koskenniemi-festschrift/14-trosterud-uibo.pdf Consonant gradation]
