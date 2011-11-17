@@ -8,12 +8,12 @@ see: http://www.haskell.org/ghc/docs/7.0.3/html/users_guide/runtime-control.html
 
 Some performance information:
 
-i3 4GB RAM; Ubuntu 11.04
-gf 3.2
-svn rev 14
-gf +RTS -K100M -RTS
-i LangEst.gf
-reading + compiling + linking: 1305620 msec
+i3 4GB RAM; Ubuntu 11.04; gf 3.3; svn rev 14:
+$ cd estonian/
+$ gf +RTS -K100M -RTS
+$ i LangEst.gf
+reading + compiling + linking: 1312520 msec
+(i.e. 22 minutes)
 
 
 Example of parsing a simple sentence:

@@ -95,11 +95,13 @@ resource MorphoEst = ResEst ** open Prelude in {
 
   --12: -se in stem, pl.part -si
   --     sg.nom can be -ne or -s (oluline ; peegeldus)
+  -- Kaarel/2011-11-17: added "match all" because otherwise got a linking error
   dNaine : Str -> NForms = \naine ->
     let 
       nais : Str = case naine of {
         _ + "ne" => Predef.tk 2 naine + "s" ;
-        _ + "s"  => naine    -- if nominative ends in s already
+        _ + "s"  => naine ;  -- if nominative ends in s already
+        _        => naine    -- match all
       } 
     in nForms7
       naine (nais + "e") (nais + "t") (nais + "esse")
@@ -107,11 +109,13 @@ resource MorphoEst = ResEst ** open Prelude in {
  
   --13: -se in stem, pl.part -eid
   --     soolane, tehas as in 12. vowel insertion in raudne-raudse-raudset.
+  -- Kaarel/2011-11-17: added "match all" because otherwise got a linking error
   dSoolane : Str -> NForms = \soolane ->
     let 
       soolas : Str = case soolane of {
         _ + "ne" => Predef.tk 2 soolane + "s" ;
-        _ + "s"  => soolane
+        _ + "s"  => soolane ;
+        _        => soolane
       } ;
       raudse : Str = case soolas of {
         _ + ("r"|"l"|"d"|"t"|"m"|"p"|"k"|"g") + "s"  => soolas +"e" ;
