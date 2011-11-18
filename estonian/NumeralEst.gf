@@ -5,42 +5,42 @@ concrete NumeralEst of Numeral = CatEst [Numeral,Digits] **  open Prelude, Parad
 
 flags optimize=all_subs ; coding=utf8;
 
-lincat 
+lincat
   Sub1000000 = {s : CardOrd => Str ; n : MorphoEst.Number} ;
   Digit = {s : CardOrd => Str} ;
   Sub10, Sub100, Sub1000 = {s : NumPlace => CardOrd => Str ; n : MorphoEst.Number} ;
 
-lin 
+lin
   num x = x ;
   n2 = co
     (nhn (mkSubst "a" "kaksi" "kahde" "kahte" "kahta" "kahteen" "kaksi" "kaksi"
-    "kaksien" "kaksia" "kaksiin")) 
+    "kaksien" "kaksia" "kaksiin"))
     (ordN "a" "kahdes") ; --- toinen
-  n3 = co 
+  n3 = co
     (nhn (mkSubst "a" "kolme" "kolme" "kolme" "kolmea" "kolmeen" "kolmi" "kolmi"
     "kolmien" "kolmia" "kolmiin"))
     (ordN "a" "kolmas") ;
   n4 = co (mkN "neljä") (ordN "ä" "neljäs") ;
   n5 = co (mkN "viisi" "viiden" "viisiä") (ordN "ä" "viides") ;
-  n6 = co (mkN "kuusi" "kuuden" "kuusia") (ordN "a" "kuudes") ; 
-  n7 = co 
-    (nhn (mkSubst "ä" "seitsemän" "seitsemä" "seitsemä" "seitsemää" 
+  n6 = co (mkN "kuusi" "kuuden" "kuusia") (ordN "a" "kuudes") ;
+  n7 = co
+    (nhn (mkSubst "ä" "seitsemän" "seitsemä" "seitsemä" "seitsemää"
     "seitsemään" "seitsemi" "seitsemi" "seitsemien" "seitsemiä"
     "seitsemiin"))
     (ordN "ä" "seitsemäs") ;
-  n8 = co 
-    (nhn (mkSubst "a" "kahdeksan" "kahdeksa" "kahdeksa" "kahdeksaa" 
+  n8 = co
+    (nhn (mkSubst "a" "kahdeksan" "kahdeksa" "kahdeksa" "kahdeksaa"
     "kahdeksaan" "kahdeksi" "kahdeksi" "kahdeksien" "kahdeksia"
     "kahdeksiin"))
     (ordN "a" "kahdeksas") ;
   n9 = co
-     (nhn (mkSubst "ä" "yhdeksän" "yhdeksä" "yhdeksä" "yhdeksää" 
+     (nhn (mkSubst "ä" "yhdeksän" "yhdeksä" "yhdeksä" "yhdeksää"
     "yhdeksään" "yhdeksi" "yhdeksi" "yhdeksien" "yhdeksiä" "yhdeksiin"))
      (ordN "ä" "yhdeksäs") ;
 
-  pot01 = 
+  pot01 =
    {s = table {
-      NumAttr => \\_ => [] ; 
+      NumAttr => \\_ => [] ;
       NumIndep => yksiN.s
       } ;
     n = Sg
@@ -51,20 +51,20 @@ lin
     n = Pl
     } ;
 
-  pot111 = {n = Pl ; s = \\_,c => yksiN.s ! c ++ BIND ++ "toista"} ; ---- yhdes
-  pot1to19 d = {n = Pl ; s = \\_,c => d.s ! c ++ BIND ++ "toista"} ;
+  pot111 = {n = Pl ; s = \\_,c => yksiN.s ! c ++ BIND ++ "teist"} ; ---- yhdes
+  pot1to19 d = {n = Pl ; s = \\_,c => d.s ! c ++ BIND ++ "teist"} ;
   pot0as1 n = n ;
 
   pot1 d = {n = Pl ; s = \\_,c => d.s ! c ++ BIND ++ kymmentaN.s ! c} ;
   pot1plus d e = {
-    n = Pl ; 
+    n = Pl ;
     s = \\_,c => d.s ! c ++ BIND ++ kymmentaN.s ! c ++ BIND ++ e.s ! NumIndep ! c
     } ;
   pot1as2 n = n ;
   pot2 d = {n = Pl ; s = \\_,c => d.s ! NumAttr ! c ++ nBIND d.n ++ sataaN.s ! d.n ! c} ; ----
   pot2plus d e = {
-    n = Pl ; 
-    s = \\_,c => d.s ! NumAttr ! c ++ nBIND d.n ++ sataaN.s ! d.n ! c ++ 
+    n = Pl ;
+    s = \\_,c => d.s ! NumAttr ! c ++ nBIND d.n ++ sataaN.s ! d.n ! c ++
                  BIND ++ e.s ! NumIndep ! c
     } ;
   pot2as3 n = {n = n.n  ; s = n.s ! NumIndep} ;
@@ -86,30 +86,30 @@ oper
 
 -- Too much trouble to infer vowel, cf. "kuudes" vs. "viides".
 
-  ordN : Str -> Str -> N = \a,sadas ->  --{s : NForms => Str} = \a,sadas -> 
+  ordN : Str -> Str -> N = \a,sadas ->  --{s : NForms => Str} = \a,sadas ->
     let
       sada = init sadas
     in
-    mkN 
+    mkN
       sadas (sada + "nnen") (sada + "tt" + a) (sada + "nsia") ;
   -- (sada + "nten" + a) (sada + "nteen")
   --    (sada + "nsien") (sada + "nsi" + a)  (sada + "nsin" + a)
      -- (sada + "nsiss" + a) (sada + "nsiin") ;
 
-param 
+param
   NumPlace = NumIndep | NumAttr  ;
 
 oper
-  yksiN = co 
-    (nhn (mkSubst "ä" "yksi" "yhde" "yhte" "yhtä" "yhteen" "yksi" "yksi" 
-     "yksien" "yksiä" "yksiin")) 
+  yksiN = co
+    (nhn (mkSubst "ä" "yksi" "yhde" "yhte" "yhtä" "yhteen" "yksi" "yksi"
+     "yksien" "yksiä" "yksiin"))
     (ordN "ä" "yhdes") ; ---- ensimmäinen
-  kymmenenN = co 
-    (nhn (mkSubst "ä" "kymmenen" "kymmene" "kymmene" "kymmentä" 
-    "kymmeneen" "kymmeni" "kymmeni" "kymmenien" "kymmeniä" "kymmeniin")) 
+  kymmenenN = co
+    (nhn (mkSubst "ä" "kymmenen" "kymmene" "kymmene" "kymmentä"
+    "kymmeneen" "kymmeni" "kymmeni" "kymmenien" "kymmeniä" "kymmeniin"))
     (ordN "ä" "kymmenes") ;
-  sataN = co 
-    (mkN "sata") 
+  sataN = co
+    (mkN "sata")
     (ordN "a" "sadas") ;
 
   tuhatN = co
@@ -130,7 +130,7 @@ oper
       NCard (NCase Sg Nom) => "sataa" ;
       k => sataN.s ! k
       }
-    } 
+    }
   } ;
 
   tuhattaN = {s = table {
@@ -143,11 +143,11 @@ oper
   } ;
 
 
-  lincat 
+  lincat
     Dig = TDigit ;
 
   lin
-    IDig d = d ; 
+    IDig d = d ;
 
     IIDig d i = {
       s = \\o => d.s ! NCard (NCase Sg Nom) ++ i.s ! o ;
