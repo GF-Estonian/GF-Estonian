@@ -1,3 +1,5 @@
+--# -path=.:../abstract:../common:../../prelude
+
 concrete NumeralEst of Numeral = CatEst [Numeral,Digits] **  open Prelude, ParadigmsEst, MorphoEst in {
 
 -- Notice: possessive forms are not used. They get wrong, since every
@@ -12,31 +14,14 @@ lincat
 
 lin
   num x = x ;
-  n2 = co
-    (nhn (mkSubst "a" "kaksi" "kahde" "kahte" "kahta" "kahteen" "kaksi" "kaksi"
-    "kaksien" "kaksia" "kaksiin"))
-    (ordN "a" "kahdes") ; --- toinen
-  n3 = co
-    (nhn (mkSubst "a" "kolme" "kolme" "kolme" "kolmea" "kolmeen" "kolmi" "kolmi"
-    "kolmien" "kolmia" "kolmiin"))
-    (ordN "a" "kolmas") ;
-  n4 = co (mkN "neljä") (ordN "ä" "neljäs") ;
-  n5 = co (mkN "viisi" "viiden" "viisiä") (ordN "ä" "viides") ;
-  n6 = co (mkN "kuusi" "kuuden" "kuusia") (ordN "a" "kuudes") ;
-  n7 = co
-    (nhn (mkSubst "ä" "seitsemän" "seitsemä" "seitsemä" "seitsemää"
-    "seitsemään" "seitsemi" "seitsemi" "seitsemien" "seitsemiä"
-    "seitsemiin"))
-    (ordN "ä" "seitsemäs") ;
-  n8 = co
-    (nhn (mkSubst "a" "kahdeksan" "kahdeksa" "kahdeksa" "kahdeksaa"
-    "kahdeksaan" "kahdeksi" "kahdeksi" "kahdeksien" "kahdeksia"
-    "kahdeksiin"))
-    (ordN "a" "kahdeksas") ;
-  n9 = co
-     (nhn (mkSubst "ä" "yhdeksän" "yhdeksä" "yhdeksä" "yhdeksää"
-    "yhdeksään" "yhdeksi" "yhdeksi" "yhdeksien" "yhdeksiä" "yhdeksiin"))
-     (ordN "ä" "yhdeksäs") ;
+  n2 = co (mkN "kaks") (ordN "a" "teine") ;
+  n3 = co (mkN "kolm") (ordN "a" "kolmas") ;
+  n4 = co (mkN "neli") (ordN "a" "neljas") ;
+  n5 = co (mkN "viis") (ordN "a" "viies") ;
+  n6 = co (mkN "kuus") (ordN "a" "kuues") ;
+  n7 = co (mkN "seitse") (ordN "a" "seitsmes") ;
+  n8 = co (mkN "kaheksa") (ordN "a" "kaheksas") ;
+  n9 = co (mkN "üheksa") (ordN "a" "üheksas") ;
 
   pot01 =
    {s = table {
@@ -51,7 +36,7 @@ lin
     n = Pl
     } ;
 
-  pot111 = {n = Pl ; s = \\_,c => yksiN.s ! c ++ BIND ++ "teist"} ; ---- yhdes
+  pot111 = {n = Pl ; s = \\_,c => yksiN.s ! c ++ BIND ++ "teist"} ;
   pot1to19 d = {n = Pl ; s = \\_,c => d.s ! c ++ BIND ++ "teist"} ;
   pot0as1 n = n ;
 
@@ -61,14 +46,14 @@ lin
     s = \\_,c => d.s ! c ++ BIND ++ kymmentaN.s ! c ++ BIND ++ e.s ! NumIndep ! c
     } ;
   pot1as2 n = n ;
-  pot2 d = {n = Pl ; s = \\_,c => d.s ! NumAttr ! c ++ nBIND d.n ++ sataaN.s ! d.n ! c} ; ----
+  pot2 d = {n = Pl ; s = \\_,c => d.s ! NumAttr ! c ++ nBIND d.n ++ sataaN.s ! d.n ! c} ;
   pot2plus d e = {
     n = Pl ;
     s = \\_,c => d.s ! NumAttr ! c ++ nBIND d.n ++ sataaN.s ! d.n ! c ++
                  BIND ++ e.s ! NumIndep ! c
     } ;
   pot2as3 n = {n = n.n  ; s = n.s ! NumIndep} ;
-  pot3 d = {n = Pl ; s = \\c => d.s ! NumAttr ! c ++ nBIND d.n ++ tuhattaN.s ! d.n ! c} ; ----
+  pot3 d = {n = Pl ; s = \\c => d.s ! NumAttr ! c ++ nBIND d.n ++ tuhattaN.s ! d.n ! c} ;
   pot3plus d e = {
     n = Pl ;
     s = \\c => d.s ! NumAttr ! c ++ nBIND d.n ++ tuhattaN.s ! d.n ! c ++ e.s ! NumIndep ! c
@@ -90,36 +75,31 @@ oper
     let
       sada = init sadas
     in
-    mkN
-      sadas (sada + "nnen") (sada + "tt" + a) (sada + "nsia") ;
-  -- (sada + "nten" + a) (sada + "nteen")
-  --    (sada + "nsien") (sada + "nsi" + a)  (sada + "nsin" + a)
-     -- (sada + "nsiss" + a) (sada + "nsiin") ;
+    mkN sadas ;
 
 param
   NumPlace = NumIndep | NumAttr  ;
 
 oper
   yksiN = co
-    (nhn (mkSubst "ä" "yksi" "yhde" "yhte" "yhtä" "yhteen" "yksi" "yksi"
-     "yksien" "yksiä" "yksiin"))
-    (ordN "ä" "yhdes") ; ---- ensimmäinen
+    (mkN "üks")
+    (ordN "a" "esimene") ;
+
   kymmenenN = co
-    (nhn (mkSubst "ä" "kymmenen" "kymmene" "kymmene" "kymmentä"
-    "kymmeneen" "kymmeni" "kymmeni" "kymmenien" "kymmeniä" "kymmeniin"))
-    (ordN "ä" "kymmenes") ;
+    (mkN "kümmend")
+    (ordN "a" "kümnes") ;
+
   sataN = co
-    (mkN "sata")
-    (ordN "a" "sadas") ;
+    (mkN "sada")
+    (ordN "a" "sajas") ;
 
   tuhatN = co
-    (mkN "tuhat" "tuhannen" "tuhatta" "tuhansia")--"tuhantena" "tuhanteen"
-  --  "tuhansien" "tuhansia" "tuhansina" "tuhansissa" "tuhansiin")
-    (ordN "a" "tuhannes")  ;
+    (mkN "tuhat")
+    (ordN "a" "tuhandes")  ;
 
   kymmentaN =
    {s = table {
-      NCard (NCase Sg Nom) => "kymmentä" ;
+      NCard (NCase Sg Nom) => "kümmend" ;
       k => kymmenenN.s ! k
       }
     } ;
@@ -127,7 +107,7 @@ oper
   sataaN : {s : MorphoEst.Number => CardOrd => Str} = {s = table {
     Sg => sataN.s ;
     Pl => table {
-      NCard (NCase Sg Nom) => "sataa" ;
+      NCard (NCase Sg Nom) => "sada" ;
       k => sataN.s ! k
       }
     }
@@ -136,7 +116,7 @@ oper
   tuhattaN = {s = table {
     Sg => tuhatN.s ;
     Pl => table {
-      NCard (NCase Sg Nom) => "tuhatta" ;
+      NCard (NCase Sg Nom) => "tuhat" ;
       k => tuhatN.s ! k
       }
     }
