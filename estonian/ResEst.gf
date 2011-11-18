@@ -465,10 +465,10 @@ oper
     {s = table {
       Inf Inf1 => tulla ;
       Presn Sg P1 => tuje + "n" ;
-      Presn Sg P2 => tuje + "t" ;
+      Presn Sg P2 => tuje + "d" ;
       Presn Sg P3 => tulee ;
-      Presn Pl P1 => tuje + "mme" ;
-      Presn Pl P2 => tuje + "tte" ;
+      Presn Pl P1 => tuje + "me" ;
+      Presn Pl P2 => tuje + "te" ;
       Presn Pl P3 => tulevat ;
       Impf Sg P1 => tuji + "n" ;   --# notpresent
       Impf Sg P2 => tuji + "t" ;  --# notpresent

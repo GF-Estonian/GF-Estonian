@@ -33,7 +33,7 @@ lin
   bread_N = mkN "leib" "leiva" "leiba" "leibu";
   break_V2 = mkV2 (mkV "rikkoa") ;
   broad_A = mkA (mkN "leveä") "leveämpi" "levein" ;
-  brother_N = mkN "vend" "venna" "venda" "vendasid";
+  brother_N2 = mkN2 (mkN "vend") ;
   brown_A = mkA (mkN "ruskea") "ruskeampi" "ruskein" ;
   butter_N = mkN "või" "või" "võid" "võisid";
   buy_V2 = mkV2 (mkV "ostaa") ;
@@ -231,8 +231,8 @@ lin
     mkV "tehdä" "teen" "tekee" "tekevät" "tehkää" "tehdään"
       "tein" "teki" "tekisi" "tehnyt" "tehty" "tehdyn") ; 
 
-  now_Adv = mkAdv "nyyd" ;
-  already_Adv = mkAdv "jo" ;
+  now_Adv = mkAdv "nüüd" ;
+  already_Adv = mkAdv "juba" ;
   song_N = mkN "laulu" ;
   add_V3 = mkV3 (mkV "lisätä") accPrep (casePrep illative) ;
   number_N = mk2N "numero" "numeroita" ;
@@ -241,7 +241,7 @@ lin
   jump_V = mkV "hypätä" ;
   left_Ord = mkOrd (mkN "vasen") ;
   right_Ord = mkOrd (mkN "oikea") ;
-  far_Adv = mkAdv "kaukana" ;
+  far_Adv = mkAdv "kaugel" ;
   correct_A = mkA "oikea" ;
   dry_A = mkA (mkN "kuiva") "kuivempi" "kuivin" ;
   dull_A = mkA (mkN "tylsä") "tylsempi" "tylsin" ;
@@ -372,11 +372,11 @@ lin
   language_N = mk2N "kieli" "kieliä" ;
   rule_N = mkN "sääntö" ;
 
-    john_PN = mkPN "Jussi" ;
+    john_PN = mkPN "Juhan" ;
     question_N = mkN "kysymys" ;
     ready_A = mkA (mkN "valmis") ;
     reason_N = mkN "syy" ;
-    today_Adv = mkAdv "tänään" ;
+    today_Adv = mkAdv "täna" ;
     uncertain_A = mkA "epävarma" ;
 
  oper

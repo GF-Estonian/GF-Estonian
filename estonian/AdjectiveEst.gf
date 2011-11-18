@@ -10,8 +10,8 @@ concrete AdjectiveEst of Adjective = CatEst ** open ResEst, Prelude in {
       } ;
     ComparA a np = {
       s = \\isMod,af => case isMod of {
-        True => np.s ! NPCase Part ++ a.s ! Compar ! AN af ;        -- minua isompi
-        _    => a.s ! Compar ! AN af ++ "kuin" ++ np.s ! NPCase Nom -- isompi kuin minä
+        True => np.s ! NPCase Elat ++ a.s ! Compar ! AN af ;        -- minust suurem
+        _    => a.s ! Compar ! AN af ++ "kui" ++ np.s ! NPCase Nom  -- suurem kui mina
         } 
       } ;
     CAdvAP ad ap np = {

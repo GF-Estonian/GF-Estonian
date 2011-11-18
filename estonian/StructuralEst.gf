@@ -58,9 +58,9 @@ concrete StructuralEst of Structural = CatEst **
     a = agrP3 Sg ;
     isPron = False
     } ;
-  less_CAdv = X.mkCAdv "vähemmän" "kuin" ;
+  less_CAdv = X.mkCAdv "vähem" "kui" ;
   many_Det = mkDet Sg (mkN "moni" "monia") ;
-  more_CAdv = X.mkCAdv "enemmän" "kuin" ;
+  more_CAdv = X.mkCAdv "rohkem" "kui" ;
   most_Predet = {s = \\n,c => (nForms2N (dSuurin "useinta")).s ! NCase n (npform2case n c)} ;
   much_Det = mkDet Sg {s = \\_ => "paljon"} ;
   must_VV = mkVV (caseV genitive (mkV "täytyä")) ;
@@ -301,7 +301,7 @@ lin
   at_least_AdN = ss "vähemalt" ;
   at_most_AdN = ss "kuni" ;
 
-  as_CAdv = X.mkCAdv "yhtä" "kuin" ;
+  as_CAdv = X.mkCAdv "sama palju" "kui" ;
 
   except_Prep = postPrep partitive "lukuunottamatta" ;
 
