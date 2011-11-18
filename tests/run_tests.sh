@@ -9,8 +9,10 @@
 # sh run_tests.sh
 #
 
+path="../estonian/:../abstract/:../common/"
+
 echo "Running the tests..."
-gf --run < test_np.gfs > test_results.txt
+gf --path $path --run < test_np.gfs > test_results.txt
 
 echo "Comparing the results..."
 diff correct_results.txt test_results.txt

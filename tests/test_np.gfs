@@ -73,3 +73,16 @@ cc -table nForms2N (dOun "vits")
 cc -table nForms2N (dOun "õun")
 --cc -table nForms2N (dOun "kaer")
 --cc -table nForms2N (dOun "saks")
+
+
+import -retain ../estonian/StructuralEst.gf
+-- Pronouns
+cc -table i_Pron
+cc -table youSg_Pron
+cc -table he_Pron
+cc -table she_Pron
+cc -table we_Pron
+cc -table youPl_Pron
+cc -table they_Pron
+cc -table this_Quant
+cc -table that_Quant

@@ -950,3 +950,233 @@ s . ResEst.NCase ParamX.Pl ResEst.Allat => õuntele
 s . ResEst.NCase ParamX.Pl ResEst.Abess => õunteta
 s . ResEst.NCase ParamX.Pl ResEst.Comit => õuntega
 s . ResEst.NCase ParamX.Pl ResEst.Termin => õunteni
+s . ResEst.NPCase ResEst.Nom => mina
+s . ResEst.NPCase ResEst.Gen => minu
+s . ResEst.NPCase ResEst.Part => mind
+s . ResEst.NPCase ResEst.Transl => minuks
+s . ResEst.NPCase ResEst.Ess => minuna
+s . ResEst.NPCase ResEst.Iness => minus
+s . ResEst.NPCase ResEst.Elat => minust
+s . ResEst.NPCase ResEst.Illat => minusse
+s . ResEst.NPCase ResEst.Adess => minul
+s . ResEst.NPCase ResEst.Ablat => minult
+s . ResEst.NPCase ResEst.Allat => minule
+s . ResEst.NPCase ResEst.Abess => minuta
+s . ResEst.NPCase ResEst.Comit => minuga
+s . ResEst.NPCase ResEst.Termin => minuni
+s . ResEst.NPAcc => mint
+a . ResEst.Ag ParamX.Sg ParamX.P1
+s . ResEst.NPCase ResEst.Nom => sina
+s . ResEst.NPCase ResEst.Gen => sinu
+s . ResEst.NPCase ResEst.Part => sind
+s . ResEst.NPCase ResEst.Transl => sinuks
+s . ResEst.NPCase ResEst.Ess => sinuna
+s . ResEst.NPCase ResEst.Iness => sinus
+s . ResEst.NPCase ResEst.Elat => sinust
+s . ResEst.NPCase ResEst.Illat => sinusse
+s . ResEst.NPCase ResEst.Adess => sinul
+s . ResEst.NPCase ResEst.Ablat => sinult
+s . ResEst.NPCase ResEst.Allat => sinule
+s . ResEst.NPCase ResEst.Abess => sinuta
+s . ResEst.NPCase ResEst.Comit => sinuga
+s . ResEst.NPCase ResEst.Termin => sinuni
+s . ResEst.NPAcc => sint
+a . ResEst.Ag ParamX.Sg ParamX.P2
+s . ResEst.NPCase ResEst.Nom => tema
+s . ResEst.NPCase ResEst.Gen => tema
+s . ResEst.NPCase ResEst.Part => teda
+s . ResEst.NPCase ResEst.Transl => temaks
+s . ResEst.NPCase ResEst.Ess => temana
+s . ResEst.NPCase ResEst.Iness => temas
+s . ResEst.NPCase ResEst.Elat => temast
+s . ResEst.NPCase ResEst.Illat => temasse
+s . ResEst.NPCase ResEst.Adess => temal
+s . ResEst.NPCase ResEst.Ablat => temalt
+s . ResEst.NPCase ResEst.Allat => temale
+s . ResEst.NPCase ResEst.Abess => temata
+s . ResEst.NPCase ResEst.Comit => temaga
+s . ResEst.NPCase ResEst.Termin => temani
+s . ResEst.NPAcc => temt
+a . ResEst.Ag ParamX.Sg ParamX.P3
+s . ResEst.NPCase ResEst.Nom => tema
+s . ResEst.NPCase ResEst.Gen => tema
+s . ResEst.NPCase ResEst.Part => teda
+s . ResEst.NPCase ResEst.Transl => temaks
+s . ResEst.NPCase ResEst.Ess => temana
+s . ResEst.NPCase ResEst.Iness => temas
+s . ResEst.NPCase ResEst.Elat => temast
+s . ResEst.NPCase ResEst.Illat => temasse
+s . ResEst.NPCase ResEst.Adess => temal
+s . ResEst.NPCase ResEst.Ablat => temalt
+s . ResEst.NPCase ResEst.Allat => temale
+s . ResEst.NPCase ResEst.Abess => temata
+s . ResEst.NPCase ResEst.Comit => temaga
+s . ResEst.NPCase ResEst.Termin => temani
+s . ResEst.NPAcc => temt
+a . ResEst.Ag ParamX.Sg ParamX.P3
+s . ResEst.NPCase ResEst.Nom => meie
+s . ResEst.NPCase ResEst.Gen => meie
+s . ResEst.NPCase ResEst.Part => meid
+s . ResEst.NPCase ResEst.Transl => meieks
+s . ResEst.NPCase ResEst.Ess => meiena
+s . ResEst.NPCase ResEst.Iness => meies
+s . ResEst.NPCase ResEst.Elat => meiest
+s . ResEst.NPCase ResEst.Illat => meiesse
+s . ResEst.NPCase ResEst.Adess => meiel
+s . ResEst.NPCase ResEst.Ablat => meielt
+s . ResEst.NPCase ResEst.Allat => meiele
+s . ResEst.NPCase ResEst.Abess => meieta
+s . ResEst.NPCase ResEst.Comit => meiega
+s . ResEst.NPCase ResEst.Termin => meieni
+s . ResEst.NPAcc => meit
+a . ResEst.Ag ParamX.Pl ParamX.P1
+s . ResEst.NPCase ResEst.Nom => teie
+s . ResEst.NPCase ResEst.Gen => teie
+s . ResEst.NPCase ResEst.Part => teid
+s . ResEst.NPCase ResEst.Transl => teieks
+s . ResEst.NPCase ResEst.Ess => teiena
+s . ResEst.NPCase ResEst.Iness => teies
+s . ResEst.NPCase ResEst.Elat => teiest
+s . ResEst.NPCase ResEst.Illat => teiesse
+s . ResEst.NPCase ResEst.Adess => teiel
+s . ResEst.NPCase ResEst.Ablat => teielt
+s . ResEst.NPCase ResEst.Allat => teiele
+s . ResEst.NPCase ResEst.Abess => teieta
+s . ResEst.NPCase ResEst.Comit => teiega
+s . ResEst.NPCase ResEst.Termin => teieni
+s . ResEst.NPAcc => teit
+a . ResEst.Ag ParamX.Pl ParamX.P2
+s . ResEst.NPCase ResEst.Nom => nemad
+s . ResEst.NPCase ResEst.Gen => nende
+s . ResEst.NPCase ResEst.Part => neid
+s . ResEst.NPCase ResEst.Transl => nendeks
+s . ResEst.NPCase ResEst.Ess => nendena
+s . ResEst.NPCase ResEst.Iness => nendes
+s . ResEst.NPCase ResEst.Elat => nendest
+s . ResEst.NPCase ResEst.Illat => nendesse
+s . ResEst.NPCase ResEst.Adess => nendel
+s . ResEst.NPCase ResEst.Ablat => nendelt
+s . ResEst.NPCase ResEst.Allat => nendele
+s . ResEst.NPCase ResEst.Abess => nendeta
+s . ResEst.NPCase ResEst.Comit => nendega
+s . ResEst.NPCase ResEst.Termin => nendeni
+s . ResEst.NPAcc => nendt
+a . ResEst.Ag ParamX.Pl ParamX.P3
+isDef . Prelude.True
+isPoss . Prelude.False
+s1 . ParamX.Sg => ResEst.Nom => see
+s1 . ParamX.Sg => ResEst.Gen => selle
+s1 . ParamX.Sg => ResEst.Part => seda
+s1 . ParamX.Sg => ResEst.Transl => selleks
+s1 . ParamX.Sg => ResEst.Ess => sellena
+s1 . ParamX.Sg => ResEst.Iness => selles
+s1 . ParamX.Sg => ResEst.Elat => sellest
+s1 . ParamX.Sg => ResEst.Illat => sellesse
+s1 . ParamX.Sg => ResEst.Adess => sellel
+s1 . ParamX.Sg => ResEst.Ablat => sellelt
+s1 . ParamX.Sg => ResEst.Allat => sellele
+s1 . ParamX.Sg => ResEst.Abess => selleta
+s1 . ParamX.Sg => ResEst.Comit => sellega
+s1 . ParamX.Sg => ResEst.Termin => selleni
+s1 . ParamX.Pl => ResEst.Nom => need
+s1 . ParamX.Pl => ResEst.Gen => nende
+s1 . ParamX.Pl => ResEst.Part => neid
+s1 . ParamX.Pl => ResEst.Transl => nendeks
+s1 . ParamX.Pl => ResEst.Ess => nendena
+s1 . ParamX.Pl => ResEst.Iness => nendes
+s1 . ParamX.Pl => ResEst.Elat => nendest
+s1 . ParamX.Pl => ResEst.Illat => nendesse
+s1 . ParamX.Pl => ResEst.Adess => nendel
+s1 . ParamX.Pl => ResEst.Ablat => nendelt
+s1 . ParamX.Pl => ResEst.Allat => nendele
+s1 . ParamX.Pl => ResEst.Abess => nendeta
+s1 . ParamX.Pl => ResEst.Comit => nendega
+s1 . ParamX.Pl => ResEst.Termin => nendeni
+s2 . []
+sp . ParamX.Sg => ResEst.Nom => see
+sp . ParamX.Sg => ResEst.Gen => selle
+sp . ParamX.Sg => ResEst.Part => seda
+sp . ParamX.Sg => ResEst.Transl => selleks
+sp . ParamX.Sg => ResEst.Ess => sellena
+sp . ParamX.Sg => ResEst.Iness => selles
+sp . ParamX.Sg => ResEst.Elat => sellest
+sp . ParamX.Sg => ResEst.Illat => sellesse
+sp . ParamX.Sg => ResEst.Adess => sellel
+sp . ParamX.Sg => ResEst.Ablat => sellelt
+sp . ParamX.Sg => ResEst.Allat => sellele
+sp . ParamX.Sg => ResEst.Abess => selleta
+sp . ParamX.Sg => ResEst.Comit => sellega
+sp . ParamX.Sg => ResEst.Termin => selleni
+sp . ParamX.Pl => ResEst.Nom => need
+sp . ParamX.Pl => ResEst.Gen => nende
+sp . ParamX.Pl => ResEst.Part => neid
+sp . ParamX.Pl => ResEst.Transl => nendeks
+sp . ParamX.Pl => ResEst.Ess => nendena
+sp . ParamX.Pl => ResEst.Iness => nendes
+sp . ParamX.Pl => ResEst.Elat => nendest
+sp . ParamX.Pl => ResEst.Illat => nendesse
+sp . ParamX.Pl => ResEst.Adess => nendel
+sp . ParamX.Pl => ResEst.Ablat => nendelt
+sp . ParamX.Pl => ResEst.Allat => nendele
+sp . ParamX.Pl => ResEst.Abess => nendeta
+sp . ParamX.Pl => ResEst.Comit => nendega
+sp . ParamX.Pl => ResEst.Termin => nendeni
+isDef . Prelude.True
+isPoss . Prelude.False
+s1 . ParamX.Sg => ResEst.Nom => too
+s1 . ParamX.Sg => ResEst.Gen => tolle
+s1 . ParamX.Sg => ResEst.Part => toda
+s1 . ParamX.Sg => ResEst.Transl => tolleks
+s1 . ParamX.Sg => ResEst.Ess => tollena
+s1 . ParamX.Sg => ResEst.Iness => tolles
+s1 . ParamX.Sg => ResEst.Elat => tollest
+s1 . ParamX.Sg => ResEst.Illat => tollesse
+s1 . ParamX.Sg => ResEst.Adess => tollel
+s1 . ParamX.Sg => ResEst.Ablat => tollelt
+s1 . ParamX.Sg => ResEst.Allat => tollele
+s1 . ParamX.Sg => ResEst.Abess => tolleta
+s1 . ParamX.Sg => ResEst.Comit => tollega
+s1 . ParamX.Sg => ResEst.Termin => tolleni
+s1 . ParamX.Pl => ResEst.Nom => nood
+s1 . ParamX.Pl => ResEst.Gen => nonde
+s1 . ParamX.Pl => ResEst.Part => noid
+s1 . ParamX.Pl => ResEst.Transl => nondeks
+s1 . ParamX.Pl => ResEst.Ess => nondena
+s1 . ParamX.Pl => ResEst.Iness => nondes
+s1 . ParamX.Pl => ResEst.Elat => nondest
+s1 . ParamX.Pl => ResEst.Illat => nondesse
+s1 . ParamX.Pl => ResEst.Adess => nondel
+s1 . ParamX.Pl => ResEst.Ablat => nondelt
+s1 . ParamX.Pl => ResEst.Allat => nondele
+s1 . ParamX.Pl => ResEst.Abess => nondeta
+s1 . ParamX.Pl => ResEst.Comit => nondega
+s1 . ParamX.Pl => ResEst.Termin => nondeni
+s2 . []
+sp . ParamX.Sg => ResEst.Nom => too
+sp . ParamX.Sg => ResEst.Gen => tolle
+sp . ParamX.Sg => ResEst.Part => toda
+sp . ParamX.Sg => ResEst.Transl => tolleks
+sp . ParamX.Sg => ResEst.Ess => tollena
+sp . ParamX.Sg => ResEst.Iness => tolles
+sp . ParamX.Sg => ResEst.Elat => tollest
+sp . ParamX.Sg => ResEst.Illat => tollesse
+sp . ParamX.Sg => ResEst.Adess => tollel
+sp . ParamX.Sg => ResEst.Ablat => tollelt
+sp . ParamX.Sg => ResEst.Allat => tollele
+sp . ParamX.Sg => ResEst.Abess => tolleta
+sp . ParamX.Sg => ResEst.Comit => tollega
+sp . ParamX.Sg => ResEst.Termin => tolleni
+sp . ParamX.Pl => ResEst.Nom => nood
+sp . ParamX.Pl => ResEst.Gen => nonde
+sp . ParamX.Pl => ResEst.Part => noid
+sp . ParamX.Pl => ResEst.Transl => nondeks
+sp . ParamX.Pl => ResEst.Ess => nondena
+sp . ParamX.Pl => ResEst.Iness => nondes
+sp . ParamX.Pl => ResEst.Elat => nondest
+sp . ParamX.Pl => ResEst.Illat => nondesse
+sp . ParamX.Pl => ResEst.Adess => nondel
+sp . ParamX.Pl => ResEst.Ablat => nondelt
+sp . ParamX.Pl => ResEst.Allat => nondele
+sp . ParamX.Pl => ResEst.Abess => nondeta
+sp . ParamX.Pl => ResEst.Comit => nondega
+sp . ParamX.Pl => ResEst.Termin => nondeni

@@ -41,7 +41,7 @@ concrete StructuralEst of Structural = CatEst **
 ---  first_Ord = {s = \\n,c => (mkN "ensimmäinen").s ! NCase n c} ;
   for_Prep = casePrep allative ;
   from_Prep = casePrep elative ;
-  he_Pron = mkPronoun "hän" "hänen" "häntä"  "hänenä" "häneen" Sg P3 ;
+  he_Pron = mkPronoun "tema" "tema" "teda" Sg P3 ;
   here_Adv = ss "siin" ;
   here7to_Adv = ss "siia" ;
   here7from_Adv = ss "siit" ;
@@ -51,7 +51,7 @@ concrete StructuralEst of Structural = CatEst **
     {s = \\c => "kuinka" ++ (mkN "moni" "monia").s ! NCase Sg c ; n = Sg ; isNum = False} ;
   if_Subj = ss "kui" ;
   in8front_Prep = postGenPrep "edessä" ;
-  i_Pron  = mkPronoun "minä" "minun" "minua" "minuna" "minuun" Sg P1 ;
+  i_Pron  = mkPronoun "mina" "minu" "mind" Sg P1 ;
   in_Prep = casePrep inessive ;
   it_Pron = {
     s = \\c => pronSe.s ! npform2case Sg c ;
@@ -74,7 +74,7 @@ concrete StructuralEst of Structural = CatEst **
   please_Voc = ss ["ole hyvä"] ; --- number
   possess_Prep = casePrep genitive ;
   quite_Adv = ss "üsna" ;
-  she_Pron = mkPronoun "hän" "hänen" "häntä"  "hänenä" "häneen" Sg P3 ;
+  she_Pron = mkPronoun "tema" "tema" "teda" Sg P3 ;
   so_AdA = ss "nii" ;
   somebody_NP = {
     s = \\c => jokuPron ! Sg ! npform2case Sg c ;
@@ -100,10 +100,10 @@ concrete StructuralEst of Structural = CatEst **
   that_Quant = heavyQuant {
     s1 = table (MorphoEst.Number) {
           Sg => table (MorphoEst.Case) {
-            c => (mkPronoun "tuo" "tuon" "tuota" "tuona" "tuohon" Sg P3).s ! NPCase c
+            c => (mkPronoun "too" "tolle" "toda" Sg P3).s ! NPCase c
             } ;
           Pl => table (MorphoEst.Case) {
-            c => (mkPronoun "nuo" "noiden" "noita" "noina" "noihin" Sg P3).s ! NPCase c
+            c => (mkPronoun "nood" "nonde" "noid" Sg P3).s ! NPCase c
             }
           } ;
     s2 = [] ; isNum,isPoss = False ; isDef = True ;
@@ -113,14 +113,14 @@ concrete StructuralEst of Structural = CatEst **
   there7to_Adv = ss "sinna" ;
   there7from_Adv = ss "sealt" ;
   therefore_PConj = ss "sellepärast" ;
-  they_Pron = mkPronoun "he" "heidän" "heitä" "heinä" "heihin"  Pl P3 ; --- ne
+  they_Pron = mkPronoun "nemad" "nende" "neid" Pl P3 ;
   this_Quant = heavyQuant {
     s1 = table (MorphoEst.Number) {
           Sg => table (MorphoEst.Case) {
-            c => (mkPronoun "tämä" "tämän" "tätä" "tänä" "tähän" Sg P3).s ! NPCase c
+            c => (mkPronoun "see" "selle" "seda" Sg P3).s ! NPCase c
             } ;
           Pl => table (MorphoEst.Case) {
-            c => (mkPronoun "nämä" "näiden" "näitä" "näinä" "näihin" Sg P3).s ! NPCase c
+            c => (mkPronoun "need" "nende" "neid" Sg P3).s ! NPCase c
             }
           } ;
     s2 = [] ; isNum,isPoss = False ; isDef = True ;
@@ -131,7 +131,7 @@ concrete StructuralEst of Structural = CatEst **
   under_Prep = postGenPrep "alla" ;
   very_AdA = ss "eriti" ;
   want_VV = mkVV (mkV "tahtoa") ;
-  we_Pron = mkPronoun "me" "meidän" "meitä" "meinä" "meihin" Pl P1 ;
+  we_Pron = mkPronoun "meie" "meie" "meid" Pl P1 ;
   whatPl_IP = {
     s = table {NPAcc => "mitkä" ; c => mikaInt ! Pl ! npform2case Pl c} ;
     n = Pl
@@ -158,10 +158,10 @@ concrete StructuralEst of Structural = CatEst **
   without_Prep = prePrep partitive "ilman" ;
   with_Prep = postGenPrep "kanssa" ;
   yes_Utt = ss "jah" ;
-  youSg_Pron = mkPronoun "sinä" "sinun" "sinua" "sinuna" "sinuun"  Sg P2 ;
-  youPl_Pron = mkPronoun "te" "teidän" "teitä" "teinä" "teihin"  Pl P2 ;
+  youSg_Pron = mkPronoun "sina" "sinu" "sind" Sg P2 ;
+  youPl_Pron = mkPronoun "teie" "teie" "teid" Pl P2 ;
   youPol_Pron =
-    let p = mkPronoun "te" "teidän" "teitä" "teinä" "teihin"  Pl P2 in
+    let p = mkPronoun "teie" "teie" "teid" Pl P2 in
     {s = p.s ; a = AgPol} ;
 
 oper

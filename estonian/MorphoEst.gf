@@ -1063,37 +1063,42 @@ caseTable : Number -> CommonNoun -> Case => Str = \n,cn ->
 
 -- Here we define personal and relative pronouns.
 
-  mkPronoun : (_,_,_,_,_ : Str) ->  Number -> Person -> 
+  -- input forms: Nom, Gen, Part
+  -- Note that the Fin version required 5 input forms, the
+  -- Est pronouns thus seem to be much simpler.
+  -- TODO: meiesse/teiesse -> meisse/teisse
+  -- TODO: remove NPAcc?
+  mkPronoun : (_,_,_ : Str) -> Number -> Person ->
     {s : NPForm => Str ; a : Agr} = 
-    \mina, minun, minua, minuna, minuun, n, p ->
+    \mina, minu, mind, n, p ->
     let {
-      minu = Predef.tk 2 minuna ;
-      a    = Predef.dp 1 minuna
+      a = "a" -- currently not used
     } in 
     {s = table {
       NPCase Nom    => mina ;
-      NPCase Gen    => minun ;
-      NPCase Part   => minua ;
-      NPCase Transl => minu + "ksi" ;
-      NPCase Ess    => minuna ;
-      NPCase Iness  => minu + ("ss" + a) ;
-      NPCase Elat   => minu + ("st" + a) ;
-      NPCase Illat  => minuun ;
-      NPCase Adess  => minu + ("ll" + a) ;
-      NPCase Ablat  => minu + ("lt" + a) ;
-      NPCase Allat  => minu + "lle" ;
-      NPCase Abess  => minu + ("tt" + a) ;
+      NPCase Gen    => minu ;
+      NPCase Part   => mind ;
+      NPCase Transl => minu + "ks" ;
+      NPCase Ess    => minu + "na" ;
+      NPCase Iness  => minu + "s" ;
+      NPCase Elat   => minu + "st" ;
+      NPCase Illat  => minu + "sse" ;
+      NPCase Adess  => minu + "l" ;
+      NPCase Ablat  => minu + "lt" ;
+      NPCase Allat  => minu + "le" ;
+      NPCase Abess  => minu + "ta" ;
       NPCase Comit  => minu + "ga" ;
       NPCase Termin => minu + "ni" ;
-      NPAcc         => Predef.tk 1 minun + "t"
+      NPAcc         => Predef.tk 1 minu + "t"
       } ;
      a = Ag n p
     } ; 
 
+  -- TODO: this does not seem to be called from anyway
   mkDemPronoun : (_,_,_,_,_ : Str) ->  Number -> 
     {s : NPForm => Str ; a : Agr} = 
     \tuo, tuon, tuota, tuona, tuohon, n ->
-    let pro = mkPronoun tuo tuon tuota tuona tuohon n P3
+    let pro = mkPronoun tuo tuon tuota n P3
     in {
       s = table {
         NPAcc => tuo ;
@@ -1123,6 +1128,7 @@ oper
 
   ProperName = {s : Case => Str} ;
 
+  -- TODO: generate using mkPronoun
   pronSe : ProperName  = {
     s = table {
       Nom    => "see" ;
@@ -1142,6 +1148,7 @@ oper
       } ;
     } ;
 
+  -- TODO: generate using mkPronoun
   pronNe : ProperName  = {
     s = table {
       Nom    => "need" ;
@@ -1160,6 +1167,5 @@ oper
       Termin => "nendeni" 
       } ;
     } ;
-
 
 }
