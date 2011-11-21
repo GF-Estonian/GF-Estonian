@@ -309,12 +309,17 @@ oper
     s : Tense => Anteriority => Polarity => {subj,fin,inf,compl,adv,ext : Str ; qp : Bool}
     } ;
 
+  -- The Finnish version of SQuest featured a word order change and
+  -- the question particle "ko". The Estonian version just prefixes the
+  -- declarative sentence with the yes/no-queryword "kas".
+  -- SQuest: "kas" + SDecl
+  -- It would be also correct to use the Finnish structure, just without the ko-particle.
   mkClause : (Polarity -> Str) -> Agr -> VP -> Clause = 
     \sub,agr,vp -> {
       s = \\t,a,b => let c = (mkClausePlus sub agr vp).s ! t ! a ! b in 
          table {
            SDecl  => c.subj ++ c.fin ++ c.inf ++ c.compl ++ c.adv ++ c.ext ;
-           SQuest => c.fin ++ BIND ++ questPart c.qp ++ c.subj ++ c.inf ++ c.compl ++ c.adv ++ c.ext
+           SQuest => "kas" ++ c.subj ++ c.fin ++ c.inf ++ c.compl ++ c.adv ++ c.ext
            }
       } ;
 
@@ -378,6 +383,7 @@ oper
   subjForm : NP -> NPForm -> Polarity -> Str = \np,sc,b -> 
     appCompl False b {s = [] ; c = sc ; isPre = True} np ;
 
+  -- TODO: remove: Estonian does not have question particles
   questPart : Bool -> Str = \b -> if_then_Str b "ko" "kö" ;
 
   selectPart : VP -> Anteriority -> Polarity -> Bool = \vp,a,p -> 
