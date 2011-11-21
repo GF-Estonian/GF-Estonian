@@ -200,15 +200,15 @@ oper
     } in
     table {
       Sg => table {
-        Nom => "mikä" ;
-        Gen => "minkä" ;
-        Part => "mitä" ;
+        Nom => "mis" ;
+        Gen => "mille" ;
+        Part => "mida" ;
         c   => mi.s ! NCase Sg c
        } ;
       Pl => table {
-        Nom => "mitkä" ;
-        Gen => "minkä" ;
-        Part => "mitä" ;
+        Nom => "mis" ;
+        Gen => "mille" ;
+        Part => "mida" ;
         c   => mi.s ! NCase Sg c
         }
       } ;

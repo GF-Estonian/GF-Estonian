@@ -690,10 +690,17 @@ oper
       isPron = False -- no special acc form
       } ;
 
+  -- Estonian does not have possessive suffixes
+  -- TODO: we temporarily return "0" for such a suffix
+  possSuffixFront : Agr -> Str = \agr -> "0" ;
+  possSuffix : Agr -> Str = \agr -> "0" ;
+
+{--
   possSuffixFront : Agr -> Str = \agr -> 
     table Agr ["ni" ; "si" ; "nsä" ; "mme" ; "nne" ; "nsä" ; "nne"] ! agr ;
   possSuffix : Agr -> Str = \agr -> 
     table Agr ["ni" ; "si" ; "nsa" ; "mme" ; "nne" ; "nsa" ; "nne"] ! agr ;
+--}
 
 oper
   rp2np : Number -> {s : Number => NPForm => Str ; a : RAgr} -> NP = \n,rp -> {

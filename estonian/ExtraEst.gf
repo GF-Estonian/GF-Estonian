@@ -62,7 +62,7 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
       in  {
         s = \\t,a,p => cl.s ! t ! a ! p ! SDecl
       } ;
-x
+
 --    i_implicPron = mkPronoun [] "minun" "minua" "minuna" "minuun" Sg P1 ;
     whatPart_IP = {
       s = table {
