@@ -86,3 +86,8 @@ cc -table youPl_Pron
 cc -table they_Pron
 cc -table this_Quant
 cc -table that_Quant
+
+
+import -retain ../estonian/ResEst.gf
+
+cc -table verbOlla

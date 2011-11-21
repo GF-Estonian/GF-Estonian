@@ -198,7 +198,7 @@ lin
   television_N = mk2N "televisio" "televisioita" ;
   thick_A = mkA "paksu" ;
   thin_A = mkA (mkN "ohut" "ohuita") ;
-  train_N = mkN "juna" ;
+  train_N = mkN "rong" ;
   travel_V = mkV "matkustaa" ;
   tree_N = mkN "puu" ;
  ---- trousers_N = mkN "trousers" ;

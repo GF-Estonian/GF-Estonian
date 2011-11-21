@@ -410,16 +410,18 @@ oper
 -- The definitions below were moved here from $MorphoFin$ so that we the
 -- auxiliary of predication can be defined.
 
+  -- Inf1, SgP3, ~PgP1, PlP3, ImperPl, PassTrue?
+  -- ImpfSgP3, ImpfSgP1, ConditSgP3?, ??, ??, ??
   verbOlla : Verb = 
     let olla = mkVerb 
-      "olla" "on" "olen" "ovat" "olkaa" "ollaan" 
+      "olla" "on" "olen" "on" "olge" "ollaan" 
       "oli" "olin" "olisi" "ollut" "oltu" "ollun" ;
     in {s = table {
-      Inf Inf3Iness => "olemassa" ;
-      Inf Inf3Elat  => "olemasta" ;
-      Inf Inf3Illat => "olemaan" ;
-      Inf Inf3Adess => "olemalla" ;
-      Inf Inf3Abess => "olematta" ;
+      Inf Inf3Iness => "olemas" ;
+      Inf Inf3Elat  => "olemast" ;
+      Inf Inf3Illat => "olemasse" ; -- TODO: not Estonian
+      Inf Inf3Adess => "olemal" ;  -- TODO: not Estonian
+      Inf Inf3Abess => "olemata" ;
       v => olla.s ! v
       }
     } ;
@@ -454,7 +456,6 @@ oper
       tulisi = vh.tulisi ;
       tullut = vh.tullut ;
       tultu = vh.tultu ;
-      tultu = vh.tultu ;
       tullun = vh.tullun ;
       tuje = init tulen ;
       tuji = init tulin ;
@@ -464,9 +465,8 @@ oper
       tulleena = Predef.tk 2 tullut + ("een" + a) ;
       tulleen = (noun2adj (nhn (sRae tullut tulleena))).s ;
       tullun = (noun2adj (nhn (sKukko tultu tullun (tultu + ("j"+a))))).s  ;
-      tulema = Predef.tk 3 tulevat + "m" + a ;
-----      tulema = tuje + "m" + a ;
-      vat = "v" + a + "t"
+      tulema = Predef.tk 3 tulevat + "ma" ;
+      vat = "v" + a + "d"
     in
     {s = table {
       Inf Inf1 => tulla ;
@@ -477,10 +477,10 @@ oper
       Presn Pl P2 => tuje + "te" ;
       Presn Pl P3 => tulevat ;
       Impf Sg P1 => tuji + "n" ;   --# notpresent
-      Impf Sg P2 => tuji + "t" ;  --# notpresent
+      Impf Sg P2 => tuji + "d" ;  --# notpresent
       Impf Sg P3 => tuli ;  --# notpresent
-      Impf Pl P1 => tuji + "mme" ;  --# notpresent
-      Impf Pl P2 => tuji + "tte" ;  --# notpresent
+      Impf Pl P1 => tuji + "me" ;  --# notpresent
+      Impf Pl P2 => tuji + "te" ;  --# notpresent
       Impf Pl P3 => tuli + vat ;  --# notpresent
       Condit Sg P1 => tulisi + "n" ;  --# notpresent
       Condit Sg P2 => tulisi + "t" ;  --# notpresent
@@ -498,11 +498,12 @@ oper
       Pass False => Predef.tk 2 tullaan ;
       PastPartAct n => tulleen ! n ;
       PastPartPass n => tullun ! n ;
-      Inf Inf3Iness => tulema + "ss" + a ;
-      Inf Inf3Elat  => tulema + "st" + a ;
-      Inf Inf3Illat => tulema +  a   + "n" ;
-      Inf Inf3Adess => tulema + "ll" + a ;
-      Inf Inf3Abess => tulema + "tt" + a 
+      -- Inf Inf3Transl => tulema + "ks" ; -- -maks (missing in Finnish)
+      Inf Inf3Iness => tulema + "s" ; -- -mas
+      Inf Inf3Elat  => tulema + "st" ; -- -mast
+      Inf Inf3Illat => tulema + "sse" ; -- TODO: missing in Estonian
+      Inf Inf3Adess => tulema + "l" ; -- TODO: missing in Estonian
+      Inf Inf3Abess => tulema + "ta" -- -mata
       }
     } ;
 
@@ -585,30 +586,30 @@ oper
       NCase Sg Nom    => vesi ;
       NCase Sg Gen    => vede + "n" ;
       NCase Sg Part   => vetta ;
-      NCase Sg Transl => vede + "ksi" ;
+      NCase Sg Transl => vede + "ks" ;
       NCase Sg Ess    => vete + ("n" + a) ;
       NCase Sg Iness  => vede + ("ss" + a) ;
-      NCase Sg Elat   => vede + ("st" + a) ;
+      NCase Sg Elat   => vede + "st" ;
       NCase Sg Illat  => veteen ;
-      NCase Sg Adess  => vede + ("ll" + a) ;
-      NCase Sg Ablat  => vede + ("lt" + a) ;
-      NCase Sg Allat  => vede + "lle" ;
-      NCase Sg Abess  => vede + ("tt" + a) ;
+      NCase Sg Adess  => vede + "l" ;
+      NCase Sg Ablat  => vede + "lt" ;
+      NCase Sg Allat  => vede + "le" ;
+      NCase Sg Abess  => vede + ("t" + a) ;
       NCase Sg Comit  => vede + "ga" ;
       NCase Sg Termin => vede + "ni" ;
 
-      NCase Pl Nom    => vede + "t" ;
+      NCase Pl Nom    => vede + "d" ;
       NCase Pl Gen    => vesien ;
       NCase Pl Part   => vesia ;
-      NCase Pl Transl => vesii + "ksi" ;
+      NCase Pl Transl => vesii + "ks" ;
       NCase Pl Ess    => vetii + ("n" + a) ;
       NCase Pl Iness  => vesii + ("ss" + a) ;
-      NCase Pl Elat   => vesii + ("st" + a) ;
+      NCase Pl Elat   => vesii + "st" ;
       NCase Pl Illat  => vesiin ;
-      NCase Pl Adess  => vesii + ("ll" + a) ;
-      NCase Pl Ablat  => vesii + ("lt" + a) ;
-      NCase Pl Allat  => vesii + "lle" ;
-      NCase Pl Abess  => vesii + ("tt" + a) ;
+      NCase Pl Adess  => vesii + ("l" + a) ;
+      NCase Pl Ablat  => vesii + "lt" ;
+      NCase Pl Allat  => vesii + "le" ;
+      NCase Pl Abess  => vesii + ("t" + a) ;
       NCase Pl Comit  => vesii + "ga" ;
       NCase Pl Termin => vesii + "ni" 
 
