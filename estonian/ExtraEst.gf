@@ -96,13 +96,13 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
           let
             n = complNumAgr agr ;
             c = case n of {
-              Sg => Nom ;  -- minä olen iso ; te olette iso
-              Pl => Part   -- me olemme isoja ; te olette isoja
+              Sg => Nom ;  -- Fin (Nom): minä olen iso ; te olette iso
+              Pl => Nom    -- Fin (Part): me olemme isoja ; te olette isoja
               }            --- definiteness of NP ?
-          in "kuinka" ++ ap.s ! False ! (NCase n c)
+          in "kui" ++ ap.s ! False ! (NCase n c)
       } ;
 
-    IAdvAdv adv = {s = "kuinka" ++ adv.s} ;
+    IAdvAdv adv = {s = "kui" ++ adv.s} ;
 
     ProDrop p = {
       s = table {NPCase (Nom | Gen) => [] ; c => p.s ! c} ; 

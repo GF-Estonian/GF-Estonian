@@ -91,3 +91,7 @@ cc -table that_Quant
 import -retain ../estonian/ResEst.gf
 
 cc -table verbOlla
+
+import -retain ../estonian/ParadigmsEst.gf
+
+cc -table mkN "keel" "keele" "keelt" "keeli"

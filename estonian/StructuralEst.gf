@@ -48,9 +48,9 @@ concrete StructuralEst of Structural = CatEst **
   how_IAdv = ss "kuidas" ;
   how8much_IAdv = ss "kui palju" ;
   how8many_IDet =
-    {s = \\c => "kuinka" ++ (mkN "moni" "monia").s ! NCase Sg c ; n = Sg ; isNum = False} ;
+    {s = \\c => "kui" ++ (mkN "moni" "monia").s ! NCase Sg c ; n = Sg ; isNum = False} ;
   if_Subj = ss "kui" ;
-  in8front_Prep = postGenPrep "edessä" ;
+  in8front_Prep = postGenPrep "ees" ;
   i_Pron  = mkPronoun "mina" "minu" "mind" Sg P1 ;
   in_Prep = casePrep inessive ;
   it_Pron = {
@@ -62,7 +62,7 @@ concrete StructuralEst of Structural = CatEst **
   many_Det = mkDet Sg (mkN "moni" "monia") ;
   more_CAdv = X.mkCAdv "rohkem" "kui" ;
   most_Predet = {s = \\n,c => (nForms2N (dSuurin "useinta")).s ! NCase n (npform2case n c)} ;
-  much_Det = mkDet Sg {s = \\_ => "paljon"} ;
+  much_Det = mkDet Sg {s = \\_ => "palju"} ;
   must_VV = mkVV (caseV genitive (mkV "täytyä")) ;
   no_Utt = ss "ei" ;
   on_Prep = casePrep adessive ;

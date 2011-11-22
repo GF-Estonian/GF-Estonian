@@ -44,17 +44,18 @@ oper
   plural   : Number ;
 
   Case        : Type ;
-  nominative  : Case ; -- e.g. "talo"
-  genitive    : Case ; -- e.g. "talon"
-  partitive   : Case ;  -- e.g. "taloa"
-  essive      : Case ;  -- e.g. "talona"
-  translative : Case ;  -- e.g. "taloksi"
-  inessive    : Case ;  -- e.g. "talossa"
-  elative     : Case ;  -- e.g. "talosta"
-  illative    : Case ;  -- e.g. "taloon"
-  adessive    : Case ;  -- e.g. "talolla"
-  ablative    : Case ;  -- e.g. "talolta"
-  allative    : Case ; -- e.g. "talolle"
+  nominative  : Case ; -- e.g. "karp"
+  genitive    : Case ; -- e.g. "karbi"
+  partitive   : Case ; -- e.g. "karpi"
+  essive      : Case ; -- e.g. "karbina"
+  translative : Case ; -- e.g. "karbiks"
+  inessive    : Case ; -- e.g. "karbis"
+  elative     : Case ; -- e.g. "karbist"
+  illative    : Case ; -- e.g. "karbisse/karpi"
+  adessive    : Case ; -- e.g. "karbil"
+  ablative    : Case ; -- e.g. "karbilt"
+  allative    : Case ; -- e.g. "karbile"
+  comitative  : Case ; -- e.g. "karbiga"
 
   infFirst : InfForm ; -- e.g. "tehdä"
   infElat : InfForm ;  -- e.g. "tekemästä"
@@ -250,6 +251,7 @@ oper
   adessive = Adess ;
   ablative = Ablat ;
   allative = Allat ;
+  comitative = Comit ;
 
   infFirst = Inf1 ; infElat = Inf3Elat ; infIllat = Inf3Illat ;
 
