@@ -14,7 +14,7 @@ lin
   art_N = mkN "kunst" "kunsti" "kunsti" "kunste";
   ask_V2Q = mkV2 (mkV "kysyä") (casePrep ablative) ;
   baby_N = mkN "beebi" "beebi" "beebit" "beebisid";
-  bad_A = mkA (mkN "paha") "pahempi" "pahin" ;
+  bad_A = mkA (mkN "halb") "halvem" "halvim" ;
   bank_N = mkN "pank" "panga" "panka" "panku";
   beautiful_A = mkA (mkN "kaunis") "kauniimpi" "kaunein" ;
   become_VA = mkVA (mkV "tulla") (casePrep translative) ;
@@ -54,7 +54,7 @@ lin
   clever_A = mkA (mkN "viisas") ;
   close_V2 = mkV2 (mkV "sulkea") ;
   coat_N = mkN "takki" ;
-  cold_A = mkA (mkN "kylmä") "kylmempi" "kylmin" ;
+  cold_A = mkA (mkN "külm") "külmem" "külmim" ;
   come_V = mkV "tulla" ;
   computer_N = mkN "tietokone" ;
   country_N = mkN "maa" ;
@@ -87,7 +87,7 @@ lin
   girl_N = mkN "tyttö" ;
   glove_N = mkN "käsine" ;
   gold_N = mkN "kulta" ;
-  good_A = mkA (mkN "hyvä") "parempi" "parhain" ; --- paras
+  good_A = mkA (mkN "hea") "parem" "parim" ;
   go_V = mkV "mennä" ;
   green_A = mkA (mkN "vihreä") "vihreämpi" "vihrein" ;
   harbour_N = mkN "satama" "sataman" "satamia" ;
@@ -116,15 +116,14 @@ lin
   like_V2 = mkV2 (mkV "pitää") elative ;
   listen_V2 = mkV2 (mkV "kuunnella" "kuunteli") partitive ;
   live_V = mkV "elää" ;
-  long_A = mkA (mkN "pitkä") "pitempi" "pisin" ;
+  long_A = mkA (mkN "pikk") "pikem" "pikim" ;
   lose_V2 = mkV2 (mkV "hävitä" "hävisi") ; --- hukata
   love_N = mk3N "rakkaus" "rakkauden" "rakkauksia" ;
   love_V2 = mkV2 (mkV "rakastaa") partitive ;
-  man_N = mkN "mies" "miehen" "miestä" "miehiä" ; -- "miehenä" "mieheen" 
-            --  "miesten" "miehiä" "miehinä" "miehissä" "miehiin" ; 
+  man_N = mkN "mees" ;
   married_A2 = mkA2 (mkA "avioitunut") (postPrep genitive "kanssa") ; ---- infl
   meat_N = mkN "liha" ;
-  milk_N = mkN "maito" ;
+  milk_N = mkN "piim" ;
   moon_N = mkN "kuu" ;
   mother_N2 = mkN2 (mkN "äiti") ;
   mountain_N = mkN "vuori" "vuoria" ;
@@ -133,7 +132,7 @@ lin
   new_A = mkA (mk3N "uusi" "uuden" "uusia") "uudempi" "uusin" ;
   newspaper_N = mkN "sanoma" (mkN "lehti" "lehtiä") ; --- for correct vowel harmony
   oil_N = mkN "öljy" ;
-  old_A = mkA (mkN "vanha") "vanhempi" "vanhin" ;
+  old_A = mkA (mkN "vana") "vanem" "vanim" ;
   open_V2 = mkV2 (mkV "avata" "avasi") ;
   paint_V2A = mkV2A (mkV "maalata") accPrep (casePrep translative) ;
   paper_N = mk2N "paperi" "papereita" ;
@@ -208,17 +207,13 @@ lin
   village_N = mkN "kylä" ;
   wait_V2 = mkV2 (mkV "odottaa") partitive ;
   walk_V = mkV "kävellä" "käveli" ;
-  warm_A = mkA 
-    (mkN "lämmin" "lämpimän" "lämmintä" "lämpimiä" ) --"lämpimänä" "lämpimään" 
---         "lämpiminä" "lämpimiä" "lämpimien" "lämpimissä" "lämpimiin"
---	 ) 
-    "lämpimämpi" "lämpimin" ;
+  warm_A = mkA (mkN "soe") "soojem" "kõige soojem" ;
   war_N = mkN "sota" ;
   watch_V2 = mkV2 (mkV "katsella") cpartitive ;
-  water_N = mk3N "vesi" "veden" "vesiä" ;
+  water_N = mkN "vesi" ;
   white_A = mkA "valkoinen" ;
   window_N = mk2N "ikkuna" "ikkunoita" ;
-  wine_N = mkN "viini" ;
+  wine_N = mkN "vein" ;
   win_V2 = mkV2 (mkV "voittaa") ;
   woman_N = mkN "naine" ;
   wonder_VQ = mkVQ (mkV "ihmetellä") ;
@@ -295,7 +290,7 @@ lin
   liver_N = mkN "maksa" ;
   louse_N = mkN "lude" ;
   mouth_N = mkN "suu" ;
-  name_N = mk2N "nimi" "nimiä" ;
+  name_N = mkN "nimi" ;
   neck_N = mkN "niska" ;
   night_N = mkN "yö" ;
   nose_N = mkN "nenä" ;
@@ -304,7 +299,7 @@ lin
   road_N = mkN "tie" ;
   root_N = mk2N "juuri" "juuria" ;
   rope_N = mk3N "köysi" "köyden" "köysiä" ;
-  salt_N = mkN "suola" ;
+  salt_N = mkN "sool" ;
   sand_N = mkN "hiekka" ;
   seed_N = mkN "siemen" ;
   skin_N = mkN "nahka" ;
@@ -319,7 +314,7 @@ lin
   wind_N = mk2N "tuuli" "tuulia" ;
   wing_N = mk2N "siipi" "siipiä" ;
   worm_N = mkN "mato" ;
-  year_N = mk3N "vuosi" "vuoden" "vuosia" ;
+  year_N = mkN "aasta" ;
   bite_V2 = mkV2 (mkV "purra") ;
   blow_V = mkV "puhaltaa" ;
   burn_V = mkV "palaa" ;

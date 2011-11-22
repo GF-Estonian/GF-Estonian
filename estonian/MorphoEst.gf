@@ -657,8 +657,8 @@ resource MorphoEst = ResEst ** open Prelude in {
         suur = Predef.tk 4 (nforms ! 8) ;
       in {
         posit = nforms ;
-        compar = dSuurempi (suure ++ "mpi") ;
-        superl = dSuurin   (suur ++ "in") ;
+        compar = dSuurempi (suure ++ "m") ;
+        superl = dSuurin   (suur ++ "im") ;
         adv_posit = suure + "sti" ;
         adv_compar = suure + "mmin" ;
         adv_superl = suur + "immin" ;
@@ -1029,14 +1029,16 @@ resource MorphoEst = ResEst ** open Prelude in {
       ase => ase
       } ;
 
+  -- TODO: not sure if we can do anything with these
+  -- for Estonian
   vowHarmony : Str -> Str = \s -> case s of {
     _ + ("a" | "o" | "u") + _ => "a" ;
-    _ => "ä"
+    _ => "i"
     } ;
 
   getHarmony : Str -> Str = \u -> case u of {
     "a"|"o"|"u" => "a" ;
-    _   => "ä"
+    _   => "i"
     } ;
 
 -----------------------

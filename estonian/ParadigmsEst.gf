@@ -292,6 +292,7 @@ oper
     mkN : (sana : NK) -> N = \w -> nForms2N w.s ;
   } ;
 
+  -- Adjective forms (incl. comp and sup) are derived from noun forms
   mk1A : Str -> A = \jalo -> aForms2A (nforms2aforms (nForms1 jalo)) ;
   mkNA : N -> A = \suuri -> aForms2A (nforms2aforms (n2nforms suuri)) ;
 
@@ -526,8 +527,8 @@ oper
   noun2adjDeg : Noun -> Adjective = \suuri -> 
     regAdjective 
       suuri 
-      (init (suuri.s ! NCase Sg Gen) + "mpi")  ---- to check
-      (init (suuri.s ! NCase Sg Gen) + "n") ; ----
+      (init (suuri.s ! NCase Sg Gen) + "m")  ---- to check
+      (init (suuri.s ! NCase Sg Gen) + "im") ; ----
 --      (suuri.s ! NInstruct) ; ----
     
 
