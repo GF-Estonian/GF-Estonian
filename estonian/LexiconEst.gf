@@ -294,7 +294,7 @@ lin
   neck_N = mkN "niska" ;
   night_N = mkN "yö" ;
   nose_N = mkN "nenä" ;
-  person_N = mkN "henkilö" ;
+  person_N = mkN "inimene" ;
   rain_N = mkN "sade" ;
   road_N = mkN "tie" ;
   root_N = mk2N "juuri" "juuria" ;
