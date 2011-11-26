@@ -569,6 +569,8 @@ oper
       ot   = init ota ;
     in
     case ottaa of {
+      _ + "aada" =>
+        cSaada ottaa ;
       _ + ("e" | "i" | "o" | "u" | "y" | "ö") + ("a" | "ä") =>
         cHukkua ottaa (ota + "n") ;
       _ + ("l" | "n" | "r") + ("taa" | "tää") => 

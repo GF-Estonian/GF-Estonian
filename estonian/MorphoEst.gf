@@ -752,7 +752,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       juoda
       (juo + "n")
       (juo)
-      (juo + "v" + a + "t")
+      (juo + "v" + a + "d")
       (juo + "k" + a + a)
       (juoda + a + "n")
       (joi + "n")
@@ -761,6 +761,41 @@ resource MorphoEst = ResEst ** open Prelude in {
       (juo + "n" + u + "t")
       (juo + "t" + u)
       (juo + "nee") ;
+
+  cSaada : (_ : Str) -> VForms = \saada ->
+    let
+      saa = Predef.tk 2 saada;
+      sa = Predef.tk 3 saada;
+    in vForms12
+      saada
+      (saa + "n")
+      (saa + "b")
+      (saa + "vad")
+      (saa + "gu") -- Imper Pl
+      (saa + "an") --5?
+      (sa + "in")
+      (sa + "ite")
+      (saa + "ks") -- Condit Sg P3
+      (saa + "nud") --9?
+      (saa + "tu") --10?
+      (saa + "nee"); -- 11?
+
+  cElada : (_ : Str) -> VForms = \elada ->
+    let
+      ela = Predef.tk 2 elada;
+    in vForms12
+      elada
+      (ela + "n")
+      (ela + "b")
+      (ela + "vad")
+      (ela + "gu") -- Imper Pl
+      (elada + "an") --5?
+      (ela + "sin")
+      (ela + "site")
+      (ela + "ks") -- Condit Sg P3
+      (ela + "nud") --9?
+      (ela + "tu") --10?
+      (ela + "nee"); -- 11?
 
   cPudota : (_,_ : Str) -> VForms = \pudota,putosi -> 
     let
@@ -851,6 +886,7 @@ resource MorphoEst = ResEst ** open Prelude in {
 
 -- auxiliaries
 
+    -- TODO: does not exist in Estonian
     uyHarmony : Str -> Str = \a -> case a of {
       "a" => "u" ;
       _ => "y"
@@ -898,29 +934,28 @@ resource MorphoEst = ResEst ** open Prelude in {
       tulleen = (nForms2N (dOttanut tullut)).s ;
       tullu : Str = weakGrade tultu ;
       tullun  = (nForms2N (dUkko tultu (tullu + "n"))).s ; 
-      tulema = Predef.tk 3 tulevat + "m" + a ;
-      vat = "v" + a + "t"
+      tulema = Predef.tk 2 tulevat + "ma" ;
     in
     {s = table {
       Inf Inf1 => tulla ;
       Presn Sg P1 => tule_ + "n" ;
-      Presn Sg P2 => tule_ + "t" ;
+      Presn Sg P2 => tule_ + "d" ;
       Presn Sg P3 => tulee ;
-      Presn Pl P1 => tule_ + "mme" ;
-      Presn Pl P2 => tule_ + "tte" ;
+      Presn Pl P1 => tule_ + "me" ;
+      Presn Pl P2 => tule_ + "te" ;
       Presn Pl P3 => tulevat ;
       Impf Sg P1  => tuli_ + "n" ;   --# notpresent
-      Impf Sg P2  => tuli_ + "t" ;  --# notpresent
+      Impf Sg P2  => tuli_ + "d" ;  --# notpresent
       Impf Sg P3  => tuli ;  --# notpresent
-      Impf Pl P1  => tuli_ + "mme" ;  --# notpresent
-      Impf Pl P2  => tuli_ + "tte" ;  --# notpresent
-      Impf Pl P3  => tuli + vat ;  --# notpresent
-      Condit Sg P1 => tulisi + "n" ;  --# notpresent
-      Condit Sg P2 => tulisi + "t" ;  --# notpresent
+      Impf Pl P1  => tuli_ + "me" ;  --# notpresent
+      Impf Pl P2  => tuli_ + "te" ;  --# notpresent
+      Impf Pl P3  => tuli_ + "d" ;  --# notpresent
+      Condit Sg P1 => tulisi + "in" ;  --# notpresent
+      Condit Sg P2 => tulisi + "id" ;  --# notpresent
       Condit Sg P3 => tulisi ;  --# notpresent
-      Condit Pl P1 => tulisi + "mme" ;  --# notpresent
-      Condit Pl P2 => tulisi + "tte" ;  --# notpresent
-      Condit Pl P3 => tulisi + vat ;  --# notpresent
+      Condit Pl P1 => tulisi + "ime" ;  --# notpresent
+      Condit Pl P2 => tulisi + "ite" ;  --# notpresent
+      Condit Pl P3 => tulisi + "id" ;  --# notpresent
       Imper Sg   => tule_ ;
       Imper Pl   => tulkaa ;
       ImperP3 Sg => tulkoo + "n" ;
@@ -933,11 +968,12 @@ resource MorphoEst = ResEst ** open Prelude in {
       PastPartAct AAdv    => tullee + "sti" ;
       PastPartPass (AN n) => tullun ! n ;
       PastPartPass AAdv   => tullu + "sti" ;
-      Inf Inf3Iness => tulema + "ss" + a ;
-      Inf Inf3Elat  => tulema + "st" + a ;
-      Inf Inf3Illat => tulema +  a   + "n" ;
-      Inf Inf3Adess => tulema + "ll" + a ;
-      Inf Inf3Abess => tulema + "tt" + a 
+      --Inf Inf3Transl => tulema + "ks" ; -- -maks (missing in Finnish)
+      Inf Inf3Iness => tulema + "s" ;
+      Inf Inf3Elat  => tulema + "st" ;
+      Inf Inf3Illat => "TODO:remove" ;
+      Inf Inf3Adess => "TODO:remove" ;
+      Inf Inf3Abess => tulema + "ta"
       } ;
     sc = NPCase Nom ;
     qp = pbool2bool (Predef.eqStr (last tulko) "o") ;
