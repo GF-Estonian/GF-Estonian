@@ -593,7 +593,7 @@ oper
       _ + ("eta" | "etä" | "ota" | "ata" | "uta" | "ytä" | "ätä" | "ötä") => 
         cPudota ottaa (strongGrade ott + "si") ;
       _ + ("da" | "dä") => 
-        cJuoda ottaa ;
+        cElada ottaa ;
       _ => Predef.error (["expected infinitive, found"] ++ ottaa) 
     } ;   
 

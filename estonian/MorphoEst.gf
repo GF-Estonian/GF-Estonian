@@ -934,7 +934,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       tulleen = (nForms2N (dOttanut tullut)).s ;
       tullu : Str = weakGrade tultu ;
       tullun  = (nForms2N (dUkko tultu (tullu + "n"))).s ; 
-      tulema = Predef.tk 2 tulevat + "ma" ;
+      tulema = Predef.tk 2 tulla + "ma" ;
     in
     {s = table {
       Inf Inf1 => tulla ;
