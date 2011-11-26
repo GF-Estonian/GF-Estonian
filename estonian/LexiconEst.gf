@@ -88,7 +88,7 @@ lin
   glove_N = mkN "käsine" ;
   gold_N = mkN "kulta" ;
   good_A = mkA (mkN "hea") "parem" "parim" ;
-  go_V = mkV "mennä" ;
+  go_V = mkV "minna" ;
   green_A = mkA (mkN "vihreä") "vihreämpi" "vihrein" ;
   harbour_N = mkN "satama" "sataman" "satamia" ;
   hate_V2 = mkV2 (mkV "vihata") cpartitive ;

@@ -501,8 +501,8 @@ oper
       -- Inf Inf3Transl => tulema + "ks" ; -- -maks (missing in Finnish)
       Inf Inf3Iness => tulema + "s" ; -- -mas
       Inf Inf3Elat  => tulema + "st" ; -- -mast
-      Inf Inf3Illat => tulema + "sse" ; -- TODO: missing in Estonian
-      Inf Inf3Adess => tulema + "l" ; -- TODO: missing in Estonian
+      Inf Inf3Illat => "TODO:remove" ; -- TODO: missing in Estonian
+      Inf Inf3Adess => "TODO:remove" ; -- TODO: missing in Estonian
       Inf Inf3Abess => tulema + "ta" -- -mata
       }
     } ;
