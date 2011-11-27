@@ -968,11 +968,9 @@ resource MorphoEst = ResEst ** open Prelude in {
       PastPartAct AAdv    => tullee + "sti" ;
       PastPartPass (AN n) => tullun ! n ;
       PastPartPass AAdv   => tullu + "sti" ;
-      --Inf Inf3Transl => tulema + "ks" ; -- -maks (missing in Finnish)
+      Inf Inf3Transl => tulema + "ks" ; -- -maks (missing in Finnish)
       Inf Inf3Iness => tulema + "s" ;
       Inf Inf3Elat  => tulema + "st" ;
-      Inf Inf3Illat => "TODO:remove" ;
-      Inf Inf3Adess => "TODO:remove" ;
       Inf Inf3Abess => tulema + "ta"
       } ;
     sc = NPCase Nom ;

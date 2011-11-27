@@ -59,7 +59,6 @@ oper
 
   infFirst : InfForm ; -- e.g. "tehdä"
   infElat : InfForm ;  -- e.g. "tekemästä"
-  infIllat : InfForm ; -- e.g. "tekemään"
 
 -- The following type is used for defining *rection*, i.e. complements
 -- of many-place verbs and adjective. A complement can be defined by
@@ -253,7 +252,7 @@ oper
   allative = Allat ;
   comitative = Comit ;
 
-  infFirst = Inf1 ; infElat = Inf3Elat ; infIllat = Inf3Illat ;
+  infFirst = Inf1 ; infElat = Inf3Elat ;
 
   prePrep  : Case -> Str -> Prep = 
     \c,p -> {c = NPCase c ; s = p ; isPre = True ; lock_Prep = <>} ;
@@ -660,7 +659,7 @@ oper
 
   mkV0  v = v ** {lock_V = <>} ;
   mkV2S v p = mk2V2 v p ** {lock_V2S = <>} ;
-  mkV2V v p = mkV2Vf v p infIllat ;
+  mkV2V v p = mkV2Vf v p infElat ; -- TODO: was infIllat (which we removed)
   mkV2Vf v p f = mk2V2 v p ** {vi = f ; lock_V2V = <>} ;
 
   mkVA  v p = v ** {c2 = p ; lock_VA = <>} ;

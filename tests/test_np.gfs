@@ -96,4 +96,5 @@ import -retain ../estonian/ParadigmsEst.gf
 
 cc -table mkN "keel" "keele" "keelt" "keeli"
 cc -table mkV "elada"
+--cc -table mkV "leppida"
 cc -table mkV "saada"

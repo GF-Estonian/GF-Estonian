@@ -110,13 +110,13 @@ param
    | PastPartPass AForm
    ;
 
+  -- TODO: add: supiin
   InfForm =
-     Inf1
-   | Inf3Iness  -- 5 forms acc. to Karlsson
-   | Inf3Elat
-   | Inf3Illat
-   | Inf3Adess
-   | Inf3Abess
+     Inf1       -- da
+   | Inf3Iness  -- mas
+   | Inf3Elat   -- mast
+   | Inf3Abess  -- mata
+   | Inf3Transl -- maks
    ;
 
   SType = SDecl | SQuest ;
@@ -419,9 +419,8 @@ oper
     in {s = table {
       Inf Inf3Iness => "olemas" ;
       Inf Inf3Elat  => "olemast" ;
-      Inf Inf3Illat => "olemasse" ; -- TODO: not Estonian
-      Inf Inf3Adess => "olemal" ;  -- TODO: not Estonian
       Inf Inf3Abess => "olemata" ;
+      Inf Inf3Transl => "olemaks" ;
       v => olla.s ! v
       }
     } ;
@@ -498,11 +497,9 @@ oper
       Pass False => Predef.tk 2 tullaan ;
       PastPartAct n => tulleen ! n ;
       PastPartPass n => tullun ! n ;
-      -- Inf Inf3Transl => tulema + "ks" ; -- -maks (missing in Finnish)
+      Inf Inf3Transl => tulema + "ks" ; -- -maks (missing in Finnish)
       Inf Inf3Iness => tulema + "s" ; -- -mas
       Inf Inf3Elat  => tulema + "st" ; -- -mast
-      Inf Inf3Illat => "TODO:remove" ; -- TODO: missing in Estonian
-      Inf Inf3Adess => "TODO:remove" ; -- TODO: missing in Estonian
       Inf Inf3Abess => tulema + "ta" -- -mata
       }
     } ;
