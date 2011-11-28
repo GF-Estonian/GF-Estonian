@@ -96,5 +96,6 @@ import -retain ../estonian/ParadigmsEst.gf
 
 cc -table mkN "keel" "keele" "keelt" "keeli"
 cc -table mkV "elada"
+cc -table mk12V "minna" "lähen" "läheb" "lähevad" "mingu" "TODO" "läksin" "läks" "läheks" "läinud" "TODO" "TODO"
 --cc -table mkV "leppida"
 cc -table mkV "saada"
