@@ -86,7 +86,7 @@ oper
     (ordN "a" "esimene") ;
 
   kymmenenN = co
-    (mkN "kümmend")
+    (mkN "kümme")
     (ordN "a" "kümnes") ;
 
   sataN = co
