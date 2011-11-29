@@ -1,0 +1,6 @@
+-- Usage:
+-- cat test_NumeralEst.gfs | gf --run | sort
+
+import ../estonian/NumeralEst.gf
+
+gt -cat=Sub100 | l -bind

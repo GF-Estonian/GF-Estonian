@@ -86,6 +86,8 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
 
     vai_Conj = {s1 = [] ; s2 = "vai" ; n = Sg} ;
 
+    -- Fin: pizza on herkullista
+    -- TODO: remove or change this because in Estonian the copula adjective is in nominative
     CompPartAP ap = {
       s = \\agr => ap.s ! False ! NCase (complNumAgr agr) Part
       } ;
