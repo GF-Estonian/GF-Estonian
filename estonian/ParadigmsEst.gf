@@ -557,6 +557,7 @@ oper
      \a,b,c,d,e,f,g,h,i,j,k,l -> 
         vforms2V (vForms12 a b c d e f g h i j k l) ** {sc = NPCase Nom ; lock_V = <>} ;
 
+  -- This used to be the last case: _ => Predef.error (["expected infinitive, found"] ++ ottaa) 
   vForms1 : Str -> VForms = \ottaa ->
     let
       a = last ottaa ;
@@ -593,7 +594,8 @@ oper
         cPudota ottaa (strongGrade ott + "si") ;
       _ + ("da" | "dä") => 
         cElada ottaa ;
-      _ => Predef.error (["expected infinitive, found"] ++ ottaa) 
+      _ =>
+        cElada ottaa
     } ;   
 
   vForms2 : (_,_ : Str) -> VForms = \huutaa,huusi ->
