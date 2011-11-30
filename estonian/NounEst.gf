@@ -133,7 +133,9 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
       n = num.n
       } ;
 
-    OrdSuperl a = {s = \\nc => a.s ! Superl ! AN nc} ;
+    -- OrdSuperl a = {s = \\nc => a.s ! Superl ! AN nc} ;
+    -- TODO: it is more robust to use: kõige + Compar
+    OrdSuperl a = {s = \\nc => "kõige" ++ a.s ! Compar ! AN nc} ;
 
     DefArt = {
       s1 = \\_,_ => [] ; 

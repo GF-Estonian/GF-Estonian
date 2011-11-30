@@ -114,7 +114,9 @@ lin
       "opin" "oppi" "oppisi" "oppinut" "opittu" "opitun") ;
   leather_N = mkN "nahka" ; --- nahan
   leave_V2 = mkV2 (mkV "jättää") ;
-  like_V2 = mkV2 (mkV "pitää") elative ;
+  -- TODO: fix this: either use a 2-arg oper to handle to splittable verb 'lugupidada'
+  -- or use 'meeldida' but in this case 'elative' cannot be used.
+  like_V2 = mkV2 (mkV "lugupidada") elative ;
   listen_V2 = mkV2 (mkV "kuunnella" "kuunteli") partitive ;
   live_V = mkV "elää" ;
   long_A = mkA (mkN "pikk") "pikem" "pikim" ;

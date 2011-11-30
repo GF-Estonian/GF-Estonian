@@ -1297,6 +1297,93 @@ s . ResEst.NCase ParamX.Pl ResEst.Allat => keeedele
 s . ResEst.NCase ParamX.Pl ResEst.Abess => keeedeta
 s . ResEst.NCase ParamX.Pl ResEst.Comit => keeedega
 s . ResEst.NCase ParamX.Pl ResEst.Termin => keeedeni
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Nom) => soolane
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Gen) => soolase
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Part) => soolast
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Transl) => soolaseks
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Ess) => soolasena
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Iness) => soolases
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Elat) => soolasest
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Illat) => soolasesse
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Adess) => soolasel
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Ablat) => soolaselt
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Allat) => soolasele
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Abess) => soolaseta
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Comit) => soolasega
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Termin) => soolaseni
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Nom) => soolased
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Gen) => soolaste
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Part) => soolaseid
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Transl) => soolasteks
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Ess) => soolastena
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Iness) => soolastes
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Elat) => soolastest
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Illat) => soolastesse
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Adess) => soolastel
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Ablat) => soolastelt
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Allat) => soolastele
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Abess) => soolasteta
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Comit) => soolastega
+s . ParamX.Posit => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Termin) => soolasteni
+s . ParamX.Posit => ResEst.AAdv => soolassti
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Nom) => soolasem
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Gen) => soolasman
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Part) => soolaseaa
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Transl) => soolasmanks
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Ess) => soolasmanna
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Iness) => soolasmans
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Elat) => soolasmanst
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Illat) => soolaseana
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Adess) => soolasmanl
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Ablat) => soolasmanlt
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Allat) => soolasmanle
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Abess) => soolasmanta
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Comit) => soolasmanga
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Termin) => soolasmanni
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Nom) => soolasmand
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Gen) => soolaseaan
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Part) => soolaseien
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Transl) => soolaseaanks
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Ess) => soolaseaanna
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Iness) => soolaseaans
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Elat) => soolaseaanst
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Illat) => soolasema
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Adess) => soolaseaanl
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Ablat) => soolaseaanlt
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Allat) => soolaseaanle
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Abess) => soolaseaanta
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Comit) => soolaseaanga
+s . ParamX.Compar => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Termin) => soolaseaanni
+s . ParamX.Compar => ResEst.AAdv => soolasmin
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Nom) => soolaseim
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Gen) => soolaseimman
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Part) => soolaseimta
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Transl) => soolaseimmanks
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Ess) => soolaseimmanna
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Iness) => soolaseimmans
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Elat) => soolaseimmanst
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Illat) => soolaseimpana
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Adess) => soolaseimmanl
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Ablat) => soolaseimmanlt
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Allat) => soolaseimmanle
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Abess) => soolaseimmanta
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Comit) => soolaseimmanga
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Sg ResEst.Termin) => soolaseimmanni
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Nom) => soolaseimmand
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Gen) => soolaseimpaan
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Part) => soolaseimpien
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Transl) => soolaseimpaanks
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Ess) => soolaseimpaanna
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Iness) => soolaseimpaans
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Elat) => soolaseimpaanst
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Illat) => soolaseimpia
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Adess) => soolaseimpaanl
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Ablat) => soolaseimpaanlt
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Allat) => soolaseimpaanle
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Abess) => soolaseimpaanta
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Comit) => soolaseimpaanga
+s . ParamX.Superl => ResEst.AN (ResEst.NCase ParamX.Pl ResEst.Termin) => soolaseimpaanni
+s . ParamX.Superl => ResEst.AAdv => soolaseimmin
 s . ResEst.Inf ResEst.Inf1 => elada
 s . ResEst.Inf ResEst.Inf3Iness => elamas
 s . ResEst.Inf ResEst.Inf3Elat => elamast

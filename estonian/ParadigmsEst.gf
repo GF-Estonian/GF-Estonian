@@ -402,14 +402,13 @@ oper
       (noun2adj kiva) 
       (noun2adjComp False (nForms2N (dSuurempi kivempi))) 
       (noun2adjComp False (nForms2N (dSuurin kivin))) ;
-  noun2adjDeg : Noun -> Adjective = \suuri -> 
-    regAdjective 
-      suuri 
-      (init (suuri.s ! NCase Sg Gen) + "m")  ---- to check
-      (init (suuri.s ! NCase Sg Gen) + "im") ; ----
---      (suuri.s ! NInstruct) ; ----
-    
 
+  -- TODO: this is a bit simplified
+  noun2adjDeg : Noun -> Adjective = \suur ->
+    regAdjective
+      suur
+      ((suur.s ! NCase Sg Gen) + "m")
+      ((suur.s ! NCase Sg Gen) + "im") ;
 
 
 -- verbs
