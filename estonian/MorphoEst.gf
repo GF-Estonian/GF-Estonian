@@ -491,27 +491,18 @@ resource MorphoEst = ResEst ** open Prelude in {
 
 -- for adjective comparison
 
-  dSuurempi : Str -> NForms = \suurempi ->
+  -- Comparative adjectives inflect in the same way
+  -- TODO: confirm this
+  dSuurempi : Str -> NForms = \suurem ->
     let
-      a = vowHarmony suurempi ;
-      suuremp = init suurempi ;
-      suuremm = Predef.tk 2 suurempi + "m" ;
-    in nForms10
-      suurempi (suuremm + a + "n") (suuremp + a + a) 
-      (suuremp + a + "n" + a) (suuremp + a + a + "n")
-      (suuremp + "ien") (suurempi + a) 
-      (suurempi + "n" + a) (suuremm + "iss" + a) (suurempi + "in") ; 
+      suurema = suurem + "a" ;
+    in nForms7
+      suurem (suurema) (suurema + "t") (suurema + "sse")
+      (suurema + "te") (suurema + "id") (suurema + "tesse") ;
 
-  dSuurin : Str -> NForms = \suurin ->
-    let
-      a = vowHarmony suurin ;
-      suurimm = init suurin + "mm" ;
-      suurimp = init suurimm + "p" ;
-    in nForms10
-      suurin (suurimm + a + "n") (suurin + "t" + a) 
-      (suurimp + a + "n" + a) (suurimp + a + a + "n")
-      (suurimp + "ien") (suurimp + "i" + a) 
-      (suurimp + "in" + a) (suurimm + "iss" + a) (suurimp + "iin") ; 
+  -- Superlatives follow the exact same pattern as comparatives
+  -- TODO: confirm this
+  dSuurin : Str -> NForms = \suurim -> dSuurempi suurim ;
 
 -- for verb participle forms
 
