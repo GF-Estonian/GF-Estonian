@@ -105,7 +105,7 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
 
     PossPron p = {
       s1,sp = \\_,_ => p.s ! NPCase Gen ;
-      s2 = BIND ++ possSuffix p.a ;
+      s2 = [] ;
       isNum = False ;
       isPoss = True ;
       isDef = True  --- "minun kolme autoani ovat" ; thus "...on" is missing

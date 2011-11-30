@@ -681,30 +681,23 @@ oper
   --Estonian version started
   reflPron : Agr -> NP = \agr -> 
     let 
-      itse = (nhn (sKukko "itse" "itsen" "itsejä")).s ;
-      nsa  = possSuffixFront agr
+      itse = (nhn (sKukko "itse" "itsen" "itsejä")).s
     in {
       s = table {
-        NPCase (Nom | Gen) | NPAcc => itse ! NCase Sg Nom + nsa ;   -- NPossNom Sg
-        NPCase Transl      => itse ! NCase Sg Transl + nsa ;        -- NPossTransl etc.
-        NPCase Illat       => itse ! NCase Sg Illat  + nsa ;
-        NPCase c           => itse ! NCase Sg c + nsa
+        NPCase (Nom | Gen) | NPAcc => itse ! NCase Sg Nom ;   -- NPossNom Sg
+        NPCase Transl      => itse ! NCase Sg Transl ;        -- NPossTransl etc.
+        NPCase Illat       => itse ! NCase Sg Illat ;
+        NPCase c           => itse ! NCase Sg c
         } ;
       a = agr ;
       isPron = False -- no special acc form
       } ;
 
   -- Estonian does not have possessive suffixes
-  -- TODO: we temporarily return "0" for such a suffix
-  possSuffixFront : Agr -> Str = \agr -> "0" ;
-  possSuffix : Agr -> Str = \agr -> "0" ;
-
-{--
-  possSuffixFront : Agr -> Str = \agr -> 
-    table Agr ["ni" ; "si" ; "nsä" ; "mme" ; "nne" ; "nsä" ; "nne"] ! agr ;
-  possSuffix : Agr -> Str = \agr -> 
-    table Agr ["ni" ; "si" ; "nsa" ; "mme" ; "nne" ; "nsa" ; "nne"] ! agr ;
---}
+  -- possSuffixFront : Agr -> Str = \agr -> 
+  --   table Agr ["ni" ; "si" ; "nsä" ; "mme" ; "nne" ; "nsä" ; "nne"] ! agr ;
+  -- possSuffix : Agr -> Str = \agr -> 
+  --   table Agr ["ni" ; "si" ; "nsa" ; "mme" ; "nne" ; "nsa" ; "nne"] ! agr ;
 
 oper
   rp2np : Number -> {s : Number => NPForm => Str ; a : RAgr} -> NP = \n,rp -> {
