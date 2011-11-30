@@ -330,119 +330,17 @@ oper
     case ukko of {
       _ + "lik"        => dKasulik ukko ;
       _ + ("s"|"ne")   => dSoolane ukko ;
---      _ + ("pp"|"kk"|"tt") => 
-{------------
-      _ + ("aa" | "ee" | "ii" | "oo" | "uu" | "yy" |"ää"|"öö") => dPuu ukko ;
-      _ + ("ai" | "ei" | "oi" | "ui" | "yi" | "äi" | "öi") => dPuu ukko ;
-      _ + ("ie" | "uo" | "yö") => dSuo ukko ;
-      _ + ("ea" | "eä") => dKorkea ukko ;
-      _ + "is" => dKaunis ukko ;
-      _ + ("i" | "u") + "n" => dLiitin ukko (renka + "men") ;
-      _ + ("ton" | "tön") => dOnneton ukko ;
-      _ + "e" => dRae ukko (rake + "en") ;
-      _ + ("ut" | "yt") => dOttanut ukko ;
-      _ + ("as" | "äs") => dRae ukko (renka + last renka + "n") ;
-      _ + ("uus" | "yys" | "eus" | "eys") => dLujuus ukko ;
-      _ + "s" => dJalas ukko ; 
-
-{- heuristics for 3-syllable nouns ending a/ä
-      _ + ("a" | "e" | "i" | "o" | "u" | "y" | "ä" | "ö") + ? + 
-          _ + "i" + ? + a@("a" | "ä") =>  
-          dSilakka ukko (ukko + "n") (ukk + o + "it" + a) ;
-      _ + ("a" | "e" | "i" | "o" | "u" | "y" | "ä" | "ö") + ? + _ + 
-          ("a" | "e" | "o" | "u" | "y" | "ä" | "ö") + 
-          ("l" | "r" | "n") + a@("a" | "ä") =>  
-          dSilakka ukko (ukko + "n") (ukk + o + "it" + a) ;
-      _ + ("a" | "e" | "i" | "o" | "u" | "y" | "ä" | "ö") + ? + _ + 
-          ("a" | "e" | "i" | "o" | "u" | "y" | "ä" | "ö") + 
-          ("n" | "k" | "s") + "k" + a@("a" | "ä") =>  
-          dSilakka ukko (uko + "n") (init uko + o + "it" + a) ;
-      _ + ("a" | "e" | "i" | "o" | "u" | "y" | "ä" | "ö") + ? + _ + 
-          ("a" | "e" | "i" | "o" | "u" | "y" | "ä" | "ö") + 
-          ("n" | "t" | "s") + "t" + a@("a" | "ä") =>  
-          dSilakka ukko (uko + "n") (ukk + o + "j" + a) ;
-      _ + ("a" | "e" | "i" | "o" | "u") + ? + _ + 
-          ("a" | "e" | "o" | "u") + ? + "a" =>  
-          dSilakka ukko (ukko + "n") (ukk + "ia") ;
--}
-      _ + "i" +o@("o"|"ö") => dSilakka ukko (ukko+"n") (ukko+"it"+getHarmony o);
-      _ + "i" + "a" => dSilakka ukko (ukko + "n") (ukk + "oita") ;
-      _ + "i" + "ä" => dSilakka ukko (ukko + "n") (ukk + "öitä") ;
-      _ + ("a" | "o" | "u" | "y" | "ä" | "ö") => dUkko ukko ukon ;
-      _ + "i" => dPaatti ukko ukon ;
-      _ + ("ar" | "är") => dPiennar ukko (renka + "ren") ;
-      _ + "e" + ("l" | "n") => dPiennar ukko (ukko + "en") ;
-----------------} 
-
       _ => dSeminar ukko
     } ;   
 
 
-    nForms2 : (_,_ : Str) -> NForms = \ukko,ukkoja -> 
+  nForms2 : (_,_ : Str) -> NForms = \ukko,ukkoja -> 
       dNaine ukko  ;
 
-{-------------------
-      let
-        ukot = nForms1 ukko ; 
-        ukon = weakGrade ukko + "n" ;
-      in
-      case <ukko,ukkoja> of {
-        <_, _ + ":" + ? + ("a" | "ä")> => dSDP ukko ;
-        <_ + "ea", _ + "oita"> => 
-          dSilakka ukko ukon ukkoja ;  -- idea, but not korkea
-        <_ + ("aa" | "ee" | "ii" | "oo" | "uu" | "yy" | "ää" | "öö" | 
-              "ie" | "uo" | "yö" | "ea" | "eä" | 
-              "ia" | "iä" | "io" | "iö"), _ + ("a" | "ä")> => 
-          nForms1 ukko ; --- to protect --- how to get "dioja"?
-        <_ + ("a" | "ä" | "o" | "ö"), _ + ("a" | "ä")> => 
-          dSilakka ukko ukon ukkoja ;
-        <arp + "i", _ + "i" + ("a" | "ä")> =>
-          dArpi ukko (init (weakGrade ukko) + "en") ;
-        <_ + "i", _ + ("eita" | "eitä")> => 
-          dTohtori ukko ;
-        <_ + ("ut" | "yt"),_ + ("uita" | "yitä")>  => dRae ukko (init ukko + "en") ;
-        <_ + "e", nuk + ("eja" | "ejä")> => 
-          dNukke ukko ukon ;
-        <_ + ("l" | "n" | "r" | "s"), _ + ("eja" | "ejä")> => dSeminar ukko ;
-        <_, _ + ("a" | "ä")> => ukot ;
-        _ => 
-          Predef.error 
-           (["last argument should end in a/ä, not"] ++ ukkoja)
--}
-
-       
-    nForms3 : (_,_,_ : Str) -> NForms = \ukko,ukon,ukkoja -> 
+  nForms3 : (_,_,_ : Str) -> NForms = \ukko,ukon,ukkoja -> 
       dOun ukko ;
 
-{-
-      let
-        ukk = init ukko ;
-        ukot = nForms2 ukko ukkoja ;
-      in
-      case <ukko,ukon> of {
-        <_, _ + ":n"> => dSDP ukko ;
-        <_ + ("aa" | "ee" | "ii" | "oo" | "uu" | "yy" | "ää" | "öö" | 
-              "ie" | "uo" | "yö" | "ea" | "eä" | 
-              "ia" | "iä" | "io" | "iö" | "ja" | "jä"), _ + "n"> => 
-           ukot ; --- to protect
-        <_ + ("a" | "o" | "u" | "y" | "ä" | "ö"), _ + "n"> => 
-          dSilakka ukko ukon ukkoja ;  -- auto,auton
-        <_ + "mpi", _ + ("emman" | "emmän")> => dSuurempi ukko ;
-        <_ + "in", _ + ("imman" | "immän")> => dSuurin ukko ;
-        <terv + "e", terv + "een"> => 
-          dRae ukko ukon ;
-        <taiv + ("as" | "äs"), taiv + ("aan" | "ään")> => 
-          dRae ukko ukon ;
-        <nukk + "e", nuk + "een"> => dRae ukko ukon ;
-        <arp + "i", arv + "en"> => dArpi ukko ukon ;
-        <_ + ("us" | "ys"), _ + "den"> => dLujuus ukko ;
-        <_, _ + "n"> => ukot ;
-        _ => 
-          Predef.error (["second argument should end in n, not"] ++ ukon)
-       } ;
--------------------}
-
-    nForms4 : (_,_,_,_ : Str) -> NForms = \paat,paadi,paati,paate -> 
+  nForms4 : (_,_,_,_ : Str) -> NForms = \paat,paadi,paati,paate -> 
     case <paat,paadi,paati,paate> of {
       <_ + "ne", _+ "se", _+"st", _ + "si"> => dNaine paat ;
       <_ + "ne", _+ "se", _+"st", _ + "seid"> => dSoolane paat ;
@@ -452,25 +350,6 @@ oper
       _  => dTuli paat paadi 
       } ;
 
-
-{--------------------------------------
-    nForms4 : (_,_,_,_ : Str) -> NForms = \ukko,ukon,ukkoja,ukkoa -> 
-      let
-        ukot = nForms3 ukko ukon ukkoja ;
-      in
-      case <ukko,ukon,ukkoja,ukkoa> of {
-        <_,_ + "n", _ + ("a" | "ä"), _ + ("a" | "ä")> => 
-          table {
-            2 => ukkoa ;
-            n => ukot ! n
-          } ;
-        _ => 
-          Predef.error 
-            (["last arguments should end in n, a/ä, and a/ä, not"] ++ 
-            ukon ++ ukkoja ++ ukkoa)
-      } ;
-
------------------------------------------}
 
   mkN2 = overload {
     mkN2 : N -> N2 = \n -> mmkN2 n (casePrep genitive) ;
