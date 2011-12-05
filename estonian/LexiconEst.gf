@@ -151,7 +151,7 @@ lin
     (mkA (mkN "todennäköinen") "tonennäköisempi" "todennäköisin") ; ---- sta
   queen_N = mkN "kuningatar" ;
   radio_N = mk2N "radio" "radioita" ;
-  rain_V0 = mkV0 (mk2V "sataa" "satoi") ;
+  rain_V0 = mkV0 (mk2V "sadada" "satoi") ;
   read_V2 = mkV2 (mkV "lukea") ;
   red_A = mkA "punane" ;
   religion_N = mkN "uskonto" ;
@@ -190,7 +190,7 @@ lin
   stove_N = mk3N "liesi" "lieden" "liesiä" ;
   student_N = mk2N "opiskelija" "opiskelijoita" ;
   stupid_A = mkA "tyhmä" ;
-  sun_N = mkN "aurinko" ;
+  sun_N = mkN "päike" ;
   switch8off_V2 = mkV2 (mkV "sammuttaa") ; ---
   switch8on_V2 = mkV2 (mkV "sytyttää") ; ---
   table_N = mkN "pöytä" ;
@@ -298,7 +298,7 @@ lin
   night_N = mkN "yö" ;
   nose_N = mkN "nenä" ;
   person_N = mkN "inimene" ;
-  rain_N = mkN "sade" ;
+  rain_N = mkN "vihm" ;
   road_N = mkN "tie" ;
   root_N = mk2N "juuri" "juuria" ;
   rope_N = mk3N "köysi" "köyden" "köysiä" ;
@@ -314,7 +314,7 @@ lin
   tongue_N = mk2N "kieli" "kieliä" ;
   tooth_N = mkN "hammas" ;
   wife_N = mkN "vaimo" ;
-  wind_N = mk2N "tuuli" "tuulia" ;
+  wind_N = mkN "tuul" ;
   wing_N = mk2N "siipi" "siipiä" ;
   worm_N = mkN "mato" ;
   year_N = mkN "aasta" ;

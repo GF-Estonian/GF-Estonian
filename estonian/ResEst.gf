@@ -9,7 +9,7 @@
 
 resource ResEst = ParamX ** open Prelude in {
 
-  flags optimize=all ;
+  flags optimize=all ; coding=utf8;
 
 
 --2 Parameters for $Noun$
@@ -200,7 +200,6 @@ oper
   predV : (Verb ** {sc : NPForm ; qp : Bool}) -> VP = \verb -> {
     s = \\vi,ant,b,agr0 => 
       let
-
         agr = verbAgr agr0 ;
         verbs = verb.s ;
         part  : Str = case vi of {
@@ -208,45 +207,35 @@ oper
           _      => verbs ! PastPartAct (AN (NCase agr.n Nom))
           } ; 
 
-        eiv : Str = case agr of {
-          _ => "ei"
-{-          {n = Sg ; p = P1} => "en" ;
-          {n = Sg ; p = P2} => "et" ;
-          {n = Sg ; p = P3} => "ei" ;
-          {n = Pl ; p = P1} => "emme" ;
-          {n = Pl ; p = P2} => "ette" ;
-          {n = Pl ; p = P3} => "eivät"
--}
-          } ;
+  eiv : Str = case agr of {
+    _ => "ei"
+  } ;
 
-        einegole : Str * Str * Str = case <vi,agr.n> of {
-          <VIFin Pres,_>  => <eiv, verbs ! Imper Sg,     "ole"> ;
-          <VIFin Fut,_>  => <eiv, verbs ! Imper Sg,     "ole"> ;   --# notpresent
-          <VIFin Cond,        _>  => <eiv, verbs ! Condit Sg P3, "olisi"> ;  --# notpresent
-          <VIFin Past,        Sg> => <eiv, part,                 "ollut"> ;  --# notpresent
-          <VIFin Past,        Pl> => <eiv, part,                 "olleet"> ;  --# notpresent
-          <VIImper,           Sg> => <"älä", verbs ! Imper Sg,   "ole"> ;
-          <VIImper,           Pl> => <"älkää", verbs ! ImpNegPl, "olko"> ;
-          <VIPass,            _>  => <"ei", verbs ! Pass False,  "ole"> ;
-          <VIInf i,           _>  => <"ei", verbs ! Inf i, "olla"> ----
-          } ;
+  einegole : Str * Str * Str = case <vi,agr.n> of {
+    <VIFin Pres,   _>  => <eiv, verbs ! Imper Sg,     "ole"> ;
+    <VIFin Fut,    _>  => <eiv, verbs ! Imper Sg,     "ole"> ;   --# notpresent
+    <VIFin Cond,   _>  => <eiv, verbs ! Condit Sg P3, "oleks"> ;  --# notpresent
+    <VIFin Past,   Sg> => <eiv, part,                 "olnud"> ;  --# notpresent
+    <VIFin Past,   Pl> => <eiv, part,                 "olnud"> ;  --# notpresent
+    <VIImper,      Sg> => <"ära", verbs ! Imper Sg,   "ole"> ;
+    <VIImper,      Pl> => <"ärge", verbs ! ImpNegPl,  "olge"> ;
+    <VIPass,       _>  => <"ei", verbs ! Pass False,  "ole"> ;
+    <VIInf i,      _>  => <"ei", verbs ! Inf i, "olla">
+  } ;
 
-        ei  : Str = einegole.p1 ;
-        neg : Str = einegole.p2 ;
-        ole : Str = einegole.p3 ;
+  ei  : Str = einegole.p1 ;
+  neg : Str = einegole.p2 ;
+  ole : Str = einegole.p3 ;
 
-        olla : VForm => Str = verbOlla.s ;
+  olla : VForm => Str = verbOlla.s ;
 
-        vf : Str -> Str -> {fin, inf : Str} = \x,y -> 
-          {fin = x ; inf = y} ;
-        mkvf : VForm -> {fin, inf : Str} = \p -> case <ant,b> of {
-          <Simul,Pos> => vf (verbs ! p) [] ;
-          <Anter,Pos> => vf (olla ! p)  part ;    --# notpresent
-          <Anter,Neg> => vf ei          (ole ++ part) ;   --# notpresent
-          <Simul,Neg> => vf ei          neg
-          }
-      in
-      case vi of {
+  vf : Str -> Str -> {fin, inf : Str} = \x,y -> {fin = x ; inf = y} ;
+  mkvf : VForm -> {fin, inf : Str} = \p -> case <ant,b> of {
+    <Simul,Pos> => vf (verbs ! p) [] ;
+    <Anter,Pos> => vf (olla ! p)  part ;    --# notpresent
+    <Anter,Neg> => vf ei          (ole ++ part) ;   --# notpresent
+    <Simul,Neg> => vf ei          neg
+  } in case vi of {
         VIFin Past => mkvf (Impf agr.n agr.p) ;     --# notpresent
         VIFin Cond => mkvf (Condit agr.n agr.p) ;  --# notpresent
         VIFin Fut  => mkvf (Presn agr.n agr.p) ;  --# notpresent
@@ -415,7 +404,7 @@ oper
   verbOlla : Verb = 
     let olla = mkVerb 
       "olla" "on" "olen" "on" "olge" "ollaan" 
-      "oli" "olin" "olisi" "ollut" "oltu" "ollun" ;
+      "oli" "olin" "oleks" "ollut" "oltu" "ollun" ;
     in {s = table {
       Inf Inf3Iness => "olemas" ;
       Inf Inf3Elat  => "olemast" ;
@@ -481,12 +470,12 @@ oper
       Impf Pl P1 => tuji + "me" ;  --# notpresent
       Impf Pl P2 => tuji + "te" ;  --# notpresent
       Impf Pl P3 => tuli + vat ;  --# notpresent
-      Condit Sg P1 => tulisi + "n" ;  --# notpresent
-      Condit Sg P2 => tulisi + "t" ;  --# notpresent
+      Condit Sg P1 => tulisi + "in" ;  --# notpresent
+      Condit Sg P2 => tulisi + "id" ;  --# notpresent
       Condit Sg P3 => tulisi ;  --# notpresent
-      Condit Pl P1 => tulisi + "mme" ;  --# notpresent
-      Condit Pl P2 => tulisi + "tte" ;  --# notpresent
-      Condit Pl P3 => tulisi + vat ;  --# notpresent
+      Condit Pl P1 => tulisi + "ime" ;  --# notpresent
+      Condit Pl P2 => tulisi + "ite" ;  --# notpresent
+      Condit Pl P3 => tulisi + "id";  --# notpresent
       Imper Sg   => tuje ;
       Imper Pl   => tulkaa ;
       ImperP3 Sg => tulko + o + "n" ;
