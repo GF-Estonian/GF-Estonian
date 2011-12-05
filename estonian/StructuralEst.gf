@@ -28,8 +28,8 @@ concrete StructuralEst of Structural = CatEst **
   but_PConj = ss "aga" ;
   by8agent_Prep = postGenPrep "toimesta" ;
   by8means_Prep = casePrep adessive ;
-  can8know_VV = mkVV (mkV "osata" "osasi") ;
-  can_VV = mkVV (mkV "voida" "voi") ;
+  can8know_VV = mkVV (mkV "osata") ;
+  can_VV = mkVV (mkV "võida") ;
   during_Prep = postGenPrep "aikana" ;
   either7or_DConj = sd2 "joko" "tai" ** {n = Sg} ;
   everybody_NP = makeNP (mkN "jokainen") Sg ;
@@ -63,7 +63,7 @@ concrete StructuralEst of Structural = CatEst **
   more_CAdv = X.mkCAdv "rohkem" "kui" ;
   most_Predet = {s = \\n,c => (nForms2N (dSuurin "useinta")).s ! NCase n (npform2case n c)} ;
   much_Det = mkDet Sg {s = \\_ => "palju"} ;
-  must_VV = mkVV (caseV genitive (mkV "täytyä")) ;
+  must_VV = mkVV (caseV genitive (mkV "pidada")) ;
   no_Utt = ss "ei" ;
   on_Prep = casePrep adessive ;
 ---  one_Quant = mkDet Sg  DEPREC
@@ -130,7 +130,7 @@ concrete StructuralEst of Structural = CatEst **
   to_Prep = casePrep illative ; --- allative
   under_Prep = postGenPrep "alla" ;
   very_AdA = ss "eriti" ;
-  want_VV = mkVV (mkV "tahtoa") ;
+  want_VV = mkVV (mkV "tahta") ;
   we_Pron = mkPronoun "meie" "meie" "meid" Pl P1 ;
   whatPl_IP = {
     s = table {NPAcc => "mitkä" ; c => mikaInt ! Pl ! npform2case Pl c} ;

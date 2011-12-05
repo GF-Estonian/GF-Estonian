@@ -36,7 +36,7 @@ lin
   brother_N2 = mkN2 (mkN "vend") ;
   brown_A = mkA (mkN "ruskea") "ruskeampi" "ruskein" ;
   butter_N = mkN "või" "või" "võid" "võisid";
-  buy_V2 = mkV2 (mkV "ostaa") ;
+  buy_V2 = mkV2 (mkV "osta") ;
   camera_N = mkN "kaamera" "kaamera" "kaamerat" "kaameraid";
   cap_N = mkN "müts" "mütsi" "mütsi" "mütse";
   car_N = mkN "auto" "auto" "autot" "autosid";
@@ -66,10 +66,10 @@ lin
   doctor_N = mk2N "tohtori" "tohtoreita" ;
   dog_N = mkN "koira" ;
   door_N = mkN "ovi" "ovia" ;
-  drink_V2 = mkV2 (mkV "juoda") (casePrep partitive) ;
+  drink_V2 = mkV2 (mkV "juua") (casePrep partitive) ;
   easy_A2V = mkA2 (mkA (mkN "helppo") "helpompi" "helpoin") 
     (casePrep allative) ;
-  eat_V2 = mkV2 (mkV "syödä") (casePrep partitive) ;
+  eat_V2 = mkV2 (mkV "süüa") (casePrep partitive) ;
   empty_A = mkA (mkN "tyhjä") "tyhjempi" "tyhjin" ;
   enemy_N = mkN "vihollinen" ;
   factory_N = mkN "tehdas" ;
@@ -144,15 +144,15 @@ lin
   pen_N = mkN "kynä" ;
   planet_N = mkN "planeetta" ;
   plastic_N = mkN "muovi" ;
-  play_V2 = mkV2 (mkV "pelata") cpartitive ; --- leikkiä, soittaa
+  play_V2 = mkV2 (mkV "mängida") cpartitive ; --- leikkiä, soittaa
   policeman_N = mkN "poliisi" ;
   priest_N = mkN "pappi" ;
   probable_AS = mkAS --- for vowel harmony
     (mkA (mkN "todennäköinen") "tonennäköisempi" "todennäköisin") ; ---- sta
   queen_N = mkN "kuningatar" ;
   radio_N = mk2N "radio" "radioita" ;
-  rain_V0 = mkV0 (mk2V "sadada" "satoi") ;
-  read_V2 = mkV2 (mkV "lukea") ;
+  rain_V0 = mkV0 (mk2V "sadada" "sadas") ;
+  read_V2 = mkV2 (mkV "lugeda") ;
   red_A = mkA "punane" ;
   religion_N = mkN "uskonto" ;
   restaurant_N = mkN "ravintola" ;
@@ -160,7 +160,7 @@ lin
   rock_N = mk2N "kallio" "kallioita" ;
   roof_N = mkN "katto" ;
   rubber_N = mkN "kumi" ;
-  run_V = mk2V "juosta" "juoksi" ;
+  run_V = mk2V "joosta" "jooksis" ;
   say_VS = mkVS (mkV "sanoa") ;
   school_N = mkN "koulu" ;
   science_N = mkN "tiede" ;
@@ -179,7 +179,7 @@ lin
   short_A = mkA (mkN "lyhyt" "lyhyitä") ;
   silver_N = mkN "hopea" ;
   sister_N = mkN "sisko" ;
-  sleep_V = mkV "nukkua" ;
+  sleep_V = mkV "magada" ;
   small_A = mkA (mk2N "pieni" "pieniä") "pienempi" "pienin" ;
   snake_N = mkN "käärme" ;
   sock_N = mkN "sukka" ;
@@ -208,8 +208,8 @@ lin
   understand_V2 = mkV2 (mkV "ymmärtää" "ymmärrän" "ymmärsi") ;
   university_N = mkN "yliopisto" ;
   village_N = mkN "kylä" ;
-  wait_V2 = mkV2 (mkV "odottaa") partitive ;
-  walk_V = mkV "kävellä" "käveli" ;
+  wait_V2 = mkV2 (mkV "oodata") partitive ;
+  walk_V = mkV "kõndida" ;
   warm_A = mkA (mkN "soe") "soojem" "kõige soojem" ;
   war_N = mkN "sota" ;
   watch_V2 = mkV2 (mkV "katsella") cpartitive ;
@@ -221,7 +221,7 @@ lin
   woman_N = mkN "naine" ;
   wonder_VQ = mkVQ (mkV "ihmetellä") ;
   wood_N = mkN "puu" ;
-  write_V2 = mkV2 (mkV "kirjoittaa") ;
+  write_V2 = mkV2 (mkV "kirjutada") ;
   yellow_A = mkA "keltainen" ;
   young_A = mkA (mkN "nuori" "nuoria") "nuorempi" "nuorin" ;
 
@@ -338,14 +338,14 @@ lin
   kill_V2 = mkV2 (mkV "tappaa") ;
   laugh_V = mkV "nauraa" "nauroi" ;
   lie_V = mkV "maata" "makasi" ;
-  play_V = mkV "pelata" ;
+  play_V = mkV "mängida" ;
   pull_V2 = mkV2 (mkV "vetää") ;
   push_V2 = mkV2 (mkV "työntää") ;
   rub_V2 = mkV2 (mkV "hieroa") cpartitive ;
   scratch_V2 = mkV2 (mkV "raapia") cpartitive ;
   sew_V = mkV "kylvää" ;
   sing_V = mkV "laulaa" ;
-  sit_V = mkV "istua" ;
+  sit_V = mkV "istuda" ;
   smell_V = mk2V "haista" "haisi" ;
   spit_V = mkV "sylkeä" ;
   split_V2 = mkV2 (mk2V "halkaista" "halkaisi") ;
@@ -355,7 +355,7 @@ lin
       "seisoin" "seisoi" "seisoisi" "seissyt" "seisty" "seistyn" ; --- *seisoivät
   suck_V2 = mkV2 (mkV "imeä") cpartitive ;
   swell_V = mkV "turvota" "turposi" ;
-  swim_V = mkV "uida" "uin" "ui" ;
+  swim_V = mkV "ujuda" ;
   think_V = mkV "ajatella" "ajattelen" "ajatteli" ;
   throw_V2 = mkV2 (mkV "heittää") ;
   tie_V2 = mkV2 (mkV "sitoa") ;
