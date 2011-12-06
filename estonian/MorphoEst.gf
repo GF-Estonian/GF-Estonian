@@ -758,7 +758,8 @@ resource MorphoEst = ResEst ** open Prelude in {
     let
       saa = Predef.tk 2 saama;
       sa = Predef.tk 3 saama;
-    in vForms12
+    in vForms13
+      saama
       (saa + "da")
       (saa + "n")
       (saa + "b")
@@ -776,7 +777,8 @@ resource MorphoEst = ResEst ** open Prelude in {
   cElama : (_ : Str) -> VForms = \elama ->
     let
       ela = Predef.tk 2 elama;
-    in vForms12
+    in vForms13
+      elama
       (ela + "da")
       (ela + "n")
       (ela + "b")
@@ -796,7 +798,8 @@ resource MorphoEst = ResEst ** open Prelude in {
     let
       hyppa = Predef.tk 2 hyppama ;
       hypa = weakGrade hyppa ;
-    in vForms12
+    in vForms13
+      hyppama
       (hypa + "ta")
       (hyppa + "n")
       (hyppa + "b")
@@ -905,9 +908,97 @@ resource MorphoEst = ResEst ** open Prelude in {
       _ => "y"
       } ;
 
+    VFormsEst : Type = Predef.Ints 12 => Str ;
+
     VForms : Type = Predef.Ints 11 => Str ;
 
-    vForms12 : (x1,_,_,_,_,_,_,_,_,_,_,x12 : Str) -> VForms = 
+    vForms13 : (x1,_,_,_,_,_,_,_,_,_,_,_,x13 : Str) -> VFormsEst =
+      \olema,olla,olen,on,ovat,olkaa,ollaan,olin,oli,olisi,ollut,oltu,lienee ->
+      table {
+        0 => olema ;
+        1 => olla ;
+        2 => olen ;
+        3 => on ;
+        4 => ovat ;
+        5 => olkaa ;
+        6 => ollaan ;
+        7 => olin ;
+        8 => oli ;
+        9 => olisi ;
+       10 => ollut ;
+       11 => oltu ;
+       12 => lienee
+      } ;
+
+    vforms2VEst : VFormsEst -> Verb ** {qp : Bool} = \vh -> 
+    let
+      tulema = vh ! 0 ; 
+      tulla = vh ! 1 ; 
+      tulen = vh ! 2 ; 
+      tulee = vh ! 3 ; 
+      tulevat = vh ! 4 ;
+      tulge = vh ! 5 ; 
+      tullaan = vh ! 6 ; 
+      tulin = vh ! 7 ; 
+      tuli = vh ! 8 ;
+      tulisi = vh ! 9 ;
+      tullut = vh ! 10 ;
+      tultu = vh ! 11 ;
+      tullun = vh ! 12 ;
+      tule_ = init tulen ;
+      tuli_ = init tulin ;
+      a = last tulge ;
+      tulgu = (init tulge) + "u" ;
+      tulko = Predef.tk 2 tulge + (ifTok Str a "a" "o" "ö") ;
+      tullee = Predef.tk 2 tullut + "ee" ;
+      tulleen = (nForms2N (dOttanut tullut)).s ;
+      tullu : Str = weakGrade tultu ;
+      tullun  = (nForms2N (dUkko tultu (tullu + "n"))).s ; 
+    in
+    {s = table {
+      Inf Inf1 => tulla ;
+      Presn Sg P1 => tule_ + "n" ;
+      Presn Sg P2 => tule_ + "d" ;
+      Presn Sg P3 => tulee ;
+      Presn Pl P1 => tule_ + "me" ;
+      Presn Pl P2 => tule_ + "te" ;
+      Presn Pl P3 => tulevat ;
+      Impf Sg P1  => tuli_ + "n" ;   --# notpresent
+      Impf Sg P2  => tuli_ + "d" ;  --# notpresent
+      Impf Sg P3  => tuli ;  --# notpresent
+      Impf Pl P1  => tuli_ + "me" ;  --# notpresent
+      Impf Pl P2  => tuli_ + "te" ;  --# notpresent
+      Impf Pl P3  => tuli_ + "d" ;  --# notpresent
+      Condit Sg P1 => tulisi + "in" ;  --# notpresent
+      Condit Sg P2 => tulisi + "id" ;  --# notpresent
+      Condit Sg P3 => tulisi ;  --# notpresent
+      Condit Pl P1 => tulisi + "ime" ;  --# notpresent
+      Condit Pl P2 => tulisi + "ite" ;  --# notpresent
+      Condit Pl P3 => tulisi + "id" ;  --# notpresent
+      Imper Sg   => tule_ ; -- tule
+      Imper Pl   => tulge ; -- tulge
+      ImperP3 Sg => tulgu ; -- ta tulgu ?
+      ImperP3 Pl => tulgu ; -- nad tulgu ?
+      ImperP1Pl  => tulgu ; -- me tulgu ?
+      ImpNegPl   => tulge ; -- ärge tulge ?
+      Pass True  => tullaan ;
+      Pass False => Predef.tk 2 tullaan ;
+      PastPartAct (AN n)  => tulleen ! n ;
+      PastPartAct AAdv    => tullee + "sti" ;
+      PastPartPass (AN n) => tullun ! n ;
+      PastPartPass AAdv   => tullu + "sti" ;
+      Inf Inf3Transl => tulema + "ks" ; -- -maks (missing in Finnish)
+      Inf Inf3Iness => tulema + "s" ;
+      Inf Inf3Elat  => tulema + "st" ;
+      Inf Inf3Abess => tulema + "ta"
+      } ;
+    sc = NPCase Nom ;
+    qp = pbool2bool (Predef.eqStr (last tulko) "o") ;
+    lock_V = <>
+    } ;
+
+
+    vForms12 : (x1,_,_,_,_,_,_,_,_,_,_,x12 : Str) -> VForms =
       \olla,olen,on,ovat,olkaa,ollaan,olin,oli,olisi,ollut,oltu,lienee ->
       table {
         0 => olla ;

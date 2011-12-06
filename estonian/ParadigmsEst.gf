@@ -424,10 +424,10 @@ oper
   } ;
 
   mk1V : Str -> V = \s -> 
-    let vfs = vforms2V (vForms1 s) in 
+    let vfs = vforms2VEst (vForms1 s) in 
       vfs ** {sc = NPCase Nom ; lock_V = <>} ;
   mk2V : (_,_ : Str) -> V = \x,y -> 
-    let vfs = vforms2V (vForms2 x y) in vfs ** {sc = NPCase Nom ; lock_V = <>} ;
+    let vfs = vforms2VEst (vForms2 x y) in vfs ** {sc = NPCase Nom ; lock_V = <>} ;
   mk3V : (huutaa,huudan,huusi : Str) -> V = \x,_,y -> mk2V x y ; ----
   mk12V : (
       huutaa,huudan,huutaa,huutavat,huutakaa,huudetaan,
@@ -436,7 +436,8 @@ oper
         vforms2V (vForms12 a b c d e f g h i j k l) ** {sc = NPCase Nom ; lock_V = <>} ;
 
   -- This used to be the last case: _ => Predef.error (["expected infinitive, found"] ++ ottaa) 
-  vForms1 : Str -> VForms = \ottaa ->
+  -- regexp example: ("" | ?) + ("a" | "e" | "i") + _ + "aa" => 
+  vForms1 : Str -> VFormsEst = \ottaa ->
     let
       a = last ottaa ;
       otta = init ottaa ; 
@@ -451,33 +452,14 @@ oper
         cSaama ottaa ;
       _ + ("pp" | "mb" | "t") + "ama" =>
         cHyppama ottaa ;
-      _ + ("e" | "i" | "o" | "u" | "y" | "ö") + ("a" | "ä") =>
-        cHukkua ottaa (ota + "n") ;
-      _ + ("l" | "n" | "r") + ("taa" | "tää") => 
-        cOttaa ottaa (ota + "n") (ots + "in") (ots + "i") ;
-      ("" | ?) + ("a" | "e" | "i" | "o" | "u") + ? + _ + 
-        ("a" | "e" | "i" | "o" | "u") + _ + "aa" => 
-        cOttaa ottaa (ota + "n") (ot + "in") (ott + "i") ;
-      ("" | ?) + ("a" | "e" | "i") + _ + "aa" => 
-        cOttaa ottaa (ota + "n") (ot + "oin") (ott + "oi") ;
-      _ + ("aa" | "ää") => 
-        cOttaa ottaa (ota + "n") (ot + "in") (ott + "i") ;
-      _ + ("ella" | "ellä") => 
-        cKuunnella ottaa otin ;
-      _ + ("osta" | "östä") => 
-        cJuosta ottaa (init ott + "ksen") ;
-      _ + ("st" | "nn" | "ll" | "rr") + ("a" | "ä") => 
-        cJuosta ottaa (ott + "en") ;
-      _ + ("ita" | "itä") => 
-        cHarkita ottaa ;
-      _ + ("eta" | "etä" | "ota" | "ata" | "uta" | "ytä" | "ätä" | "ötä") => 
-        cPudota ottaa (strongGrade ott + "si") ;
       _ + ("a" | "e" | "u" | "i") + "ma" =>
         cElama ottaa ;
       _ =>
         cElama ottaa
     } ;   
 
+  --    <_ + ("taa" | "tää"), _ + ("oi" | "öi")> =>
+  --      cOttaa huutaa (huuda + "n") autoin huusi ;
   vForms2 : (_,_ : Str) -> VForms = \huutaa,huusi ->
     let
       huuda = weakGrade (init huutaa) ;
@@ -485,18 +467,6 @@ oper
       autoin = weakGrade (init huusi) + "in" ;
     in 
     case <huutaa,huusi> of {
-      <_ + ("taa" | "tää"), _ + ("oi" | "öi")> =>
-        cOttaa huutaa (huuda + "n") autoin huusi ;
-      <_ + ("aa" | "ää"), _ + "i"> =>
-        cOttaa huutaa (huuda + "n") huusin huusi ;
-      <_ + ("eta" | "etä"), _ + "eni"> =>
-        cValjeta huutaa huusi ;
-      <_ + ("sta" | "stä"), _ + "si"> =>
-        vForms1 huutaa ; -- pestä, halkaista
-      <_ + ("ta" | "tä"), _ + "si"> =>
-        cPudota huutaa huusi ;
-      <_ + ("lla" | "llä"), _ + "li"> =>
-        cKuunnella huutaa huusin ;
       _ => vForms1 huutaa
       } ;
 
