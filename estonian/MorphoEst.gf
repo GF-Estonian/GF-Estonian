@@ -753,6 +753,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       (juo + "t" + u)
       (juo + "nee") ;
 
+  -- VVS: 37 võima
   cSaada : (_ : Str) -> VForms = \saada ->
     let
       saa = Predef.tk 2 saada;
@@ -762,7 +763,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       (saa + "n")
       (saa + "b")
       (saa + "vad")
-      (saa + "gu") -- Imper Pl
+      (saa + "ge") -- Imper Pl (2nd person? 'saage')
       (saa + "an") --5?
       (sa + "in")
       (sa + "ite")
@@ -771,6 +772,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       (saa + "tu") --10?
       (saa + "nee"); -- 11?
 
+  -- VVS: 27 elama
   cElada : (_ : Str) -> VForms = \elada ->
     let
       ela = Predef.tk 2 elada;
@@ -779,7 +781,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       (ela + "n")
       (ela + "b")
       (ela + "vad")
-      (ela + "gu") -- Imper Pl
+      (ela + "ge") -- Imper Pl
       (elada + "an") --5?
       (ela + "sin")
       (ela + "site")
@@ -908,7 +910,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       tulen = vh ! 1 ; 
       tulee = vh ! 2 ; 
       tulevat = vh ! 3 ;
-      tulkaa = vh ! 4 ; 
+      tulge = vh ! 4 ; 
       tullaan = vh ! 5 ; 
       tulin = vh ! 6 ; 
       tuli = vh ! 7 ;
@@ -918,9 +920,9 @@ resource MorphoEst = ResEst ** open Prelude in {
       tullun = vh ! 11 ;
       tule_ = init tulen ;
       tuli_ = init tulin ;
-      a = last tulkaa ;
-      tulko = Predef.tk 2 tulkaa + (ifTok Str a "a" "o" "ö") ;
-      tulkoo = tulko + last tulko ;
+      a = last tulge ;
+      tulgu = (init tulge) + "u" ;
+      tulko = Predef.tk 2 tulge + (ifTok Str a "a" "o" "ö") ;
       tullee = Predef.tk 2 tullut + "ee" ;
       tulleen = (nForms2N (dOttanut tullut)).s ;
       tullu : Str = weakGrade tultu ;
@@ -947,12 +949,12 @@ resource MorphoEst = ResEst ** open Prelude in {
       Condit Pl P1 => tulisi + "ime" ;  --# notpresent
       Condit Pl P2 => tulisi + "ite" ;  --# notpresent
       Condit Pl P3 => tulisi + "id" ;  --# notpresent
-      Imper Sg   => tule_ ;
-      Imper Pl   => tulkaa ;
-      ImperP3 Sg => tulkoo + "n" ;
-      ImperP3 Pl => tulkoo + "t" ;
-      ImperP1Pl  => tulkaa + "mme" ;
-      ImpNegPl   => tulko ;
+      Imper Sg   => tule_ ; -- tule
+      Imper Pl   => tulge ; -- tulge
+      ImperP3 Sg => tulgu ; -- ta tulgu ?
+      ImperP3 Pl => tulgu ; -- nad tulgu ?
+      ImperP1Pl  => tulgu ; -- me tulgu ?
+      ImpNegPl   => tulge ; -- ärge tulge ?
       Pass True  => tullaan ;
       Pass False => Predef.tk 2 tullaan ;
       PastPartAct (AN n)  => tulleen ! n ;
