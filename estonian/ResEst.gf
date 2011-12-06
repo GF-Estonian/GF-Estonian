@@ -403,6 +403,7 @@ oper
   -- ImpfSgP3, ImpfSgP1, ConditSgP3?, ??, ??, ??
   verbOlla : Verb = 
     let olla = mkVerb 
+      "olema"
       "olla" "on" "olen" "on" "olge" "ollaan" 
       "oli" "olin" "oleks" "ollut" "oltu" "ollun" ;
     in {s = table {
@@ -425,14 +426,15 @@ oper
 --- stem has vowel harmony "ä" but the others "a", thus "seisoivat" but "seiskää".
 
 
-  mkVerb : (_,_,_,_,_,_,_,_,_,_,_,_ : Str) -> Verb = 
-    \tulla,tulee,tulen,tulevat,tulkaa,tullaan,tuli,tulin,tulisi,tullut,tultu,tullun -> 
+  mkVerb : (_,_,_,_,_,_,_,_,_,_,_,_,_ : Str) -> Verb = 
+    \tulema,tulla,tulee,tulen,tulevat,tulkaa,tullaan,tuli,tulin,tulisi,tullut,tultu,tullun -> 
     v2v (mkVerbH 
-     tulla tulee tulen tulevat tulkaa tullaan tuli tulin tulisi tullut tultu tullun
+     tulema tulla tulee tulen tulevat tulkaa tullaan tuli tulin tulisi tullut tultu tullun
       ) ;
 
   v2v : VerbH -> Verb = \vh -> 
     let
+      tulema = vh.tulema ;
       tulla = vh.tulla ; 
       tulee = vh.tulee ; 
       tulen = vh.tulen ; 
@@ -452,9 +454,7 @@ oper
       o = last tulko ;
       tulleena = Predef.tk 2 tullut + ("een" + a) ;
       tulleen = (noun2adj (nhn (sRae tullut tulleena))).s ;
-      tullun = (noun2adj (nhn (sKukko tultu tullun (tultu + ("j"+a))))).s  ;
-      tulema = Predef.tk 3 tulevat + "ma" ;
-      vat = "v" + a + "d"
+      tullun = (noun2adj (nhn (sKukko tultu tullun (tultu + ("j"+a))))).s
     in
     {s = table {
       Inf Inf1 => tulla ;
@@ -469,7 +469,7 @@ oper
       Impf Sg P3 => tuli ;  --# notpresent
       Impf Pl P1 => tuji + "me" ;  --# notpresent
       Impf Pl P2 => tuji + "te" ;  --# notpresent
-      Impf Pl P3 => tuli + vat ;  --# notpresent
+      Impf Pl P3 => tuli + "d" ;  --# notpresent
       Condit Sg P1 => tulisi + "in" ;  --# notpresent
       Condit Sg P2 => tulisi + "id" ;  --# notpresent
       Condit Sg P3 => tulisi ;  --# notpresent
@@ -494,13 +494,15 @@ oper
     } ;
 
   VerbH : Type = {
-    tulla,tulee,tulen,tulevat,tulkaa,tullaan,tuli,tulin,tulisi,tullut,tultu,tullun
+    tulema,tulla,tulee,tulen,tulevat,tulkaa,tullaan,tuli,tulin,tulisi,tullut,tultu,tullun
       : Str
     } ;
 
-  mkVerbH : (_,_,_,_,_,_,_,_,_,_,_,_ : Str) -> VerbH = 
-    \tulla,tulee,tulen,tulevat,tulkaa,tullaan,tuli,tulin,tulisi,tullut,tultu,tullun -> 
-    {tulla = tulla ; 
+  mkVerbH : (_,_,_,_,_,_,_,_,_,_,_,_,_ : Str) -> VerbH = 
+    \tulema,tulla,tulee,tulen,tulevat,tulkaa,tullaan,tuli,tulin,tulisi,tullut,tultu,tullun -> 
+    {
+     tulema = tulema ;
+     tulla = tulla ; 
      tulee = tulee ; 
      tulen = tulen ; 
      tulevat = tulevat ;

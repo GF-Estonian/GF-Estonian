@@ -2,7 +2,7 @@
 
 --1 Estonian Lexical Paradigms
 --
--- Aarne Ranta 2003--2008
+-- Based on the Finnish Lexical Paradigms by Aarne Ranta 2003--2008
 --
 -- This is an API to the user of the resource grammar 
 -- for adding lexical items. It gives functions for forming
@@ -448,6 +448,8 @@ oper
       ot   = init ota ;
     in
     case ottaa of {
+      _ + "sma" =>
+        cSeisma ottaa ;
       _ + "aama" =>
         cSaama ottaa ;
       _ + ("pp" | "mb" | "t") + "ama" =>

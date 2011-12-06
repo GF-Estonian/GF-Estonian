@@ -792,6 +792,29 @@ resource MorphoEst = ResEst ** open Prelude in {
       (ela + "tu") --10?
       (ela + "nee"); -- 11?
 
+  -- VVS: 32 seisma
+  -- EKSS 44: tõusma, maksma, jooksma
+  cSeisma : (_ : Str) -> VForms = \seisma ->
+    let
+      seis = Predef.tk 2 seisma;
+      -- oo -> e
+      -- õu -> e
+      a = "a";
+    in vForms13
+      seisma
+      (seis + "ta")
+      (seis + a + "n")
+      (seis + a + "b")
+      (seis + a + "vad")
+      (seis + "ke") -- Imper Pl
+      (seis + a + "n") --5?
+      (seis + "in")
+      (seis + "ite")
+      (seis + a + "ks") -- Condit Sg P3
+      (seis + "nud") --9?
+      (seis + "tu") --10?
+      (seis + "nee"); -- 11?
+
   -- VVS: 29 hüppama
   -- EKSS 48: tõmbama, ootama
   cHyppama : (_ : Str) -> VForms = \hyppama ->
@@ -1101,8 +1124,8 @@ resource MorphoEst = ResEst ** open Prelude in {
         "pp" + _ => ku + "p"  + o  ;
         "tt" + _ => ku + "t"  + o  ;
         "nk" + _ => ku + "ng" + o  ;
-        "nt" + _ => ku + "nn" + o  ;
-        "mp" + _ => ku + "mm" + o  ;
+        "nt" + _ => ku + "nd" + o  ;
+        "mb" + _ => ku + "mm" + o  ;
         "rt" + _ => ku + "rr" + o  ;
         "lt" + _ => ku + "ll" + o  ;
         "lk" + ("i" | "e") => ku + "lj" + o ;
