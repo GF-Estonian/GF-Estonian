@@ -447,8 +447,10 @@ oper
       ot   = init ota ;
     in
     case ottaa of {
-      _ + "aada" =>
-        cSaada ottaa ;
+      _ + "aama" =>
+        cSaama ottaa ;
+      _ + ("pp" | "mb" | "t") + "ama" =>
+        cHyppama ottaa ;
       _ + ("e" | "i" | "o" | "u" | "y" | "ö") + ("a" | "ä") =>
         cHukkua ottaa (ota + "n") ;
       _ + ("l" | "n" | "r") + ("taa" | "tää") => 
@@ -470,10 +472,10 @@ oper
         cHarkita ottaa ;
       _ + ("eta" | "etä" | "ota" | "ata" | "uta" | "ytä" | "ätä" | "ötä") => 
         cPudota ottaa (strongGrade ott + "si") ;
-      _ + ("da" | "dä") => 
-        cElada ottaa ;
+      _ + ("a" | "e" | "u" | "i") + "ma" =>
+        cElama ottaa ;
       _ =>
-        cElada ottaa
+        cElama ottaa
     } ;   
 
   vForms2 : (_,_ : Str) -> VForms = \huutaa,huusi ->

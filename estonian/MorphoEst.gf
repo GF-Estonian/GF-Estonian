@@ -754,12 +754,12 @@ resource MorphoEst = ResEst ** open Prelude in {
       (juo + "nee") ;
 
   -- VVS: 37 võima
-  cSaada : (_ : Str) -> VForms = \saada ->
+  cSaama : (_ : Str) -> VForms = \saama ->
     let
-      saa = Predef.tk 2 saada;
-      sa = Predef.tk 3 saada;
+      saa = Predef.tk 2 saama;
+      sa = Predef.tk 3 saama;
     in vForms12
-      saada
+      (saa + "da")
       (saa + "n")
       (saa + "b")
       (saa + "vad")
@@ -773,22 +773,42 @@ resource MorphoEst = ResEst ** open Prelude in {
       (saa + "nee"); -- 11?
 
   -- VVS: 27 elama
-  cElada : (_ : Str) -> VForms = \elada ->
+  cElama : (_ : Str) -> VForms = \elama ->
     let
-      ela = Predef.tk 2 elada;
+      ela = Predef.tk 2 elama;
     in vForms12
-      elada
+      (ela + "da")
       (ela + "n")
       (ela + "b")
       (ela + "vad")
       (ela + "ge") -- Imper Pl
-      (elada + "an") --5?
+      (elama + "an") --5?
       (ela + "sin")
       (ela + "site")
       (ela + "ks") -- Condit Sg P3
       (ela + "nud") --9?
       (ela + "tu") --10?
       (ela + "nee"); -- 11?
+
+  -- VVS: 29 hüppama
+  -- EKSS 48: tõmbama, ootama
+  cHyppama : (_ : Str) -> VForms = \hyppama ->
+    let
+      hyppa = Predef.tk 2 hyppama ;
+      hypa = weakGrade hyppa ;
+    in vForms12
+      (hypa + "ta")
+      (hyppa + "n")
+      (hyppa + "b")
+      (hyppa + "vad")
+      (hypa + "ke") -- Imper Pl
+      (hyppa + "an") --5?
+      (hyppa+ "sin")
+      (hyppa + "site")
+      (hyppa + "ks") -- Condit Sg P3
+      (hypa + "nud") --9?
+      (hypa + "tu") --10?
+      (hyppa + "nee"); -- 11?
 
   cPudota : (_,_ : Str) -> VForms = \pudota,putosi -> 
     let
