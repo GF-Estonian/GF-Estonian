@@ -836,6 +836,27 @@ resource MorphoEst = ResEst ** open Prelude in {
       (hypa + "tu") --10?
       (hyppa + "nee"); -- 11?
 
+  -- VVS: 37 võima
+  -- EKSS 42: õppima, kõndima, sadama
+  cVqima : (_ : Str) -> VForms = \vqima ->
+    let
+      vqi = Predef.tk 2 vqima ;
+      vqi_weak = weakGrade vqi ;
+    in vForms13
+      vqima
+      (vqi + "da")
+      (vqi_weak + "n")
+      (vqi_weak + "b")
+      (vqi_weak + "vad")
+      (vqi + "ge") -- Imper Pl
+      (vqi + "an") --5?
+      (vqi + "sin")
+      (vqi + "site")
+      (vqi_weak + "ks") -- Condit Sg P3
+      (vqi + "nud") --9?
+      (vqi_weak + "tu") --10?
+      (vqi + "nee"); -- 11?
+
   cPudota : (_,_ : Str) -> VForms = \pudota,putosi -> 
     let
       a      = last pudota ;
@@ -1125,6 +1146,8 @@ resource MorphoEst = ResEst ** open Prelude in {
         "tt" + _ => ku + "t"  + o  ;
         "nk" + _ => ku + "ng" + o  ;
         "nt" + _ => ku + "nd" + o  ;
+        "nd" + _ => ku + "nn" + o  ;
+        "ad" + _ => ku + "aj" + o  ; -- TODO: maybe any vowel, not just 'a'
         "mb" + _ => ku + "mm" + o  ;
         "rt" + _ => ku + "rr" + o  ;
         "lt" + _ => ku + "ll" + o  ;

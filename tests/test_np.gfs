@@ -99,6 +99,7 @@ cc -table mkN "keel" "keele" "keelt" "keeli"
 cc -table mkA "soolane"
 
 cc -table mkV "elama"
+cc -table mkV "kirjutama"
 
 -- 29/48
 cc -table mkV "hüppama"
@@ -107,6 +108,11 @@ cc -table mkV "ootama"
 cc -table mkV "maksma"
 --cc -table mkV "jooksma"
 --cc -table mkV "tõusma"
+
+-- 37
+cc -table mkV "kõndima"
+cc -table mkV "sadama"
+
 
 cc -table mk12V "minna" "lähen" "läheb" "lähevad" "mingu" "TODO" "läksin" "läks" "läheks" "läinud" "TODO" "TODO"
 --cc -table mkV "leppima"
