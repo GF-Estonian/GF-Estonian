@@ -753,27 +753,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       (juo + "t" + u)
       (juo + "nee") ;
 
-  -- VVS: 37 võima
-  cSaama : (_ : Str) -> VForms = \saama ->
-    let
-      saa = Predef.tk 2 saama;
-      sa = Predef.tk 3 saama;
-    in vForms13
-      saama
-      (saa + "da")
-      (saa + "n")
-      (saa + "b")
-      (saa + "vad")
-      (saa + "ge") -- Imper Pl (2nd person? 'saage')
-      (saa + "an") --5?
-      (sa + "in")
-      (sa + "ite")
-      (saa + "ks") -- Condit Sg P3
-      (saa + "nud") --9?
-      (saa + "tu") --10?
-      (saa + "nee"); -- 11?
-
-  -- VVS: 27 elama
+  -- VVS 27 elama
   cElama : (_ : Str) -> VForms = \elama ->
     let
       ela = Predef.tk 2 elama;
@@ -792,7 +772,56 @@ resource MorphoEst = ResEst ** open Prelude in {
       (ela + "tu") --10?
       (ela + "nee"); -- 11?
 
-  -- VVS: 32 seisma
+  -- VVS 28 leppima (lugema, rääkima)
+  cLeppima : (_ : Str) -> VForms = \leppima ->
+    let
+      leppi = Predef.tk 2 leppima ;
+      lepi = weakGrade leppi ;
+    in vForms13
+      leppima
+      (leppi + "da")
+      (lepi + "n")
+      (lepi + "b")
+      (lepi + "vad")
+      (leppi + "ge") -- Imper Pl
+      (leppi + "an") --5?
+      (leppi + "sin")
+      (leppi + "site")
+      (lepi + "ks") -- Condit Sg P3
+      (leppi + "nud") --9?
+      (lepi + "tu") --10?
+      (leppi + "nee"); -- 11?
+
+  -- VVS 28~27 tekkima (leppima~elama)
+
+  -- VVS 29 hüppama
+  -- EKSS 48: tõmbama, ootama
+  cHyppama : (_ : Str) -> VForms = \hyppama ->
+    let
+      hyppa = Predef.tk 2 hyppama ;
+      hypa = weakGrade hyppa ;
+    in vForms13
+      hyppama
+      (hypa + "ta")
+      (hyppa + "n")
+      (hyppa + "b")
+      (hyppa + "vad")
+      (hypa + "ke") -- Imper Pl
+      (hyppa + "an") --5?
+      (hyppa+ "sin")
+      (hyppa + "site")
+      (hyppa + "ks") -- Condit Sg P3
+      (hypa + "nud") --9?
+      (hypa + "tu") --10?
+      (hyppa + "nee"); -- 11?
+
+  -- VVS 29~27 laastama (hüppama~elama)
+
+  -- VVS 30 riidlema
+
+  -- VVS 31~27 kõnelema (rabelema~elama)
+
+  -- VVS 32 seisma
   -- EKSS 44: tõusma, maksma, jooksma
   cSeisma : (_ : Str) -> VForms = \seisma ->
     let
@@ -815,29 +844,14 @@ resource MorphoEst = ResEst ** open Prelude in {
       (seis + "tu") --10?
       (seis + "nee"); -- 11?
 
-  -- VVS: 29 hüppama
-  -- EKSS 48: tõmbama, ootama
-  cHyppama : (_ : Str) -> VForms = \hyppama ->
-    let
-      hyppa = Predef.tk 2 hyppama ;
-      hypa = weakGrade hyppa ;
-    in vForms13
-      hyppama
-      (hypa + "ta")
-      (hyppa + "n")
-      (hyppa + "b")
-      (hyppa + "vad")
-      (hypa + "ke") -- Imper Pl
-      (hyppa + "an") --5?
-      (hyppa+ "sin")
-      (hyppa + "site")
-      (hyppa + "ks") -- Condit Sg P3
-      (hypa + "nud") --9?
-      (hypa + "tu") --10?
-      (hyppa + "nee"); -- 11?
+  -- VVS 33 naerma
+  -- VVS 34 saatma
+  -- VVS 35 nutma
+  -- VVS 36 tulema
+  -- VVS 36&27 tulema&elama
 
-  -- VVS: 37 võima
-  -- EKSS 42: õppima, kõndima, sadama
+  -- VVS 37 võima
+  -- EKSS 42: õppima, kõndima, sadama, lugema
   cVqima : (_ : Str) -> VForms = \vqima ->
     let
       vqi = Predef.tk 2 vqima ;
@@ -856,6 +870,29 @@ resource MorphoEst = ResEst ** open Prelude in {
       (vqi + "nud") --9?
       (vqi_weak + "tu") --10?
       (vqi + "nee"); -- 11?
+
+  -- VVS: 38 sööma
+
+  -- VVS: 37 võima
+  -- TODO: remove
+  cSaama : (_ : Str) -> VForms = \saama ->
+    let
+      saa = Predef.tk 2 saama;
+      sa = Predef.tk 3 saama;
+    in vForms13
+      saama
+      (saa + "da")
+      (saa + "n")
+      (saa + "b")
+      (saa + "vad")
+      (saa + "ge") -- Imper Pl (2nd person? 'saage')
+      (saa + "an") --5?
+      (sa + "in")
+      (sa + "ite")
+      (saa + "ks") -- Condit Sg P3
+      (saa + "nud") --9?
+      (saa + "tu") --10?
+      (saa + "nee"); -- 11?
 
   cPudota : (_,_ : Str) -> VForms = \pudota,putosi -> 
     let
@@ -1141,26 +1178,26 @@ resource MorphoEst = ResEst ** open Prelude in {
       o   = last kukko
     in
       case kko of {
-        "kk" + _ => ku + "k"  + o  ;
-        "pp" + _ => ku + "p"  + o  ;
-        "tt" + _ => ku + "t"  + o  ;
-        "nk" + _ => ku + "ng" + o  ;
-        "nt" + _ => ku + "nd" + o  ;
-        "nd" + _ => ku + "nn" + o  ;
-        "ad" + _ => ku + "aj" + o  ; -- TODO: maybe any vowel, not just 'a'
-        "mb" + _ => ku + "mm" + o  ;
-        "rt" + _ => ku + "rr" + o  ;
-        "lt" + _ => ku + "ll" + o  ;
+        "kk" + _ => ku + "k"  + o ;
+        "pp" + _ => ku + "p"  + o ;
+        "tt" + _ => ku + "t"  + o ;
+        "nk" + _ => ku + "ng" + o ;
+        "nt" + _ => ku + "nd" + o ;
+        "nd" + _ => ku + "nn" + o ;
+        "ad" + _ => ku + "aj" + o ; -- TODO: maybe any vowel, not just 'a'
+        "mb" + _ => ku + "mm" + o ;
+        "ug" + _ => ku + "o" + o ;  -- luge -> loe
+        "rt" + _ => ku + "rr" + o ;
+        "lt" + _ => ku + "ll" + o ;
         "lk" + ("i" | "e") => ku + "lj" + o ;
         "rk" + ("i" | "e") => ku + "rj" + o ;
-        "lk" + _ => ku + "l" + o  ;
-        "rk" + _ => ku + "r" + o  ;
+        "lk" + _ => ku + "l" + o ;
+        "rk" + _ => ku + "r" + o ;
         ("hk" | "tk") + _ => kukko ;           -- *tahko-tahon, *pitkä-pitkän
         "s" + ("k" | "p" | "t") + _ => kukko ; -- *lasku-lasvun, *raspi-rasvin, *lastu-lasdun
-        x + "ku" => ku + x + "vu" ;
-        x + "k" + ("a" | "e" | "i" | "o" | "u" | "y" | "ä" | "ö") => ku + x      + o ; 
-        x + "p" + ("a" | "e" | "i" | "o" | "u" | "y" | "ä" | "ö") => ku + x + "v" + o ; 
-        x + "t" + ("a" | "e" | "i" | "o" | "u" | "y" | "ä" | "ö") => ku + x + "d" + o ; 
+        x + "k" + ("a" | "e" | "i" | "o" | "u") => ku + x + "g" + o ;
+        x + "p" + ("a" | "e" | "i" | "o" | "u") => ku + x + "b" + o ;
+        x + "t" + ("a" | "e" | "i" | "o" | "u") => ku + x + "d" + o ; -- oota -> ooda
         _ => kukko
         } ;
 

@@ -448,6 +448,10 @@ oper
       ot   = init ota ;
     in
     case ottaa of {
+      _ + "ima" =>
+        cLeppima ottaa ;
+      _ + "ugema" =>
+        cLeppima ottaa ;
       _ + "ndima" =>
         cVqima ottaa ;
       _ + "adama" =>

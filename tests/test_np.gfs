@@ -98,8 +98,14 @@ cc -table mkN "keel" "keele" "keelt" "keeli"
 
 cc -table mkA "soolane"
 
+-- 27
 cc -table mkV "elama"
 cc -table mkV "kirjutama"
+
+-- 28
+cc -table mkV "leppima"
+cc -table mkV "lugema"
+cc -table mkV "rääkima"
 
 -- 29/48
 cc -table mkV "hüppama"
