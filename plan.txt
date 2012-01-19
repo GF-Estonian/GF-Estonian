@@ -1,8 +1,0 @@
-First changes:
-- lexicon from Fin to Est
-- Paradigms in MorphoFin to Estonian paradigms. We should find out whether 10 forms is 
-the worst-case scenario in Estonian too.
-- MorphoEst implements the paradigms, assuming that 10 forms are given. ParadigmsEst does 
-the magic from 1-4 forms to 10 forms.
-- Syntax
-- ???
