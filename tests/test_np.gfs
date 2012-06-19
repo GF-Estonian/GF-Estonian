@@ -95,29 +95,42 @@ cc -table verbOlla
 import -retain ../estonian/ParadigmsEst.gf
 
 cc -table mkN "keel" "keele" "keelt" "keeli"
+--cc -table mkN "kaks" "kahe" "kahte" "kahti"
+--cc -table mkN "kolm" "kolme" "kolme" "kolmi"
 
 cc -table mkA "soolane"
 
 -- 27
-cc -table mkV "elama"
-cc -table mkV "kirjutama"
+--cc -table mkV "elama"
+cc -table regVerb "elama" "elada" "elab" "elatakse"
+
+--cc -table mkV "kirjutama"
+cc -table regVerb "kirjutama" "kirjutada" "kirjutab" "kirjutatakse"
 
 -- 28
-cc -table mkV "leppima"
+--cc -table mkV "leppima"
+cc -table regVerb "leppima" "leppida" "lepib" "lepitakse"
+
 cc -table mkV "lugema"
-cc -table mkV "rääkima"
+
+--cc -table mkV "rääkima"
+cc -table regVerb "rääkima" "rääkida" "räägib" "räägitakse"
 
 -- 29/48
-cc -table mkV "hüppama"
+-- TODO: generate "hypage"
+--cc -table mkV "hüppama"
+cc -table regVerb "hüppama" "hüpata" "hüppab" "hüpatakse"
 cc -table mkV "tõmbama"
 cc -table mkV "ootama"
 cc -table mkV "maksma"
---cc -table mkV "jooksma"
+--cc -table regVerb "jooksma" "joosta" "jookseb" "joostakse"
 --cc -table mkV "tõusma"
 
 -- 37
 cc -table mkV "kõndima"
-cc -table mkV "sadama"
+
+--cc -table mkV "sadama"
+cc -table regVerb "sadama" "sadada" "sajab" "sajatakse"
 
 
 cc -table mk12V "minna" "lähen" "läheb" "lähevad" "mingu" "TODO" "läksin" "läks" "läheks" "läinud" "TODO" "TODO"
@@ -125,3 +138,6 @@ cc -table mk12V "minna" "lähen" "läheb" "lähevad" "mingu" "TODO" "läksin" "l
 cc -table mkV "saama"
 
 -- cc -table mkV2 "tahtma"
+
+-- Regular verbs, guessed from 4 base forms
+cc -table regVerb "kinkima" "kinkida" "kingib" "kingitakse"

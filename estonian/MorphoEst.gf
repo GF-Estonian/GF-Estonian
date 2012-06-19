@@ -981,6 +981,9 @@ resource MorphoEst = ResEst ** open Prelude in {
       (kuunnel + "t" + u)
       (kuunnel + l + "ee") ;
 
+  regVerb : (_,_,_,_ : Str) -> Verb ** {qp : Bool} = \kinkima,kinkida,kingib,kingitakse ->
+    mk_forms4_to_verb (vForms4 kinkima kinkida kingib kingitakse) ;
+
 -- auxiliaries
 
     -- TODO: does not exist in Estonian
@@ -990,6 +993,8 @@ resource MorphoEst = ResEst ** open Prelude in {
       } ;
 
     VFormsEst : Type = Predef.Ints 12 => Str ;
+
+    VForms4 : Type = Predef.Ints 3 => Str ;
 
     VForms : Type = Predef.Ints 11 => Str ;
 
@@ -1078,6 +1083,74 @@ resource MorphoEst = ResEst ** open Prelude in {
     lock_V = <>
     } ;
 
+    vForms4 : (_,_,_,_ : Str) -> VForms4 =
+      \kinkima,kinkida,kingib,kingitakse ->
+      table {
+        0 => kinkima ;
+        1 => kinkida ;
+        2 => kingib ;
+        3 => kingitakse
+      } ;
+
+    -- (Experimental) Full paradigm from 4 base forms.
+    -- Analoogiaseosed pöördsõna paradigmas
+    -- http://www.eki.ee/books/ekk09/index.php?p=3&p1=5&id=227
+    -- TODO: ma: kinkivat, kinkiv
+    -- TODO: da: des,
+    mk_forms4_to_verb : VForms4 -> Verb ** {qp : Bool} = \vh ->
+    let
+      vestlema = vh ! 0 ;
+      vestelda = vh ! 1 ;
+      kingib = vh ! 2 ;
+      kingitakse = vh ! 3 ;
+      vestle_ = Predef.tk 2 vestlema ;
+      vestel_ = Predef.tk 2 vestelda ;
+      kingi_ = init kingib ;
+      kingi2_ = Predef.tk 4 kingitakse ;
+      kinkinud = (nForms2N (dOttanut (vestel_ + "nud"))).s ;
+      kingitud = (nForms2N (dOttanut (kingi2_ + "tud"))).s ;  -- or 'dud'
+    in
+    {s = table {
+      Inf Inf1 => vestelda ;
+      Presn Sg P1 => kingi_ + "n" ;
+      Presn Sg P2 => kingi_ + "d" ;
+      Presn Sg P3 => kingib ;
+      Presn Pl P1 => kingi_ + "me" ;
+      Presn Pl P2 => kingi_ + "te" ;
+      Presn Pl P3 => kingi_ + "vad" ;
+      Impf Sg P1  => vestle_ + "sin" ;   --# notpresent
+      Impf Sg P2  => vestle_ + "sid" ;  --# notpresent
+      Impf Sg P3  => vestle_ + "s" ;  --# notpresent
+      Impf Pl P1  => vestle_ + "sime" ;  --# notpresent
+      Impf Pl P2  => vestle_ + "site" ;  --# notpresent
+      Impf Pl P3  => vestle_ + "sid" ;  --# notpresent
+      Condit Sg P1 => kingi_ + "ksin" ;  --# notpresent
+      Condit Sg P2 => kingi_ + "ksid" ;  --# notpresent
+      Condit Sg P3 => kingi_ + "ks" ;  --# notpresent
+      Condit Pl P1 => kingi_ + "ksime" ;  --# notpresent
+      Condit Pl P2 => kingi_ + "ksite" ;  --# notpresent
+      Condit Pl P3 => kingi_ + "ksid" ;  --# notpresent
+      Imper Sg   => kingi_ ; -- kingi!
+      Imper Pl   => vestel_ + "ge" ; -- vestelge
+      ImperP3 Sg => vestel_ + "gu" ; -- ta vestelgu ?
+      ImperP3 Pl => vestel_ + "gu" ; -- nad vestelgu ?
+      ImperP1Pl  => vestel_ + "gem" ; -- me vestelgem ?
+      ImpNegPl   => vestel_ + "ge" ; -- ärge vestelge ?
+      Pass True  => vestel_ + "nud" ;
+      Pass False => Predef.tk 2 "TODO" ;
+      PastPartAct (AN n)  => kinkinud ! n ;
+      PastPartAct AAdv    => "TODO" ;
+      PastPartPass (AN n) => kingitud ! n ;
+      PastPartPass AAdv   => "TODO" ;
+      Inf Inf3Transl => vestle_ + "maks" ;
+      Inf Inf3Iness => vestle_ + "mas" ;
+      Inf Inf3Elat  => vestle_ + "mast" ;
+      Inf Inf3Abess => vestle_ + "mata"
+      } ;
+    sc = NPCase Nom ;
+    qp = pbool2bool (Predef.eqStr "o" "o") ; -- TODO: ?
+    lock_V = <>
+    } ;
 
     vForms12 : (x1,_,_,_,_,_,_,_,_,_,_,x12 : Str) -> VForms =
       \olla,olen,on,ovat,olkaa,ollaan,olin,oli,olisi,ollut,oltu,lienee ->
