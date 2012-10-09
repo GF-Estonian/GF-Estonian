@@ -9,7 +9,7 @@
 # sh run_tests.sh
 #
 
-path="../estonian/:../abstract/:../common/"
+path="present:../estonian/"
 
 echo "Running the tests..."
 gf --path $path --run < test_np.gfs > test_out.txt
