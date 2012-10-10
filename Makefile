@@ -12,7 +12,7 @@ help:
 
 # -v: verbose (gives some idea of what slows down the linking)
 compile:
-	gf +RTS -K100M -RTS --path $(path) estonian/LangEst.gf
+	gf +RTS -K100M -RTS --path $(path) --preproc=mkPresent estonian/LangEst.gf
 
 clean:
 	find -name *.gfo | xargs rm

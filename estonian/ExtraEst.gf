@@ -1,4 +1,4 @@
---# -path=.:../abstract:../common:../prelude
+--# -path=.:abstract:common:prelude
 
 concrete ExtraEst of ExtraEstAbs = CatEst ** 
   open ResEst, MorphoEst, Coordination, Prelude, NounEst, StructuralEst, (R = ParamX) in {
@@ -9,8 +9,9 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
       s2 = [] ;
       isNum  = False ;
       isPoss = False ;
-      isDef  = True  --- "Jussin kolme autoa ovat" ; thus "...on" is missing
-      } ;
+      isDef  = True ; --- "Jussin kolme autoa ovat" ; thus "...on" is missing
+      isNeg = False 
+     } ;
 
     GenCN n1 n2 = {s = \\nf => n1.s ! NPCase Gen ++ n2.s ! nf} ;
 
@@ -25,6 +26,43 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
     ConjVPI = conjunctDistrSS ;
     ComplVPIVV vv vpi = 
       insertObj (\\_,_,_ => vpi.s) (predV vv) ;
+
+  lincat
+    VPS = {
+      s   : Agr  => Str ; 
+      sc  : NPForm ;  --- can be different for diff parts
+      qp  : Bool -- True = back vowel --- can be different for diff parts
+      } ;
+
+    [VPS] = {
+      s1,s2 : Agr  => Str ; 
+      sc    : NPForm ;  --- take the first: minä osaan kutoa ja täytyy virkata
+      qp    : Bool      --- take the first: osaanko minä kutoa ja käyn koulua
+      } ;
+
+  lin
+    BaseVPS x y = twoTable Agr x y ** {sc = x.sc ; qp = x.qp} ;
+    ConsVPS x y = consrTable Agr comma x y ** {sc = x.sc ; qp = x.qp} ;
+
+    ConjVPS conj ss = conjunctDistrTable Agr conj ss ** {
+      sc = ss.sc ; qp = ss.qp
+      } ;
+
+    MkVPS t p vp = { --  Temp -> Pol -> VP -> VPS ;
+      s = \\a => let vps = vp.s ! VIFin t.t ! t.a ! p.p ! a
+                 in
+                 t.s ++ p.s ++
+                 vps.fin ++ vps.inf ++
+                 vp.s2 ! True ! p.p ! a ++
+                 vp.adv ! p.p ++
+                 vp.ext ;
+      sc = vp.sc ;
+      qp = vp.qp
+      } ;
+
+    PredVPS np vps = { -- NP -> VPS -> S ;
+      s = subjForm np vps.sc Pos ++ vps.s ! np.a
+      } ;
 
     AdvExistNP adv np = 
       mkClause (\_ -> adv.s) np.a (insertObj 
@@ -81,7 +119,7 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
           c => acn.s ! c
           } ; 
         a = acn.a ;
-        isPron = False
+        isPron = False ; isNeg = False
         } ;
 
     vai_Conj = {s1 = [] ; s2 = "vai" ; n = Sg} ;
@@ -112,13 +150,15 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
       a = p.a
       } ;
 
+    -- Fin: s2 = BIND ++ possSuffix p.a ;
     ProDropPoss p = {
       s1 = \\_,_ => [] ;
       sp = \\_,_ => p.s ! NPCase Gen ;
       s2 = [] ;
       isNum = False ;
       isPoss = True ;
-      isDef = True  --- "minun kolme autoani ovat" ; thus "...on" is missing
+      isDef = True ;  --- "minun kolme autoani ovat" ; thus "...on" is missing
+      isNeg = False
       } ;
 
   lincat 
@@ -150,6 +190,13 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
          pa = part.s ! cl.qp
       in
       {s = t.s ++ p.s ++ cl.adv ++ pa ++ cl.subj ++ cl.fin ++ cl.inf ++ cl.compl ++ cl.ext} ; 
+
+    S_OVS part t p clp = 
+      let 
+         cl = clp.s ! t.t ! t.a ! p.p ;
+         pa = part.s ! True ----
+      in
+      {s = t.s ++ p.s ++ cl.compl ++ pa ++ cl.fin ++ cl.inf ++ cl.subj ++ cl.adv ++ cl.ext} ; 
 
     PredClPlus np vp = mkClausePlus (subjForm np vp.sc) np.a vp ;
     PredClPlusFocSubj np vp = insertKinClausePlus 0 (mkClausePlus (subjForm np vp.sc) np.a vp) ;

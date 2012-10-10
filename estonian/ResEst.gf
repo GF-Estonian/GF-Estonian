@@ -697,7 +697,7 @@ oper
     isPron = False  -- has no special accusative
     } ;
 
-  etta_Conj : Str = "että" ;
+  etta_Conj : Str = "et" ;
 
     heavyDet : PDet -> PDet ** {sp : Case => Str} = \d -> d ** {sp = d.s1} ;
     PDet : Type = {

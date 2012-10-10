@@ -12,7 +12,7 @@ concrete StructuralEst of Structural = CatEst **
       kaiket = caseTable n ((mkN "kaikki" "kaiken" "kaikkena"))
     in
     case npform2case n c of {
-      Nom => "kaikki" ;
+      Nom => "kõik" ;
       k => kaiket ! k
       }
     } ;
@@ -29,12 +29,12 @@ concrete StructuralEst of Structural = CatEst **
   by8agent_Prep = postGenPrep "toimesta" ;
   by8means_Prep = casePrep adessive ;
   can8know_VV = mkVV (mkV "osata") ;
-  can_VV = mkVV (mkV "võida") ;
+  can_VV = mkVV (mkV "võima") ;
   during_Prep = postGenPrep "aikana" ;
-  either7or_DConj = sd2 "joko" "tai" ** {n = Sg} ;
-  everybody_NP = makeNP (mkN "jokainen") Sg ;
-  every_Det = mkDet Sg (mkN "jokainen") ;
-  everything_NP = makeNP (((mkN "kaikki" "kaiken" "kaikkena")) **
+  either7or_DConj = sd2 "kas" "või" ** {n = Sg} ;
+  everybody_NP = makeNP (mkN "igaüks") Sg ;
+  every_Det = mkDet Sg (mkN "iga") ;
+  everything_NP = makeNP (((mkN "kõik" "kõigi" "kõiki")) **
     {lock_N = <>}) Sg ;
   everywhere_Adv = ss "kõikjal" ;
   few_Det  = mkDet Sg (mkN "harva") ;
@@ -67,8 +67,8 @@ concrete StructuralEst of Structural = CatEst **
   no_Utt = ss "ei" ;
   on_Prep = casePrep adessive ;
 ---  one_Quant = mkDet Sg  DEPREC
-  only_Predet = {s = \\_,_ => "vain"} ;
-  or_Conj = {s1 = [] ; s2 = "tai" ; n = Pl} ;
+  only_Predet = {s = \\_,_ => "ainult"} ;
+  or_Conj = {s1 = [] ; s2 = "või" ; n = Pl} ;
   otherwise_PConj = ss "muidu" ;
   part_Prep = casePrep partitive ;
   please_Voc = ss ["ole hyvä"] ; --- number
@@ -92,7 +92,7 @@ concrete StructuralEst of Structural = CatEst **
     n = Pl
     } ;
   something_NP = {
-    s = \\c => jokinPron ! Sg ! npform2case Sg c ;
+    s = \\c => mikaInt ! Sg ! npform2case Sg c ;
     a = agrP3 Sg ;
     isPron = False
     } ;
@@ -181,10 +181,11 @@ oper
         }
       } ;
 
+  -- TODO: maybe remove
   jokinPron : MorphoEst.Number => (MorphoEst.Case) => Str =
     table {
       Sg => table {
-        Nom => "jokin" ;
+        Nom => "midagi" ;
         Gen => "jonkin" ;
         c => relPron ! Sg ! c + "kin"
        } ;
@@ -223,47 +224,29 @@ oper
         c   => kuka.s ! NCase Sg c
        } ;
       Pl => table {
-        Nom => "ketkä" ;
+        Nom => "kes" ;
         c   => kuka.s ! NCase Pl c
         }
       } ;
   mikaanPron : MorphoEst.Number => (MorphoEst.Case) => Str = \\n,c =>
     case <n,c> of {
-        <Sg,Nom> => "mikään" ;
-        <_,Part> => "mitään" ;
-        <Sg,Gen> => "minkään" ;
-        <Pl,Nom> => "mitkään" ;
-        <Pl,Gen> => "mittenkään" ;
-        <_,Ess>  => "minään" ;
-        <_,Iness> => "missään" ;
-        <_,Elat> => "mistään" ;
-        <_,Adess> => "millään" ;
-        <_,Ablat> => "miltään" ;
-        _   => mikaInt ! n ! c + "kään"
+        <_,Nom> => "ükski" ;
+        <_,Part> => "ühtegi" ;
+        <_,Gen> => "ühegi" ;
+        _   => mikaInt ! n ! c + "TODO"
        } ;
 
   kukaanPron : MorphoEst.Number => (MorphoEst.Case) => Str =
     table {
       Sg => table {
-        Nom => "kukaan" ;
-        Part => "ketään" ;
-        Ess => "kenään" ;
-        Iness => "kessään" ;
-        Elat  => "kestään" ;
-        Illat => "kehenkään" ;
-        Adess => "kellään" ;
-        Ablat => "keltään" ;
-        c   => kukaInt ! Sg ! c + "kään"
+        Nom => "keegi" ;
+        Part => "kedagi" ;
+        c   => kukaInt ! Sg ! c + "TODO"
        } ;
       Pl => table {
         Nom => "ketkään" ;
         Part => "keitään" ;
-        Ess => "keinään" ;
-        Iness => "keissään" ;
-        Elat => "keistään" ;
-        Adess => "keillään" ;
-        Ablat => "keiltään" ;
-        c   => kukaInt ! Pl ! c + "kään"
+        c   => kukaInt ! Pl ! c + "TODO"
         }
       } ;
 
@@ -281,19 +264,19 @@ lin
   not_Predet = {s = \\_,_ => "ei"} ;
 
   no_Quant = heavyQuant {
-    s1 = \\n,c => "ei" ++ mikaanPron ! n ! c ;
+    s1 = \\n,c => "mitte" ++ mikaanPron ! n ! c ;
     s2 = [] ; isNum,isPoss = False ; isDef = True ;
     } ;
 
-  if_then_Conj = {s1 = "jos" ; s2 = "niin" ; n = Sg} ;
+  if_then_Conj = {s1 = "kui" ; s2 = "siis" ; n = Sg} ;
   nobody_NP = {
-    s = \\c => "ei" ++ kukaanPron ! Sg ! npform2case Sg c ;
+    s = \\c => "mitte" ++ kukaanPron ! Sg ! npform2case Sg c ;
     a = agrP3 Sg ;
     isPron = False
     } ;
 
   nothing_NP = {
-    s = \\c => "ei" ++ mikaanPron ! Sg ! npform2case Sg c ;
+    s = \\c => "mitte" ++ mikaanPron ! Sg ! npform2case Sg c ;
     a = agrP3 Sg ;
     isPron = False
     } ;
@@ -303,7 +286,7 @@ lin
 
   as_CAdv = X.mkCAdv "sama palju" "kui" ;
 
-  except_Prep = postPrep partitive "lukuunottamatta" ;
+  except_Prep = postPrep partitive "väljaarvatud" ;
 
   have_V2 = mkV2 (caseV adessive vOlla) ;
 

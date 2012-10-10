@@ -1,5 +1,7 @@
 abstract ExtraEstAbs = Extra [
-  GenNP,VPI,ListVPI,BaseVPI,ConsVPI,MkVPI,ComplVPIVV,ConjVPI,
+  GenNP,
+  VPI,ListVPI,BaseVPI,ConsVPI,MkVPI,ComplVPIVV,ConjVPI,
+  VPS,ListVPS,BaseVPS,ConsVPS,ConjVPS,MkVPS,PredVPS,ConjVPS,Tense,Temp,Pol,S,
   VV,VP,Conj,NP,Quant,IAdv,IComp,ICompAP,IAdvAdv,Adv,AP, Pron, ProDrop] ** {
 
   fun
@@ -37,7 +39,7 @@ abstract ExtraEstAbs = Extra [
     S_ASV  : Part -> Temp -> Pol -> ClPlusAdv  -> S ;  -- nytpäs me juomme maitoa
 
 --    S_SOV  : Part -> Temp -> Pol -> ClPlus  -> S ;  -- mepäs maitoa juomme
---    S_OVS  : Part -> Temp -> Pol -> ClPlus  -> S ;  -- maitoapas juomme me
+    S_OVS  : Part -> Temp -> Pol -> ClPlus  -> S ;  -- maitoapas juomme me
 --    S_VOS  : Part -> Temp -> Pol -> ClPlus  -> S ;  -- juommepas maitoa me
 
 
