@@ -1,10 +1,12 @@
-resource HjkEst = open ResEst in {
+resource HjkEst = open ResEst, Prelude in {
 
   -- TODO: change the name of this file and the names of the opers in this file
 
   oper
 
 	NFS = {s : NForm => Str} ;
+
+	vowel : pattern Str = #("a" | "e" | "i" | "o") ;
 
 	hjk_type_I_koi : Str -> NFS ;
 
@@ -17,24 +19,56 @@ resource HjkEst = open ResEst in {
 	hjk_type_II_ema x =
 		hjk_nForms6 x x x (x+"sse") (x+"de") (x+"sid") ;
 
+
 	hjk_type_III_ratsu : Str -> NFS ;
 
 	hjk_type_III_ratsu x =
 		hjk_nForms6 x x (x+"t") (x+"sse") (x+"de") (x+"sid") ;
+
 
 	hjk_type_IVa_aasta : Str -> NFS ;
 
 	hjk_type_IVa_aasta x =
 		hjk_nForms6 x x (x+"t") (x+"sse") (x+"te") (x+"id") ;
 
-	hjk_type_IVb_audit : Str -> NFS ;
 
-	hjk_type_IVb_audit x =
+	hjk_type_IVb_audit : Str -> Str -> NFS ;
+
+	hjk_type_IVb_audit x v_g =
 		let
-			v_g = "i" ;
-			v_pl = "e"
+			v_pl = case v_g of { "i" => "e" ; _ => v_g }
 		in
 		hjk_nForms6 x (x+v_g) (x+v_g+"t") (x+v_g+"sse") (x+v_g+"te") (x+v_pl+"id") ;
+
+
+	hjk_type_IVb_maakas : Str -> NFS ;
+
+	hjk_type_IVb_maakas x =
+		let
+			gen = init x
+		in
+		hjk_nForms6 x gen (gen+"t") (gen+"sse") (gen+"te") (gen+"id") ;
+
+
+	-- TODO: variant: vastusesse | vastusse
+	hjk_type_Va_otsene : Str -> NFS ;
+
+	hjk_type_Va_otsene x =
+		let
+			f : Str = case x of { y + "ne" => y + "s" ; _ => x }
+		in
+		hjk_nForms6 x (f+"e") (f+"t") (f+"esse") (f+"te") (f+"eid") ;
+
+
+	-- TODO: variant: olulisesse | olulisse
+	hjk_type_Vb_oluline : Str -> NFS ;
+
+	hjk_type_Vb_oluline x =
+		let
+			f : Str = case x of { y + "ne" => y + "s" ; _ => x }
+		in
+		hjk_nForms6 x (f+"e") (f+"t") (f+"esse") (f+"te") (f+"i") ;
+
 
 	-- Converts 6 given strings (Nom, Gen, Part, Illat, Gen, Part) into Noun
 	hjk_nForms6 : (jogi,joe,joge,joesse,jogede,jogesid : Str) -> {s : NForm => Str} ;
