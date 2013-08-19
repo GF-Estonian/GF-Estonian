@@ -27,6 +27,15 @@ resource HjkEst = open ResEst in {
 	hjk_type_IVa_aasta x =
 		hjk_nForms6 x x (x+"t") (x+"sse") (x+"te") (x+"id") ;
 
+	hjk_type_IVb_audit : Str -> NFS ;
+
+	hjk_type_IVb_audit x =
+		let
+			v_g = "i" ;
+			v_pl = "e"
+		in
+		hjk_nForms6 x (x+v_g) (x+v_g+"t") (x+v_g+"sse") (x+v_g+"te") (x+v_pl+"id") ;
+
 	-- Converts 6 given strings (Nom, Gen, Part, Illat, Gen, Part) into Noun
 	hjk_nForms6 : (jogi,joe,joge,joesse,jogede,jogesid : Str) -> {s : NForm => Str} ;
 
