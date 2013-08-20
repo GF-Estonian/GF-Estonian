@@ -1,4 +1,4 @@
-resource HjkEst = open ResEst, Prelude in {
+resource HjkEst = open ResEst, Prelude, Predef in {
 
   -- TODO: change the name of this file and the names of the opers in this file
 
@@ -6,7 +6,7 @@ resource HjkEst = open ResEst, Prelude in {
 
 	NFS = {s : NForm => Str} ;
 
-	vowel : pattern Str = #("a" | "e" | "i" | "o") ;
+	vowel : pattern Str = #("a" | "e" | "i" | "o" | "u") ;
 
 	hjk_type_I_koi : Str -> NFS ;
 
@@ -148,11 +148,33 @@ resource HjkEst = open ResEst, Prelude in {
 	} } ;
 
 
-	-- TODO: implement
+	-- TODO: implement fully
 	weaker : Str -> Str ;
-	weaker x = x ;
+	weaker x =
+		case x of {
+			y + "kk" => y + "k" ;
+			y + "pp" => y + "p" ;
+			y + "tt" => y + "t" ;
+			y + "ss" => y + "s" ;
+			y + "k" => y + "g" ;
+			y + "t" => y + "d" ;
+			y + "p" => y + "b" ;
+			_ => x
+		} ;
 
-	-- TODO: implement
+	-- TODO: implement fully
 	stronger : Str -> Str ;
-	stronger x = x ;
+	stronger x =
+		let
+			beginning = tk 2 x ;
+			ending = dp 2 x
+		in
+		beginning + case ending of {
+			y + k@("k"|"p"|"t"|"s") + e => y + k + k + e ;
+			y + "g" + e => y + "k" + e ;
+			y + "d" + e => y + "t" + e ;
+			y + "b" + e => y + "p" + e ;
+			_ => ending
+		} ;
+
 }
