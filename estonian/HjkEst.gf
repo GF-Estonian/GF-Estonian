@@ -1,12 +1,18 @@
 resource HjkEst = open ResEst, Prelude, Predef in {
 
+  flags
+	coding = utf8 ;
+
   -- TODO: change the name of this file and the names of the opers in this file
 
   oper
 
 	NFS = {s : NForm => Str} ;
 
-	vowel : pattern Str = #("a" | "e" | "i" | "o" | "u") ;
+	foreign : pattern Str = #("z" | "ž") ;
+	v : pattern Str = #("a" | "e" | "i" | "o" | "u") ;
+	c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r") ;
+	lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
 
 	hjk_type_I_koi : Str -> NFS ;
 
@@ -177,4 +183,31 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			_ => ending
 		} ;
 
+
+	hjk_type : Str -> NFS ;
+
+	hjk_type x =
+		case x of {
+			_ + #v + #v => hjk_type_I_koi x ;
+			_ + ("lik"|"nik"|"stik") => hjk_type_VI_imelik x ;
+			_ + ("kond") => hjk_type_VI_meeskond x ;
+			_ + "nna" => hjk_type_III_ratsu x ;
+			_ + ("nu"|"tu") => hjk_type_IVa_aasta x ;
+			_ + ("kas"|"jas"|"nud"|"tud") => hjk_type_IVb_maakas x ;
+			_ + ("us"|"is") => hjk_type_Vb_oluline x ;
+			_ + #v + "s" => hjk_type_Va_otsene x ;
+			_ + #foreign + _ + "in" => hjk_type_IVb_audit x "i" ; -- TODO: 2 syl + better foreign detection
+			_ + "in" => hjk_type_IVb_audit x "a" ; -- TODO: 2 syl
+			_ + ("v"|"tav"|"m"|"im") => hjk_type_IVb_audit x "a" ;
+			_ + ("a"|"e"|"i") + ("ng"|"k") => hjk_type_IVb_audit x "u" ; -- TODO: 2 syl
+			_ + #c + #v + #lmnr => hjk_type_VI_seminar x ; -- TODO: 3 syl
+			_ + ("line"|"lane"|"mine"|"kene") => hjk_type_Vb_oluline x ;
+			_ + "ne" => hjk_type_Va_otsene x ;
+			_ + #v + #c + #c + #c => hjk_type_VI_link x ; -- TODO: 2 syl
+			_ + #v + #c + #c => hjk_type_VI_link x ; -- TODO: 2 syl
+			_ + #v + #v + #c => hjk_type_VI_link x ; -- TODO: 2 syl
+			_ + #c => hjk_type_IVb_audit x "i" ; -- TODO: 2 syl
+			_ + "e" => hjk_type_VII_touge x ; -- TODO: verb+e
+			_ => hjk_type_II_ema x -- TODO: what is the best catch all?
+		} ;
 }
