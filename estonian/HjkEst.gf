@@ -70,6 +70,48 @@ resource HjkEst = open ResEst, Prelude in {
 		hjk_nForms6 x (f+"e") (f+"t") (f+"esse") (f+"te") (f+"i") ;
 
 
+	hjk_type_VI_link : Str -> NFS ;
+
+	hjk_type_VI_link x =
+		let
+			x_n : Str = weaker x
+		in
+		hjk_nForms6 x (x_n+"i") (x+"i") (x+"i") (x+"ide") (x+"e") ;
+
+
+	hjk_type_VI_imelik : Str -> NFS ;
+
+	hjk_type_VI_imelik x =
+		let
+			x_t : Str = stronger x
+		in
+		hjk_nForms6 x (x+"u") (x_t+"u") (x_t+"u") (x+"e") (x_t+"e") ;
+
+
+	hjk_type_VI_meeskond : Str -> NFS ;
+
+	hjk_type_VI_meeskond x =
+		let
+			x_n : Str = weaker x
+		in
+		hjk_nForms6 x (x_n+"a") (x+"a") (x+"a") (x+"ade") (x+"i") ;
+
+
+	hjk_type_VI_seminar : Str -> NFS ;
+
+	hjk_type_VI_seminar x =
+		hjk_nForms6 x (x+"i") (x+"i") (x+"i") (x+"ide") (x+"e") ;
+
+
+	hjk_type_VII_touge : Str -> NFS ;
+
+	hjk_type_VII_touge x =
+		let
+			x_t : Str = stronger x
+		in
+		hjk_nForms6 x x_t (x+"t") (x_t+"sse") (x+"te") (x_t+"id") ;
+
+
 	-- Converts 6 given strings (Nom, Gen, Part, Illat, Gen, Part) into Noun
 	hjk_nForms6 : (jogi,joe,joge,joesse,jogede,jogesid : Str) -> {s : NForm => Str} ;
 
@@ -105,4 +147,12 @@ resource HjkEst = open ResEst, Prelude in {
 		NCase Pl Termin => jogede + "ni"
 	} } ;
 
+
+	-- TODO: implement
+	weaker : Str -> Str ;
+	weaker x = x ;
+
+	-- TODO: implement
+	stronger : Str -> Str ;
+	stronger x = x ;
 }
