@@ -1,4 +1,4 @@
---# -path=.:prelude:../abstract:../common
+--# -path=.:../abstract:../common
 
 concrete LexiconEst of Lexicon = CatEst ** open MorphoEst, ParadigmsEst in {
 
@@ -7,22 +7,22 @@ flags
 
 
 lin
-  airplane_N = mkN "lennuk" "lennuki" "lennukit" "lennukeid";
+  airplane_N = mkN "lennuk" ;
   answer_V2S = mkV2 (mkV "vastama") (casePrep allative) ;
-  apartment_N = mkN "korter" "korteri" "korterit" "kortereid";
+  apartment_N = mkN "korter" ;
   apple_N = mkN "õun" "õuna" "õuna" "õunu";
-  art_N = mkN "kunst" "kunsti" "kunsti" "kunste";
+  art_N = mkN "kunst" ;
   ask_V2Q = mkV2 (mkV "küsima") (casePrep ablative) ;
-  baby_N = mkN "beebi" "beebi" "beebit" "beebisid";
+  baby_N = mkN "beebi" ;
   bad_A = mkA (mkN "halb") "halvem" "halvim" ;
-  bank_N = mkN "pank" "panga" "panka" "panku";
+  bank_N = mkN "pank" ;
   beautiful_A = mkA (mkN "kaunis") "kauniimpi" "kaunein" ;
   become_VA = mkVA (mkV "muutuma") (casePrep translative) ;
-  beer_N = mkN "õlu" "õlu" "õlut" "õlusid";
+  beer_N = mkN "õlu" ;
   beg_V2V = mkV2V (mk2V "pyytää" "pyysi") (casePrep partitive) ;
   big_A = mkA (mkN "suuri" "suuria") "suurempi" "suurin" ;
-  bike_N = mkN "ratas" "ratta" "ratast" "rattaid";
-  bird_N = mkN "lind" "linnu" "lindu" "linde";
+  bike_N = mkN "ratas" ;
+  bird_N = mkN "lind" ;
   black_A = mkA (mkN "musta") "mustempi" "mustin" ;
   blue_A = mkA (mkN "sininen") "sinisempi" "sinisin" ;
   boat_N = mkN "paat" "paadi" "paati" "paate";
@@ -53,13 +53,13 @@ lin
   clean_A = mkA (mkN "puhdas") ;
   clever_A = mkA (mkN "viisas") ;
   close_V2 = mkV2 (mkV "sulgema") ;
-  coat_N = mkN "takki" ;
+  coat_N = mkN "mantel" ;
   cold_A = mkA (mkN "külm") "külmem" "külmim" ;
   come_V = mkV "tulema" ;
-  computer_N = mkN "tietokone" ;
+  computer_N = mkN "arvuti" ;
   country_N = mkN "maa" ;
-  cousin_N = mkN "serkku" ;
-  cow_N = mkN "lehmä" ;
+  cousin_N = mkN "nõbu" ;
+  cow_N = mkN "lehm" ;
   die_V = mkV "surema" ;
   dirty_A = mkA (mkN "likainen") "likaisempi" "likaisin" ;
   distance_N3 = mkN3 (mkN "etäisyys") (casePrep elative) (casePrep illative) ;

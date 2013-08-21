@@ -12,8 +12,12 @@ def quote_form(form):
 def quote_form_list(form_list):
 	return [quote_form(x) for x in form_list]
 
-def format_gf(cmd, oper, args):
-	print '{0} {1} {2}'.format(cmd, oper, ' '.join(quote_form_list(args)))
+def format_gf(cmd, oper, arg):
+	if len(arg) > 0:
+		args = arg.split(', ')
+		print '{0} {1} {2}'.format(cmd, oper, ' '.join(quote_form_list(args)))
+	else:
+		print '{0} {1}'.format(cmd, oper)
 
 parser = argparse.ArgumentParser(description='Formats input as GF\'s cc calls')
 
@@ -38,5 +42,4 @@ args = parser.parse_args()
 
 print 'import -retain {0}'.format(args.resource)
 for line in sys.stdin:
-	splits = line.strip().split(', ')
-	format_gf(args.cmd, args.oper, splits)
+	format_gf(args.cmd, args.oper, line.strip())

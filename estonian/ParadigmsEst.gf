@@ -25,6 +25,7 @@ resource ParadigmsEst = open
   (Predef=Predef), 
   Prelude, 
   MorphoEst,
+  HjkEst,
   CatEst
   in {
 
@@ -104,6 +105,7 @@ oper
     mkN : (pank,panga,panka,panku : Str) -> N ; -- sg nom,gen,part, pl.part
 
 --    mkN : (olo,n,a,na,oon,jen,ja,ina,issa,ihin : Str) -> N ; -- worst case, 10 forms
+    mkN : (oun,ouna,ouna,ounasse,ounte,ounu : Str) -> N ; -- worst case, 6 forms
     mkN : (oun,ouna,ouna,ounasse,ounte,ounu,ountesse : Str) -> N ; -- worst case, 7 forms
     mkN : (pika : Str) -> (juna  : N) -> N ; -- compound with invariable prefix
     mkN : (oma : N)    -> (tunto : N) -> N ; -- compound with inflecting prefix
@@ -301,12 +303,15 @@ oper
   mk1A : Str -> A = \jalo -> aForms2A (nforms2aforms (nForms1 jalo)) ;
   mkNA : N -> A = \suuri -> aForms2A (nforms2aforms (n2nforms suuri)) ;
 
-  mk1N : (talo : Str) -> N = \s -> nForms2N (nForms1 s) ;
+  --mk1N : (talo : Str) -> N = \s -> nForms2N (nForms1 s) ;
+  mk1N : (talo : Str) -> N = \s -> (hjk_type s) ** { lock_N = <> } ;
   mk2N : (talo,talon : Str) -> N = \s,t -> nForms2N (nForms2 s t) ;
   mk3N : (talo,talon,taloja : Str) -> N = \s,t,u -> nForms2N (nForms3 s t u) ;
   mk4N : (talo,talon,taloa,taloja : Str) -> N = \s,t,u,v -> 
       nForms2N (nForms4 s t u v) ;
 
+  mk6N : (oun,ouna,ouna,ounasse,ounte,ounu : Str) -> N =
+      \a,b,c,d,e,f -> (hjk_nForms6 a b c d e f) ** { lock_N = <> } ;
   mk7N : (oun,ouna,ouna,ounasse,ounte,ounu,ountesse : Str) -> N = 
       \a,b,c,d,e,f,g -> nForms2N (nForms7 a b c d e f g) ;
 
