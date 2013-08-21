@@ -8,7 +8,7 @@
 -- syntax. To build a lexicon, it is better to use $ParadigmsEst$, which
 -- gives a higher-level access to this module.
 
-resource MorphoEst = ResEst ** open Prelude in {
+resource MorphoEst = ResEst ** open Prelude, HjkEst in {
 
   flags optimize=all ; coding=utf8;
 
@@ -981,7 +981,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       (kuunnel + "t" + u)
       (kuunnel + l + "ee") ;
 
-  regVerb : (_,_,_,_ : Str) -> Verb ** {qp : Bool} = \kinkima,kinkida,kingib,kingitakse ->
+  regVerb : (_,_,_,_ : Str) -> Verb = \kinkima,kinkida,kingib,kingitakse ->
     mk_forms4_to_verb (vForms4 kinkima kinkida kingib kingitakse) ;
 
 -- auxiliaries
@@ -1016,13 +1016,13 @@ resource MorphoEst = ResEst ** open Prelude in {
        12 => lienee
       } ;
 
-    vforms2VEst : VFormsEst -> Verb ** {qp : Bool} = \vh -> 
+    vforms2VEst : VFormsEst -> Verb = \vh -> 
     let
       tulema = vh ! 0 ; 
       tulla = vh ! 1 ; 
       tulen = vh ! 2 ; 
-      tulee = vh ! 3 ; 
-      tulevat = vh ! 4 ;
+      tuleb = vh ! 3 ; 
+      tulevad = vh ! 4 ;
       tulge = vh ! 5 ; 
       tullaan = vh ! 6 ; 
       tulin = vh ! 7 ; 
@@ -1045,10 +1045,10 @@ resource MorphoEst = ResEst ** open Prelude in {
       Inf Inf1 => tulla ;
       Presn Sg P1 => tule_ + "n" ;
       Presn Sg P2 => tule_ + "d" ;
-      Presn Sg P3 => tulee ;
+      Presn Sg P3 => tuleb ;
       Presn Pl P1 => tule_ + "me" ;
       Presn Pl P2 => tule_ + "te" ;
-      Presn Pl P3 => tulevat ;
+      Presn Pl P3 => tulevad ;
       Impf Sg P1  => tuli_ + "n" ;   --# notpresent
       Impf Sg P2  => tuli_ + "d" ;  --# notpresent
       Impf Sg P3  => tuli ;  --# notpresent
@@ -1067,8 +1067,11 @@ resource MorphoEst = ResEst ** open Prelude in {
       ImperP3 Pl => tulgu ; -- nad tulgu ?
       ImperP1Pl  => tulgu ; -- me tulgu ?
       ImpNegPl   => tulge ; -- ärge tulge ?
-      Pass True  => tullaan ;
-      Pass False => Predef.tk 2 tullaan ;
+      PassPresn True  => tullaan ;
+      PassPresn False => Predef.tk 2 tullaan ;
+      PassImpf True  => tullaan ;
+      PassImpf False => Predef.tk 2 tullaan ;
+      PresPart => "TODO" ;
       PastPartAct (AN n)  => tulleen ! n ;
       PastPartAct AAdv    => tullee + "sti" ;
       PastPartPass (AN n) => tullun ! n ;
@@ -1079,7 +1082,7 @@ resource MorphoEst = ResEst ** open Prelude in {
       Inf Inf3Abess => tulema + "ta"
       } ;
     sc = NPCase Nom ;
-    qp = pbool2bool (Predef.eqStr (last tulko) "o") ;
+
     lock_V = <>
     } ;
 
@@ -1097,7 +1100,7 @@ resource MorphoEst = ResEst ** open Prelude in {
     -- http://www.eki.ee/books/ekk09/index.php?p=3&p1=5&id=227
     -- TODO: ma: kinkivat, kinkiv
     -- TODO: da: des,
-    mk_forms4_to_verb : VForms4 -> Verb ** {qp : Bool} = \vh ->
+    mk_forms4_to_verb : VForms4 -> Verb = \vh ->
     let
       vestlema = vh ! 0 ;
       vestelda = vh ! 1 ;
@@ -1106,9 +1109,9 @@ resource MorphoEst = ResEst ** open Prelude in {
       vestle_ = Predef.tk 2 vestlema ;
       vestel_ = Predef.tk 2 vestelda ;
       kingi_ = init kingib ;
-      kingi2_ = Predef.tk 4 kingitakse ;
-      kinkinud = (nForms2N (dOttanut (vestel_ + "nud"))).s ;
-      kingitud = (nForms2N (dOttanut (kingi2_ + "tud"))).s ;  -- or 'dud'
+      kingit_ = Predef.tk 4 kingitakse ; --kingi2_
+      kinkinud = (hjk_type_IVb_maakas (vestel_ + "nud")).s ;
+      kingitud = (hjk_type_IVb_maakas (kingit_ + "ud")).s ;
     in
     {s = table {
       Inf Inf1 => vestelda ;
@@ -1136,19 +1139,21 @@ resource MorphoEst = ResEst ** open Prelude in {
       ImperP3 Pl => vestel_ + "gu" ; -- nad vestelgu ?
       ImperP1Pl  => vestel_ + "gem" ; -- me vestelgem ?
       ImpNegPl   => vestel_ + "ge" ; -- ärge vestelge ?
-      Pass True  => vestel_ + "nud" ;
-      Pass False => Predef.tk 2 "TODO" ;
+      PassPresn True  => kingitakse ;
+      PassPresn False => kingit_ + "a" ;
+      PassImpf  True  => kingit_ + "i" ; --di or ti
+      PassImpf  False => kingit_ + "ud" ;  
+      PresPart => vestle_ + "v" ;
       PastPartAct (AN n)  => kinkinud ! n ;
-      PastPartAct AAdv    => "TODO" ;
+      PastPartAct AAdv    => kinkinud ! (NCase Sg Ablat) ;
       PastPartPass (AN n) => kingitud ! n ;
-      PastPartPass AAdv   => "TODO" ;
+      PastPartPass AAdv   => kingitud ! (NCase Sg Ablat) ;
       Inf Inf3Transl => vestle_ + "maks" ;
       Inf Inf3Iness => vestle_ + "mas" ;
       Inf Inf3Elat  => vestle_ + "mast" ;
       Inf Inf3Abess => vestle_ + "mata"
       } ;
     sc = NPCase Nom ;
-    qp = pbool2bool (Predef.eqStr "o" "o") ; -- TODO: ?
     lock_V = <>
     } ;
 
@@ -1169,12 +1174,12 @@ resource MorphoEst = ResEst ** open Prelude in {
        11 => lienee
       } ;
 
-    vforms2V : VForms -> Verb ** {qp : Bool} = \vh -> 
+    vforms2V : VForms -> Verb = \vh -> 
     let
       tulla = vh ! 0 ; 
       tulen = vh ! 1 ; 
-      tulee = vh ! 2 ; 
-      tulevat = vh ! 3 ;
+      tuleb = vh ! 2 ; 
+      tulevad = vh ! 3 ;
       tulge = vh ! 4 ; 
       tullaan = vh ! 5 ; 
       tulin = vh ! 6 ; 
@@ -1198,10 +1203,10 @@ resource MorphoEst = ResEst ** open Prelude in {
       Inf Inf1 => tulla ;
       Presn Sg P1 => tule_ + "n" ;
       Presn Sg P2 => tule_ + "d" ;
-      Presn Sg P3 => tulee ;
+      Presn Sg P3 => tuleb ;
       Presn Pl P1 => tule_ + "me" ;
       Presn Pl P2 => tule_ + "te" ;
-      Presn Pl P3 => tulevat ;
+      Presn Pl P3 => tulevad ;
       Impf Sg P1  => tuli_ + "n" ;   --# notpresent
       Impf Sg P2  => tuli_ + "d" ;  --# notpresent
       Impf Sg P3  => tuli ;  --# notpresent
@@ -1220,8 +1225,11 @@ resource MorphoEst = ResEst ** open Prelude in {
       ImperP3 Pl => tulgu ; -- nad tulgu ?
       ImperP1Pl  => tulgu ; -- me tulgu ?
       ImpNegPl   => tulge ; -- ärge tulge ?
-      Pass True  => tullaan ;
-      Pass False => Predef.tk 2 tullaan ;
+      PassPresn True  => tullaan ;
+      PassPresn False => Predef.tk 2 tullaan ;
+      PassImpf True  => tullaan ;
+      PassImpf False => Predef.tk 2 tullaan ;
+      PresPart => "TODO" ;
       PastPartAct (AN n)  => tulleen ! n ;
       PastPartAct AAdv    => tullee + "sti" ;
       PastPartPass (AN n) => tullun ! n ;
@@ -1232,7 +1240,6 @@ resource MorphoEst = ResEst ** open Prelude in {
       Inf Inf3Abess => tulema + "ta"
       } ;
     sc = NPCase Nom ;
-    qp = pbool2bool (Predef.eqStr (last tulko) "o") ;
     lock_V = <>
     } ;
 

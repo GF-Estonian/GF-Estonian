@@ -105,7 +105,9 @@ param
    | ImperP3 Number
    | ImperP1Pl
    | ImpNegPl
-   | Pass Bool 
+   | PassPresn Bool
+   | PassImpf Bool
+   | PresPart
    | PastPartAct  AForm
    | PastPartPass AForm
    ;
@@ -115,7 +117,9 @@ param
      Inf1       -- da
    | Inf3Iness  -- mas
    | Inf3Elat   -- mast
+--   | Inf3Illat  -- puhumaan --TODO is this necessary?
    | Inf3Abess  -- mata
+--   | InfPresPart -- puhuvan --TODO is this necessary?
    | Inf3Transl -- maks
    ;
 
@@ -194,10 +198,9 @@ oper
     adv : Polarity => Str ; -- ainakin/ainakaan
     ext : Str ;
     sc  : NPForm ;
-    qp  : Bool -- True = back vowel
     } ;
     
-  predV : (Verb ** {sc : NPForm ; qp : Bool}) -> VP = \verb -> {
+  predV : (Verb ** {sc : NPForm}) -> VP = \verb -> {
     s = \\vi,ant,b,agr0 => 
       let
         agr = verbAgr agr0 ;
@@ -219,7 +222,7 @@ oper
     <VIFin Past,   Pl> => <eiv, part,                 "olnud"> ;  --# notpresent
     <VIImper,      Sg> => <"ära", verbs ! Imper Sg,   "ole"> ;
     <VIImper,      Pl> => <"ärge", verbs ! ImpNegPl,  "olge"> ;
-    <VIPass,       _>  => <"ei", verbs ! Pass False,  "ole"> ;
+    <VIPass,       _>  => <"ei", verbs ! PassPresn False,  "ole"> ;
     <VIInf i,      _>  => <"ei", verbs ! Inf i, "olla">
   } ;
 
@@ -241,15 +244,14 @@ oper
         VIFin Fut  => mkvf (Presn agr.n agr.p) ;  --# notpresent
         VIFin Pres => mkvf (Presn agr.n agr.p) ;
         VIImper    => mkvf (Imper agr.n) ;
-        VIPass     => mkvf (Pass True) ;
+        VIPass     => mkvf (PassPresn True) ;
         VIInf i    => mkvf (Inf i)
         } ;
 
     s2 = \\_,_,_ => [] ;
     adv = \\_ => [] ;
     ext = [] ;
-    sc = verb.sc ;
-    qp = verb.qp
+    sc = verb.sc 
     } ;
 
   insertObj : (Bool => Polarity => Agr => Str) -> VP -> VP = \obj,vp -> {
@@ -258,7 +260,6 @@ oper
     adv = vp.adv ;
     ext = vp.ext ;
     sc = vp.sc ; 
-    qp = vp.qp
     } ;
 
   insertObjPre : (Bool => Polarity => Agr => Str) -> VP -> VP = \obj,vp -> {
@@ -267,7 +268,6 @@ oper
     adv = vp.adv ;
     ext = vp.ext ;
     sc = vp.sc ; 
-    qp = vp.qp
     } ;
 
   insertAdv : (Polarity => Str) -> VP -> VP = \adv,vp -> {
@@ -276,7 +276,6 @@ oper
     ext = vp.ext ;
     adv = \\b => vp.adv ! b ++ adv ! b ;
     sc = vp.sc ; 
-    qp = vp.qp
     } ;
 
   insertExtrapos : Str -> VP -> VP = \obj,vp -> {
@@ -285,7 +284,6 @@ oper
     ext = vp.ext ++ obj ;
     adv = vp.adv ;
     sc = vp.sc ; 
-    qp = vp.qp
     } ;
 
 -- For $Sentence$.
@@ -295,7 +293,7 @@ oper
     } ;
 
   ClausePlus : Type = {
-    s : Tense => Anteriority => Polarity => {subj,fin,inf,compl,adv,ext : Str ; qp : Bool}
+    s : Tense => Anteriority => Polarity => {subj,fin,inf,compl,adv,ext : Str}
     } ;
 
   -- The Finnish version of SQuest featured a word order change and
@@ -327,7 +325,6 @@ oper
             compl = vp.s2 ! agrfin.p2 ! b ! agr ;
             adv  = vp.adv ! b ; 
             ext  = vp.ext ; 
-            qp   = selectPart vp a b
             }
      } ;
 
@@ -337,10 +334,10 @@ oper
          c = cl.s ! t ! a ! b   
       in
       case p of {
-         0 => {subj = c.subj ++ kin b True ; fin = c.fin ; inf = c.inf ;  -- Jussikin nukkuu
-               compl = c.compl ; adv = c.adv ; ext = c.ext ; qp = c.qp} ;
-         1 => {subj = c.subj ; fin = c.fin ++ kin b c.qp ; inf = c.inf ;  -- Jussi nukkuukin
-               compl = c.compl ; adv = c.adv ; ext = c.ext ; qp = c.qp}
+         0 => {subj = c.subj ++ kin b ; fin = c.fin ; inf = c.inf ;  -- Jussikin nukkuu
+               compl = c.compl ; adv = c.adv ; ext = c.ext} ;
+         1 => {subj = c.subj ; fin = c.fin ++ kin b ; inf = c.inf ;  -- Jussi nukkuukin 
+               compl = c.compl ; adv = c.adv ; ext = c.ext}
          }
     } ;
 
@@ -349,20 +346,20 @@ oper
     s = \\t,a,b =>
       let 
          c = cl.s ! t ! a ! b ;
-         co = obj ! b ++ if_then_Str ifKin (kin b True) [] ;
+         co = obj ! b ++ if_then_Str ifKin (kin b) [] ;
       in case p of {
          0 => {subj = c.subj ; fin = c.fin ; inf = c.inf ; 
-               compl = co ; adv = c.compl ++ c.adv ; ext = c.ext ; qp = c.qp} ; -- Jussi juo maitoakin
+               compl = co ; adv = c.compl ++ c.adv ; ext = c.ext} ; -- Jussi juo maitoakin
          1 => {subj = c.subj ; fin = c.fin ; inf = c.inf ; 
-               compl = c.compl ; adv = co ; ext = c.adv ++ c.ext ; qp = c.qp}   -- Jussi nukkuu nytkin
+               compl = c.compl ; adv = co ; ext = c.adv ++ c.ext}   -- Jussi nukkuu nytkin
          }
      } ;
 
-  kin : Polarity -> Bool -> Str  = 
-    \p,b -> case p of {Pos => (mkPart "kin" "kin").s ! b ; Neg => (mkPart "kaan" "kään").s ! b} ;
+  kin : Polarity -> Str  = 
+    \p -> case p of {Pos => "gi" ; Neg => "gi"} ;
 
-  mkPart : Str -> Str -> {s : Bool => Str} = \ko,koe ->
-    {s = table {True => glueTok ko ; False => glueTok koe}} ;
+  --mkPart : Str -> Str -> {s : Bool => Str} = \ko,koe ->
+  --  {s = table {True => glueTok ko ; False => glueTok koe}} ;
 
   glueTok : Str -> Str = \s -> "&+" ++ s ;
 
@@ -372,7 +369,7 @@ oper
   subjForm : NP -> NPForm -> Polarity -> Str = \np,sc,b -> 
     appCompl False b {s = [] ; c = sc ; isPre = True} np ;
 
-  -- TODO: remove: Estonian does not have question particles
+{-  -- TODO: remove: Estonian does not have question particles
   questPart : Bool -> Str = \b -> if_then_Str b "ko" "kö" ;
 
   selectPart : VP -> Anteriority -> Polarity -> Bool = \vp,a,p -> 
@@ -383,6 +380,7 @@ oper
         _ => vp.qp  -- tuleeko, meneekö
         }
       } ;
+-}
 
   infVP : NPForm -> Polarity -> Agr -> VP -> InfForm -> Str =
     \sc,pol,agr,vp,vi ->
@@ -482,8 +480,11 @@ oper
       ImperP3 Pl => tulko + o + "t" ;
       ImperP1Pl  => tulkaa + "mme" ;
       ImpNegPl   => tulko ;
-      Pass True  => tullaan ;
-      Pass False => Predef.tk 2 tullaan ;
+      PassPresn True  => tullaan ;
+      PassPresn False => Predef.tk 2 tullaan ;
+      PassImpf True  => tullaan ;
+      PassImpf False => Predef.tk 2 tullaan ;
+      PresPart => "TODO" ;
       PastPartAct n => tulleen ! n ;
       PastPartPass n => tullun ! n ;
       Inf Inf3Transl => tulema + "ks" ; -- -maks (missing in Finnish)

@@ -1,3 +1,4 @@
+Lang> cc -table -unqual mk_forms4_to_verb ( vForms4 "laulma" "laulda" "laulab" "lauldakse")
 s . Inf Inf1 => laulda
 s . Inf Inf3Iness => laulmas
 s . Inf Inf3Elat => laulmast
@@ -29,8 +30,8 @@ s . ImperP1Pl => laulgem
 s . ImpNegPl => laulge
 s . PassPresn True => lauldakse
 s . PassPresn False => laulda
-s . PassImpf True => laulati
-s . PassImpf False => laulatud
+s . PassImpf True => lauldi
+s . PassImpf False => lauldud
 s . PresPart => laulv
 s . PastPartAct (AN (NCase Sg Nom)) => laulnud
 s . PastPartAct (AN (NCase Sg Gen)) => laulnu
@@ -60,7 +61,7 @@ s . PastPartAct (AN (NCase Pl Allat)) => laulnutele
 s . PastPartAct (AN (NCase Pl Abess)) => laulnuteta
 s . PastPartAct (AN (NCase Pl Comit)) => laulnutega
 s . PastPartAct (AN (NCase Pl Termin)) => laulnuteni
-s . PastPartAct AAdv => TODO
+s . PastPartAct AAdv => laulnult
 s . PastPartPass (AN (NCase Sg Nom)) => lauldud
 s . PastPartPass (AN (NCase Sg Gen)) => lauldu
 s . PastPartPass (AN (NCase Sg Part)) => lauldut
@@ -89,9 +90,10 @@ s . PastPartPass (AN (NCase Pl Allat)) => lauldutele
 s . PastPartPass (AN (NCase Pl Abess)) => laulduteta
 s . PastPartPass (AN (NCase Pl Comit)) => lauldutega
 s . PastPartPass (AN (NCase Pl Termin)) => laulduteni
-s . PastPartPass AAdv => TODO
+s . PastPartPass AAdv => lauldult
 
 
+Lang> cc -table -unqual mk_forms4_to_verb ( vForms4 "kinkima" "kingida" "kingib" "kingitakse")
 s . Inf Inf1 => kingida
 s . Inf Inf3Iness => kinkimas
 s . Inf Inf3Elat => kinkimast
@@ -154,7 +156,7 @@ s . PastPartAct (AN (NCase Pl Allat)) => kinginutele
 s . PastPartAct (AN (NCase Pl Abess)) => kinginuteta
 s . PastPartAct (AN (NCase Pl Comit)) => kinginutega
 s . PastPartAct (AN (NCase Pl Termin)) => kinginuteni
-s . PastPartAct AAdv => TODO
+s . PastPartAct AAdv => kinginult
 s . PastPartPass (AN (NCase Sg Nom)) => kingitud
 s . PastPartPass (AN (NCase Sg Gen)) => kingitu
 s . PastPartPass (AN (NCase Sg Part)) => kingitut
@@ -183,4 +185,4 @@ s . PastPartPass (AN (NCase Pl Allat)) => kingitutele
 s . PastPartPass (AN (NCase Pl Abess)) => kingituteta
 s . PastPartPass (AN (NCase Pl Comit)) => kingitutega
 s . PastPartPass (AN (NCase Pl Termin)) => kingituteni
-s . PastPartPass AAdv => TODO
+s . PastPartPass AAdv => kingitult
