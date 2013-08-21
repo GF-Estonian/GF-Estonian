@@ -23,8 +23,7 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
                 sc = case vp.sc of {
                   NPCase Nom => v.sc ;   -- minun täytyy pestä auto
                   c => c                 -- minulla täytyy olla auto
-                  } ;
-                qp = v.qp
+                  }
                }
          ) ;
 
@@ -53,7 +52,7 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
     ComplSlash vp np = insertObjPre (\\fin,b,_ => appCompl fin b vp.c2 np) vp ;
 
     UseComp comp = 
-      insertObj (\\_,_ => comp.s) (predV (verbOlla ** {sc = NPCase Nom ; qp = True})) ;
+      insertObj (\\_,_ => comp.s) (predV (verbOlla ** {sc = NPCase Nom})) ;
 
     SlashVV v vp = 
       insertObj 
@@ -62,8 +61,7 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
                 sc = case vp.sc of {
                   NPCase Nom => v.sc ;   -- minun täytyy pestä auto
                   c => c                 -- minulla täytyy olla auto
-                  } ;
-                qp = v.qp
+                  } 
                }
          ) ** {c2 = vp.c2} ; ---- correct ??
 
@@ -84,7 +82,6 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
       s2 = \\_,_,_ => [] ;
       adv = \\_ => [] ;
       ext = [] ;
-      qp = v.qp ;
       sc = v.c2.c  -- minut valitaan ; minua rakastetaan ; minulle kuiskataan 
       } ;          ---- talon valitaan: should be marked like inf.
 
