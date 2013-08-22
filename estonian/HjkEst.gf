@@ -5,13 +5,16 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 
   -- TODO: change the name of this file and the names of the opers in this file
 
+  param
+	SylCount = S1 | S2 | S3 ;
+
   oper
 
 	NFS = {s : NForm => Str} ;
 
 	foreign : pattern Str = #("z" | "ž") ;
-	v : pattern Str = #("a" | "e" | "i" | "o" | "u") ;
-	c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r") ;
+	v : pattern Str = #("a" | "e" | "i" | "o" | "u" | "õ" | "ä" | "ö" | "ü") ;
+	c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r" | "z" | "ž") ;
 	lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
 
 	hjk_type_I_koi : Str -> NFS ;
@@ -187,27 +190,88 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	hjk_type : Str -> NFS ;
 
 	hjk_type x =
+		let
+			sc = syl_count x
+		in
+		case <sc,x> of {
+			<_, _ + #v + #v> => hjk_type_I_koi x ;
+			<_, _ + ("lik"|"nik"|"stik")> => hjk_type_VI_imelik x ;
+			<_, _ + ("kond")> => hjk_type_VI_meeskond x ;
+			<_, _ + "nna"> => hjk_type_III_ratsu x ;
+			<_, _ + ("nu"|"tu")> => hjk_type_IVa_aasta x ;
+			<_, _ + ("kas"|"jas"|"nud"|"tud")> => hjk_type_IVb_maakas x ;
+			<_, _ + ("us"|"is")> => hjk_type_Vb_oluline x ;
+			<_, _ + #v + "s"> => hjk_type_Va_otsene x ;
+			<S2, _ + "e"> => hjk_type_III_ratsu x ; -- TODO 1st quant
+			<S2, _ + #v> => hjk_type_II_ema x ; -- TODO 1st quant
+			<S2, _ + #v> => hjk_type_III_ratsu x ; -- TODO 2st quant (masked)
+			<S2, _ + #v> => hjk_type_IVa_aasta x ; -- TODO 3rd quant (masked)
+			<S2, _ + #foreign + _ + "in"> => hjk_type_IVb_audit x "i" ; -- TODO: better foreign detection
+			<S2, _ + "in"> => hjk_type_IVb_audit x "a" ;
+			<_, _ + ("v"|"tav"|"m"|"im")> => hjk_type_IVb_audit x "a" ;
+			<S2, _ + ("a"|"e"|"i") + ("ng"|"k")> => hjk_type_IVb_audit x "u" ;
+			<S3, _ + #c + #v + #lmnr> => hjk_type_VI_seminar x ;
+			<_, _ + ("line"|"lane"|"mine"|"kene")> => hjk_type_Vb_oluline x ;
+			<_, _ + "ne"> => hjk_type_Va_otsene x ;
+			<S1, _ + #v + #c + #c + #c> => hjk_type_VI_link x ;
+			<S1, _ + #v + #c + #c> => hjk_type_VI_link x ;
+			<S1, _ + #v + #v + #c> => hjk_type_VI_link x ;
+			<S3, _ + #v + #c + #c + #c> => hjk_type_VI_link x ;
+			<S3, _ + #v + #c + #c> => hjk_type_VI_link x ;
+			<S3, _ + #v + #v + #c> => hjk_type_VI_link x ;
+			--<S2, _ + #v + #c + #c + #c> => hjk_type_VI_link x ; -- TODO: last syl long
+			--<S2, _ + #v + #c + #c> => hjk_type_VI_link x ;
+			--<S2, _ + #v + #v + #c> => hjk_type_VI_link x ;
+			<S2, _ + #c> => hjk_type_IVb_audit x "i" ;
+			<S3, _ + #v> => hjk_type_IVa_aasta x ;
+			<_, _ + "e"> => hjk_type_VII_touge x ; -- TODO: verb+e
+			<_, _> => hjk_type_II_ema x -- TODO: what is the best catch all?
+		} ;
+
+
+	syl_count : Str -> SylCount ;
+	syl_count x =
 		case x of {
-			_ + #v + #v => hjk_type_I_koi x ;
-			_ + ("lik"|"nik"|"stik") => hjk_type_VI_imelik x ;
-			_ + ("kond") => hjk_type_VI_meeskond x ;
-			_ + "nna" => hjk_type_III_ratsu x ;
-			_ + ("nu"|"tu") => hjk_type_IVa_aasta x ;
-			_ + ("kas"|"jas"|"nud"|"tud") => hjk_type_IVb_maakas x ;
-			_ + ("us"|"is") => hjk_type_Vb_oluline x ;
-			_ + #v + "s" => hjk_type_Va_otsene x ;
-			_ + #foreign + _ + "in" => hjk_type_IVb_audit x "i" ; -- TODO: 2 syl + better foreign detection
-			_ + "in" => hjk_type_IVb_audit x "a" ; -- TODO: 2 syl
-			_ + ("v"|"tav"|"m"|"im") => hjk_type_IVb_audit x "a" ;
-			_ + ("a"|"e"|"i") + ("ng"|"k") => hjk_type_IVb_audit x "u" ; -- TODO: 2 syl
-			_ + #c + #v + #lmnr => hjk_type_VI_seminar x ; -- TODO: 3 syl
-			_ + ("line"|"lane"|"mine"|"kene") => hjk_type_Vb_oluline x ;
-			_ + "ne" => hjk_type_Va_otsene x ;
-			_ + #v + #c + #c + #c => hjk_type_VI_link x ; -- TODO: 2 syl
-			_ + #v + #c + #c => hjk_type_VI_link x ; -- TODO: 2 syl
-			_ + #v + #v + #c => hjk_type_VI_link x ; -- TODO: 2 syl
-			_ + #c => hjk_type_IVb_audit x "i" ; -- TODO: 2 syl
-			_ + "e" => hjk_type_VII_touge x ; -- TODO: verb+e
-			_ => hjk_type_II_ema x -- TODO: what is the best catch all?
+			-- all 2-letters
+			? + ? => S1 ;
+			-- all 3-letters
+			#v + #c + #v => S2 ;
+			#v + #v + #v => S2 ;
+			? + ? + ? => S1 ;
+			-- all 4-letters
+			#c + #v + #v + #c => S1 ; -- siid
+			#c + #v + #c + #c => S1 ; -- link
+			#v + #v + #c + #v => S2 ;
+			#v + #c + #v + #v => S2 ;
+			#v + #c + #v + #c => S2 ;
+			#v + #c + #c + #v => S2 ;
+			#c + #v + #c + #v => S2 ;
+			? + ? + ? + ? => S1 ;
+			-- all 5-letters
+			#c + #v + #c + #c + #c => S1 ;
+			#c + #v + #c + #v + #c => S2 ;
+			#v + #c + #c + #c + #v => S2 ;
+			#v + #v + #c + #v + #c => S2 ;
+		_ + ? + #c + #v + #c + #v => S3 ; -- oluline
+			-- all 6-letters
+			#c + #v + #c + #v + #c + #c => S2 ;
+			#c + #v + #c + #c + #v + #c => S2 ;
+			#v + #c + #c + #v + #c + #v => S3 ;
+			-- all 7-letters
+			#c + #v + #c + #c + #v + #v + #c => S2 ; -- pension
+			#c + #v + #v + #c + #v + #c + #c => S2 ; -- haarang
+			-- other
+			_ => S3
+		} ;
+
+	-- Recursion is not allowed
+	--B@(_ + #v + #v) + E@(#v + _) => add_syl_count (syl_count B) (syl_count E) ;
+	add_syl_count : SylCount -> SylCount -> SylCount ;
+	--add_syl_count S1 S1 = S2 ;
+	--add_syl_count _ _ = S3 ;
+	add_syl_count x y =
+		case <x,y> of {
+			<S1,S1> => S2 ;
+			_ => S3
 		} ;
 }
