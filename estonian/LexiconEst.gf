@@ -77,9 +77,9 @@ lin
   fish_N = mkN "kala" ;
   floor_N = mkN "põrand" ;
   forget_V2 = mkV2 (mkV "unustama") ;
-  fridge_N = mkN "külmkapp" ; -- TODO: compound
+  fridge_N = mkN "külm" (mkN "kapp") ;
   friend_N = mkN "sõber" ;
-  fruit_N = mkN "puuvili" ; -- TODO: compound
+  fruit_N = mkN "puu" (mkN "vili") ;
   fun_AV = mkAV (mkA (mkN "hauska") "hauskempi" "hauskin") ;
   garden_N = mkN "aed" ;
   girl_N = mkN "tüdruk" ;
@@ -131,7 +131,7 @@ lin
   music_N = mkN "muusika" ;
   narrow_A = mkA (mkN "kapea") "kapeampi" "kapein" ;
   new_A = mkA (mkN "uus") "uuem" "uusim" ;
-  newspaper_N = mkN "ajaleht" ; --- TODO: compound
+  newspaper_N = mkN "aja" (mkN "leht") ;
   oil_N = mkN "õli" ;
   old_A = mkA (mkN "vana") "vanem" "vanim" ;
   open_V2 = mkV2 (mkV "avama") ;
