@@ -16,6 +16,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	v : pattern Str = #("a" | "e" | "i" | "o" | "u" | "õ" | "ä" | "ö" | "ü") ;
 	c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r" | "z" | "ž") ;
 	lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
+	kpt : pattern Str = #("k" | "p" | "t") ;
 
 	hjk_type_I_koi : Str -> NFS ;
 
@@ -159,17 +160,30 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 
 	-- TODO: implement fully
 	weaker : Str -> Str ;
-	weaker x =
-		case x of {
-			y + "kk" => y + "k" ;
-			y + "pp" => y + "p" ;
-			y + "tt" => y + "t" ;
-			y + "ss" => y + "s" ;
-			y + "k" => y + "g" ;
-			y + "t" => y + "d" ;
-			y + "p" => y + "b" ;
-			_ => x
-		} ;
+	weaker link =
+		let
+			li = Predef.tk 2 link ;
+			nk = Predef.dp 2 link
+		in
+		case nk of {
+			"kk" => li + "k" ;
+			"pp" => li + "p" ;
+			"tt" => li + "t" ;
+			"ss" => li + "s" ;
+			V@(#v) + "k" => li + V + "g" ;
+			V@(#v) + "p" => li + V + "b" ;
+			V@(#v) + "t" => li + V + "d" ;
+			N@(#lmnr) + "k" => li + N + "g" ;
+			N@(#lmnr) + "p" => li + N + "b" ;
+			N@(#lmnr) + "t" => li + N + "d" ;
+			"sk" => li + "s" ;
+			"h" + #kpt => li + "h" ;
+			"nd" => li + "nn" ;
+			"ad" => li + "aj" ;
+			"mb" => li + "mm" ;
+			_ => link
+	} ;
+
 
 	-- TODO: implement fully
 	stronger : Str -> Str ;
