@@ -15,3 +15,11 @@ Current state:
 
   - some experiments with the paradigms
   - some tweaking of the syntax mainly guided by the needs of the MOLTO Phrasebook and ACE-in-GF applications
+
+
+Testing
+-------
+
+To test the noun morphology run (in `tools/`):
+
+	run_hjk_tests.sh
