@@ -12,11 +12,11 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 
 	NFS = {s : NForm => Str} ;
 
-	foreign : pattern Str = #("z" | "ž") ;
+	foreign : pattern Str = #("z" | "ž" | "š") ;
 	v : pattern Str = #("a" | "e" | "i" | "o" | "u" | "õ" | "ä" | "ö" | "ü") ;
-	c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r" | "z" | "ž") ;
+	c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r" | "z" | "ž" | "š") ;
 	lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
-	kpt : pattern Str = #("k" | "p" | "t") ;
+	kpt : pattern Str = #("k" | "p" | "t" | "f" | "š") ;
 
 	hjk_type_I_koi : Str -> NFS ;
 
@@ -123,6 +123,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 
 
 	-- Converts 6 given strings (Nom, Gen, Part, Illat, Gen, Part) into Noun
+	-- http://www.eki.ee/books/ekk09/index.php?p=3&p1=5&id=226
 	hjk_nForms6 : (jogi,joe,joge,joesse,jogede,jogesid : Str) -> {s : NForm => Str} ;
 
 	hjk_nForms6 jogi joe joge joesse jogede jogesid = {s = table {
@@ -222,7 +223,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<S2, _ + #v> => hjk_type_IVa_aasta x ; -- TODO 3rd quant (masked)
 			<S2, _ + #foreign + _ + "in"> => hjk_type_IVb_audit x "i" ; -- TODO: better foreign detection
 			<S2, _ + "in"> => hjk_type_IVb_audit x "a" ;
-			<_, _ + ("v"|"tav"|"m"|"im")> => hjk_type_IVb_audit x "a" ;
+			<_, _ + ("v"|"tav"|"em"|"im")> => hjk_type_IVb_audit x "a" ;
 			<S2, _ + ("a"|"e"|"i") + ("ng"|"k")> => hjk_type_IVb_audit x "u" ;
 			<S3, _ + #c + #v + #lmnr> => hjk_type_VI_seminar x ;
 			<_, _ + ("line"|"lane"|"mine"|"kene")> => hjk_type_Vb_oluline x ;
