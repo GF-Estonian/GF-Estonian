@@ -34,7 +34,8 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
       s = \\c => let 
                    k = ncase c ;
                  in
-                 det.s1 ! k.p1 ++ cn.s ! k.p2 ++ det.s2 ; 
+                 det.s1 ! k.p1 ++ det.s2 ++ cn.s ! k.p2 ; -- oma auto
+                 --det.s1 ! k.p1 ++ cn.s ! k.p2 ++ det.s2 ;  --autoni
       a = agrP3 (case det.isDef of {
             False => Sg ;  -- autoja menee; kolme autoa menee
             _ => det.n

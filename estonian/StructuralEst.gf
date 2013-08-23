@@ -71,7 +71,7 @@ concrete StructuralEst of Structural = CatEst **
   or_Conj = {s1 = [] ; s2 = "või" ; n = Pl} ;
   otherwise_PConj = ss "muidu" ;
   part_Prep = casePrep partitive ;
-  please_Voc = ss ["ole hyvä"] ; --- number
+  please_Voc = ss ["palun"] ; --- number
   possess_Prep = casePrep genitive ;
   quite_Adv = ss "üsna" ;
   she_Pron = mkPronoun "tema" "tema" "teda" Sg P3 ;

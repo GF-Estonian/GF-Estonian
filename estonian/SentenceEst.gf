@@ -46,7 +46,7 @@ concrete SentenceEst of Sentence = CatEst ** open Prelude, ResEst in {
 
     EmbedS  s  = {s = etta_Conj ++ s.s} ;
     EmbedQS qs = {s = qs.s} ;
-    EmbedVP vp = {s = infVP (NPCase Nom) Pos (agrP3 Sg) vp Inf1} ; --- case,pol,agr,infform
+    EmbedVP vp = {s = infVP (NPCase Nom) Pos (agrP3 Sg) vp InfDa} ; --- case,pol,agr,infform
 
     UseCl  t p cl = {s = t.s ++ p.s ++ cl.s ! t.t ! t.a ! p.p ! SDecl} ;
     UseQCl t p cl = {s = t.s ++ p.s ++ cl.s ! t.t ! t.a ! p.p} ;

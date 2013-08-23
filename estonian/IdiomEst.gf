@@ -48,7 +48,7 @@ concrete IdiomEst of Idiom = CatEst **
 
     ProgrVP vp = 
       let 
-        inf = (vp.s ! VIInf Inf3Iness ! Simul ! Pos ! agrP3 Sg).fin ;
+        inf = (vp.s ! VIInf InfMas ! Simul ! Pos ! agrP3 Sg).fin ;
         on  = predV olla
       in {
         s = on.s ;

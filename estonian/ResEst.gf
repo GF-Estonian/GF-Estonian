@@ -17,9 +17,9 @@ resource ResEst = ParamX ** open Prelude in {
 -- This is the $Case$ as needed for both nouns and $NP$s.
 
   param
-    Case = Nom | Gen | Part | Transl | Ess 
-         | Iness | Elat | Illat | Adess | Ablat | Allat 
-         | Abess | Comit | Termin ;
+    Case = Nom | Gen | Part  
+         | Illat | Iness | Elat | Allat | Adess | Ablat 
+         | Transl | Ess | Termin | Abess | Comit;
 
     NForm = NCase Number Case ; 
 
@@ -112,15 +112,14 @@ param
    | PastPartPass AForm
    ;
 
-  -- TODO: add: supiin
   InfForm =
-     Inf1       -- da
-   | Inf3Iness  -- mas
-   | Inf3Elat   -- mast
---   | Inf3Illat  -- puhumaan --TODO is this necessary?
-   | Inf3Abess  -- mata
---   | InfPresPart -- puhuvan --TODO is this necessary?
-   | Inf3Transl -- maks
+     InfDa     -- lugeda
+   | InfDes    -- lugedes 
+   | InfMa     -- lugema  
+   | InfMas    -- lugemas
+   | InfMast   -- lugemast
+   | InfMata   -- lugemata
+   | InfMaks   -- lugemaks
    ;
 
   SType = SDecl | SQuest ;
@@ -405,10 +404,10 @@ oper
       "olla" "on" "olen" "on" "olge" "ollaan" 
       "oli" "olin" "oleks" "ollut" "oltu" "ollun" ;
     in {s = table {
-      Inf Inf3Iness => "olemas" ;
-      Inf Inf3Elat  => "olemast" ;
-      Inf Inf3Abess => "olemata" ;
-      Inf Inf3Transl => "olemaks" ;
+      Inf InfMas => "olemas" ;
+      Inf InfMast => "olemast" ;
+      Inf InfMata => "olemata" ;
+      Inf InfMaks => "olemaks" ;
       v => olla.s ! v
       }
     } ;
@@ -434,6 +433,7 @@ oper
     let
       tulema = vh.tulema ;
       tulla = vh.tulla ; 
+      tulles = "TODO" ;
       tulee = vh.tulee ; 
       tulen = vh.tulen ; 
       tulevat = vh.tulevat ;
@@ -455,7 +455,8 @@ oper
       tullun = (noun2adj (nhn (sKukko tultu tullun (tultu + ("j"+a))))).s
     in
     {s = table {
-      Inf Inf1 => tulla ;
+      Inf InfDa => tulla ;
+      Inf InfDes => tulles ;
       Presn Sg P1 => tuje + "n" ;
       Presn Sg P2 => tuje + "d" ;
       Presn Sg P3 => tulee ;
@@ -487,10 +488,11 @@ oper
       PresPart => "TODO" ;
       PastPartAct n => tulleen ! n ;
       PastPartPass n => tullun ! n ;
-      Inf Inf3Transl => tulema + "ks" ; -- -maks (missing in Finnish)
-      Inf Inf3Iness => tulema + "s" ; -- -mas
-      Inf Inf3Elat  => tulema + "st" ; -- -mast
-      Inf Inf3Abess => tulema + "ta" -- -mata
+      Inf InfMa => tulema ;
+      Inf InfMas => tulema + "s" ; -- -mas
+      Inf InfMast  => tulema + "st" ; -- -mast
+      Inf InfMaks => tulema + "ks" ; -- -maks (missing in Finnish)
+      Inf InfMata => tulema + "ta" -- -mata
       }
     } ;
 

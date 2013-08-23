@@ -47,18 +47,21 @@ oper
   nominative  : Case ; -- e.g. "karp"
   genitive    : Case ; -- e.g. "karbi"
   partitive   : Case ; -- e.g. "karpi"
-  essive      : Case ; -- e.g. "karbina"
-  translative : Case ; -- e.g. "karbiks"
+  illative    : Case ; -- e.g. "karbisse/karpi"
   inessive    : Case ; -- e.g. "karbis"
   elative     : Case ; -- e.g. "karbist"
-  illative    : Case ; -- e.g. "karbisse/karpi"
+  allative    : Case ; -- e.g. "karbile"
   adessive    : Case ; -- e.g. "karbil"
   ablative    : Case ; -- e.g. "karbilt"
-  allative    : Case ; -- e.g. "karbile"
+  translative : Case ; -- e.g. "karbiks"
+  terminative : Case ; -- e.g. "karbini"
+  essive      : Case ; -- e.g. "karbina"
+  abessive    : Case ; -- e.g. "karbita"
   comitative  : Case ; -- e.g. "karbiga"
 
-  infFirst : InfForm ; -- e.g. "tehdä"
-  infElat : InfForm ;  -- e.g. "tekemästä"
+  infDa : InfForm ; -- e.g. "lugeda"
+  infMa : InfForm ; -- e.g. "lugema"
+  infMast : InfForm ;  -- e.g. "lugemast"
 
 -- The following type is used for defining *rection*, i.e. complements
 -- of many-place verbs and adjective. A complement can be defined by
@@ -210,7 +213,7 @@ oper
   mkVV  : V -> VV ;  -- e.g. "alkaa"
   mkVVf : V -> InfForm -> VV ; -- e.g. "ruveta" infIllat
   mkV2V : V -> Prep -> V2V ;  -- e.g. "käskeä" genitive
-  mkV2Vf : V -> Prep -> InfForm -> V2V ; -- e.g. "kieltää" partitive infElat  
+  mkV2Vf : V -> Prep -> InfForm -> V2V ; -- e.g. "kieltää" partitive infMast  
   mkVA  : V -> Prep -> VA ; -- e.g. "maistua" ablative
   mkV2A : V -> Prep -> Prep -> V2A ; -- e.g. "maalata" accusative translative
   mkVQ  : V -> VQ ; 
@@ -242,17 +245,20 @@ oper
   nominative = Nom ;
   genitive = Gen ;
   partitive = Part ;
-  translative = Transl ;
-  inessive = Iness ;
-  essive  = Ess ;
-  elative = Elat ;
   illative = Illat ;
+  inessive = Iness ;
+  elative = Elat ;
+  allative = Allat ;
   adessive = Adess ;
   ablative = Ablat ;
-  allative = Allat ;
+  translative = Transl ;
+  terminative = Termin ;
+  essive  = Ess ;
+  abessive = Abess ;  
   comitative = Comit ;
-
-  infFirst = Inf1 ; infElat = Inf3Elat ;
+ 
+  infDa = InfDa ; infMa = InfMa ; infMast = InfMast ;
+  --infDes = InfDes ; infMas = InfMas ; infMaks = InfMaks ; infMata = InfMata ;
 
   prePrep  : Case -> Str -> Prep = 
     \c,p -> {c = NPCase c ; s = p ; isPre = True ; lock_Prep = <>} ;
@@ -515,7 +521,7 @@ oper
   dirdirV3 v = dirV3 v allative ;
 
   mkVS  v = v ** {lock_VS = <>} ;
-  mkVV  v = mkVVf v infFirst ;
+  mkVV  v = mkVVf v infDa ;
   mkVVf  v f = v ** {vi = f ; lock_VV = <>} ;
   mkVQ  v = v ** {lock_VQ = <>} ;
 
@@ -525,7 +531,7 @@ oper
 
   mkV0  v = v ** {lock_V = <>} ;
   mkV2S v p = mk2V2 v p ** {lock_V2S = <>} ;
-  mkV2V v p = mkV2Vf v p infElat ; -- TODO: was infIllat (which we removed)
+  mkV2V v p = mkV2Vf v p infMast ; -- TODO: was infIllat (which we removed)
   mkV2Vf v p f = mk2V2 v p ** {vi = f ; lock_V2V = <>} ;
 
   mkVA  v p = v ** {c2 = p ; lock_VA = <>} ;

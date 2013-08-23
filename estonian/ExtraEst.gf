@@ -22,7 +22,7 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
     BaseVPI = twoSS ;
     ConsVPI = consrSS comma ;
 
-    MkVPI vp = {s = infVP (NPCase Nom) Pos (agrP3 Sg) vp Inf1} ;
+    MkVPI vp = {s = infVP (NPCase Nom) Pos (agrP3 Sg) vp InfDa} ;
     ConjVPI = conjunctDistrSS ;
     ComplVPIVV vv vpi = 
       insertObj (\\_,_,_ => vpi.s) (predV vv) ;
