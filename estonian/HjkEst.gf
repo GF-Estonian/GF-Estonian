@@ -232,6 +232,8 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	syl_count : Str -> SylCount ;
 	syl_count x =
 		case x of {
+			-- all 1-letters
+			? => S1 ;
 			-- all 2-letters
 			? + ? => S1 ;
 			-- all 3-letters
