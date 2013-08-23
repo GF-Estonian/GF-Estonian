@@ -22,9 +22,9 @@ abstract ExtraEstAbs = Extra [
 
     vai_Conj : Conj ;                     -- minä vai sinä? ("or" in question)
 
-    CompPartAP : AP -> Comp ;             -- kahvi on valmista
 
-    ProDropPoss : Pron -> Quant ;         -- vaimoni
+    OmaPoss : Quant ;                     -- Reflexive possessive "oma"
+    ProDropPoss : Pron -> Quant ;         -- vaimoni --TODO Is this relevant in Estonian? Is the agreement of pronoun ever needed, or is it the same as oma?
 
   cat
     ClPlus ;      -- clause with more variation

@@ -1,0 +1,22 @@
+log:
+
+* Implemented noun morphology following HJK
+   - worst case constructor 6 forms
+   - Finnish worst case constructor ? forms
+* Verb morphology
+   - Regular internal representation 4 forms
+   - Around 30 irregular verbs that need ? forms
+   - Finnish worst case constructor 10 forms
+   
+Other changes
+   - Removed question particles from the category of verbs
+   - Removed possessive suffix from nouns and dets
+   - Removed vowel harmony features
+   - Added "oma" possessive to Extra
+   - Removed CompPartAP from Extra: copula complement is in nominative    CompPartAP : AP -> Comp ; -- kahvi on valmista
+   - To remove from Extra:
+    	- Particles (-han, -pa etc.)
+    	- Word orders with focused member
+   	- PartCN?
+   	- 
+   

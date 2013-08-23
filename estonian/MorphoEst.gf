@@ -1360,17 +1360,14 @@ caseTable : Number -> CommonNoun -> Case => Str = \n,cn ->
   \\c => cn.s ! NCase n c ;
 
   mkDet : Number -> CommonNoun -> {
-      s1,sp : Case => Str ;       -- minun kolme
-      s2 : Str ;               -- -ni
+      s,sp : Case => Str ;       -- minun kolme
       n : Number ;             -- Pl   (agreement feature for verb)
       isNum : Bool ;           -- True (a numeral is present)
-      isPoss : Bool ;          -- True (a possessive suffix is present)
       isDef : Bool             -- True (verb agrees in Pl, Nom is not Part)
       } = \n, noun -> heavyDet {
-    s1 = \\c => noun.s ! NCase n c ;
-    s2 = [] ;
+    s = \\c => noun.s ! NCase n c ;
     n = n ;
-    isNum, isPoss = False ;
+    isNum = False ;
     isDef = True  --- does this hold for all new dets?
     } ;
 

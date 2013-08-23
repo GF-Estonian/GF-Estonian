@@ -5,10 +5,8 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
 
   lin
     GenNP np = {
-      s1,sp = \\_,_ => np.s ! NPCase Gen ;
-      s2 = [] ;
+      s,sp = \\_,_ => np.s ! NPCase Gen ;
       isNum  = False ;
-      isPoss = False ;
       isDef  = True ; --- "Jussin kolme autoa ovat" ; thus "...on" is missing
       isNeg = False 
      } ;
@@ -31,21 +29,19 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
     VPS = {
       s   : Agr  => Str ; 
       sc  : NPForm ;  --- can be different for diff parts
-      qp  : Bool -- True = back vowel --- can be different for diff parts
       } ;
 
     [VPS] = {
       s1,s2 : Agr  => Str ; 
       sc    : NPForm ;  --- take the first: minä osaan kutoa ja täytyy virkata
-      qp    : Bool      --- take the first: osaanko minä kutoa ja käyn koulua
       } ;
 
   lin
-    BaseVPS x y = twoTable Agr x y ** {sc = x.sc ; qp = x.qp} ;
-    ConsVPS x y = consrTable Agr comma x y ** {sc = x.sc ; qp = x.qp} ;
+    BaseVPS x y = twoTable Agr x y ** {sc = x.sc} ;
+    ConsVPS x y = consrTable Agr comma x y ** {sc = x.sc} ;
 
     ConjVPS conj ss = conjunctDistrTable Agr conj ss ** {
-      sc = ss.sc ; qp = ss.qp
+      sc = ss.sc
       } ;
 
     MkVPS t p vp = { --  Temp -> Pol -> VP -> VPS ;
@@ -57,7 +53,6 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
                  vp.adv ! p.p ++
                  vp.ext ;
       sc = vp.sc ;
-      qp = vp.qp
       } ;
 
     PredVPS np vps = { -- NP -> VPS -> S ;
@@ -66,7 +61,7 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
 
     AdvExistNP adv np = 
       mkClause (\_ -> adv.s) np.a (insertObj 
-        (\\_,b,_ => np.s ! NPCase Nom) (predV (verbOlla ** {sc = NPCase Nom ; qp = True}))) ;
+        (\\_,b,_ => np.s ! NPCase Nom) (predV (verbOlla ** {sc = NPCase Nom}))) ;
 
     RelExistNP prep rp np = {
       s = \\t,ant,bo,ag => 
@@ -77,7 +72,7 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
           np.a 
           (insertObj 
             (\\_,b,_ => np.s ! NPCase Nom) 
-            (predV (verbOlla ** {sc = NPCase Nom ; qp = True}))) ;
+            (predV (verbOlla ** {sc = NPCase Nom}))) ;
       in 
       cl.s ! t ! ant ! bo ! SDecl ;
       c = NPCase Nom
@@ -89,7 +84,7 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
 
     ICompExistNP adv np = 
       let cl = mkClause (\_ -> adv.s ! np.a) np.a (insertObj 
-        (\\_,b,_ => np.s ! NPCase Nom) (predV (verbOlla ** {sc = NPCase Nom ; qp = True}))) ;
+        (\\_,b,_ => np.s ! NPCase Nom) (predV (verbOlla ** {sc = NPCase Nom}))) ;
       in  {
         s = \\t,a,p => cl.s ! t ! a ! p ! SDecl
       } ;
@@ -124,11 +119,9 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
 
     vai_Conj = {s1 = [] ; s2 = "vai" ; n = Sg} ;
 
-    -- Fin: pizza on herkullista
-    -- TODO: remove or change this because in Estonian the copula adjective is in nominative
-    CompPartAP ap = {
-      s = \\agr => ap.s ! False ! NCase (complNumAgr agr) Part
-      } ;
+    --The reflexive possessive "oma"
+    --for "ta näeb oma koera" instead of *"tema koera"
+    OmaPoss = {s,sp = \\_,_ => "oma" ; isDef,isNeg,isNum = False} ;
 
 ---- copied from VerbEst.CompAP, should be shared
     ICompAP ap = {
@@ -150,51 +143,48 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
       a = p.a
       } ;
 
-    -- Fin: s2 = BIND ++ possSuffix p.a ;
     ProDropPoss p = {
-      s1 = \\_,_ => [] ;
+      s = \\_,_ => "oma" ; --???
       sp = \\_,_ => p.s ! NPCase Gen ;
-      s2 = [] ;
       isNum = False ;
-      isPoss = True ;
       isDef = True ;  --- "minun kolme autoani ovat" ; thus "...on" is missing
       isNeg = False
       } ;
 
   lincat 
     ClPlus, ClPlusObj, ClPlusAdv = ClausePlus ;
-    Part = {s : Bool => Str} ;
+    Part = {s : Str} ;
 
   lin 
     S_SVO part t p clp = 
       let 
          cl = clp.s ! t.t ! t.a ! p.p ;
-         pa = part.s ! True ----
+         pa = part.s ----
       in
       {s = t.s ++ p.s ++ cl.subj ++ pa ++ cl.fin ++ cl.inf ++ cl.compl ++ cl.adv ++ cl.ext} ; 
     S_OSV part t p clp = 
       let 
          cl = clp.s ! t.t ! t.a ! p.p ;
-         pa = part.s ! True ----
+         pa = part.s ----
       in
       {s = t.s ++ p.s ++ cl.compl ++ pa ++ cl.subj ++ cl.fin ++ cl.inf ++ cl.adv ++ cl.ext} ; 
     S_VSO part t p clp = 
       let 
          cl = clp.s ! t.t ! t.a ! p.p ;
-         pa = part.s ! cl.qp
+         pa = part.s
       in
       {s = t.s ++ p.s ++ cl.fin ++ pa ++ cl.subj ++ cl.inf ++ cl.compl ++ cl.adv ++ cl.ext} ; 
     S_ASV part t p clp = 
       let 
          cl = clp.s ! t.t ! t.a ! p.p ;
-         pa = part.s ! cl.qp
+         pa = part.s
       in
       {s = t.s ++ p.s ++ cl.adv ++ pa ++ cl.subj ++ cl.fin ++ cl.inf ++ cl.compl ++ cl.ext} ; 
 
     S_OVS part t p clp = 
       let 
          cl = clp.s ! t.t ! t.a ! p.p ;
-         pa = part.s ! True ----
+         pa = part.s ----
       in
       {s = t.s ++ p.s ++ cl.compl ++ pa ++ cl.fin ++ cl.inf ++ cl.subj ++ cl.adv ++ cl.ext} ; 
 
@@ -213,13 +203,14 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
     ClPlusWithObj c = c ;
     ClPlusWithAdv c = c ;
 
-  noPart     = {s = \\_ => []} ;
-  han_Part   = mkPart "han" "hän" ;
+  noPart     = {s = []} ;
+{-han_Part   = mkPart "han" "hän" ;
   pa_Part    = mkPart "pa" "pä" ;
   pas_Part   = mkPart "pas" "päs" ;
   ko_Part    = mkPart "ko" "kö" ;
   kos_Part   = mkPart "kos" "kös" ;
   kohan_Part = mkPart "kohan" "köhän" ;
   pahan_Part = mkPart "pahan" "pähän" ;
+-}
 
 } 

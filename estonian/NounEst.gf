@@ -16,11 +16,11 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
         ncase : NPForm -> Case * NForm = \c ->
           let k = npform2case n c 
           in 
-          case <n, c, det.isNum, det.isPoss, det.isDef> of {
-            <_, NPAcc,       True,_,_>  => <Nom,NCase Sg Part> ; -- kolme kytkintä(ni)
-            <_, NPCase Nom,  True,_,_>  => <Nom,NCase Sg Part> ; -- kolme kytkintä(ni)
-            <_, _, True,False,_>        => <k,  NCase Sg k> ;    -- kolmeksi kytkimeksi
-            <Pl,NPCase Nom,  _,_,False> => <k,  NCase Pl Part> ; -- kytkimiä
+          case <n, c, det.isNum, det.isDef> of {
+            <_, NPAcc,       True,_>  => <Nom,NCase Sg Part> ; -- kolme kytkintä(ni)
+            <_, NPCase Nom,  True,_>  => <Nom,NCase Sg Part> ; -- kolme kytkintä(ni)
+            <_, _, True,_>        => <k,  NCase Sg k> ;    -- kolmeksi kytkimeksi
+            <Pl,NPCase Nom,  _,False> => <k,  NCase Pl Part> ; -- kytkimiä
 
 {-          --Not in Estonian
             <_, NPCase Nom,_,True,_>    => <k,  NPossNom n> ;    -- kytkime+ni on/ovat...
@@ -34,8 +34,7 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
       s = \\c => let 
                    k = ncase c ;
                  in
-                 det.s1 ! k.p1 ++ det.s2 ++ cn.s ! k.p2 ; -- oma auto
-                 --det.s1 ! k.p1 ++ cn.s ! k.p2 ++ det.s2 ;  --autoni
+                 det.s ! k.p1 ++ cn.s ! k.p2 ;  --fin autoni, est no poss.suf.
       a = agrP3 (case det.isDef of {
             False => Sg ;  -- autoja menee; kolme autoa menee
             _ => det.n
@@ -85,30 +84,24 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
       } ;
 
     DetQuantOrd quant num ord = {
-      s1 = \\c => quant.s1 ! num.n ! c ++ num.s ! Sg ! c ++ ord.s ! NCase num.n c ; 
+      s = \\c => quant.s ! num.n ! c ++ num.s ! Sg ! c ++ ord.s ! NCase num.n c ; 
       sp = \\c => quant.sp ! num.n ! c ++ num.s ! Sg ! c ++ ord.s ! NCase num.n c ; 
-      s2 = quant.s2 ;
       n = num.n ;
       isNum = num.isNum ;
-      isPoss = quant.isPoss ;
       isDef = quant.isDef
       } ;
 
     DetQuant quant num = {
-      s1 = \\c => quant.s1 ! num.n ! c ++ num.s ! Sg ! c ;
+      s = \\c => quant.s ! num.n ! c ++ num.s ! Sg ! c ;
       sp = \\c => quant.sp ! num.n ! c ++ num.s ! Sg ! c ;
-      s2 = quant.s2 ;
       n = num.n ;
       isNum = num.isNum ; -- case num.n of {Sg => False ; _ => True} ;
-      isPoss = quant.isPoss ;
       isDef = quant.isDef
       } ;
 
     PossPron p = {
-      s1,sp = \\_,_ => p.s ! NPCase Gen ;
-      s2 = [] ;
+      s,sp = \\_,_ => p.s ! NPCase Gen ;
       isNum = False ;
-      isPoss = True ;
       isDef = True  --- "minun kolme autoani ovat" ; thus "...on" is missing
       } ;
 
@@ -139,20 +132,18 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
     OrdSuperl a = {s = \\nc => "kõige" ++ a.s ! Compar ! AN nc} ;
 
     DefArt = {
-      s1 = \\_,_ => [] ; 
-      sp = table {Sg => pronSe.s ; Pl => pronNe.s} ;
-      s2 = [] ; 
-      isNum,isPoss = False ;
+      s = \\_,_ => [] ; 
+      sp = table {Sg => pronSe.s ; Pl => pronNe.s} ; 
+      isNum = False ;
       isDef = True   -- autot ovat
       } ;
 
     IndefArt = {
-      s1 = \\_,_ => [] ; -- Nom is Part in Pl: use isDef in DetCN
+      s = \\_,_ => [] ; -- Nom is Part in Pl: use isDef in DetCN
       sp = \\n,c => 
          (nhn (mkSubst "ä" "yksi" "yhde" "yhte" "yhtä" "yhteen" "yksi" "yksi" 
-         "yksien" "yksiä" "yksiin")).s ! NCase n c ;
-      s2 = [] ; 
-      isNum,isPoss,isDef = False -- autoja on
+         "yksien" "yksiä" "yksiin")).s ! NCase n c ; 
+      isNum,isDef = False -- autoja on
       } ;
 
     MassNP cn =

@@ -702,19 +702,17 @@ oper
 
   etta_Conj : Str = "et" ;
 
-    heavyDet : PDet -> PDet ** {sp : Case => Str} = \d -> d ** {sp = d.s1} ;
+    heavyDet : PDet -> PDet ** {sp : Case => Str} = \d -> d ** {sp = d.s} ;
     PDet : Type = {
-      s1 : Case => Str ;
-      s2 : Str ;
+      s : Case => Str ;
       n : Number ;
       isNum : Bool ;
-      isPoss : Bool ;
       isDef : Bool
       } ;
 
     heavyQuant : PQuant -> PQuant ** {sp : Number => Case => Str} = \d -> 
-      d ** {sp = d.s1} ; 
+      d ** {sp = d.s} ; 
     PQuant : Type =  
-      {s1 : Number => Case => Str ; s2 : Str ; isPoss : Bool ; isDef : Bool} ; 
+      {s : Number => Case => Str ; isDef : Bool} ; 
 
 }

@@ -82,13 +82,12 @@ concrete StructuralEst of Structural = CatEst **
     isPron = False
     } ;
   someSg_Det = heavyDet {
-    s1 = jokuPron ! Sg ;
-    s2 = [] ;
-    isNum,isPoss = False ; isDef = True ; n = Sg
+    s = jokuPron ! Sg ;
+    isNum = False ; isDef = True ; n = Sg
     } ;
   somePl_Det = heavyDet {
-    s1 = jokuPron ! Pl ;
-    s2 = [] ; isNum,isPoss = False ; isDef = True ;
+    s = jokuPron ! Pl ;
+    isNum = False ; isDef = True ;
     n = Pl
     } ;
   something_NP = {
@@ -98,7 +97,7 @@ concrete StructuralEst of Structural = CatEst **
     } ;
   somewhere_Adv = ss "kuskil" ;
   that_Quant = heavyQuant {
-    s1 = table (MorphoEst.Number) {
+    s = table (MorphoEst.Number) {
           Sg => table (MorphoEst.Case) {
             c => (mkPronoun "too" "tolle" "toda" Sg P3).s ! NPCase c
             } ;
@@ -106,7 +105,7 @@ concrete StructuralEst of Structural = CatEst **
             c => (mkPronoun "nood" "nonde" "noid" Sg P3).s ! NPCase c
             }
           } ;
-    s2 = [] ; isNum,isPoss = False ; isDef = True ;
+    isNum = False ; isDef = True ;
     } ;
   that_Subj = ss "et" ;
   there_Adv = ss "seal" ;
@@ -115,7 +114,7 @@ concrete StructuralEst of Structural = CatEst **
   therefore_PConj = ss "sellepärast" ;
   they_Pron = mkPronoun "nemad" "nende" "neid" Pl P3 ;
   this_Quant = heavyQuant {
-    s1 = table (MorphoEst.Number) {
+    s = table (MorphoEst.Number) {
           Sg => table (MorphoEst.Case) {
             c => (mkPronoun "see" "selle" "seda" Sg P3).s ! NPCase c
             } ;
@@ -123,7 +122,7 @@ concrete StructuralEst of Structural = CatEst **
             c => (mkPronoun "need" "nende" "neid" Sg P3).s ! NPCase c
             }
           } ;
-    s2 = [] ; isNum,isPoss = False ; isDef = True ;
+    isNum = False ; isDef = True ;
     } ;
   through_Prep = postGenPrep "kautta" ;
   too_AdA = ss "liiga" ;
@@ -264,8 +263,8 @@ lin
   not_Predet = {s = \\_,_ => "ei"} ;
 
   no_Quant = heavyQuant {
-    s1 = \\n,c => "mitte" ++ mikaanPron ! n ! c ;
-    s2 = [] ; isNum,isPoss = False ; isDef = True ;
+    s = \\n,c => "mitte" ++ mikaanPron ! n ! c ;
+    isNum = False ; isDef = True ;
     } ;
 
   if_then_Conj = {s1 = "kui" ; s2 = "siis" ; n = Sg} ;

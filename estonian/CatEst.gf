@@ -51,18 +51,16 @@ concrete CatEst of Cat = CommonX ** open ResEst, Prelude in {
     Pron = {s : NPForm => Str ; a : Agr} ;
     NP   = {s : NPForm => Str ; a : Agr ; isPron : Bool} ;
     Det  = {
-      s1 : Case => Str ;       -- minun kolme
-      s2 : Str ;               -- -ni
+      s : Case => Str ;       -- minun kolme
       sp : Case => Str ;       -- se   (substantival form)
       n : Number ;             -- Pl   (agreement feature for verb)
       isNum : Bool ;           -- True (a numeral is present)
-      isPoss : Bool ;          -- True (a possessive suffix is present)
       isDef : Bool             -- True (verb agrees in Pl, Nom is not Part)
       } ;
-----    QuantSg, QuantPl = {s1 : Case => Str ; s2 : Str ; isPoss, isDef : Bool} ;
+----    QuantSg, QuantPl = {s : Case => Str ;  isDef : Bool} ;
     Ord    = {s : NForm => Str} ;
     Predet = {s : Number => NPForm => Str} ;
-    Quant  = {s1,sp : Number => Case => Str ; s2 : Str ; isPoss : Bool ; isDef : Bool} ;
+    Quant  = {s,sp : Number => Case => Str ; isDef : Bool} ;
     Card   = {s : Number => Case => Str ; n : Number} ;
     Num    = {s : Number => Case => Str ; isNum : Bool ; n : Number} ;
 
