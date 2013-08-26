@@ -28,8 +28,8 @@ do
 	cat ${tests}/${type}.csv | sed "s/,.*//" | python cc.py -r ${g}/ParadigmsEst.gf --oper "mkN" | gf --run >> ${tests}/mkN.gold.csv
 done
 
-# TODO: cover also A, Adv, V, etc.
-for oper in $(cat ${g}/LexiconEst.gf | grep -v "^ *--" | grep "_[N].*=" | sed "s/=.*//" | sed "s/ //g")
+# TODO: cover also Adv, V, etc.
+for oper in $(cat ${g}/LexiconEst.gf | grep -v "^ *--" | grep "_[NA][0-9]* *=" | sed "s/=.*//" | sed "s/ //g")
 do
 	echo $oper
 	echo | python cc.py -r ${g}/LexiconEst.gf --oper "$oper" | gf --run >> ${tests}/lexicon.gold.csv
