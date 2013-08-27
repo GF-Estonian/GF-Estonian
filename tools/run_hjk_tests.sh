@@ -12,6 +12,7 @@ cat ${tests}/nouns.csv | python cc.py -r ${g}/ParadigmsEst.gf --oper "mkN" | gf 
 rm ${tests}/hjk_type.gold.csv
 rm ${tests}/mkN.gold.csv
 rm ${tests}/lexicon.gold.csv
+rm ${tests}/numeral.gold.csv
 
 for file in $(ls ${tests}/hjk_type*.csv | grep -v "\.gold\.")
 do
@@ -33,4 +34,10 @@ for oper in $(cat ${g}/LexiconEst.gf | grep -v "^ *--" | grep "_[NA][0-9]* *=" |
 do
 	echo $oper
 	echo | python cc.py -r ${g}/LexiconEst.gf --oper "$oper" | gf --run >> ${tests}/lexicon.gold.csv
+done
+
+for oper in $(cat ${g}/NumeralEst.gf | egrep "(yksN|kymmeN|sadaN|tuhatN|kymmendN|tuhattaN|n[0-9]) *=" | sed "s/=.*//" | sed "s/ //g")
+do
+	echo $oper
+	echo | python cc.py -r ${g}/NumeralEst.gf --oper "$oper" | gf --run >> ${tests}/numeral.gold.csv
 done

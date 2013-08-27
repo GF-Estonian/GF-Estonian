@@ -1,5 +1,5 @@
 -- Usage:
--- cat test_NumeralEst.gfs | gf -path=present --run | sort
+-- cat test_NumeralEst.gfs | gf --run | sort
 
 import ../estonian/NumeralEst.gf
 

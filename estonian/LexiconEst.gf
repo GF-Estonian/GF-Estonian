@@ -14,7 +14,7 @@ lin
   art_N = mkN "kunst" ;
   ask_V2Q = mkV2 (mkV "küsima") (casePrep ablative) ;
   baby_N = mkN "beebi" ;
-  bad_A = mkA "halb" ;
+  bad_A = mkA (mkN "halb" "halva" "halba" "halba" "halbade" "halbu") ;
   bank_N = mkN "pank" ;
   beautiful_A = mkA "kaunis" ;
   become_VA = mkVA (mkV "muutuma") (casePrep translative) ;

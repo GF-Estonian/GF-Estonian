@@ -14,36 +14,44 @@ lincat
 
 lin
   num x = x ;
-  n2 = co (mkN "kaks") (ordN "a" "teine") ;
-  n3 = co (mkN "kolm") (ordN "a" "kolmas") ;
-  n4 = co (mkN "neli") (ordN "a" "neljas") ;
-  n5 = co (mkN "viis") (ordN "a" "viies") ;
-  n6 = co (mkN "kuus") (ordN "a" "kuues") ;
-  n7 = co (mkN "seitse") (ordN "a" "seitsmes") ;
-  n8 = co (mkN "kaheksa") (ordN "a" "kaheksas") ;
-  n9 = co (mkN "üheksa") (ordN "a" "üheksas") ;
+  n2 = co (mkN "kaks" "kahe" "kahte" "kahte" "kahtede" "kahtesid")
+		(mkN "teine" "teise" "teist" "teisesse" "teiste" "teisi") ;
+  n3 = co (mkN "kolm" "kolme" "kolme" "kolme" "kolmede" "kolmi")
+		(mkN "kolmas" "kolmanda" "kolmandat" "kolmandasse" "kolmandate" "kolmandaid") ;
+  n4 = co (mkN "neli" "nelja" "nelja" "nelja" "neljade" "neljasid")
+		(mkN "neljas" "neljanda" "neljandat" "neljandasse" "neljandate" "neljandaid") ;
+  n5 = co (mkN "viis" "viie" "viit" "viide" "viite" "viisi")
+		(mkN "viies" "viienda" "viiendat" "viiendasse" "viiendate" "viiendaid") ;
+  n6 = co (mkN "kuus" "kuue" "kuut" "kuude" "kuute" "kuusi")
+		(mkN "kuues" "kuuenda" "kuuendat" "kuuendasse" "kuuendate" "kuuendaid") ;
+  n7 = co (mkN "seitse" "seitsme" "seitset" "seitsmesse" "seitsmete" "seitsmeid")
+		(mkN "seitsmes" "seitsmenda" "seitsmendat" "seitsmendasse" "seitsmendate" "seitsmendaid") ;
+  n8 = co (mkN "kaheksa")
+		(mkN "kaheksas" "kaheksanda" "kaheksandat" "kaheksandasse" "kaheksandate" "kaheksandaid") ;
+  n9 = co (mkN "üheksa")
+		(mkN "üheksas" "üheksanda" "üheksandat" "üheksandasse" "üheksandate" "üheksandaid") ;
 
   pot01 =
    {s = table {
       NumAttr => \\_ => [] ;
-      NumIndep => yksiN.s
+      NumIndep => yksN.s
       } ;
     n = Sg
     } ;
   pot0 d = {n = Pl ; s = \\_ => d.s} ;
   pot110 =
-   {s = \\_ => kymmenenN.s ;
+   {s = \\_ => kymmeN.s ;
     n = Pl
     } ;
 
-  pot111 = {n = Pl ; s = \\_,c => yksiN.s ! c ++ BIND ++ "teist"} ;
+  pot111 = {n = Pl ; s = \\_,c => yksN.s ! c ++ BIND ++ "teist"} ;
   pot1to19 d = {n = Pl ; s = \\_,c => d.s ! c ++ BIND ++ "teist"} ;
   pot0as1 n = n ;
 
-  pot1 d = {n = Pl ; s = \\_,c => d.s ! c ++ BIND ++ kymmentaN.s ! c} ;
+  pot1 d = {n = Pl ; s = \\_,c => d.s ! c ++ BIND ++ kymmendN.s ! c} ;
   pot1plus d e = {
     n = Pl ;
-    s = \\_,c => d.s ! c ++ BIND ++ kymmentaN.s ! c ++ e.s ! NumIndep ! c
+    s = \\_,c => d.s ! c ++ BIND ++ kymmendN.s ! c ++ e.s ! NumIndep ! c
     } ;
   pot1as2 n = n ;
   pot2 d = {n = Pl ; s = \\_,c => d.s ! NumAttr ! c ++ nBIND d.n ++ sataaN.s ! d.n ! c} ;
@@ -69,46 +77,38 @@ oper
 
   nBIND : Number -> Str = \n -> case n of {Sg => [] ; _ => BIND} ; -- no BIND after silent 1
 
--- Too much trouble to infer vowel, cf. "kuudes" vs. "viides".
-
-  ordN : Str -> Str -> N = \a,sadas ->  --{s : NForms => Str} = \a,sadas ->
-    let
-      sada = init sadas
-    in
-    mkN sadas ;
-
 param
   NumPlace = NumIndep | NumAttr  ;
 
 oper
-  yksiN = co
-    (mkN "üks")
-    (ordN "a" "esimene") ;
+  yksN = co
+    (mkN "üks" "ühe" "ühte" "ühte" "ühtede" "ühtesid")
+    (mkN "esimene" "esimese" "esimest" "esimesse" "esimeste" "esimesi") ;
 
-  kymmenenN = co
-    (mkN "kümme")
-    (ordN "a" "kümnes") ;
+  kymmeN = co
+    (mkN "kümme" "kümne" "kümmet" "kümnesse" "kümnete" "kümneid")
+    (mkN "kümnes" "kümnenda" "kümnendat" "kümnendasse" "kümnendate" "kümnendaid") ;
 
-  sataN = co
-    (mkN "sada")
-    (ordN "a" "sajas") ;
+  sadaN = co
+    (mkN "sada" "saja" "sadat" "sajasse" "sadade" "sadu")
+    (mkN "sajas" "sajanda" "sajandat" "sajandasse" "sajandate" "sajandaid") ;
 
   tuhatN = co
-    (mkN "tuhat")
-    (ordN "a" "tuhandes")  ;
+    (mkN "tuhat" "tuhande" "tuhandet" "tuhandesse" "tuhandete" "tuhandeid")
+    (mkN "tuhandes" "tuhandenda" "tuhandendat" "tuhandendasse" "tuhandete" "tuhandendaid")  ;
 
-  kymmentaN =
+  kymmendN =
    {s = table {
       NCard (NCase Sg Nom) => "kümmend" ;
-      k => kymmenenN.s ! k
+      k => kymmeN.s ! k
       }
     } ;
 
   sataaN : {s : MorphoEst.Number => CardOrd => Str} = {s = table {
-    Sg => sataN.s ;
+    Sg => sadaN.s ;
     Pl => table {
       NCard (NCase Sg Nom) => "sada" ;
-      k => sataN.s ! k
+      k => sadaN.s ! k
       }
     }
   } ;
@@ -160,4 +160,3 @@ oper
     } ;
 
 }
-
