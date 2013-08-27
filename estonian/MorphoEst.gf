@@ -754,7 +754,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       (juo + "nee") ;
 
   -- VVS 27 elama
-  cElama : (_ : Str) -> VForms = \elama ->
+{-  cElama : (_ : Str) -> VForms = \elama ->
     let
       ela = Predef.tk 2 elama;
     in vForms13
@@ -893,6 +893,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       (saa + "nud") --9?
       (saa + "tu") --10?
       (saa + "nee"); -- 11?
+-}
 
   cPudota : (_,_ : Str) -> VForms = \pudota,putosi -> 
     let
@@ -992,55 +993,46 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       _ => "y"
       } ;
 
-    VFormsEst : Type = Predef.Ints 12 => Str ;
+    VFormsEst : Type = Predef.Ints 7 => Str ;
 
     VForms4 : Type = Predef.Ints 3 => Str ;
-
+    
     VForms : Type = Predef.Ints 11 => Str ;
 
-    vForms13 : (x1,_,_,_,_,_,_,_,_,_,_,_,x13 : Str) -> VFormsEst =
-      \olema,olla,olen,on,ovat,olkaa,ollaan,olin,oli,olisi,ollut,oltu,lienee ->
+    vForms8 : (x1,_,_,_,_,_,_,x8 : Str) -> VFormsEst =
+      \tulema,tulla,tuleb,tulge,tullakse,tuli,tuldud,tulev ->
       table {
-        0 => olema ;
-        1 => olla ;
-        2 => olen ;
-        3 => on ;
-        4 => ovat ;
-        5 => olkaa ;
-        6 => ollaan ;
-        7 => olin ;
-        8 => oli ;
-        9 => olisi ;
-       10 => ollut ;
-       11 => oltu ;
-       12 => lienee
+        0 => tulema ;
+        1 => tulla ;
+        2 => tuleb ;
+        3 => tulge ;
+        4 => tullakse ;
+        5 => tuli ;
+        6 => tuldud ;
+        7 => tulev 
       } ;
 
     vforms2VEst : VFormsEst -> Verb = \vh -> 
     let
       tulema = vh ! 0 ; 
       tulla = vh ! 1 ; 
-      tulen = vh ! 2 ; 
-      tuleb = vh ! 3 ; 
-      tulevad = vh ! 4 ;
-      tulge = vh ! 5 ; 
-      tullaan = vh ! 6 ; 
-      tulin = vh ! 7 ; 
-      tuli = vh ! 8 ;
-      tulisi = vh ! 9 ;
-      tullut = vh ! 10 ;
-      tultu = vh ! 11 ;
-      tullun = vh ! 12 ;
-      tulles = "TODO" ;
-      tule_ = init tulen ;
-      tuli_ = init tulin ;
-      a = last tulge ;
+      tuleb = vh ! 2 ; 
+      tulge = vh ! 3 ;  --necessary for tulla, surra (otherwise *tulege, *surege)
+      tullakse = vh ! 4 ; --necessary for all 
+      tuli = vh ! 5 ; --necessary for jooma-juua-jõi
+      tuldud = vh ! 6 ; --necessary for t/d in tuldi
+      tulev = vh ! 7 ; --sooma~soov ; laulma~laulev
+      tull_ = Predef.tk 1 tulla ; --juu(a); saad(a); tull(a); luged(a)
+      tulles = tull_ + "es" ; --juues; saades; tulles; lugedes
+      tule_ = init tuleb ; --is imperative like this always?
+      kaisi_ = case (last tuli) of {
+          "i" => tuli ;           --jõin, jõid, jõi
+            _ => tuli + "i" } ;   --käisin, käisid, käis
+      tuld_ = Predef.tk 2 tuldud ; --d/t choice for tuldi etc.
       tulgu = (init tulge) + "u" ;
-      tulko = Predef.tk 2 tulge + (ifTok Str a "a" "o" "ö") ;
-      tullee = Predef.tk 2 tullut + "ee" ;
-      tulleen = (nForms2N (dOttanut tullut)).s ;
-      tullu : Str = weakGrade tultu ;
-      tullun  = (nForms2N (dUkko tultu (tullu + "n"))).s ; 
+      luge_ = Predef.tk 2 tulge ; --joo(ge); tul(ge); luge(ge) ;
+      lugenud = (hjk_type_IVb_maakas (luge_ + "nud")).s ;
+      loetud = (hjk_type_IVb_maakas tuldud).s ;
     in
     {s = table {
       Inf InfDa => tulla ;
@@ -1050,34 +1042,35 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       Presn Sg P3 => tuleb ;
       Presn Pl P1 => tule_ + "me" ;
       Presn Pl P2 => tule_ + "te" ;
-      Presn Pl P3 => tulevad ;
-      Impf Sg P1  => tuli_ + "n" ;   --# notpresent
-      Impf Sg P2  => tuli_ + "d" ;  --# notpresent
+      Presn Pl P3 => tule_ + "vad" ;
+      Impf Sg P1  => kaisi_ + "n" ;   --# notpresent
+      Impf Sg P2  => kaisi_ + "d" ;  --# notpresent
       Impf Sg P3  => tuli ;  --# notpresent
-      Impf Pl P1  => tuli_ + "me" ;  --# notpresent
-      Impf Pl P2  => tuli_ + "te" ;  --# notpresent
-      Impf Pl P3  => tuli_ + "d" ;  --# notpresent
-      Condit Sg P1 => tulisi + "in" ;  --# notpresent
-      Condit Sg P2 => tulisi + "id" ;  --# notpresent
-      Condit Sg P3 => tulisi ;  --# notpresent
-      Condit Pl P1 => tulisi + "ime" ;  --# notpresent
-      Condit Pl P2 => tulisi + "ite" ;  --# notpresent
-      Condit Pl P3 => tulisi + "id" ;  --# notpresent
+      Impf Pl P1  => kaisi_ + "me" ;  --# notpresent
+      Impf Pl P2  => kaisi_ + "te" ;  --# notpresent
+      Impf Pl P3  => kaisi_ + "d" ;  --# notpresent
+      Condit Sg P1 => tule_ + "ksin" ;  --# notpresent
+      Condit Sg P2 => tule_ + "ksid" ;  --# notpresent
+      Condit Sg P3 => tule_ + "ks";  --# notpresent
+      Condit Pl P1 => tule_ + "ksime" ;  --# notpresent
+      Condit Pl P2 => tule_ + "ksite" ;  --# notpresent
+      Condit Pl P3 => tule_ + "ksid" ;  --# notpresent
       Imper Sg   => tule_ ; -- tule
       Imper Pl   => tulge ; -- tulge
       ImperP3 Sg => tulgu ; -- ta tulgu ?
       ImperP3 Pl => tulgu ; -- nad tulgu ?
-      ImperP1Pl  => tulgu ; -- me tulgu ?
+      ImperP1Pl  => tulge + "m" ; -- me tulgem ?
       ImpNegPl   => tulge ; -- ärge tulge ?
-      PassPresn True  => tullaan ;
-      PassPresn False => Predef.tk 2 tullaan ;
-      PassImpf True  => tullaan ;
-      PassImpf False => Predef.tk 2 tullaan ;
-      PresPart => tule_ + "v" ;
-      PastPartAct (AN n)  => tulleen ! n ;
-      PastPartAct AAdv    => tullee + "sti" ;
-      PastPartPass (AN n) => tullun ! n ;
-      PastPartPass AAdv   => tullu + "sti" ;
+      PassPresn True  => tullakse ;
+      PassPresn False => tuld_ + "a" ; --da or ta
+      PassImpf  True  => tuld_ + "i" ; --di or ti
+      PassImpf  False => tuldud ;  
+      --TODO Quotative
+      PresPart => tulev ;
+      PastPartAct (AN n)  => lugenud ! n ;
+      PastPartAct AAdv    => lugenud ! (NCase Sg Ablat) ;
+      PastPartPass (AN n) => loetud ! n ;
+      PastPartPass AAdv   => loetud ! (NCase Sg Ablat) ;
       Inf InfMa => tulema ;
       Inf InfMas => tulema + "s" ;
       Inf InfMast => tulema + "st" ;
@@ -1089,7 +1082,8 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
     lock_V = <>
     } ;
 
-    vForms4 : (_,_,_,_ : Str) -> VForms4 =
+    
+    vForms4 : (x1,_,_,x4 : Str) -> VForms4 =
       \kinkima,kinkida,kingib,kingitakse ->
       table {
         0 => kinkima ;
@@ -1097,7 +1091,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
         2 => kingib ;
         3 => kingitakse
       } ;
-
+      
     -- (Experimental) Full paradigm from 4 base forms.
     -- Analoogiaseosed pöördsõna paradigmas
     -- http://www.eki.ee/books/ekk09/index.php?p=3&p1=5&id=227
@@ -1164,7 +1158,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
     sc = NPCase Nom ;
     lock_V = <>
     } ;
-
+    
     vForms12 : (x1,_,_,_,_,_,_,_,_,_,_,x12 : Str) -> VForms =
       \olla,olen,on,ovat,olkaa,ollaan,olin,oli,olisi,ollut,oltu,lienee ->
       table {

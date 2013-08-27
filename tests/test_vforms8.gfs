@@ -1,0 +1,5 @@
+import -retain ../estonian/MorphoEst.gf
+
+cc -table -unqual vforms2VEst ( vForms8 "lugema" "lugeda" "loeb" "lugege" "loetakse" "luges" "loetud" "lugev" )
+cc -table -unqual vforms2VEst ( vForms8  "vestlema" "vestelda" "vestleb" "vestelge" "vesteldakse" "vestles" "vesteldud" "vestlev" )
+cc -table -unqual vforms2VEst (vForms8 "kinkima" "kinkida" "kingib" "kinkige" "kingitakse" "kinkis" "kingitud" "kinkiv")

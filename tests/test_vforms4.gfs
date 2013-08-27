@@ -1,0 +1,5 @@
+import -retain ../estonian/MorphoEst.gf
+
+cc -table -unqual mk_forms4_to_verb (vForms4 "lugema" "lugeda" "loeb" "loetakse")
+cc -table -unqual mk_forms4_to_verb (vForms4 "vestlema" "vestelda" "vestleb" "vesteldakse" )
+cc -table -unqual mk_forms4_to_verb (vForms4 "kinkima" "kinkida" "kingib" "kingitakse" )
