@@ -176,7 +176,7 @@ lin
   shop_N = mkN "kauplus" ;
   short_A = mkA "lühike" ;
   silver_N = mkN "hõbe" ;
-  sister_N = mkN "õde" ;
+  sister_N = mkN "õde" "õe" "õde" "õesse" "õdede" "õdesid" ;
   sleep_V = mkV "magama" ;
   small_A = mkA "väike" ;
   snake_N = mkN "uss" ;

@@ -6,7 +6,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
   -- TODO: change the name of this file and the names of the opers in this file
 
   param
-	SylCount = S1 | S2 | S3 ;
+	SylCount = S1 | S2 | S21 | S22 | S23 | S3 ;
 
   oper
 
@@ -17,6 +17,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r" | "z" | "ž" | "š") ;
 	lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
 	kpt : pattern Str = #("k" | "p" | "t" | "f" | "š") ;
+	gbd : pattern Str = #("g" | "b" | "d") ;
 
 	hjk_type_I_koi : Str -> NFS ;
 
@@ -217,17 +218,17 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<_, _ + ("kas"|"jas"|"nud"|"tud")> => hjk_type_IVb_maakas x ;
 			<_, _ + ("us"|"is")> => hjk_type_Vb_oluline x ;
 			<_, _ + #v + "s"> => hjk_type_Va_otsene x ;
-			<S2, _ + "e"> => hjk_type_III_ratsu x ; -- TODO 1st quant
+			<_, _ + ("v"|"tav"|"em"|"im")> => hjk_type_IVb_audit x "a" ;
+			<_, _ + ("line"|"lane"|"mine"|"kene")> => hjk_type_Vb_oluline x ;
+			<S21, _ + "e"> => hjk_type_III_ratsu x ; -- k6ne
+			<_, _ + "ne"> => hjk_type_Va_otsene x ;
 			<S2, _ + #v> => hjk_type_II_ema x ; -- TODO 1st quant
-			<S2, _ + #v> => hjk_type_III_ratsu x ; -- TODO 2st quant (masked)
-			<S2, _ + #v> => hjk_type_IVa_aasta x ; -- TODO 3rd quant (masked)
+			<S22, _ + #v> => hjk_type_III_ratsu x ;
+			<S23, _ + #v> => hjk_type_IVa_aasta x ;
 			<S2, _ + #foreign + _ + "in"> => hjk_type_IVb_audit x "i" ; -- TODO: better foreign detection
 			<S2, _ + "in"> => hjk_type_IVb_audit x "a" ;
-			<_, _ + ("v"|"tav"|"em"|"im")> => hjk_type_IVb_audit x "a" ;
 			<S2, _ + ("a"|"e"|"i") + ("ng"|"k")> => hjk_type_IVb_audit x "u" ;
 			<S3, _ + #c + #v + #lmnr> => hjk_type_VI_seminar x ;
-			<_, _ + ("line"|"lane"|"mine"|"kene")> => hjk_type_Vb_oluline x ;
-			<_, _ + "ne"> => hjk_type_Va_otsene x ;
 			<S1, _ + #v + #c + #c + #c> => hjk_type_VI_link x ;
 			<S1, _ + #v + #c + #c> => hjk_type_VI_link x ;
 			<S1, _ + #v + #v + #c> => hjk_type_VI_link x ;
@@ -258,20 +259,26 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			-- all 4-letters
 			#c + #v + #v + #c => S1 ; -- siid
 			#c + #v + #c + #c => S1 ; -- link
-			#v + #v + #c + #v => S2 ;
+			#v + #v + #c + #v => S23 ; -- 6ige
 			#v + #c + #v + #v => S2 ;
 			#v + #c + #v + #c => S2 ;
 			#v + #c + #c + #v => S2 ;
-			#c + #v + #c + #v => S2 ;
+			#c + #v + #c + #v => S21 ;
 			? + ? + ? + ? => S1 ;
 			-- all 5-letters
 			#c + #v + #c + #c + #c => S1 ;
 			#c + #v + #c + #v + #c => S2 ;
+			#c + #v + #c + #gbd + "e" => S23 ; -- valge
+			#c + #v + #v + #gbd + "e" => S23 ; -- haige ?
+			#c + #v + #c + #c + #v => S22 ; -- ratsu
 			#v + #c + #c + #c + #v => S2 ;
 			#v + #v + #c + #v + #c => S2 ;
-		_ + ? + #c + #v + #c + #v => S3 ; -- oluline
+			#v + #v + #c + #c + #v => S23 ; -- aasta
+			#c + #c + #v + #c + #v => S2 ; -- blogi
+			_ + ? + #c + #v + #c + #v => S3 ; -- oluline
 			-- all 6-letters
 			#c + #v + #c + #v + #c + #c => S2 ;
+			#c + #v + #c + #v + #c + #v => S3 ;
 			#c + #v + #c + #c + #v + #c => S2 ;
 			#v + #c + #c + #v + #c + #v => S3 ;
 			-- all 7-letters

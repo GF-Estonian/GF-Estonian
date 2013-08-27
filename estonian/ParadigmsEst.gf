@@ -415,6 +415,9 @@ oper
       (noun2adjComp False (nForms2N (dSuurin kivin))) ;
 
   -- TODO: this is a bit simplified
+  -- http://www.eki.ee/books/ekk09/index.php?p=3&p1=4&id=208
+  -- TODO: maybe not implement the superlative, which is more complex,
+  -- use "kõige" + Comp instead
   noun2adjDeg : Noun -> Adjective = \suur ->
     regAdjective
       suur
