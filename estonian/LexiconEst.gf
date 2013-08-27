@@ -33,7 +33,7 @@ lin
   bread_N = mkN "leib" ;
   break_V2 = mkV2 (mkV "rikkoa") ;
   broad_A = mkA "lai" ;
-  brother_N2 = mkN2 (mkN "vend") ;
+  brother_N2 = mkN2 (mkN "vend" "venna" "venda" "venda" "vendade" "vendi") ;
   brown_A = mkA "pruun" ;
   butter_N = mkN "või" ;
   buy_V2 = mkV2 (mkV "ostma") ;
@@ -45,7 +45,7 @@ lin
   ceiling_N = mkN "lagi" ;
   chair_N = mkN "tool" ;
   cheese_N = mkN "juust" ;
-  child_N = mkN "laps" ;
+  child_N = mkN "laps" "lapse" "last" "lapsesse" "laste" "lapsi" ;
   church_N = mkN "kirik" ;
   city_N = mkN "linn" ;
   clean_A = mkA "puhas" ;
