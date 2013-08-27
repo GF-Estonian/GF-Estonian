@@ -521,13 +521,20 @@ oper
 
   noun2adj : CommonNoun -> Adj = noun2adjComp True ;
 
+  -- TODO: remove the unused arguments and clean up the code
+  -- TODO: AAdv is current just Sg Ablat, which seems OK in most cases, although
+  -- ilus -> ilusti | ilusalt?
+  -- hea -> hästi
+  -- parem -> paremini
+  -- parim -> kõige paremini | parimalt?
   noun2adjComp : Bool -> CommonNoun -> Adj = \isPos,tuore ->
     let 
       tuoreesti  = Predef.tk 1 (tuore.s ! NCase Sg Gen) + "sti" ; 
       tuoreemmin = Predef.tk 2 (tuore.s ! NCase Sg Gen) + "in"
     in {s = table {
          AN f => tuore.s ! f ;
-         AAdv => if_then_Str isPos tuoreesti tuoreemmin
+         -- AAdv => if_then_Str isPos tuoreesti tuoreemmin
+         AAdv => tuore.s ! NCase Sg Ablat
          }
        } ;
 

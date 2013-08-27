@@ -14,17 +14,17 @@ lin
   art_N = mkN "kunst" ;
   ask_V2Q = mkV2 (mkV "küsima") (casePrep ablative) ;
   baby_N = mkN "beebi" ;
-  bad_A = mkA (mkN "halb") "halvem" "halvim" ;
+  bad_A = mkA "halb" ;
   bank_N = mkN "pank" ;
-  beautiful_A = mkA (mkN "kaunis") "kauniimpi" "kaunein" ;
+  beautiful_A = mkA "kaunis" ;
   become_VA = mkVA (mkV "muutuma") (casePrep translative) ;
   beer_N = mkN "õlu" ;
   beg_V2V = mkV2V (mk2V "pyytää" "pyysi") (casePrep partitive) ;
-  big_A = mkA (mkN "suuri" "suuria") "suurempi" "suurin" ;
+  big_A = mkA "suur" ;
   bike_N = mkN "ratas" ;
   bird_N = mkN "lind" ;
-  black_A = mkA (mkN "musta") "mustempi" "mustin" ;
-  blue_A = mkA (mkN "sininen") "sinisempi" "sinisin" ;
+  black_A = mkA "must" ;
+  blue_A = mkA "sinine" ;
   boat_N = mkN "paat" ;
   book_N = mkN "raamat" ;
   boot_N = mkN "saabas" ;
@@ -32,9 +32,9 @@ lin
   boy_N = mkN "poiss" ;
   bread_N = mkN "leib" ;
   break_V2 = mkV2 (mkV "rikkoa") ;
-  broad_A = mkA (mkN "leveä") "leveämpi" "levein" ;
-  brother_N2 = mkN2 (mkN "vend") ;
-  brown_A = mkA (mkN "ruskea") "ruskeampi" "ruskein" ;
+  broad_A = mkA "lai" ;
+  brother_N2 = mkN2 (mkN "vend" "venna" "venda" "venda" "vendade" "vendi") ;
+  brown_A = mkA "pruun" ;
   butter_N = mkN "või" ;
   buy_V2 = mkV2 (mkV "ostma") ;
   camera_N = mkN "kaamera" ;
@@ -45,21 +45,21 @@ lin
   ceiling_N = mkN "lagi" ;
   chair_N = mkN "tool" ;
   cheese_N = mkN "juust" ;
-  child_N = mkN "laps" ;
+  child_N = mkN "laps" "lapse" "last" "lapsesse" "laste" "lapsi" ;
   church_N = mkN "kirik" ;
   city_N = mkN "linn" ;
-  clean_A = mkA (mkN "puhdas") ;
-  clever_A = mkA (mkN "viisas") ;
+  clean_A = mkA "puhas" ;
+  clever_A = mkA "tark" ;
   close_V2 = mkV2 (mkV "sulgema") ;
   coat_N = mkN "mantel" ;
-  cold_A = mkA (mkN "külm") "külmem" "külmim" ;
+  cold_A = mkA "külm" ;
   come_V = mkV "tulema" ;
   computer_N = mkN "arvuti" ;
   country_N = mkN "maa" ;
   cousin_N = mkN "nõbu" ;
   cow_N = mkN "lehm" ;
   die_V = mkV "surema" ;
-  dirty_A = mkA (mkN "likainen") "likaisempi" "likaisin" ;
+  dirty_A = mkA "must" ;
   distance_N3 = mkN3 (mkN "kaugus") (casePrep elative) (casePrep illative) ;
   doctor_N = mkN "arst" ;
   dog_N = mkN "koer" ;
@@ -68,7 +68,7 @@ lin
   easy_A2V = mkA2 (mkA (mkN "helppo") "helpompi" "helpoin") 
     (casePrep allative) ;
   eat_V2 = mkV2 (mkV "sööma") (casePrep partitive) ;
-  empty_A = mkA (mkN "tyhjä") "tyhjempi" "tyhjin" ;
+  empty_A = mkA "tühi" ;
   enemy_N = mkN "vaenlane" ;
   factory_N = mkN "tehas" ;
   father_N2 = mkN2 (mkN "isa") ;
@@ -88,7 +88,7 @@ lin
   good_A = mkA (mkN "hea") "parem" "parim" ;
   go_V = mk12V "minna" "lähen" "läheb" "lähevad" "mingu" "TODO"
       "läksin" "läks" "läheks" "TODO" "TODO" "TODO" ;
-  green_A = mkA (mkN "roheline") "rohelisem" "rohelisim" ;
+  green_A = mkA "roheline" ;
   harbour_N = mkN "sadam" ;
   hate_V2 = mkV2 (mkV "vihkama") cpartitive ;
   hat_N = mkN "müts" ;
@@ -96,9 +96,9 @@ lin
   hill_N = mkN "mägi" ;
   hope_VS = mkVS (mkV "lootma") ;
   horse_N = mkN "hobune" ;
-  hot_A = mkA (mkN "kuuma") "kuumempi" "kuumin" ;
+  hot_A = mkA "kuum" ;
   house_N = mkN "maja" ;
-  important_A = mkA (mkN "tärkeä") "tärkeämpi" "tärkein" ;
+  important_A = mkA "tähtis" ;
   industry_N = mkN "tööstus" ;
   iron_N = mkN "raud" ;
   king_N = mkN "kuningas" ;
@@ -117,7 +117,7 @@ lin
   like_V2 = mkV2 (mkV "lugupidama") elative ;
   listen_V2 = mkV2 (mkV "kuunnella" "kuunteli") partitive ;
   live_V = mkV "elama" ;
-  long_A = mkA (mkN "pikk") "pikem" "pikim" ;
+  long_A = mkA "pikk" ;
   lose_V2 = mkV2 (mkV "hävitä" "hävisi") ; --- hukata
   love_N = mkN "armastus" ;
   love_V2 = mkV2 (mkV "armastama") partitive ;
@@ -129,11 +129,11 @@ lin
   mother_N2 = mkN2 (mkN "ema") ;
   mountain_N = mkN "mägi" ;
   music_N = mkN "muusika" ;
-  narrow_A = mkA (mkN "kapea") "kapeampi" "kapein" ;
-  new_A = mkA (mkN "uus") "uuem" "uusim" ;
+  narrow_A = mkA "kitsas" ;
+  new_A = mkA "uus" ;
   newspaper_N = mkN "aja" (mkN "leht") ;
   oil_N = mkN "õli" ;
-  old_A = mkA (mkN "vana") "vanem" "vanim" ;
+  old_A = mkA "vana" ;
   open_V2 = mkV2 (mkV "avama") ;
   paint_V2A = mkV2A (mkV "maalata") accPrep (casePrep translative) ;
   paper_N = mkN "paber" ;
@@ -174,11 +174,11 @@ lin
   shirt_N = mkN "särk" ;
   shoe_N = mkN "king" ;
   shop_N = mkN "kauplus" ;
-  short_A = mkA (mkN "lühike") ;
+  short_A = mkA "lühike" ;
   silver_N = mkN "hõbe" ;
   sister_N = mkN "õde" ;
   sleep_V = mkV "magama" ;
-  small_A = mkA (mkN "väike") "väiksem" "väikseim" ;
+  small_A = mkA "väike" ;
   snake_N = mkN "uss" ;
   sock_N = mkN "sukk" ;
   speak_V2 = mkV2 (mkV "puhua") cpartitive ;
@@ -187,7 +187,7 @@ lin
   stone_N = mkN "kivi" ;
   stove_N = mkN "ahi" ;
   student_N = mkN "tudeng" ;
-  stupid_A = mkA "tyhmä" ;
+  stupid_A = mkA "loll" ;
   sun_N = mkN "päike" ;
   switch8off_V2 = mkV2 (mkV "sammuttaa") ;
   switch8on_V2 = mkV2 (mkV "sytyttää") ;
@@ -197,21 +197,21 @@ lin
   teach_V2 = mkV2 (mkV "opettaa") ;
   television_N = mkN "televisioon" ;
   thick_A = mkA "paks" ;
-  thin_A = mkA (mkN "ohut" "ohuita") ;
+  thin_A = mkA "õhuke" ;
   train_N = mkN "rong" ;
   travel_V = mkV "matkustaa" ;
   tree_N = mkN "puu" ;
-  ugly_A = mkA (mkN "ruma") "rumempi" "rumin" ;
+  ugly_A = mkA "kole" ;
   understand_V2 = mkV2 (mkV "ymmärtää" "ymmärrän" "ymmärsi") ;
   university_N = mkN "ülikool" ;
   village_N = mkN "küla" ;
   wait_V2 = mkV2 (mkV "ootama") partitive ;
   walk_V = mkV "kõndima" ;
-  warm_A = mkA (mkN "soe") "soojem" "kõige soojem" ;
+  warm_A = mkA "soe" ;
   war_N = mkN "sõda" ;
   watch_V2 = mkV2 (mkV "vaatama") cpartitive ;
   water_N = mkN "vesi" ;
-  white_A = mkA "valkoinen" ;
+  white_A = mkA "valge" ;
   window_N = mkN "aken" ;
   wine_N = mkN "vein" ;
   win_V2 = mkV2 (mkV "voittaa") ;
@@ -219,8 +219,8 @@ lin
   wonder_VQ = mkVQ (mkV "ihmetellä") ;
   wood_N = mkN "puu" ;
   write_V2 = mkV2 (mkV "kirjutama") ;
-  yellow_A = mkA "keltainen" ;
-  young_A = mkA (mkN "nuori" "nuoria") "nuorempi" "nuorin" ;
+  yellow_A = mkA "kollane" ;
+  young_A = mkA "noor" ;
 
   do_V2 = mkV2 (
     mkV "tehdä" "teen" "tekee" "tekevät" "tehkää" "tehdään"
@@ -237,19 +237,19 @@ lin
   left_Ord = mkOrd (mkN "vasen") ;
   right_Ord = mkOrd (mkN "oikea") ;
   far_Adv = mkAdv "kaugel" ;
-  correct_A = mkA "oikea" ;
-  dry_A = mkA (mkN "kuiva") "kuivempi" "kuivin" ;
-  dull_A = mkA (mkN "tylsä") "tylsempi" "tylsin" ;
-  full_A = mkA (mkN "täysi") "täydempi" "täysin" ;
-  heavy_A = mkA "raskas" ;
-  near_A = mkA (mkN "läheinen") "läheisempi" "lähin" ;
-  rotten_A = mkA "mätä" ;
-  round_A = mkA "pyöreä" ;
-  sharp_A = mkA "terävä" ;
-  smooth_A = mkA "sileä" ;
-  straight_A = mkA (mkN "suora") "suorempi" "suorin" ;
-  wet_A = mkA (mkN "märkä") "märempi" "märin" ;
-  wide_A = mkA "leveä" ;
+  correct_A = mkA "õige" ;
+  dry_A = mkA "kuiv" ;
+  dull_A = mkA "igav" ;
+  full_A = mkA "täis" ;
+  heavy_A = mkA "raske" ;
+  near_A = mkA "lähedane" ;
+  rotten_A = mkA "mäda" ;
+  round_A = mkA "ümmargune" ;
+  sharp_A = mkA "terav" ;
+  smooth_A = mkA "sile" ;
+  straight_A = mkA "sirge" ;
+  wet_A = mkA "märg" ;
+  wide_A = mkA "lai" ;
   animal_N = mkN "loom" ;
   ashes_N = mkN "tuhk" ;
   back_N = mkN "selg" ;
@@ -367,10 +367,10 @@ lin
 
   john_PN = mkPN "Juhan" ;
   question_N = mkN "küsimus" ;
-  ready_A = mkA (mkN "valmis") ;
+  ready_A = mkA "valmis" ;
   reason_N = mkN "põhjus" ;
   today_Adv = mkAdv "täna" ;
-  uncertain_A = mkA "epävarma" ;
+  uncertain_A = mkA "ebakindel" ;
 
  oper
     mkOrd : N -> Ord ;

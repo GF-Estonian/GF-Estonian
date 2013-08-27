@@ -288,8 +288,8 @@ oper
 
     mkN : (raamat,raamatu,raamatut,raamatuid : Str) -> N = mk4N ;
 
-    -- mkN : (talo,talon,taloja,taloa : Str) -> N = mk4N ;
-    --  \s,t,u,v -> nForms2N (nForms4 s t u v) ;
+    mkN : (oun,ouna,ouna,ounasse,ounte,ounu : Str) -> N = mk6N ;
+
     mkN : (oun,ouna,ouna,ounasse,ounte,ounu,ountesse : Str) -> N = mk7N ;
 --    mkN : 
 --      (talo,talon,taloa,talona,taloon,talojen,taloja,taloina,taloissa,taloihin
