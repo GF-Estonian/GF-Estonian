@@ -1,5 +1,40 @@
 import -retain ../estonian/MorphoEst.gf
 
-cc -table -unqual vforms2VEst ( vForms8 "lugema" "lugeda" "loeb" "lugege" "loetakse" "luges" "loetud" "lugev" )
-cc -table -unqual vforms2VEst ( vForms8  "vestlema" "vestelda" "vestleb" "vestelge" "vesteldakse" "vestles" "vesteldud" "vestlev" )
-cc -table -unqual vforms2VEst (vForms8 "kinkima" "kinkida" "kingib" "kinkige" "kingitakse" "kinkis" "kingitud" "kinkiv")
+--Regular verbs, test whether vForms8 gives the same results as vForms4
+cc -table -unqual vforms82VEst ( vForms8 "lugema" "lugeda" "loeb" "lugege" "loetakse" "luges" "loetud" "lugev" )
+cc -table -unqual vforms82VEst ( vForms8  "vestlema" "vestelda" "vestleb" "vestelge" "vesteldakse" "vestles" "vesteldud" "vestlev" )
+cc -table -unqual vforms82VEst (vForms8 "kinkima" "kinkida" "kingib" "kinkige" "kingitakse" "kinkis" "kingitud" "kinkiv")
+
+--Irregular verbs: the 27 that can't be formed with vForms4
+
+--olema, minema
+cc -table -unqual vforms82VEst ( vForms8  "olema" "olla" "on" "olge" "ollakse" "oli" "oldud" "olev" ) 
+cc -table -unqual vforms82VEst ( vForms8  "minema" "minna" "läheb" "minge" "minnakse" "läks" "mindud" "minev" )  
+
+--tegema, nägema
+cc -table -unqual vforms82VEst ( vForms8  "tegema" "teha" "teeb" "tehke" "tehakse" "tegi" "tehtud" "tegev" ) 
+cc -table -unqual vforms82VEst ( vForms8  "nägema" "näha" "nääb" "nähke" "nähakse" "nägi" "nähtud" "nägev" ) 
+
+--laskma 
+cc -table -unqual vforms82VEst ( vForms8  "laskma" "lasta" "laseb" "laske" "lastakse" "lasi" "lastud" "laskev" )  
+
+--pesema, kusema
+cc -table -unqual vforms82VEst ( vForms8  "pesema" "pesta" "peseb" "peske" "pestakse" "pesi" "pestud" "pesev" )
+cc -table -unqual vforms82VEst ( vForms8  "kusema" "kusta" "kuseb" "kuske" "kustakse" "kusi" "kustud" "kusev" )
+
+--pidama
+cc -table -unqual vforms82VEst ( vForms8  "pidama" "pidada" "peab" "pidage" "peetakse" "pidi" "peetud" "pidav" )  
+
+
+--panema, surema, tulema
+cc -table -unqual vforms82VEst ( vForms8  "panema" "panna" "paneb" "pange" "pannakse" "pani" "pandud" "panev" )  
+cc -table -unqual vforms82VEst ( vForms8 "surema" "surra" "sureb" "surge" "surrakse" "suri" "surdud" "surev")
+cc -table -unqual vforms82VEst ( vForms8 "tulema" "tulla" "tuleb" "tulge" "tullakse" "tuli" "tuldud" "tulev")
+
+
+--võima, saama, käima, jooma
+cc -table -unqual vforms82VEst ( vForms8 "võima" "võida" "võib" "võige" "võiakse" "võis" "võidud" "võiv")
+cc -table -unqual vforms82VEst ( vForms8 "saama" "saada" "saab" "saage" "saadakse" "sai" "saadud" "saav")
+cc -table -unqual vforms82VEst ( vForms8 "käima" "käia" "käib" "käige" "käiakse" "käis" "käidud" "käiv")
+cc -table -unqual vforms82VEst ( vForms8 "jooma" "juua" "joob" "jooge" "juuakse" "jõi" "joodud" "joov")
+

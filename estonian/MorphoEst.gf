@@ -1043,7 +1043,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       tul_ = Predef.tk 3 tuldud ;  --correct stem for tulnud
       tuld_ = Predef.tk 2 tuldud ; --d/t choice for tuldi etc.
       tulgu = (init tulge) + "u" ;
-      joonud = (hjk_type_IVb_maakas (tul_ + "nud")).s ;
+      joonud = (hjk_type_IVb_maakas (tulnud)).s ;
       joodud = (hjk_type_IVb_maakas tuldud).s ;
     in
     {s = table {
