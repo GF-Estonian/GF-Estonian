@@ -811,36 +811,6 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
   -- VVS 30 riidlema
 
   -- VVS 31~27 kõnelema (rabelema~elama)
-
-  -- VVS 32 seisma
-  -- EKSS 44: tõusma, maksma, jooksma
-  -- t in takse,tud ; s in imperfect 3sg 
-  cSeisma : (_,_ : Str) -> VForms = \seisma,seisab ->
-    let
-      seis = Predef.tk 2 seisma ;
-    in vForms8
-      seisma
-      (seis + "ta")
-      seisab
-      (seis + "takse")
-      (seis + "ke")
-      (seis + "is")
-      (seis + "nud") 
-      (seis + "tud");
-
-  cLaskma : (_,_ : Str) -> VForms = \laskma,laseb ->
-    let
-      lask = Predef.tk 2 laskma ;
-      las = weaker lask ; --tõusma also ?
-    in vForms8
-      laskma
-      (las + "ta")
-      laseb
-      (las + "takse")
-      (las + "ke")
-      (lask + "is")
-      (lask + "nud") 
-      (las + "tud");
         
   -- VVS 33 naerma
   
@@ -850,7 +820,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
   -- Needs tud as a parameter, takse formed from that
   -- This might make sense with 2-param constructor. Not deleting yet. 
   -- cMuutma for only 58 and cAndma for only 63.
-  cSaatma : (_,_ : Str) -> VForms = \saatma,saadetud ->
+  cSaatma5863 : (_,_ : Str) -> VForms = \saatma,saadetud ->
     let
       saat = Predef.tk 2 saatma ;
       saadet = Predef.tk 2 saadetud ;
@@ -869,18 +839,15 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
   
   
   -- TS 58 muutma, saatma,
-  -- like seisma, but no reduplication of stem consonant (muutma~muuta, not *muutta)
-  -- like andma,murdma (TS 63) but different takse (muudetakse vs. antakse)
-  -- like petma (TS 59) but da with strong stem
+  -- like laskma (TS 62, 64), but no reduplication of stem consonant (muutma~muuta, not *muutta)
+  -- like andma (TS 63) but different takse (muudetakse vs. antakse)
   cMuutma : (_ : Str) -> VForms = \muutma ->
     let
       muut = Predef.tk 2 muutma ;
-      muu = Predef.tk 1 muut ;
-      t = last muut ;
       muud = weaker muut ;
     in vForms8
       muutma
-      (muu + t + "a")
+      (muut + "a")
       (muud + "ab")
       (muud + "etakse") -- always e?
       (muut + "ke")
@@ -888,28 +855,64 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       (muut + "nud")
       (muud + "etud") ; -- always e?
   
-  -- TS 59
-  -- weak stem in ma, strong in da
-  cPetma : (_ : Str) -> VForms = \petma ->
+  -- TS 59 (petma), TS 60 (jatma)
+  -- weak stem in ma, strong in da ; TS 60 irregular takse, tud
+  -- tud given as a param
+  cJatma : (_,_ : Str) -> VForms = \jatma,jaetud ->
     let
-      pet = Predef.tk 2 petma ;
-      pett = stronger pet ;
+      jat = Predef.tk 2 jatma ;
+      jatt = stronger jat ;
+      jaet = Predef.tk 2 jaetud ;
     in vForms8
-      petma
-      (pett + "a")
-      (pet + "ab")
-      (pet + "etakse") --always e?
-      (pet + "ke")
-      (pett + "is")
-      (pet + "nud")
-      (pet + "etud") ; --always e?
-     
+      jatma
+      (jatt + "a")
+      (jat + "ab")
+      (jaet + "akse") --always e?
+      (jat + "ke")
+      (jatt + "is")
+      (jat + "nud")
+      jaetud ; --always e?
+      
+      
+  --TS 61 (laulma)
+  --vowel given with the second param
+  --veenma,naerma
+  cKuulma : (_,_ : Str) -> VForms = \kuulma,kuuleb ->
+    let
+      kuul = Predef.tk 2 kuulma ;
+    in vForms8
+      kuulma
+      (kuul + "da")
+      kuuleb
+      (kuul + "dakse")
+      (kuul + "ge")
+      (kuul + "is")
+      (kuul + "nud")
+      (kuul + "dud") ;
+      
+   --TS 62 (tõusma), 64 (mõksma)
+  --works also for maitsma, jooksma
+  --doesn't give alt. forms joosta, joostes
+  cLaskma : (_,_ : Str) -> VForms = \laskma,laseb ->
+    let
+      lask = Predef.tk 2 laskma ;
+      las = weaker lask ; --no effect on tõusma
+    in vForms8
+      laskma
+      (las + "ta")
+      laseb
+      (las + "takse")
+      (las + "ke")
+      (lask + "is")
+      (lask + "nud") 
+      (las + "tud") ;
+
   -- TS 63 andma, murdma 
   cAndma : (_ : Str) -> VForms = \andma ->
     let
-      and = Predef.tk 2 andma ;
-      an = Predef.tk 1 and ;
-      ann = weaker and ;
+      and = Predef.tk 2 andma ; --murd(ma), hoid(ma)
+      an = Predef.tk 1 and ;    --mur(d),   hoi(d)
+      ann = weaker and ;        --murr,     hoi
     in vForms8
       andma
       (and + "a")
@@ -918,7 +921,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       (and + "ke")
       (and + "is")
       (and + "nud")
-      (an + "tud") ; --always e?
+      (an + "tud") ;
 
       
   -- VVS 35 nutma

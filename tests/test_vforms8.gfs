@@ -5,6 +5,7 @@ cc -table -unqual vforms2V ( vForms8 "lugema" "lugeda" "loeb" "loetakse" "lugege
 cc -table -unqual vforms2V ( vForms8  "vestlema" "vestelda" "vestleb" "vesteldakse" "vestelge" "vestles" "vestlenud" "vesteldud" )
 cc -table -unqual vforms2V (vForms8 "kinkima" "kinkida" "kingib" "kingitakse" "kinkige" "kinkis" "kinkinud" "kingitud" )
 cc -table -unqual vforms2V (vForms8 "muutma" "muuta" "muudab" "muudetakse" "muutke" "muutis" "muutnud" "muudetud" )
+cc -table -unqual vforms2V (vForms8 "hoidma" "hoida" "hoiab" "hoitakse" "hoidke" "hoidis" "hoidnud" "hoitud")
 
 
 --Irregular verbs: the 27 that can't be formed with vForms4

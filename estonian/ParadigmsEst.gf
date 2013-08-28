@@ -462,36 +462,30 @@ oper
       c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r" | "z" | "ž" | "š") ;
       lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
       kpt : pattern Str = #("k" | "p" | "t" | "f" | "š") ;
-
-{-      ott  = init luge ;
-      ots  = init ott + "s" ;
-      ota  = weakGrade luge ;
-      otin = init (strongGrade (init ott)) + "elin" ;
-      ot   = init ota ; -}
     in
-    case lugema of {
-    
-      --Consonant stem before ma
-      _ + "tma" =>
-        cMuutma lugema ;
-      _ + "dma" =>
-        cAndma lugema  ;
-      _ + #c + "ma" => 
-        cLaskma lugema (loe + "eb") ; 
-
---      _ + TODO + _ + "ma" => cPetma lugema ;
-      
---      _ + ("s"|"k") + "ma" =>
---      _ + #c + "ma" =>
---        cSeisma lugema (luge + "eb") ;  --default vowel tõusma~tõuseb; for seisma~seisab use mk2V (TODO)
-        
+    case lugema of {        
       --TS 49 verbs  
       ? + ("äi"|"õi") + "ma" =>
         cKaima lugema ;  --käima,võima
-      ? + a@("a"|"e"|"ä") + a + "ma" =>  
+      ? + ("aa"|"ee"|"ää") + "ma" =>  
         cSaama lugema ;  -- saama,jääma,keema
-      ? + o@("o"|"ö"|"ü"|"i") + o + "ma" =>
+      ? + ("oo"|"öö"|"üü"|"ii") + "ma" =>
         cJooma lugema ;  --jooma,looma,lööma,müüma,pooma,sööma,tooma,viima
+    
+      --Consonant stem before ma
+      --TS 58,61-64
+      --TS 59 (petma,nutma), TS 60 (jätma) with mk2V/mk3V 
+      _ + "tma" =>
+        cMuutma lugema ;
+      _ + "dma" =>
+        cAndma lugema ;
+      _ + "lma" =>
+        cKuulma lugema (luge + "eb") ; --kuulma,koolma. for laulma~laulab use mk2V (TODO)
+      _ + ("r"|"n") + "ma" =>
+        cKuulma lugema (luge + "ab") ; --for naerma,siirma,veenma,möönma
+      _ + #c + "ma" => 
+        cLaskma lugema (loe + "eb") ; --for __ab use mk2V (TODO)
+
         
       _ + "ima" =>
         cLeppima lugema ;
@@ -519,14 +513,14 @@ oper
         cElama lugema
     } ;   
  
-  vForms2 : (_,_ : Str) -> VForms = \huutaa,huusi ->
+  vForms2 : (_,_ : Str) -> VForms = \petma,pettis ->
     let
-      huuda = weakGrade (init huutaa) ;
-      huusin = weakGrade huusi + "n" ;
-      autoin = weakGrade (init huusi) + "in" ;
+      pet = Predef.tk 2 petma ;
+      pett = Predef.tk 2 pettis
     in 
-    case <huutaa,huusi> of {
-      _ => vForms1 huutaa
+    case <petma,pettis> of {
+      <_, _ + ("tt"|"kk"|"pp") + _> => cJatma petma (pet + "etud") ;
+      _ => vForms1 petma
       } ;
 
 

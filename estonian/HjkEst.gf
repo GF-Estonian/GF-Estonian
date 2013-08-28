@@ -175,6 +175,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			V@(#v) + "k" => li + V + "g" ;
 			V@(#v) + "p" => li + V + "b" ;
 			V@(#v) + "t" => li + V + "d" ;
+			V@(#v) + "d" => li + V ; --hoidma,hoiab
 			N@(#lmnr) + "k" => li + N + "g" ;
 			N@(#lmnr) + "p" => li + N + "b" ;
 			N@(#lmnr) + "t" => li + N + "d" ;
