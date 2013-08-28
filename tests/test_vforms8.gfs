@@ -1,40 +1,42 @@
 import -retain ../estonian/MorphoEst.gf
 
 --Regular verbs, test whether vForms8 gives the same results as vForms4
-cc -table -unqual vforms82VEst ( vForms8 "lugema" "lugeda" "loeb" "loetakse" "lugege" "luges" "lugenud" "loetud" )
-cc -table -unqual vforms82VEst ( vForms8  "vestlema" "vestelda" "vestleb" "vesteldakse" "vestelge" "vestles" "vestlenud" "vesteldud" )
-cc -table -unqual vforms82VEst (vForms8 "kinkima" "kinkida" "kingib" "kingitakse" "kinkige" "kinkis" "kinkinud" "kingitud" )
+cc -table -unqual vforms2V ( vForms8 "lugema" "lugeda" "loeb" "loetakse" "lugege" "luges" "lugenud" "loetud" )
+cc -table -unqual vforms2V ( vForms8  "vestlema" "vestelda" "vestleb" "vesteldakse" "vestelge" "vestles" "vestlenud" "vesteldud" )
+cc -table -unqual vforms2V (vForms8 "kinkima" "kinkida" "kingib" "kingitakse" "kinkige" "kinkis" "kinkinud" "kingitud" )
+cc -table -unqual vforms2V (vForms8 "muutma" "muuta" "muudab" "muudetakse" "muutke" "muutis" "muutnud" "muudetud" )
+
 
 --Irregular verbs: the 27 that can't be formed with vForms4
 
 --olema, minema
-cc -table -unqual vforms82VEst ( vForms8  "olema" "olla" "on" "ollakse" "olge" "oli" "olnud" "oldud" ) 
-cc -table -unqual vforms82VEst ( vForms8  "minema" "minna" "läheb" "minnakse" "minge" "läks" "läinud" "mindud" )  
+--cc -table -unqual vforms2V ( vForms8  "olema" "olla" "on" "ollakse" "olge" "oli" "olnud" "oldud" ) 
+--cc -table -unqual vforms2V ( vForms8  "minema" "minna" "läheb" "minnakse" "minge" "läks" "läinud" "mindud" )  
 
 --tegema, nägema
-cc -table -unqual vforms82VEst ( vForms8  "tegema" "teha" "teeb" "tehakse" "tehke" "tegi" "teinud" "tehtud" ) 
-cc -table -unqual vforms82VEst ( vForms8  "nägema" "näha" "näeb" "nähakse" "nähke" "nägi" "näinud" "nähtud" ) 
+cc -table -unqual vforms2V ( vForms8  "tegema" "teha" "teeb" "tehakse" "tehke" "tegi" "teinud" "tehtud" ) 
+cc -table -unqual vforms2V ( vForms8  "nägema" "näha" "näeb" "nähakse" "nähke" "nägi" "näinud" "nähtud" ) 
 
 --laskma 
-cc -table -unqual vforms82VEst ( vForms8  "laskma" "lasta" "laseb" "lastakse" "laske" "lasi" "lasknud" "lastud" )  
+cc -table -unqual vforms2V ( vForms8  "laskma" "lasta" "laseb" "lastakse" "laske" "lasi" "lasknud" "lastud" )  
 
 --pesema, kusema
-cc -table -unqual vforms82VEst ( vForms8  "pesema" "pesta" "peseb" "pestakse" "peske" "pesi" "pesnud" "pestud" )
-cc -table -unqual vforms82VEst ( vForms8  "kusema" "kusta" "kuseb" "kustakse" "kuske" "kusi" "kusnud" "kustud" )
+cc -table -unqual vforms2V ( vForms8  "pesema" "pesta" "peseb" "pestakse" "peske" "pesi" "pesnud" "pestud" )
+cc -table -unqual vforms2V ( vForms8  "kusema" "kusta" "kuseb" "kustakse" "kuske" "kusi" "kusnud" "kustud" )
 
 --pidama
-cc -table -unqual vforms82VEst ( vForms8  "pidama" "pidada" "peab" "peetakse" "pidage" "pidi" "pidanud" "peetud" )  
+cc -table -unqual vforms2V ( vForms8  "pidama" "pidada" "peab" "peetakse" "pidage" "pidi" "pidanud" "peetud" )  
 
 
 --panema, surema, tulema
-cc -table -unqual vforms82VEst ( vForms8  "panema" "panna" "paneb" "pannakse" "pange" "pani" "pannud" "pandud" )  
-cc -table -unqual vforms82VEst ( vForms8 "surema" "surra" "sureb" "surge" "surrakse" "suri" "surrud" "surdud")
-cc -table -unqual vforms82VEst ( vForms8 "tulema" "tulla" "tuleb" "tulge" "tullakse" "tuli" "tulnud" "tuldud")
+cc -table -unqual vforms2V ( vForms8  "panema" "panna" "paneb" "pannakse" "pange" "pani" "pannud" "pandud" )  
+cc -table -unqual vforms2V ( vForms8 "surema" "surra" "sureb" "surrakse" "surge"  "suri" "surrud" "surdud")
+cc -table -unqual vforms2V ( vForms8 "tulema" "tulla" "tuleb" "tullakse" "tulge" "tuli" "tulnud" "tuldud")
 
 
 --võima, saama, käima, jooma
-cc -table -unqual vforms82VEst ( vForms8 "võima" "võida" "võib" "võiakse" "võige" "võis" "võinud" "võidud")
-cc -table -unqual vforms82VEst ( vForms8 "saama" "saada" "saab" "saadakse" "saage" "sai" "saanud" "saadud")
-cc -table -unqual vforms82VEst ( vForms8 "käima" "käia" "käib" "käiakse" "käige" "käis" "käinud" "käidud")
-cc -table -unqual vforms82VEst ( vForms8 "jooma" "juua" "joob" "juuakse" "jooge" "jõi" "joonud" "joodud")
+cc -table -unqual vforms2V ( vForms8 "võima" "võida" "võib" "võiakse" "võige" "võis" "võinud" "võidud")
+cc -table -unqual vforms2V ( vForms8 "saama" "saada" "saab" "saadakse" "saage" "sai" "saanud" "saadud")
+cc -table -unqual vforms2V ( vForms8 "käima" "käia" "käib" "käiakse" "käige" "käis" "käinud" "käidud")
+cc -table -unqual vforms2V ( vForms8 "jooma" "juua" "joob" "juuakse" "jooge" "jõi" "joonud" "joodud")
 
