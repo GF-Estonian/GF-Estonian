@@ -343,8 +343,7 @@ lin
   split_V2 = mkV2 (mk2V "halkaista" "halkaisi") ;
   squeeze_V2 = mkV2 (mkV "puristaa") cpartitive ;
   stab_V2 = mkV2 (mkV "pistää") cpartitive ;
---  stand_V = mk12V "seistä" "seison" "seisoo" "seisovat" "seiskää" "seistään"
---      "seisoin" "seisoi" "seisoisi" "seissyt" "seisty" "seistyn" ;
+  stand_V = mkV "seisma" "seista" "seisab" "seistakse" ;
   suck_V2 = mkV2 (mkV "imeä") cpartitive ;
   swell_V = mkV "turvota" "turposi" ;
   swim_V = mkV "ujuma" ;
