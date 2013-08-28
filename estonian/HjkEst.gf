@@ -183,6 +183,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			"nd" => li + "nn" ;
 			"ad" => li + "aj" ;
 			"mb" => li + "mm" ;
+			("ug"|"ub") => li + "o" ;
 			_ => link
 	} ;
 
