@@ -119,7 +119,8 @@ lin
   lose_V2 = mkV2 (mkV "hävitä" "hävisi") ; --- hukata
   love_N = mkN "armastus" ;
   love_V2 = mkV2 (mkV "armastama") partitive ;
-  man_N = mkN "mees" ;
+  man_N = mkN "mees" "mehe" "meest" "mehesse" "meeste" "mehi" ;
+  --married_A2 = mkA2 (mkA "abielus") comitative ;
   married_A2 = mkA2 (mkA "avioitunut") (postPrep genitive "kanssa") ; ---- infl
   meat_N = mkN "liha" ;
   milk_N = mkN "piim" ;

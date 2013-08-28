@@ -9,7 +9,7 @@ concrete StructuralEst of Structural = CatEst **
 
   all_Predet = {s = \\n,c =>
     let
-      kaiket = caseTable n ((mkN "kaikki" "kaiken" "kaikkena"))
+      kaiket = caseTable n (mkN "kõik")
     in
     case npform2case n c of {
       Nom => "kõik" ;
@@ -26,7 +26,7 @@ concrete StructuralEst of Structural = CatEst **
   between_Prep = postGenPrep "välissä" ;
   both7and_DConj = sd2 "sekä" "että" ** {n = Pl} ;
   but_PConj = ss "aga" ;
-  by8agent_Prep = postGenPrep "toimesta" ;
+  by8agent_Prep = postGenPrep "poolt" ;
   by8means_Prep = casePrep adessive ;
   can8know_VV = mkVV (mkV "osata") ;
   can_VV = mkVV (mkV "võima") ;
@@ -34,7 +34,7 @@ concrete StructuralEst of Structural = CatEst **
   either7or_DConj = sd2 "kas" "või" ** {n = Sg} ;
   everybody_NP = makeNP (mkN "igaüks") Sg ;
   every_Det = mkDet Sg (mkN "iga") ;
-  everything_NP = makeNP (((mkN "kõik" "kõigi" "kõiki")) **
+  everything_NP = makeNP ((mkN "kõik") **
     {lock_N = <>}) Sg ;
   everywhere_Adv = ss "kõikjal" ;
   few_Det  = mkDet Sg (mkN "harva") ;
@@ -48,7 +48,7 @@ concrete StructuralEst of Structural = CatEst **
   how_IAdv = ss "kuidas" ;
   how8much_IAdv = ss "kui palju" ;
   how8many_IDet =
-    {s = \\c => "kui" ++ (mkN "moni" "monia").s ! NCase Sg c ; n = Sg ; isNum = False} ;
+    {s = \\c => "kui" ++ (mkN "palju").s ! NCase Sg c ; n = Sg ; isNum = False} ;
   if_Subj = ss "kui" ;
   in8front_Prep = postGenPrep "ees" ;
   i_Pron  = mkPronoun "mina" "minu" "mind" Sg P1 ;
@@ -59,7 +59,7 @@ concrete StructuralEst of Structural = CatEst **
     isPron = False
     } ;
   less_CAdv = X.mkCAdv "vähem" "kui" ;
-  many_Det = mkDet Sg (mkN "moni" "monia") ;
+  many_Det = mkDet Sg (mkN "mitu") ;
   more_CAdv = X.mkCAdv "rohkem" "kui" ;
   most_Predet = {s = \\n,c => (nForms2N (dSuurin "useinta")).s ! NCase n (npform2case n c)} ;
   much_Det = mkDet Sg {s = \\_ => "palju"} ;
@@ -124,15 +124,15 @@ concrete StructuralEst of Structural = CatEst **
           } ;
     isNum = False ; isDef = True ;
     } ;
-  through_Prep = postGenPrep "kautta" ;
+  through_Prep = postGenPrep "kaudu" ;
   too_AdA = ss "liiga" ;
   to_Prep = casePrep illative ; --- allative
-  under_Prep = postGenPrep "alla" ;
+  under_Prep = postGenPrep "all" ;
   very_AdA = ss "eriti" ;
-  want_VV = mkVV (mkV "tahta") ;
+  want_VV = mkVV (mkV "tahtma") ;
   we_Pron = mkPronoun "meie" "meie" "meid" Pl P1 ;
   whatPl_IP = {
-    s = table {NPAcc => "mitkä" ; c => mikaInt ! Pl ! npform2case Pl c} ;
+    s = table {NPAcc => "mida" ; c => mikaInt ! Pl ! npform2case Pl c} ;
     n = Pl
     } ;
   whatSg_IP = {
@@ -146,16 +146,16 @@ concrete StructuralEst of Structural = CatEst **
     s = mikaInt
     } ;
   whoSg_IP = {
-    s = table {NPAcc => "kenet" ; c => kukaInt ! Sg ! npform2case Sg c} ;
+    s = table {NPAcc => "keda" ; c => kukaInt ! Sg ! npform2case Sg c} ;
     n = Sg
     } ;
   whoPl_IP = {
-    s = table {NPAcc => "ketkä" ; c => kukaInt ! Pl ! npform2case Pl c} ;
+    s = table {NPAcc => "keda" ; c => kukaInt ! Pl ! npform2case Pl c} ;
     n = Pl
     } ;
   why_IAdv = ss "miks" ;
-  without_Prep = prePrep partitive "ilman" ;
-  with_Prep = postGenPrep "kanssa" ;
+  without_Prep = prePrep partitive "ilma" ;
+  with_Prep = postGenPrep "koos" ;
   yes_Utt = ss "jah" ;
   youSg_Pron = mkPronoun "sina" "sinu" "sind" Sg P2 ;
   youPl_Pron = mkPronoun "teie" "teie" "teid" Pl P2 ;
@@ -216,7 +216,7 @@ oper
   kukaInt : MorphoEst.Number => (MorphoEst.Case) => Str =
     let
       kuka = mkN "kes" "kelle" "keda" "kellesse"
-                 "kellede" "keda" "kelledesse" ;
+                 "kellede" "keda" ;
     in
     table {
       Sg => table {

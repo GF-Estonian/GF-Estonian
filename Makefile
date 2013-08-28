@@ -21,4 +21,4 @@ compile_old_comp:
 	time gf +RTS -K100M -RTS --old-comp --make --path $(path) --preproc=mkPresent estonian/LangEst.gf
 
 clean:
-	find -name *.gfo | xargs rm
+	find -name *.gfo | xargs rm -f
