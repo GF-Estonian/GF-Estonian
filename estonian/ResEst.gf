@@ -401,7 +401,7 @@ oper
   verbOlla : Verb = 
     let olla = mkVerb 
       "olema"
-      "olla" "on" "olen" "on" "olge" "ollaan" 
+      "olla" "on" "olen" "on" "olge" "ollakse" 
       "oli" "olin" "oleks" "ollut" "oltu" "ollun" ;
     in {s = table {
       Inf InfMas => "olemas" ;

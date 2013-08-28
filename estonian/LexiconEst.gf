@@ -86,8 +86,8 @@ lin
   glove_N = mkN "kinnas" ;
   gold_N = mkN "kuld" ;
   good_A = mkA (mkN "hea") "parem" "parim" ;
-  go_V = mk12V "minna" "lähen" "läheb" "lähevad" "mingu" "TODO"
-      "läksin" "läks" "läheks" "TODO" "TODO" "TODO" ;
+  go_V = mkV "minema" "minna" "läheb" "minnakse"
+      "minge" "läks" "läinud" "lähtud" ;
   green_A = mkA "roheline" ;
   harbour_N = mkN "sadam" ;
   hate_V2 = mkV2 (mkV "vihkama") cpartitive ;
@@ -107,9 +107,7 @@ lin
   know_V2 = mkV2 (mkV "tuntea" "tunsi") ;
   lake_N = mkN "järv" ;
   lamp_N = mkN "lamp" ;
-  learn_V2 = 
-    mkV2 (mk12V "oppia" "opin" "oppii" "oppivat" "oppikaa" "opitaan"
-      "opin" "oppi" "oppisi" "oppinut" "opittu" "opitun") ;
+  learn_V2 = mkV2 (mkV "õppima") ;
   leather_N = mkN "nahk" ;
   leave_V2 = mkV2 (mkV "jättää") ;
   -- TODO: fix this: either use a 2-arg oper to handle to splittable verb 'lugupidada'
@@ -164,9 +162,8 @@ lin
   science_N = mkN "teadus" ;
   sea_N = mkN "meri" ;
   seek_V2 = mkV2 (mkV "etsiä") cpartitive ;
-  see_V2 = mkV2 (
-    mk12V "nähdä" "näen" "näkee" "näkevät" "nähkää" "nähdään"
-      "näin" "näki" "näkisi" "nähnyt" "nähty" "nähdyn") ; 
+  see_V2 = mkV2 (mkV "nägema" "näha" "näeb" "nähakse" 
+                      "nähke" "nägi" "näinud" "nähtud") ; 
   sell_V3 = mkV3 (mkV "myydä") accPrep (casePrep allative) ;
   send_V3 = mkV3 (mkV "lähettää") accPrep (casePrep allative) ;
   sheep_N = mkN "lammas" ;
@@ -223,8 +220,8 @@ lin
   young_A = mkA "noor" ;
 
   do_V2 = mkV2 (
-    mkV "tehdä" "teen" "tekee" "tekevät" "tehkää" "tehdään"
-      "tein" "teki" "tekisi" "tehnyt" "tehty" "tehdyn") ; 
+    mkV "tegema" "teha" "teeb" "tehakse" 
+      "tehke" "tegi" "teinud" "tehtud" ) ; 
 
   now_Adv = mkAdv "nüüd" ;
   already_Adv = mkAdv "juba" ;
@@ -346,8 +343,8 @@ lin
   split_V2 = mkV2 (mk2V "halkaista" "halkaisi") ;
   squeeze_V2 = mkV2 (mkV "puristaa") cpartitive ;
   stab_V2 = mkV2 (mkV "pistää") cpartitive ;
-  stand_V = mk12V "seistä" "seison" "seisoo" "seisovat" "seiskää" "seistään"
-      "seisoin" "seisoi" "seisoisi" "seissyt" "seisty" "seistyn" ;
+--  stand_V = mk12V "seistä" "seison" "seisoo" "seisovat" "seiskää" "seistään"
+--      "seisoin" "seisoi" "seisoisi" "seissyt" "seisty" "seistyn" ;
   suck_V2 = mkV2 (mkV "imeä") cpartitive ;
   swell_V = mkV "turvota" "turposi" ;
   swim_V = mkV "ujuma" ;

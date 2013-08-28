@@ -174,9 +174,10 @@ oper
 
   caseV : Case -> V -> V ;  -- deviating subj. case, e.g. genitive "täytyä"
 
--- The verbs "be" is special.
+-- The verbs "be" and "go" are special.
 
   vOlla : V ; -- the verb "be"
+  --vMinema : V ; -- the verb "go"
 
 
 --3 Two-place verbs
@@ -431,63 +432,83 @@ oper
     mkV : (huutaa : Str) -> V = mk1V ;
     mkV : (huutaa,huusi : Str) -> V = mk2V ;
     mkV : (huutaa,huudan,huusi : Str) -> V = mk3V ;
-    mkV : (
+    {-mkV : (
       huutaa,huudan,huutaa,huutavat,huutakaa,huudetaan,
-      huusin,huusi,huusisi,huutanut,huudettu,huutanee : Str) -> V = mk12V ;
+      huusin,huusi,huusisi,huutanut,huudettu,huutanee : Str) -> V = mk12V ; -}
+    mkV : (lugema,lugeda,loeb,loetakse : Str) -> V = mk4V ;
+    mkV : (tegema,teha,teeb,tehakse,tehke,tegi,teinud,tehtud : Str) -> V = mk8V ;
     mkV : (sana : VK) -> V = \w -> vforms2V w.s ** {sc = NPCase Nom ; lock_V = <>} ;
   } ;
 
   mk1V : Str -> V = \s -> 
-    let vfs = vforms2VEst (vForms1 s) in 
+    let vfs = vforms2V (vForms1 s) in 
       vfs ** {sc = NPCase Nom ; lock_V = <>} ;
   mk2V : (_,_ : Str) -> V = \x,y -> 
-    let vfs = vforms2VEst (vForms2 x y) in vfs ** {sc = NPCase Nom ; lock_V = <>} ;
+    let vfs = vforms2V (vForms2 x y) in vfs ** {sc = NPCase Nom ; lock_V = <>} ;
   mk3V : (huutaa,huudan,huusi : Str) -> V = \x,_,y -> mk2V x y ; ----
-  mk12V : (
-      huutaa,huudan,huutaa,huutavat,huutakaa,huudetaan,
-      huusin,huusi,huusisi,huutanut,huudettu,huutanee : Str) -> V = 
-     \a,b,c,d,e,f,g,h,i,j,k,l -> 
-        vforms2V (vForms12 a b c d e f g h i j k l) ** {sc = NPCase Nom ; lock_V = <>} ;
-
+  mk4V : (lugema,lugeda,loeb,loetakse : Str) -> V =
+     \a,b,c,d -> mk_forms4_to_verb (vForms4 a b c d) ** {sc = NPCase Nom ; lock_V = <>} ;
+  mk8V : (lugema,lugeda,loeb,loetakse,lugege,luges,lugenud,loetud : Str) -> V =
+     \a,b,c,d,e,f,g,h -> vforms2V (vForms8 a b c d e f g h) ** {sc = NPCase Nom ; lock_V = <>} ;
+     
+  	
   -- This used to be the last case: _ => Predef.error (["expected infinitive, found"] ++ ottaa) 
   -- regexp example: ("" | ?) + ("a" | "e" | "i") + _ + "aa" => 
-  vForms1 : Str -> VFormsEst = \ottaa ->
+  vForms1 : Str -> VForms = \lugema ->
     let
-      a = last ottaa ;
-      otta = init ottaa ; 
-      ott  = init otta ;
-      ots  = init ott + "s" ;
-      ota  = weakGrade otta ;
-      otin = init (strongGrade (init ott)) + "elin" ;
-      ot   = init ota ;
-    in
-    case ottaa of {
-      _ + "ima" =>
-        cLeppima ottaa ;
-      _ + "ugema" =>
-        cLeppima ottaa ;
-      _ + "ndima" =>
-        cVqima ottaa ;
-      _ + "adama" =>
-        cVqima ottaa ;
-      _ + "ootama" =>
-        cHyppama ottaa ;
-      _ + ("a" | "e" | "i" | "o" | "u") + ("ta" | "sta" | "bi") + "ma" =>
-        cElama ottaa ;
-      _ + "sma" =>
-        cSeisma ottaa ;
-      _ + "aama" =>
-        cSaama ottaa ;
-      _ + ("pp" | "mb" | "t") + "ama" =>
-        cHyppama ottaa ;
-      _ + ("a" | "e" | "u" | "i") + "ma" =>
-        cElama ottaa ;
-      _ =>
-        cElama ottaa
-    } ;   
+      luge = Predef.tk 2 lugema ;
+      v : pattern Str = #("a" | "e" | "i" | "o" | "u" | "õ" | "ä" | "ö" | "ü") ;
+      c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r" | "z" | "ž" | "š") ;
+      lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
+      kpt : pattern Str = #("k" | "p" | "t" | "f" | "š") ;
 
-  --    <_ + ("taa" | "tää"), _ + ("oi" | "öi")> =>
-  --      cOttaa huutaa (huuda + "n") autoin huusi ;
+{-      ott  = init luge ;
+      ots  = init ott + "s" ;
+      ota  = weakGrade luge ;
+      otin = init (strongGrade (init ott)) + "elin" ;
+      ot   = init ota ; -}
+    in
+    case lugema of {
+      _ + ("t"|"d") + "ma" =>
+        cMuutma lugema ; 
+      _ + #c + #c + "ma" => 
+        cMuutma lugema ;
+        
+--      _ + ("s"|"k") + "ma" =>
+      _ + #c + "ma" =>
+        cSeisma lugema (luge + "eb") ;  --default vowel tõusma~tõuseb; for seisma~seisab use mk2V (TODO)
+      ? + ("äi"|"õi") + "ma" =>
+        cKaima lugema ;  --käima, võima
+      ? + a@("a"|"e"|"ä") + a + "ma" =>  
+        cSaama lugema ;  -- saama, jääma, keema
+      ? + o@("o"|"ö"|"ü"|"i") + o + "ma" =>
+        cJooma lugema ;  --jooma,looma,lööma,müüma,pooma,sööma,tooma,viima
+      _ + "ima" =>
+        cLeppima lugema ;
+      _ + "ugema" =>
+        cLeppima lugema ;
+{-
+      _ + "ndima" =>
+        cVqima lugema ;
+      _ + "adama" =>
+        cVqima lugema ;
+-}
+      _ + "ootama" =>
+        cHyppama lugema ;
+      
+      _ + ("a" | "e" | "i" | "o" | "u") + ("ta" | "sta" | "bi") + "ma" =>
+        cElama lugema ;
+
+
+      _ + ("pp" | "mb" | "t") + "ama" =>
+        cHyppama lugema ;
+      _ + ("a" | "e" | "u" | "i") + "ma" =>
+        cElama lugema ; 
+
+      _ =>
+        cElama lugema
+    } ;   
+ 
   vForms2 : (_,_ : Str) -> VForms = \huutaa,huusi ->
     let
       huuda = weakGrade (init huutaa) ;

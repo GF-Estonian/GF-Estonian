@@ -658,7 +658,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
 
   oper
 
-  cHukkua : (_,_ : Str) -> VForms = \hukkua,hukun -> 
+  cHukkua : (_,_ : Str) -> VFormsFin = \hukkua,hukun -> 
     let
       a     = last hukkua ;
       hukku = init hukkua ;
@@ -685,7 +685,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       (huku + "tt" + y)
       (hukku + "nee") ;
 
-  cOttaa : (_,_,_,_ : Str) -> VForms = \ottaa,otan,otin,otti -> 
+  cOttaa : (_,_,_,_ : Str) -> VFormsFin = \ottaa,otan,otin,otti -> 
     let
       a    = last ottaa ;
       aa   = a + a ;
@@ -707,7 +707,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       (ote + "tt" + u)
       (otta + "nee") ;
 
-  cJuosta : (_,_ : Str) -> VForms = \juosta,juoksen -> 
+  cJuosta : (_,_ : Str) -> VFormsFin = \juosta,juoksen -> 
     let
       a      = last juosta ;
       juos   = Predef.tk 2 juosta ;
@@ -730,7 +730,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       (juos + "t" + u)
       (juoss + "ee") ;
 
-  cJuoda : (_ : Str) -> VForms = \juoda -> 
+  cJuoda : (_ : Str) -> VFormsFin = \juoda -> 
     let
       a      = last juoda ;
       juo    = Predef.tk 2 juoda ;
@@ -754,43 +754,37 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       (juo + "nee") ;
 
   -- VVS 27 elama
-  cElama : (_ : Str) -> VForms = \elama ->
+  -- t in takse, tud, no cons.grad
+  cElama : (_ : Str) -> VFormsFin = \elama ->
     let
       ela = Predef.tk 2 elama;
-    in vForms13
+    in vForms8
       elama
       (ela + "da")
-      (ela + "n")
       (ela + "b")
-      (ela + "vad")
-      (ela + "ge") -- Imper Pl
-      (elama + "an") --5?
-      (ela + "sin")
-      (ela + "site")
-      (ela + "ks") -- Condit Sg P3
-      (ela + "nud") --9?
-      (ela + "tu") --10?
-      (ela + "nee"); -- 11?
+      (ela + "takse") 
+      (ela + "ge") -- Imperative P1 Pl
+      (ela + "s")  -- Imperfect P3 Sg 
+      (ela + "nud") 
+      (ela + "tud") ;
+
+
 
   -- VVS 28 leppima (lugema, rääkima)
+  -- t in takse, tud
   cLeppima : (_ : Str) -> VForms = \leppima ->
     let
       leppi = Predef.tk 2 leppima ;
       lepi = weakGrade leppi ;
-    in vForms13
+    in vForms8
       leppima
       (leppi + "da")
-      (lepi + "n")
       (lepi + "b")
-      (lepi + "vad")
-      (leppi + "ge") -- Imper Pl
-      (leppi + "an") --5?
-      (leppi + "sin")
-      (leppi + "site")
-      (lepi + "ks") -- Condit Sg P3
-      (leppi + "nud") --9?
-      (lepi + "tu") --10?
-      (leppi + "nee"); -- 11?
+      (lepi + "takse")
+      (leppi + "ge") -- Imperative P1 Pl
+      (leppi + "s")  -- Imperfect P3 Sg
+      (leppi + "nud")
+      (lepi + "tud") ;
 
   -- VVS 28~27 tekkima (leppima~elama)
 
@@ -800,20 +794,15 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
     let
       hyppa = Predef.tk 2 hyppama ;
       hypa = weakGrade hyppa ;
-    in vForms13
+    in vForms8
       hyppama
       (hypa + "ta")
-      (hyppa + "n")
       (hyppa + "b")
-      (hyppa + "vad")
-      (hypa + "ke") -- Imper Pl
-      (hyppa + "an") --5?
-      (hyppa+ "sin")
-      (hyppa + "site")
-      (hyppa + "ks") -- Condit Sg P3
-      (hypa + "nud") --9?
-      (hypa + "tu") --10?
-      (hyppa + "nee"); -- 11?
+      (hypa + "takse") -- Passive
+      (hypa + "ke") -- Imperative P1 Pl
+      (hyppa + "s") -- Condit Sg P3
+      (hyppa + "nud") -- PastPartAct
+      (hypa + "tud") ; -- PastPartPass
 
   -- VVS 29~27 laastama (hüppama~elama)
 
@@ -823,78 +812,112 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
 
   -- VVS 32 seisma
   -- EKSS 44: tõusma, maksma, jooksma
-  cSeisma : (_ : Str) -> VForms = \seisma ->
+  -- t in takse,tud ; s in imperfect 3sg 
+  cSeisma : (_,_ : Str) -> VForms = \seisma,seisab ->
     let
-      seis = Predef.tk 2 seisma;
-      -- oo -> e
-      -- õu -> e
-      a = "a";
-    in vForms13
+      seis = Predef.tk 2 seisma ;
+    in vForms8
       seisma
       (seis + "ta")
-      (seis + a + "n")
-      (seis + a + "b")
-      (seis + a + "vad")
-      (seis + "ke") -- Imper Pl
-      (seis + a + "n") --5?
-      (seis + "in")
-      (seis + "ite")
-      (seis + a + "ks") -- Condit Sg P3
-      (seis + "nud") --9?
-      (seis + "tu") --10?
-      (seis + "nee"); -- 11?
+      seisab
+      (seis + "takse")
+      (seis + "ke")
+      (seis + "is")
+      (seis + "nud") 
+      (seis + "tud");
 
   -- VVS 33 naerma
-  -- VVS 34 saatma
+  
+  -- VVS 34 saatma, muutma, andma, laskma(?)
+  -- like seisma, but no reduplication of stem consonant (muutma~muuta, not *muutta)
+  cMuutma : (_ : Str) -> VForms = \muutma ->
+    let
+      muut = Predef.tk 2 muutma ;
+      muu = Predef.tk 1 muut ;
+      t = last muut ;
+      muud = weakGrade muut ;
+    in vForms8
+      muutma
+      (muu + t + "a")
+      (muud + "ab")
+      (muud + "etakse") --is there always e?
+      (muut + "ke")
+      (muut + "is")
+      (muut + "nud")
+      (muud + "etud") ; --always e?
+      
   -- VVS 35 nutma
+  -- like muutma but strong grade ???
+  
   -- VVS 36 tulema
   -- VVS 36&27 tulema&elama
 
-  -- VVS 37 võima
+  -- VVS 37 võima ?
   -- EKSS 42: õppima, kõndima, sadama, lugema
-  cVqima : (_ : Str) -> VForms = \vqima ->
+  -- d in dakse, dud ; imperfect 3sg ends in i
+  cSaama : (_ : Str) -> VFormsFin = \saama ->
     let
-      vqi = Predef.tk 2 vqima ;
-      vqi_weak = weakGrade vqi ;
-    in vForms13
-      vqima
-      (vqi + "da")
-      (vqi_weak + "n")
-      (vqi_weak + "b")
-      (vqi_weak + "vad")
-      (vqi + "ge") -- Imper Pl
-      (vqi + "an") --5?
-      (vqi + "sin")
-      (vqi + "site")
-      (vqi_weak + "ks") -- Condit Sg P3
-      (vqi + "nud") --9?
-      (vqi_weak + "tu") --10?
-      (vqi + "nee"); -- 11?
-
-  -- VVS: 38 sööma
-
-  -- VVS: 37 võima
-  -- TODO: remove
-  cSaama : (_ : Str) -> VForms = \saama ->
-    let
-      saa = Predef.tk 2 saama;
-      sa = Predef.tk 3 saama;
-    in vForms13
+      saa = Predef.tk 2 saama ;
+      sa = Predef.tk 1 saa ;
+      sai = sa + "i" ;
+    in vForms8
       saama
       (saa + "da")
-      (saa + "n")
       (saa + "b")
-      (saa + "vad")
-      (saa + "ge") -- Imper Pl (2nd person? 'saage')
-      (saa + "an") --5?
-      (sa + "in")
-      (sa + "ite")
-      (saa + "ks") -- Condit Sg P3
-      (saa + "nud") --9?
-      (saa + "tu") --10?
-      (saa + "nee"); -- 11?
+      (saa + "dakse") 
+      (saa + "ge") -- Imper Pl
+      sai
+      (saa + "nud") 
+      (saa + "dud") ;
 
-  cPudota : (_,_ : Str) -> VForms = \pudota,putosi -> 
+  -- VVS: 37 võima
+  -- no d/t in da, takse ; imperfect 3sg ends in s
+  cKaima : (_ : Str) -> VForms = \kaima ->
+    let
+      kai = Predef.tk 2 kaima ;
+      
+    in vForms8
+      kaima
+      (kai + "a")
+      (kai + "b")
+      (kai + "akse")
+      (kai + "ge")
+      (kai + "s")
+      (kai + "nud") 
+      (kai + "dud") ;
+
+  -- VVS: 38 sööma
+  -- no d/t in da, takse ; vowel may change in da ; imperfect 3sg ends in i
+  cJooma : (_ : Str) -> VForms = \jooma ->
+    let
+      j = Predef.tk 4 jooma ;
+      joo = Predef.tk 2 jooma;
+      o = last joo ;
+      u = case o of {
+        "o" => "u" ;
+        "ö" => "ü" ;
+         _  => o 
+        } ;
+      q = case o of {
+        ("o"|"ö") => "õ" ;
+         _        => o
+        } ;
+       juua = j + u + u + "a" ;
+       j6i = j + q + "i" ;
+    in vForms8
+      jooma
+      juua
+      (joo + "b")
+      (juua + "kse")
+      (joo + "ge") 
+      j6i
+      (joo + "nud") 
+      (joo + "dud") ;
+
+      
+      
+
+  cPudota : (_,_ : Str) -> VFormsFin = \pudota,putosi -> 
     let
       a      = last pudota ;
       pudot  = init pudota ;
@@ -919,7 +942,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       (pudot + "t" + u)
       (pudo  + "nnee") ;
 
-  cHarkita : (_ : Str) -> VForms = \harkita -> 
+  cHarkita : (_ : Str) -> VFormsFin = \harkita -> 
     let
       a      = last harkita ;
       harkit = init harkita ;
@@ -939,7 +962,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       (harkit + "t" + u)
       (harki  + "nnee") ;
 
-  cValjeta : (_,_ : Str) -> VForms = \valjeta,valkeni -> 
+  cValjeta : (_,_ : Str) -> VFormsFin = \valjeta,valkeni -> 
     let
       a      = last valjeta ;
       valjet = init valjeta ;
@@ -960,7 +983,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       (valjet + "t" + u)
       (valje  + "nnee") ;
 
-  cKuunnella : (_,_ : Str) -> VForms = \kuunnella,kuuntelin -> 
+  cKuunnella : (_,_ : Str) -> VFormsFin = \kuunnella,kuuntelin -> 
     let
       a       = last kuunnella ;
       kuunnel = Predef.tk 2 kuunnella ;
@@ -992,16 +1015,16 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       _ => "y"
       } ;
 
-    VForms8Est : Type = Predef.Ints 7 => Str ;
+    VForms : Type = Predef.Ints 7 => Str ;
     
-    VFormsEst : Type = Predef.Ints 12 => Str ;
+    VForms13 : Type = Predef.Ints 12 => Str ;
 
     VForms4 : Type = Predef.Ints 3 => Str ;
     
-    VForms : Type = Predef.Ints 11 => Str ;
+    VFormsFin : Type = Predef.Ints 11 => Str ;
     
     
-    vForms13 : (x1,_,_,_,_,_,_,_,_,_,_,_,x13 : Str) -> VFormsEst =
+    vForms13 : (x1,_,_,_,_,_,_,_,_,_,_,_,x13 : Str) -> VForms13 =
       \olema,olla,olen,on,ovat,olkaa,ollaan,olin,oli,olisi,ollut,oltu,lienee ->
       table {
         0 => olema ;
@@ -1019,7 +1042,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
        12 => lienee
       } ;
 
-    vforms2VEst : VFormsEst -> Verb = \vh -> 
+{-    vforms2VEst : VForms13 -> Verb = \vh -> 
     let
       tulema = vh ! 0 ; 
       tulla = vh ! 1 ; 
@@ -1093,41 +1116,48 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
 
     lock_V = <>
     } ;
+-}
 
-
-    vForms8 : (x1,_,_,_,_,_,_,x8 : Str) -> VForms8Est =
-      \tulema,tulla,tuleb,tulge,tullakse,tuli,tuldud,tulev ->
+    vForms8 : (x1,_,_,_,_,_,_,x8 : Str) -> VForms =
+      \tulema,tulla,tuleb,tullakse,tulge,tuli,tulnud,tuldud ->
       table {
         0 => tulema ;
         1 => tulla ;
         2 => tuleb ;
-        3 => tulge ;
-        4 => tullakse ;
+        3 => tullakse ;
+        4 => tulge ;
         5 => tuli ;
-        6 => tuldud ;
-        7 => tulev 
+        6 => tulnud ;
+        7 => tuldud
       } ;
 
-    vforms82VEst : VForms8Est -> Verb = \vh -> 
+    vforms2V : VForms -> Verb = \vh -> 
     let
       tulema = vh ! 0 ; 
       tulla = vh ! 1 ; 
       tuleb = vh ! 2 ; 
-      tulge = vh ! 3 ;  --necessary for tulla, surra (otherwise *tulege, *surege)
-      tullakse = vh ! 4 ; --necessary for all 
+      tullakse = vh ! 3 ; --juuakse; loetakse 
+      tulge = vh ! 4 ;  --necessary for tulla, surra (otherwise *tulege, *surege) 
       tuli = vh ! 5 ; --necessary for jooma-juua-jõi
-      tuldud = vh ! 6 ; --necessary for t/d in tuldi
-      tulev = vh ! 7 ; --sooma~soov ; laulma~laulev
-      tull_ = Predef.tk 1 tulla ; --juu(a); saad(a); tull(a); luged(a)
-      tulles = tull_ + "es" ; --juues; saades; tulles; lugedes
-      tule_ = init tuleb ; --is imperative like this always?
+      tulnud = vh ! 6 ;
+      tuldud = vh ! 7 ; --necessary for t/d in tuldi; loeti
+      
+      tull_ = Predef.tk 1 tulla ; --juu(a); saad(a); tull(a);
+      tulles = tull_ + "es" ; --juues; saades; tulles;
+      
+      tule_ = init tuleb ;
+      
+      lask_ = Predef.tk 2 tulema ;
+      laulev = case (last lask_) of { --sooma~soov ; laulma~laulev
+          ("a"|"e"|"i"|"o"|"õ"|"u"|"ü"|"ä"|"ö") => lask_ + "v" ;
+          _ => lask_ + "ev" } ; --consonant stem in -ma, add e 
       kaisi_ = case (last tuli) of {
           "i" => tuli ;           --jõin, jõid, jõi
             _ => tuli + "i" } ;   --käisin, käisid, käis
       tuld_ = Predef.tk 2 tuldud ; --d/t choice for tuldi etc.
       tulgu = (init tulge) + "u" ;
       luge_ = Predef.tk 2 tulge ; --joo(ge); tul(ge); luge(ge) ;
-      lugenud = (hjk_type_IVb_maakas (luge_ + "nud")).s ;
+      lugenud = (hjk_type_IVb_maakas tulnud).s ;
       loetud = (hjk_type_IVb_maakas tuldud).s ;
     in
     {s = table {
@@ -1162,7 +1192,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       PassImpf  True  => tuld_ + "i" ; --di or ti
       PassImpf  False => tuldud ;  
       --TODO Quotative
-      PresPart => tulev ;
+      PresPart => laulev ;
       PastPartAct (AN n)  => lugenud ! n ;
       PastPartAct AAdv    => lugenud ! (NCase Sg Ablat) ;
       PastPartPass (AN n) => loetud ! n ;
@@ -1255,7 +1285,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
     lock_V = <>
     } ;
     
-    vForms12 : (x1,_,_,_,_,_,_,_,_,_,_,x12 : Str) -> VForms =
+    vForms12 : (x1,_,_,_,_,_,_,_,_,_,_,x12 : Str) -> VFormsFin =
       \olla,olen,on,ovat,olkaa,ollaan,olin,oli,olisi,ollut,oltu,lienee ->
       table {
         0 => olla ;
@@ -1272,7 +1302,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
        11 => lienee
       } ;
 
-    vforms2V : VForms -> Verb = \vh -> 
+    vforms2VFin : VFormsFin -> Verb = \vh -> 
     let
       tulla = vh ! 0 ; 
       tulen = vh ! 1 ; 
@@ -1367,6 +1397,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
         "ad" + _ => ku + "aj" + o ; -- TODO: maybe any vowel, not just 'a'
         "mb" + _ => ku + "mm" + o ;
         "ug" + _ => ku + "o" + o ;  -- luge -> loe
+        "ub" + _ => ku + "o" + o ;  -- tuba -> toa  
         "rt" + _ => ku + "rr" + o ;
         "lt" + _ => ku + "ll" + o ;
         "lk" + ("i" | "e") => ku + "lj" + o ;
