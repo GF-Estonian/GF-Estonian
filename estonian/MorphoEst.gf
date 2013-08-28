@@ -775,7 +775,9 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
   cLeppima : (_ : Str) -> VForms = \leppima ->
     let
       leppi = Predef.tk 2 leppima ;
-      lepi = weakGrade leppi ;
+      i = last leppi ;
+      lepp = init leppi ;
+      lepi = (weaker lepp) + i ;
     in vForms8
       leppima
       (leppi + "da")
@@ -793,7 +795,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
   cHyppama : (_ : Str) -> VForms = \hyppama ->
     let
       hyppa = Predef.tk 2 hyppama ;
-      hypa = weakGrade hyppa ;
+      hypa = weaker hyppa ;
     in vForms8
       hyppama
       (hypa + "ta")
@@ -826,25 +828,98 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       (seis + "nud") 
       (seis + "tud");
 
+  cLaskma : (_,_ : Str) -> VForms = \laskma,laseb ->
+    let
+      lask = Predef.tk 2 laskma ;
+      las = weaker lask ; --tõusma also ?
+    in vForms8
+      laskma
+      (las + "ta")
+      laseb
+      (las + "takse")
+      (las + "ke")
+      (lask + "is")
+      (lask + "nud") 
+      (las + "tud");
+        
   -- VVS 33 naerma
   
-  -- VVS 34 saatma, muutma, andma, laskma(?)
+  
+  -- TS 58 (saatma), 63 (murdma)
+  -- Strong stem in ma and da 
+  -- Needs tud as a parameter, takse formed from that
+  -- This might make sense with 2-param constructor. Not deleting yet. 
+  -- cMuutma for only 58 and cAndma for only 63.
+  cSaatma : (_,_ : Str) -> VForms = \saatma,saadetud ->
+    let
+      saat = Predef.tk 2 saatma ;
+      saadet = Predef.tk 2 saadetud ;
+      murtakse = saadet + "akse" ;  
+      saad = weaker saat ;
+    in
+      vForms8
+        saatma
+        (saat + "a")
+        (saad + "ab")
+        murtakse
+        (saat + "ke")
+        (saat + "is")
+        (saat + "nud")
+        saadetud ;
+  
+  
+  -- TS 58 muutma, saatma,
   -- like seisma, but no reduplication of stem consonant (muutma~muuta, not *muutta)
+  -- like andma,murdma (TS 63) but different takse (muudetakse vs. antakse)
+  -- like petma (TS 59) but da with strong stem
   cMuutma : (_ : Str) -> VForms = \muutma ->
     let
       muut = Predef.tk 2 muutma ;
       muu = Predef.tk 1 muut ;
       t = last muut ;
-      muud = weakGrade muut ;
+      muud = weaker muut ;
     in vForms8
       muutma
       (muu + t + "a")
       (muud + "ab")
-      (muud + "etakse") --is there always e?
+      (muud + "etakse") -- always e?
       (muut + "ke")
       (muut + "is")
       (muut + "nud")
-      (muud + "etud") ; --always e?
+      (muud + "etud") ; -- always e?
+  
+  -- TS 59
+  -- weak stem in ma, strong in da
+  cPetma : (_ : Str) -> VForms = \petma ->
+    let
+      pet = Predef.tk 2 petma ;
+      pett = stronger pet ;
+    in vForms8
+      petma
+      (pett + "a")
+      (pet + "ab")
+      (pet + "etakse") --always e?
+      (pet + "ke")
+      (pett + "is")
+      (pet + "nud")
+      (pet + "etud") ; --always e?
+     
+  -- TS 63 andma, murdma 
+  cAndma : (_ : Str) -> VForms = \andma ->
+    let
+      and = Predef.tk 2 andma ;
+      an = Predef.tk 1 and ;
+      ann = weaker and ;
+    in vForms8
+      andma
+      (and + "a")
+      (ann + "ab")
+      (an + "takse")
+      (and + "ke")
+      (and + "is")
+      (and + "nud")
+      (an + "tud") ; --always e?
+
       
   -- VVS 35 nutma
   -- like muutma but strong grade ???
@@ -852,9 +927,8 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
   -- VVS 36 tulema
   -- VVS 36&27 tulema&elama
 
-  -- VVS 37 võima ?
-  -- EKSS 42: õppima, kõndima, sadama, lugema
-  -- d in dakse, dud ; imperfect 3sg ends in i
+  -- TS 49
+  -- d in da, takse, dud ; imperfect 3sg ends in i
   cSaama : (_ : Str) -> VFormsFin = \saama ->
     let
       saa = Predef.tk 2 saama ;
@@ -870,7 +944,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       (saa + "nud") 
       (saa + "dud") ;
 
-  -- VVS: 37 võima
+  -- TS 49
   -- no d/t in da, takse ; imperfect 3sg ends in s
   cKaima : (_ : Str) -> VForms = \kaima ->
     let
@@ -886,8 +960,8 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       (kai + "nud") 
       (kai + "dud") ;
 
-  -- VVS: 38 sööma
-  -- no d/t in da, takse ; vowel may change in da ; imperfect 3sg ends in i
+  -- TS 49 
+  -- vowel changes in -da da, takse, no d/t ; imperfect 3sg ends in i
   cJooma : (_ : Str) -> VForms = \jooma ->
     let
       j = Predef.tk 4 jooma ;
@@ -1150,13 +1224,18 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       lask_ = Predef.tk 2 tulema ;
       laulev = case (last lask_) of { --sooma~soov ; laulma~laulev
           ("a"|"e"|"i"|"o"|"õ"|"u"|"ü"|"ä"|"ö") => lask_ + "v" ;
-          _ => lask_ + "ev" } ; --consonant stem in -ma, add e 
-      kaisi_ = case (last tuli) of {
-          "i" => tuli ;           --jõin, jõid, jõi
-            _ => tuli + "i" } ;   --käisin, käisid, käis
+          _ => lask_ + "ev" } ; --consonant stem in -ma, add e
+          
+      --imperfect stem
+      kaisi_ = case (Predef.dp 3 tuli) of {
+          "sis"    => lask_ + "i" ; --tõusin, tõusis
+          _ + "i"  => tuli ;        --jõin, jõi
+          _        => lask_ + "si"  --käisin, käis; muutsin, muutis
+         }; 
+            
       tuld_ = Predef.tk 2 tuldud ; --d/t choice for tuldi etc.
       tulgu = (init tulge) + "u" ;
-      luge_ = Predef.tk 2 tulge ; --joo(ge); tul(ge); luge(ge) ;
+      --luge_ = Predef.tk 2 tulge ; --joo(ge); tul(ge); luge(ge) ;
       lugenud = (hjk_type_IVb_maakas tulnud).s ;
       loetud = (hjk_type_IVb_maakas tuldud).s ;
     in
@@ -1221,8 +1300,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
     -- (Experimental) Full paradigm from 4 base forms.
     -- Analoogiaseosed pöördsõna paradigmas
     -- http://www.eki.ee/books/ekk09/index.php?p=3&p1=5&id=227
-    -- TODO: ma: kinkivat, kinkiv
-    -- TODO: da: des,
+    -- TODO: ma: kinkivat
     mk_forms4_to_verb : VForms4 -> Verb = \vh ->
     let
       vestlema = vh ! 0 ;
@@ -1323,7 +1401,7 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
       tulko = Predef.tk 2 tulge + (ifTok Str a "a" "o" "ö") ;
       tullee = Predef.tk 2 tullut + "ee" ;
       tulleen = (nForms2N (dOttanut tullut)).s ;
-      tullu : Str = weakGrade tultu ;
+      tullu : Str = weaker tultu ;
       tullun  = (nForms2N (dUkko tultu (tullu + "n"))).s ; 
       tulema = Predef.tk 2 tulla + "ma" ;
     in

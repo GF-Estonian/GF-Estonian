@@ -30,7 +30,7 @@ cc -table -unqual vforms2V ( vForms8  "pidama" "pidada" "peab" "peetakse" "pidag
 
 --panema, surema, tulema
 cc -table -unqual vforms2V ( vForms8  "panema" "panna" "paneb" "pannakse" "pange" "pani" "pannud" "pandud" )  
-cc -table -unqual vforms2V ( vForms8 "surema" "surra" "sureb" "surrakse" "surge"  "suri" "surrud" "surdud")
+cc -table -unqual vforms2V ( vForms8 "surema" "surra" "sureb" "surrakse" "surge"  "suri" "surnud" "surdud")
 cc -table -unqual vforms2V ( vForms8 "tulema" "tulla" "tuleb" "tullakse" "tulge" "tuli" "tulnud" "tuldud")
 
 

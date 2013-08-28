@@ -457,6 +457,7 @@ oper
   vForms1 : Str -> VForms = \lugema ->
     let
       luge = Predef.tk 2 lugema ;
+      loe = weaker luge ;
       v : pattern Str = #("a" | "e" | "i" | "o" | "u" | "õ" | "ä" | "ö" | "ü") ;
       c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r" | "z" | "ž" | "š") ;
       lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
@@ -469,20 +470,29 @@ oper
       ot   = init ota ; -}
     in
     case lugema of {
-      _ + ("t"|"d") + "ma" =>
-        cMuutma lugema ; 
-      _ + #c + #c + "ma" => 
+    
+      --Consonant stem before ma
+      _ + "tma" =>
         cMuutma lugema ;
-        
+      _ + "dma" =>
+        cAndma lugema  ;
+      _ + #c + "ma" => 
+        cLaskma lugema (loe + "eb") ; 
+
+--      _ + TODO + _ + "ma" => cPetma lugema ;
+      
 --      _ + ("s"|"k") + "ma" =>
-      _ + #c + "ma" =>
-        cSeisma lugema (luge + "eb") ;  --default vowel tõusma~tõuseb; for seisma~seisab use mk2V (TODO)
+--      _ + #c + "ma" =>
+--        cSeisma lugema (luge + "eb") ;  --default vowel tõusma~tõuseb; for seisma~seisab use mk2V (TODO)
+        
+      --TS 49 verbs  
       ? + ("äi"|"õi") + "ma" =>
-        cKaima lugema ;  --käima, võima
+        cKaima lugema ;  --käima,võima
       ? + a@("a"|"e"|"ä") + a + "ma" =>  
-        cSaama lugema ;  -- saama, jääma, keema
+        cSaama lugema ;  -- saama,jääma,keema
       ? + o@("o"|"ö"|"ü"|"i") + o + "ma" =>
         cJooma lugema ;  --jooma,looma,lööma,müüma,pooma,sööma,tooma,viima
+        
       _ + "ima" =>
         cLeppima lugema ;
       _ + "ugema" =>
