@@ -123,6 +123,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		hjk_nForms6 x x_t (x+"t") (x_t+"sse") (x+"te") (x_t+"id") ;
 
 
+	-- @deprecated: use nForms6 from ResEst
 	-- Converts 6 given strings (Nom, Gen, Part, Illat, Gen, Part) into Noun
 	-- http://www.eki.ee/books/ekk09/index.php?p=3&p1=5&id=226
 	hjk_nForms6 : (jogi,joe,joge,joesse,jogede,jogesid : Str) -> {s : NForm => Str} ;

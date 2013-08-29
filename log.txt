@@ -19,4 +19,12 @@ Other changes
     	- Word orders with focused member
    	- PartCN?
    	- 
-   
+
+Inari 29.8.2013
+
+TS classification are not always very logical. For instance, 49 is one class which I split in three 1-argument functions: saama~saada ; jooma~juua ; käima~käia. (I could of course just do more matching inside the ``Str -> VForms`` function. Maybe this detail is not so important anyway.)
+Classes 50-52 are identical. Stem that you get from ma infinitive doesn't change, you just add suffixes.
+Classes 55-57 are identical, just the details of consonant gradation differ. 55 is pp~p, 56 is nd~nn, 57 is lugema~loeb or pidama~peab. 
+Class 61 contains both a and e (laulab, kooleb), and you don't know that from ma infinitive.
+I merged 62 and 64, because the only difference is that other has consonant gradation and other doesn't. So you can give instruction ``X_weak + "suffix"``, and if X can't be made weaker, it has no effect.
+

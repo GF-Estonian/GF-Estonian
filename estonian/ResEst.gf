@@ -682,23 +682,53 @@ oper
   --Estonian version started
   reflPron : Agr -> NP = \agr -> 
     let 
-      itse = (nhn (sKukko "itse" "itsen" "itsejä")).s
+      ise = nForms6 "ise" "enda" "ennast" "endasse" "IGNORE" "IGNORE"
     in {
       s = table {
-        NPCase (Nom | Gen) | NPAcc => itse ! NCase Sg Nom ;   -- NPossNom Sg
-        NPCase Transl      => itse ! NCase Sg Transl ;        -- NPossTransl etc.
-        NPCase Illat       => itse ! NCase Sg Illat ;
-        NPCase c           => itse ! NCase Sg c
+        NPAcc => "ennast" ;
+        NPCase c => ise.s ! NCase Sg c
         } ;
       a = agr ;
       isPron = False -- no special acc form
       } ;
 
-  -- Estonian does not have possessive suffixes
-  -- possSuffixFront : Agr -> Str = \agr -> 
-  --   table Agr ["ni" ; "si" ; "nsä" ; "mme" ; "nne" ; "nsä" ; "nne"] ! agr ;
-  -- possSuffix : Agr -> Str = \agr -> 
-  --   table Agr ["ni" ; "si" ; "nsa" ; "mme" ; "nne" ; "nsa" ; "nne"] ! agr ;
+
+    -- Converts 6 given strings (Nom, Gen, Part, Illat, Gen, Part) into Noun
+    -- http://www.eki.ee/books/ekk09/index.php?p=3&p1=5&id=226
+    nForms6 : (jogi,joe,joge,joesse,jogede,jogesid : Str) -> {s : NForm => Str} ;
+
+    nForms6 jogi joe joge joesse jogede jogesid = {s = table {
+        NCase Sg Nom    => jogi ;
+        NCase Sg Gen    => joe ;
+        NCase Sg Part   => joge ;
+        NCase Sg Transl => joe + "ks" ;
+        NCase Sg Ess    => joe + "na" ;
+        NCase Sg Iness  => joe + "s" ;
+        NCase Sg Elat   => joe + "st" ;
+        NCase Sg Illat  => joesse ;
+        NCase Sg Adess  => joe + "l" ;
+        NCase Sg Ablat  => joe + "lt" ;
+        NCase Sg Allat  => joe + "le" ;
+        NCase Sg Abess  => joe + "ta" ;
+        NCase Sg Comit  => joe + "ga" ;
+        NCase Sg Termin => joe + "ni" ;
+
+        NCase Pl Nom    => joe + "d" ;
+        NCase Pl Gen    => jogede ;
+        NCase Pl Part   => jogesid ;
+        NCase Pl Transl => jogede + "ks" ;
+        NCase Pl Ess    => jogede + "na" ;
+        NCase Pl Iness  => jogede + "s" ;
+        NCase Pl Elat   => jogede + "st" ;
+        NCase Pl Illat  => jogede + "sse" ;
+        NCase Pl Adess  => jogede + "l" ;
+        NCase Pl Ablat  => jogede + "lt" ;
+        NCase Pl Allat  => jogede + "le" ;
+        NCase Pl Abess  => jogede + "ta" ;
+        NCase Pl Comit  => jogede + "ga" ;
+        NCase Pl Termin => jogede + "ni"
+    } } ;
+
 
 oper
   rp2np : Number -> {s : Number => NPForm => Str ; a : RAgr} -> NP = \n,rp -> {
