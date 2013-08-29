@@ -29,17 +29,14 @@ do
 	cat ${tests}/${type}.csv | sed "s/,.*//" | python cc.py -r ${g}/ParadigmsEst.gf --oper "mkN" | gf --run >> ${tests}/mkN.gold.csv
 done
 
-for file in $(ls ${tests}/ts_type*.csv | grep -v "\.gold\.")
+for file in $(ls ${tests}/ts_type*.csv)
 do
 	type=$(basename "$file")
 	type="${type%%.*}"
 	echo $type
 
-	# Compute using the 1 or 2 argument oper
-	#cat ${tests}/${type}.csv | python cc.py -r ${g}/ParadigmsEst.gf --oper ${type} | gf --run > ${tests}/${type}.gold.csv
-
-	echo "Testing ParadigmsEst: mkN"
-	cat ${tests}/${type}.csv | sed "s/,.*//" | python cc.py -r ${g}/ParadigmsEst.gf --oper "mkN" | gf --run >> ${tests}/mkV.gold.csv
+	# echo "Testing ParadigmsEst: mkV"
+	cat ${tests}/${type}.csv | sed "s/,.*//" | python cc.py -r ${g}/ParadigmsEst.gf --oper "mkV" | gf --run >> ${tests}/mkV.gold.csv
 done
 
 # TODO: cover also Adv, V, etc.
