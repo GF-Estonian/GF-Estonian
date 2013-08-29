@@ -967,21 +967,11 @@ caseTable : Number -> CommonNoun -> Case => Str = \n,cn ->
 -- The inflextion shows a surprising similarity with "suo".
 
 oper
-  -- TODO: 'kes', 'mis' (?)
-  -- No plural in Estonian (?)
+  -- TODO: fix: Nom => kelled
+  -- TODO: mis
   relPron : Number => Case => Str =
-    let {jo = nForms2N (dLuu "ke")} in
-    table {
-      Sg => table {
-        Nom => "kes" ;
-        Gen => "kelle" ;
-        c   => jo.s ! NCase Sg c
-       } ; 
-      Pl => table {
-        Nom => "kes" ;
-        c   => "j" + (jo.s ! NCase Pl c)
-        }
-      } ;
+    let kes = hjk_nForms6 "kes" "kelle" "keda" "kellesse" "kelle" "keda" in
+    \\n,c => kes.s ! NCase n c ;
 
   ProperName = {s : Case => Str} ;
 
