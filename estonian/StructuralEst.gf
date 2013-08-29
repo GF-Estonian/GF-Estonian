@@ -166,17 +166,14 @@ concrete StructuralEst of Structural = CatEst **
 oper
   jokuPron : MorphoEst.Number => (MorphoEst.Case) => Str =
     let
-      kui = mkN "kuu"
+      keegi = mkN "keegi" "kellegi" "kedagi" "kellegisse" "kellegi" "kedagi"
     in
     table {
       Sg => table {
-        Nom => "joku" ;
-        Gen => "jonkun" ;
-        c => relPron ! Sg ! c + "ku" + Predef.drop 3 (kui.s ! NCase Sg c)
+        c => keegi.s ! NCase Sg c
        } ;
       Pl => table {
-        Nom => "jotkut" ;
-        c => relPron ! Pl ! c + kui.s ! NCase Pl c
+        c => keegi.s ! NCase Sg c
         }
       } ;
 

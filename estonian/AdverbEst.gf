@@ -20,6 +20,6 @@ concrete AdverbEst of Adverb = CatEst ** open ResEst, Prelude in {
     SubjS = cc2 ;
 ----b    AdvSC s = s ;
 
-    AdnCAdv cadv = {s = cadv.s ++ "kuin"} ;
+    AdnCAdv cadv = {s = cadv.s ++ "kui"} ;
 
 }
