@@ -11,6 +11,7 @@ cat ${tests}/nouns.csv | python cc.py -r ${g}/ParadigmsEst.gf --oper "mkN" | gf 
 
 rm ${tests}/hjk_type.gold.csv
 rm ${tests}/mkN.gold.csv
+rm ${tests}/mkV.gold.csv
 rm ${tests}/lexicon.gold.csv
 rm ${tests}/numeral.gold.csv
 

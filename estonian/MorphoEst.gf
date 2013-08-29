@@ -432,7 +432,7 @@ oper
   -- VVS 33 naerma
   
   
-  -- TS 58 (saatma), 63 (murdma)
+{-- TS 58 (saatma), 63 (murdma)
   -- Strong stem in ma and da 
   -- Needs tud as a parameter, takse formed from that
   -- This might make sense with 2-param constructor. Not deleting yet. 
@@ -453,7 +453,7 @@ oper
         (saat + "is")
         (saat + "nud")
         saadetud ;
-  
+-}  
   
   -- TS 58 muutma, saatma,
   -- like laskma (TS 62, 64), but no reduplication of stem consonant (muutma~muuta, not *muutta)
@@ -524,7 +524,7 @@ oper
       (lask + "nud") 
       (las + "tud") ;
 
-  -- TS 63 andma, murdma 
+  -- TS 63 andma, murdma, hoidma 
   cAndma : (_ : Str) -> VForms = \andma ->
     let
       and = Predef.tk 2 andma ; --murd(ma), hoid(ma)
@@ -564,8 +564,7 @@ oper
   -- no d/t in da, takse ; imperfect 3sg ends in s
   cKaima : (_ : Str) -> VForms = \kaima ->
     let
-      kai = Predef.tk 2 kaima ;
-      
+      kai = Predef.tk 2 kaima ;      
     in vForms8
       kaima
       (kai + "a")

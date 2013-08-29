@@ -17,7 +17,6 @@ echo "Running the tests..."
 gf --run < test_vforms8.gfs > test_v8_out.txt
 #gf --run < test_vforms4.gfs > test_v4_out.txt
 
-
 echo "Comparing the results..."
 #diff test_gold.txt test_out.txt
 #diff test_v8_out.txt test_v4_out.txt

@@ -460,7 +460,7 @@ oper
       lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
       kpt : pattern Str = #("k" | "p" | "t" | "f" | "š") ;
     in
-    case lugema of {        
+    case lugema of {
       --TS 49 verbs  
       ? + ("äi"|"õi") + "ma" =>
         cKaima lugema ;  --käima,võima

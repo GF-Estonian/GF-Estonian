@@ -6,7 +6,7 @@ log:
 * Verb morphology
    - Regular internal representation 4 forms
    - Around 30 irregular verbs that need ? forms
-   - Finnish worst case constructor 10 forms
+   - Finnish worst case constructor 12 forms
    
 Other changes
    - Removed question particles from the category of verbs
