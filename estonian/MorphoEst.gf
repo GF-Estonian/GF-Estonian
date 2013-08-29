@@ -369,180 +369,6 @@ resource MorphoEst = ResEst ** open Prelude, HjkEst in {
 ---------------------
 
 oper
-
-  -- VVS 27 elama
-  -- t in takse, tud, no cons.grad
-  cElama : (_ : Str) -> VForms = \elama ->
-    let
-      ela = Predef.tk 2 elama;
-    in vForms8
-      elama
-      (ela + "da")
-      (ela + "b")
-      (ela + "takse") 
-      (ela + "ge") -- Imperative P1 Pl
-      (ela + "s")  -- Imperfect P3 Sg 
-      (ela + "nud") 
-      (ela + "tud") ;
-
-
-
-  -- VVS 28 leppima (lugema, rääkima)
-  -- t in takse, tud
-  cLeppima : (_ : Str) -> VForms = \leppima ->
-    let
-      leppi = Predef.tk 2 leppima ;
-      i = last leppi ;
-      lepp = init leppi ;
-      lepi = (weaker lepp) + i ;
-    in vForms8
-      leppima
-      (leppi + "da")
-      (lepi + "b")
-      (lepi + "takse")
-      (leppi + "ge") -- Imperative P1 Pl
-      (leppi + "s")  -- Imperfect P3 Sg
-      (leppi + "nud")
-      (lepi + "tud") ;
-
-  -- VVS 28~27 tekkima (leppima~elama)
-
-  -- VVS 29 hüppama
-  -- EKSS 48: tõmbama, ootama
-  cHyppama : (_ : Str) -> VForms = \hyppama ->
-    let
-      hyppa = Predef.tk 2 hyppama ;
-      hypa = weaker hyppa ;
-    in vForms8
-      hyppama
-      (hypa + "ta")
-      (hyppa + "b")
-      (hypa + "takse") -- Passive
-      (hypa + "ke") -- Imperative P1 Pl
-      (hyppa + "s") -- Condit Sg P3
-      (hyppa + "nud") -- PastPartAct
-      (hypa + "tud") ; -- PastPartPass
-
-  -- VVS 29~27 laastama (hüppama~elama)
-
-  -- VVS 30 riidlema
-
-  -- VVS 31~27 kõnelema (rabelema~elama)
-        
-  -- VVS 33 naerma
-  
-  
-{-- TS 58 (saatma), 63 (murdma)
-  -- Strong stem in ma and da 
-  -- Needs tud as a parameter, takse formed from that
-  -- This might make sense with 2-param constructor. Not deleting yet. 
-  -- cMuutma for only 58 and cAndma for only 63.
-  cSaatma5863 : (_,_ : Str) -> VForms = \saatma,saadetud ->
-    let
-      saat = Predef.tk 2 saatma ;
-      saadet = Predef.tk 2 saadetud ;
-      murtakse = saadet + "akse" ;  
-      saad = weaker saat ;
-    in
-      vForms8
-        saatma
-        (saat + "a")
-        (saad + "ab")
-        murtakse
-        (saat + "ke")
-        (saat + "is")
-        (saat + "nud")
-        saadetud ;
--}  
-  
-  -- TS 58 muutma, saatma,
-  -- like laskma (TS 62, 64), but no reduplication of stem consonant (muutma~muuta, not *muutta)
-  -- like andma (TS 63) but different takse (muudetakse vs. antakse)
-  cMuutma : (_ : Str) -> VForms = \muutma ->
-    let
-      muut = Predef.tk 2 muutma ;
-      muud = weaker muut ;
-    in vForms8
-      muutma
-      (muut + "a")
-      (muud + "ab")
-      (muud + "etakse") -- always e?
-      (muut + "ke")
-      (muut + "is")
-      (muut + "nud")
-      (muud + "etud") ; -- always e?
-  
-  -- TS 59 (petma), TS 60 (jatma)
-  -- weak stem in ma, strong in da ; TS 60 irregular takse, tud
-  -- tud given as a param
-  cJatma : (_,_ : Str) -> VForms = \jatma,jaetud ->
-    let
-      jat = Predef.tk 2 jatma ;
-      jatt = stronger jat ;
-      jaet = Predef.tk 2 jaetud ;
-    in vForms8
-      jatma
-      (jatt + "a")
-      (jat + "ab")
-      (jaet + "akse") --always e?
-      (jat + "ke")
-      (jatt + "is")
-      (jat + "nud")
-      jaetud ; --always e?
-      
-      
-  --TS 61 (laulma)
-  --vowel given with the second param
-  --veenma,naerma
-  cKuulma : (_,_ : Str) -> VForms = \kuulma,kuuleb ->
-    let
-      kuul = Predef.tk 2 kuulma ;
-    in vForms8
-      kuulma
-      (kuul + "da")
-      kuuleb
-      (kuul + "dakse")
-      (kuul + "ge")
-      (kuul + "is")
-      (kuul + "nud")
-      (kuul + "dud") ;
-      
-   --TS 62 (tõusma), 64 (mõksma)
-  --works also for maitsma, jooksma
-  --doesn't give alt. forms joosta, joostes
-  cLaskma : (_,_ : Str) -> VForms = \laskma,laseb ->
-    let
-      lask = Predef.tk 2 laskma ;
-      las = weaker lask ; --no effect on tõusma
-    in vForms8
-      laskma
-      (las + "ta")
-      laseb
-      (las + "takse")
-      (las + "ke")
-      (lask + "is")
-      (lask + "nud") 
-      (las + "tud") ;
-
-  -- TS 63 andma, murdma, hoidma 
-  cAndma : (_ : Str) -> VForms = \andma ->
-    let
-      and = Predef.tk 2 andma ; --murd(ma), hoid(ma)
-      an = Predef.tk 1 and ;    --mur(d),   hoi(d)
-      ann = weaker and ;        --murr,     hoi
-    in vForms8
-      andma
-      (and + "a")
-      (ann + "ab")
-      (an + "takse")
-      (and + "ke")
-      (and + "is")
-      (and + "nud")
-      (an + "tud") ;
- 
-  -- VVS 36 tulema
-  -- VVS 36&27 tulema&elama
-
   -- TS 49
   -- d in da, takse, dud ; imperfect 3sg ends in i
   cSaama : (_ : Str) -> VForms = \saama ->
@@ -603,6 +429,211 @@ oper
       (joo + "nud") 
       (joo + "dud") ;
 
+  -- TS 50-53 (elama, muutuma, kirjutama, tegelema alt forms)
+  -- t in takse, tud, no cons.grad
+  cElama : (_ : Str) -> VForms = \elama ->
+    let
+      ela = Predef.tk 2 elama;
+    in vForms8
+      elama
+      (ela + "da")
+      (ela + "b")
+      (ela + "takse") 
+      (ela + "ge") -- Imperative P1 Pl
+      (ela + "s")  -- Imperfect P3 Sg 
+      (ela + "nud") 
+      (ela + "tud") ;
+
+  --TS 54 (tulema)
+  --consonant assimilation on l,r,n
+  --cTulema : (_ : Str) -> VForms = \tulema ->
+  --  let
+  --  in
+  --    vForms8
+  
+  -- TS 55-57 (õppima, sündima, lugema)
+  -- t in takse, tud ; consonant gradation on stem
+  cLeppima : (_ : Str) -> VForms = \leppima ->
+    let
+      leppi = Predef.tk 2 leppima ;
+      i = last leppi ;
+      lepp = init leppi ;
+      lepi = (weaker lepp) + i ;
+    in vForms8
+      leppima
+      (leppi + "da")
+      (lepi + "b")
+      (lepi + "takse")
+      (leppi + "ge") -- Imperative P1 Pl
+      (leppi + "s")  -- Imperfect P3 Sg
+      (leppi + "nud")
+      (lepi + "tud") ;
+      
+      
+  -- TS 58 muutma, saatma,
+  -- like laskma (TS 62, 64), but no reduplication of stem consonant (muutma~muuta, not *muutta)
+  -- like andma (TS 63) but different takse (muudetakse vs. antakse)
+  cMuutma : (_ : Str) -> VForms = \muutma ->
+    let
+      muut = Predef.tk 2 muutma ;
+      muud = weaker muut ;
+    in vForms8
+      muutma
+      (muut + "a")
+      (muud + "ab")
+      (muud + "etakse") -- always e?
+      (muut + "ke")
+      (muut + "is")
+      (muut + "nud")
+      (muud + "etud") ; -- always e?
+  
+  -- TS 59 (petma), TS 60 (jatma)
+  -- weak stem in ma, strong in da ; TS 60 irregular takse, tud
+  -- tud given as a param
+  cJatma : (_,_ : Str) -> VForms = \jatma,jaetud ->
+    let
+      jat = Predef.tk 2 jatma ;
+      jatt = stronger jat ;
+      jaet = Predef.tk 2 jaetud ;
+    in vForms8
+      jatma
+      (jatt + "a")
+      (jat + "ab")
+      (jaet + "akse") --always e?
+      (jat + "ke")
+      (jatt + "is")
+      (jat + "nud")
+      jaetud ; --always e?
+      
+      
+  --TS 61 (laulma)
+  --vowel given with the second param
+  --veenma,naerma
+  cKuulma : (_,_ : Str) -> VForms = \kuulma,kuuleb ->
+    let
+      kuul = Predef.tk 2 kuulma ;
+    in vForms8
+      kuulma
+      (kuul + "da")
+      kuuleb
+      (kuul + "dakse")
+      (kuul + "ge")
+      (kuul + "is")
+      (kuul + "nud")
+      (kuul + "dud") ;
+      
+  --TS 62 (tõusma), 64 (mõksma)
+  --works also for maitsma, jooksma
+  --doesn't give alt. forms joosta, joostes
+  cLaskma : (_,_ : Str) -> VForms = \laskma,laseb ->
+    let
+      lask = Predef.tk 2 laskma ;
+      las = weaker lask ; --no effect on tõusma
+      
+    in vForms8
+      laskma
+      (las + "ta")
+      laseb
+      (las + "takse")
+      (las + "ke")
+      (lask + "is")
+      (lask + "nud") 
+      (las + "tud") ;
+
+  -- TS 63 (andma, murdma, hoidma) 
+  cAndma : (_ : Str) -> VForms = \andma ->
+    let
+      and = Predef.tk 2 andma ; --murd(ma), hoid(ma)
+      an = Predef.tk 1 and ;    --mur(d),   hoi(d)
+      ann = weaker and ;        --murr,     hoi
+    in vForms8
+      andma
+      (and + "a")
+      (ann + "ab")
+      (an + "takse")
+      (and + "ke")
+      (and + "is")
+      (and + "nud")
+      (an + "tud") ;
+      
+  -- TS 65 (pesema)
+  -- a consonant stem verb in disguise
+  cPesema : (_ : Str) -> VForms = \pesema ->
+    let
+      pese = Predef.tk 2 pesema ;
+      pes =  Predef.tk 1 pese ;
+    in vForms8
+      pesema
+      (pes + "ta")
+      (pese + "b")
+      (pes + "takse")
+      (pes + "ke")
+      (pes + "i")
+      (pes + "nud")
+      (pes + "tud") ;
+
+  -- TS 66 (nägema)
+  -- very irregular
+  
+  
+      
+  -- TS 67-68 (hüppama, tõmbama) 
+  -- strong stem in ma, b, s
+  -- weak stem in ta, takse, ke, nud, tud
+  cHyppama : (_ : Str) -> VForms = \hyppama ->
+    let
+      hyppa = Predef.tk 2 hyppama ;
+      hypa = weaker hyppa ;
+    in vForms8
+      hyppama
+      (hypa + "ta")
+      (hyppa + "b")
+      (hypa + "takse") -- Passive
+      (hypa + "ke") -- Imperative P1 Pl
+      (hyppa + "s") -- Condit Sg P3
+      (hyppa + "nud") -- PastPartAct
+      (hypa + "tud") ; -- PastPartPass
+
+  -- TS 69 (õmblema)
+  cOmblema : (_ : Str) -> VForms = \omblema ->
+    let
+      omble = Predef.tk 2 omblema ;
+      
+      ommel = weaker omble ;
+    in vForms8
+      omblema
+      (ommel + "da")
+      (omble + "b")
+      (ommel + "dakse") -- Passive
+      (ommel + "ge") -- Imperative P1 Pl
+      (omble + "s") -- Condit Sg P3
+      (omble + "nud") -- PastPartAct
+      (ommel + "dud") ; -- PastPartPass
+  
+  
+{-- TS 58 (saatma), 63 (murdma)
+  -- Strong stem in ma and da 
+  -- Needs tud as a parameter, takse formed from that
+  -- This might make sense with 2-param constructor. Not deleting yet. 
+  -- cMuutma for only 58 and cAndma for only 63.
+  cSaatma5863 : (_,_ : Str) -> VForms = \saatma,saadetud ->
+    let
+      saat = Predef.tk 2 saatma ;
+      saadet = Predef.tk 2 saadetud ;
+      murtakse = saadet + "akse" ;  
+      saad = weaker saat ;
+    in
+      vForms8
+        saatma
+        (saat + "a")
+        (saad + "ab")
+        murtakse
+        (saat + "ke")
+        (saat + "is")
+        (saat + "nud")
+        saadetud ;
+-}  
+  
   regVerb : (_,_,_,_ : Str) -> Verb = \kinkima,kinkida,kingib,kingitakse ->
     mk_forms4_to_verb (vForms4 kinkima kinkida kingib kingitakse) ;
 
