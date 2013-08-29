@@ -432,9 +432,6 @@ oper
     mkV : (huutaa : Str) -> V = mk1V ;
     mkV : (huutaa,huusi : Str) -> V = mk2V ;
     mkV : (huutaa,huudan,huusi : Str) -> V = mk3V ;
-    {-mkV : (
-      huutaa,huudan,huutaa,huutavat,huutakaa,huudetaan,
-      huusin,huusi,huusisi,huutanut,huudettu,huutanee : Str) -> V = mk12V ; -}
     mkV : (lugema,lugeda,loeb,loetakse : Str) -> V = mk4V ;
     mkV : (tegema,teha,teeb,tehakse,tehke,tegi,teinud,tehtud : Str) -> V = mk8V ;
     mkV : (sana : VK) -> V = \w -> vforms2V w.s ** {sc = NPCase Nom ; lock_V = <>} ;
