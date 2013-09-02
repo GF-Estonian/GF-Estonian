@@ -312,7 +312,7 @@ oper
       nForms2N (nForms4 s t u v) ;
 
   mk6N : (oun,ouna,ouna,ounasse,ounte,ounu : Str) -> N =
-      \a,b,c,d,e,f -> (hjk_nForms6 a b c d e f) ** { lock_N = <> } ;
+      \a,b,c,d,e,f -> (nForms6 a b c d e f) ** { lock_N = <> } ;
   mk7N : (oun,ouna,ouna,ounasse,ounte,ounu,ountesse : Str) -> N = 
       \a,b,c,d,e,f,g -> nForms2N (nForms7 a b c d e f g) ;
 
