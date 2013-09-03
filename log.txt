@@ -2,7 +2,7 @@ log:
 
 * Implemented noun morphology following HJK
    - worst case constructor 6 forms
-   - Finnish worst case constructor ? forms
+   - Finnish worst case constructor 10 forms
 * Verb morphology
    - Regular internal representation 4 forms
    - Around 30 irregular verbs that need ? forms
@@ -20,6 +20,7 @@ Other changes
    	- PartCN?
    	- 
 
+
 Inari 29.8.2013
 
 TS classification are not always very logical. For instance, 49 is one class which I split in three 1-argument functions: saama~saada ; jooma~juua ; käima~käia. (I could of course just do more matching inside the ``Str -> VForms`` function. Maybe this detail is not so important anyway.)
@@ -27,4 +28,35 @@ Classes 50-52 are identical. Stem that you get from ma infinitive doesn't change
 Classes 55-57 are identical, just the details of consonant gradation differ. 55 is pp~p, 56 is nd~nn, 57 is lugema~loeb or pidama~peab. 
 Class 61 contains both a and e (laulab, kooleb), and you don't know that from ma infinitive.
 I merged 62 and 64, because the only difference is that other has consonant gradation and other doesn't. So you can give instruction ``X_weak + "suffix"``, and if X can't be made weaker, it has no effect.
+
+Inari 1.9.2013
+
+Paradigm from a CS point of view and a linguistic point of view; 
+definition of (Aarne & Gregoire smart paradigms paper http://www.aclweb.org/anthology/E/E12/E12-1066.pdf); paradigm is a function that you apply to one form to give you n forms, that is, the full inflection table of a lemma. If you consider it as an instruction, 62 and 64 are in the same class: applying the same procedure gives the full inflection table for all words that belong to the TS classes 62 and 64. 
+If you consider it as a description, it is more justified to separate the classes. One contains consonant gradation, other doesn't.
+Difference between classes 51 and 55-57 is that 51 does not undergo consonant gradation, 55-57 do. They aren't implemented in the same smart paradigm, because verbs 51 could potentially undergo it; that is, applying function ``weaker`` to stems of 51 verbs would transform them and that would result in incorrect forms.
+
+With nouns, we use the HJK (http://kjk.eki.ee/ee/issues/2012/6/156) system, where the full inflection table of a noun can be formed by 6 forms. What is then left to do for the GF smart paradigms is how to form the 6 forms from one.
+With verbs the number of forms for forming the full paradigm is 8 -- this is enough for all verbs except _olema_ and _minema_, which are just formed separately. With the assumption that 6 and 8 forms are enough to compute all other forms, we have reduced the immediate problem to finding 6/8 forms based on one.
+
+An example of the template for verbs in TS 63.
+The suffixes are fixed; you couldn't produce for instance any verb that has the vowel _e_ in the present tense personal forms, or imperative with the allomorph _ge_.
+Second thing is that you can't form a verb whose stem behaves differently. For instance, the verbs _õppima_ and _hüppama_ have different quantities in present tense forms (_õpib_ and _hüppab_), so you can't describe the process that happens in the stem in the same function. 
+These are both very intuitive definitions; behaviour and instructions coincide.
+
+  -- TS 63 (andma, murdma, hoidma) 
+  cAndma : Str -> VForms = \andma ->
+    let
+      and = tk 2 andma ;   --murd(ma), hoid(ma)
+      an = tk 1 and ;      --mur(d),   hoi(d)
+      ann = weaker and ;   --murr,     hoi
+    in vForms8
+      andma
+      (and + "a")
+      (ann + "ab")
+      (an + "takse")
+      (and + "ke")
+      (and + "is")
+      (and + "nud")
+      (an + "tud") ;
 
