@@ -574,6 +574,23 @@ oper
 
   -- TS 66 (nägema)
   -- very irregular
+  -- TODO
+  cNagema : (_ : Str) -> VForms = \nagema ->
+    let
+      nage = Predef.tk 2 nagema ;
+      nag =  Predef.tk 1 nage ;
+      na = tk 1 nag ;
+      nah = na + "h" ;
+      nai = na + "i" ;
+    in vForms8
+      nagema
+      (nah + "a")
+      (nage + "b")
+      (nah + "akse")
+      (nah + "ke")
+      (nag + "i")
+      (nai + "nud")
+      (nah + "tud") ;
   
   
       
@@ -598,8 +615,10 @@ oper
   cOmblema : (_ : Str) -> VForms = \omblema ->
     let
       omble = Predef.tk 2 omblema ;
-      
-      ommel = weaker omble ;
+      e = last omble ;
+      l = last (Predef.tk 1 omble) ;
+      omb = Predef.tk 2 omble ;
+      ommel = (weaker omb) + e + l ;
     in vForms8
       omblema
       (ommel + "da")
