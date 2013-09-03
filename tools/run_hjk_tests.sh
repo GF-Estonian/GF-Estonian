@@ -5,7 +5,7 @@ g=../estonian/
 
 # Warning: overwrites gold files
 
-cat ${tests}/forms_six.csv | python cc.py --oper hjk_nForms6 --resource ${g}/HjkEst.gf | gf --run > ${tests}/forms_six.gold.csv
+cat ${tests}/forms_six.csv | python cc.py --oper nForms6 --resource ${g}/HjkEst.gf | gf --run > ${tests}/forms_six.gold.csv
 cat ${tests}/forms_six.csv | python cc.py --oper mk6N --resource ${g}/ParadigmsEst.gf | gf --run > ${tests}/paradigms_mk6N.gold.csv
 cat ${tests}/nouns.csv | python cc.py -r ${g}/ParadigmsEst.gf --oper "mkN" | gf --run > ${tests}/nouns.gold.csv
 

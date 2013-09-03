@@ -1019,7 +1019,7 @@ oper
   -- TODO: fix: Nom => kelled
   -- TODO: mis
   relPron : Number => Case => Str =
-    let kes = hjk_nForms6 "kes" "kelle" "keda" "kellesse" "kelle" "keda" in
+    let kes = nForms6 "kes" "kelle" "keda" "kellesse" "kelle" "keda" in
     \\n,c => kes.s ! NCase n c ;
 
   ProperName = {s : Case => Str} ;
