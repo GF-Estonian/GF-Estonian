@@ -2,13 +2,13 @@
 
 --1 A Simple Estonian Resource Morphology
 --
--- Aarne Ranta (, Inari Listenmaa, Kaarel Kaljurand)
+-- Aarne Ranta, Inari Listenmaa, Kaarel Kaljurand
 --
 -- This resource morphology contains definitions needed in the resource
 -- syntax. To build a lexicon, it is better to use $ParadigmsEst$, which
 -- gives a higher-level access to this module.
 
-resource MorphoEst = ResEst ** open Prelude, HjkEst in {
+resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
 
   flags optimize=all ; coding=utf8;
 
