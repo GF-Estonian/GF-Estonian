@@ -31,7 +31,7 @@ concrete QuestionEst of Question = CatEst ** open ResEst, Prelude in {
     QuestIComp icomp np = {
       s = \\t,a,p => 
         let 
-          vp = predV (verbOlla ** {sc = NPCase Nom ; qp = True}) ;
+          vp = predV (verbOlema ** {sc = NPCase Nom ; qp = True}) ;
           cl = mkClause (subjForm np vp.sc) np.a vp ;
         in
         icomp.s ! np.a ++ cl.s ! t ! a ! p ! SDecl

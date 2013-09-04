@@ -20,6 +20,7 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
       insertObj 
         (\\_,b,a => infVP v.sc b a vp v.vi) 
         (predV {s = v.s ; 
+                s2 = v.s2 ;
                 sc = case vp.sc of {
                   NPCase Nom => v.sc ;   -- minun täytyy pestä auto
                   c => c                 -- minulla täytyy olla auto
@@ -52,12 +53,13 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
     ComplSlash vp np = insertObjPre (\\fin,b,_ => appCompl fin b vp.c2 np) vp ;
 
     UseComp comp = 
-      insertObj (\\_,_ => comp.s) (predV (verbOlla ** {sc = NPCase Nom})) ;
+      insertObj (\\_,_ => comp.s) (predV (verbOlema ** {sc = NPCase Nom})) ;
 
     SlashVV v vp = 
       insertObj 
         (\\_,b,a => infVP v.sc b a vp v.vi) 
         (predV {s = v.s ; 
+                s2 = v.s2 ;
                 sc = case vp.sc of {
                   NPCase Nom => v.sc ;   -- minun täytyy pestä auto
                   c => c                 -- minulla täytyy olla auto

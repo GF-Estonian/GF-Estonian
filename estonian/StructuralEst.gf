@@ -284,10 +284,11 @@ lin
 
   except_Prep = postPrep partitive "väljaarvatud" ;
 
-  have_V2 = mkV2 (caseV adessive vOlla) ;
+  have_V2 = mkV2 (caseV adessive vOlema) ;
 
   -- Kaarel: TODO: not sure what this is...
-  lin language_title_Utt = ss "suomi" ;
+  -- Name of the language in that language, s/suomi/eesti/ :--P
+  lin language_title_Utt = ss "eesti" ;
 
 }
 

@@ -258,7 +258,7 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
     6 => ukko.s ! NCase Pl Illat
   } ;
   --end Estonian
-    Noun = {s : NForm => Str; lock_N : {}} ;
+    Noun = CommonNoun ** {lock_N : {}} ;
 
     nForms2N : NForms -> Noun = \f -> 
       let
@@ -825,7 +825,7 @@ oper
       Inf InfMaks => tulema + "ks" 
       } ;
     sc = NPCase Nom ;
-
+    s2 = [] ;
     lock_V = <>
     } ;
 
@@ -901,6 +901,7 @@ oper
       Inf InfMaks => vestlema + "ks" ;
       Inf InfMata => vestlema + "ta"
       } ;
+    s2 = [] ;
     sc = NPCase Nom ;
     lock_V = <>
     } ;

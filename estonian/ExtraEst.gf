@@ -61,7 +61,7 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
 
     AdvExistNP adv np = 
       mkClause (\_ -> adv.s) np.a (insertObj 
-        (\\_,b,_ => np.s ! NPCase Nom) (predV (verbOlla ** {sc = NPCase Nom}))) ;
+        (\\_,b,_ => np.s ! NPCase Nom) (predV (verbOlema ** {sc = NPCase Nom}))) ;
 
     RelExistNP prep rp np = {
       s = \\t,ant,bo,ag => 
@@ -72,7 +72,7 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
           np.a 
           (insertObj 
             (\\_,b,_ => np.s ! NPCase Nom) 
-            (predV (verbOlla ** {sc = NPCase Nom}))) ;
+            (predV (verbOlema ** {sc = NPCase Nom}))) ;
       in 
       cl.s ! t ! ant ! bo ! SDecl ;
       c = NPCase Nom
@@ -84,7 +84,7 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
 
     ICompExistNP adv np = 
       let cl = mkClause (\_ -> adv.s ! np.a) np.a (insertObj 
-        (\\_,b,_ => np.s ! NPCase Nom) (predV (verbOlla ** {sc = NPCase Nom}))) ;
+        (\\_,b,_ => np.s ! NPCase Nom) (predV (verbOlema ** {sc = NPCase Nom}))) ;
       in  {
         s = \\t,a,p => cl.s ! t ! a ! p ! SDecl
       } ;

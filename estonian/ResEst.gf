@@ -24,12 +24,6 @@ resource ResEst = ParamX ** open Prelude in {
     NForm = NCase Number Case ; 
 
 
---Not in Estonian
-{-          | NComit  | NInstruct  -- no number dist
-          | NPossNom Number | NPossGen Number --- number needed for syntax of AdjCN
-          | NPossTransl Number | NPossIllat Number ;
--}
-
 -- Agreement of $NP$ has number*person and the polite second ("te olette valmis").
 
 
@@ -99,8 +93,8 @@ param
   VForm = 
      Inf InfForm
    | Presn Number Person
-   | Impf Number Person  --# notpresent
-   | Condit Number Person  --# notpresent
+   | Impf Number Person
+   | Condit Number Person
    | Imper Number
    | ImperP3 Number
    | ImperP1Pl
@@ -179,7 +173,8 @@ param
 -- For $Verb$.
 
   Verb : Type = {
-    s : VForm => Str
+    s : VForm => Str ;
+    s2 : Str  -- particle verbs
     } ;
 
 param
@@ -215,10 +210,10 @@ oper
 
   einegole : Str * Str * Str = case <vi,agr.n> of {
     <VIFin Pres,   _>  => <eiv, verbs ! Imper Sg,     "ole"> ;
-    <VIFin Fut,    _>  => <eiv, verbs ! Imper Sg,     "ole"> ;   --# notpresent
-    <VIFin Cond,   _>  => <eiv, verbs ! Condit Sg P3, "oleks"> ;  --# notpresent
-    <VIFin Past,   Sg> => <eiv, part,                 "olnud"> ;  --# notpresent
-    <VIFin Past,   Pl> => <eiv, part,                 "olnud"> ;  --# notpresent
+    <VIFin Fut,    _>  => <eiv, verbs ! Imper Sg,     "ole"> ;
+    <VIFin Cond,   _>  => <eiv, verbs ! Condit Sg P3, "oleks"> ;
+    <VIFin Past,   Sg> => <eiv, part,                 "olnud"> ;
+    <VIFin Past,   Pl> => <eiv, part,                 "olnud"> ;
     <VIImper,      Sg> => <"ära", verbs ! Imper Sg,   "ole"> ;
     <VIImper,      Pl> => <"ärge", verbs ! ImpNegPl,  "olge"> ;
     <VIPass,       _>  => <"ei", verbs ! PassPresn False,  "ole"> ;
@@ -229,18 +224,18 @@ oper
   neg : Str = einegole.p2 ;
   ole : Str = einegole.p3 ;
 
-  olla : VForm => Str = verbOlla.s ;
+  olla : VForm => Str = verbOlema.s ;
 
   vf : Str -> Str -> {fin, inf : Str} = \x,y -> {fin = x ; inf = y} ;
   mkvf : VForm -> {fin, inf : Str} = \p -> case <ant,b> of {
     <Simul,Pos> => vf (verbs ! p) [] ;
-    <Anter,Pos> => vf (olla ! p)  part ;    --# notpresent
-    <Anter,Neg> => vf ei          (ole ++ part) ;   --# notpresent
+    <Anter,Pos> => vf (olla ! p)  part ; 
+    <Anter,Neg> => vf ei          (ole ++ part) ;
     <Simul,Neg> => vf ei          neg
   } in case vi of {
-        VIFin Past => mkvf (Impf agr.n agr.p) ;     --# notpresent
-        VIFin Cond => mkvf (Condit agr.n agr.p) ;  --# notpresent
-        VIFin Fut  => mkvf (Presn agr.n agr.p) ;  --# notpresent
+        VIFin Past => mkvf (Impf agr.n agr.p) ;  
+        VIFin Cond => mkvf (Condit agr.n agr.p) ;
+        VIFin Fut  => mkvf (Presn agr.n agr.p) ;
         VIFin Pres => mkvf (Presn agr.n agr.p) ;
         VIImper    => mkvf (Imper agr.n) ;
         VIPass     => mkvf (PassPresn True) ;
@@ -393,131 +388,128 @@ oper
         in
         verb.fin ++ verb.inf ++ compl ;
 
--- The definitions below were moved here from $MorphoFin$ so that we the
+-- The definitions below were moved here from $MorphoFin$ so that  
 -- auxiliary of predication can be defined.
 
-  -- Inf1, SgP3, ~PgP1, PlP3, ImperPl, PassTrue?
-  -- ImpfSgP3, ImpfSgP1, ConditSgP3?, ??, ??, ??
-  verbOlla : Verb = 
-    let olla = mkVerb 
-      "olema"
-      "olla" "on" "olen" "on" "olge" "ollakse" 
-      "oli" "olin" "oleks" "ollut" "oltu" "ollun" ;
-    in {s = table {
-      Inf InfMas => "olemas" ;
-      Inf InfMast => "olemast" ;
-      Inf InfMata => "olemata" ;
-      Inf InfMaks => "olemaks" ;
-      v => olla.s ! v
-      }
+  verbOlema : Verb = 
+    let olema = mkVerb
+      "olema" "olla" "olen" "ollakse" 
+      "olge" "oli" "olnud" "oldud"
+     in {s = table {
+      Presn _ P3 => "on" ;
+      v => olema.s ! v
+      } ;
+      s2 = []
     } ;
- 
+
+  verbMinema : Verb = 
+    let minema = mkVerb 
+      "minema" "minna" "läheb" "minnakse" 
+      "minge" "läks" "läinud" "mindud"
+    in {s = table {
+      Impf Sg P1 => "läksin" ;
+      Impf Sg P2 => "läksid" ;
+      Impf Pl P1 => "läksime" ;
+      Impf Pl P2 => "läksite" ;
+      Impf Pl P3 => "läksivad" ;
+      Imper Sg => "mine" ;
+      v => minema.s ! v
+      } ;
+      s2 = []
+    } ;
+    
 
 --3 Verbs
---
--- The present, past, conditional. and infinitive stems, acc. to Koskenniemi.
--- Unfortunately not enough (without complicated processes).
--- We moreover give grade alternation forms as arguments, since it does not
--- happen automatically.
---- A problem remains with the verb "seistä", where the infinitive
---- stem has vowel harmony "ä" but the others "a", thus "seisoivat" but "seiskää".
 
-
-  mkVerb : (_,_,_,_,_,_,_,_,_,_,_,_,_ : Str) -> Verb = 
-    \tulema,tulla,tulee,tulen,tulevat,tulkaa,tullaan,tuli,tulin,tulisi,tullut,tultu,tullun -> 
+  mkVerb : (x1,_,_,_,_,_,_,x8 : Str) -> Verb = 
+    \tulema,tulla,tuleb,tullakse,tulge,tuli,tulnud,tuldud -> 
     v2v (mkVerbH 
-     tulema tulla tulee tulen tulevat tulkaa tullaan tuli tulin tulisi tullut tultu tullun
+     tulema tulla tuleb tullakse tulge tuli tulnud tuldud
       ) ;
 
   v2v : VerbH -> Verb = \vh -> 
     let
       tulema = vh.tulema ;
-      tulla = vh.tulla ; 
-      tulles = "TODO" ;
-      tulee = vh.tulee ; 
-      tulen = vh.tulen ; 
-      tulevat = vh.tulevat ;
-      tulkaa = vh.tulkaa ; 
-      tullaan = vh.tullaan ; 
+      tulla = vh.tulla ;
+      tuleb = vh.tuleb ; 
+      tullakse = vh.tullakse ;
+      tulge = vh.tulge ; 
       tuli = vh.tuli ; 
-      tulin = vh.tulin ;
-      tulisi = vh.tulisi ;
-      tullut = vh.tullut ;
-      tultu = vh.tultu ;
-      tullun = vh.tullun ;
-      tuje = init tulen ;
-      tuji = init tulin ;
-      a = Predef.dp 1 tulkaa ;
-      tulko = Predef.tk 2 tulkaa + (ifTok Str a "a" "o" "ö") ;
-      o = last tulko ;
-      tulleena = Predef.tk 2 tullut + ("een" + a) ;
-      tulleen = (noun2adj (nhn (sRae tullut tulleena))).s ;
-      tullun = (noun2adj (nhn (sKukko tultu tullun (tultu + ("j"+a))))).s
+      tulnud = vh.tulnud ;
+      tuldud = vh.tuldud ;
+
+      tule_ = init tuleb ;
+      tull_ = init tulla ;
+      tuld_ = Predef.tk 2 tuldud ;
+      tulles = tull_ + "es" ; 
+      tulgu = (init tulge) + "e" ;
+
+      lugenud = (nhn (sMaakas tulnud)).s ;
+      loetud = (nhn (sMaakas tuldud)).s ;
     in
     {s = table {
       Inf InfDa => tulla ;
       Inf InfDes => tulles ;
-      Presn Sg P1 => tuje + "n" ;
-      Presn Sg P2 => tuje + "d" ;
-      Presn Sg P3 => tulee ;
-      Presn Pl P1 => tuje + "me" ;
-      Presn Pl P2 => tuje + "te" ;
-      Presn Pl P3 => tulevat ;
-      Impf Sg P1 => tuji + "n" ;   --# notpresent
-      Impf Sg P2 => tuji + "d" ;  --# notpresent
-      Impf Sg P3 => tuli ;  --# notpresent
-      Impf Pl P1 => tuji + "me" ;  --# notpresent
-      Impf Pl P2 => tuji + "te" ;  --# notpresent
-      Impf Pl P3 => tuli + "d" ;  --# notpresent
-      Condit Sg P1 => tulisi + "in" ;  --# notpresent
-      Condit Sg P2 => tulisi + "id" ;  --# notpresent
-      Condit Sg P3 => tulisi ;  --# notpresent
-      Condit Pl P1 => tulisi + "ime" ;  --# notpresent
-      Condit Pl P2 => tulisi + "ite" ;  --# notpresent
-      Condit Pl P3 => tulisi + "id";  --# notpresent
-      Imper Sg   => tuje ;
-      Imper Pl   => tulkaa ;
-      ImperP3 Sg => tulko + o + "n" ;
-      ImperP3 Pl => tulko + o + "t" ;
-      ImperP1Pl  => tulkaa + "mme" ;
-      ImpNegPl   => tulko ;
-      PassPresn True  => tullaan ;
-      PassPresn False => Predef.tk 2 tullaan ;
-      PassImpf True  => tullaan ;
-      PassImpf False => Predef.tk 2 tullaan ;
-      PresPart => "TODO" ;
-      PastPartAct n => tulleen ! n ;
-      PastPartPass n => tullun ! n ;
+      Presn Sg P1 => tule_ + "n" ;
+      Presn Sg P2 => tule_ + "d" ;
+      Presn Sg P3 => tuleb ;
+      Presn Pl P1 => tule_ + "me" ;
+      Presn Pl P2 => tule_ + "te" ;
+      Presn Pl P3 => tule_ + "vad" ;
+      Impf Sg P1  => tuli + "n" ;
+      Impf Sg P2  => tuli + "d" ;
+      Impf Sg P3  => tuli ;
+      Impf Pl P1  => tuli + "me" ;
+      Impf Pl P2  => tuli + "te" ;
+      Impf Pl P3  => tuli + "d" ;
+      Condit Sg P1 => tule_ + "ksin" ;
+      Condit Sg P2 => tule_ + "ksid" ;
+      Condit Sg P3 => tule_ + "ks";
+      Condit Pl P1 => tule_ + "ksime" ;
+      Condit Pl P2 => tule_ + "ksite" ;
+      Condit Pl P3 => tule_ + "ksid" ;
+      Imper Sg   => tule_ ; 
+      Imper Pl   => tulge ; 
+      ImperP3 Sg => tulgu ;  
+      ImperP3 Pl => tulgu ; 
+      ImperP1Pl  => tulge + "m" ;
+      ImpNegPl   => tulge ;
+      PassPresn True  => tullakse ;
+      PassPresn False => tuld_ + "a" ; 
+      PassImpf  True  => tuld_ + "i" ; 
+      PassImpf  False => tuldud ;  
+      PresPart => tule_ + "v" ;
+      PastPartAct (AN n)  => lugenud ! n ;
+      PastPartAct AAdv    => lugenud ! (NCase Sg Ablat) ;
+      PastPartPass (AN n) => loetud ! n ;
+      PastPartPass AAdv   => loetud ! (NCase Sg Ablat) ;
       Inf InfMa => tulema ;
-      Inf InfMas => tulema + "s" ; -- -mas
-      Inf InfMast  => tulema + "st" ; -- -mast
-      Inf InfMaks => tulema + "ks" ; -- -maks (missing in Finnish)
-      Inf InfMata => tulema + "ta" -- -mata
-      }
-    } ;
+      Inf InfMas => tulema + "s" ;
+      Inf InfMast => tulema + "st" ;
+      Inf InfMata => tulema + "ta" ;
+      Inf InfMaks => tulema + "ks" 
+      } ;
+      s2 = [] 
+  } ;
 
   VerbH : Type = {
-    tulema,tulla,tulee,tulen,tulevat,tulkaa,tullaan,tuli,tulin,tulisi,tullut,tultu,tullun
+    tulema,tulla,tuleb,tullakse,tulge,tuli,tulnud,tuldud
       : Str
     } ;
 
-  mkVerbH : (_,_,_,_,_,_,_,_,_,_,_,_,_ : Str) -> VerbH = 
-    \tulema,tulla,tulee,tulen,tulevat,tulkaa,tullaan,tuli,tulin,tulisi,tullut,tultu,tullun -> 
+  mkVerbH : (x1,_,_,_,_,_,_,x8 : Str) -> VerbH = 
+    \tulema,tulla,tuleb,tullakse,tulge,tuli,tulnud,tuldud -> 
     {
      tulema = tulema ;
      tulla = tulla ; 
-     tulee = tulee ; 
-     tulen = tulen ; 
-     tulevat = tulevat ;
-     tulkaa = tulkaa ; 
-     tullaan = tullaan ; 
+     tuleb = tuleb ; 
+     tullakse = tullakse ; 
+     tulge = tulge ; 
      tuli = tuli ; 
-     tulin = tulin ;
-     tulisi = tulisi ;
-     tullut = tullut ;
-     tultu = tultu ;
-     tullun = tullun
+     tulnud = tulnud ;
+     tuldud = tuldud 
      } ; 
+
 
   noun2adj : CommonNoun -> Adj = noun2adjComp True ;
 
@@ -546,139 +538,54 @@ oper
   Adj : Type = {s : AForm => Str} ;
 
   NounH : Type = {
-    a,vesi,vede,vete,vetta,veteen,vetii,vesii,vesien,vesia,vesiin : Str
+    maakas,maaka,maakat,maakasse,maakate,maakaid : Str
     } ;
 
 -- worst-case macro
 
-  mkSubst : Str -> (_,_,_,_,_,_,_,_,_,_ : Str) -> NounH = 
-    \a,vesi,vede,vete,vetta,veteen,vetii,vesii,vesien,vesia,vesiin -> 
-    {a = a ;
-     vesi = vesi ;
-     vede = vede ;
-     vete = vete ;
-     vetta = vetta ;
-     veteen = veteen ;
-     vetii = vetii ;
-     vesii = vesii ;
-     vesien = vesien ;
-     vesia = vesia ;
-     vesiin = vesiin
+  mkSubst : (x1,_,_,_,_,x6 : Str) -> NounH = 
+    \maakas,maaka,maakat,maakasse,maakate,maakaid -> 
+    {
+     maakas = maakas ;
+     maaka = maaka ;
+     maakat = maakat ;
+     maakasse = maakasse ;
+     maakate = maakate ;
+     maakaid = maakaid ;
     } ;
 
   nhn : NounH -> CommonNoun = \nh ->
     let
-     a = nh.a ;
-     vesi = nh.vesi ;
-     vede = nh.vede ;
-     vete = nh.vete ;
-     vetta = nh.vetta ;
-     veteen = nh.veteen ;
-     vetii = nh.vetii ;
-     vesii = nh.vesii ;
-     vesien = nh.vesien ;
-     vesia = nh.vesia ;
-     vesiin = nh.vesiin
+     maakas = nh.maakas ;
+     maaka = nh.maaka ;
+     maakat = nh.maakat ;
+     maakasse = nh.maakasse ;
+     maakate = nh.maakate ;
+     maakaid = nh.maakaid ;
     in
-    {s = table { 
-      NCase Sg Nom    => vesi ;
-      NCase Sg Gen    => vede + "n" ;
-      NCase Sg Part   => vetta ;
-      NCase Sg Transl => vede + "ks" ;
-      NCase Sg Ess    => vete + ("n" + a) ;
-      NCase Sg Iness  => vede + ("ss" + a) ;
-      NCase Sg Elat   => vede + "st" ;
-      NCase Sg Illat  => veteen ;
-      NCase Sg Adess  => vede + "l" ;
-      NCase Sg Ablat  => vede + "lt" ;
-      NCase Sg Allat  => vede + "le" ;
-      NCase Sg Abess  => vede + ("t" + a) ;
-      NCase Sg Comit  => vede + "ga" ;
-      NCase Sg Termin => vede + "ni" ;
+      nForms6
+        maakas
+        maaka
+        maakat
+        maakasse
+        maakate
+        maakaid ;
 
-      NCase Pl Nom    => vede + "d" ;
-      NCase Pl Gen    => vesien ;
-      NCase Pl Part   => vesia ;
-      NCase Pl Transl => vesii + "ks" ;
-      NCase Pl Ess    => vetii + ("n" + a) ;
-      NCase Pl Iness  => vesii + ("ss" + a) ;
-      NCase Pl Elat   => vesii + "st" ;
-      NCase Pl Illat  => vesiin ;
-      NCase Pl Adess  => vesii + ("l" + a) ;
-      NCase Pl Ablat  => vesii + "lt" ;
-      NCase Pl Allat  => vesii + "le" ;
-      NCase Pl Abess  => vesii + ("t" + a) ;
-      NCase Pl Comit  => vesii + "ga" ;
-      NCase Pl Termin => vesii + "ni" 
-
-{-    --Not in Estonian
-      NComit    => vede + "ga" ;
-      NInstruct => vesii + "n" ;
-
-      NPossNom _     => vete ;
-      NPossGen Sg    => vete ;
-      NPossGen Pl    => Predef.tk 1 vesien ;
-      NPossTransl Sg => vede + "kse" ;
-      NPossTransl Pl => vesii + "kse" ;
-      NPossIllat Sg  => Predef.tk 1 veteen ;
-      NPossIllat Pl  => Predef.tk 1 vesiin
--}
-      }
-    } ;
--- Surprisingly, making the test for the partitive, this not only covers
--- "rae", "perhe", "savuke", but also "rengas", "lyhyt" (except $Sg Illat$), etc.
-
-  sRae : (_,_ : Str) -> NounH = \rae,rakeena ->
-    let {
-      a      = Predef.dp 1 rakeena ;
-      rakee  = Predef.tk 2 rakeena ;
-      rakei  = Predef.tk 1 rakee + "i" ;
-      raet   = rae + (ifTok Str (Predef.dp 1 rae) "e" "t" [])
-    } 
-    in
-    mkSubst a 
-            rae
-            rakee 
-            rakee
-            (raet + ("t" + a)) 
-            (rakee + "seen")
-            rakei
-            rakei
-            (rakei + "den") 
-            (rakei + ("t" + a))
-            (rakei + "siin") ;
--- Nouns with partitive "a"/"ä" ; 
--- to account for grade and vowel alternation, three forms are usually enough
--- Examples: "talo", "kukko", "huippu", "koira", "kukka", "syylä",...
-
-  sKukko : (_,_,_ : Str) -> NounH = \kukko,kukon,kukkoja ->
-    let {
-      o      = Predef.dp 1 kukko ;
-      a      = Predef.dp 1 kukkoja ;
-      kukkoj = Predef.tk 1 kukkoja ;
-      i      = Predef.dp 1 kukkoj ;
-      ifi    = ifTok Str i "i" ;
-      kukkoi = ifi kukkoj (Predef.tk 1 kukkoj) ;
-      e      = Predef.dp 1 kukkoi ;
-      kukoi  = Predef.tk 2 kukon + Predef.dp 1 kukkoi
-    } 
-    in
-    mkSubst a 
-            kukko 
-            (Predef.tk 1 kukon) 
-            kukko
-            (kukko + a) 
-            (kukko + o + "n")
-            (kukkoi + ifi "" "i") 
-            (kukoi + ifi "" "i") 
-            (ifTok Str e "e" (Predef.tk 1 kukkoi + "ien") (kukkoi + ifi "en" "jen"))
-            kukkoja
-            (kukkoi + ifi "in" "ihin") ;
+  sMaakas : (_ : Str) -> NounH = \maakas ->
+    let
+      maaka = init maakas ;
+    in 
+      mkSubst maakas
+              maaka
+              (maaka + "t")
+              (maaka + "sse")
+              (maaka + "te")
+              (maaka + "id") ;
 
 -- Reflexive pronoun. 
 --- Possessive could be shared with the more general $NounFin.DetCN$.
 
-oper
+--oper
   --Estonian version started
   reflPron : Agr -> NP = \agr -> 
     let 
@@ -693,11 +600,12 @@ oper
       } ;
 
 
-    -- Converts 6 given strings (Nom, Gen, Part, Illat, Gen, Part) into Noun
+    -- Converts 6 given strings (Nom, Gen, Part, Illat, Gen, Part) into CommonNoun
     -- http://www.eki.ee/books/ekk09/index.php?p=3&p1=5&id=226
-    nForms6 : (jogi,joe,joge,joesse,jogede,jogesid : Str) -> {s : NForm => Str} ;
+    nForms6 : (jogi,joe,joge,joesse,jogede,jogesid : Str) -> CommonNoun ;
 
-    nForms6 jogi joe joge joesse jogede jogesid = {s = table {
+    nForms6 jogi joe joge joesse jogede jogesid = 
+    {s = table {
         NCase Sg Nom    => jogi ;
         NCase Sg Gen    => joe ;
         NCase Sg Part   => joge ;
@@ -727,7 +635,8 @@ oper
         NCase Pl Abess  => jogede + "ta" ;
         NCase Pl Comit  => jogede + "ga" ;
         NCase Pl Termin => jogede + "ni"
-    } } ;
+        }
+    } ;
 
 
 oper

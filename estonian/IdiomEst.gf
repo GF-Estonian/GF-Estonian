@@ -70,7 +70,7 @@ concrete IdiomEst of Idiom = CatEst **
     } ;
 
   oper
-    olla = verbOlla ** {sc = NPCase Nom ; qp = True} ;
+    olla = verbOlema ** {sc = NPCase Nom ; qp = True} ;
 
     noSubj : Polarity -> Str = \_ -> [] ;
 }
