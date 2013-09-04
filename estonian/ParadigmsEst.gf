@@ -333,11 +333,11 @@ oper
   nForms1 : Str -> NForms = \ukko ->
     let
       ukk = init ukko ;
-      uko = weakGrade ukko ;
+      uko = weaker ukko ;
       ukon = uko + "n" ;
       o = case last ukko of {"ä" => "ö" ; "a" => "o"} ; -- only used then 
-      renka = strongGrade (init ukko) ;
-      rake = strongGrade ukko ;
+      renka = stronger (init ukko) ;
+      rake = stronger ukko ;
     in
     case ukko of {
       _ + "lik"        => dKasulik ukko ;
@@ -461,66 +461,114 @@ oper
       kpt : pattern Str = #("k" | "p" | "t" | "f" | "š") ;
     in
     case lugema of {
-      --TS 49 verbs  
+      -- TS 49
+      -- Small class of CVVma
       ? + ("äi"|"õi") + "ma" =>
         cKaima lugema ;  --käima,võima
       ? + ("aa"|"ee"|"ää") + "ma" =>  
         cSaama lugema ;  -- saama,jääma,keema
       ? + ("oo"|"öö"|"üü"|"ii") + "ma" =>
         cJooma lugema ;  --jooma,looma,lööma,müüma,pooma,sööma,tooma,viima
-    
-      --Consonant stem before ma
-      --TS 58,61-64
-      --TS 59 (petma,nutma), TS 60 (jätma) with mk2V/mk3V 
+
+      -- TS 53
+      _ + "elema" =>
+        cTegelema lugema ;
+      
+      -- TS 54
+      -- Small class, just list all members
+      ("tule"|"sure"|"pane") + "ma" =>
+        cTulema lugema ;
+        
+      -- TS 55-57
+      -- Consonant gradation
+      _ + ("kk"|"pp"|"tt"|"ss") + "ima" => --TODO not a complete list
+        cLeppima lugema ;
+      ? + "ugema" => --lugema,pugema,sugema ; not raugema
+        cLeppima lugema ;
+      ("pidama"|"siduma") => --only these two (?)
+        cLeppima lugema ;
+      
+      -- TS 60 (jätma,võtma) default behaviour for CVtma, based on frequency.
+      ? + #v + "tma" =>
+        cJatma lugema ;        
+      -- TS 59 (lõpma,tapma). Rest (nutma,petma,utma) with mk2V/mk3V (TODO). 
+      ? + #v + "pma" =>
+        cPetma lugema ;
+      -- TS 58 for rest that end tma (muutma,kartma,...)
       _ + "tma" =>
         cMuutma lugema ;
+
+     -- TS 61 (laulma,kuulma,naerma,möönma)
+     -- Default vowel e for lma, a for (r|n)ma.
+     -- For laulab use mk2V/mk3V (TODO).
+      _ + "lma" => 
+        cKuulma lugema (loe + "eb") ; 
+      _ + ("r"|"n") + "ma" =>
+        cKuulma lugema (loe + "ab") ;
+     
+      -- TS 63 (andma,hoidma)
       _ + "dma" =>
         cAndma lugema ;
-      _ + "lma" =>
-        cKuulma lugema (luge + "eb") ; --kuulma,koolma. for laulma~laulab use mk2V (TODO)
-      _ + ("r"|"n") + "ma" =>
-        cKuulma lugema (luge + "ab") ; --for naerma,siirma,veenma,möönma
-      _ + #c + "ma" => 
-        cLaskma lugema (loe + "eb") ; --for __ab use mk2V (TODO)
-
         
-      _ + "ima" =>
-        cLeppima lugema ;
-      _ + "ugema" =>
-        cLeppima lugema ;
-{-
-      _ + "ndima" =>
-        cVqima lugema ;
-      _ + "adama" =>
-        cVqima lugema ;
--}
-      _ + "ootama" =>
+      -- TS 62 alt form
+      _ + "ooksma" => --for any other verb that would need jooksma~joosta~jookseb, mk2V
+        cJooksma lugema ;
+        
+      -- TS 62, 64 (tõusma,mõksma), default vowel e 
+      _ + #c + "ma" => 
+        cLaskma lugema (loe + "eb") ; --for __ab use mk2V/mk3V (TODO)
+        
+      -- TS 65 (pesema)
+      #c + #v + "sema" =>
+        cPesema lugema ;
+        
+      -- TS 66 (nägema)
+      -- Small class, just list all members
+      ("nägema"|"tegema") =>
+        cNagema lugema ;
+      
+     -- TS 67-68
+     (?|"") + ? + ("n"|"r") + "dama" => --hindama,kordama; not alandama
+        cHyppama lugema ;
+     (?|"") + ? + ("h"|"s"|"n") + "tama" => --istama,kohtama; not armastama 
+        cHyppama lugema ;
+     _ + #lmnr + ("k"|"p"|"g"|"b"|"j"|"v") + "ama" => --hingama,põrkama,arvama
+        cHyppama lugema ;
+     _ + ("sk"|"ps"|"ks"|"ts"|"pl") + "ama" => --oskama,jaksama
+        cHyppama lugema ;
+     _ + ("hk"|"hm"|"hn"|"hr") + "ama" => --puhkama,lõhnama 
+        cHyppama lugema ;
+     _ + ("pp"|"kk"|"tt"|"ss"|"nn"|"mm"|"ll"|"rr") + "ama" => --hakkama
+        cHyppama lugema ;
+     ? + ("aa"|"oo"|"uu") + ("d"|"t") + "ama" => --ootama,vaatama
         cHyppama lugema ;
       
-      _ + ("a" | "e" | "i" | "o" | "u") + ("ta" | "sta" | "bi") + "ma" =>
-        cElama lugema ;
+      -- TS 69
+      _ + #c + "lema" =>
+        cOmblema lugema ;
 
-
-      _ + ("pp" | "mb" | "t") + "ama" =>
-        cHyppama lugema ;
-      _ + ("a" | "e" | "u" | "i") + "ma" =>
-        cElama lugema ; 
-
+      -- TS 50-52
+      -- Default case
       _ =>
         cElama lugema
+        
+{-      _ + ("a" | "e" | "i" | "o" | "u") + ("ta" | "sta" | "bi") + "ma" =>
+        cElama lugema ;
+      _ + ("a" | "e" | "u" | "i") + "ma" =>
+        cElama lugema ; 
+-}
     } ;   
  
-  vForms2 : (_,_ : Str) -> VForms = \petma,pettis ->
+  vForms2 : (_,_ : Str) -> VForms = \petma,petta ->
     let
       pet = Predef.tk 2 petma ;
-      pett = Predef.tk 2 pettis
+      pett = Predef.tk 2 petta
     in 
-    case <petma,pettis> of {
-      <_, _ + ("tt"|"kk"|"pp") + _> => cJatma petma (pet + "etud") ;
+    case <petma,petta> of {
+      <_, _ + ("tt"|"kk"|"pp") + _> => cPetma petma ;
+      <_ + "ksma", _ + "sta"> => cJooksma petma ;
       _ => vForms1 petma
       } ;
-
-
 
   caseV c v = {s = v.s ; sc = NPCase c ; lock_V = <>} ;
 

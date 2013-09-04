@@ -143,6 +143,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			N@(#lmnr) + "p" => li + N + "b" ;
 			N@(#lmnr) + "t" => li + N + "d" ;
 			N@(#lmnr) + "d" => li + N + N ;
+			N@("l"|"r") + "g" => li + N ; --algama,alata
 			"sk" => li + "s" ;
 			"h" + #kpt => li + "h" ;
 			"nd" => li + "nn" ;

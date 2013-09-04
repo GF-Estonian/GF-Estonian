@@ -186,7 +186,7 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
   --31: mote-motte, hinne-hinde. reverse consonant gradation, stem vowel in sg.nom.
   dHinne : Str -> NForms = \hinne ->
     let
-      hinde : Str = strongGrade hinne 
+      hinde : Str = stronger hinne 
     in nForms7
       hinne hinde (hinne + "t") (hinde + "sse")
       (hinne + "te") (hinde + "id") (hinne + "tesse") ;
@@ -429,8 +429,8 @@ oper
       (joo + "nud") 
       (joo + "dud") ;
 
-  -- TS 50-53 (elama, muutuma, kirjutama, tegelema alt forms)
-  -- t in takse, tud, no cons.grad
+  -- TS 50-52 (elama, muutuma, kirjutama), 53 (tegelema) alt forms
+  -- t in takse, tud; no cons.grad
   cElama : (_ : Str) -> VForms = \elama ->
     let
       ela = Predef.tk 2 elama;
@@ -444,12 +444,41 @@ oper
       (ela + "nud") 
       (ela + "tud") ;
 
-  --TS 54 (tulema)
-  --consonant assimilation on l,r,n
-  --cTulema : (_ : Str) -> VForms = \tulema ->
-  --  let
-  --  in
-  --    vForms8
+  -- TS 53 (tegelema)
+  -- d in takse, tud; g in ge; consonant stem in takse, tud, nud, ge; no cons.grad
+  cTegelema : (_ : Str) -> VForms = \tegelema ->
+    let
+      tegele = Predef.tk 2 tegelema ;
+      tegel = Predef.tk 1 tegele ;
+    in vForms8
+      tegelema
+      (tegel + "da")
+      (tegele + "b")
+      (tegel + "dakse") 
+      (tegel + "ge") -- Imperative P1 Pl
+      (tegele + "s")  -- Imperfect P3 Sg 
+      (tegel + "nud") 
+      (tegel + "dud") ; 	
+      
+  -- TS 54 (tulema)
+  -- consonant assimilation (l,r,n) in da, takse
+  -- d in tud, g in ge
+  -- imperfect 3sg ends in i
+  cTulema : (_ : Str) -> VForms = \tulema ->
+    let
+      tul = Predef.tk 3 tulema ;
+      l = last tul ;
+      tull = tul + l ;
+    in
+      vForms8
+        tulema
+        (tull + "a")
+        (tul + "eb")
+        (tull + "akse")
+        (tul + "ge")
+        (tul + "i")
+        (tul + "nud")
+        (tul + "dud") ;
   
   -- TS 55-57 (õppima, sündima, lugema)
   -- t in takse, tud ; consonant gradation on stem
@@ -458,7 +487,11 @@ oper
       leppi = Predef.tk 2 leppima ;
       i = last leppi ;
       lepp = init leppi ;
-      lepi = (weaker lepp) + i ;
+      lepi = case leppi of {
+        "sidu" => "seo" ; --irregular gradation patterns
+        "pida" => "pea" ;
+        _ => (weaker lepp) + i 
+      } ;
     in vForms8
       leppima
       (leppi + "da")
@@ -487,27 +520,48 @@ oper
       (muut + "nud")
       (muud + "etud") ; -- always e?
   
-  -- TS 59 (petma), TS 60 (jatma)
-  -- weak stem in ma, strong in da ; TS 60 irregular takse, tud
-  -- tud given as a param
-  cJatma : (_,_ : Str) -> VForms = \jatma,jaetud ->
+  -- TS 59 (petma) 
+  -- weak stem in ma, strong in da
+    cPetma : (_ : Str) -> VForms = \petma ->
+    let
+      pet = Predef.tk 2 petma ;
+      pett = stronger pet ;
+    in vForms8
+      petma
+      (pett + "a")
+      (pet + "ab")
+      (pet + "etakse") --always e?
+      (pet + "ke")
+      (pett + "is")
+      (pet + "nud")
+      (pet + "etud") ;
+
+  -- TS 60 (jatma)
+  -- weak stem in ma, strong in da ; irregular takse, tud
+  cJatma : (_ : Str) -> VForms = \jatma ->
     let
       jat = Predef.tk 2 jatma ;
       jatt = stronger jat ;
-      jaet = Predef.tk 2 jaetud ;
+      ja = init jat ;
+      j = init ja ;
+      a = last ja ;
+      koe = case a of {
+        "ü" => j + "öe" ;
+        _   => ja + "e"  --kütma,köetud
+      } ;
     in vForms8
       jatma
       (jatt + "a")
       (jat + "ab")
-      (jaet + "akse") --always e?
+      (koe + "takse") --always e?
       (jat + "ke")
       (jatt + "is")
       (jat + "nud")
-      jaetud ; --always e?
+      (koe + "tud") ;
       
       
-  --TS 61 (laulma)
-  --vowel given with the second param
+  -- TS 61 (laulma)
+  --vowel (a/e) given with the second argument
   --veenma,naerma
   cKuulma : (_,_ : Str) -> VForms = \kuulma,kuuleb ->
     let
@@ -522,14 +576,13 @@ oper
       (kuul + "nud")
       (kuul + "dud") ;
       
-  --TS 62 (tõusma), 64 (mõksma)
-  --works also for maitsma, jooksma
-  --doesn't give alt. forms joosta, joostes
+  -- TS 62 (tõusma), 64 (mõksma)
+  -- vowel (a/e) given with the second argument
+  -- doesn't give alt. forms joosta, joostes
   cLaskma : (_,_ : Str) -> VForms = \laskma,laseb ->
     let
       lask = Predef.tk 2 laskma ;
       las = weaker lask ; --no effect on tõusma
-      
     in vForms8
       laskma
       (las + "ta")
@@ -539,6 +592,21 @@ oper
       (lask + "is")
       (lask + "nud") 
       (las + "tud") ;
+      
+  -- TS 62 alt forms
+  cJooksma : (_ : Str) -> VForms = \jooksma ->
+    let
+      jooks = Predef.tk 2 jooksma ;
+      joos = (Predef.tk 2 jooks) + "s" ;
+    in vForms8
+      jooksma
+      (joos + "ta")
+      (jooks + "eb")
+      (joos + "takse")
+      (joos + "ke")
+      (jooks + "is")
+      (jooks + "nud") 
+      (joos + "tud") ;
 
   -- TS 63 (andma, murdma, hoidma) 
   cAndma : (_ : Str) -> VForms = \andma ->
@@ -574,7 +642,6 @@ oper
 
   -- TS 66 (nägema)
   -- very irregular
-  -- TODO
   cNagema : (_ : Str) -> VForms = \nagema ->
     let
       nage = Predef.tk 2 nagema ;
@@ -585,7 +652,7 @@ oper
     in vForms8
       nagema
       (nah + "a")
-      (nage + "b")
+      (na + "eb")
       (nah + "akse")
       (nah + "ke")
       (nag + "i")
@@ -593,14 +660,20 @@ oper
       (nah + "tud") ;
   
   
-      
   -- TS 67-68 (hüppama, tõmbama) 
   -- strong stem in ma, b, s
-  -- weak stem in ta, takse, ke, nud, tud
+  -- weak stem in da, takse, ge, nud, tud
+  -- t in da, takse; k in ge
   cHyppama : (_ : Str) -> VForms = \hyppama ->
     let
       hyppa = Predef.tk 2 hyppama ;
-      hypa = weaker hyppa ;
+      hypp = init hyppa ;
+      a = last hyppa ;
+      hypa = (weaker hypp) + a
+      --case hyppa of {
+         --irregular gradation patterns
+      --  _ => (weaker hypp) + a
+      --} ;
     in vForms8
       hyppama
       (hypa + "ta")
@@ -658,12 +731,6 @@ oper
 
 -- auxiliaries
 
-    -- TODO: does not exist in Estonian
-    uyHarmony : Str -> Str = \a -> case a of {
-      "a" => "u" ;
-      _ => "y"
-      } ;
-
     VForms : Type = Predef.Ints 7 => Str ;
 
     VForms4 : Type = Predef.Ints 3 => Str ;
@@ -711,7 +778,6 @@ oper
             
       tuld_ = Predef.tk 2 tuldud ; --d/t choice for tuldi etc.
       tulgu = (init tulge) + "u" ;
-      --luge_ = Predef.tk 2 tulge ; --joo(ge); tul(ge); luge(ge) ;
       lugenud = (hjk_type_IVb_maakas tulnud).s ;
       loetud = (hjk_type_IVb_maakas tuldud).s ;
     in
@@ -738,10 +804,10 @@ oper
       Condit Pl P3 => tule_ + "ksid" ;  --# notpresent
       Imper Sg   => tule_ ; -- tule
       Imper Pl   => tulge ; -- tulge
-      ImperP3 Sg => tulgu ; -- ta tulgu ?
-      ImperP3 Pl => tulgu ; -- nad tulgu ?
-      ImperP1Pl  => tulge + "m" ; -- me tulgem ?
-      ImpNegPl   => tulge ; -- ärge tulge ?
+      ImperP3 Sg => tulgu ; -- tulgu (ta) 
+      ImperP3 Pl => tulgu ; -- tulgu (nad)
+      ImperP1Pl  => tulge + "m" ; -- tulgem
+      ImpNegPl   => tulge ; -- ärge tulge
       PassPresn True  => tullakse ;
       PassPresn False => tuld_ + "a" ; --da or ta
       PassImpf  True  => tuld_ + "i" ; --di or ti
@@ -843,101 +909,6 @@ oper
 -- Auxiliaries
 -----------------------------------------
 
--- The following function defines how grade alternation works if it is active.
--- In general, *whether there is* grade alternation must be given in the lexicon
--- (cf. "auto - auton" not "audon"; "vihje - vihjeen" not "vihkeen").
-
-  weakGrade : Str -> Str = \kukko ->
-    let
-      ku  = Predef.tk 3 kukko ;
-      kko = Predef.dp 3 kukko ;
-      o   = last kukko
-    in
-      case kko of {
-        "kk" + _ => ku + "k"  + o ;
-        "pp" + _ => ku + "p"  + o ;
-        "tt" + _ => ku + "t"  + o ;
-        "nk" + _ => ku + "ng" + o ;
-        "nt" + _ => ku + "nd" + o ;
-        "nd" + _ => ku + "nn" + o ;
-        "ad" + _ => ku + "aj" + o ; -- TODO: maybe any vowel, not just 'a'
-        "mb" + _ => ku + "mm" + o ;
-        "ug" + _ => ku + "o" + o ;  -- luge -> loe
-        "ub" + _ => ku + "o" + o ;  -- tuba -> toa  
-        "rt" + _ => ku + "rr" + o ;
-        "lt" + _ => ku + "ll" + o ;
-        "lk" + ("i" | "e") => ku + "lj" + o ;
-        "rk" + ("i" | "e") => ku + "rj" + o ;
-        "lk" + _ => ku + "l" + o ;
-        "rk" + _ => ku + "r" + o ;
-        ("hk" | "tk") + _ => kukko ;           -- *tahko-tahon, *pitkä-pitkän
-        "s" + ("k" | "p" | "t") + _ => kukko ; -- *lasku-lasvun, *raspi-rasvin, *lastu-lasdun
-        x + "k" + ("a" | "e" | "i" | "o" | "u") => ku + x + "g" + o ;
-        x + "p" + ("a" | "e" | "i" | "o" | "u") => ku + x + "b" + o ;
-        x + "t" + ("a" | "e" | "i" | "o" | "u") => ku + x + "d" + o ; -- oota -> ooda
-        _ => kukko
-        } ;
-
--- This is used to analyse nouns "rae", "hake", "rengas", "laidun", etc.
-
-  strongGrade : Str -> Str = \hinne ->
-    let
-      hi = Predef.tk 3 hinne ;
-      nne = Predef.dp 3 hinne ; 
-    in 
-    hi + case nne of {
---      "ng" + a => "nk" + a ;
-      "nn" + e => "nd" + e ;
---      "mm" + e => "mp" + e ;
---      "rr" + e => "rt" + e ;
---      "ll" + a => "lt" + a ;
---      h@("h" | "l") + "je" + e => h + "ke" ; -- pohje/lahje impossible
---      ("tk" | "hk" | "sk" | "sp" | "st") + _ => nke ;       -- viuhke,kuiske 
-      a + k@("k"|"p"|"t") + e@("e"|"a"|"ä"|"u"|"y"|"i"|"o"|"ö")  => a + k + k + e ;
---      a + "d" + e@("e"|"a"|"ä"|"u"|"i"|"o"|"ö")  => a + "t" + e ; 
---      s + a@("a" | "ä") + "e" => s + a + "ke" ;       -- säe, tae
---      s + "ui"                      => s + "uki" ;     -- ruis
---      s + "aa"                      => s + "aka" ;       -- taata
---      s + "i" + a@("a" | "e" | "i") => s + "ik" + a ;       -- liata, siitä, pietä
---      a + "v" + e@("e"|"a"|"ä"|"u"|"i") => a + "p" + e ;  -- taive/toive imposs
-      ase => ase
-      } ;
-
-
-  strongGradeFin : Str -> Str = \hanke ->
-    let
-      ha = Predef.tk 3 hanke ;
-      nke = Predef.dp 3 hanke ; 
-    in 
-    ha + case nke of {
-      "ng" + a => "nk" + a ;
-      "nn" + e => "nt" + e ;
-      "mm" + e => "mp" + e ;
-      "rr" + e => "rt" + e ;
-      "ll" + a => "lt" + a ;
-      h@("h" | "l") + "je" + e => h + "ke" ; -- pohje/lahje impossible
-      ("tk" | "hk" | "sk" | "sp" | "st") + _ => nke ;       -- viuhke,kuiske 
-      a + k@("k"|"p"|"t") + e@("e"|"a"|"ä"|"u"|"y"|"i"|"o"|"ö")  => a + k + k + e ;
-      a + "d" + e@("e"|"a"|"ä"|"u"|"i"|"o"|"ö")  => a + "t" + e ; 
-      s + a@("a" | "ä") + "e" => s + a + "ke" ;       -- säe, tae
-      s + "ui"                      => s + "uki" ;     -- ruis
-      s + "aa"                      => s + "aka" ;       -- taata
-      s + "i" + a@("a" | "e" | "i") => s + "ik" + a ;       -- liata, siitä, pietä
-      a + "v" + e@("e"|"a"|"ä"|"u"|"i") => a + "p" + e ;  -- taive/toive imposs
-      ase => ase
-      } ;
-
-  -- TODO: not sure if we can do anything with these
-  -- for Estonian
-  vowHarmony : Str -> Str = \s -> case s of {
-    _ + ("a" | "o" | "u") + _ => "a" ;
-    _ => "i"
-    } ;
-
-  getHarmony : Str -> Str = \u -> case u of {
-    "a"|"o"|"u" => "a" ;
-    _   => "i"
-    } ;
 
 -----------------------
 -- for Structural
