@@ -64,3 +64,46 @@ These are both very intuitive definitions; behaviour and instructions coincide.
       (and + "nud")
       (an + "tud") ;
 
+Kaarel 5.9.2013
+
+Tested the 1-arg noun paradigm.
+
+  1. Took all nouns from the Estonian WordNet: 65214
+  2. Applied Filosoft compound splitting to them
+  3. Removed 24262 nouns for which compound splitting failed (Filosoft tag ####)
+     TODO: investigate why is this number so large
+  4. For the remaining words, removed everything up to the last compound part.
+     After sort|uniq, this resulted in 17983 words (non-compounds are also included)
+  5. Applied Filosoft morph. generation
+  6. Removed words for which generation failed (Filosoft tag ####), resulting in 17551 words
+  7. Applied "recode latin1..utf8" which fixed 3 encoding errors that crashed (?) GF (TODO: report this to Filosoft)
+     hea, hea, head, heasse, heade, häid
+     make-up, make-upi, make-upi, make-upisse|make-upi, make-upide, make-upu|make-upisid
+     pea, pea, pead, peasse|pähe, peade, päid
+  8. Ran GF's cc on the sg nom forms, something like:
+
+     cat nouns.6forms.csv | sed "s/,.*//" | ./cc.py -r HjkEst.gf --oper "hjk_type" |\
+     gf --run | perl -nal -F",\s+" -e 'print "$F[0], $F[1], $F[2], $F[3], $F[15], $F[16]"'
+
+  9. Compared the output against the Filosoft original file using diff-list-set.py,
+     resulting in this difference distribution (e.g. 5-6 means that only the plural forms are wrong)
+
+      13853
+       1507 2-3-4-5-6
+        524 3-5-6
+        425 3-4-5-6
+        267 2-3-4-5
+        251 5-6
+        219 2
+        186 6
+        112 2-4-6
+         58 3
+         55 2-4-5-6
+         50 2-3-5-6
+         32 2-4
+          9 3-5
+          1 4-6
+          1 2-3-4-6
+          1 2-3-4
+
+So, about 79% of the nouns are currently handled correctly.
