@@ -141,8 +141,8 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
     IndefArt = {
       s = \\_,_ => [] ; -- Nom is Part in Pl: use isDef in DetCN
       sp = \\n,c => 
-         (nhn (mkSubst "üks" "ühe" "üht" "ühesse" "" 
-         "")).s ! NCase n c ; 
+         (nhn (mkSubst "üks" "ühe" "üht" "ühesse" "ühtede" 
+         "ühtesid")).s ! NCase n c ; 
       isNum,isDef = False -- autoja on
       } ;
 

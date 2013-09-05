@@ -614,6 +614,7 @@ oper
       and = Predef.tk 2 andma ; --murd(ma), hoid(ma)
       an = Predef.tk 1 and ;    --mur(d),   hoi(d)
       ann = weaker and ;        --murr,     hoi
+      --TODO fix teadma,tean (currently teaan)
     in vForms8
       andma
       (and + "a")

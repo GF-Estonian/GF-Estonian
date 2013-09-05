@@ -5,7 +5,8 @@ log:
    - Finnish worst case constructor 10 forms
 * Verb morphology
    - Regular internal representation 4 forms
-   - Around 30 irregular verbs that need ? forms
+   - 25 irregular verbs that need 8 forms
+   - 2 irregular verbs defined separately
    - Finnish worst case constructor 12 forms
    
 Other changes
@@ -19,6 +20,9 @@ Other changes
     	- Word orders with focused member
    	- PartCN?
    	- 
+   - To add:
+   	- püsiühendid
+        - negation "pole" to Extra
 
 
 Inari 29.8.2013
