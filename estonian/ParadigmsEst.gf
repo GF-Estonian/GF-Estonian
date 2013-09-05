@@ -469,12 +469,12 @@ oper
     case lugema of {
       -- TS 49
       -- Small class of CVVma
-      ? + ("äi"|"õi") + "ma" =>
-        cKaima lugema ;  --käima,võima
+      ? + ("ä"|"õ"|"i") + "ima" =>
+        cKaima lugema ;  --käima,viima,võima
       ? + ("aa"|"ee"|"ää") + "ma" =>  
         cSaama lugema ;  -- saama,jääma,keema
-      ? + ("oo"|"öö"|"üü"|"ii") + "ma" =>
-        cJooma lugema ;  --jooma,looma,lööma,müüma,pooma,sööma,tooma,viima
+      ? + ("oo"|"öö"|"üü") + "ma" =>
+        cJooma lugema ;  --jooma,looma,lööma,müüma,pooma,sööma,tooma
 
       -- TS 53
       _ + "elema" =>

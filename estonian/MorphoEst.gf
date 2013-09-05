@@ -30,7 +30,7 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
   --2: like 1, but pl.part irregular.
   dLuu : Str -> NForms = \luu ->
     let 
-      lui = (Predef.tk 1 luu) + "i" ;
+      lui = (init luu) + "i" ;
     in nForms7
       luu luu (luu + "d") (luu + "sse")
       (luu + "de") (lui + "d") (luu + "desse") ;
@@ -48,7 +48,7 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
   --   sg.part needed to distinguish between tuld and suve.
   dTuli : (_,_ : Str) -> NForms = \tuli,tuld ->
     let
-      tule  : Str = Predef.tk 1 tuli + "e" 
+      tule  : Str = init tuli + "e" 
     in nForms7
       tuli tule tuld (tule + "sse")
       (tule + "de") (tule + "sid") (tule + "desse") ;
@@ -78,7 +78,7 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
   --   stem vowel changes in pl.part: i-eid
   dNumber : (_,_ : Str) -> NForms = \number,numbri ->
     let
-      numbr = Predef.tk 1 numbri --the consonant stem
+      numbr = init numbri --the consonant stem
     in nForms7
       number numbri (numbri + "t") (numbri + "sse")
       (numbri + "te") (numbr + "eid") (numbri + "tesse") ;
@@ -174,9 +174,9 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
   --default case for noun ending in s probably dSoolane?
   dKaas : (_,_ : Str) -> NForms = \kaas,kaane ->
     let
-      kaan : Str = Predef.tk 1 kaane ;
+      kaan : Str = init kaane ;
       var  : Str = case kaan of {
-        _ + ("ll"|"rr"|"nn")  => Predef.tk 1 kaan ; -- V@? + C@? + C 
+        _ + ("ll"|"rr"|"nn")  => init kaan ; -- V@? + C@? + C 
         _ => kaan  
       }
     in nForms7
@@ -374,7 +374,7 @@ oper
   cSaama : (_ : Str) -> VForms = \saama ->
     let
       saa = Predef.tk 2 saama ;
-      sa = Predef.tk 1 saa ;
+      sa = init saa ;
       sai = sa + "i" ;
     in vForms8
       saama
@@ -402,7 +402,7 @@ oper
       (kai + "dud") ;
 
   -- TS 49 
-  -- vowel changes in -da da, takse, no d/t ; imperfect 3sg ends in i
+  -- vowel changes in da, takse, no d/t ; imperfect 3sg ends in i
   cJooma : (_ : Str) -> VForms = \jooma ->
     let
       j = Predef.tk 4 jooma ;
@@ -449,14 +449,14 @@ oper
   cTegelema : (_ : Str) -> VForms = \tegelema ->
     let
       tegele = Predef.tk 2 tegelema ;
-      tegel = Predef.tk 1 tegele ;
+      tegel = init tegele ;
     in vForms8
       tegelema
       (tegel + "da")
       (tegele + "b")
       (tegel + "dakse") 
       (tegel + "ge") -- Imperative P1 Pl
-      (tegele + "s")  -- Imperfect P3 Sg 
+      (tegele + "s") -- Imperfect P3 Sg 
       (tegel + "nud") 
       (tegel + "dud") ; 	
       
@@ -633,7 +633,7 @@ oper
   cPesema : (_ : Str) -> VForms = \pesema ->
     let
       pese = Predef.tk 2 pesema ;
-      pes =  Predef.tk 1 pese ;
+      pes =  init pese ;
     in vForms8
       pesema
       (pes + "ta")
@@ -693,7 +693,7 @@ oper
     let
       omble = Predef.tk 2 omblema ;
       e = last omble ;
-      l = last (Predef.tk 1 omble) ;
+      l = last (init omble) ;
       omb = Predef.tk 2 omble ;
       ommel = (weaker omb) + e + l ;
     in vForms8
@@ -763,7 +763,7 @@ oper
       tulnud = vh ! 6 ;
       tuldud = vh ! 7 ; --necessary for t/d in tuldi; loeti
       
-      tull_ = Predef.tk 1 tulla ; --juu(a); saad(a); tull(a);
+      tull_ = init tulla ; --juu(a); saad(a); tull(a);
       tulles = tull_ + "es" ; --juues; saades; tulles;
       
       tule_ = init tuleb ;
