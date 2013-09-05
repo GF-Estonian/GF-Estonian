@@ -14,6 +14,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 
 	foreign : pattern Str = #("z" | "ž" | "š") ;
 	v : pattern Str = #("a" | "e" | "i" | "o" | "u" | "õ" | "ä" | "ö" | "ü") ;
+	vv : pattern Str = #("aa" | "ee" | "ii" | "oo" | "uu" | "õõ" | "ää" | "öö" | "üü") ;
 	c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r" | "z" | "ž" | "š") ;
 	lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
 	kpt : pattern Str = #("k" | "p" | "t" | "f" | "š") ;
@@ -185,6 +186,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<_, _ + ("kas"|"jas"|"nud"|"tud")> => hjk_type_IVb_maakas x ;
 			<_, _ + ("us"|"is")> => hjk_type_Vb_oluline x ;
 			<_, _ + #v + "s"> => hjk_type_Va_otsene x ;
+			<S1, _ + #vv + #c> => hjk_type_VI_link x ; -- 'statiiv' (not like 'karjuv')
 			<_, _ + ("v"|"tav"|"em"|"im")> => hjk_type_IVb_audit x "a" ;
 			<_, _ + ("line"|"lane"|"mine"|"kene")> => hjk_type_Vb_oluline x ;
 			<S21, _ + "e"> => hjk_type_III_ratsu x ; -- k6ne
@@ -202,7 +204,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<S3, _ + #v + #c + #c + #c> => hjk_type_VI_link x ;
 			<S3, _ + #v + #c + #c> => hjk_type_VI_link x ;
 			<S3, _ + #v + #v + #c> => hjk_type_VI_link x ;
-			--<S2, _ + #v + #c + #c + #c> => hjk_type_VI_link x ; -- TODO: last syl long
+			--<S2, _ + #v + #c + #c + #c> => hjk_type_VI_link x ;
 			--<S2, _ + #v + #c + #c> => hjk_type_VI_link x ;
 			--<S2, _ + #v + #v + #c> => hjk_type_VI_link x ;
 			<S2, _ + #c> => hjk_type_IVb_audit x "i" ;
@@ -212,6 +214,10 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		} ;
 
 
+	-- Assigns stress/quantity indicator to the word based on its character composition.
+	-- Note that you cannot use recursion in these rules.
+	-- Also, backreferences do not seem to work on the left-hand side, e.g. this works weird:
+	-- #c + #v + #c + #c + i@(#v) + i + #c => S1 ; -- double vowel in the last syllable: vampiir, bensiin
 	syl_count : Str -> SylCount ;
 	syl_count x =
 		case x of {
@@ -249,6 +255,8 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			#c + #v + #c + #c + #v + #c => S2 ;
 			#v + #c + #c + #v + #c + #v => S3 ;
 			-- all 7-letters
+			--_ + #v + #c + #c + #vv + #c => S1 ; -- double vowel in the last syllable: bensiin, benseen, bensool
+			_ + ? + ? + #c + #vv + #c => S1 ; -- double vowel in the last syllable: bensiin, benseen, bensool
 			#c + #v + #c + #c + #v + #v + #c => S2 ; -- pension
 			#c + #v + #v + #c + #v + #c + #c => S2 ; -- haarang
 			-- other
