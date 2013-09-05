@@ -11,9 +11,38 @@ We started out with a fork from the Finnish resource grammar with the general pl
   - implement Estonian smart paradigms to replace the Finnish ones
   - tweak the syntax to be Estonian
 
-Current state:
+Status
+------
 
-  - some experiments with the paradigms
+Current status and immediate future plans.
+
+### Nouns
+
+  - 1-arg paradigm: 80% correct
+  - 6-arg paradigm: 100% correct (?)
+  - no parallel forms
+  - TODO: improve 1-arg paradigm
+  - TODO: add 2-arg paradigm (nom, gen)
+
+### Adjectives
+
+  - constructed in the same way as nouns
+  - comparative guessed: TODO: determine correctness
+  - TODO: superlative (not urgent)
+
+### Verbs
+
+  - 1-arg paradigm done
+  - TODO: test correctness
+  - TODO: püsiühendid
+
+### Lexicon
+
+  - demo lexicon almost translated (TODO: remaining verbs)
+  - TODO: derive large lexicon from WordNet
+
+### Syntax
+
   - some tweaking of the syntax mainly guided by the needs of the MOLTO Phrasebook and ACE-in-GF applications
 
 
