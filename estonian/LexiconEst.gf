@@ -200,7 +200,7 @@ lin
   travel_V = mkV "matkustaa" ;
   tree_N = mkN "puu" ;
   ugly_A = mkA "kole" ;
-  understand_V2 = mkV2 (mkV "ymmärtää" "ymmärrän" "ymmärsi") ;
+  understand_V2 = mkV2 (mkV "aru" (mkV "saama")) (casePrep elative) ;
   university_N = mkN "ülikool" ;
   village_N = mkN "küla" ;
   wait_V2 = mkV2 (mkV "ootama") partitive ;

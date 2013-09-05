@@ -79,13 +79,20 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
 
     ReflVP v = insertObjPre (\\fin,b,agr => appCompl fin b v.c2 (reflPron agr)) v ;
 
-    PassV2 v = let vp = predV v in {
+    PassV2 v = 
+    let 
+      vp = predV v ;
+      subjCase = case v.c2.c of {
+        NPCase Gen => NPCase Nom ; --valisin koera -> koer valitakse
+        _          => v.c2.c       --rääkisin koerale -> koerale räägitakse
+      }
+    in {
       s = \\_ => vp.s ! VIPass ;
       s2 = \\_,_,_ => [] ;
       adv = \\_ => [] ;
-      ext = [] ;
-      sc = v.c2.c  -- minut valitaan ; minua rakastetaan ; minulle kuiskataan 
-      } ;          ---- talon valitaan: should be marked like inf.
+      ext = [] ; --TODO particle verbs
+      sc = subjCase  -- koer valitakse ; koerale räägitakse 
+      } ;  ---- mina valitakse: personal pronouns should be in partitive
 
 ----b    UseVS, UseVQ = \v -> v ** {c2 = {s = [] ; c = NPAcc ; isPre = True}} ;
 

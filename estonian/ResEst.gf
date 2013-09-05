@@ -116,7 +116,7 @@ param
    | InfMaks   -- lugemaks
    ;
 
-  SType = SDecl | SQuest ;
+  SType = SDecl | SQuest | SInv ;
 
 --2 For $Relative$
  
@@ -202,37 +202,39 @@ oper
         part  : Str = case vi of {
           VIPass => verbs ! PastPartPass (AN (NCase agr.n Nom)) ; 
           _      => verbs ! PastPartAct (AN (NCase agr.n Nom))
-          } ; 
+        } ; 
 
-  eiv : Str = case agr of {
-    _ => "ei"
-  } ;
-
-  einegole : Str * Str * Str = case <vi,agr.n> of {
-    <VIFin Pres,   _>  => <eiv, verbs ! Imper Sg,     "ole"> ;
-    <VIFin Fut,    _>  => <eiv, verbs ! Imper Sg,     "ole"> ;
-    <VIFin Cond,   _>  => <eiv, verbs ! Condit Sg P3, "oleks"> ;
-    <VIFin Past,   Sg> => <eiv, part,                 "olnud"> ;
-    <VIFin Past,   Pl> => <eiv, part,                 "olnud"> ;
-    <VIImper,      Sg> => <"ära", verbs ! Imper Sg,   "ole"> ;
-    <VIImper,      Pl> => <"ärge", verbs ! ImpNegPl,  "olge"> ;
-    <VIPass,       _>  => <"ei", verbs ! PassPresn False,  "ole"> ;
-    <VIInf i,      _>  => <"ei", verbs ! Inf i, "olla">
-  } ;
-
-  ei  : Str = einegole.p1 ;
-  neg : Str = einegole.p2 ;
-  ole : Str = einegole.p3 ;
-
-  olla : VForm => Str = verbOlema.s ;
-
-  vf : Str -> Str -> {fin, inf : Str} = \x,y -> {fin = x ; inf = y} ;
-  mkvf : VForm -> {fin, inf : Str} = \p -> case <ant,b> of {
-    <Simul,Pos> => vf (verbs ! p) [] ;
-    <Anter,Pos> => vf (olla ! p)  part ; 
-    <Anter,Neg> => vf ei          (ole ++ part) ;
-    <Simul,Neg> => vf ei          neg
-  } in case vi of {
+        eiv : Str = case agr of {
+          _ => "ei"
+        } ;
+        
+        einegole : Str * Str * Str = case <vi,agr.n> of {
+          <VIFin Pres,   _>  => <eiv, verbs ! Imper Sg,     "ole"> ;
+          <VIFin Fut,    _>  => <eiv, verbs ! Imper Sg,     "ole"> ;
+          <VIFin Cond,   _>  => <eiv, verbs ! Condit Sg P3, "oleks"> ;
+          <VIFin Past,   Sg> => <eiv, part,                 "olnud"> ;
+          <VIFin Past,   Pl> => <eiv, part,                 "olnud"> ;
+          <VIImper,      Sg> => <"ära", verbs ! Imper Sg,   "ole"> ;
+          <VIImper,      Pl> => <"ärge", verbs ! ImpNegPl,  "olge"> ;
+          <VIPass,       _>  => <"ei", verbs ! PassPresn False,  "ole"> ;
+          <VIInf i,      _>  => <"ei", verbs ! Inf i, "olla">
+        } ;
+        
+        ei  : Str = einegole.p1 ;
+        neg : Str = einegole.p2 ;
+        ole : Str = einegole.p3 ;
+        
+        olla : VForm => Str = verbOlema.s ;
+        
+        vf : Str -> Str -> {fin, inf : Str} = \x,y -> {fin = x ; inf = y} ;
+        
+        mkvf : VForm -> {fin, inf : Str} = \p -> case <ant,b> of {
+          <Simul,Pos> => vf (verbs ! p) [] ;
+          <Anter,Pos> => vf (olla ! p)  part ; 
+          <Anter,Neg> => vf ei          (ole ++ part) ;
+          <Simul,Neg> => vf ei          neg
+        }
+   in case vi of {
         VIFin Past => mkvf (Impf agr.n agr.p) ;  
         VIFin Cond => mkvf (Condit agr.n agr.p) ;
         VIFin Fut  => mkvf (Presn agr.n agr.p) ;
@@ -244,7 +246,8 @@ oper
 
     s2 = \\_,_,_ => [] ;
     adv = \\_ => [] ;
-    ext = [] ;
+    --ext = [] ;
+    ext = verb.s2 ; --particle verbs
     sc = verb.sc 
     } ;
 
@@ -275,7 +278,8 @@ oper
   insertExtrapos : Str -> VP -> VP = \obj,vp -> {
     s = vp.s ;
     s2 = vp.s2 ;
-    ext = vp.ext ++ obj ;
+    --ext = vp.ext ++ obj ;
+    ext = obj ++ vp.ext ; --TODO test particle verbs
     adv = vp.adv ;
     sc = vp.sc ; 
     } ;
@@ -295,13 +299,23 @@ oper
   -- declarative sentence with the yes/no-queryword "kas".
   -- SQuest: "kas" + SDecl
   -- It would be also correct to use the Finnish structure, just without the ko-particle.
+  -- Inari: added a third SType, SInv. 
+  -- Not sure if SInv is needed, but keeping it for possible future use.
+  -- There's need for an inverted word order with auxiliary verbs; infVP handles that. ComplVV calls infVP, which inverts the word order for the complement VP, and puts it into the resulting VP's `compl' field.
+  -- SInv made by mkClause would be for cases where you just need to construct an inverted word order, and then call it from some other place; application grammar (TODO: api oper for SType) or ExtraEst.
   mkClause : (Polarity -> Str) -> Agr -> VP -> Clause = 
     \sub,agr,vp -> {
-      s = \\t,a,b => let c = (mkClausePlus sub agr vp).s ! t ! a ! b in 
+      s = \\t,a,b => 
+      let
+        c = (mkClausePlus sub agr vp).s ! t ! a ! b ;
+        declCl = c.subj ++ c.fin ++ c.inf ++ c.compl ++ c.adv ++ c.ext ;
+        invCl = c.subj ++ c.fin ++ c.adv ++ c.compl ++ c.ext ++ c.inf
+      in 
          table {
-           SDecl  => c.subj ++ c.fin ++ c.inf ++ c.compl ++ c.adv ++ c.ext ;
-           SQuest => "kas" ++ c.subj ++ c.fin ++ c.inf ++ c.compl ++ c.adv ++ c.ext
-           }
+           SDecl  => declCl ;
+           SQuest => "kas" ++ declCl ;
+           SInv   => invCl 
+         }
       } ;
 
   mkClausePlus : (Polarity -> Str) -> Agr -> VP -> ClausePlus =
@@ -344,16 +358,15 @@ oper
       in case p of {
          0 => {subj = c.subj ; fin = c.fin ; inf = c.inf ; 
                compl = co ; adv = c.compl ++ c.adv ; ext = c.ext} ; -- Jussi juo maitoakin
-         1 => {subj = c.subj ; fin = c.fin ; inf = c.inf ; 
-               compl = c.compl ; adv = co ; ext = c.adv ++ c.ext}   -- Jussi nukkuu nytkin
+         1 => {subj = c.subj ; fin = c.fin ; inf = c.inf ; -- Jussi nukkuu nytkin
+               compl = c.compl ; adv = co ; ext = c.adv ++ c.ext} --Not sure what is happening with adv becoming object and ext becoming adv++ext... also not sure if this holds anymore when ext is in its (new?) use as particle for particle verbs. TODO test this.
          }
      } ;
 
   kin : Polarity -> Str  = 
     \p -> case p of {Pos => "gi" ; Neg => "gi"} ;
-
-  --mkPart : Str -> Str -> {s : Bool => Str} = \ko,koe ->
-  --  {s = table {True => glueTok ko ; False => glueTok koe}} ;
+  
+  gi : Str = "gi" ;
 
   glueTok : Str -> Str = \s -> "&+" ++ s ;
 
@@ -384,9 +397,13 @@ oper
             _ => False           -- minun täytyy nähdä auto
             } ;
           verb  = vp.s ! VIInf vi ! Simul ! Pos ! agr ; -- no "ei"
-          compl = vp.s2 ! fin ! pol ! agr ++ vp.ext     -- but compl. case propagated
+          compl = vp.s2 ! fin ! pol ! agr  -- but compl. case propagated
         in
-        verb.fin ++ verb.inf ++ compl ;
+        -- inverted word order for; e.g.
+        --sinust aru       saama       0     
+        compl ++ vp.ext ++ verb.fin ++ verb.inf ;
+        --for debugging, what gets where:
+        --"<COMPL>" ++ compl ++ "</COMPL>" ++ vp.ext ++ "<FIN>" ++ verb.fin ++ "</FIN>" ++ "<INF>" ++ verb.inf ++ "</INF>" ;
 
 -- The definitions below were moved here from $MorphoFin$ so that  
 -- auxiliary of predication can be defined.

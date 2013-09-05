@@ -107,3 +107,18 @@ Tested the 1-arg noun paradigm.
           1 2-3-4
 
 So, about 79% of the nouns are currently handled correctly.
+
+Inari 5.9.
+
+1) Added particle verbs. Added a s2 field for Verb, and used the pre-existing ext field in VP for the particle.
+
+Clauses with verb complement require an inverted word order. Modified the function infVP (ResEst) to handle that. ComplVV calls infVP, which inverts the word order for the complement VP, and puts it into the resulting VP's complement field. This happens to all cases with auxiliary, but not with negation:
+
+  * mina saan sinust aru
+  * mina ei saa sinust aru
+  * mina tahan sinust aru saada
+  
+Added also a third SType, SInv, for forming inverted word order in mkClause (ResEst).
+SInv made by mkClause may be needed for cases where you just need to construct an inverted word order, for whichever pragmatic reason, and then call it from some other place, e.g. application grammar or ExtraEst function.
+
+2) Started testing the syntax. Copied exx-resource.gfs from GF main repo, testsuite/libraries. Now exx-resource.gfs.golf is just the output, TODO correct that and diff after changing something.

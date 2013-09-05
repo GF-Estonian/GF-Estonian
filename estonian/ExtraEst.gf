@@ -162,6 +162,24 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
          pa = part.s ----
       in
       {s = t.s ++ p.s ++ cl.subj ++ pa ++ cl.fin ++ cl.inf ++ cl.compl ++ cl.adv ++ cl.ext} ; 
+   
+   {- TODO: different word orders
+   S_SOV : (Polarity -> Str) -> Agr -> VP -> Clause = 
+    \sub,agr,vp -> {
+      s = \\t,a,b =>  
+      let
+        c = (mkClausePlus sub agr vp).s ! t ! a ! b ;
+        --e.g.    ma       tahan   tõesti    sinust     aru      saada
+        declCl = c.subj ++ c.fin ++ c.adv ++ c.compl ++ c.ext ++ c.inf ;
+      in 
+         table {
+
+           SDecl  =>  declCl ;
+           SQuest => "kas" ++ declCl
+           }
+      } ;
+--}
+
     S_OSV part t p clp = 
       let 
          cl = clp.s ! t.t ! t.a ! p.p ;

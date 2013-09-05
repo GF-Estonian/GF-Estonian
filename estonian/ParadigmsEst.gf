@@ -437,7 +437,7 @@ oper
     mkV : (huutaa,huudan,huusi : Str) -> V = mk3V ;
     mkV : (lugema,lugeda,loeb,loetakse : Str) -> V = mk4V ;
     mkV : (tegema,teha,teeb,tehakse,tehke,tegi,teinud,tehtud : Str) -> V = mk8V ;
-    mkV : (saama : V) -> (aru : Str) -> V = mkPYV ; -- püsiühendid TODO
+    mkV : (aru : Str) -> (saama : V) -> V = mkPV ; -- particle verbs
     mkV : (sana : VW) -> V = \w -> vforms2V w.s ** {sc = NPCase Nom ; lock_V = <>} ;
   } ;
 
@@ -451,7 +451,7 @@ oper
      \a,b,c,d -> mk_forms4_to_verb (vForms4 a b c d) ** {sc = NPCase Nom ; lock_V = <>} ;
   mk8V : (lugema,lugeda,loeb,loetakse,lugege,luges,lugenud,loetud : Str) -> V =
      \a,b,c,d,e,f,g,h -> vforms2V (vForms8 a b c d e f g h) ** {sc = NPCase Nom ; lock_V = <>} ;
-  mkPYV : (saama : V) -> (aru : Str) -> V = \saama,aru ->
+  mkPV : (aru : Str) -> (saama : V) -> V = \aru,saama ->
     {s = saama.s ; s2 = aru ; sc = saama.sc ; lock_V = <> } ;
      
   	
@@ -520,7 +520,7 @@ oper
       _ + "ooksma" => --for any other verb that would need jooksma~joosta~jookseb, mk2V
         cJooksma lugema ;
         
-      -- TS 62, 64 (tõusma,mõksma), default vowel e 
+      -- TS 62, 64 (tõusma,mõskma), default vowel e 
       _ + #c + "ma" => 
         cLaskma lugema (loe + "eb") ; --for __ab use mk2V/mk3V (TODO)
         
