@@ -52,6 +52,11 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		in
 		nForms6 x (x+v_g) (x+v_g+"t") (x+v_g+"sse") (x+v_g+"te") (x+v_pl+"id") ;
 
+	-- TODO: clean this up
+	hjk_type_IVb_audit1 : Str -> Str -> NFS ;
+	hjk_type_IVb_audit1 x y =
+		nForms6 x (y + "i") (y+"it") (y+"isse") (y+"ite") (y+"eid") ;
+
 
 	hjk_type_IVb_maakas : Str -> NFS ;
 
@@ -187,6 +192,9 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<_, _ + ("us"|"is")> => hjk_type_Vb_oluline x ;
 			<_, _ + #v + "s"> => hjk_type_Va_otsene x ;
 			<S1, _ + #vv + #c> => hjk_type_VI_link x ; -- 'statiiv' (not like 'karjuv')
+			<S1, _ + #v + #c + #c> => hjk_type_VI_link x ;
+			<S3, _ + #c + #v + #lmnr> => hjk_type_VI_seminar x ;
+			-- TODO: test if -m is better then -em
 			<_, _ + ("v"|"tav"|"em"|"im")> => hjk_type_IVb_audit x "a" ;
 			<_, _ + ("line"|"lane"|"mine"|"kene")> => hjk_type_Vb_oluline x ;
 			<S21, _ + "e"> => hjk_type_III_ratsu x ; -- k6ne
@@ -197,9 +205,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<S2, _ + #foreign + _ + "in"> => hjk_type_IVb_audit x "i" ; -- TODO: better foreign detection
 			<S2, _ + "in"> => hjk_type_IVb_audit x "a" ;
 			<S2, _ + ("a"|"e"|"i") + ("ng"|"k")> => hjk_type_IVb_audit x "u" ;
-			<S3, _ + #c + #v + #lmnr> => hjk_type_VI_seminar x ;
 			<S1, _ + #v + #c + #c + #c> => hjk_type_VI_link x ;
-			<S1, _ + #v + #c + #c> => hjk_type_VI_link x ;
 			<S1, _ + #v + #v + #c> => hjk_type_VI_link x ;
 			<S3, _ + #v + #c + #c + #c> => hjk_type_VI_link x ;
 			<S3, _ + #v + #c + #c> => hjk_type_VI_link x ;
@@ -207,6 +213,10 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			--<S2, _ + #v + #c + #c + #c> => hjk_type_VI_link x ;
 			--<S2, _ + #v + #c + #c> => hjk_type_VI_link x ;
 			--<S2, _ + #v + #v + #c> => hjk_type_VI_link x ;
+			-- Handling of 'kringel' -> 'kringli', 'amper' -> 'ampri', 'meeter', 'reegel'
+			-- Note that 'redel' and 'paber' do not lose the 'e'.
+			<S2, y + n@("g"|"k"|"p"|"t") + "e" + l@("l"|"r")> => hjk_type_IVb_audit1 x (y+n+l) ;
+			<S2, y + "e" + l@("l"|"r") > => hjk_type_IVb_audit x "i" ;
 			<S2, _ + #c> => hjk_type_IVb_audit x "i" ;
 			<S3, _ + #v> => hjk_type_IVa_aasta x ;
 			<_, _ + "e"> => hjk_type_VII_touge x ; -- TODO: verb+e
@@ -239,12 +249,15 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			#c + #v + #c + #v => S21 ;
 			? + ? + ? + ? => S1 ;
 			-- all 5-letters
+			#c + #c + #v + #c + #c => S1 ; -- tramm
 			#c + #v + #c + #c + #c => S1 ;
-			#c + #v + #c + #v + #c => S2 ;
+			#c + #v + #c + #v + #c => S2 ; -- redel
 			#c + #v + #c + #gbd + "e" => S23 ; -- valge
 			#c + #v + #v + #gbd + "e" => S23 ; -- haige ?
 			#c + #v + #c + #c + #v => S22 ; -- ratsu
 			#v + #c + #c + #c + #v => S2 ;
+			#v + #c + #c + #v + #c => S2 ; -- amper
+			#v + #c + #v + #c + #c => S1 ; -- alarm ?
 			#v + #v + #c + #v + #c => S2 ;
 			#v + #v + #c + #c + #v => S23 ; -- aasta
 			#c + #c + #v + #c + #v => S2 ; -- blogi
@@ -253,12 +266,13 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			#c + #v + #c + #v + #c + #c => S2 ;
 			#c + #v + #c + #v + #c + #v => S3 ;
 			#c + #v + #c + #c + #v + #c => S2 ;
+			#c + #v + #v + #c + #v + #c => S2 ; -- meeter, reegel
 			#v + #c + #c + #v + #c + #v => S3 ;
 			-- all 7-letters
-			--_ + #v + #c + #c + #vv + #c => S1 ; -- double vowel in the last syllable: bensiin, benseen, bensool
 			_ + ? + ? + #c + #vv + #c => S1 ; -- double vowel in the last syllable: bensiin, benseen, bensool
 			#c + #v + #c + #c + #v + #v + #c => S2 ; -- pension
 			#c + #v + #v + #c + #v + #c + #c => S2 ; -- haarang
+			#c + #c + #v + #c + #c + #v + #c => S2 ; -- kringel
 			-- other
 			_ => S3
 		} ;
