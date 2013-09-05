@@ -612,13 +612,16 @@ oper
   cAndma : (_ : Str) -> VForms = \andma ->
     let
       and = Predef.tk 2 andma ; --murd(ma), hoid(ma)
-      an = Predef.tk 1 and ;    --mur(d),   hoi(d)
+      an = init and ;           --mur(d),   hoi(d)
       ann = weaker and ;        --murr,     hoi
-      --TODO fix teadma,tean (currently teaan)
+      te = case (last ann) of { --to prevent teadma~teaab
+         "a" => init ann ;
+         _   => ann 
+      } ;
     in vForms8
       andma
       (and + "a")
-      (ann + "ab")
+      (te + "ab")
       (an + "takse")
       (and + "ke")
       (and + "is")
@@ -646,8 +649,8 @@ oper
   cNagema : (_ : Str) -> VForms = \nagema ->
     let
       nage = Predef.tk 2 nagema ;
-      nag =  Predef.tk 1 nage ;
-      na = tk 1 nag ;
+      nag =  init nage ;
+      na = init nag ;
       nah = na + "h" ;
       nai = na + "i" ;
     in vForms8
