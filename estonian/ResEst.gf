@@ -393,8 +393,8 @@ oper
     \sc,pol,agr,vp,vi ->
         let 
           fin = case sc of {     -- subject case
-            NPCase Nom => True ; -- minä tahdon nähdä auton
-            _ => False           -- minun täytyy nähdä auto
+            NPCase Nom => True ; -- mina tahan joosta
+            _ => False           -- minul peab 
             } ;
           verb  = vp.s ! VIInf vi ! Simul ! Pos ! agr ; -- no "ei"
           compl = vp.s2 ! fin ! pol ! agr  -- but compl. case propagated
@@ -405,7 +405,7 @@ oper
         --for debugging, what gets where:
         --"<COMPL>" ++ compl ++ "</COMPL>" ++ vp.ext ++ "<FIN>" ++ verb.fin ++ "</FIN>" ++ "<INF>" ++ verb.inf ++ "</INF>" ;
 
--- The definitions below were moved here from $MorphoFin$ so that  
+-- The definitions below were moved here from $MorphoEst$ so that  
 -- auxiliary of predication can be defined.
 
   verbOlema : Verb = 

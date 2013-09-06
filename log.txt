@@ -121,4 +121,4 @@ Clauses with verb complement require an inverted word order. Modified the functi
 Added also a third SType, SInv, for forming inverted word order in mkClause (ResEst).
 SInv made by mkClause may be needed for cases where you just need to construct an inverted word order, for whichever pragmatic reason, and then call it from some other place, e.g. application grammar or ExtraEst function.
 
-2) Started testing the syntax. Copied exx-resource.gfs from GF main repo, testsuite/libraries. Now exx-resource.gfs.golf is just the output, TODO correct that and diff after changing something.
+2) Started testing the syntax. Copied exx-resource.gfs from GF main repo, testsuite/libraries. Now exx-resource.gfs.gold is just the output, TODO correct that and diff after changing something.

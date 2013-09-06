@@ -28,7 +28,7 @@ concrete StructuralEst of Structural = CatEst **
   but_PConj = ss "aga" ;
   by8agent_Prep = postGenPrep "poolt" ;
   by8means_Prep = casePrep adessive ;
-  can8know_VV = mkVV (mkV "osata") ;
+  can8know_VV = mkVV (mkV "oskama") ;
   can_VV = mkVV (mkV "võima") ;
   during_Prep = postGenPrep "aikana" ;
   either7or_DConj = sd2 "kas" "või" ** {n = Sg} ;
@@ -63,7 +63,7 @@ concrete StructuralEst of Structural = CatEst **
   more_CAdv = X.mkCAdv "rohkem" "kui" ;
   most_Predet = {s = \\n,c => (nForms2N (dSuurin "useinta")).s ! NCase n (npform2case n c)} ;
   much_Det = mkDet Sg {s = \\_ => "palju"} ;
-  must_VV = mkVV (caseV genitive (mkV "pidada")) ;
+  must_VV = mkVVf (mkV "pidama") infMa ;
   no_Utt = ss "ei" ;
   on_Prep = casePrep adessive ;
 ---  one_Quant = mkDet Sg  DEPREC
