@@ -183,14 +183,13 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			sc = syl_count x
 		in
 		case <sc,x> of {
-			<_, _ + #v + #v> => hjk_type_I_koi x ;
+			<S1, _ + #v + #v> => hjk_type_I_koi x ; -- this should not match 'anatoomia'
 			<_, _ + ("lik"|"nik"|"stik")> => hjk_type_VI_imelik x ;
 			<_, _ + ("kond")> => hjk_type_VI_meeskond x ;
 			<_, _ + "nna"> => hjk_type_III_ratsu x ;
 			<_, _ + ("nu"|"tu")> => hjk_type_IVa_aasta x ;
 			<_, _ + ("kas"|"jas"|"nud"|"tud")> => hjk_type_IVb_maakas x ;
 			<_, _ + ("us"|"is")> => hjk_type_Vb_oluline x ;
-			<_, _ + #v + "s"> => hjk_type_Va_otsene x ;
 			<S1, _ + #vv + #c> => hjk_type_VI_link x ; -- 'statiiv' (not like 'karjuv')
 			<S1, _ + #v + #c + #c> => hjk_type_VI_link x ;
 			<S3, _ + #c + #v + #lmnr> => hjk_type_VI_seminar x ;
@@ -204,6 +203,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<S2, _ + #v + #v + #c> => hjk_type_VI_link x ; -- rostbiif
 			<S2, _ + #v + #c + #c> => hjk_type_VI_link x ; -- portfell
 			<S2, _ + #v + #c + #c + #c> => hjk_type_VI_link x ; -- impulss
+			<_, _ + #v + "s"> => hjk_type_Va_otsene x ; -- this should not match 'baas'
 			-- TODO: test if -m is better then -em
 			-- Exclude: -am, -om, -um
 			<_, _ + ("v"|"tav"|"em"|"im")> => hjk_type_IVb_audit x "a" ; -- kauneim
@@ -240,17 +240,20 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			-- all 3-letters
 			#v + #c + #v => S21 ;
 			#v + #v + #v => S2 ;
-			? + ? + ? => S1 ;
+			? + ? + ? => S1 ; -- koi, kae
 			-- all 4-letters
+			-- TODO: epee, oboe -> S1
 			#c + #v + #v + #c => S1 ; -- siid
 			#c + #v + #c + #c => S1 ; -- link
 			#v + #v + #c + #v => S23 ; -- 6ige
-			#v + #c + #v + #v => S2 ;
+			#v + #c + #v + #v => S1 ;
 			#v + #c + #v + #c => S2 ;
 			#v + #c + #c + #v => S2 ;
 			#c + #v + #c + #v => S21 ;
 			? + ? + ? + ? => S1 ;
 			-- all 5-letters
+			#v + #c + #c + #v + #v => S1 ; -- armee
+			#c + #v + #c + #v + #v => S1 ; -- depoo
 			#c + #c + #v + #c + #c => S1 ; -- tramm
 			#c + #v + #c + #c + #c => S1 ;
 			#c + #v + #c + #v + #c => S2 ; -- redel
@@ -265,6 +268,8 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			#c + #c + #v + #c + #v => S21 ; -- blogi
 			_ + ? + #c + #v + #c + #v => S3 ; -- oluline
 			-- all 6-letters
+			#c + #v + #v + #c + #v + #v => S1 ; -- peoleo
+			#v + #c + #v + #c + #v + #v => S1 ; -- agoraa
 			#c + #v + #c + #v + #c + #c => S2 ;
 			#c + #v + #c + #v + #c + #v => S3 ;
 			#c + #v + #c + #c + #v + #c => S2 ;
@@ -281,6 +286,10 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			#c + #c + #v + #c + #c + #v + #c => S2 ; -- kringel
 			_ + #c + #v + #v + #c + #v + #c => S2 ; -- araabik
 			-- other
+			_ + #v + #c + #c + #c + #v + #v => S1 ; -- displei
+			_ + #c + #v + #c + #c + #v + #v => S1 ; -- politsei
+			_ + #c + #c + #v + #c + #v + #v => S1 ; -- kompanii (TODO: remove, caught by next)
+			     _ + #c + #v + #c + #v + #v => S1 ; -- defilee
 			_ => S3
 		} ;
 
