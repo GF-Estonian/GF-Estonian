@@ -44,7 +44,6 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		nForms6 x x (x+"t") (x+"sse") (x+"te") (x+"id") ;
 
 
-	-- TODO: if x = _ + v_g => v_g <- some other vowel
 	hjk_type_IVb_audit : Str -> Str -> NFS ;
 
 	hjk_type_IVb_audit x v_g =
@@ -92,7 +91,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 
 	hjk_type_VI_link x =
 		let
-			x_n : Str = weaker x
+			x_n : Str = weaker_noun x
 		in
 		nForms6 x (x_n+"i") (x+"i") (x+"i") (x+"ide") (x+"e") ;
 
@@ -110,7 +109,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 
 	hjk_type_VI_meeskond x =
 		let
-			x_n : Str = weaker x
+			x_n : Str = weaker_noun x
 		in
 		nForms6 x (x_n+"a") (x+"a") (x+"a") (x+"ade") (x+"i") ;
 
@@ -130,8 +129,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		nForms6 x x_t (x+"t") (x_t+"sse") (x+"te") (x_t+"id") ;
 
 
-	-- TODO: implement fully
-	-- TODO: do all these rules apply to both nouns and verbs
+	-- Use this only to weaken the verbs
 	weaker : Str -> Str ;
 	weaker link =
 		let
@@ -146,18 +144,37 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			V@(#v) + "k" => li + V + "g" ;
 			V@(#v) + "p" => li + V + "b" ;
 			V@(#v) + "t" => li + V + "d" ;
-			V@(#v) + "d" => li + V ; --hoidma,hoiab, TODO: not 'jood'
+			V@(#v) + "d" => li + V ; --hoidma,hoiab
 			N@(#lmnr) + "k" => li + N + "g" ;
 			N@(#lmnr) + "p" => li + N + "b" ;
 			N@(#lmnr) + "t" => li + N + "d" ;
 			N@(#lmnr) + "d" => li + N + N ;
-			N@("l"|"r") + "g" => li + N ; --algama,alata, TODO: not 'kirurg'
+			N@("l"|"r") + "g" => li + N ; --algama,alata
 			"sk" => li + "s" ;
 			"h" + #kpt => li + "h" ;
 			"nd" => li + "nn" ;
 			"ad" => li + "aj" ;
 			"mb" => li + "mm" ;
 			("ug"|"ub") => li + "o" ;
+			_ => link
+	} ;
+
+
+	-- Only the very stable weakening that happens to nouns
+	weaker_noun : Str -> Str ;
+	weaker_noun link =
+		case link of {
+			li + "kk" => li + "k" ;
+			li + "pp" => li + "p" ;
+			li + "tt" => li + "t" ;
+			li + V@(#v) + "k" => li + V + "g" ;
+			li + V@(#v) + "p" => li + V + "b" ;
+			li + V@(#v) + "t" => li + V + "d" ;
+			li + N@(#lmnr) + "k" => li + N + "g" ;
+			li + N@(#lmnr) + "p" => li + N + "b" ;
+			li + N@(#lmnr) + "t" => li + N + "d" ;
+			li + "h" + #kpt => li + "h" ;
+			li + "kond" => li + "konn" ;
 			_ => link
 	} ;
 
