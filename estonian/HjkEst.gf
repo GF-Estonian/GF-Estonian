@@ -44,6 +44,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		nForms6 x x (x+"t") (x+"sse") (x+"te") (x+"id") ;
 
 
+	-- TODO: if x = _ + v_g => v_g <- some other vowel
 	hjk_type_IVb_audit : Str -> Str -> NFS ;
 
 	hjk_type_IVb_audit x v_g =
@@ -130,6 +131,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 
 
 	-- TODO: implement fully
+	-- TODO: do all these rules apply to both nouns and verbs
 	weaker : Str -> Str ;
 	weaker link =
 		let
@@ -144,12 +146,12 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			V@(#v) + "k" => li + V + "g" ;
 			V@(#v) + "p" => li + V + "b" ;
 			V@(#v) + "t" => li + V + "d" ;
-			V@(#v) + "d" => li + V ; --hoidma,hoiab
+			V@(#v) + "d" => li + V ; --hoidma,hoiab, TODO: not 'jood'
 			N@(#lmnr) + "k" => li + N + "g" ;
 			N@(#lmnr) + "p" => li + N + "b" ;
 			N@(#lmnr) + "t" => li + N + "d" ;
 			N@(#lmnr) + "d" => li + N + N ;
-			N@("l"|"r") + "g" => li + N ; --algama,alata
+			N@("l"|"r") + "g" => li + N ; --algama,alata, TODO: not 'kirurg'
 			"sk" => li + "s" ;
 			"h" + #kpt => li + "h" ;
 			"nd" => li + "nn" ;
@@ -183,23 +185,26 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			sc = syl_count x
 		in
 		case <sc,x> of {
-			<S1, _ + #v + #v> => hjk_type_I_koi x ; -- this should not match 'anatoomia'
-			<_, _ + ("lik"|"nik"|"stik")> => hjk_type_VI_imelik x ;
 			<_, _ + ("kond")> => hjk_type_VI_meeskond x ;
+			<_, _ + ("lik"|"nik"|"stik")> => hjk_type_VI_imelik x ;
+			<_, _ + ("kas"|"jas"|"nud"|"tud")> => hjk_type_IVb_maakas x ;
+			<S1, _ + #v + #v> => hjk_type_I_koi x ; -- this should not match 'anatoomia'
+			<S1, _ + #vv + #c> => hjk_type_VI_link x ; -- 'statiiv' (not like 'karjuv')
+			<S3, _ + #c + #v + #lmnr> => hjk_type_VI_seminar x ;
+			-- next 3: not S2
+			<S1, _ + #v + #v + #c> => hjk_type_VI_link x ;
+			<S1, _ + #v + #c + #c> => hjk_type_VI_link x ;
+			<S1, _ + #v + #c + #c + #c> => hjk_type_VI_link x ;
+			<_, _ + ("us"|"is")> => hjk_type_Vb_oluline x ;
+			-- next 3: not S2
+			<S3, _ + #v + #v + #c> => hjk_type_VI_link x ;
+			<S3, _ + #v + #c + #c> => hjk_type_VI_link x ;
+			<S3, _ + #v + #c + #c + #c> => hjk_type_VI_link x ;
 			<_, _ + "nna"> => hjk_type_III_ratsu x ;
 			<_, _ + ("nu"|"tu")> => hjk_type_IVa_aasta x ;
-			<_, _ + ("kas"|"jas"|"nud"|"tud")> => hjk_type_IVb_maakas x ;
-			<_, _ + ("us"|"is")> => hjk_type_Vb_oluline x ;
-			<S1, _ + #vv + #c> => hjk_type_VI_link x ; -- 'statiiv' (not like 'karjuv')
-			<S1, _ + #v + #c + #c> => hjk_type_VI_link x ;
-			<S3, _ + #c + #v + #lmnr> => hjk_type_VI_seminar x ;
-			<S1, _ + #v + #c + #c + #c> => hjk_type_VI_link x ;
-			<S1, _ + #v + #v + #c> => hjk_type_VI_link x ;
-			<S3, _ + #v + #c + #c + #c> => hjk_type_VI_link x ;
-			<S3, _ + #v + #c + #c> => hjk_type_VI_link x ;
-			<S3, _ + #v + #v + #c> => hjk_type_VI_link x ;
 			<S2, _ + ("a"|"e"|"i") + ("ng"|"k")> => hjk_type_IVb_audit x "u" ;
 			<S2, _ + #foreign + _ + "in"> => hjk_type_IVb_audit x "i" ; -- TODO: better foreign detection
+			-- TODO: next 3 rules: last syllable must be long
 			<S2, _ + #v + #v + #c> => hjk_type_VI_link x ; -- rostbiif
 			<S2, _ + #v + #c + #c> => hjk_type_VI_link x ; -- portfell
 			<S2, _ + #v + #c + #c + #c> => hjk_type_VI_link x ; -- impulss
@@ -216,7 +221,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<S2, _ + "in"> => hjk_type_IVb_audit x "a" ;
 			-- Handling of 'kringel' -> 'kringli', 'amper' -> 'ampri', 'meeter', 'reegel'
 			-- Note that 'redel' and 'paber' do not lose the 'e'.
-			<S2, y + n@("g"|"k"|"p"|"t") + "e" + l@("l"|"r")> => hjk_type_IVb_audit1 x (y+n+l) ;
+			<S2, y + n@("mb"|"g"|"k"|"p"|"t") + "e" + l@("l"|"r")> => hjk_type_IVb_audit1 x (y+n+l) ;
 			<S2, y + "e" + l@("l"|"r") > => hjk_type_IVb_audit x "i" ;
 			<S2, _ + #c> => hjk_type_IVb_audit x "i" ; -- TODO: masked by 'link'
 			<S3, _ + #v> => hjk_type_IVa_aasta x ;
@@ -242,11 +247,10 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			#v + #v + #v => S2 ;
 			? + ? + ? => S1 ; -- koi, kae
 			-- all 4-letters
-			-- TODO: epee, oboe -> S1
 			#c + #v + #v + #c => S1 ; -- siid
 			#c + #v + #c + #c => S1 ; -- link
 			#v + #v + #c + #v => S23 ; -- 6ige
-			#v + #c + #v + #v => S1 ;
+			#v + #c + #v + #v => S1 ; -- epee, oboe
 			#v + #c + #v + #c => S2 ;
 			#v + #c + #c + #v => S2 ;
 			#c + #v + #c + #v => S21 ;
@@ -256,23 +260,31 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			#c + #v + #c + #v + #v => S1 ; -- depoo
 			#c + #c + #v + #c + #c => S1 ; -- tramm
 			#c + #v + #c + #c + #c => S1 ;
+			#c + #v + #v + #v + #c => S2 ; -- hoius, laius, maius
 			#c + #v + #c + #v + #c => S2 ; -- redel
 			#c + #v + #c + #gbd + "e" => S23 ; -- valge
 			#c + #v + #v + #gbd + "e" => S23 ; -- haige ?
 			#c + #v + #c + #c + #v => S22 ; -- ratsu
 			#v + #c + #c + #c + #v => S2 ;
 			#v + #c + #c + #v + #c => S2 ; -- amper
-			#v + #c + #v + #c + #c => S1 ; -- alarm ?
+			#v + #c + #v + #c + #c => S2 ; -- avang
+			#c + #c + #v + #v + #c => S1 ; -- bluus, kruus
+			#v + #c + #v + #v + #c => S1 ; -- ukaas, TODO: not 'avaus'
 			#v + #v + #c + #v + #c => S2 ; -- aatom
 			#v + #v + #c + #c + #v => S23 ; -- aasta
 			#c + #c + #v + #c + #v => S21 ; -- blogi
 			_ + ? + #c + #v + #c + #v => S3 ; -- oluline
 			-- all 6-letters
+			#c + #c + #v + #v + #v + #c => S1 ; -- kruiis
+			#v + #c + #c + #v + #v + #c => S1 ; -- aplaus
+			#v + #c + #c + #v + #c + #c => S1 ; -- akkakk
 			#c + #v + #v + #c + #v + #v => S1 ; -- peoleo
+			#c + #v + #c + #vv + #c => S1 ; -- deviis (double vowel in the last syllable)
 			#v + #c + #v + #c + #v + #v => S1 ; -- agoraa
 			#c + #v + #c + #v + #c + #c => S2 ;
 			#c + #v + #c + #v + #c + #v => S3 ;
-			#c + #v + #c + #c + #v + #c => S2 ;
+			#c + #v + #c + #c + #v + #c => S2 ; -- rektor
+			#c + #v + #c + #v + #v + #c => S2 ; -- paleus
 			#c + #v + #v + #c + #v + #c => S2 ; -- meeter, reegel
 			#v + #v + #c + #c + #v + #c => S2 ; -- aastak
 			#v + #c + #v + #c + #v + #c => S2 ; -- alevik
@@ -282,7 +294,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			_ + ? + ? + #c + #vv + #c => S1 ; -- double vowel in the last syllable: bensiin, benseen, bensool
 			#c + #v + #c + #c + #v + #v + #c => S2 ; -- pension
 			#c + #v + #v + #c + #v + #c + #c => S2 ; -- haarang
-			#c + #v + #v + #c + #v + #v + #c => S2 ; -- kauneim
+			#c + #v + #v + #c + #v + #v + #c => S2 ; -- raadius, kauneim
 			#c + #c + #v + #c + #c + #v + #c => S2 ; -- kringel
 			_ + #c + #v + #v + #c + #v + #c => S2 ; -- araabik
 			-- other
