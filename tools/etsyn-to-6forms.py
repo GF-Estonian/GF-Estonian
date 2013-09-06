@@ -1,6 +1,18 @@
 #!/usr/bin/env python
 
-# Picks 6 noun forms out of the Filsoft morph. synth. output format.
+# Picks 6 noun forms out of the Filsoft morph. synth. (etsyn) output format.
+#
+# Usage:
+#
+# cat file.etsyn | ./etsyn-to-6forms.py | sort | uniq
+#
+# Note that we use sort|uniq to avoid duplicate lines. These can occur
+# even if unique lemmas were given to etsyn, e.g. etsyn maps
+# both 'vunts' and 'vuntsid' to 'vunts' as the 'sg n' form,
+# thus creating a duplicate line.
+#
+# @author Kaarel Kaljurand
+# @version 2013-09-06
 
 import sys
 import re
