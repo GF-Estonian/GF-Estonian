@@ -122,3 +122,40 @@ Added also a third SType, SInv, for forming inverted word order in mkClause (Res
 SInv made by mkClause may be needed for cases where you just need to construct an inverted word order, for whichever pragmatic reason, and then call it from some other place, e.g. application grammar or ExtraEst function.
 
 2) Started testing the syntax. Copied exx-resource.gfs from GF main repo, testsuite/libraries. Now exx-resource.gfs.gold is just the output, TODO correct that and diff after changing something.
+
+Inari 8.9.
+
+Tested the 1-arg verb paradigm.
+
+  1. Took (all?) verbs from the Estonian WordNet: 7845
+  2. Excluded 587 verbs for which generation failed (Filosoft tag ####)
+  3. Excluded 1282 compound verbs (e.g. 'kinni hoidma'), resulting in 5976 words 
+  4. Ran GF's cc on the ma forms, same procedure as for nouns:
+       
+       cat verbs.8forms.csv | sed "s/,.*//" |\
+       python cc.py -r /ParadigmsEst.gf --oper "mkV" |\
+       gf --run |\
+       perl -nal -F",\s+" -e 'print "$F[2], $F[0], $F[9], $F[31], $F[26], $F[15], $F[36], $F[65]"'
+
+  5. Compared the output against the Filosoft original file using diff-list-set.py, resulting in this difference distribution (e.g. 4-8 means that passive present and passive participle are wrong.)
+
+forms:  1 = ma   2 = da   3 = b   4 = takse
+        5 = ge   6 = s    7 = nud   8 = tud         
+
+   5262
+    240 3-4-8
+    198 7
+    101 2-5
+     90 2-4-5-7-8
+     47 2-4-5-8
+      9 3
+      8 4-8
+      7 6
+      6 2-4-6-8
+      3 2-3-4-5-6-7-8
+      2 2-4-8
+      2 2-3-4-6-8
+      1 4-6-8
+      1 2-4-6
+      
+88 % of the verbs get correct parse for 1-arg smart paradigm.
