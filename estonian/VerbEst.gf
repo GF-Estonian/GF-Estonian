@@ -22,8 +22,8 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
         (predV {s = v.s ; 
                 s2 = v.s2 ;
                 sc = case vp.sc of {
-                  NPCase Nom => v.sc ;   -- minun täytyy pestä auto
-                  c => c                 -- minulla täytyy olla auto
+                  NPCase Nom => v.sc ; -- minul tuleb kirjutada (VV 'tulema' determines the subject case)
+                  c => c               -- minul peab auto olema (VP 'olema' determines the subject case)
                   }
                }
          ) ;
@@ -82,7 +82,7 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
     PassV2 v = 
     let 
       vp = predV v ;
-      subjCase = case v.c2.c of {
+      subjCase = case v.c2.c of { --this is probably a reason to not get rid of NPAcc; TODO check
         NPCase Gen => NPCase Nom ; --valisin koera -> koer valitakse
         _          => v.c2.c       --rääkisin koerale -> koerale räägitakse
       }
@@ -90,9 +90,9 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
       s = \\_ => vp.s ! VIPass ;
       s2 = \\_,_,_ => [] ;
       adv = \\_ => [] ;
-      ext = [] ; --TODO particle verbs
+      ext = vp.ext ;
       sc = subjCase  -- koer valitakse ; koerale räägitakse 
-      } ;  ---- mina valitakse: personal pronouns should be in partitive
+      } ;
 
 ----b    UseVS, UseVQ = \v -> v ** {c2 = {s = [] ; c = NPAcc ; isPre = True}} ;
 
@@ -100,20 +100,23 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
       s = \\agr => 
           let
             n = complNumAgr agr ;
-            c = case n of {
+            
+            c = Nom {-case n of { --always Nom in Estonian?
               Sg => Nom ;  -- minä olen iso ; te olette iso
               Pl => Part   -- me olemme isoja ; te olette isoja
-              }            --- definiteness of NP ?
+              }            --- definiteness of NP ? -}
+ 
           in ap.s ! False ! (NCase n c)
       } ;
+      
     CompCN cn = {
       s = \\agr => 
           let
             n = complNumAgr agr ;
-            c = case n of {
+            c = Nom ; {-case n of { --always Nom in Est?
               Sg => Nom ;  -- minä olen iso ; te olette iso
               Pl => Part   -- me olemme isoja ; te olette isoja
-              }            --- definiteness of NP ?
+              }            --- definiteness of NP ? -}
           in cn.s ! (NCase n c)
       } ;
     CompNP np = {s = \\_ => np.s ! NPCase Nom} ;

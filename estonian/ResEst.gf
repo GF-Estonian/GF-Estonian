@@ -376,25 +376,12 @@ oper
   subjForm : NP -> NPForm -> Polarity -> Str = \np,sc,b -> 
     appCompl False b {s = [] ; c = sc ; isPre = True} np ;
 
-{-  -- TODO: remove: Estonian does not have question particles
-  questPart : Bool -> Str = \b -> if_then_Str b "ko" "kö" ;
-
-  selectPart : VP -> Anteriority -> Polarity -> Bool = \vp,a,p -> 
-    case p of {
-      Neg => False ;  -- eikö tule
-      _ => case a of {
-        Anter => True ; -- onko mennyt --# notpresent
-        _ => vp.qp  -- tuleeko, meneekö
-        }
-      } ;
--}
-
   infVP : NPForm -> Polarity -> Agr -> VP -> InfForm -> Str =
     \sc,pol,agr,vp,vi ->
         let 
           fin = case sc of {     -- subject case
             NPCase Nom => True ; -- mina tahan joosta
-            _ => False           -- minul peab 
+            _ => False           -- minul peab auto olema
             } ;
           verb  = vp.s ! VIInf vi ! Simul ! Pos ! agr ; -- no "ei"
           compl = vp.s2 ! fin ! pol ! agr  -- but compl. case propagated

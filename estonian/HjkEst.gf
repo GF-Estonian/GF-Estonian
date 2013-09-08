@@ -141,6 +141,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			"pp" => li + "p" ;
 			"tt" => li + "t" ;
 			"ss" => li + "s" ;
+			("üt"|"üs") => li + "ö" ; --süsi,söe ; ütlema,öelda
 			V@(#v) + "k" => li + V + "g" ;
 			V@(#v) + "p" => li + V + "b" ;
 			V@(#v) + "t" => li + V + "d" ;

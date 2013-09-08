@@ -542,22 +542,19 @@ oper
     let
       jat = Predef.tk 2 jatma ;
       jatt = stronger jat ;
-      ja = init jat ;
-      j = init ja ;
-      a = last ja ;
-      koe = case a of {
-        "ü" => j + "öe" ;
-        _   => ja + "e"  --kütma,köetud
-      } ;
+      ko = (weaker (weaker jat))
+      --weaker jät = jäd ; weaker (weaker jät) = jä
+      --weaker küt = kö  ; weaker (weaker küt) = kö
+      --HjkEst.weaker takes care of kütma->köetud
     in vForms8
       jatma
       (jatt + "a")
       (jat + "ab")
-      (koe + "takse") --always e?
+      (ko + "etakse") --always e?
       (jat + "ke")
       (jatt + "is")
       (jat + "nud")
-      (koe + "tud") ;
+      (ko + "etud") ;
       
       
   -- TS 61 (laulma)
