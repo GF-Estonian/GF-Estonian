@@ -37,6 +37,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 
 	-- Types that map singular nominative to the full paradigm.
 	-- VI and VII include gradation which is described separately.
+	hjk_type,
 	hjk_type_I_koi,
 	hjk_type_II_ema,
 	hjk_type_III_ratsu,
@@ -246,61 +247,133 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	--  - last syllable superlong (rostbiif)
 	--  - compound words (workaround: mark the compound border manually)
 	--  - exceptional words (workaround: take these from the lexicon)
-	hjk_type : Str -> NFS ;
-
 	hjk_type x =
-		let
-			sc = syl_type x
-		in
-		case <sc,x> of {
-			<S3, _ + "ke"> => hjk_type_Vb_oluline x ;
-			<_, _ + "kond"> => hjk_type_VI_meeskond x ;
-			<S2, _ + ("a"|"e"|"i") + ("ng"|"k")> => hjk_type_IVb_audit x "u" ; -- but not 'konjak'
+		case <(syl_type x), x> of {
+			<S3, _ + "ke">
+				=> hjk_type_Vb_oluline x ;
+
+			<_, _ + "kond">
+				=> hjk_type_VI_meeskond x ;
+
+			-- but not 'konjak'
+			<S2, _ + ("a"|"e"|"i") + ("ng"|"k")>
+				=> hjk_type_IVb_audit x "u" ;
+
 			-- TODO: this is more relaxed than in HJKEKS: _ + ("lik"|"nik"|"stik")
-			<_, _ + #c + ("ik")> => hjk_type_VI_imelik x ;
-			<_, ? + #v + #c + #v + "s"> => hjk_type_Va_otsene x ; -- kikas
-			<_, _ + ("ngas"|"kas"|"jas"|"nud"|"tud")> => hjk_type_IVb_maakas x ;
-			<_, _ + "ia"> => hjk_type_IVa_aasta x ; -- TODO: not in HJKEKS
-			<S1, _ + #v + #v> => hjk_type_I_koi x ; -- this should not match 'anatoomia'
-			<S1, _ + #vv + #c> => hjk_type_VI_link x ; -- 'statiiv' (not like 'karjuv')
-			<S3, _ + #c + #v + #lmnr> => hjk_type_VI_seminar x ;
-			-- next 3: not S2
-			<S1, _ + #v + #v + #c> => hjk_type_VI_link x ;
-			<S1, _ + #v + #c + #c> => hjk_type_VI_link x ;
-			<S1, _ + #v + #c + #c + #c> => hjk_type_VI_link x ;
-			<_, _ + ("us"|"is")> => hjk_type_Vb_oluline x ;
-			-- next 3: not S2
-			<S3, _ + #v + #v + #c> => hjk_type_VI_link x ;
-			<S3, _ + #v + #c + #c> => hjk_type_VI_link x ;
-			<S3, _ + #v + #c + #c + #c> => hjk_type_VI_link x ;
-			<_, _ + "nna"> => hjk_type_III_ratsu x ;
-			<S2, _ + ("nu"|"tu")> => hjk_type_IVa_aasta x ; -- TODO
-			<S3, _ + ("nu"|"tu")> => hjk_type_IVa_aasta x ; -- TODO
-			<S2, _ + #foreign + _ + "in"> => hjk_type_IVb_audit x "i" ; -- TODO: better foreign detection
+			<_, _ + #c + ("ik")>
+				=> hjk_type_VI_imelik x ;
+
+			-- kikas
+			<_, ? + #v + #c + #v + "s">
+				=> hjk_type_Va_otsene x ;
+
+			<_, _ + ("ngas"|"kas"|"jas"|"nud"|"tud")>
+				=> hjk_type_IVb_maakas x ;
+
+			-- TODO: not in HJKEKS
+			<_, _ + "ia">
+				=> hjk_type_IVa_aasta x ;
+
+			<S1, _ + #v + #v>
+				=> hjk_type_I_koi x ;
+
+			-- 'statiiv' (not like 'karjuv')
+			<S1, _ + #vv + #c>
+				=> hjk_type_VI_link x ;
+
+			<S3, _ + #c + #v + #lmnr>
+				=> hjk_type_VI_seminar x ;
+
+			<S1, _ + #v + #v + #c>
+				=> hjk_type_VI_link x ;
+
+			<_, _ + ("us"|"is")>
+				=> hjk_type_Vb_oluline x ;
+
+			<S3, _ + #v + #v + #c>
+				=> hjk_type_VI_link x ;
+
+			<(S1|S3), _ + #v + #c + #c>
+				=> hjk_type_VI_link x ;
+
+			<(S1|S3), _ + #v + #c + #c + #c>
+				=> hjk_type_VI_link x ;
+
+			<_, _ + "nna">
+				=> hjk_type_III_ratsu x ;
+
+			<(S2|S3), _ + ("nu"|"tu")>
+				=> hjk_type_IVa_aasta x ;
+
+			-- TODO: improve foreign detection
+			<S2, _ + #foreign + _ + "in">
+				=> hjk_type_IVb_audit x "i" ;
+
+			-- TODO: this is not in HJKEKS
 			-- 'absurd' vs 'ebard'
-			<S2, _ + #v + #lmnr + "d"> => hjk_type_IVb_audit x "i" ; -- TODO: this is not in HJKEKS
+			<S2, _ + #v + #lmnr + "d">
+				=> hjk_type_IVb_audit x "i" ;
+
 			-- sometimes 'a' (laurits) TODO: this is not in HJKEKS
-			<S2, _ + #v + #kpt + "s"> => hjk_type_IVb_audit x "i" ;
-			<S2, _ + ("em"|"im")> => hjk_type_IVb_audit x "a" ; -- comparative and superlative
+			<S2, _ + #v + #kpt + "s">
+				=> hjk_type_IVb_audit x "i" ;
+
+			-- comparative and superlative
+			<S2, _ + ("em"|"im")>
+				=> hjk_type_IVb_audit x "a" ;
+
 			-- TODO: next 3 rules: last syllable must be long
 			-- portfell, TODO: not 'karask'
-			<S2, _ + #v + #c + #c> => hjk_type_VI_link x ;
-			<S2, _ + #c + #v + #v + #c> => hjk_type_VI_link x ; -- rostbiif, not viiul
-			<S2, _ + #v + #c + #c + #c> => hjk_type_VI_link x ; -- impulss
-			<_, _ + #v + "s"> => hjk_type_Va_otsene x ; -- masked by 'maakas'
+			<S2, _ + #v + #c + #c>
+				=> hjk_type_VI_link x ;
+
+			-- rostbiif, not viiul
+			<S2, _ + #c + #v + #v + #c>
+				=> hjk_type_VI_link x ;
+
+			-- impulss
+			<S2, _ + #v + #c + #c + #c>
+				=> hjk_type_VI_link x ;
+
+			-- TODO: sometimes masked by 'maakas'
+			<_, _ + #v + "s">
+				=> hjk_type_Va_otsene x ;
+
+			-- kauneim
 			-- Exclude: -am, -om, -um
-			<_, _ + ("v"|"tav"|"em"|"im")> => hjk_type_IVb_audit x "a" ; -- kauneim
-			<_, _ + ("line"|"lane"|"mine"|"kene")> => hjk_type_Vb_oluline x ;
-			<S21, _ + "e"> => hjk_type_III_ratsu x ; -- k6ne
-			-- verb + e
-			<S22, _ + "e"> => hjk_type_VII_touge x ;
-			<S2, _ + "e"> => hjk_type_VII_touge x ;
-			<_, _ + "ne"> => hjk_type_Va_otsene x ;
-			<S21, _ + #foreign_v> => hjk_type_III_ratsu x ; -- ufo, pita, lito
-			<S21, _ + #v> => hjk_type_II_ema x ;
-			<S22, _ + #v> => hjk_type_III_ratsu x ;
-			<S23, _ + #v> => hjk_type_IVa_aasta x ;
-			<S2, _ + "in"> => hjk_type_IVb_audit x "a" ;
+			<_, _ + ("v"|"tav"|"em"|"im")>
+				=> hjk_type_IVb_audit x "a" ;
+
+			<_, _ + ("line"|"lane"|"mine"|"kene")>
+				=> hjk_type_Vb_oluline x ;
+
+			-- k6ne
+			<S21, _ + "e">
+				=> hjk_type_III_ratsu x ;
+
+			-- verb + e, TODO: masked by S21/e
+			<(S2|S22), _ + "e">
+				=> hjk_type_VII_touge x ;
+
+			<_, _ + "ne">
+				=> hjk_type_Va_otsene x ;
+
+			-- ufo, pita, lito
+			<S21, _ + #foreign_v>
+				=> hjk_type_III_ratsu x ;
+
+			<S21, _ + #v>
+				=> hjk_type_II_ema x ;
+
+			<S22, _ + #v>
+				=> hjk_type_III_ratsu x ;
+
+			<S23, _ + #v>
+				=> hjk_type_IVa_aasta x ;
+
+			<S2, _ + "in">
+				=> hjk_type_IVb_audit x "a" ;
+
 			-- 'e' deletion
 			-- kringel -> kringli, amper -> ampri, meeter -> meetri, reegel -> reegli
 			-- kaabel-> kaabli (TODO: not: juubel -> juubli)
@@ -309,24 +382,45 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			-- Note: 'redel' and 'paber' do not lose the 'e'.
 			<S2, y + kk@("kk"|"pp"|"tt"|"hh") + "e" + l@("l"|"r")>
 				=> hjk_type_IVb_audit1 x (y + (init kk) + l) ;
+
 			-- aaker -> aakri, teater -> teatri
 			<S2, y + vvkpt@(#v + #v + #kpt) + "e" + l@("l"|"r")>
 				=> hjk_type_IVb_audit1 x (y+vvkpt+l) ;
+
 			<S2, y + vv@(#vv) + gbd@(#gbd) + "e" + l@("l"|"r")>
 				=> hjk_type_IVb_audit1 x (y+vv+gbd+l) ;
+
 			-- Disabled, 50-50 correctness
 			--<S2, y + vv@(#vv) + lmnr@(#lmnr) + "e" + l@("l"|"r")>
 			--	=> hjk_type_IVb_audit1 x (y+vv+lmnr+l) ; -- 50-50
+
 			<S2, y + vv@(#vv) + s@("s"|"v") + "e" + l@("l"|"r")>
 				=> hjk_type_IVb_audit1 x (y+vv+s+l) ;
+
 			<S2, y + n@("ht"|"hk"|"hv"|"nts"|"ld"|"lv"|"lb"|"ng"|"nd"|"mb"|"mp"|"nt"|"ps"|"ks"|"sk"|"st") + "e" + l@("l"|"r")>
 				=> hjk_type_IVb_audit1 x (y+n+l) ;
-			<S2, y + "e" + l@("l"|"r") > => hjk_type_IVb_audit x "i" ;
-			<S2, _ + #c> => hjk_type_IVb_audit x "i" ; -- TODO: masked by 'link'
-			<S3, _ + #v> => hjk_type_IVa_aasta x ;
-			<_, _ + "e"> => hjk_type_VII_touge x ; -- verb + 'e'
-			<_, _ + #c> => hjk_type_IVb_audit x "i" ; -- catch all that end with consonant
-			<_, _> => hjk_type_III_ratsu x -- catch all
+
+			<S2, y + "e" + l@("l"|"r")>
+				=> hjk_type_IVb_audit x "i" ;
+
+			-- TODO: sometimes masked by 'link'
+			<S2, _ + #c>
+				=> hjk_type_IVb_audit x "i" ;
+
+			<S3, _ + #v>
+				=> hjk_type_IVa_aasta x ;
+
+			-- verb + 'e'
+			<_, _ + "e">
+				=> hjk_type_VII_touge x ;
+
+			-- catch all that end with consonant
+			<_, _ + #c>
+				=> hjk_type_IVb_audit x "i" ;
+
+			-- catch all
+			<_, _>
+				=> hjk_type_III_ratsu x
 		} ;
 
 
