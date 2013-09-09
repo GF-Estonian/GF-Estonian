@@ -461,10 +461,11 @@ oper
     let
       luge = Predef.tk 2 lugema ;
       loe = weaker luge ;
-      v : pattern Str = #("a" | "e" | "i" | "o" | "u" | "õ" | "ä" | "ö" | "ü") ;
+{-      v : pattern Str = #("a" | "e" | "i" | "o" | "u" | "õ" | "ä" | "ö" | "ü") ;
       c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r" | "z" | "ž" | "š") ;
       lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
       kpt : pattern Str = #("k" | "p" | "t" | "f" | "š") ;
+-}      
     in
     case lugema of {
       -- TS 49
@@ -487,12 +488,31 @@ oper
         
       -- TS 55-57
       -- Consonant gradation
-      _ + ("kk"|"pp"|"tt"|"ss") + "ima" => --TODO not a complete list
+      -- Regular (55-56)'leppima' and irregular (57) 'lugema'
+      _ + "ndima" =>
         cLeppima lugema ;
+      _ + #lmnr + ("k"|"p"|"t"|"b") + ("ima"|"uma") => 
+        cLeppima lugema ;
+      _ + ("sk"|"ps"|"ks"|"ts"|"pl") + ("ima") => --|"uma") => 
+        cLeppima lugema ;
+      _ + ("hk"|"hm"|"hn"|"hr") + ("ima") => --most *hkuma,*hmuma are TS 51 (muutuma) 
+        cLeppima lugema ;
+      _ + ("rss"|"lss") + "ima" => --default behaviour ss-ss
+        cLugema lugema ;
+      _ + ("pp"|"kk"|"tt"|"ss"|"ff"|"nn"|"mm"|"ll"|"rr") + ("ima"|"uma") => 
+        cLeppima lugema ;
+         
+      --irregular gradation patterns begin here
+      --mostly just listing of all verbs
       ? + "ugema" => --lugema,pugema,sugema ; not raugema
-        cLeppima lugema ;
-      ("pidama"|"siduma") => --only these two (?)
-        cLeppima lugema ;
+        cLugema lugema ;
+      #c + #v + "dema" => --kudema,küdema,põdema
+        cLugema lugema ;
+      ("hau"|"ka"|"ku"|"la"|"ni"|"si") + "duma" =>
+        cLugema lugema ;
+      ? + ("aadima"|"aagima") =>
+        cLugema lugema ;
+
       
       -- TS 60 (jätma,võtma) default behaviour for CVtma, based on frequency.
       ? + #v + "tma" =>
@@ -530,7 +550,7 @@ oper
         
       -- TS 66 (nägema)
       -- Small class, just list all members
-      ("nägema"|"tegema") =>
+      ("nägema"|"tegema"|"nÃ¤gema") =>
         cNagema lugema ;
       
      -- TS 67-68
@@ -540,13 +560,13 @@ oper
         cHyppama lugema ;
      _ + #lmnr + ("k"|"p"|"g"|"b"|"j"|"v") + "ama" => --hingama,põrkama,arvama
         cHyppama lugema ;
-     _ + ("sk"|"ps"|"ks"|"ts"|"pl") + "ama" => --oskama,jaksama
+     _ + ("sk"|"ps"|"ks"|"ts"|"pl"|"tj") + "ama" => --oskama,jaksama
         cHyppama lugema ;
      _ + ("hk"|"hm"|"hn"|"hr") + "ama" => --puhkama,lõhnama 
         cHyppama lugema ;
      _ + ("pp"|"kk"|"tt"|"ss"|"nn"|"mm"|"ll"|"rr") + "ama" => --hakkama
         cHyppama lugema ;
-     ? + ("aa"|"oo"|"uu") + ("d"|"t") + "ama" => --ootama,vaatama
+     (""|?) + #vv + ("d"|"t"|"g") + "ama" => --ootama,vaatama
         cHyppama lugema ;
       
       -- TS 69
@@ -557,12 +577,6 @@ oper
       -- Default case
       _ =>
         cElama lugema
-        
-{-      _ + ("a" | "e" | "i" | "o" | "u") + ("ta" | "sta" | "bi") + "ma" =>
-        cElama lugema ;
-      _ + ("a" | "e" | "u" | "i") + "ma" =>
-        cElama lugema ; 
--}
     } ;   
  
   vForms2 : (_,_ : Str) -> VForms = \petma,petta ->
@@ -573,6 +587,7 @@ oper
     case <petma,petta> of {
       <_, _ + ("tt"|"kk"|"pp") + _> => cPetma petma ;
       <_ + "ksma", _ + "sta"> => cJooksma petma ;
+      <_, _ + "ata"> => cHyppama petma ;
       _ => vForms1 petma
       } ;
 

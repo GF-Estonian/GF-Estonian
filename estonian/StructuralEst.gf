@@ -191,9 +191,10 @@ oper
         }
       } ;
 
+  --TODO does this work?
   mikaInt : MorphoEst.Number => (MorphoEst.Case) => Str =
     let {
-      mi  = mkN "mi"
+      mi  = mkN "mille"
     } in
     table {
       Sg => table {

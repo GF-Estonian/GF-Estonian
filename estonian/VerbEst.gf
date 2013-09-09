@@ -99,25 +99,15 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
     CompAP ap = {
       s = \\agr => 
           let
-            n = complNumAgr agr ;
-            
-            c = Nom {-case n of { --always Nom in Estonian?
-              Sg => Nom ;  -- minä olen iso ; te olette iso
-              Pl => Part   -- me olemme isoja ; te olette isoja
-              }            --- definiteness of NP ? -}
- 
-          in ap.s ! False ! (NCase n c)
+            n = complNumAgr agr ; 
+          in ap.s ! False ! (NCase n Nom)
       } ;
       
     CompCN cn = {
       s = \\agr => 
           let
             n = complNumAgr agr ;
-            c = Nom ; {-case n of { --always Nom in Est?
-              Sg => Nom ;  -- minä olen iso ; te olette iso
-              Pl => Part   -- me olemme isoja ; te olette isoja
-              }            --- definiteness of NP ? -}
-          in cn.s ! (NCase n c)
+          in cn.s ! (NCase n Nom)
       } ;
     CompNP np = {s = \\_ => np.s ! NPCase Nom} ;
     CompAdv a = {s = \\_ => a.s} ;

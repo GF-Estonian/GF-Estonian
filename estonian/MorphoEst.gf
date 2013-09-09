@@ -12,7 +12,7 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
 
   flags optimize=all ; coding=utf8;
 
-  oper
+  oper    
   --Estonian paradigms
 
   --Inflection paradigms from tüüpsõnad 
@@ -480,18 +480,14 @@ oper
         (tul + "nud")
         (tul + "dud") ;
   
-  -- TS 55-57 (õppima, sündima, lugema)
+  -- TS 55-56 (õppima, sündima)
   -- t in takse, tud ; consonant gradation on stem
   cLeppima : (_ : Str) -> VForms = \leppima ->
     let
       leppi = Predef.tk 2 leppima ;
       i = last leppi ;
       lepp = init leppi ;
-      lepi = case leppi of {
-        "sidu" => "seo" ; --irregular gradation patterns
-        "pida" => "pea" ;
-        _ => (weaker lepp) + i 
-      } ;
+      lepi = (weaker lepp) + i 
     in vForms8
       leppima
       (leppi + "da")
@@ -501,6 +497,37 @@ oper
       (leppi + "s")  -- Imperfect P3 Sg
       (leppi + "nud")
       (lepi + "tud") ;
+      
+  -- TS 57 (lugema)
+  -- Like 55-56 but irregular gradation patterns, that shouldn't be in HjkEst.weaker
+  --including also marssima,valssima
+  cLugema : (_ : Str) -> VForms = \lugema ->
+    let
+      luge = Predef.tk 2 lugema ;
+      lug = init luge ;
+      l = Predef.tk 3 luge ;
+      e = last luge ;
+      loe = case luge of {
+        _ + ("aju"|"adu"|"agu") => l + "ao" ;
+        _ + "adi"               => l + "ae" ;
+            "haudu"             => "hau" ;
+        _ + ("idu"|"igu")       => l + "eo" ;
+        _ + "ida"               => l + "ea" ;
+        _ + "udu"               => l + "oo" ;
+        _ + ("uge"|"ude")       => l + "oe" ;
+
+        _ + #c + "ssi"          => (init lug) + e;
+        _ => (weaker lug) + e 
+      } ;
+    in vForms8
+      lugema
+      (luge + "da")
+      (loe + "b")
+      (loe + "takse")
+      (luge + "ge") -- Imperative P1 Pl
+      (luge + "s")  -- Imperfect P3 Sg
+      (luge + "nud")
+      (loe + "tud") ;
       
       
   -- TS 58 muutma, saatma,
@@ -682,7 +709,7 @@ oper
       (hypa + "takse") -- Passive
       (hypa + "ke") -- Imperative P1 Pl
       (hyppa + "s") -- Condit Sg P3
-      (hyppa + "nud") -- PastPartAct
+      (hypa + "nud") -- PastPartAct
       (hypa + "tud") ; -- PastPartPass
 
   -- TS 69 (õmblema)
@@ -692,7 +719,13 @@ oper
       e = last omble ;
       l = last (init omble) ;
       omb = Predef.tk 2 omble ;
-      ommel = (weaker omb) + e + l ;
+      omm = case omb of {
+        "mõt" => "mõe" ; --some "double weak" patterns; however weaker (weaker omb) makes the coverage worse
+        "mÃµt" => "mÃµe" ;
+       
+         _    => weaker omb 
+      } ;
+      ommel = omm + e + l ;
     in vForms8
       omblema
       (ommel + "da")
@@ -700,7 +733,7 @@ oper
       (ommel + "dakse") -- Passive
       (ommel + "ge") -- Imperative P1 Pl
       (omble + "s") -- Condit Sg P3
-      (omble + "nud") -- PastPartAct
+      (ommel + "nud") -- PastPartAct
       (ommel + "dud") ; -- PastPartPass
   
   
@@ -767,7 +800,7 @@ oper
       
       lask_ = Predef.tk 2 tulema ;
       laulev = case (last lask_) of { --sooma~soov ; laulma~laulev
-          ("a"|"e"|"i"|"o"|"õ"|"u"|"ü"|"ä"|"ö") => lask_ + "v" ;
+          ("a"|"e"|"i"|"o"|"u"|"õ"|"ä"|"ö"|"ü") => lask_ + "v" ;
           _ => lask_ + "ev" } ; --consonant stem in -ma, add e
           
       --imperfect stem
@@ -855,7 +888,7 @@ oper
       kingi_ = init kingib ;
       kingit_ = Predef.tk 4 kingitakse ;
       laulev = case (last vestle_) of {
-          ("a"|"e"|"i"|"o"|"õ"|"u"|"ü"|"ä"|"ö") => vestle_ + "v" ;
+          ("a"|"e"|"i"|"o"|"u"|"õ"|"ä"|"ö"|"ü") => vestle_ + "v" ;
           _ => vestle_ + "ev" } ; --consonant stem in -ma, add e
       kinkinud = (hjk_type_IVb_maakas (vestel_ + "nud")).s ;
       kingitud = (hjk_type_IVb_maakas (kingit_ + "ud")).s ;
