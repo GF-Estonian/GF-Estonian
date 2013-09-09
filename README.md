@@ -18,10 +18,9 @@ Current status and immediate future plans.
 
 ### Nouns
 
-  - 1-arg paradigm: 90% correct
+  - 1-arg paradigm: 91% correct
   - 6-arg paradigm: 100% correct (?)
   - no parallel forms
-  - TODO: improve 1-arg paradigm
   - TODO: add 2-arg paradigm (nom, gen)
 
 ### Adjectives
