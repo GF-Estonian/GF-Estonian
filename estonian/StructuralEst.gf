@@ -181,13 +181,20 @@ oper
   jokinPron : MorphoEst.Number => (MorphoEst.Case) => Str =
     table {
       Sg => table {
-        Nom => "midagi" ;
-        Gen => "jonkin" ;
-        c => relPron ! Sg ! c + "kin"
+        Nom => "miski" ;
+        Iness => "milleski" ;
+        Elat => "millestki" ;
+        Ablat => "milleltki" ;
+        Transl => "millekski" ;
+        c => mikaInt ! Sg ! c + "gi"
        } ;
-      Pl => table {
-        Nom => "jotkin" ;
-        c => relPron ! Pl ! c + "kin"
+      Pl => table { --TODO correct these plurals
+        Nom => "miski" ;
+        Iness => "milleski" ;
+        Elat => "millestki" ;
+        Ablat => "milleltki" ;
+        Transl => "millekski" ;
+        c => mikaInt ! Pl ! c + "gi"
         }
       } ;
 
@@ -207,7 +214,7 @@ oper
         Nom => "mis" ;
         Gen => "mille" ;
         Part => "mida" ;
-        c   => mi.s ! NCase Sg c
+        c   => mi.s ! NCase Pl c
         }
       } ;
 
@@ -230,7 +237,7 @@ oper
         <_,Nom> => "ükski" ;
         <_,Part> => "ühtegi" ;
         <_,Gen> => "ühegi" ;
-        _   => mikaInt ! n ! c + "TODO"
+        _   => mikaInt ! n ! c + "gi" ----ki
        } ;
 
   kukaanPron : MorphoEst.Number => (MorphoEst.Case) => Str =
@@ -238,12 +245,12 @@ oper
       Sg => table {
         Nom => "keegi" ;
         Part => "kedagi" ;
-        c   => kukaInt ! Sg ! c + "TODO"
+        c   => kukaInt ! Sg ! c + "gi"
        } ;
       Pl => table {
         Nom => "ketkään" ;
         Part => "keitään" ;
-        c   => kukaInt ! Pl ! c + "TODO"
+        c   => kukaInt ! Pl ! c + "gi"
         }
       } ;
 

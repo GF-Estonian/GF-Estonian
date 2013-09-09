@@ -497,7 +497,7 @@ oper
         cLeppima lugema ;
       _ + ("hk"|"hm"|"hn"|"hr") + ("ima") => --most *hkuma,*hmuma are TS 51 (muutuma) 
         cLeppima lugema ;
-      _ + ("rss"|"lss") + "ima" => --default behaviour ss-ss
+      _ + #c + "ssima" => --weaker *ss = *ss; should be weaker Css = Cs
         cLugema lugema ;
       _ + ("pp"|"kk"|"tt"|"ss"|"ff"|"nn"|"mm"|"ll"|"rr") + ("ima"|"uma") => 
         cLeppima lugema ;
@@ -550,7 +550,7 @@ oper
         
       -- TS 66 (nägema)
       -- Small class, just list all members
-      ("nägema"|"tegema"|"nÃ¤gema") =>
+      ("nägema"|"tegema") =>
         cNagema lugema ;
       
      -- TS 67-68

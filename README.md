@@ -32,8 +32,8 @@ Current status and immediate future plans.
 
 ### Verbs
 
-  - 1-arg paradigm: 88% correct
-  - TODO: püsiühendid
+  - 1-arg paradigm: 93% correct
+  - TODO: 2-arg paradigm
 
 ### Lexicon
 

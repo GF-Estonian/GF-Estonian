@@ -721,8 +721,6 @@ oper
       omb = Predef.tk 2 omble ;
       omm = case omb of {
         "mõt" => "mõe" ; --some "double weak" patterns; however weaker (weaker omb) makes the coverage worse
-        "mÃµt" => "mÃµe" ;
-       
          _    => weaker omb 
       } ;
       ommel = omm + e + l ;
