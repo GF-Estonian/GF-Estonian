@@ -18,7 +18,7 @@ Current status and immediate future plans.
 
 ### Nouns
 
-  - 1-arg paradigm: 88% correct
+  - 1-arg paradigm: 90% correct
   - 6-arg paradigm: 100% correct (?)
   - no parallel forms
   - TODO: improve 1-arg paradigm
@@ -32,8 +32,7 @@ Current status and immediate future plans.
 
 ### Verbs
 
-  - 1-arg paradigm done
-  - TODO: test correctness
+  - 1-arg paradigm: 88% correct
   - TODO: püsiühendid
 
 ### Lexicon
