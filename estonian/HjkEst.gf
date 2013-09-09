@@ -1,12 +1,24 @@
 resource HjkEst = open ResEst, Prelude, Predef in {
 
+-- Implementation of the noun inflection rules from
+-- Heiki-Jaan Kaalep. "Eesti käänamissüsteemi seaduspärasused" (2012)
+--
+-- @author Kaarel Kaljurand
+-- @version 2013-09-09
+
   flags
 	coding = utf8 ;
 
   -- TODO: change the name of this file and the names of the opers in this file
 
   param
-	-- S21, S22, S23 apply only to words that end with a vowel
+	-- S1: stress on the last syllable
+	-- S2: stress on the penultimate syllable
+	-- S3: stress not on the last 2 syllables
+	-- If the S2 word ends with a vowel then we distinguish between:
+	-- S21: 1st quantity: blo.gi, ta.la
+	-- S22: 2nd quantity: rat.su, vol.le
+	-- S23: 3rd quantity: aas.ta
 	SylType = S1 | S2 | S21 | S22 | S23 | S3 ;
 
   oper
@@ -15,41 +27,52 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 
 	foreign : pattern Str = #("z" | "ž" | "š") ;
 	-- Foreign vowel endings
-	-- TODO: very experimental
 	foreign_v : pattern Str = #("ko" | "po" | "to" | "fo" | "ka" | "pa" | "ta" | "fa" | "ku" | "pu" | "tu" | "fu" | "ri") ;
-	v : pattern Str = #("a" | "e" | "i" | "o" | "u" | "õ" | "ä" | "ö" | "ü") ;
+	v : pattern Str = #("a" | "e" | "i" | "o" | "u" | "õ" | "ä" | "ö" | "ü" | "w") ;
 	vv : pattern Str = #("aa" | "ee" | "ii" | "oo" | "uu" | "õõ" | "ää" | "öö" | "üü") ;
-	c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r" | "z" | "ž" | "š") ;
+	c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r" | "z" | "ž" | "š" | "c" | "q") ;
 	lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
 	kpt : pattern Str = #("k" | "p" | "t" | "f" | "š") ;
 	gbd : pattern Str = #("g" | "b" | "d") ;
 
-	hjk_type_I_koi : Str -> NFS ;
+	-- Types that map singular nominative to the full paradigm.
+	-- VI and VII include gradation which is described separately.
+	hjk_type_I_koi,
+	hjk_type_II_ema,
+	hjk_type_III_ratsu,
+	hjk_type_IVa_aasta,
+	hjk_type_IVb_maakas,
+	hjk_type_Va_otsene,
+	hjk_type_Vb_oluline,
+	hjk_type_VI_link,
+	hjk_type_VI_imelik,
+	hjk_type_VI_meeskond,
+	hjk_type_VI_seminar,
+	hjk_type_VII_touge : Str -> NFS ;
 
+	-- IVa additionally needs the stem vowel.
+	hjk_type_IVb_audit,
+	hjk_type_IVb_audit1 : Str -> Str -> NFS ;
+
+
+	-- Definition of the mapping rules.
+	-- Verbatim from HJKEKS.
 	hjk_type_I_koi x =
 		nForms6 x x (x+"d") (x+"sse") (x+"de") (x+"sid") ;
-
-
-	hjk_type_II_ema : Str -> NFS ;
 
 	hjk_type_II_ema x =
 		nForms6 x x x (x+"sse") (x+"de") (x+"sid") ;
 
-
-	hjk_type_III_ratsu : Str -> NFS ;
-
 	hjk_type_III_ratsu x =
 		nForms6 x x (x+"t") (x+"sse") (x+"de") (x+"sid") ;
 
-
-	-- TODO: if 'arvuti' is of this type then last form is 'arvut' + 'eid' (50 errors)
-	hjk_type_IVa_aasta : Str -> NFS ;
-
+	-- if ends with 'i' ('arvuti') then last form is 'arvut' + 'e' + 'id'
+	-- There are ~50 such words in the WordNet.
 	hjk_type_IVa_aasta x =
-		nForms6 x x (x+"t") (x+"sse") (x+"te") (x+"id") ;
-
-
-	hjk_type_IVb_audit : Str -> Str -> NFS ;
+		let
+			x1 : Str = case x of { _ + "i" => (init x) + "e" ; _ => x }
+		in
+		nForms6 x x (x+"t") (x+"sse") (x+"te") (x1+"id") ;
 
 	hjk_type_IVb_audit x v_g =
 		let
@@ -58,12 +81,8 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		nForms6 x (x+v_g) (x+v_g+"t") (x+v_g+"sse") (x+v_g+"te") (x+v_pl+"id") ;
 
 	-- TODO: clean this up
-	hjk_type_IVb_audit1 : Str -> Str -> NFS ;
 	hjk_type_IVb_audit1 x y =
 		nForms6 x (y + "i") (y+"it") (y+"isse") (y+"ite") (y+"eid") ;
-
-
-	hjk_type_IVb_maakas : Str -> NFS ;
 
 	hjk_type_IVb_maakas x =
 		let
@@ -71,28 +90,19 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		in
 		nForms6 x gen (gen+"t") (gen+"sse") (gen+"te") (gen+"id") ;
 
-
 	-- TODO: variant: vastusesse | vastusse
-	hjk_type_Va_otsene : Str -> NFS ;
-
 	hjk_type_Va_otsene x =
 		let
 			f : Str = case x of { y + "ne" => y + "s" ; _ => x }
 		in
 		nForms6 x (f+"e") (f+"t") (f+"esse") (f+"te") (f+"eid") ;
 
-
 	-- TODO: variant: olulisesse | olulisse
-	hjk_type_Vb_oluline : Str -> NFS ;
-
 	hjk_type_Vb_oluline x =
 		let
 			f : Str = case x of { y + "ne" => y + "s" ; _ => x }
 		in
 		nForms6 x (f+"e") (f+"t") (f+"esse") (f+"te") (f+"i") ;
-
-
-	hjk_type_VI_link : Str -> NFS ;
 
 	hjk_type_VI_link x =
 		let
@@ -100,17 +110,11 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		in
 		nForms6 x (x_n+"i") (x+"i") (x+"i") (x+"ide") (x+"e") ;
 
-
-	hjk_type_VI_imelik : Str -> NFS ;
-
 	hjk_type_VI_imelik x =
 		let
-			x_t : Str = stronger x
+			x_t : Str = stronger_noun x
 		in
 		nForms6 x (x+"u") (x_t+"u") (x_t+"u") (x+"e") (x_t+"e") ;
-
-
-	hjk_type_VI_meeskond : Str -> NFS ;
 
 	hjk_type_VI_meeskond x =
 		let
@@ -118,18 +122,12 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		in
 		nForms6 x (x_n+"a") (x+"a") (x+"a") (x+"ade") (x+"i") ;
 
-
-	hjk_type_VI_seminar : Str -> NFS ;
-
 	hjk_type_VI_seminar x =
 		nForms6 x (x+"i") (x+"i") (x+"i") (x+"ide") (x+"e") ;
 
-
-	hjk_type_VII_touge : Str -> NFS ;
-
 	hjk_type_VII_touge x =
 		let
-			x_t : Str = stronger x
+			x_t : Str = (stronger_noun (init x)) + "e"
 		in
 		nForms6 x x_t (x+"t") (x_t+"sse") (x+"te") (x_t+"id") ;
 
@@ -166,7 +164,9 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	} ;
 
 
-	-- Only the very stable weakening that happens to nouns
+	-- Weakening of nouns.
+	-- Only the very stable weakening that happens to nouns.
+	-- TODO: verify correctness/completeness based on some other implementation.
 	weaker_noun : Str -> Str ;
 	weaker_noun link =
 		case link of {
@@ -185,8 +185,28 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			_ => link
 	} ;
 
+	-- Strengthening of nouns.
+	-- Input must not have the last vowel.
+	stronger_noun : Str -> Str ;
+	stronger_noun x =
+		case x of {
+			y + "lg" => y + "lg" ;
+			y + "tk" => y + "tk" ; -- katke
+			y + "ks" => y + "ks" ; -- makse
+			y + "sk" => y + "sk" ; -- raske (?)
+			y + "ts" => y + "ts" ; -- katse
+			y + "st" => y + "st" ; -- TODO: sometimes stm: iste, kaste
+			y + k@("k"|"p"|"t"|"s") => y + k + k ;
+			y + "g" => y + "k" ;
+			y + "d" => y + "t" ;
+			y + "b" => y + "p" ;
+			y + "mm" => y + "mb" ; -- komme -> kombe
+			y + "nn" => y + "nd" ;
+			_ => x
+		} ;
 
-	-- TODO: implement fully
+
+	-- Strengthening of verbs.
 	stronger : Str -> Str ;
 	stronger x =
 		let
@@ -202,6 +222,17 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		} ;
 
 
+	-- Mapping of singular nominative to HJKEKS types.
+	-- This implements the patterns from HJKEKS section 8 but
+	-- makes the rule ordering explicit, handles things like dropping 'e'
+	-- in 'reegel' -> 'reegli', etc.
+	-- Works ~90% correctly, ~100% correctly with input longer than 10 letters.
+	-- If this rule delivers an incorrect form, then use the 6-arg oper.
+	-- Not always correctly handled:
+	--  - type VII (t6uge -> t6uke), as one needs to detect derivation from verb
+	--  - last syllable superlong (rostbiif)
+	--  - compound words (workaround: mark the compound border manually)
+	--  - exceptional words (workaround: take these from the lexicon)
 	hjk_type : Str -> NFS ;
 
 	hjk_type x =
@@ -241,11 +272,13 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<S2, _ + #c + #v + #v + #c> => hjk_type_VI_link x ; -- rostbiif, not viiul
 			<S2, _ + #v + #c + #c + #c> => hjk_type_VI_link x ; -- impulss
 			<_, _ + #v + "s"> => hjk_type_Va_otsene x ;
-			-- TODO: test if -m is better then -em
 			-- Exclude: -am, -om, -um
 			<_, _ + ("v"|"tav"|"em"|"im")> => hjk_type_IVb_audit x "a" ; -- kauneim
 			<_, _ + ("line"|"lane"|"mine"|"kene")> => hjk_type_Vb_oluline x ;
 			<S21, _ + "e"> => hjk_type_III_ratsu x ; -- k6ne
+			-- verb + e
+			<S22, _ + "e"> => hjk_type_VII_touge x ;
+			<S2, _ + "e"> => hjk_type_VII_touge x ;
 			<_, _ + "ne"> => hjk_type_Va_otsene x ;
 			<S21, _ + #foreign_v> => hjk_type_III_ratsu x ; -- ufo, pita, lito
 			<S21, _ + #v> => hjk_type_II_ema x ;
@@ -260,11 +293,11 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<S2, y + kk@("kk"|"pp"|"tt"|"hh") + "e" + l@("l"|"r")> => hjk_type_IVb_audit1 x (y + (init kk) + l) ;
 			<S2, y + vv@(#vv) + gbd@(#gbd) + "e" + l@("l"|"r")> => hjk_type_IVb_audit1 x (y+vv+gbd+l) ;
 			<S2, y + vv@(#vv) + s@("s") + "e" + l@("l"|"r")> => hjk_type_IVb_audit1 x (y+vv+s+l) ;
-			<S2, y + n@("nts"|"ld"|"ng"|"nd"|"mb"|"k"|"p"|"t") + "e" + l@("l"|"r")> => hjk_type_IVb_audit1 x (y+n+l) ;
+			<S2, y + n@("hv"|"nts"|"ld"|"ng"|"nd"|"mb"|"k"|"p"|"t") + "e" + l@("l"|"r")> => hjk_type_IVb_audit1 x (y+n+l) ;
 			<S2, y + "e" + l@("l"|"r") > => hjk_type_IVb_audit x "i" ;
 			<S2, _ + #c> => hjk_type_IVb_audit x "i" ; -- TODO: masked by 'link'
 			<S3, _ + #v> => hjk_type_IVa_aasta x ;
-			<_, _ + "e"> => hjk_type_VII_touge x ; -- TODO: verb+e
+			<_, _ + "e"> => hjk_type_VII_touge x ; -- verb + 'e'
 			<_, _ + #c> => hjk_type_IVb_audit x "i" ; -- catch all that end with consonant
 			<_, _> => hjk_type_III_ratsu x -- catch all
 		} ;
@@ -291,10 +324,11 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			#v + #c + #v + #c => S2 ;
 			#v + #vv + #c => S1 ; -- auul, ioon, oaas
 			#v + #v + #v + #c => S2 ; -- aiak (?)
-			#v + #v + #c + #v => S23 ; -- 6ige
+			#v + #v + #c + #v => S22 ; -- aine, aade; not: 6ige
 			#v + #c + #v + #v => S1 ; -- epee, oboe
 			#v + #c + #c + #v => S2 ;
 			#c + #v + #c + #v => S21 ;
+			--#c + #v + #v + #v => S22 ; -- TODO: muie
 			? + ? + ? + ? => S1 ;
 			-- all 5-letters
 			#v + #c + #c + #v + #v => S1 ; -- armee
@@ -304,8 +338,8 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			#c + #v + #vv     + #c => S1 ; -- poeem
 			#c + #v + #v + #v + #c => S2 ; -- hoius, laius, maius
 			#c + #v + #c + #v + #c => S2 ; -- redel
-			#c + #v + #c + #gbd + "e" => S23 ; -- valge
-			#c + #v + #v + #gbd + "e" => S23 ; -- haige ?
+			#c + #v + #c + #gbd + "e" => S23 ; -- valge, k6rge; p6rge, hange
+			#c + #v + #v + #gbd + "e" => S22 ; -- haige, kauge; t6uge
 			#c + #v + #c + #c + #v => S22 ; -- ratsu
 			#v + #c + #c + #c + #v => S2 ;
 			#v + #c + #c + #v + #c => S2 ; -- amper
