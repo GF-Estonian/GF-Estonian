@@ -4,7 +4,7 @@
 #
 # Usage:
 #
-# cat file.etsyn | ./etsyn-to-6forms.py | sort | uniq
+# cat file.etsyn | ./etsyn-to-6forms.py --tag A | sort | uniq
 #
 # Note that we use sort|uniq to avoid duplicate lines. These can occur
 # even if unique lemmas were given to etsyn, e.g. etsyn maps
@@ -12,10 +12,11 @@
 # thus creating a duplicate line.
 #
 # @author Kaarel Kaljurand
-# @version 2013-09-06
+# @version 2013-09-10
 
 import sys
 import re
+import argparse
 
 forms = {}
 prev_line = ""
@@ -45,9 +46,9 @@ def get_ill_adt(f):
 		return '|'.join(f['sg ill']) + '|' + '|'.join(f['adt'])
 	return '|'.join(f['sg ill'])
 
-def add_to_forms(forms, line):
+def add_to_forms(tag, forms, line):
 	line = line.strip()
-	m = re.match(r"(.+) //_S_ (.+), //", line)
+	m = re.match(r"(.+) //_" + tag + "_ (.+), //", line)
 	if m:
 		key = m.group(2) # morph. category
 		val = re.sub(r'\+', '', m.group(1)) # word form
@@ -56,9 +57,21 @@ def add_to_forms(forms, line):
 		else:
 			forms[key] = [val]
 
+# Commandline arguments parsing
+parser = argparse.ArgumentParser(description='')
+
+parser.add_argument('-t', '--tag', type=str, action='store', dest='tag',
+	default="S",
+	help='morph. category tag, default: S')
+
+parser.add_argument('-v', '--version', action='version', version='%(prog)s v0.1')
+
+args = parser.parse_args()
+
+
 for line in sys.stdin:
 	if re.match(r'^\s', line):
-		add_to_forms(forms, line)
+		add_to_forms(args.tag, forms, line)
 	else:
 		try:
 			show(forms)

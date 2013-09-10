@@ -3,7 +3,7 @@
 gold=nouns.6forms.csv
 out=nouns.6forms.gf.csv
 diff=nouns.6forms.diff.csv
-coverage=coverage.txt
+coverage=noun.coverage.txt
 
 g=../estonian/
 cat ${gold} |\
@@ -20,4 +20,4 @@ result=`echo "scale=4; ${correct}/${total}" | bc`
 
 echo "Coverage: ${correct} out of ${total} = ${result}"
 
-diff coverage.prev ${coverage}
+diff noun.coverage.prev ${coverage}
