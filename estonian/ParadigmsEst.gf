@@ -359,9 +359,9 @@ oper
     case <paat,paadi,paati,paate> of {
       <_ + "ne", _+ "se", _+"st", _ + "si"> => dNaine paat ;
       <_ + "ne", _+ "se", _+"st", _ + "seid"> => dSoolane paat ;
-      <_ + ("n"|"l"|"r"), _ + V@("a" | "u" | "e"),  _ + V,  _ + "u"> => dOun paat ; 
-      <_ + C@("r" | "n" | "l" | "m" | "s" | "t" |"k"), _ + C + "i", 
-       _ + C + "i", _> => dSeminar paat ;
+      -- TODO: make linear
+      --<_ + ("n"|"l"|"r"), _ + V@("a" | "u" | "e"),  _ + V,  _ + "u"> => dOun paat ;
+      --<_ + C@("r" | "n" | "l" | "m" | "s" | "t" |"k"), _ + C + "i", _ + C + "i", _> => dSeminar paat ;
       _  => dTuli paat paadi 
       } ;
 

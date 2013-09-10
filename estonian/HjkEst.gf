@@ -91,12 +91,25 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		in
 		nForms6 x gen (gen+"t") (gen+"sse") (gen+"te") (gen+"id") ;
 
+	-- This rule handles the removal of -ne and -s endings, and the addition of 'e'
+	-- in the case of Cne-nouns (e.g. 'raudne').
+	-- vastus - vastuse - vastust
+	-- otsense - otsese - otsest
+	-- raudne - raudse - raudsEt - raudsesse - raudsEte - raudseid (additional 'e')
 	-- TODO: variant: vastusesse | vastusse
 	hjk_type_Va_otsene x =
 		let
-			f : Str = case x of { y + "ne" => y + "s" ; _ => x }
+			f : Str = case x of {
+				y + c@(#c) + "ne" => y + c + "se" ;
+				y + "ne" => y + "s" ;
+				_ => x
+			} ;
+			f1 : Str = case x of {
+				y + "ne" => y + "s" ;
+				_ => x
+			}
 		in
-		nForms6 x (f+"e") (f+"t") (f+"esse") (f+"te") (f+"eid") ;
+		nForms6 x (f1+"e") (f+"t") (f1+"esse") (f+"te") (f1+"eid") ;
 
 	-- TODO: variant: olulisesse | olulisse
 	hjk_type_Vb_oluline x =
@@ -197,6 +210,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	stronger_noun x =
 		case x of {
 			y + "lg" => y + "lg" ;
+			y + "hk" => y + "hk" ; -- tahke
 			y + "tk" => y + "tk" ; -- katke
 			y + "rs" => y + "rs" ; -- morse
 			y + "rr" => y + "rd" ; -- murre
@@ -351,12 +365,16 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<S21, _ + "e">
 				=> hjk_type_III_ratsu x ;
 
+			-- Many adjectives end with "ne" (40% in WordNet)
+			-- We require them to be at least 5 letters long (excluding 'öine'),
+			-- to give a change to VII_touge (next rule).
+			<_, _ + ? + ? + ? + "ne">
+				=> hjk_type_Va_otsene x ;
+
+			-- Note: this rule does not actually check the derivation from verb.
 			-- verb + e, TODO: masked by S21/e
 			<(S2|S22), _ + "e">
 				=> hjk_type_VII_touge x ;
-
-			<_, _ + "ne">
-				=> hjk_type_Va_otsene x ;
 
 			-- ufo, pita, lito
 			<S21, _ + #foreign_v>

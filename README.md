@@ -26,6 +26,7 @@ Current status and immediate future plans.
 ### Adjectives
 
   - constructed in the same way as nouns
+  - 1-arg paradigm: 80% correct
   - comparative guessed: TODO: determine correctness
   - TODO: superlative (not urgent)
 
