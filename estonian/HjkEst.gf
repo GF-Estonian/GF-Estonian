@@ -302,7 +302,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<_, _ + "nna">
 				=> hjk_type_III_ratsu x ;
 
-			<(S2|S3), _ + ("nu"|"tu")>
+			<-(S21|S22), _ + ("nu"|"tu")>
 				=> hjk_type_IVa_aasta x ;
 
 			-- TODO: improve foreign detection
@@ -424,10 +424,11 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		} ;
 
 
-	-- Assigns stress/quantity indicator to the word based on its character composition.
-	-- Note that you cannot use recursion in these rules.
-	-- Also, backreferences do not seem to work on the left-hand side, e.g. this works weird:
-	-- #c + #v + #c + #c + i@(#v) + i + #c => S1 ; -- double vowel in the last syllable: vampiir, bensiin
+	-- Assigns stress/quantity indicator (SylType) to the word based on
+	-- its character composition.
+	-- Note: you cannot use recursion (circular definitions) in these rules
+	-- Note: patterns must be linear (GF book C.4.13), i.e. you cannot write
+	--     oi@(#v + #v) + oi => S2 ; -- oi-oi, ai-ai, oo-oo
 	syl_type : Str -> SylType ;
 	syl_type x =
 		case x of {

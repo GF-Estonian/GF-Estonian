@@ -110,9 +110,7 @@ lin
   learn_V2 = mkV2 (mkV "õppima") ;
   leather_N = mkN "nahk" ;
   leave_V2 = mkV2 (mkV "jättää") ;
-  -- TODO: fix this: either use a 2-arg oper to handle to splittable verb 'lugupidada'
-  -- or use 'meeldida' but in this case 'elative' cannot be used.
-  like_V2 = mkV2 (mkV "lugupidama") elative ;
+  like_V2 = mkV2 (mkV "lugu" (mkV "pidama")) (casePrep elative) ;
   listen_V2 = mkV2 (mkV "kuunnella" "kuunteli") partitive ;
   live_V = mkV "elama" ;
   long_A = mkA "pikk" ;
