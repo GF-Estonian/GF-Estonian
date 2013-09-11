@@ -459,7 +459,6 @@ oper
   mk4V : (x1,_,_,x4 : Str) -> V = \a,b,c,d -> 
     let 
       vfs = vforms2V (vForms4 a b c d)
-      --vfs = mk_forms4_to_verb (vForms4 a b c d)
     in vfs ** {sc = NPCase Nom ; lock_V = <>} ;
   mk8V : (x1,_,_,_,_,_,_,x8 : Str) -> V = \a,b,c,d,e,f,g,h -> 
     let
@@ -512,7 +511,7 @@ oper
         cLeppima lugema ;
       
       -- TS 59 (petma, tapma) 
-      -- TS 60 (jätma, võtma) with mk4V
+      -- Use mk4V for TS 60 (jätma, võtma)
       ? + #v + ("tma"|"pma") =>
         cPetma lugema (luge + "etakse") ;
       -- TS 58 for rest that end tma (muutma,kartma,...)
@@ -552,19 +551,15 @@ oper
       -- TS 69
       (?|"") + (?|"") + ? + "tlema" => --vestlema,mõtlema,ütlema; not õnnitlema
         cOmblema lugema ;
-        --cOmblema ("1õmblema:" + lugema) ; --DEBUG
       _ + "tlema" =>
         cElama lugema ;
-        --cElama ("2elama:" + lugema) ; --DEBUG
       _ + #c + "lema" =>
         cOmblema lugema ;
-        --cOmblema ("3omblema:" +lugema) ; --DEBUG
 
       -- TS 50-52
       -- Default case
       _ =>
         cElama lugema
-        --cElama ("DEFAULT:" + lugema) --DEBUG
     } ;   
 
   vForms2 : (_,_ : Str) -> VForms = \petma,petta ->
@@ -573,27 +568,22 @@ oper
     -- * 62 alt form (Csma, sta)
     -- * 50-52 (elama) recognized as 69 (õmblema)
     -- * 66 (nägema~näha)
-    -- * 67-68 (hüppama~hüpata)
     -- * 54 (tulema~tulla)
+    -- * 67-68 (hüppama~hüpata)
     case <petma,petta> of {
       <_ + "ksma", _ + "sta"> => cJooksma petma ; --62 alt forms
-      <_,          _ + "ata"> => cHyppama petma ; --67-68 recognized as 50-52
+      <_,          _ + "ata"> => cHyppama petma ; --67-68
       <_,          _ + "ha"> => cNagema petma ; --66
       <_,          _ + ("rra"|"lla"|"nna")> => cTulema petma ; --54
       <_ + #c + "lema",
-       _ + #c + "leda"> => cElama petma ; --50-52 recognized as 69
-       --_ + #c + "leda"> => cElama ("cElama:" + petma) ; --DEBUG
+       _ + #c + "leda"> => cElama petma ; --50-52 (õnnitlema) recognized as 69 (mõtlema)
        _ => vForms1 petma
-      --_ => vForms1 ("V2->"+petma) --DEBUG
       } ;
 
   vForms3 : (_,_,_ : Str) -> VForms = \taguma,taguda,taob ->
-    let
-    in
     -- Arguments: ma infinitive, da infinitive, b
     -- Use this for the following cases:
     -- * Irregular gradation (taguma,taob)
-    -- * 
     -- * Non-default vowel in b for TS 58-64 (laulma,laulab)
     case <taguma,taguda,taob> of {
       <_, _ + #vv + #lmnr + "da", _> => cKuulma taguma taob ;
@@ -601,19 +591,17 @@ oper
       <_, _, (""|#c) + #c + #v + #v + "b"> => cLugema taguma ; --57
       <_ + "lema", _, _> => vForms2 taguma taguda ;
       <_ + #v + "ma", _+"da", _> => cSattumaPettuma taguma taob ; --to be sure about consonant gradation
-      --<_, _, _+ #c + #c + #v + "b"> => cElama ("#C#C#V:"+taguma) ; --DEBUG
       <_,_,_> => vForms2 taguma taguda
-      --<_,_,_> => vForms2 ("V3->"+taguma) taguda --DEBUG
     } ;
     
   vForms4 : (x1,_,_,x4 : Str) -> VForms = \jatma,jatta,jatab,jaetakse ->
-    let
-    in
+    -- There are 29 verbs in test suite that don't get correct forms with mk4V
     case <jatma,jatta,jatab,jaetakse> of {
-      <_, _+("kka"|"ppa"|"tta"), _, _+"takse"> => cPetma jatma jaetakse ;
-      <_ + "dma",_,_,_> => cAndma jatma ;
+      <_,         _+("kka"|"ppa"|"tta"), 
+       _,         _+"takse"> => cPetma jatma jaetakse ;
+      <_ + "dma",_,
+       _,         _+"takse"> => cAndma jatma ; --regVForms would have been too messy to handle these, and they are very reliable to recognize anyway
       <_,_,_,_> => regVForms jatma jatta jatab jaetakse
-      --<_,_,_,_> => vForms3 ("V4->"+jatma) jatta jatab --DEBUG
     } ;    
     
   caseV c v = {s = v.s ; s2 = v.s2; sc = NPCase c ; lock_V = <>} ;

@@ -548,7 +548,7 @@ oper
       (muud + "etud") ; -- always e?
   
   -- TS 59-60 (petma~petetakse, jätma~jäetakse) 
-  -- weak stem in ma, strong in da
+  -- takse given as second argument
     cPetma : (_,_ : Str) -> VForms = \petma,jaetakse ->
     let
       pet = Predef.tk 2 petma ;
@@ -671,7 +671,7 @@ oper
       (pes + "tud") ;
 
   -- TS 66 (nägema)
-  -- very irregular
+  -- näg, näh and näi stems
   cNagema : (_ : Str) -> VForms = \nagema ->
     let
       nage = Predef.tk 2 nagema ;
@@ -732,7 +732,7 @@ oper
       (ommel + "nud") -- PastPartAct
       (ommel + "dud") ; -- PastPartPass
 
-  -- To distinguish between 50-52 and 55-57
+  -- 2-arg paradigm to distinguish between 50-52 and 55-57
   cSattumaPettuma : (_,_ : Str) -> VForms = \pettuma,satub ->
     let
       pettu = Predef.tk 2 pettuma ;
@@ -747,30 +747,9 @@ oper
       (pettu + "nud") -- PastPartAct
       (satu + "tud") ; -- PastPartPass
 
-  
-{-- TS 58 (saatma), 63 (murdma)
-  -- Strong stem in ma and da 
-  -- Needs tud as a parameter, takse formed from that
-  -- This might make sense with 2-param constructor. Not deleting yet. 
-  -- cMuutma for only 58 and cAndma for only 63.
-  cSaatma5863 : (_,_ : Str) -> VForms = \saatma,saadetud ->
-    let
-      saat = Predef.tk 2 saatma ;
-      saadet = Predef.tk 2 saadetud ;
-      murtakse = saadet + "akse" ;  
-      saad = weaker saat ;
-    in
-      vForms8
-        saatma
-        (saat + "a")
-        (saad + "ab")
-        murtakse
-        (saat + "ke")
-        (saat + "is")
-        (saat + "nud")
-        saadetud ;
--}  
-  
+  -- For regular verbs, paradigm from 4 base forms
+  -- Analoogiaseosed pöördsõna paradigmas
+  -- http://www.eki.ee/books/ekk09/index.php?p=3&p1=5&id=227
   regVForms : (x1,_,_,x4 : Str) -> VForms = \vestlema,vestelda,vestleb,vesteldakse ->
     let
       vestle_ = Predef.tk 2 vestlema ;
@@ -782,9 +761,9 @@ oper
         "t" => "k" ;
         _   => "g"
       } ;
-      toit_ = case (last vestle_) of { --toitma~toitke; vestlema~vestelge
-        ("t"|"d") => vesteld_ ;
-         _        => vestel_ 
+      toit_ = case (last vestle_) of {  
+        ("t"|"d") => vesteld_ ; --toit(ma)   -> toitke;
+         _        => vestel_    --vestle(ma) -> vestelge
       } ;
       toiti_ = case (last vestle_) of { --toitis; vestles
         ("a"|"e"|"i"|"o"|"u"|"õ"|"ä"|"ö"|"ü") => vestle_ ;
@@ -803,14 +782,12 @@ oper
         
 
   regVerb : (_,_,_,_ : Str) -> Verb = \kinkima,kinkida,kingib,kingitakse ->
-    mk_forms4_to_verb (vForms4experimental kinkima kinkida kingib kingitakse) ;
+    vforms2V (regVForms kinkima kinkida kingib kingitakse) ;
 
 
 -- auxiliaries
 
     VForms : Type = Predef.Ints 7 => Str ;
-
-    VForms4 : Type = Predef.Ints 3 => Str ;
     
     vForms8 : (x1,_,_,_,_,_,_,x8 : Str) -> VForms =
       \tulema,tulla,tuleb,tullakse,tulge,tuli,tulnud,tuldud ->
@@ -903,88 +880,6 @@ oper
       } ;
     sc = NPCase Nom ;
     s2 = [] ;
-    lock_V = <>
-    } ;
-
-    
-    vForms4experimental : (x1,_,_,x4 : Str) -> VForms4 =
-      \kinkima,kinkida,kingib,kingitakse ->
-      table {
-        0 => kinkima ;
-        1 => kinkida ;
-        2 => kingib ;
-        3 => kingitakse
-      } ;
-      
-    -- (Experimental) Full paradigm from 4 base forms.
-    -- Analoogiaseosed pöördsõna paradigmas
-    -- http://www.eki.ee/books/ekk09/index.php?p=3&p1=5&id=227
-    -- TODO: ma: kinkivat
-    mk_forms4_to_verb : VForms4 -> Verb = \vh ->
-    let
-      vestlema = vh ! 0 ;
-      vestelda = vh ! 1 ;
-      kingib = vh ! 2 ;
-      kingitakse = vh ! 3 ;
-      vestle_ = Predef.tk 2 vestlema ;
-      vestel_ = Predef.tk 2 vestelda ;
-      vesteld_ = init vestelda ;
-      kingi_ = init kingib ;
-      kingit_ = Predef.tk 4 kingitakse ;
-      laulev = case (last vestle_) of {
-          ("a"|"e"|"i"|"o"|"u"|"õ"|"ä"|"ö"|"ü") => vestle_ + "v" ;
-          _ => vestle_ + "ev" } ; --consonant stem in -ma, add e
-      g = case (last vesteld_) of {
-        "t" => "k" ;
-        _   => "g"
-      } ;
-      kinkinud = (hjk_type_IVb_maakas (vestel_ + "nud")).s ;
-      kingitud = (hjk_type_IVb_maakas (kingit_ + "ud")).s ;
-    in
-    {s = table {
-      Inf InfDa => vestelda ;
-      Inf InfDes => vesteld_ + "es" ;
-      Presn Sg P1 => kingi_ + "n" ;
-      Presn Sg P2 => kingi_ + "d" ;
-      Presn Sg P3 => kingib ;
-      Presn Pl P1 => kingi_ + "me" ;
-      Presn Pl P2 => kingi_ + "te" ;
-      Presn Pl P3 => kingi_ + "vad" ;
-      Impf Sg P1  => vestle_ + "sin" ;   --# notpresent
-      Impf Sg P2  => vestle_ + "sid" ;  --# notpresent
-      Impf Sg P3  => vestle_ + "s" ;  --# notpresent
-      Impf Pl P1  => vestle_ + "sime" ;  --# notpresent
-      Impf Pl P2  => vestle_ + "site" ;  --# notpresent
-      Impf Pl P3  => vestle_ + "sid" ;  --# notpresent
-      Condit Sg P1 => kingi_ + "ksin" ;  --# notpresent
-      Condit Sg P2 => kingi_ + "ksid" ;  --# notpresent
-      Condit Sg P3 => kingi_ + "ks" ;  --# notpresent
-      Condit Pl P1 => kingi_ + "ksime" ;  --# notpresent
-      Condit Pl P2 => kingi_ + "ksite" ;  --# notpresent
-      Condit Pl P3 => kingi_ + "ksid" ;  --# notpresent
-      Imper Sg   => kingi_ ; -- kingi!
-      Imper Pl   => vestel_ + g + "e" ; -- vestelge
-      ImperP3 Sg => vestel_ + g + "u" ; -- vestelgu (ta)
-      ImperP3 Pl => vestel_ + g + "u" ; -- vestelgu (nad)
-      ImperP1Pl  => vestel_ + g + "em" ; -- vestelgem
-      ImpNegPl   => vestel_ + g + "e" ; -- ärge vestelge
-      PassPresn True  => kingitakse ;
-      PassPresn False => kingit_ + "a" ;
-      PassImpf  True  => kingit_ + "i" ; --di or ti
-      PassImpf  False => kingit_ + "ud" ;  
-      PresPart => laulev ;
-      PastPartAct (AN n)  => kinkinud ! n ;
-      PastPartAct AAdv    => kinkinud ! (NCase Sg Ablat) ;
-      PastPartPass (AN n) => kingitud ! n ;
-      PastPartPass AAdv   => kingitud ! (NCase Sg Ablat) ;
-      Inf InfMa => vestlema ;
-      Inf InfMas => vestlema + "s" ;
-      Inf InfMast  => vestlema + "st" ;
-      Inf InfMaks => vestlema + "ks" ;
-      Inf InfMata => vestlema + "ta"
-      } ;
-    s2 = [] ;
-    sc = NPCase Nom ;
     lock_V = <>
     } ;
     
