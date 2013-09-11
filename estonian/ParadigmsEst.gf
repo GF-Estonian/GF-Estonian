@@ -61,8 +61,12 @@ oper
   comitative  : Case ; -- e.g. "karbiga"
 
   infDa : InfForm ; -- e.g. "lugeda"
+  infDes : InfForm ;
   infMa : InfForm ; -- e.g. "lugema"
+  infMas : InfForm ; -- e.g. "lugemas"
+  infMaks : InfForm ; -- e.g. "lugemaks"
   infMast : InfForm ;  -- e.g. "lugemast"
+  infMata : InfForm ; -- e.g. "lugemata"
 
 -- The following type is used for defining *rection*, i.e. complements
 -- of many-place verbs and adjective. A complement can be defined by
@@ -164,8 +168,8 @@ oper
 
   mkV : overload {
     mkV : (lugema : Str) -> V ;     -- predictable verbs, covers n %
-    mkV : (huutaa,huusi : Str) -> V ; -- deviating past 3sg
-    mkV : (huutaa,huudan,huusi : Str) -> V ; -- also deviating pres. 1sg
+    mkV : (lugema,lugeda : Str) -> V ; -- deviating past 3sg
+    mkV : (lugema,loeb,lugeda : Str) -> V ; -- also deviating pres. 1sg
     mkV : (lugema,lugeda,loeb,loetakse : Str) -> V ;
     mkV : (tegema,teha,teeb,tehakse,tehke,tegi,teinud,tehtud : Str) -> V ; -- worst-case verb
     mkV : (saama : V) -> (aru : Str) -> V ; -- püsiühendid TODO
@@ -264,7 +268,7 @@ oper
   comitative = Comit ;
  
   infDa = InfDa ; infMa = InfMa ; infMast = InfMast ;
-  --infDes = InfDes ; infMas = InfMas ; infMaks = InfMaks ; infMata = InfMata ;
+  infDes = InfDes ; infMas = InfMas ; infMaks = InfMaks ; infMata = InfMata ;
 
   prePrep  : Case -> Str -> Prep = 
     \c,p -> {c = NPCase c ; s = p ; isPre = True ; lock_Prep = <>} ;
@@ -432,9 +436,9 @@ oper
 -- verbs
 
   mkV = overload {
-    mkV : (huutaa : Str) -> V = mk1V ;
-    mkV : (huutaa,huusi : Str) -> V = mk2V ;
-    mkV : (huutaa,huudan,huusi : Str) -> V = mk3V ;
+    mkV : (lugema : Str) -> V = mk1V ;
+    mkV : (lugema,lugeda : Str) -> V = mk2V ;
+    mkV : (lugema,lugeda,loeb : Str) -> V = mk3V ;
     mkV : (lugema,lugeda,loeb,loetakse : Str) -> V = mk4V ;
     mkV : (tegema,teha,teeb,tehakse,tehke,tegi,teinud,tehtud : Str) -> V = mk8V ;
     mkV : (aru : Str) -> (saama : V) -> V = mkPV ; -- particle verbs
@@ -445,12 +449,22 @@ oper
     let vfs = vforms2V (vForms1 s) in 
       vfs ** {sc = NPCase Nom ; lock_V = <>} ;
   mk2V : (_,_ : Str) -> V = \x,y -> 
-    let vfs = vforms2V (vForms2 x y) in vfs ** {sc = NPCase Nom ; lock_V = <>} ;
-  mk3V : (huutaa,huudan,huusi : Str) -> V = \x,_,y -> mk2V x y ; ----
-  mk4V : (lugema,lugeda,loeb,loetakse : Str) -> V =
-     \a,b,c,d -> mk_forms4_to_verb (vForms4 a b c d) ** {sc = NPCase Nom ; lock_V = <>} ;
-  mk8V : (lugema,lugeda,loeb,loetakse,lugege,luges,lugenud,loetud : Str) -> V =
-     \a,b,c,d,e,f,g,h -> vforms2V (vForms8 a b c d e f g h) ** {sc = NPCase Nom ; lock_V = <>} ;
+    let 
+      vfs = vforms2V (vForms2 x y) 
+    in vfs ** {sc = NPCase Nom ; lock_V = <>} ;
+  mk3V : (_,_,_ : Str) -> V = \x,y,z -> 
+    let 
+      vfs = vforms2V (vForms3 x y z) 
+    in vfs ** {sc = NPCase Nom ; lock_V = <>} ;
+  mk4V : (x1,_,_,x4 : Str) -> V = \a,b,c,d -> 
+    let 
+      vfs = vforms2V (vForms4 a b c d)
+      --vfs = mk_forms4_to_verb (vForms4 a b c d)
+    in vfs ** {sc = NPCase Nom ; lock_V = <>} ;
+  mk8V : (x1,_,_,_,_,_,_,x8 : Str) -> V = \a,b,c,d,e,f,g,h -> 
+    let
+      vfs = vforms2V (vForms8 a b c d e f g h)
+    in vfs ** {sc = NPCase Nom ; lock_V = <>} ;
   mkPV : (aru : Str) -> (saama : V) -> V = \aru,saama ->
     {s = saama.s ; s2 = aru ; sc = saama.sc ; lock_V = <> } ;
      
@@ -461,11 +475,6 @@ oper
     let
       luge = Predef.tk 2 lugema ;
       loe = weaker luge ;
-{-      v : pattern Str = #("a" | "e" | "i" | "o" | "u" | "õ" | "ä" | "ö" | "ü") ;
-      c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r" | "z" | "ž" | "š") ;
-      lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
-      kpt : pattern Str = #("k" | "p" | "t" | "f" | "š") ;
--}      
     in
     case lugema of {
       -- TS 49
@@ -478,8 +487,8 @@ oper
         cJooma lugema ;  --jooma,looma,lööma,müüma,pooma,sööma,tooma
 
       -- TS 53
-      _ + "elema" =>
-        cTegelema lugema ;
+      _ + #c + #v + "elema" =>
+        cTegelema lugema ; --not aelema
       
       -- TS 54
       -- Small class, just list all members
@@ -495,38 +504,24 @@ oper
         cLeppima lugema ;
       _ + ("sk"|"ps"|"ks"|"ts"|"pl") + ("ima") => --|"uma") => 
         cLeppima lugema ;
-      _ + ("hk"|"hm"|"hn"|"hr") + ("ima") => --most *hkuma,*hmuma are TS 51 (muutuma) 
+      _ + ("hk"|"hm"|"hn"|"hr"|"ht") + ("ima") => --most *hCuma are TS 51 (muutuma) 
         cLeppima lugema ;
       _ + #c + "ssima" => --weaker *ss = *ss; should be weaker Css = Cs
         cLugema lugema ;
       _ + ("pp"|"kk"|"tt"|"ss"|"ff"|"nn"|"mm"|"ll"|"rr") + ("ima"|"uma") => 
         cLeppima lugema ;
-         
-      --irregular gradation patterns begin here
-      --mostly just listing of all verbs
-      ? + "ugema" => --lugema,pugema,sugema ; not raugema
-        cLugema lugema ;
-      #c + #v + "dema" => --kudema,küdema,põdema
-        cLugema lugema ;
-      ("hau"|"ka"|"ku"|"la"|"ni"|"si") + "duma" =>
-        cLugema lugema ;
-      ? + ("aadima"|"aagima") =>
-        cLugema lugema ;
-
       
-      -- TS 60 (jätma,võtma) default behaviour for CVtma, based on frequency.
-      ? + #v + "tma" =>
-        cJatma lugema ;        
-      -- TS 59 (lõpma,tapma). Rest (nutma,petma,utma) with mk2V/mk3V (TODO). 
-      ? + #v + "pma" =>
-        cPetma lugema ;
+      -- TS 59 (petma, tapma) 
+      -- TS 60 (jätma, võtma) with mk4V
+      ? + #v + ("tma"|"pma") =>
+        cPetma lugema (luge + "etakse") ;
       -- TS 58 for rest that end tma (muutma,kartma,...)
       _ + "tma" =>
         cMuutma lugema ;
 
      -- TS 61 (laulma,kuulma,naerma,möönma)
      -- Default vowel e for lma, a for (r|n)ma.
-     -- For laulab use mk2V/mk3V (TODO).
+     -- Other vowel with mk3V.
       _ + "lma" => 
         cKuulma lugema (loe + "eb") ; 
       _ + ("r"|"n") + "ma" =>
@@ -535,14 +530,12 @@ oper
       -- TS 63 (andma,hoidma)
       _ + "dma" =>
         cAndma lugema ;
-        
-      -- TS 62 alt form
-      _ + "ooksma" => --for any other verb that would need jooksma~joosta~jookseb, mk2V
-        cJooksma lugema ;
-        
-      -- TS 62, 64 (tõusma,mõskma), default vowel e 
+             
+      -- TS 62, 64 (tõusma,mõskma), default vowel e
+      -- 62 alt form (jooksma,joosta) with mk2V
+      -- Other vowel than e with mk3V
       _ + #c + "ma" => 
-        cLaskma lugema (loe + "eb") ; --for __ab use mk2V/mk3V (TODO)
+        cLaskma lugema (loe + "eb") ;
         
       -- TS 65 (pesema)
       #c + #v + "sema" =>
@@ -553,44 +546,76 @@ oper
       ("nägema"|"tegema") =>
         cNagema lugema ;
       
-     -- TS 67-68
-     (?|"") + ? + ("n"|"r") + "dama" => --hindama,kordama; not alandama
-        cHyppama lugema ;
-     (?|"") + ? + ("h"|"s"|"n") + "tama" => --istama,kohtama; not armastama 
-        cHyppama lugema ;
-     _ + #lmnr + ("k"|"p"|"g"|"b"|"j"|"v") + "ama" => --hingama,põrkama,arvama
-        cHyppama lugema ;
-     _ + ("sk"|"ps"|"ks"|"ts"|"pl"|"tj") + "ama" => --oskama,jaksama
-        cHyppama lugema ;
-     _ + ("hk"|"hm"|"hn"|"hr") + "ama" => --puhkama,lõhnama 
-        cHyppama lugema ;
-     _ + ("pp"|"kk"|"tt"|"ss"|"nn"|"mm"|"ll"|"rr") + "ama" => --hakkama
-        cHyppama lugema ;
-     (""|?) + #vv + ("d"|"t"|"g") + "ama" => --ootama,vaatama
-        cHyppama lugema ;
-      
+      -- TS 67-68 with mk2V
+      -- no 100% way to distinguish from 50-52 that end in ama
+
       -- TS 69
+      (?|"") + (?|"") + ? + "tlema" => --vestlema,mõtlema,ütlema; not õnnitlema
+        cOmblema lugema ;
+        --cOmblema ("1õmblema:" + lugema) ; --DEBUG
+      _ + "tlema" =>
+        cElama lugema ;
+        --cElama ("2elama:" + lugema) ; --DEBUG
       _ + #c + "lema" =>
         cOmblema lugema ;
+        --cOmblema ("3omblema:" +lugema) ; --DEBUG
 
       -- TS 50-52
       -- Default case
       _ =>
         cElama lugema
+        --cElama ("DEFAULT:" + lugema) --DEBUG
     } ;   
- 
+
   vForms2 : (_,_ : Str) -> VForms = \petma,petta ->
-    let
-      pet = Predef.tk 2 petma ;
-      pett = Predef.tk 2 petta
-    in 
+    -- Arguments: ma infinitive, da infinitive
+    -- Use this for the following cases:
+    -- * 62 alt form (Csma, sta)
+    -- * 50-52 (elama) recognized as 69 (õmblema)
+    -- * 66 (nägema~näha)
+    -- * 67-68 (hüppama~hüpata)
+    -- * 54 (tulema~tulla)
     case <petma,petta> of {
-      <_, _ + ("tt"|"kk"|"pp") + _> => cPetma petma ;
-      <_ + "ksma", _ + "sta"> => cJooksma petma ;
-      <_, _ + "ata"> => cHyppama petma ;
-      _ => vForms1 petma
+      <_ + "ksma", _ + "sta"> => cJooksma petma ; --62 alt forms
+      <_,          _ + "ata"> => cHyppama petma ; --67-68 recognized as 50-52
+      <_,          _ + "ha"> => cNagema petma ; --66
+      <_,          _ + ("rra"|"lla"|"nna")> => cTulema petma ; --54
+      <_ + #c + "lema",
+       _ + #c + "leda"> => cElama petma ; --50-52 recognized as 69
+       --_ + #c + "leda"> => cElama ("cElama:" + petma) ; --DEBUG
+       _ => vForms1 petma
+      --_ => vForms1 ("V2->"+petma) --DEBUG
       } ;
 
+  vForms3 : (_,_,_ : Str) -> VForms = \taguma,taguda,taob ->
+    let
+    in
+    -- Arguments: ma infinitive, da infinitive, b
+    -- Use this for the following cases:
+    -- * Irregular gradation (taguma,taob)
+    -- * 
+    -- * Non-default vowel in b for TS 58-64 (laulma,laulab)
+    case <taguma,taguda,taob> of {
+      <_, _ + #vv + #lmnr + "da", _> => cKuulma taguma taob ;
+      <_, _ + #c + "ta", _> => cLaskma taguma taob ;
+      <_, _, (""|#c) + #c + #v + #v + "b"> => cLugema taguma ; --57
+      <_ + "lema", _, _> => vForms2 taguma taguda ;
+      <_ + #v + "ma", _+"da", _> => cSattumaPettuma taguma taob ; --to be sure about consonant gradation
+      --<_, _, _+ #c + #c + #v + "b"> => cElama ("#C#C#V:"+taguma) ; --DEBUG
+      <_,_,_> => vForms2 taguma taguda
+      --<_,_,_> => vForms2 ("V3->"+taguma) taguda --DEBUG
+    } ;
+    
+  vForms4 : (x1,_,_,x4 : Str) -> VForms = \jatma,jatta,jatab,jaetakse ->
+    let
+    in
+    case <jatma,jatta,jatab,jaetakse> of {
+      <_, _+("kka"|"ppa"|"tta"), _, _+"takse"> => cPetma jatma jaetakse ;
+      <_ + "dma",_,_,_> => cAndma jatma ;
+      <_,_,_,_> => regVForms jatma jatta jatab jaetakse
+      --<_,_,_,_> => vForms3 ("V4->"+jatma) jatta jatab --DEBUG
+    } ;    
+    
   caseV c v = {s = v.s ; s2 = v.s2; sc = NPCase c ; lock_V = <>} ;
 
   vOlema = verbOlema ** {sc = NPCase Nom ; lock_V = <>} ;

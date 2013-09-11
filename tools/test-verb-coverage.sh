@@ -3,12 +3,14 @@
 gold=verbs.8forms.csv
 out=verbs.8forms.gf.csv
 diff=verbs.8forms.diff.csv
-coverage=coverage.txt
+coverage=coverage4v.txt
 
 g=../estonian/
 cat ${gold} |\
-sed "s/,.*//" |\
-python cc.py -r ${g}/ParadigmsEst.gf --oper "mkV" |\
+#sed "s/,.*//" |\
+sed -r 's/([^,]*, [^,]*, [^,]*, [^,]*),.*/\1/' |\
+#sed -r 's/([^,]*, [^,]*, [^,]*),.*/\1/' |\
+python cc.py -r ${g}/ParadigmsEst.gf --oper "mk4V" |\
 gf --run |\
 perl -nal -F",\s+" -e 'print "$F[2], $F[0], $F[9], $F[31], $F[26], $F[15], $F[36], $F[65]"' > ${out}
 #python cc.py -r ${g}/ParadigmsEst.gf --oper "vForms1" |\

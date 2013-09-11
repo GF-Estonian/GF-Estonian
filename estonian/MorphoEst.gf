@@ -547,23 +547,25 @@ oper
       (muut + "nud")
       (muud + "etud") ; -- always e?
   
-  -- TS 59 (petma) 
+  -- TS 59-60 (petma~petetakse, jätma~jäetakse) 
   -- weak stem in ma, strong in da
-    cPetma : (_ : Str) -> VForms = \petma ->
+    cPetma : (_,_ : Str) -> VForms = \petma,jaetakse ->
     let
       pet = Predef.tk 2 petma ;
       pett = stronger pet ;
+      jaet = Predef.tk 4 jaetakse ;
+      jaetud = jaet + "ud"
     in vForms8
       petma
       (pett + "a")
       (pet + "ab")
-      (pet + "etakse") --always e?
+      jaetakse
       (pet + "ke")
       (pett + "is")
       (pet + "nud")
-      (pet + "etud") ;
+      jaetud ;
 
-  -- TS 60 (jatma)
+{-  -- TS 60 (jatma)
   -- weak stem in ma, strong in da ; irregular takse, tud
   cJatma : (_ : Str) -> VForms = \jatma ->
     let
@@ -582,7 +584,7 @@ oper
       (jatt + "is")
       (jat + "nud")
       (ko + "etud") ;
-      
+-}      
       
   -- TS 61 (laulma)
   --vowel (a/e) given with the second argument
@@ -698,10 +700,6 @@ oper
       hypp = init hyppa ;
       a = last hyppa ;
       hypa = (weaker hypp) + a
-      --case hyppa of {
-         --irregular gradation patterns
-      --  _ => (weaker hypp) + a
-      --} ;
     in vForms8
       hyppama
       (hypa + "ta")
@@ -733,7 +731,22 @@ oper
       (omble + "s") -- Condit Sg P3
       (ommel + "nud") -- PastPartAct
       (ommel + "dud") ; -- PastPartPass
-  
+
+  -- To distinguish between 50-52 and 55-57
+  cSattumaPettuma : (_,_ : Str) -> VForms = \pettuma,satub ->
+    let
+      pettu = Predef.tk 2 pettuma ;
+      satu = init satub ;
+    in vForms8
+      pettuma
+      (pettu + "da")
+      (satu + "b")
+      (satu + "takse") -- Passive
+      (pettu + "ge") -- Imperative P1 Pl
+      (pettu + "s") -- Condit Sg P3
+      (pettu + "nud") -- PastPartAct
+      (satu + "tud") ; -- PastPartPass
+
   
 {-- TS 58 (saatma), 63 (murdma)
   -- Strong stem in ma and da 
@@ -758,8 +771,40 @@ oper
         saadetud ;
 -}  
   
+  regVForms : (x1,_,_,x4 : Str) -> VForms = \vestlema,vestelda,vestleb,vesteldakse ->
+    let
+      vestle_ = Predef.tk 2 vestlema ;
+      vesteld_ = init vestelda ;
+      vestel_ = init vesteld_ ;
+      lase_ = init vestleb ;
+      jaet_ = Predef.tk 4 vesteldakse ;
+      g = case (last vesteld_) of { --doesn't work for andma~andke
+        "t" => "k" ;
+        _   => "g"
+      } ;
+      toit_ = case (last vestle_) of { --toitma~toitke; vestlema~vestelge
+        ("t"|"d") => vesteld_ ;
+         _        => vestel_ 
+      } ;
+      toiti_ = case (last vestle_) of { --toitis; vestles
+        ("a"|"e"|"i"|"o"|"u"|"õ"|"ä"|"ö"|"ü") => vestle_ ;
+         _  => vestle_ + "i"
+      } ;
+    in
+      vForms8
+        vestlema
+        vestelda
+        vestleb
+        vesteldakse
+        (toit_ + g + "e") --da: käskiva kõneviisi ainsuse 3. pööre ja mitmus;
+        (toiti_ + "s") --ma: kindla kõneviisi lihtmineviku pöörded;
+        (toit_ + "nud") --da: isikulise tegumoe mineviku kesksõna
+        (jaet_ + "ud"); --takse: ülejäänud umbisikulise tgm vormid
+        
+
   regVerb : (_,_,_,_ : Str) -> Verb = \kinkima,kinkida,kingib,kingitakse ->
-    mk_forms4_to_verb (vForms4 kinkima kinkida kingib kingitakse) ;
+    mk_forms4_to_verb (vForms4experimental kinkima kinkida kingib kingitakse) ;
+
 
 -- auxiliaries
 
@@ -862,7 +907,7 @@ oper
     } ;
 
     
-    vForms4 : (x1,_,_,x4 : Str) -> VForms4 =
+    vForms4experimental : (x1,_,_,x4 : Str) -> VForms4 =
       \kinkima,kinkida,kingib,kingitakse ->
       table {
         0 => kinkima ;
@@ -883,17 +928,22 @@ oper
       kingitakse = vh ! 3 ;
       vestle_ = Predef.tk 2 vestlema ;
       vestel_ = Predef.tk 2 vestelda ;
+      vesteld_ = init vestelda ;
       kingi_ = init kingib ;
       kingit_ = Predef.tk 4 kingitakse ;
       laulev = case (last vestle_) of {
           ("a"|"e"|"i"|"o"|"u"|"õ"|"ä"|"ö"|"ü") => vestle_ + "v" ;
           _ => vestle_ + "ev" } ; --consonant stem in -ma, add e
+      g = case (last vesteld_) of {
+        "t" => "k" ;
+        _   => "g"
+      } ;
       kinkinud = (hjk_type_IVb_maakas (vestel_ + "nud")).s ;
       kingitud = (hjk_type_IVb_maakas (kingit_ + "ud")).s ;
     in
     {s = table {
       Inf InfDa => vestelda ;
-      Inf InfDes => vestel_ + "des" ;
+      Inf InfDes => vesteld_ + "es" ;
       Presn Sg P1 => kingi_ + "n" ;
       Presn Sg P2 => kingi_ + "d" ;
       Presn Sg P3 => kingib ;
@@ -913,11 +963,11 @@ oper
       Condit Pl P2 => kingi_ + "ksite" ;  --# notpresent
       Condit Pl P3 => kingi_ + "ksid" ;  --# notpresent
       Imper Sg   => kingi_ ; -- kingi!
-      Imper Pl   => vestel_ + "ge" ; -- vestelge
-      ImperP3 Sg => vestel_ + "gu" ; -- ta vestelgu ?
-      ImperP3 Pl => vestel_ + "gu" ; -- nad vestelgu ?
-      ImperP1Pl  => vestel_ + "gem" ; -- me vestelgem ?
-      ImpNegPl   => vestel_ + "ge" ; -- ärge vestelge ?
+      Imper Pl   => vestel_ + g + "e" ; -- vestelge
+      ImperP3 Sg => vestel_ + g + "u" ; -- vestelgu (ta)
+      ImperP3 Pl => vestel_ + g + "u" ; -- vestelgu (nad)
+      ImperP1Pl  => vestel_ + g + "em" ; -- vestelgem
+      ImpNegPl   => vestel_ + g + "e" ; -- ärge vestelge
       PassPresn True  => kingitakse ;
       PassPresn False => kingit_ + "a" ;
       PassImpf  True  => kingit_ + "i" ; --di or ti
