@@ -219,3 +219,28 @@ Nouns:
       1 4-6
       1 2-3-4
 Coverage: 15681 out of 17210 = .9111
+
+
+Kaarel 10.09
+------------
+
+Tested on a larger set of nouns (+4500). Previous set excluded õäöüšž-nouns
+because forgot to use the "-cio utf8" flag. Somehow didn't notice this before...
+
+  19695
+    816 2-3-4-5-6
+    357 2-3-4-5
+    257 5-6
+    168 3-5-6
+    135 2-4-6
+    118 6
+     89 2-4-5-6
+     40 3-4-5-6
+     36 3
+     36 2-4
+     19 2
+      5 3-5
+      3 2-3-4
+      1 5
+      1 4-6
+Coverage: 19695 out of 21776 = .9044
