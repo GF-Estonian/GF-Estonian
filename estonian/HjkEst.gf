@@ -457,7 +457,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			? + ? => S1 ;
 			-- all 3-letters
 			#v + #c + #v => S21 ;
-			#v + #v + #v => S2 ;
+			#v + #v + #v => S22 ;
 			? + ? + ? => S1 ; -- koi, kae
 			-- all 4-letters
 			#c + #v + #v + #c => S1 ; -- siid
@@ -467,7 +467,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			#v + #v + #v + #c => S2 ; -- aiak (?)
 			#v + #v + #c + #v => S22 ; -- aine, aade; not: 6ige
 			#v + #c + #v + #v => S1 ; -- epee, oboe
-			#v + #c + #c + #v => S2 ;
+			#v + #c + #c + #v => S22 ; -- iste, iglu; not: 6htu
 			#c + #v + #c + #v => S21 ;
 			#c + #v + #v + #v => S22 ; -- muie, neiu, riie
 			? + ? + ? + ? => S1 ;
@@ -483,7 +483,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			#c + #v + #v + #gbd + "e" => S22 ; -- haige, kauge; t6uge
 			#c + #v + #v + #c + #v => S22 ; -- lause; TODO: leitu, rootu (S23)
 			#c + #v + #c + #c + #v => S22 ; -- ratsu; not: surnu
-			#v + #c + #c + #c + #v => S2 ;
+			#v + #c + #c + #c + #v => S23 ;
 			#v + #c + #c + #v + #c => S2 ; -- amper
 			#v + #c + #v + #c + #c => S2 ; -- avang
 			_ + #c + #vv + #c + #c => S1 ; -- loots (double vowel, otherwise the same as below)
