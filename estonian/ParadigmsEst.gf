@@ -497,6 +497,7 @@ oper
       -- TS 55-57
       -- Consonant gradation
       -- Regular (55-56)'leppima' and irregular (57) 'lugema'
+      -- For reliable results regarding consonant gradation, use mk3V
       _ + "ndima" =>
         cLeppima lugema ;
       _ + #lmnr + ("k"|"p"|"t"|"b") + ("ima"|"uma") => 
@@ -527,8 +528,9 @@ oper
         cKuulma lugema (loe + "ab") ;
      
       -- TS 63 (andma,hoidma)
+      -- Other vowel than a (tundma~tunneb) with mk3V
       _ + "dma" =>
-        cAndma lugema ;
+        cAndma lugema (loe + "ab") ;
              
       -- TS 62, 64 (tõusma,mõskma), default vowel e
       -- 62 alt form (jooksma,joosta) with mk2V
@@ -583,24 +585,41 @@ oper
   vForms3 : (_,_,_ : Str) -> VForms = \taguma,taguda,taob ->
     -- Arguments: ma infinitive, da infinitive, b
     -- Use this for the following cases:
-    -- * Irregular gradation (taguma,taob)
-    -- * Non-default vowel in b for TS 58-64 (laulma,laulab)
+    -- * Irregular gradation (taguma~taob)
+    -- * Non-detectable gradation (sattuma~satub ; pettuma~pettub)
+    -- * Non-default vowel in b for TS 58-64 (laulma~laulab)
     case <taguma,taguda,taob> of {
+    
+      --to be sure about vowel in b
+      <_ + "dma", _ + "da", _> => cAndma taguma taob ;
       <_, _ + #vv + #lmnr + "da", _> => cKuulma taguma taob ;
-      <_, _ + #c + "ta", _> => cLaskma taguma taob ;
+      <_, _ + #c + "ta", _> => cLaskma taguma taob ; 
+
+      --irregular gradation
       <_, _, (""|#c) + #c + #v + #v + "b"> => cLugema taguma ; --57
-      <_ + "lema", _, _> => vForms2 taguma taguda ;
-      <_ + #v + "ma", _+"da", _> => cSattumaPettuma taguma taob ; --to be sure about consonant gradation
-      <_,_,_> => vForms2 taguma taguda
+
+      --to be sure about consonant gradation
+      <_ + #c + "lema", _, _> => vForms2 taguma taguda ; --catch "-Clema" first
+      <_ + #v + "ma", _+"da", _> => cSattumaPettuma taguma taob ; 
+
+      <_,_,_> => vForms2 taguma taguda      
     } ;
     
   vForms4 : (x1,_,_,x4 : Str) -> VForms = \jatma,jatta,jatab,jaetakse ->
-    -- There are 29 verbs in test suite that don't get correct forms with mk4V
+    -- 4 forms needed to get full paradigm for regular verbs
+    -- (source: http://www.eki.ee/books/ekk09/index.php?p=3&p1=5&id=227)
+    -- regVForms in MorphoEst handles majority of these.
+    -- Filter out known irregularities and give rest to regVForms.
+    -- Not trying to match TS 49 ; can't separate käima (49) from täima (50), or detect compounds like taaslooma.
     case <jatma,jatta,jatab,jaetakse> of {
-      <_,         _+("kka"|"ppa"|"tta"), 
-       _,         _+"takse"> => cPetma jatma jaetakse ;
-      <_ + "dma",_,
-       _,         _+"takse"> => cAndma jatma ; --regVForms would have been too messy to handle these, and they are very reliable to recognize anyway
+      <_,          _+("kka"|"ppa"|"tta"), 
+       _,          _+"takse"> => cPetma jatma jaetakse ;
+      <_ + "dma",  _,
+       _,          _+"takse"> => cAndma jatma jatab ;
+      <_ + ("ts"|"ks"|"sk") + "ma", _,_,_> => cLaskma jatma jatab ;
+      <_, _ + ("lla"|"nna"|"rra"), _, _> => cTulema jatma ;
+      <_, _ + "ha", _, _> => cNagema jatma ;
+      <_ + #v + "sema", _ + "sta", _, _> => cPesema jatma ;
       <_,_,_,_> => regVForms jatma jatta jatab jaetakse
     } ;    
     

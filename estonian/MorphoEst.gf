@@ -635,7 +635,8 @@ oper
       (joos + "tud") ;
 
   -- TS 63 (andma, murdma, hoidma) 
-  cAndma : (_ : Str) -> VForms = \andma ->
+  -- vowel given in second arg (andma~annab; tundma~tunneb)
+  cAndma : (_,_ : Str) -> VForms = \andma,annab ->
     let
       and = Predef.tk 2 andma ; --murd(ma), hoid(ma)
       an = init and ;           --mur(d),   hoi(d)
@@ -647,7 +648,8 @@ oper
     in vForms8
       andma
       (and + "a")
-      (te + "ab")
+      --(te + "ab")
+      annab 
       (an + "takse")
       (and + "ke")
       (and + "is")
@@ -757,7 +759,7 @@ oper
       vestel_ = init vesteld_ ;
       lase_ = init vestleb ;
       jaet_ = Predef.tk 4 vesteldakse ;
-      g = case (last vesteld_) of { --doesn't work for andma~andke
+      g = case (last vesteld_) of { --doesn't work for anda~andke
         "t" => "k" ;
         _   => "g"
       } ;
@@ -765,9 +767,10 @@ oper
         ("t"|"d") => vesteld_ ; --toit(ma)   -> toitke;
          _        => vestel_    --vestle(ma) -> vestelge
       } ;
-      toiti_ = case (last vestle_) of { --toitis; vestles
-        ("a"|"e"|"i"|"o"|"u"|"õ"|"ä"|"ö"|"ü") => vestle_ ;
-         _  => vestle_ + "i"
+      laski_ = case (last vestle_) of { 
+        ("a"|"e"|"i"|"o"|"u"|"õ"|"ä"|"ö"|"ü") 
+            => vestle_ ;      --vestle(ma) -> vestles
+         _  => vestle_ + "i"  --lask(ma)   -> laskis
       } ;
     in
       vForms8
@@ -776,7 +779,7 @@ oper
         vestleb
         vesteldakse
         (toit_ + g + "e") --da: käskiva kõneviisi ainsuse 3. pööre ja mitmus;
-        (toiti_ + "s") --ma: kindla kõneviisi lihtmineviku pöörded;
+        (laski_ + "s") --ma: kindla kõneviisi lihtmineviku pöörded;
         (toit_ + "nud") --da: isikulise tegumoe mineviku kesksõna
         (jaet_ + "ud"); --takse: ülejäänud umbisikulise tgm vormid
         
