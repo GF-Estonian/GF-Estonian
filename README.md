@@ -39,9 +39,21 @@ Constructed in the same way as nouns, but have 3 degree forms.
 
 ### Verbs
 
-  - 1-arg paradigm: 93% correct
-  - TODO: 2-arg paradigm
+94 forms:
+{Present, Imperfect, Conditional} * {P1, P2, P3} * {Sg, Pl}
+Imperative * {P2, P3} * {Sg, Pl} + PlP1 + PlNeg 
+Passive * {Present, Past} * {Pos, Neg}
+Infinitive * 7 cases
+Past participle * {Passive, Active} * 14 cases * {Sg, Pl} + Adv
+Present participle 
 
+  - 1-arg paradigm: 90% correct
+  - 2-arg paradigm: 96% correct
+  - 3-arg paradigm: 98% correct
+  - 4-arg paradigm: 99% correct
+
+TODO: do we need all past participle inflected forms?
+    
 ### Lexicon
 
   - demo lexicon almost translated (TODO: remaining verbs)
