@@ -1,9 +1,9 @@
 #/bin/sh
 
-gold=nouns.6forms.csv
+gold=../data/nouns.6forms.csv
 out=nouns.6forms.gf.csv
 diff=nouns.6forms.diff.csv
-coverage=noun.coverage.txt
+coverage=nouns.coverage.txt
 
 g=../estonian/
 cat ${gold} |\
@@ -20,4 +20,4 @@ result=`echo "scale=4; ${correct}/${total}" | bc`
 
 echo "Coverage: ${correct} out of ${total} = ${result}"
 
-diff noun.coverage.prev ${coverage}
+diff nouns.coverage.prev ${coverage}
