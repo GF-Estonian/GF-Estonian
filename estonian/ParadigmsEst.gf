@@ -142,13 +142,12 @@ oper
 -- Comparison adjectives have three forms. 
 -- The comparative and the superlative
 -- are always inflected in the same way, so the nominative of them is actually
--- enough (except for the superlative "paras" of "hyvä").
+-- enough (TODO: confirm).
 
   mkA : overload {
     mkA : Str -> A ;  -- regular noun made into adjective
     mkA : N -> A ;    -- any noun made into adjective
-    mkA : N -> (kivempi,kivin : Str) -> A ; -- deviating comparison forms
-    mkA : (hyva,prmpi,pras : N) -> (hyvin,pmmin,prhten : Str) -> A ; -- worst case adj
+    mkA : N -> (parem, parim : Str) -> A ; -- deviating comparison forms
     mkA : AW -> A ;  -- adjective from DictEst (WordNet)
   } ;
 
@@ -401,36 +400,41 @@ oper
     mkA : N -> A = \n -> noun2adjDeg n ** {lock_A = <>} ;
     mkA : N -> (kivempaa,kivinta : Str) -> A = regAdjective ;
     mkA : (sana : AW) -> A = \w -> noun2adjDeg (nForms2N w.s) ;
-
---    mkA : (hyva,parempi,paras : N) -> (hyvin,paremmin,parhaiten : Str) -> A ;
   } ;
 
   mkA_1 : Str -> A = \x -> noun2adjDeg (mk1N x) ** {lock_A = <>} ;
 
 -- auxiliaries
-  mkAdjective : (_,_,_ : Adj) -> A = \hyva,parempi,paras -> 
+  mkAdjective : (_,_,_ : Adj) -> A = \hea,parem,parim -> 
     {s = table {
-      Posit  => hyva.s ;
-      Compar => parempi.s ;
-      Superl => paras.s
+      Posit  => hea.s ;
+      Compar => parem.s ;
+      Superl => parim.s
       } ;
      lock_A = <>
     } ;
-  regAdjective : Noun -> Str -> Str -> A = \kiva, kivempi, kivin ->
-    mkAdjective 
-      (noun2adj kiva) 
-      (noun2adjComp False (nForms2N (dSuurempi kivempi))) 
-      (noun2adjComp False (nForms2N (dSuurin kivin))) ;
 
-  -- TODO: this is a bit simplified
-  -- http://www.eki.ee/books/ekk09/index.php?p=3&p1=4&id=208
-  -- TODO: maybe not implement the superlative, which is more complex,
-  -- use "kõige" + Comp instead
-  noun2adjDeg : Noun -> Adjective = \suur ->
-    regAdjective
-      suur
-      ((suur.s ! NCase Sg Gen) + "m")
-      ((suur.s ! NCase Sg Gen) + "im") ;
+  -- Adjectives whose comparison forms are explicitly given.
+  -- The inflection of these forms with the audit-rule always works.
+  regAdjective : Noun -> Str -> Str -> A = \posit,compar,superl ->
+    mkAdjective 
+      (noun2adj posit) 
+      (noun2adjComp False (hjk_type_IVb_audit compar "a"))
+      (noun2adjComp False (hjk_type_IVb_audit superl "a")) ;
+
+  -- Adjectives whose comparison forms can be derived from the sg gen.
+  -- In case of comparative this fails only for 70 adjectives.
+  -- Superlative is more complex, and does not always exist,
+  -- e.g. lai -> laiem -> laiim? / laieim?
+  -- See also: http://www.eki.ee/books/ekk09/index.php?p=3&p1=4&id=208
+  -- Rather use "kõige" + Comp instead of the superlative.
+  noun2adjDeg : Noun -> Adjective = \kaunis ->
+    let
+      kauni = (kaunis.s ! NCase Sg Gen) ;
+      -- Convert the final 'i' to 'e' for the superlative
+      kaune : Str = case kauni of { kaun@(_) + "i" => kaun + "e" ; _ => kauni }
+    in
+    regAdjective kaunis (kauni + "m") (kaune + "im") ;
 
 
 -- verbs

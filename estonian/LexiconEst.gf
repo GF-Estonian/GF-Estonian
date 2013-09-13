@@ -14,13 +14,13 @@ lin
   art_N = mkN "kunst" ;
   ask_V2Q = mkV2 (mkV "küsima") (casePrep ablative) ;
   baby_N = mkN "beebi" ;
-  bad_A = mkA (mkN "halb" "halva" "halba" "halba" "halbade" "halbu") ;
+  bad_A = mkA (mkN "halb" "halva" "halba" "halba" "halbade" "halbu") "halvem" "halvim" ;
   bank_N = mkN "pank" ;
-  beautiful_A = mkA "kaunis" ;
+  beautiful_A = mkA (mkN "kaunis" "kauni" "kaunist" "kaunisse" "kaunite" "kauneid") ;
   become_VA = mkVA (mkV "muutuma") (casePrep translative) ;
   beer_N = mkN "õlu" ;
   beg_V2V = mkV2V (mk2V "pyytää" "pyysi") (casePrep partitive) ;
-  big_A = mkA "suur" ;
+  big_A = mkA (mkN "suur" "suure" "suurt" "suurde" "suurte" "suuri");
   bike_N = mkN "ratas" ;
   bird_N = mkN "lind" ;
   black_A = mkA "must" ;
@@ -32,7 +32,7 @@ lin
   boy_N = mkN "poiss" ;
   bread_N = mkN "leib" ;
   break_V2 = mkV2 (mkV "rikkoa") ;
-  broad_A = mkA "lai" ;
+  broad_A = mkA (mkN "lai" "laia" "laia" "laia" "laiade" "laiu") "laiem" "TODO" ;
   brother_N2 = mkN2 (mkN "vend" "venna" "venda" "venda" "vendade" "vendi") ;
   brown_A = mkA "pruun" ;
   butter_N = mkN "või" ;
@@ -59,14 +59,13 @@ lin
   cousin_N = mkN "nõbu" ;
   cow_N = mkN "lehm" ;
   die_V = mkV "surema" ;
-  dirty_A = mkA "must" ;
+  dirty_A = mkA "räpane" ;
   distance_N3 = mkN3 (mkN "kaugus") (casePrep elative) (casePrep illative) ;
   doctor_N = mkN "arst" ;
   dog_N = mkN "koer" ;
   door_N = mkN "uks" ;
   drink_V2 = mkV2 (mkV "jooma") (casePrep partitive) ;
-  easy_A2V = mkA2 (mkA (mkN "helppo") "helpompi" "helpoin") 
-    (casePrep allative) ;
+  easy_A2V = mkA2 (mkA (mkN "lihtne")) (casePrep allative) ;
   eat_V2 = mkV2 (mkV "sööma") (casePrep partitive) ;
   empty_A = mkA "tühi" ;
   enemy_N = mkN "vaenlane" ;
@@ -118,8 +117,7 @@ lin
   love_N = mkN "armastus" ;
   love_V2 = mkV2 (mkV "armastama") partitive ;
   man_N = mkN "mees" "mehe" "meest" "mehesse" "meeste" "mehi" ;
-  --married_A2 = mkA2 (mkA "abielus") comitative ;
-  married_A2 = mkA2 (mkA "avioitunut") (postPrep genitive "kanssa") ; ---- infl
+  married_A2 = mkA2 (mkA "abielus") (casePrep comitative) ;
   meat_N = mkN "liha" ;
   milk_N = mkN "piim" ;
   moon_N = mkN "kuu" ;
@@ -127,7 +125,7 @@ lin
   mountain_N = mkN "mägi" ;
   music_N = mkN "muusika" ;
   narrow_A = mkA "kitsas" ;
-  new_A = mkA "uus" ;
+  new_A = mkA (mkN "uus" "uue" "uut" "uude" "uute" "uusi") "uuem" "uusim" ;
   newspaper_N = mkN "aja" (mkN "leht") ;
   oil_N = mkN "õli" ;
   old_A = mkA "vana" ;
