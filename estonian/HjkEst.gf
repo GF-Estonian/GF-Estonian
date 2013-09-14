@@ -75,6 +75,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		in
 		nForms6 x x (x+"t") (x+"sse") (x+"te") (x1+"id") ;
 
+	-- (audit "a") can be used with comparative and superlative adjectives.
 	hjk_type_IVb_audit x v_g =
 		let
 			v_pl = case v_g of { "i" => "e" ; _ => v_g }
@@ -94,7 +95,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	-- This rule handles the removal of -ne and -s endings, and the addition of 'e'
 	-- in the case of Cne-nouns (e.g. 'raudne').
 	-- vastus - vastuse - vastust
-	-- otsense - otsese - otsest
+	-- otsene - otsese - otsest
 	-- raudne - raudse - raudsEt - raudsesse - raudsEte - raudseid (additional 'e')
 	-- TODO: variant: vastusesse | vastusse
 	hjk_type_Va_otsene x =
@@ -257,11 +258,13 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	-- If this rule delivers an incorrect form, then use the 6-arg oper.
 	-- This is also needed if another legal form is desired,
 	-- e.g. palk -> palga (the default is palk -> palgi).
-	-- Not always correctly handled:
+	--
+	-- This rule does not cover:
+	--  - exceptional words (workaround: take these from the lexicon)
+	--  - compound words (workaround: mark the compound border manually)
+	--  - comparative and superlative adjective forms (workaround: use mkA instead)
 	--  - type VII (t6uge -> t6uke), as one needs to detect derivation from verb
 	--  - last syllable superlong (rostbiif)
-	--  - compound words (workaround: mark the compound border manually)
-	--  - exceptional words (workaround: take these from the lexicon)
 	hjk_type x =
 		case <(syl_type x), x> of {
 			<S3, _ + "ke">
@@ -333,10 +336,6 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<S2, _ + #v + #kpt + "s">
 				=> hjk_type_IVb_audit x "i" ;
 
-			-- comparative and superlative
-			<S2, _ + ("em"|"im")>
-				=> hjk_type_IVb_audit x "a" ;
-
 			-- TODO: next 3 rules: last syllable must be long
 			-- portfell, TODO: not 'karask'
 			<S2, _ + #v + #c + #c>
@@ -354,9 +353,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<_, _ + #v + "s">
 				=> hjk_type_Va_otsene x ;
 
-			-- kauneim
-			-- Exclude: -am, -om, -um
-			<_, _ + ("v"|"tav"|"em"|"im")>
+			<_, _ + ("v"|"tav")>
 				=> hjk_type_IVb_audit x "a" ;
 
 			<_, _ + ("line"|"lane"|"mine"|"kene")>
