@@ -273,12 +273,24 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<_, _ + "kond">
 				=> hjk_type_VI_meeskond x ;
 
+			-- Some S2 -ik words (voolik), we only cover words with double vowel
+			<_, _ + #vv + ("lik"|"nik"|"stik")>
+				=> hjk_type_IVb_audit x "u" ;
+
+			-- Other -ik words as in HJKEKS,
+			-- but added 'ndik' which fixes fractions ('kaheksandik')
+			-- and is wrong only for 'kandik'.
+			<_, _ + ("lik"|"nik"|"stik"|"ndik")>
+				=> hjk_type_VI_imelik x ;
+
+			-- Remaining -k words (but need to be S2)
 			-- but not 'konjak'
 			<S2, _ + ("a"|"e"|"i") + ("ng"|"k")>
 				=> hjk_type_IVb_audit x "u" ;
 
-			-- TODO: this is more relaxed than in HJKEKS: _ + ("lik"|"nik"|"stik")
-			<_, _ + #c + ("ik")>
+			-- Other -ik words (not in HJKEKS)
+			-- including also: alevik, asemik, lobudik, hämarik, sarapik, põletik
+			<_, _ + ("vik"|"mik"|"dik"|"rik"|"pik"|"tik")>
 				=> hjk_type_VI_imelik x ;
 
 			-- kikas

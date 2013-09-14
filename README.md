@@ -33,7 +33,7 @@ Constructed in the same way as nouns, but have 3 degree forms.
 
 3 * 2 * 14 forms + 2 (?) * 1 adverb forms
 
-  - 1-arg paradigm: 80% correct
+  - 1-arg paradigm: 90% correct
   - comparative guessed: TODO: determine correctness
   - TODO: superlative (not urgent)
 
