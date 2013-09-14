@@ -16,6 +16,12 @@ These tools and resources were used:
 Files
 -----
 
+In the code examples:
+
+  - `etmrf` and `etsyn` are Filosoft's tools;
+  - `estwn-to-etsyn.bash` and `etsyn-to-6forms.py` are included in the tools-directory;
+  - other commands are standard Unix commandline tools.
+
 ### nouns.6forms.csv
 
 The 6 forms of nouns. Alternative forms are separated by "|".
@@ -43,8 +49,31 @@ Generated with this sequence of steps:
 	# Keep only the 6 forms but exclude hyphenated words
 	etsyn-to-6forms.py | grep -v "-" | sort | uniq
 
-where
 
-  - `etmrf` and `etsyn` are Filosoft's tools;
-  - `estwn-to-etsyn.bash` and `etsyn-to-6forms.py` are included in the tools-directory;
-  - other commands are standard Unix commandline tools.
+### adj.6forms.csv
+
+The 6 forms of adjectives. Alternative forms are separated by "|".
+This file is useful for regression testing the noun opers.
+Do not use it for a lexicon because it does not contain compound words,
+comparative and superlative forms, and
+does not specify which of the alternative forms is the default.
+
+Generated with this sequence of steps:
+
+	# Use the WordNet tix-file
+	cat kb67a-utf8.tix |
+
+	# Keep only adjectives but exclude hyphenated words
+	estwn-to-etsyn.bash a | grep -v "-" |
+
+	# Detect the compound structure (but do not guess)
+	sed "s/ \/\/.*//" | sed "s/.* //" | etmrf -cio utf8 -P |
+
+	# Keep only simple adjectives (incl. the last parts of compounds)
+	grep "^ " | grep -v "####" | sed "s/^ *//" | sed "s/.*_//" | sort | uniq |
+
+	# Generate all forms (guess if needed)
+	sed 's/$/ \/\/_A_ *, \/\//' | etsyn -cio utf8 -GO |
+
+	# Keep only the 6 forms but exclude hyphenated words
+	etsyn-to-6forms.py --tag=A | sort | uniq
