@@ -41,6 +41,7 @@ concrete IdiomEst of Idiom = CatEst **
       s = \\_ => vp.s ! VIPass ;
       s2 = vp.s2 ;
       adv = vp.adv ;
+      part = vp.part ;
       ext = vp.ext ;
       sc = vp.sc ; 
       qp = vp.qp
@@ -54,6 +55,7 @@ concrete IdiomEst of Idiom = CatEst **
         s = on.s ;
         s2 = \\b,p,a => inf ++ vp.s2 ! b ! p ! a ;
         adv = vp.adv ;
+        part = vp.part ;
         ext = vp.ext ;
         sc = vp.sc ; 
         qp = vp.qp
@@ -66,7 +68,7 @@ concrete IdiomEst of Idiom = CatEst **
     let vps = vp.s ! VIPass ! Simul ! Pos ! Ag Pl P1
     in
     {s = vps.fin ++ vps.inf ++ 
-         vp.s2 ! True ! Pos ! Ag Pl P1 ++ vp.ext
+         vp.s2 ! True ! Pos ! Ag Pl P1 ++ vp.part ++ vp.ext
     } ;
 
   oper

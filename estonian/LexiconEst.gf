@@ -8,7 +8,7 @@ flags
 
 lin
   airplane_N = mkN "lennuk" ;
-  answer_V2S = mkV2 (mkV "vastama") (casePrep allative) ;
+  answer_V2S = mkV2 (mkV "vastama" "vastata") (casePrep allative) ;
   apartment_N = mkN "korter" ;
   apple_N = mkN "õun" ;
   art_N = mkN "kunst" ;
@@ -17,7 +17,7 @@ lin
   bad_A = mkA (mkN "halb" "halva" "halba" "halba" "halbade" "halbu") "halvem" "halvim" ;
   bank_N = mkN "pank" ;
   beautiful_A = mkA (mkN "kaunis" "kauni" "kaunist" "kaunisse" "kaunite" "kauneid") ;
-  become_VA = mkVA (mkV "muutuma") (casePrep translative) ;
+  become_VA = mkVA (caseV elative (mkV "saama")) (casePrep nominative) ;
   beer_N = mkN "õlu" ;
   beg_V2V = mkV2V (mk2V "pyytää" "pyysi") (casePrep partitive) ;
   big_A = mkA (mkN "suur" "suure" "suurt" "suurde" "suurte" "suuri");
@@ -101,14 +101,14 @@ lin
   industry_N = mkN "tööstus" ;
   iron_N = mkN "raud" ;
   king_N = mkN "kuningas" ;
-  know_VS = mkVS (mkV "teadma") ;
-  know_VQ = mkVQ (mkV "tietää" "tiesi") ;
+  know_VS = mkVS (mkV "teadma" "teada" "teab") ;
+  know_VQ = mkVQ (mkV "teadma" "teada" "teab") ;
   know_V2 = mkV2 (mkV "tuntea" "tunsi") ;
   lake_N = mkN "järv" ;
   lamp_N = mkN "lamp" ;
   learn_V2 = mkV2 (mkV "õppima") ;
   leather_N = mkN "nahk" ;
-  leave_V2 = mkV2 (mkV "jättää") ;
+  leave_V2 = mkV2 (mkV "jätma") ;
   like_V2 = mkV2 (mkV "lugu" (mkV "pidama")) (casePrep elative) ;
   listen_V2 = mkV2 (mkV "kuunnella" "kuunteli") partitive ;
   live_V = mkV "elama" ;
@@ -144,7 +144,7 @@ lin
     (mkA (mkN "todennäköinen") "tonennäköisempi" "todennäköisin") ;
   queen_N = mkN "kuninganna" ;
   radio_N = mkN "raadio" ;
-  rain_V0 = mkV0 (mk2V "sadama" "sadas") ;
+  rain_V0 = mkV0 (mkV "sadama") ;
   read_V2 = mkV2 (mkV "lugema") ;
   red_A = mkA "punane" ;
   religion_N = mkN "usk" ;
@@ -153,7 +153,7 @@ lin
   rock_N = mkN "kalju" ;
   roof_N = mkN "katus" ;
   rubber_N = mkN "kumm" ;
-  run_V = mk2V "jooksma" "jooksis" ;
+  run_V = mkV "jooksma" "joosta" ;
   say_VS = mkVS (mkV "sanoa") ;
   school_N = mkN "kool" ;
   science_N = mkN "teadus" ;
@@ -161,7 +161,7 @@ lin
   seek_V2 = mkV2 (mkV "etsiä") cpartitive ;
   see_V2 = mkV2 (mkV "nägema" "näha" "näeb" "nähakse" 
                       "nähke" "nägi" "näinud" "nähtud") ; 
-  sell_V3 = mkV3 (mkV "myydä") accPrep (casePrep allative) ;
+  sell_V3 = mkV3 (mkV "mööma") accPrep (casePrep allative) ;
   send_V3 = mkV3 (mkV "lähettää") accPrep (casePrep allative) ;
   sheep_N = mkN "lammas" ;
   ship_N = mkN "laev" ;
@@ -314,7 +314,7 @@ lin
   cut_V2 = mkV2 (mk2V "leikata" "leikkasi") ;
   dig_V = mkV "kaivaa" ;
   fall_V = mkV "pudota" "putoan" "putosi" ;
-  fear_V2 = mkV2 (mkV "pelätä" "pelkään" "pelkäsi") cpartitive ;
+  fear_V2 = mkV2 (mkV "kartma") cpartitive ;
   fight_V2 = mkV2 (mkV "taistella") (postPrep partitive "vastaan") ;
   float_V = mkV "kellua" ;
   flow_V = mkV "virrata" "virtaan" "virtasi" ;
@@ -344,9 +344,9 @@ lin
   suck_V2 = mkV2 (mkV "imeä") cpartitive ;
   swell_V = mkV "turvota" "turposi" ;
   swim_V = mkV "ujuma" ;
-  think_V = mkV "ajatella" "ajattelen" "ajatteli" ;
+  think_V = mkV "mõtlema" ;
   throw_V2 = mkV2 (mkV "heittää") ;
-  tie_V2 = mkV2 (mkV "siduma") ;
+  tie_V2 = mkV2 (mkV "siduma" "siduda" "seob") ;
   turn_V = mkV "kääntyä" ;
   vomit_V = mkV "oksendama" ;
   wash_V2 = mkV2 (mkV "pesema") ;

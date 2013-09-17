@@ -96,12 +96,15 @@ param
    | Impf Number Person
    | Condit Number Person
    | Imper Number
+--   | ImperP3 
    | ImperP3 Number
    | ImperP1Pl
    | ImpNegPl
    | PassPresn Bool
    | PassImpf Bool
    | PresPart
+--   | PastPartAct
+--   | PastPartPass
    | PastPartAct  AForm
    | PastPartPass AForm
    ;
@@ -190,6 +193,7 @@ oper
     s   : VIForm => Anteriority => Polarity => Agr => {fin, inf : Str} ; 
     s2  : Bool => Polarity => Agr => Str ; -- talo/talon/taloa
     adv : Polarity => Str ; -- ainakin/ainakaan
+    part : Str ; --uninflecting component in multi-word verbs
     ext : Str ;
     sc  : NPForm ;
     } ;
@@ -246,8 +250,8 @@ oper
 
     s2 = \\_,_,_ => [] ;
     adv = \\_ => [] ;
-    --ext = [] ;
-    ext = verb.s2 ; --particle verbs
+    ext = [] ; --relative clause
+    part = verb.s2 ; --particle verbs
     sc = verb.sc 
     } ;
 
@@ -255,6 +259,7 @@ oper
     s = vp.s ;
     s2 = \\fin,b,a => vp.s2 ! fin ! b ! a  ++ obj ! fin ! b ! a ;
     adv = vp.adv ;
+    part = vp.part ;
     ext = vp.ext ;
     sc = vp.sc ; 
     } ;
@@ -263,6 +268,7 @@ oper
     s = vp.s ;
     s2 = \\fin,b,a => obj ! fin ! b ! a ++ vp.s2 ! fin ! b ! a ;
     adv = vp.adv ;
+    part = vp.part ;
     ext = vp.ext ;
     sc = vp.sc ; 
     } ;
@@ -270,6 +276,7 @@ oper
   insertAdv : (Polarity => Str) -> VP -> VP = \adv,vp -> {
     s = vp.s ;
     s2 = vp.s2 ;
+    part = vp.part ;
     ext = vp.ext ;
     adv = \\b => vp.adv ! b ++ adv ! b ;
     sc = vp.sc ; 
@@ -278,8 +285,8 @@ oper
   insertExtrapos : Str -> VP -> VP = \obj,vp -> {
     s = vp.s ;
     s2 = vp.s2 ;
-    --ext = vp.ext ++ obj ;
-    ext = obj ++ vp.ext ; --TODO test particle verbs
+    part = vp.part ;
+    ext = vp.ext ++ obj ;
     adv = vp.adv ;
     sc = vp.sc ; 
     } ;
@@ -291,7 +298,7 @@ oper
     } ;
 
   ClausePlus : Type = {
-    s : Tense => Anteriority => Polarity => {subj,fin,inf,compl,adv,ext : Str}
+    s : Tense => Anteriority => Polarity => {subj,fin,inf,compl,adv,part,ext : Str}
     } ;
 
   -- The Finnish version of SQuest featured a word order change and
@@ -308,8 +315,9 @@ oper
       s = \\t,a,b => 
       let
         c = (mkClausePlus sub agr vp).s ! t ! a ! b ;
-        declCl = c.subj ++ c.fin ++ c.inf ++ c.compl ++ c.adv ++ c.ext ;
-        invCl = c.subj ++ c.fin ++ c.adv ++ c.compl ++ c.ext ++ c.inf
+        declCl = c.subj ++ c.fin ++ c.inf ++ c.compl ++ c.adv ++ c.part ++ c.ext ;
+    --  declCl = c.subj ++ c.fin ++ c.inf ++ c.compl ++ c.adv ++ c.ext ;
+        invCl = c.subj ++ c.fin ++ c.adv ++ c.compl ++ c.part ++ c.inf ++ c.ext 
       in 
          table {
            SDecl  => declCl ;
@@ -331,6 +339,7 @@ oper
             fin  = verb.fin ; 
             inf  = verb.inf ; 
             compl = vp.s2 ! agrfin.p2 ! b ! agr ;
+            part = vp.part ;
             adv  = vp.adv ! b ; 
             ext  = vp.ext ; 
             }
@@ -342,10 +351,10 @@ oper
          c = cl.s ! t ! a ! b   
       in
       case p of {
-         0 => {subj = c.subj ++ kin b ; fin = c.fin ; inf = c.inf ;  -- Jussikin nukkuu
-               compl = c.compl ; adv = c.adv ; ext = c.ext} ;
-         1 => {subj = c.subj ; fin = c.fin ++ kin b ; inf = c.inf ;  -- Jussi nukkuukin 
-               compl = c.compl ; adv = c.adv ; ext = c.ext}
+         0 => {subj = c.subj ++ gi ; fin = c.fin ; inf = c.inf ;  -- Jussikin nukkuu
+               compl = c.compl ; part = c.part ; adv = c.adv ; ext = c.ext ; h = c.h} ;
+         1 => {subj = c.subj ; fin = c.fin ++ gi ; inf = c.inf ;  -- Jussi nukkuukin
+               compl = c.compl ; part = c.part ; adv = c.adv ; ext = c.ext ; h = c.h}
          }
     } ;
 
@@ -357,9 +366,9 @@ oper
          co = obj ! b ++ if_then_Str ifKin (kin b) [] ;
       in case p of {
          0 => {subj = c.subj ; fin = c.fin ; inf = c.inf ; 
-               compl = co ; adv = c.compl ++ c.adv ; ext = c.ext} ; -- Jussi juo maitoakin
-         1 => {subj = c.subj ; fin = c.fin ; inf = c.inf ; -- Jussi nukkuu nytkin
-               compl = c.compl ; adv = co ; ext = c.adv ++ c.ext} --Not sure what is happening with adv becoming object and ext becoming adv++ext... also not sure if this holds anymore when ext is in its (new?) use as particle for particle verbs. TODO test this.
+               compl = co ; part = c.part ; adv = c.compl ++ c.adv ; ext = c.ext ; h = c.h} ; -- Jussi juo maitoakin
+         1 => {subj = c.subj ; fin = c.fin ; inf = c.inf ; 
+               compl = c.compl ; part = c.part ; adv = co ; ext = c.adv ++ c.ext ; h = c.h}   -- Jussi nukkuu nytkin
          }
      } ;
 
@@ -384,13 +393,12 @@ oper
             _ => False           -- minul peab auto olema
             } ;
           verb  = vp.s ! VIInf vi ! Simul ! Pos ! agr ; -- no "ei"
-          compl = vp.s2 ! fin ! pol ! agr  -- but compl. case propagated
+          compl = vp.s2 ! fin ! pol ! agr ++ vp.adv ! pol -- but compl. case propagated
         in
         -- inverted word order for; e.g.
-        --sinust aru       saama       0     
-        compl ++ vp.ext ++ verb.fin ++ verb.inf ;
-        --for debugging, what gets where:
-        --"<COMPL>" ++ compl ++ "</COMPL>" ++ vp.ext ++ "<FIN>" ++ verb.fin ++ "</FIN>" ++ "<INF>" ++ verb.inf ++ "</INF>" ;
+        --sinust aru       saama       0            rel. clause
+        compl ++ vp.part ++ verb.fin ++ verb.inf ++ vp.ext ;
+        
 
 -- The definitions below were moved here from $MorphoEst$ so that  
 -- auxiliary of predication can be defined.

@@ -708,7 +708,7 @@ oper
       (hyppa + "b")
       (hypa + "takse") -- Passive
       (hypa + "ke") -- Imperative P1 Pl
-      (hyppa + "s") -- Condit Sg P3
+      (hyppa + "s") -- Imperfect Sg P3
       (hypa + "nud") -- PastPartAct
       (hypa + "tud") ; -- PastPartPass
 
@@ -730,7 +730,7 @@ oper
       (omble + "b")
       (ommel + "dakse") -- Passive
       (ommel + "ge") -- Imperative P1 Pl
-      (omble + "s") -- Condit Sg P3
+      (omble + "s") -- Imperfect Sg P3
       (ommel + "nud") -- PastPartAct
       (ommel + "dud") ; -- PastPartPass
 
@@ -745,7 +745,7 @@ oper
       (satu + "b")
       (satu + "takse") -- Passive
       (pettu + "ge") -- Imperative P1 Pl
-      (pettu + "s") -- Condit Sg P3
+      (pettu + "s") -- Imperfect Sg P3
       (pettu + "nud") -- PastPartAct
       (satu + "tud") ; -- PastPartPass
 

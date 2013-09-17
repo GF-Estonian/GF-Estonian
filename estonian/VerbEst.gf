@@ -90,6 +90,7 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
       s = \\_ => vp.s ! VIPass ;
       s2 = \\_,_,_ => [] ;
       adv = \\_ => [] ;
+      part = vp.part ;
       ext = vp.ext ;
       sc = subjCase  -- koer valitakse ; koerale räägitakse 
       } ;

@@ -341,3 +341,32 @@ b) Forming the past participle (nud) from da
 Verbs that end in -kma, actually the past participle is formed with ma stem, not da stem.	
   
 2) In a lexicon there are compound verbs that have these as bases; for example, `looma' and `taaslooma' in WordNet. So the real number of verbs not covered by 1-4 arg smart paradigms can be more than 27.
+
+Inari 17.9.
+-----------
+
+Added a field to VP and Clause; found out that the ext field is used for relative clause, so I added a new field `part' for particles. Behaviour hasn't changed.
+
+* Word order: currently produces this
+
+I want to answer to you that I have a cat
+mina tahan sinule vastata et minul on kass
+
+I want to answer to you that I have always wanted to see a cat
+mina tahan sinule vastata et mina olen tahtnud kassi näha alati
+
+* Complement cases
+
+examples with which to test e.g. here http://eap.ee/public/va_lu/ling-2006-4-2.pdf 
+
+Correct obj case (same as Finnish)
+I have seen a baby
+mina olen näinud beebi
+I haven't seen a baby
+mina ei ole näinud beebit
+
+Incorrect (should be nominative in plural also)
+I have a good friend
+minul on hea sõber
+I have good friends
+minul on heasid sõbereid
