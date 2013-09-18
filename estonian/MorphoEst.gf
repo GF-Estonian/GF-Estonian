@@ -916,6 +916,7 @@ caseTable : Number -> CommonNoun -> Case => Str = \n,cn ->
   -- Note that the Fin version required 5 input forms, the
   -- Est pronouns thus seem to be much simpler.
   -- TODO: remove NPAcc?
+  -- I: keep NPAcc; see appCompl in ResEst, it takes care of finding a right case for various types of complements; incl. when pronouns get different treatment than nouns (PassVP).
   mkPronoun : (_,_,_ : Str) -> Number -> Person ->
     {s : NPForm => Str ; a : Agr} = 
     \mina, minu, mind, n, p ->

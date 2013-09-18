@@ -17,17 +17,20 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
           let k = npform2case n c 
           in 
           case <n, c, det.isNum, det.isDef> of {
-            <_, NPAcc,       True,_>  => <Nom,NCase Sg Part> ; -- kolme kytkintä(ni)
-            <_, NPCase Nom,  True,_>  => <Nom,NCase Sg Part> ; -- kolme kytkintä(ni)
+            <_, NPAcc,      True,_>  => <Nom,NCase Sg Part> ; -- kolme kytkintä
+            <_, NPCase Nom, True,_>  => <Nom,NCase Sg Part> ; -- kolme kytkintä
+            
+            --Estonian special cases, only the last word gets case ending.
+            --TODO same for adjectives
+            <_, NPCase Comit, _, _>  => <Gen,NCase n Comit> ; --kolme kassiga
+            <_, NPCase Abess, _, _>  => <Gen,NCase n Abess> ; --kolme kassita
+            <_, NPCase Ess, _,  _>   => <Gen,NCase n Ess> ; --kolme kassina
+            <_, NPCase Termin,_, _>  => <Gen,NCase n Termin> ; --kolme kassini
+            
             <_, _, True,_>        => <k,  NCase Sg k> ;    -- kolmeksi kytkimeksi
+
             <Pl,NPCase Nom,  _,False> => <k,  NCase Pl Part> ; -- kytkimiä
 
-{-          --Not in Estonian
-            <_, NPCase Nom,_,True,_>    => <k,  NPossNom n> ;    -- kytkime+ni on/ovat...
-            <_, NPCase Gen,_,True,_>    => <k,  NPossNom n> ;    -- kytkime+ni vika
-            <_, NPCase Transl,_,True,_> => <k,  NPossTransl n> ; -- kytkim(e|i)kse+ni
-            <_, NPCase Illat,_,True,_>  => <k,  NPossIllat n> ;  -- kytkim(ee|ii)+ni
--} 
             _                           => <k,  NCase n k>       -- kytkin, kytkimen,...
             }
       in {

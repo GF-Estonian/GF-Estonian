@@ -126,7 +126,7 @@ concrete StructuralEst of Structural = CatEst **
     } ;
   through_Prep = postGenPrep "kaudu" ;
   too_AdA = ss "liiga" ;
-  to_Prep = casePrep illative ; --- allative
+  to_Prep = casePrep allative ;
   under_Prep = postGenPrep "all" ;
   very_AdA = ss "eriti" ;
   want_VV = mkVV (mkV "tahtma") ;
@@ -155,7 +155,7 @@ concrete StructuralEst of Structural = CatEst **
     } ;
   why_IAdv = ss "miks" ;
   without_Prep = prePrep partitive "ilma" ;
-  with_Prep = postGenPrep "koos" ;
+  with_Prep = prePrep comitative "koos" ;
   yes_Utt = ss "jah" ;
   youSg_Pron = mkPronoun "sina" "sinu" "sind" Sg P2 ;
   youPl_Pron = mkPronoun "teie" "teie" "teid" Pl P2 ;
