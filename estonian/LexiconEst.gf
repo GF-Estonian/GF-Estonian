@@ -1,6 +1,6 @@
 --# -path=.:../abstract:../common
 
-concrete LexiconEst of Lexicon = CatEst ** open MorphoEst, ParadigmsEst in {
+concrete LexiconEst of Lexicon = CatEst ** open MorphoEst, ParadigmsEst, Prelude in {
 
 flags 
   optimize=values ; coding=utf8;
@@ -8,6 +8,7 @@ flags
 
 lin
   airplane_N = mkN "lennuk" ;
+  alas_Interj = ss "paraku" ;
   answer_V2S = mkV2 (mkV "vastama" "vastata") (casePrep allative) ;
   apartment_N = mkN "korter" ;
   apple_N = mkN "õun" ;
@@ -103,14 +104,14 @@ lin
   king_N = mkN "kuningas" ;
   know_VS = mkVS (mkV "teadma" "teada" "teab") ;
   know_VQ = mkVQ (mkV "teadma" "teada" "teab") ;
-  know_V2 = mkV2 (mkV "tuntea" "tunsi") ;
+  know_V2 = mkV2 (mkV "tundma") ;
   lake_N = mkN "järv" ;
   lamp_N = mkN "lamp" ;
   learn_V2 = mkV2 (mkV "õppima") ;
   leather_N = mkN "nahk" ;
   leave_V2 = mkV2 (mkV "jätma") ;
-  like_V2 = mkV2 (mkV "lugu" (mkV "pidama")) (casePrep elative) ;
-  listen_V2 = mkV2 (mkV "kuunnella" "kuunteli") partitive ;
+  like_V2 = mkV2 (mkV "lugu" (mkV "pidama" "pidada" "peab" "peetakse")) (casePrep elative) ;
+  listen_V2 = mkV2 (mkV "kuulama") partitive ;
   live_V = mkV "elama" ;
   long_A = mkA "pikk" ;
   lose_V2 = mkV2 (mkV "hävitä" "hävisi") ; --- hukata
@@ -161,7 +162,7 @@ lin
   seek_V2 = mkV2 (mkV "etsiä") cpartitive ;
   see_V2 = mkV2 (mkV "nägema" "näha" "näeb" "nähakse" 
                       "nähke" "nägi" "näinud" "nähtud") ; 
-  sell_V3 = mkV3 (mkV "mööma") accPrep (casePrep allative) ;
+  sell_V3 = mkV3 (mkV "müüma") accPrep (casePrep allative) ;
   send_V3 = mkV3 (mkV "lähettää") accPrep (casePrep allative) ;
   sheep_N = mkN "lammas" ;
   ship_N = mkN "laev" ;
@@ -344,7 +345,7 @@ lin
   suck_V2 = mkV2 (mkV "imeä") cpartitive ;
   swell_V = mkV "turvota" "turposi" ;
   swim_V = mkV "ujuma" ;
-  think_V = mkV "mõtlema" ;
+  think_V = mkV "mõtlema" "mõtelda" "mõtleb" "mõeldakse";
   throw_V2 = mkV2 (mkV "heittää") ;
   tie_V2 = mkV2 (mkV "siduma" "siduda" "seob") ;
   turn_V = mkV "kääntyä" ;

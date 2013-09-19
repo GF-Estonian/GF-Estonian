@@ -7,17 +7,17 @@ concrete IdiomEst of Idiom = CatEst **
     ExistNP np = 
       let 
         cas : Polarity -> NPForm = \p -> case p of {
-          Pos => NPCase Nom ; -- on olemassa luku
-          Neg => NPCase Part  -- ei ole olemassa lukua
+          Pos => NPCase Nom ; -- on olemas lammas
+          Neg => NPCase Part  -- ei ole olemas lammast
           }
       in
       mkClause noSubj (agrP3 Sg) (insertObj 
-        (\\_,b,_ => "olemassa" ++ np.s ! cas b) (predV olla)) ;
+        (\\_,b,_ => "olemas" ++ np.s ! cas b) (predV olla)) ;
 
     ExistIP ip = 
       let
         cas : NPForm = NPCase Nom ; ---- also partitive in Extra
-        vp = insertObj (\\_,b,_ => "olemassa") (predV olla) ; 
+        vp = insertObj (\\_,b,_ => "olemas") (predV olla) ;
         cl = mkClause (subjForm (ip ** {isPron = False ; a = agrP3 ip.n}) cas) (agrP3 Sg) vp
       in {
         s = \\t,a,p => cl.s ! t ! a ! p ! SDecl
@@ -30,9 +30,10 @@ concrete IdiomEst of Idiom = CatEst **
         (insertObj (\\_,_,_ => np.s ! NPCase Nom) (predV olla))) ;
 
 -- This gives the almost forbidden "se on Porissa kun Matti asuu".
+-- Est: "see on Toris, kus Mati elab" (?)
 
-    CleftAdv ad s = mkClause (\_ -> "se") (agrP3 Sg) 
-      (insertExtrapos ("kun" ++ s.s)
+    CleftAdv ad s = mkClause (\_ -> "see") (agrP3 Sg)
+      (insertExtrapos ("kus" ++ s.s)
         (insertObj (\\_,_,_ => ad.s) (predV olla))) ;
 
     ImpersCl vp = mkClause noSubj (agrP3 Sg) vp ;
