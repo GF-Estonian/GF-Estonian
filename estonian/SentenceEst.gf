@@ -37,7 +37,7 @@ concrete SentenceEst of Sentence = CatEst ** open Prelude, ResEst in {
     SlashVS np vs slash = { 
       s = \\t,a,p => 
         (mkClause (subjForm np vs.sc) np.a 
-          (insertExtrapos ("että" ++ slash.s) 
+          (insertExtrapos (etta_Conj ++ slash.s)
              (predV vs))
         ).s ! t ! a ! p ! SDecl ;
       c2 = slash.c2

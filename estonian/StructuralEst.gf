@@ -4,8 +4,8 @@ concrete StructuralEst of Structural = CatEst **
   flags optimize=all ; coding=utf8 ;
 
   lin
-  above_Prep = postGenPrep "yläpuolella" ;
-  after_Prep = postGenPrep "jälkeen" ;
+  above_Prep = postGenPrep "peal" ;
+  after_Prep = postGenPrep "järel" ;
 
   all_Predet = {s = \\n,c =>
     let
@@ -21,23 +21,22 @@ concrete StructuralEst of Structural = CatEst **
   always_AdV = ss "alati" ;
   and_Conj = {s1 = [] ; s2 = "ja" ; n = Pl} ;
   because_Subj = ss "sellepärast" ;
-  before_Prep = prePrep partitive "ennen" ;
-  behind_Prep = postGenPrep "takana" ;
-  between_Prep = postGenPrep "välissä" ;
-  both7and_DConj = sd2 "sekä" "että" ** {n = Pl} ;
+  before_Prep = prePrep partitive "enne" ;
+  behind_Prep = postGenPrep "taga" ;
+  between_Prep = postGenPrep "vahel" ;
+  both7and_DConj = sd2 "nii" "kui ka" ** {n = Pl} ;
   but_PConj = ss "aga" ;
   by8agent_Prep = postGenPrep "poolt" ;
   by8means_Prep = casePrep adessive ;
   can8know_VV = mkVV (mkV "oskama") ;
   can_VV = mkVV (mkV "võima") ;
-  during_Prep = postGenPrep "aikana" ;
+  during_Prep = postGenPrep "ajal" ;
   either7or_DConj = sd2 "kas" "või" ** {n = Sg} ;
   everybody_NP = makeNP (mkN "igaüks") Sg ;
   every_Det = mkDet Sg (mkN "iga") ;
-  everything_NP = makeNP ((mkN "kõik") **
-    {lock_N = <>}) Sg ;
+  everything_NP = makeNP ((mkN "kõik") ** {lock_N = <>}) Sg ;
   everywhere_Adv = ss "kõikjal" ;
-  few_Det  = mkDet Sg (mkN "harva") ;
+  few_Det = mkDet Sg (mkN "mõni") ;
 ---  first_Ord = {s = \\n,c => (mkN "ensimmäinen").s ! NCase n c} ;
   for_Prep = casePrep allative ;
   from_Prep = casePrep elative ;
@@ -61,7 +60,7 @@ concrete StructuralEst of Structural = CatEst **
   less_CAdv = X.mkCAdv "vähem" "kui" ;
   many_Det = mkDet Sg (mkN "mitu") ;
   more_CAdv = X.mkCAdv "rohkem" "kui" ;
-  most_Predet = {s = \\n,c => (nForms2N (dSuurin "useinta")).s ! NCase n (npform2case n c)} ;
+  most_Predet = {s = \\n,c => (nForms2N (dSuurin "MOST")).s ! NCase n (npform2case n c)} ;
   much_Det = mkDet Sg {s = \\_ => "palju"} ;
   must_VV = mkVVf (mkV "pidama") infMa ;
   no_Utt = ss "ei" ;
