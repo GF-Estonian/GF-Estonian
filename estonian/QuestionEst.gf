@@ -31,7 +31,7 @@ concrete QuestionEst of Question = CatEst ** open ResEst, Prelude in {
     QuestIComp icomp np = {
       s = \\t,a,p => 
         let 
-          vp = predV (verbOlema ** {sc = NPCase Nom ; qp = True}) ;
+          vp = predV (verbOlema ** {sc = NPCase Nom}) ;
           cl = mkClause (subjForm np vp.sc) np.a vp ;
         in
         icomp.s ! np.a ++ cl.s ! t ! a ! p ! SDecl
@@ -52,14 +52,18 @@ concrete QuestionEst of Question = CatEst ** open ResEst, Prelude in {
     IdetCN idet cn = let n = idet.n in {
       s = \\c => 
         let 
-          k = npform2case n c ;
-          ncase = case <k,idet.isNum> of {
+          k     : Case = npform2case n c ;
+          icase : Case = case k of {
+            (Ess|Abess|Comit|Termin) => Gen ; --mille kolme kassiga --TODO oper for this
+            _  => k
+          } ;
+          ncase : NForm = case <icase,idet.isNum> of {
             <Nom,  True> => NCase Sg Part ; -- mitkä kolme kytkintä
             <_,    True> => NCase Sg k ;    -- miksi kolmeksi kytkimeksi
             _            => NCase n  k      -- mitkä kytkimet
-            }
+          }
         in
-        idet.s ! k ++ cn.s ! ncase ; 
+        idet.s ! icase ++ cn.s ! ncase ; 
       n = n
       } ;
 

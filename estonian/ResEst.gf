@@ -57,9 +57,10 @@ oper
 --2 Noun phrases
 --
 -- Two forms of *virtual accusative* are needed for nouns in singular, 
--- the nominative and the genitive one ("ostan talon"/"osta talo"). 
--- For nouns in plural, only a nominative accusative exist. Pronouns
--- have a uniform, special accusative form ("minut", etc).
+-- the nominative and the genitive one ("loen raamatu"/"loe raamat"). 
+-- For nouns in plural, only a nominative accusative exists in positive clauses. 
+-- Pronouns use the partitive as their accusative form ("mind", "sind"), in both
+-- positive and negative, indicative and imperative clauses.
 
 param 
   NPForm = NPCase Case | NPAcc ;
@@ -73,17 +74,6 @@ oper
       <NPAcc,Sg>   => Gen ;-- appCompl does the job
       <NPAcc,Pl>   => Nom
     } ;
-
-  n2nform : NForm -> NForm = \nf -> nf ; 
-{-
-\nf -> case nf of {
-    NPossNom n => NCase n Nom ; ----
-    NPossGen n  => NCase n Gen ;
-    NPossTransl n => NCase n Transl ;
-    NPossIllat n => NCase n Illat ;
-    _ => nf
-    } ;
--}
 
 --2 For $Verb$
 
@@ -178,7 +168,7 @@ param
 
   Verb : Type = {
     s : VForm => Str ;
-    part : Str  -- particle verbs
+    p : Str  -- particle verbs
     } ;
 
 param
@@ -194,7 +184,7 @@ oper
     s   : VIForm => Anteriority => Polarity => Agr => {fin, inf : Str} ; 
     s2  : Bool => Polarity => Agr => Str ; -- raamat/raamatu/raamatut
     adv : Polarity => Str ; -- ainakin/ainakaan --TODO relevant for Est?
-    part : Str ; --uninflecting component in multi-word verbs
+    p : Str ; --uninflecting component in multi-word verbs
     ext : Str ;
     sc  : NPForm ;
     } ;
@@ -252,7 +242,7 @@ oper
     s2 = \\_,_,_ => [] ;
     adv = \\_ => [] ;
     ext = [] ; --relative clause
-    part = verb.part ; --particle verbs
+    p = verb.p ; --particle verbs
     sc = verb.sc 
     } ;
 
@@ -260,7 +250,7 @@ oper
     s = vp.s ;
     s2 = \\fin,b,a => vp.s2 ! fin ! b ! a  ++ obj ! fin ! b ! a ;
     adv = vp.adv ;
-    part = vp.part ;
+    p = vp.p ;
     ext = vp.ext ;
     sc = vp.sc ; 
     } ;
@@ -269,7 +259,7 @@ oper
     s = vp.s ;
     s2 = \\fin,b,a => obj ! fin ! b ! a ++ vp.s2 ! fin ! b ! a ;
     adv = vp.adv ;
-    part = vp.part ;
+    p = vp.p ;
     ext = vp.ext ;
     sc = vp.sc ; 
     } ;
@@ -277,7 +267,7 @@ oper
   insertAdv : (Polarity => Str) -> VP -> VP = \adv,vp -> {
     s = vp.s ;
     s2 = vp.s2 ;
-    part = vp.part ;
+    p = vp.p ;
     ext = vp.ext ;
     adv = \\b => vp.adv ! b ++ adv ! b ;
     sc = vp.sc ; 
@@ -286,7 +276,7 @@ oper
   insertExtrapos : Str -> VP -> VP = \obj,vp -> {
     s = vp.s ;
     s2 = vp.s2 ;
-    part = vp.part ;
+    p = vp.p ;
     ext = vp.ext ++ obj ;
     adv = vp.adv ;
     sc = vp.sc ; 
@@ -299,7 +289,7 @@ oper
     } ;
 
   ClausePlus : Type = {
-    s : Tense => Anteriority => Polarity => {subj,fin,inf,compl,adv,part,ext : Str}
+    s : Tense => Anteriority => Polarity => {subj,fin,inf,compl,adv,p,ext : Str}
     } ;
 
   -- The Finnish version of SQuest featured a word order change and
@@ -316,8 +306,8 @@ oper
       s = \\t,a,b => 
       let
         c = (mkClausePlus sub agr vp).s ! t ! a ! b ;
-        declCl = c.subj ++ c.fin ++ c.inf ++ c.compl ++ c.adv ++ c.part ++ c.ext ;
-        invCl = c.subj ++ c.fin ++ c.adv ++ c.compl ++ c.part ++ c.inf ++ c.ext 
+        declCl = c.subj ++ c.fin ++ c.inf ++ c.compl ++ c.adv ++ c.p ++ c.ext ;
+        invCl = c.subj ++ c.fin ++ c.adv ++ c.compl ++ c.p ++ c.inf ++ c.ext 
       in 
          table {
            SDecl  => declCl ;
@@ -339,7 +329,7 @@ oper
             fin  = verb.fin ; 
             inf  = verb.inf ; 
             compl = vp.s2 ! agrfin.p2 ! b ! agr ;
-            part = vp.part ;
+            p = vp.p ;
             adv  = vp.adv ! b ; 
             ext  = vp.ext ; 
             }
@@ -352,9 +342,9 @@ oper
       in
       case p of {
          0 => {subj = c.subj ++ gi ; fin = c.fin ; inf = c.inf ;  -- Jussikin nukkuu
-               compl = c.compl ; part = c.part ; adv = c.adv ; ext = c.ext ; h = c.h} ;
+               compl = c.compl ; p = c.p ; adv = c.adv ; ext = c.ext ; h = c.h} ;
          1 => {subj = c.subj ; fin = c.fin ++ gi ; inf = c.inf ;  -- Jussi nukkuukin
-               compl = c.compl ; part = c.part ; adv = c.adv ; ext = c.ext ; h = c.h}
+               compl = c.compl ; p = c.p ; adv = c.adv ; ext = c.ext ; h = c.h}
          }
     } ;
 
@@ -366,9 +356,9 @@ oper
          co = obj ! b ++ if_then_Str ifKin (kin b) [] ;
       in case p of {
          0 => {subj = c.subj ; fin = c.fin ; inf = c.inf ; 
-               compl = co ; part = c.part ; adv = c.compl ++ c.adv ; ext = c.ext ; h = c.h} ; -- Jussi juo maitoakin
+               compl = co ; p = c.p ; adv = c.compl ++ c.adv ; ext = c.ext ; h = c.h} ; -- Jussi juo maitoakin
          1 => {subj = c.subj ; fin = c.fin ; inf = c.inf ; 
-               compl = c.compl ; part = c.part ; adv = co ; ext = c.adv ++ c.ext ; h = c.h}   -- Jussi nukkuu nytkin
+               compl = c.compl ; p = c.p ; adv = co ; ext = c.adv ++ c.ext ; h = c.h}   -- Jussi nukkuu nytkin
          }
      } ;
 
@@ -399,8 +389,8 @@ oper
           adv = vp.adv ! pol
         in
         -- inverted word order; e.g.
-      --sinust   kunagi aru                saama           rel. clause
-        compl ++ adv ++ vp.part ++ verb.inf ++ verb.fin ++ vp.ext ;
+      --sinust   kunagi aru             saama           rel. clause
+        compl ++ adv ++ vp.p ++ verb.inf ++ verb.fin ++ vp.ext ;
         --TODO adv placement?
         --TODO inf ++ fin or fin ++ inf? does it ever become a case here?
 
@@ -415,7 +405,7 @@ oper
       Presn _ P3 => "on" ;
       v => olema.s ! v
       } ;
-      part = []
+      p = []
     } ;
 
   verbMinema : Verb = 
@@ -431,7 +421,7 @@ oper
       Imper Sg => "mine" ;
       v => minema.s ! v
       } ;
-      part = []
+      p = []
     } ;
     
 
@@ -507,7 +497,7 @@ oper
       Inf InfMata => tulema + "ta" ;
       Inf InfMaks => tulema + "ks" 
       } ;
-      part = [] 
+      p = [] 
   } ;
 
   VerbH : Type = {

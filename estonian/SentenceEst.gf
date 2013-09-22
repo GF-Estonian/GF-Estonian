@@ -13,8 +13,8 @@ concrete SentenceEst of Sentence = CatEst ** open Prelude, ResEst in {
         let 
           verb  = vp.s ! VIImper ! Simul ! pol ! agr ;
           compl = vp.s2 ! False ! pol ! agr ++ vp.ext  --- False = like inf (osta auto)
-        in
-        verb.fin ++ verb.inf ++ vp.part ++ compl ; --TODO particle placement? and when would you get an ext (relative clause) in an imperative?
+        in --(ära)  loe         raamat(ut) läbi
+        verb.fin ++ verb.inf ++ compl   ++ vp.p ; 
     } ;
 
 -- The object case is formed at the use site of $c2$, in $Relative$ and $Question$.

@@ -374,7 +374,7 @@ minul on heasid sõbereid
 Inari 22.9.
 -----------
 
-1) Cases where modifiers don't agree with head: essive, comitative, abessive and terminative. Fixed this in NounEst functions DetCN and AdjCN.
+1) Cases where modifiers don't agree with head: essive, comitative, abessive and terminative. Fixed this in NounEst functions DetCN and AdjCN, and QuestionEst function IdetCN.
 
 Lang> p -cat=NP "two big cats" | l -all
   kaks suurt kassi
@@ -392,7 +392,7 @@ Lang> p -cat=NP "two big cats" | l -all
   kahe suure kassita
   kahe suure kassiga
 
-2) Intending to get rid of all inflected participal forms in verbs.
+2) Intending to get rid of all inflected participial forms in verbs.
 
 Added new VForms `PastPartAct' and `PastPartPass' instead of old `PastPart(Act|Pass) AForm'.
 Consequently, had to change the following functions:
@@ -435,7 +435,7 @@ Problem: it doesn't work.
   Internal error in Compute.ConcreteNew:
     Applying Predef.tk: Expected a value of type String, got VS (VP (VGen 1 []) (LIdent "s")) (VCApp (IC "ResEst",IC "PastPartPass") [])
 
-Another question: I've seen these kinds of constructions, where the adjective formed from a participe doesn't agree with the noun, in any case.
+Another question: I've seen these kinds of constructions, where the adjective formed from a participle doesn't agree with the noun, in any case.
 
   [Istutatud puudel] tuleb [saastunud õhus] kasvada.
   (...) mida ma [mingitest loetud teostest] arvan (...)
@@ -444,25 +444,17 @@ Should this be in the grammar? Do the inflected forms appear as modifiers at all
 
 3) Some random testing about object cases, TODO are these correct? 
 
-  three books are eaten
-  kolme raamatut süüakse
+  three books are eaten    three books aren't eaten
+  kolme raamatut süüakse   kolme raamatut ei sööda
 
-  three books aren't eaten
-  kolme raamatut ei sööda
-
-  three books have been eaten
-  kolme raamatut ollakse söödud
-
-  three books haven't been eaten
-  kolme raamatut ei ole söödud
+  three books have been eaten     kolme raamatut ollakse söödud
+  kolme raamatut ollakse söödud   kolme raamatut ei ole söödud
   
-  eat three books
-  (sg) söö kolme raamatut
-  (pl) sööge kolme raamatut
+  read a book        don't read a book
+  loe raamat         ära loe raamatut
   
-  don't eat three books
-  (sg) ära söö kolme raamatut
-  (pl) ärge sööge kolme raamatut
+  read three books   don't read three books
+  loe kolm raamatut  ära loe kolme raamatut
 
 
 4) Some word order changes in ResEst.infVP, intended to make "kassi tahtnud näha" -> "kassi näha tahtnud". Following is produced by the grammar:
@@ -570,6 +562,8 @@ tema ei oleks tahtnud kolme kassi näha
 kas tema ei oleks tahtnud kolme kassi näha
 tema ei kolme kassi näha oleks tahtnud
 
+__________
+
 SInv is not good with compound forms. infVP already attaches VP ("kolm kassi näha" to the `compl' field of a clause.
 
 Let's add an adverb:
@@ -624,3 +618,12 @@ tema ei kolme kassi täna näha taha
 
 tema on tahtnud kolm kassi täna näha
 tema on kolm kassi täna näha tahtnud
+
+5) Changed the name of the part field to p, because the Finnish grammar also has it as p. 
+In addition, `part' is already used as an abbreviation for participle and partitive.
+
+_______
+
+6) For the lulz: a quote by John McWhorter from his book Linguistic simplicity and complexity (books.google.se/books?isbn=1934078379).
+
+"Importantly, I have by no means chosen the most baroque comparison possible. Partitive marking in Finnish's close sister Estonian is so much more elaborate in terms of complex interaction with its notoriously complex consonant gradations plus rampant irregularity that its very learnability seems almost questionable."

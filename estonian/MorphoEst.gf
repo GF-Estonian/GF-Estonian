@@ -882,7 +882,7 @@ oper
       Inf InfMaks => tulema + "ks" 
       } ;
     sc = NPCase Nom ;
-    part = [] ;
+    p = [] ;
     lock_V = <>
     } ;
     

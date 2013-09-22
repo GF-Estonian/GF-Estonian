@@ -42,10 +42,9 @@ concrete IdiomEst of Idiom = CatEst **
       s = \\_ => vp.s ! VIPass ;
       s2 = vp.s2 ;
       adv = vp.adv ;
-      part = vp.part ;
+      p = vp.p ;
       ext = vp.ext ;
       sc = vp.sc ; 
-      qp = vp.qp
       } ;
 
     ProgrVP vp = 
@@ -56,10 +55,9 @@ concrete IdiomEst of Idiom = CatEst **
         s = on.s ;
         s2 = \\b,p,a => inf ++ vp.s2 ! b ! p ! a ;
         adv = vp.adv ;
-        part = vp.part ;
+        p = vp.p ;
         ext = vp.ext ;
         sc = vp.sc ; 
-        qp = vp.qp
         } ;
 
 -- This gives "otetaan oluet" instead of "ottakaamme oluet".
@@ -69,11 +67,11 @@ concrete IdiomEst of Idiom = CatEst **
     let vps = vp.s ! VIPass ! Simul ! Pos ! Ag Pl P1
     in
     {s = vps.fin ++ vps.inf ++ 
-         vp.s2 ! True ! Pos ! Ag Pl P1 ++ vp.part ++ vp.ext
+         vp.s2 ! True ! Pos ! Ag Pl P1 ++ vp.p ++ vp.ext
     } ;
 
   oper
-    olla = verbOlema ** {sc = NPCase Nom ; qp = True} ;
+    olla = verbOlema ** {sc = NPCase Nom} ;
 
     noSubj : Polarity -> Str = \_ -> [] ;
 }

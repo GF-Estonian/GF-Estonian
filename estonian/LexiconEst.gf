@@ -146,7 +146,7 @@ lin
   queen_N = mkN "kuninganna" ;
   radio_N = mkN "raadio" ;
   rain_V0 = mkV0 (mkV "sadama") ;
-  read_V2 = mkV2 (mkV "lugema") ;
+  read_V2 = mkV2 (mkV "lugema" "lugeda" "loeb") ;
   red_A = mkA "punane" ;
   religion_N = mkN "usk" ;
   restaurant_N = mkN "restoran" ;
