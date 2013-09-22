@@ -96,17 +96,18 @@ param
    | Impf Number Person
    | Condit Number Person
    | Imper Number
---   | ImperP3 
-   | ImperP3 Number
+   | ImperP3 
+--   | ImperP3 Number
    | ImperP1Pl
    | ImpNegPl
    | PassPresn Bool
    | PassImpf Bool
+--TODO   | Quotative
    | PresPart
---   | PastPartAct
---   | PastPartPass
-   | PastPartAct  AForm
-   | PastPartPass AForm
+   | PastPartAct
+   | PastPartPass
+--   | PastPartAct  AForm
+--   | PastPartPass AForm
    ;
 
   InfForm =
@@ -150,12 +151,12 @@ param
     let
       c = case co.c of {
         NPAcc => case b of {
-          Neg => NPCase Part ; -- en näe taloa/sinua
+          Neg => NPCase Part ; -- ma ei näe raamatut/sind
           Pos => case isFin of {
-               True => NPAcc ; -- näen/täytyy nähdä sinut
+               True => NPAcc ; -- ma näen raamatu/sind
                _ => case np.isPron of {
-                  False => NPCase Nom ;  -- täytyy nähdä talo
-                  _ => NPAcc
+                  False => NPCase Nom ;  --tuleb see raamat lugeda
+                  _ => NPAcc             --tuleb sind näha --TODO I: is this correct?
                   }
                }
           } ;
@@ -177,7 +178,7 @@ param
 
   Verb : Type = {
     s : VForm => Str ;
-    s2 : Str  -- particle verbs
+    part : Str  -- particle verbs
     } ;
 
 param
@@ -191,8 +192,8 @@ param
 oper
   VP = {
     s   : VIForm => Anteriority => Polarity => Agr => {fin, inf : Str} ; 
-    s2  : Bool => Polarity => Agr => Str ; -- talo/talon/taloa
-    adv : Polarity => Str ; -- ainakin/ainakaan
+    s2  : Bool => Polarity => Agr => Str ; -- raamat/raamatu/raamatut
+    adv : Polarity => Str ; -- ainakin/ainakaan --TODO relevant for Est?
     part : Str ; --uninflecting component in multi-word verbs
     ext : Str ;
     sc  : NPForm ;
@@ -204,8 +205,8 @@ oper
         agr = verbAgr agr0 ;
         verbs = verb.s ;
         part  : Str = case vi of {
-          VIPass => verbs ! PastPartPass (AN (NCase agr.n Nom)) ; 
-          _      => verbs ! PastPartAct (AN (NCase agr.n Nom))
+          VIPass => verbs ! PastPartPass ; --(AN (NCase agr.n Nom)) ; 
+          _      => verbs ! PastPartAct  --(AN (NCase agr.n Nom))
         } ; 
 
         eiv : Str = case agr of {
@@ -251,7 +252,7 @@ oper
     s2 = \\_,_,_ => [] ;
     adv = \\_ => [] ;
     ext = [] ; --relative clause
-    part = verb.s2 ; --particle verbs
+    part = verb.part ; --particle verbs
     sc = verb.sc 
     } ;
 
@@ -316,7 +317,6 @@ oper
       let
         c = (mkClausePlus sub agr vp).s ! t ! a ! b ;
         declCl = c.subj ++ c.fin ++ c.inf ++ c.compl ++ c.adv ++ c.part ++ c.ext ;
-    --  declCl = c.subj ++ c.fin ++ c.inf ++ c.compl ++ c.adv ++ c.ext ;
         invCl = c.subj ++ c.fin ++ c.adv ++ c.compl ++ c.part ++ c.inf ++ c.ext 
       in 
          table {
@@ -375,6 +375,8 @@ oper
   kin : Polarity -> Str  = 
     \p -> case p of {Pos => "gi" ; Neg => "gi"} ;
   
+  --allomorph "ki", depends only on phonetic rules "üks+ki", "ühe+gi" 
+  --waiting for post construction in GF :P
   gi : Str = "gi" ;
 
   glueTok : Str -> Str = \s -> "&+" ++ s ;
@@ -393,12 +395,14 @@ oper
             _ => False           -- minul peab auto olema
             } ;
           verb  = vp.s ! VIInf vi ! Simul ! Pos ! agr ; -- no "ei"
-          compl = vp.s2 ! fin ! pol ! agr ++ vp.adv ! pol -- but compl. case propagated
+          compl = vp.s2 ! fin ! pol ! agr ; -- but compl. case propagated
+          adv = vp.adv ! pol
         in
-        -- inverted word order for; e.g.
-        --sinust aru       saama       0            rel. clause
-        compl ++ vp.part ++ verb.fin ++ verb.inf ++ vp.ext ;
-        
+        -- inverted word order; e.g.
+      --sinust   kunagi aru                saama           rel. clause
+        compl ++ adv ++ vp.part ++ verb.inf ++ verb.fin ++ vp.ext ;
+        --TODO adv placement?
+        --TODO inf ++ fin or fin ++ inf? does it ever become a case here?
 
 -- The definitions below were moved here from $MorphoEst$ so that  
 -- auxiliary of predication can be defined.
@@ -411,7 +415,7 @@ oper
       Presn _ P3 => "on" ;
       v => olema.s ! v
       } ;
-      s2 = []
+      part = []
     } ;
 
   verbMinema : Verb = 
@@ -427,7 +431,7 @@ oper
       Imper Sg => "mine" ;
       v => minema.s ! v
       } ;
-      s2 = []
+      part = []
     } ;
     
 
@@ -482,8 +486,8 @@ oper
       Condit Pl P3 => tule_ + "ksid" ;
       Imper Sg   => tule_ ; 
       Imper Pl   => tulge ; 
-      ImperP3 Sg => tulgu ;  
-      ImperP3 Pl => tulgu ; 
+      ImperP3   => tulgu ;  
+--      ImperP3 Pl => tulgu ; 
       ImperP1Pl  => tulge + "m" ;
       ImpNegPl   => tulge ;
       PassPresn True  => tullakse ;
@@ -491,17 +495,19 @@ oper
       PassImpf  True  => tuld_ + "i" ; 
       PassImpf  False => tuldud ;  
       PresPart => tule_ + "v" ;
-      PastPartAct (AN n)  => lugenud ! n ;
-      PastPartAct AAdv    => lugenud ! (NCase Sg Ablat) ;
-      PastPartPass (AN n) => loetud ! n ;
-      PastPartPass AAdv   => loetud ! (NCase Sg Ablat) ;
+      PastPartAct => tulnud ;
+      PastPartPass => tuldud ;
+--      PastPartAct (AN n)  => lugenud ! n ;
+--      PastPartAct AAdv    => lugenud ! (NCase Sg Ablat) ;
+--      PastPartPass (AN n) => loetud ! n ;
+--      PastPartPass AAdv   => loetud ! (NCase Sg Ablat) ;
       Inf InfMa => tulema ;
       Inf InfMas => tulema + "s" ;
       Inf InfMast => tulema + "st" ;
       Inf InfMata => tulema + "ta" ;
       Inf InfMaks => tulema + "ks" 
       } ;
-      s2 = [] 
+      part = [] 
   } ;
 
   VerbH : Type = {
@@ -567,21 +573,13 @@ oper
     } ;
 
   nhn : NounH -> CommonNoun = \nh ->
-    let
-     maakas = nh.maakas ;
-     maaka = nh.maaka ;
-     maakat = nh.maakat ;
-     maakasse = nh.maakasse ;
-     maakate = nh.maakate ;
-     maakaid = nh.maakaid ;
-    in
-      nForms6
-        maakas
-        maaka
-        maakat
-        maakasse
-        maakate
-        maakaid ;
+    nForms6
+      nh.maakas
+      nh.maaka
+      nh.maakas
+      nh.maakasse
+      nh.maakate
+      nh.maakaid ;
 
   sMaakas : (_ : Str) -> NounH = \maakas ->
     let

@@ -1,4 +1,4 @@
-concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
+concrete NounEst of Noun = CatEst ** open ResEst, HjkEst, MorphoEst, Prelude in {
 
   flags optimize=all_subs ; coding=utf8;
 
@@ -21,10 +21,9 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
             <_, NPCase Nom, True,_>  => <Nom,NCase Sg Part> ; -- kolme kytkintä
             
             --Estonian special cases, only the last word gets case ending.
-            --TODO same for adjectives
             <_, NPCase Comit, _, _>  => <Gen,NCase n Comit> ; --kolme kassiga
             <_, NPCase Abess, _, _>  => <Gen,NCase n Abess> ; --kolme kassita
-            <_, NPCase Ess, _,  _>   => <Gen,NCase n Ess> ; --kolme kassina
+            <_, NPCase Ess,   _, _>  => <Gen,NCase n Ess> ; --kolme kassina
             <_, NPCase Termin,_, _>  => <Gen,NCase n Termin> ; --kolme kassini
             
             <_, _, True,_>        => <k,  NCase Sg k> ;    -- kolmeksi kytkimeksi
@@ -37,7 +36,7 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
       s = \\c => let 
                    k = ncase c ;
                  in
-                 det.s ! k.p1 ++ cn.s ! k.p2 ;  --fin autoni, est no poss.suf.
+                 det.s ! k.p1 ++ cn.s ! k.p2 ;
       a = agrP3 (case det.isDef of {
             False => Sg ;  -- autoja menee; kolme autoa menee
             _ => det.n
@@ -53,7 +52,7 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
           } ;
       in {
         s = \\c => let k = npform2case n c in
-                 det.sp ! k ; -- det.s2 is possessive suffix 
+                 det.sp ! k ; 
         a = agrP3 (case det.isDef of {
             False => Sg ;  -- autoja menee; kolme autoa menee
             _ => det.n
@@ -74,10 +73,16 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
       isPron = np.isPron  -- kaikki minun - ni
       } ;
 
-    PPartNP np v2 = {
-      s = \\c => np.s ! c ++ v2.s ! PastPartPass (AN (NCase (complNumAgr np.a) Ess)) ;
-      a = np.a ;
-      isPron = np.isPron  -- minun täällä - ni
+    PPartNP np v2 =
+      let 
+        num : Number     = complNumAgr np.a ;
+        part : Str       = v2.s ! PastPartPass ; 
+        adj : CommonNoun = nhn (sMaakas part) ; 
+        partEssive : Str = adj.s ! (NCase num Ess)
+      in {
+        s = \\c => np.s ! c ++ part ; --partEssive ;
+        a = np.a ;
+        isPron = np.isPron  -- minun täällä - ni
       } ;
 
     AdvNP np adv = {
@@ -188,7 +193,11 @@ concrete NounEst of Noun = CatEst ** open ResEst, MorphoEst, Prelude in {
       } ;
 
     AdjCN ap cn = {
-      s = \\nf => ap.s ! True ! (n2nform nf) ++ cn.s ! nf
+      s = \\nf => 
+        case nf of { 
+          NCase num (Ess|Abess|Comit|Termin) => ap.s ! True ! (NCase num Gen) ++ cn.s ! nf ; --suure kassiga, not *suurega kassiga 
+          _ => ap.s ! True ! nf ++ cn.s ! nf
+        }
       } ;
 
     RelCN cn rs = {s = \\nf => cn.s ! nf ++ rs.s ! agrP3 (numN nf)} ;

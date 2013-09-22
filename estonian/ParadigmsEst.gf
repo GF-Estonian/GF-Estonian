@@ -469,7 +469,7 @@ oper
       vfs = vforms2V (vForms8 a b c d e f g h)
     in vfs ** {sc = NPCase Nom ; lock_V = <>} ;
   mkPV : (aru : Str) -> (saama : V) -> V = \aru,saama ->
-    {s = saama.s ; s2 = aru ; sc = saama.sc ; lock_V = <> } ;
+    {s = saama.s ; part = aru ; sc = saama.sc ; lock_V = <> } ;
      
   	
   -- This used to be the last case: _ => Predef.error (["expected infinitive, found"] ++ ottaa) 
@@ -627,7 +627,7 @@ oper
       <_,_,_,_> => regVForms jatma jatta jatab jaetakse
     } ;    
     
-  caseV c v = {s = v.s ; s2 = v.s2; sc = NPCase c ; lock_V = <>} ;
+  caseV c v = {s = v.s ; part = v.part; sc = NPCase c ; lock_V = <>} ;
 
   vOlema = verbOlema ** {sc = NPCase Nom ; lock_V = <>} ;
   vMinema = verbMinema ** {sc = NPCase Nom ; lock_V = <>} ;

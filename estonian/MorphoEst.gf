@@ -648,7 +648,6 @@ oper
     in vForms8
       andma
       (and + "a")
-      --(te + "ab")
       annab 
       (an + "takse")
       (and + "ke")
@@ -835,8 +834,8 @@ oper
             
       tuld_ = Predef.tk 2 tuldud ; --d/t choice for tuldi etc.
       tulgu = (init tulge) + "u" ;
-      lugenud = (hjk_type_IVb_maakas tulnud).s ;
-      loetud = (hjk_type_IVb_maakas tuldud).s ;
+      --lugenud = (hjk_type_IVb_maakas tulnud).s ;
+      --loetud = (hjk_type_IVb_maakas tuldud).s ;
     in
     {s = table {
       Inf InfDa => tulla ;
@@ -859,22 +858,23 @@ oper
       Condit Pl P1 => tule_ + "ksime" ;  --# notpresent
       Condit Pl P2 => tule_ + "ksite" ;  --# notpresent
       Condit Pl P3 => tule_ + "ksid" ;  --# notpresent
-      Imper Sg   => tule_ ; -- tule
-      Imper Pl   => tulge ; -- tulge
-      ImperP3 Sg => tulgu ; -- tulgu (ta) 
-      ImperP3 Pl => tulgu ; -- tulgu (nad)
-      ImperP1Pl  => tulge + "m" ; -- tulgem
-      ImpNegPl   => tulge ; -- ärge tulge
+      Imper Sg  => tule_ ; -- tule
+      Imper Pl  => tulge ; -- tulge
+      ImperP3   => tulgu ; -- tulgu (ta/nad) 
+      ImperP1Pl => tulge + "m" ; -- tulgem
+      ImpNegPl  => tulge ; -- ärge tulge
       PassPresn True  => tullakse ;
       PassPresn False => tuld_ + "a" ; --da or ta
       PassImpf  True  => tuld_ + "i" ; --di or ti
       PassImpf  False => tuldud ;  
       --TODO Quotative
       PresPart => laulev ;
-      PastPartAct (AN n)  => lugenud ! n ;
-      PastPartAct AAdv    => lugenud ! (NCase Sg Ablat) ;
-      PastPartPass (AN n) => loetud ! n ;
-      PastPartPass AAdv   => loetud ! (NCase Sg Ablat) ;
+      PastPartAct => tulnud ;
+      PastPartPass => tuldud ;
+--      PastPartAct (AN n)  => lugenud ! n ;
+--      PastPartAct AAdv    => lugenud ! (NCase Sg Ablat) ;
+--      PastPartPass (AN n) => loetud ! n ;
+--      PastPartPass AAdv   => loetud ! (NCase Sg Ablat) ;
       Inf InfMa => tulema ;
       Inf InfMas => tulema + "s" ;
       Inf InfMast => tulema + "st" ;
@@ -882,7 +882,7 @@ oper
       Inf InfMaks => tulema + "ks" 
       } ;
     sc = NPCase Nom ;
-    s2 = [] ;
+    part = [] ;
     lock_V = <>
     } ;
     

@@ -20,7 +20,7 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
       insertObj 
         (\\_,b,a => infVP v.sc b a vp v.vi) 
         (predV {s = v.s ; 
-                s2 = v.s2 ;
+                part = v.part ;
                 sc = case vp.sc of {
                   NPCase Nom => v.sc ; -- minul tuleb kirjutada (VV 'tulema' determines the subject case)
                   c => c               -- minul peab auto olema (VP 'olema' determines the subject case)
@@ -59,7 +59,7 @@ concrete VerbEst of Verb = CatEst ** open Prelude, ResEst in {
       insertObj 
         (\\_,b,a => infVP v.sc b a vp v.vi) 
         (predV {s = v.s ; 
-                s2 = v.s2 ;
+                part = v.part ;
                 sc = case vp.sc of {
                   NPCase Nom => v.sc ;   -- minun täytyy pestä auto
                   c => c                 -- minulla täytyy olla auto

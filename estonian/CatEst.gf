@@ -93,6 +93,6 @@ concrete CatEst of Cat = CommonX ** open ResEst, Prelude in {
     N3 = {s : NForm => Str} ** {c2,c3 : Compl ; isPre,isPre2 : Bool} ;
     PN = {s : Case  => Str} ;
 
-oper Verb1 = Verb ** { sc : NPForm} ; --what is this for?
+oper Verb1 = Verb ** { sc : NPForm} ; --what is this for? --subject case, i.e. "ma näen kassi"/"mul on kass"
 
 }

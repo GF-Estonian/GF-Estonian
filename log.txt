@@ -370,3 +370,257 @@ I have a good friend
 minul on hea sõber
 I have good friends
 minul on heasid sõbereid
+
+Inari 22.9.
+-----------
+
+1) Cases where modifiers don't agree with head: essive, comitative, abessive and terminative. Fixed this in NounEst functions DetCN and AdjCN.
+
+Lang> p -cat=NP "two big cats" | l -all
+  kaks suurt kassi
+  kahe suure kassi
+  kahte suurt kassi
+  kahte suurde kassi
+  kahes suures kassis
+  kahest suurest kassist
+  kahele suurele kassile
+  kahel suurel kassil
+  kahelt suurelt kassilt
+  kaheks suureks kassiks
+  kahe suure kassina (not *kahena suurena kassina)
+  kahe suure kassini (etc.)
+  kahe suure kassita
+  kahe suure kassiga
+
+2) Intending to get rid of all inflected participal forms in verbs.
+
+Added new VForms `PastPartAct' and `PastPartPass' instead of old `PastPart(Act|Pass) AForm'.
+Consequently, had to change the following functions:
+
+  ResEst.gf
+    oper predV
+    ...
+        part  : Str = case vi of {
+          VIPass => verbs ! PastPartPass (AN (NCase agr.n Nom)) ; 
+          _      => verbs ! PastPartAct  (AN (NCase agr.n Nom))
+          
+Just changed these to PastPartPass and PastPartAct.
+There is no number distinction anyway, and it is by default nominative.
+
+  NounEst.gf
+  
+  Originally
+    PPartNP np v2 = {
+      s = \\c => np.s ! c ++ v2.s ! PastPartPass (AN (NCase (complNumAgr np.a) Ess)) ;
+      a = np.a ;
+      isPron = np.isPron
+      } ;
+      
+  After change
+    PPartNP np v2 =
+      let 
+        num : Number     = complNumAgr np.a ;
+        part : Str       = v2.s ! PastPartPass ; 
+        adj : CommonNoun = nhn (sMaakas part) ; 
+        partEssive : Str = adj.s ! (NCase num Ess)
+      in {
+        s = \\c => np.s ! c ++ partEssive ;
+        a = np.a ;
+        isPron = np.isPron 
+      } ;
+
+So we do the computing of case in this function. Seems better than carry 29 inflected forms per each participle in the verb's inflection table.
+Question: is this even a good construction? Sounds weird already in Finnish.
+Problem: it doesn't work. 
+  Internal error in Compute.ConcreteNew:
+    Applying Predef.tk: Expected a value of type String, got VS (VP (VGen 1 []) (LIdent "s")) (VCApp (IC "ResEst",IC "PastPartPass") [])
+
+Another question: I've seen these kinds of constructions, where the adjective formed from a participe doesn't agree with the noun, in any case.
+
+  [Istutatud puudel] tuleb [saastunud õhus] kasvada.
+  (...) mida ma [mingitest loetud teostest] arvan (...)
+  
+Should this be in the grammar? Do the inflected forms appear as modifiers at all? As adverbials yes (e.g. "sinu nimi erinevatesse keeltesse kirjutatuna").
+
+3) Some random testing about object cases, TODO are these correct? 
+
+  three books are eaten
+  kolme raamatut süüakse
+
+  three books aren't eaten
+  kolme raamatut ei sööda
+
+  three books have been eaten
+  kolme raamatut ollakse söödud
+
+  three books haven't been eaten
+  kolme raamatut ei ole söödud
+  
+  eat three books
+  (sg) söö kolme raamatut
+  (pl) sööge kolme raamatut
+  
+  don't eat three books
+  (sg) ära söö kolme raamatut
+  (pl) ärge sööge kolme raamatut
+
+
+4) Some word order changes in ResEst.infVP, intended to make "kassi tahtnud näha" -> "kassi näha tahtnud". Following is produced by the grammar:
+
+s/he sees three cats: SDecl, SQuest, SInv
+-----------------------------------------
+  
+tema näeb kolm kassi
+kas tema näeb kolm kassi
+tema näeb kolm kassi
+
+tema ei näe kolme kassi
+kas tema ei näe kolme kassi
+tema ei kolme kassi näe
+
+tema on näinud kolm kassi
+kas tema on näinud kolm kassi
+tema on kolm kassi näinud
+
+tema ei ole näinud kolme kassi
+kas tema ei ole näinud kolme kassi
+tema ei kolme kassi ole näinud
+
+tema nägi kolm kassi
+kas tema nägi kolm kassi
+tema nägi kolm kassi
+
+tema ei näinud kolme kassi
+kas tema ei näinud kolme kassi
+tema ei kolme kassi näinud
+
+tema oli näinud kolm kassi
+kas tema oli näinud kolm kassi
+tema oli kolm kassi näinud
+
+tema ei olnud näinud kolme kassi
+kas tema ei olnud näinud kolme kassi
+tema ei kolme kassi olnud näinud
+
+tema näeks kolm kassi
+kas tema näeks kolm kassi
+tema näeks kolm kassi
+
+tema ei näeks kolme kassi
+kas tema ei näeks kolme kassi
+tema ei kolme kassi näeks
+
+tema oleks näinud kolm kassi
+kas tema oleks näinud kolm kassi
+tema oleks kolm kassi näinud
+
+tema ei oleks näinud kolme kassi
+kas tema ei oleks näinud kolme kassi
+tema ei kolme kassi oleks näinud
+
+
+s/he wants to see three cats: SDecl, SQuest, SInv
+-------------------------------------------------
+
+tema tahab kolm kassi näha
+kas tema tahab kolm kassi näha
+tema tahab kolm kassi näha
+
+tema ei taha kolme kassi näha
+kas tema ei taha kolme kassi näha
+tema ei kolme kassi näha taha
+
+tema on tahtnud kolm kassi näha
+kas tema on tahtnud kolm kassi näha
+tema on kolm kassi näha tahtnud
+
+tema ei ole tahtnud kolme kassi näha
+kas tema ei ole tahtnud kolme kassi näha
+tema ei kolme kassi näha ole tahtnud
+
+tema tahtis kolm kassi näha
+kas tema tahtis kolm kassi näha
+tema tahtis kolm kassi näha
+
+tema ei tahtnud kolme kassi näha
+kas tema ei tahtnud kolme kassi näha
+tema ei kolme kassi näha tahtnud
+
+tema oli tahtnud kolm kassi näha
+kas tema oli tahtnud kolm kassi näha
+tema oli kolm kassi näha tahtnud
+
+tema ei olnud tahtnud kolme kassi näha
+kas tema ei olnud tahtnud kolme kassi näha
+tema ei kolme kassi näha olnud tahtnud
+
+tema tahaks kolm kassi näha
+kas tema tahaks kolm kassi näha
+tema tahaks kolm kassi näha
+
+tema ei tahaks kolme kassi näha
+kas tema ei tahaks kolme kassi näha
+tema ei kolme kassi näha tahaks
+
+tema oleks tahtnud kolm kassi näha
+kas tema oleks tahtnud kolm kassi näha
+tema oleks kolm kassi näha tahtnud
+
+tema ei oleks tahtnud kolme kassi näha
+kas tema ei oleks tahtnud kolme kassi näha
+tema ei kolme kassi näha oleks tahtnud
+
+SInv is not good with compound forms. infVP already attaches VP ("kolm kassi näha" to the `compl' field of a clause.
+
+Let's add an adverb:
+
+tema tahab kolm kassi näha alati
+tema tahab alati kolm kassi näha
+
+tema ei taha kolme kassi näha alati
+tema ei alati kolme kassi näha taha
+
+tema on tahtnud kolm kassi näha alati
+tema on alati kolm kassi näha tahtnud
+
+tema ei ole tahtnud kolme kassi näha alati
+tema ei alati kolme kassi näha ole tahtnud
+
+tema tahtis kolm kassi näha alati
+tema tahtis alati kolm kassi näha
+
+tema ei tahtnud kolme kassi näha alati
+tema ei alati kolme kassi näha tahtnud
+
+tema oli tahtnud kolm kassi näha alati
+tema oli alati kolm kassi näha tahtnud
+
+tema ei olnud tahtnud kolme kassi näha alati
+tema ei alati kolme kassi näha olnud tahtnud
+
+tema tahaks kolm kassi näha alati
+tema tahaks alati kolm kassi näha
+
+tema ei tahaks kolme kassi näha alati
+tema ei alati kolme kassi näha tahaks
+
+tema oleks tahtnud kolm kassi näha alati
+tema oleks alati kolm kassi näha tahtnud
+
+tema ei oleks tahtnud kolme kassi näha alati
+tema ei alati kolme kassi näha oleks tahtnud
+
+
+Also, multiple attachment possibilities for adverbs, e.g. in the following the adv attaches to the VPSlash "nägema", so already the unit "täna näha" is fixed, before any cats and insertObject calls. 
+
+tema ei näe kassi täna
+tema ei kassi täna näe
+
+tema tahab kolm kassi täna näha
+tema tahab kolm kassi täna näha
+
+tema ei taha kolme kassi täna näha
+tema ei kolme kassi täna näha taha
+
+tema on tahtnud kolm kassi täna näha
+tema on kolm kassi täna näha tahtnud

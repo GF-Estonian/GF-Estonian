@@ -27,7 +27,7 @@ lin
   black_A = mkA "must" ;
   blue_A = mkA "sinine" ;
   boat_N = mkN "paat" ;
-  book_N = mkN "raamat" ;
+  book_N = mkN "raamat" "raamatu" "raamatut" "raamatusse" "raamatute" "raamatuid" ;
   boot_N = mkN "saabas" ;
   boss_N = mkN "boss" ;
   boy_N = mkN "poiss" ;
