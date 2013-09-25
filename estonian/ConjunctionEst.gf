@@ -14,7 +14,9 @@ concrete ConjunctionEst of Conjunction =
       isPron = False
       } ;
 
-    ConjAP conj ss = conjunctDistrTable2 Bool NForm conj ss ;
+    ConjAP conj ss = conjunctDistrTable2 Bool NForm conj ss ** {
+      infl = True 
+      } ;
 
     ConjRS conj ss = conjunctDistrTable Agr conj ss ** {
       c = ss.c

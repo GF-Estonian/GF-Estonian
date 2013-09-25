@@ -1,0 +1,77 @@
+se utf8
+i LangEst.gfo
+i LangEng.gfo
+
+--Using example sentences from Sentence.gf to test word order
+
+--John walks
+l -treebank (PredVP (UsePN john_PN) (UseV walk_V)) 
+
+
+-- Clauses missing object noun phrases
+
+-- that she goes is good
+l -treebank PredSCVP (EmbedS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron she_Pron) (UseV go_V)))) (UseComp (CompAP (PositA good_A)))
+
+-- (whom) he sees
+l -treebank SlashVP (UsePron he_Pron) (SlashV2a see_V2)
+
+-- (whom) he sees today
+l -treebank AdvSlash (SlashVP (UsePron he_Pron) (SlashV2a see_V2)) today_Adv
+
+-- (with whom) he walks
+l -treebank SlashPrep (PredVP (UsePron he_Pron) (UseV walk_V)) with_Prep
+
+-- (whom) she says that he loves
+l -treebank SlashVS (UsePron she_Pron) say_VS (UseSlash (TTAnt TPres ASimul) PPos (SlashVP (UsePron he_Pron) (SlashV2a love_V2)))
+
+
+--Imperatives
+
+-- love yourself
+l -treebank ImpVP (ReflVP (SlashV2a love_V2))
+
+-- (don't) understand him
+l -treebank ImpVP (ComplSlash (SlashV2a understand_V2) (UsePron he_Pron))
+l -treebank PhrUtt NoPConj (UttImpSg PNeg (ImpVP (ComplSlash (SlashV2a understand_V2) (UsePron he_Pron)))) NoVoc
+
+
+--Embedded sentences
+
+-- Sentences, questions, and infinitival phrases can be used as
+-- subjects and (adverbial) complements.
+
+-- that she goes
+l -treebank EmbedS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron she_Pron) (UseV go_V)))
+
+-- who goes
+l -treebank EmbedQS (UseQCl (TTAnt TPres ASimul) PPos (QuestVP whoSg_IP (UseV go_V)))
+
+-- to go
+l -treebank EmbedVP (UseV go_V)
+
+
+--Sentences
+-- I see a cat (all tenses and polarities)
+gt UseCl ? ? (PredVP (UsePron i_Pron) (ComplSlash (SlashV2a see_V2) (DetCN (DetQuant IndefArt NumSg) (UseN cat_N)))) | l -treebank
+
+-- do I see a cat (all tenses and polarities)
+gt UseQCl ? ? (QuestCl (PredVP (UsePron i_Pron) (ComplSlash (SlashV2a see_V2) (DetCN (DetQuant IndefArt NumSg) (UseN cat_N))))) | l -treebank
+
+-- (a dog) who sees a cat
+-- including "dog" because otherwise RS would output all persons, "kes näen kassi", "kes näed kassi" etc.
+gt PhrUtt NoPConj (UttNP (DetCN (DetQuant IndefArt NumSg) (RelCN (UseN dog_N) (UseRCl ? ? (RelVP IdRP (ComplSlash (SlashV2a see_V2) (DetCN (DetQuant IndefArt NumSg) (UseN cat_N)))))))) NoVoc | l -all
+
+-- I don't see
+l -treebank UseSlash (TTAnt TPres ASimul) PNeg (SlashVP (UsePron i_Pron) (SlashV2a see_V2))
+
+
+-- Adverbs in the beginning of a sentence
+
+-- now I run
+l -treebank AdvS now_Adv (UseCl (TTAnt TFut ASimul) PPos (PredVP (UsePron i_Pron) (UseV run_V)))
+
+-- if she understands cats , I want to run
+-- also tests SubjS
+l -treebank ExtAdvS (SubjS if_Subj (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron she_Pron) (ComplSlash (SlashV2a understand_V2)
+(DetCN (DetQuant IndefArt NumPl) (UseN cat_N)))))) (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron i_Pron) (ComplVV want_VV (UseV run_V))))

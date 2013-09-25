@@ -307,8 +307,14 @@ oper
   } ;
 
   -- Adjective forms (incl. comp and sup) are derived from noun forms
-  mk1A : Str -> A = \jalo -> aForms2A (nforms2aforms (nForms1 jalo)) ;
-  mkNA : N -> A = \suuri -> aForms2A (nforms2aforms (n2nforms suuri)) ;
+  mk1A : Str -> A = \jalo -> 
+    let aforms = aForms2A (nforms2aforms (nForms1 jalo)) 
+    in  aforms ** {infl = True} ;
+      
+  mkNA : N -> A = \suuri -> 
+    let aforms = aForms2A (nforms2aforms (n2nforms suuri)) ; 
+    in  aforms ** {infl = True} ;
+
 
   --mk1N : (talo : Str) -> N = \s -> nForms2N (nForms1 s) ;
   mk1N : (talo : Str) -> N = \s -> (hjk_type s) ** { lock_N = <> } ;
@@ -397,12 +403,13 @@ oper
 
   mkA = overload {
     mkA : Str -> A  = mkA_1 ;
-    mkA : N -> A = \n -> noun2adjDeg n ** {lock_A = <>} ;
+    mkA : N -> A = \n -> noun2adjDeg n ** {infl = True ; lock_A = <>} ;
     mkA : N -> (kivempaa,kivinta : Str) -> A = regAdjective ;
-    mkA : (sana : AW) -> A = \w -> noun2adjDeg (nForms2N w.s) ;
+    mkA : N -> (infl : Bool) -> A = \n,infl -> noun2adjDeg n ** {infl = infl ; lock_A = <>} ;
+    mkA : (sana : AW) -> A = \w -> noun2adjDeg (nForms2N w.s) ** {infl = True} ;
   } ;
 
-  mkA_1 : Str -> A = \x -> noun2adjDeg (mk1N x) ** {lock_A = <>} ;
+  mkA_1 : Str -> A = \x -> noun2adjDeg (mk1N x) ** {infl = True ; lock_A = <>} ;
 
 -- auxiliaries
   mkAdjective : (_,_,_ : Adj) -> A = \hea,parem,parim -> 
@@ -411,6 +418,7 @@ oper
       Compar => parem.s ;
       Superl => parim.s
       } ;
+     infl = True ;
      lock_A = <>
     } ;
 

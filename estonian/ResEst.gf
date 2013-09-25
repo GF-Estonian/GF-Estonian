@@ -219,18 +219,20 @@ oper
         neg : Str = einegole.p2 ;
         ole : Str = einegole.p3 ;
         
-        olla : VForm => Str = verbOlema.s ;
+        olema : VForm => Str = verbOlema.s ;
         
         vf : Str -> Str -> {fin, inf : Str} = \x,y -> {fin = x ; inf = y} ;
         
         mkvf : VForm -> {fin, inf : Str} = \p -> case <ant,b> of {
           <Simul,Pos> => vf (verbs ! p) [] ;
-          <Anter,Pos> => vf (olla ! p)  part ; 
-          <Anter,Neg> => vf ei          (ole ++ part) ;
-          <Simul,Neg> => vf ei          neg
+          <Anter,Pos> => vf (olema ! p) part ; 
+--          <Anter,Neg> => vf ei          (ole ++ part) ;
+--          <Simul,Neg> => vf ei          neg
+          <Simul,Neg> => vf (ei ++ neg) [] ; --changed grouping from Fin
+          <Anter,Neg> => vf (ei ++ ole) part 
         }
    in case vi of {
-        VIFin Past => mkvf (Impf agr.n agr.p) ;  
+        VIFin Past => mkvf (Impf agr.n agr.p) ;
         VIFin Cond => mkvf (Condit agr.n agr.p) ;
         VIFin Fut  => mkvf (Presn agr.n agr.p) ;
         VIFin Pres => mkvf (Presn agr.n agr.p) ;
@@ -306,8 +308,12 @@ oper
       s = \\t,a,b => 
       let
         c = (mkClausePlus sub agr vp).s ! t ! a ! b ;
-        declCl = c.subj ++ c.fin ++ c.inf ++ c.compl ++ c.adv ++ c.p ++ c.ext ;
-        invCl = c.subj ++ c.fin ++ c.adv ++ c.compl ++ c.p ++ c.inf ++ c.ext 
+        --                 saan              sinust     aru    0
+        --       ma        olen     täna     sinust     aru    saanud
+        declCl = c.subj ++ c.fin ++ c.adv ++ c.compl ++ c.p ++ c.inf ++ c.ext ;
+        --                                [sind näha]  0      tahtnud
+        --      täna     olen     ma        sinust     aru    saanud
+        invCl = c.adv ++ c.fin ++ c.subj ++ c.compl ++ c.p ++ c.inf ++ c.ext
       in 
          table {
            SDecl  => declCl ;
@@ -389,7 +395,7 @@ oper
           adv = vp.adv ! pol
         in
         -- inverted word order; e.g.
-      --sinust   kunagi aru             saama           rel. clause
+      --sinust   kunagi aru     saada       tahtnud     rel. clause
         compl ++ adv ++ vp.p ++ verb.inf ++ verb.fin ++ vp.ext ;
         --TODO adv placement?
         --TODO inf ++ fin or fin ++ inf? does it ever become a case here?
@@ -535,7 +541,7 @@ oper
          AN f => tuore.s ! f ;
          -- AAdv => if_then_Str isPos tuoreesti tuoreemmin
          AAdv => tuore.s ! NCase Sg Ablat
-         }
+         } ;
        } ;
 
   CommonNoun = {s : NForm => Str} ;

@@ -155,13 +155,12 @@ lin
   roof_N = mkN "katus" ;
   rubber_N = mkN "kumm" ;
   run_V = mkV "jooksma" "joosta" ;
-  say_VS = mkVS (mkV "sanoa") ;
+  say_VS = mkVS (mkV "ütlema") ;
   school_N = mkN "kool" ;
   science_N = mkN "teadus" ;
   sea_N = mkN "meri" ;
-  seek_V2 = mkV2 (mkV "etsiä") cpartitive ;
-  see_V2 = mkV2 (mkV "nägema" "näha" "näeb" "nähakse" 
-                      "nähke" "nägi" "näinud" "nähtud") ; 
+  seek_V2 = mkV2 (mkV "otsima") cpartitive ;
+  see_V2 = mkV2 (mkV "nägema" "näha") ;
   sell_V3 = mkV3 (mkV "müüma") accPrep (casePrep allative) ;
   send_V3 = mkV3 (mkV "lähettää") accPrep (casePrep allative) ;
   sheep_N = mkN "lammas" ;
@@ -176,7 +175,7 @@ lin
   small_A = mkA "väike" ;
   snake_N = mkN "uss" ;
   sock_N = mkN "sukk" ;
-  speak_V2 = mkV2 (mkV "puhua") cpartitive ;
+  speak_V2 = mkV2 (mkV "rääkima") cpartitive ;
   star_N = mkN "täht" ;
   steel_N = mkN "teras" ;
   stone_N = mkN "kivi" ;
@@ -187,14 +186,14 @@ lin
   switch8off_V2 = mkV2 (mkV "sammuttaa") ;
   switch8on_V2 = mkV2 (mkV "sytyttää") ;
   table_N = mkN "laud" ;
-  talk_V3 = mkV3 (mkV "puhua") (casePrep allative) (casePrep elative) ;
+  talk_V3 = mkV3 (mkV "rääkima") (casePrep allative) (casePrep elative) ;
   teacher_N = mkN "õpetaja" ;
-  teach_V2 = mkV2 (mkV "opettaa") ;
+  teach_V2 = mkV2 (mkV "õpetama") ;
   television_N = mkN "televisioon" ;
   thick_A = mkA "paks" ;
   thin_A = mkA "õhuke" ;
   train_N = mkN "rong" ;
-  travel_V = mkV "matkustaa" ;
+  travel_V = mkV "sõitma" ; --reisima?
   tree_N = mkN "puu" ;
   ugly_A = mkA "kole" ;
   understand_V2 = mkV2 (mkV "aru" (mkV "saama")) (casePrep elative) ;
@@ -209,7 +208,7 @@ lin
   white_A = mkA "valge" ;
   window_N = mkN "aken" ;
   wine_N = mkN "vein" ;
-  win_V2 = mkV2 (mkV "voittaa") ;
+  win_V2 = mkV2 (mkV "võitma") ;
   woman_N = mkN "naine" ;
   wonder_VQ = mkVQ (mkV "ihmetellä") ;
   wood_N = mkN "puu" ;
@@ -217,9 +216,7 @@ lin
   yellow_A = mkA "kollane" ;
   young_A = mkA "noor" ;
 
-  do_V2 = mkV2 (
-    mkV "tegema" "teha" "teeb" "tehakse" 
-      "tehke" "tegi" "teinud" "tehtud" ) ; 
+  do_V2 = mkV2 (mkV "tegema" "teha") ; 
 
   now_Adv = mkAdv "nüüd" ;
   already_Adv = mkAdv "juba" ;

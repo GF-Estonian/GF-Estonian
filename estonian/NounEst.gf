@@ -194,10 +194,13 @@ concrete NounEst of Noun = CatEst ** open ResEst, HjkEst, MorphoEst, Prelude in 
 
     AdjCN ap cn = {
       s = \\nf => 
-        case nf of { 
-          NCase num (Ess|Abess|Comit|Termin) => ap.s ! True ! (NCase num Gen) ++ cn.s ! nf ; --suure kassiga, not *suurega kassiga 
-          _ => ap.s ! True ! nf ++ cn.s ! nf
-        }
+        case ap.infl of {
+          False => ap.s ! True ! (NCase Sg Nom) ++ cn.s ! nf ;
+          True => case nf of { 
+              NCase num (Ess|Abess|Comit|Termin) => ap.s ! True ! (NCase num Gen) ++ cn.s ! nf ; --suure kassiga, not *suurega kassiga 
+              _ => ap.s ! True ! nf ++ cn.s ! nf
+              } 
+          } 
       } ;
 
     RelCN cn rs = {s = \\nf => cn.s ! nf ++ rs.s ! agrP3 (numN nf)} ;

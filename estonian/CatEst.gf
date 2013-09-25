@@ -6,7 +6,7 @@ concrete CatEst of Cat = CommonX ** open ResEst, Prelude in {
 
 -- Tensed/Untensed
 
-    S  = {s : Str} ;
+    S  = {s : Str} ; --TODO {s : Order => Str}, like in German?
     QS = {s : Str} ;
     RS = {s : Agr => Str ; c : NPForm} ;
     SSlash = {s : Str ; c2 : Compl} ;
@@ -41,7 +41,7 @@ concrete CatEst of Cat = CommonX ** open ResEst, Prelude in {
 -- The $Bool$ tells whether usage is modifying (as opposed to
 -- predicative), e.g. "x on suurempi kuin y" vs. "y:tä suurempi luku".
 
-    AP = {s : Bool => NForm => Str} ; 
+    AP = {s : Bool => NForm => Str ; infl : Bool} ; 
 
 -- Noun
 
@@ -85,12 +85,12 @@ concrete CatEst of Cat = CommonX ** open ResEst, Prelude in {
     V2V = Verb1 ** {c2 : Compl ; vi : InfForm} ; ---- infinitive form
     V3 = Verb1 ** {c2, c3 : Compl} ;
 
-    A  = {s : Degree => AForm => Str} ;
-    A2 = {s : Degree => AForm => Str ; c2 : Compl} ;
+    A  = Adjective ** {infl : Bool} ;
+    A2 = A ** {c2 : Compl} ;
 
-    N  = {s : NForm => Str} ;
-    N2 = {s : NForm => Str} ** {c2 : Compl ; isPre : Bool} ;
-    N3 = {s : NForm => Str} ** {c2,c3 : Compl ; isPre,isPre2 : Bool} ;
+    N  = CommonNoun ;
+    N2 = CommonNoun ** {c2 : Compl ; isPre : Bool} ;
+    N3 = CommonNoun ** {c2,c3 : Compl ; isPre,isPre2 : Bool} ;
     PN = {s : Case  => Str} ;
 
 oper Verb1 = Verb ** { sc : NPForm} ; --what is this for? --subject case, i.e. "ma näen kassi"/"mul on kass"

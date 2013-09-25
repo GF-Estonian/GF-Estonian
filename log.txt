@@ -447,7 +447,7 @@ Should this be in the grammar? Do the inflected forms appear as modifiers at all
   three books are eaten    three books aren't eaten
   kolme raamatut süüakse   kolme raamatut ei sööda
 
-  three books have been eaten     kolme raamatut ollakse söödud
+  three books have been eaten     three books haven't been eaten
   kolme raamatut ollakse söödud   kolme raamatut ei ole söödud
   
   read a book        don't read a book
@@ -457,167 +457,32 @@ Should this be in the grammar? Do the inflected forms appear as modifiers at all
   loe kolm raamatut  ära loe kolme raamatut
 
 
-4) Some word order changes in ResEst.infVP, intended to make "kassi tahtnud näha" -> "kassi näha tahtnud". Following is produced by the grammar:
+4) Some word order changes in (ResEst) infVP and mkClause, to make "kassi tahtnud näha" -> "kassi näha tahtnud". 
+Also changed the place of negation in ResEst.predV: now the grouping is [ei ole] [tahtnud] or [ei taha] [näha]. 
+For "ei ole (midagi) näha tahtnud", the verb "näha" is placed into the `compl' field of the VP in previous infVP call. So [ei ole] midagi näha [tahtnud].
 
-s/he sees three cats: SDecl, SQuest, SInv
------------------------------------------
-  
-tema näeb kolm kassi
-kas tema näeb kolm kassi
-tema näeb kolm kassi
+Some examples of word orders that mkClause produces.
+                   näen
+                   ei taha
+                   tahan             sind              näha
+                   saan              sinust     aru    0
+         ma        olen     täna     sinust     aru    saanud                 
+declCl = c.subj ++ c.fin ++ c.adv ++ c.compl ++ c.p ++ c.inf ++ c.ext ;
 
-tema ei näe kolme kassi
-kas tema ei näe kolme kassi
-tema ei kolme kassi näe
+                                  [sind näha]  0      tahtnud  
+        täna     olen     ma        sinust     aru    saanud
+invCl = c.adv ++ c.fin ++ c.subj ++ c.compl ++ c.p ++ c.inf ++ c.ext 
 
-tema on näinud kolm kassi
-kas tema on näinud kolm kassi
-tema on kolm kassi näinud
+How about sentences that are inverted this way?
 
-tema ei ole näinud kolme kassi
-kas tema ei ole näinud kolme kassi
-tema ei kolme kassi ole näinud
+	kui palju   sul    (täna)? aega          on olnud/olnud on?
+???Cl = question ++ subj ++ adv ++ compl ++ p ++ fin++inf/inf++fin ++ ext
 
-tema nägi kolm kassi
-kas tema nägi kolm kassi
-tema nägi kolm kassi
+Lang> p "how many cats do I have" | l
+how many cats do I have
+kui palju kassi minul on
 
-tema ei näinud kolme kassi
-kas tema ei näinud kolme kassi
-tema ei kolme kassi näinud
-
-tema oli näinud kolm kassi
-kas tema oli näinud kolm kassi
-tema oli kolm kassi näinud
-
-tema ei olnud näinud kolme kassi
-kas tema ei olnud näinud kolme kassi
-tema ei kolme kassi olnud näinud
-
-tema näeks kolm kassi
-kas tema näeks kolm kassi
-tema näeks kolm kassi
-
-tema ei näeks kolme kassi
-kas tema ei näeks kolme kassi
-tema ei kolme kassi näeks
-
-tema oleks näinud kolm kassi
-kas tema oleks näinud kolm kassi
-tema oleks kolm kassi näinud
-
-tema ei oleks näinud kolme kassi
-kas tema ei oleks näinud kolme kassi
-tema ei kolme kassi oleks näinud
-
-
-s/he wants to see three cats: SDecl, SQuest, SInv
--------------------------------------------------
-
-tema tahab kolm kassi näha
-kas tema tahab kolm kassi näha
-tema tahab kolm kassi näha
-
-tema ei taha kolme kassi näha
-kas tema ei taha kolme kassi näha
-tema ei kolme kassi näha taha
-
-tema on tahtnud kolm kassi näha
-kas tema on tahtnud kolm kassi näha
-tema on kolm kassi näha tahtnud
-
-tema ei ole tahtnud kolme kassi näha
-kas tema ei ole tahtnud kolme kassi näha
-tema ei kolme kassi näha ole tahtnud
-
-tema tahtis kolm kassi näha
-kas tema tahtis kolm kassi näha
-tema tahtis kolm kassi näha
-
-tema ei tahtnud kolme kassi näha
-kas tema ei tahtnud kolme kassi näha
-tema ei kolme kassi näha tahtnud
-
-tema oli tahtnud kolm kassi näha
-kas tema oli tahtnud kolm kassi näha
-tema oli kolm kassi näha tahtnud
-
-tema ei olnud tahtnud kolme kassi näha
-kas tema ei olnud tahtnud kolme kassi näha
-tema ei kolme kassi näha olnud tahtnud
-
-tema tahaks kolm kassi näha
-kas tema tahaks kolm kassi näha
-tema tahaks kolm kassi näha
-
-tema ei tahaks kolme kassi näha
-kas tema ei tahaks kolme kassi näha
-tema ei kolme kassi näha tahaks
-
-tema oleks tahtnud kolm kassi näha
-kas tema oleks tahtnud kolm kassi näha
-tema oleks kolm kassi näha tahtnud
-
-tema ei oleks tahtnud kolme kassi näha
-kas tema ei oleks tahtnud kolme kassi näha
-tema ei kolme kassi näha oleks tahtnud
-
-__________
-
-SInv is not good with compound forms. infVP already attaches VP ("kolm kassi näha" to the `compl' field of a clause.
-
-Let's add an adverb:
-
-tema tahab kolm kassi näha alati
-tema tahab alati kolm kassi näha
-
-tema ei taha kolme kassi näha alati
-tema ei alati kolme kassi näha taha
-
-tema on tahtnud kolm kassi näha alati
-tema on alati kolm kassi näha tahtnud
-
-tema ei ole tahtnud kolme kassi näha alati
-tema ei alati kolme kassi näha ole tahtnud
-
-tema tahtis kolm kassi näha alati
-tema tahtis alati kolm kassi näha
-
-tema ei tahtnud kolme kassi näha alati
-tema ei alati kolme kassi näha tahtnud
-
-tema oli tahtnud kolm kassi näha alati
-tema oli alati kolm kassi näha tahtnud
-
-tema ei olnud tahtnud kolme kassi näha alati
-tema ei alati kolme kassi näha olnud tahtnud
-
-tema tahaks kolm kassi näha alati
-tema tahaks alati kolm kassi näha
-
-tema ei tahaks kolme kassi näha alati
-tema ei alati kolme kassi näha tahaks
-
-tema oleks tahtnud kolm kassi näha alati
-tema oleks alati kolm kassi näha tahtnud
-
-tema ei oleks tahtnud kolme kassi näha alati
-tema ei alati kolme kassi näha oleks tahtnud
-
-
-Also, multiple attachment possibilities for adverbs, e.g. in the following the adv attaches to the VPSlash "nägema", so already the unit "täna näha" is fixed, before any cats and insertObject calls. 
-
-tema ei näe kassi täna
-tema ei kassi täna näe
-
-tema tahab kolm kassi täna näha
-tema tahab kolm kassi täna näha
-
-tema ei taha kolme kassi täna näha
-tema ei kolme kassi täna näha taha
-
-tema on tahtnud kolm kassi täna näha
-tema on kolm kassi täna näha tahtnud
+Is this also acceptable?
 
 5) Changed the name of the part field to p, because the Finnish grammar also has it as p. 
 In addition, `part' is already used as an abbreviation for participle and partitive.
@@ -627,3 +492,42 @@ _______
 6) For the lulz: a quote by John McWhorter from his book Linguistic simplicity and complexity (books.google.se/books?isbn=1934078379).
 
 "Importantly, I have by no means chosen the most baroque comparison possible. Partitive marking in Finnish's close sister Estonian is so much more elaborate in terms of complex interaction with its notoriously complex consonant gradations plus rampant irregularity that its very learnability seems almost questionable."
+
+
+Inari 25.9.
+-----------
+1) Created test cases for word order; see tests/wordorder.gfs
+
+2) Added a field to A and AP to show whether it inflects as a modifier.
+
+    A  = {s : Degree => AForm => Str ; infl : Bool} ;
+    AP = {s : Bool => NForm => Str   ; infl : Bool} ;     
+
+ParadigmsEst.mkA: if no infl specified, by default mkA builds an inflecting adjective.
+
+    mkA : N -> A = \n -> noun2adjDeg n ** {infl = True} ;
+    mkA : N -> Bool -> A = \n,infl -> noun2adjDeg n ** {infl = infl} ;
+
+NounEst.AdjCN checks whether the AP inflects or not, and chooses the right form. 
+
+   AdjCN ap cn = {
+      s = \\nf => 
+        case ap.infl of {
+          False => ap.s ! True ! (NCase Sg Nom) ++ cn.s ! nf ;
+          True => case nf of { ...} 
+          } 
+seotud maja     seotud majad
+seotud maja     seotud majade
+seotud maja     seotud majasid
+seotud majasse  seotud majadesse
+seotud majas    seotud majades
+seotud majast   seotud majadest
+seotud majale   seotud majadele
+seotud majal    seotud majadel
+seotud majalt   seotud majadelt
+seotud majaks   seotud majadeks
+seotud majana   seotud majadena
+seotud majani   seotud majadeni
+seotud majata   seotud majadeta
+seotud majaga   seotud majadega
+
