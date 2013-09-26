@@ -143,6 +143,7 @@ oper
 -- The comparative and the superlative
 -- are always inflected in the same way, so the nominative of them is actually
 -- enough (TODO: confirm).
+-- TODO: update these types to include the new boolean non-inflection marker
 
   mkA : overload {
     mkA : Str -> A ;  -- regular noun made into adjective
@@ -404,8 +405,11 @@ oper
   mkA = overload {
     mkA : Str -> A  = mkA_1 ;
     mkA : N -> A = \n -> noun2adjDeg n ** {infl = True ; lock_A = <>} ;
-    mkA : N -> (kivempaa,kivinta : Str) -> A = regAdjective ;
+    mkA : N -> (parem,parim : Str) -> A = regAdjective ;
     mkA : N -> (infl : Bool) -> A = \n,infl -> noun2adjDeg n ** {infl = infl ; lock_A = <>} ;
+    -- TODO: temporary usage of regAdjective1
+    mkA : N -> (valmim,valmeim : Str) -> (infl : Bool) -> A =
+		\n,c,s,infl -> (regAdjective1 n c s) ** {infl = infl ; lock_A = <>} ;
     mkA : (sana : AW) -> A = \w -> noun2adjDeg (nForms2N w.s) ** {infl = True} ;
   } ;
 
@@ -429,6 +433,11 @@ oper
       (noun2adj posit) 
       (noun2adjComp False (hjk_type_IVb_audit compar "a"))
       (noun2adjComp False (hjk_type_IVb_audit superl "a")) ;
+
+  -- TODO: this is a temporary hack that converts A ~> Adjective.
+  -- The caller needs this otherwise ** fails.
+  -- This should be cleaned up but I don't know how (K).
+  regAdjective1 : Noun -> Str -> Str -> Adjective = regAdjective ;
 
   -- Adjectives whose comparison forms can be derived from the sg gen.
   -- In case of comparative this fails only for 70 adjectives.

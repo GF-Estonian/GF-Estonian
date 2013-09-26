@@ -49,7 +49,7 @@ lin
   child_N = mkN "laps" "lapse" "last" "lapsesse" "laste" "lapsi" ;
   church_N = mkN "kirik" ;
   city_N = mkN "linn" ;
-  clean_A = mkA "puhas" ;
+  clean_A = mkA (mkN "puhas" "puhta" "puhast" "puhtasse" "puhaste" "puhtaid");
   clever_A = mkA "tark" ;
   close_V2 = mkV2 (mkV "sulgema") ;
   coat_N = mkN "mantel" ;
@@ -232,7 +232,7 @@ lin
   correct_A = mkA "õige" ;
   dry_A = mkA "kuiv" ;
   dull_A = mkA "igav" ;
-  full_A = mkA "täis" ;
+  full_A = mkA (mkN "täis") "täiem" "täiim" False ; -- 'täis' is one of the non-inflecting adjectives
   heavy_A = mkA "raske" ;
   near_A = mkA "lähedane" ;
   rotten_A = mkA "mäda" ;
@@ -358,7 +358,7 @@ lin
 
   john_PN = mkPN "Juhan" ;
   question_N = mkN "küsimus" ;
-  ready_A = mkA "valmis" ;
+  ready_A = mkA (mkN "valmis") "valmim" "valmeim" False ; -- 'valmis' is one of the non-inflecting adjectives
   reason_N = mkN "põhjus" ;
   today_Adv = mkAdv "täna" ;
   uncertain_A = mkA "ebakindel" ;

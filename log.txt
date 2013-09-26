@@ -531,3 +531,38 @@ seotud majani   seotud majadeni
 seotud majata   seotud majadeta
 seotud majaga   seotud majadega
 
+
+Kaarel 26.09
+------------
+
+Went through the Lexicon and tagged two adjectives ('full' and 'ready')
+as non-inflecting.
+
+Added oper "N -> Str -> Str -> Bool" which supports the comparison forms.
+The implementation of this oper is a bit hackish, due to the fact that
+I still don't have complete understanding of lock fields.
+
+Also found two bugs.
+
+1. TODO: fix coordination which still applies the inflection.
+
+Lang> p -cat=NP "valmis kassidena"
+OK
+
+Lang> p -cat=NP "valmiste kassidena"
+OK: The parser failed at token "kassidena"
+
+Lang> p -cat=NP "valmis ja suurte kassidena"
+The parser failed at token "kassidena"
+TODO: Should not fail.
+
+Lang> p -cat=NP "valmiste ja suurte kassidena"
+TODO: Should fail.
+
+2. TODO: fix: in comparative/superlative the adjective should start inflecting again:
+
+Lang> p -cat=NP "valmimale kassile"
+TODO: Should not fail.
+
+p -cat=NP "valmim kassile"
+TODO: Should fail.
