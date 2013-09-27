@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #coding=utf8
 
-# Picks 8 verb forms out of the Filsoft morph. synth. (etsyn) output format.
+# Picks 8 verb forms out of the Filosoft morph. synth. (etsyn) output format.
 #
 # Usage:
 #

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Picks 6 noun forms out of the Filsoft morph. synth. (etsyn) output format.
+# Picks 6 noun forms out of the Filosoft morph. synth. (etsyn) output format.
 #
 # Usage:
 #
