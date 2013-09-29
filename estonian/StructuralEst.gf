@@ -62,7 +62,7 @@ concrete StructuralEst of Structural = CatEst **
   more_CAdv = X.mkCAdv "rohkem" "kui" ;
   most_Predet = {s = \\n,c => (nForms2N (dSuurin "MOST")).s ! NCase n (npform2case n c)} ;
   much_Det = mkDet Sg {s = \\_ => "palju"} ;
-  must_VV = mkVVf (mkV "pidama") infMa ;
+  must_VV = mkVVf (mkV "pidama" "pidada" "peab" "peetakse" "pidage" "pidi" "pidanud" "peetud") infMa ;
   no_Utt = ss "ei" ;
   on_Prep = casePrep adessive ;
 ---  one_Quant = mkDet Sg  DEPREC
@@ -127,7 +127,7 @@ concrete StructuralEst of Structural = CatEst **
   too_AdA = ss "liiga" ;
   to_Prep = casePrep allative ;
   under_Prep = postGenPrep "all" ;
-  very_AdA = ss "eriti" ;
+  very_AdA = ss "väga" ;
   want_VV = mkVV (mkV "tahtma") ;
   we_Pron = mkPronoun "meie" "meie" "meid" Pl P1 ;
   whatPl_IP = {

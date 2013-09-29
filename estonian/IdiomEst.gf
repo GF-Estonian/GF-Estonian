@@ -24,8 +24,9 @@ concrete IdiomEst of Idiom = CatEst **
         } ;
 
 -- Notice the nominative in the cleft $NP$: "se on Matti josta Liisa pitÃ¤Ã¤"
+-- Est: "see on Mati, kellest Liis lugu peab"
 
-    CleftNP np rs = mkClause (\_ -> "se") (agrP3 Sg) 
+    CleftNP np rs = mkClause (\_ -> "see") (agrP3 Sg)
       (insertExtrapos (rs.s ! np.a)
         (insertObj (\\_,_,_ => np.s ! NPCase Nom) (predV olla))) ;
 

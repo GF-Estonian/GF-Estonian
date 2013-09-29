@@ -3,23 +3,23 @@ LangEst: soe
 
 
 Lang: ComparA warm_A (UsePron i_Pron)
-LangEst: minust soem
+LangEst: minust soojem
 
 
 Lang: ComplA2 married_A2 (UsePron she_Pron)
-LangEst: tema kanssa avioitunut
+LangEst: temaga abielus
 
 
 Lang: ComplA2 married_A2 (DetNP (DetQuant (PossPron she_Pron) NumPl))
-LangEst: tema kanssa avioitunut
+LangEst: tema abielus
 
 
 Lang: ComplA2 married_A2 (DetNP (DetQuant (PossPron she_Pron) NumSg))
-LangEst: tema kanssa avioitunut
+LangEst: tema abielus
 
 
 Lang: ReflA2 married_A2
-LangEst: enda kanssa avioitunut
+LangEst: endaga abielus
 
 
 Couldn't match expected type A
@@ -30,11 +30,11 @@ LangEst: hea et tema on siin
 
 
 Lang: AdAP very_AdA (PositA warm_A)
-LangEst: eriti soe
+LangEst: väga soe
 
 
 Lang: PositAdvAdj warm_A
-LangEst: soelt
+LangEst: soojalt
 
 
 Lang: PrepNP in_Prep (DetCN (DetQuant DefArt NumSg) (UseN house_N))
@@ -42,11 +42,11 @@ LangEst: majas
 
 
 Lang: ComparAdvAdj more_CAdv warm_A (UsePN john_PN)
-LangEst: rohkem soelt kui Juhan
+LangEst: rohkem soojalt kui Juhan
 
 
 Lang: ComparAdvAdjS more_CAdv warm_A (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron he_Pron) (UseV run_V)))
-LangEst: rohkem soelt kui tema jookseb
+LangEst: rohkem soojalt kui tema jookseb
 
 
 Lang: SubjS when_Subj (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron she_Pron) (UseV sleep_V)))
@@ -58,7 +58,7 @@ LangEst: rohkem kui viis
 
 
 Lang: ConjS and_Conj (BaseS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron he_Pron) (UseV walk_V))) (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron she_Pron) (UseV run_V))))
-LangEst: tema kõndib ja tema jookseb
+LangEst: tema kõnnib ja tema jookseb
 
 
 Lang: ConjAP and_Conj (BaseAP (PositA cold_A) (PositA warm_A))
@@ -74,11 +74,11 @@ LangEst: siin või seal
 
 
 Lang: ConjS either7or_DConj (BaseS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron he_Pron) (UseV walk_V))) (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron she_Pron) (UseV run_V))))
-LangEst: kas tema kõndib või tema jookseb
+LangEst: kas tema kõnnib või tema jookseb
 
 
 Lang: ConjAP both7and_DConj (BaseAP (PositA warm_A) (PositA cold_A))
-LangEst: sekä soe että külm
+LangEst: nii soe kui ka külm
 
 
 Lang: ConjNP either7or_DConj (BaseNP (UsePron he_Pron) (UsePron she_Pron))
@@ -86,7 +86,7 @@ LangEst: kas tema või tema
 
 
 Lang: ConjAdv both7and_DConj (BaseAdv here_Adv there_Adv)
-LangEst: sekä siin että seal
+LangEst: nii siin kui ka seal
 
 
 Lang: ImpersCl (UseComp (CompAP (PositA hot_A)))
@@ -98,19 +98,19 @@ LangEst: magatakse
 
 
 Lang: CleftNP (UsePron i_Pron) (UseRCl (TTAnt TPast ASimul) PPos (RelVP IdRP (ComplSlash (SlashV2a do_V2) (UsePron it_Pron))))
-LangEst: se on mina kes tegin selle
+LangEst: see on mina kes tegin selle
 
 
 Lang: CleftAdv here_Adv (UseCl (TTAnt TPast ASimul) PPos (PredVP (UsePron she_Pron) (UseV sleep_V)))
-LangEst: se on siin kun tema magas
+LangEst: see on siin kus tema magas
 
 
 Lang: ExistNP (DetCN (DetQuant IndefArt NumSg) (UseN house_N))
-LangEst: on olemassa maja
+LangEst: on olemas maja
 
 
 Lang: ExistIP (IdetCN (IdetQuant which_IQuant NumPl) (UseN house_N))
-LangEst: mis majad on olemassa
+LangEst: mis majad on olemas
 
 
 Lang: PredVP (UsePron i_Pron) (ProgrVP (UseV sleep_V))
@@ -138,7 +138,7 @@ LangEst: ainult mees
 
 
 Lang: PPartNP (DetCN (DetQuant DefArt NumSg) (UseN man_N)) see_V2
-LangEst: mees nähtuna
+LangEst: mees nähtud
 
 
 Lang: AdvNP (UsePN paris_PN) today_Adv
@@ -194,7 +194,7 @@ LangEst: viies &+ kümnes esimene
 
 
 Lang: OrdSuperl warm_A
-LangEst: kõige soem
+LangEst: kõige soojem
 
 
 Lang: DetCN (DetQuantOrd DefArt (NumCard (NumNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5))))))) (OrdSuperl good_A)) (UseN man_N)
@@ -234,11 +234,11 @@ LangEst: maja
 
 
 Lang: ComplN2 mother_N2 (DetCN (DetQuant DefArt NumSg) (UseN king_N))
-LangEst: kuningase ema
+LangEst: kuninga ema
 
 
 Lang: ComplN2 (ComplN3 distance_N3 (DetCN (DetQuant this_Quant NumSg) (UseN city_N))) (UsePN paris_PN)
-LangEst: kaugus sellest linnist Pariisesse
+LangEst: kaugus sellest linnist Pariisi
 
 
 Lang: UseN2 mother_N2
@@ -250,7 +250,7 @@ LangEst: kaugus sellest linnist
 
 
 Lang: ComplN2 (Use3N3 distance_N3) (UsePN paris_PN)
-LangEst: kaugus Pariisesse
+LangEst: kaugus Pariisi
 
 
 Lang: UseN2 (Use2N3 distance_N3)
@@ -342,7 +342,7 @@ LangEst: aga tule , minu sõber
 
 
 Lang: PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePN john_PN) (UseV walk_V)))) NoVoc
-LangEst: Juhan kõndib
+LangEst: Juhan kõnnib
 
 
 Lang: UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron it_Pron) (UseComp (CompAP (PositA good_A))))))
@@ -390,11 +390,11 @@ LangEst: , minu sõber
 
 
 Lang: QuestCl (PredVP (UsePN john_PN) (UseV walk_V))
-LangEst: kas Juhan kõndib
+LangEst: kas Juhan kõnnib
 
 
 Lang: QuestVP whoSg_IP (UseV walk_V)
-LangEst: kes kõndib
+LangEst: kes kõnnib
 
 
 Lang: QuestSlash whoSg_IP (SlashVP (UsePN john_PN) (SlashV2a love_V2))
@@ -402,7 +402,7 @@ LangEst: keda Juhan armastab
 
 
 Lang: QuestIAdv why_IAdv (PredVP (UsePN john_PN) (UseV walk_V))
-LangEst: miks Juhan kõndib
+LangEst: miks Juhan kõnnib
 
 
 Lang: QuestIComp (CompIAdv where_IAdv) (UsePN john_PN)
@@ -418,7 +418,7 @@ LangEst: mis viis
 
 
 Lang: AdvIP whoSg_IP (PrepNP in_Prep (UsePN paris_PN))
-LangEst: kes Pariises
+LangEst: kes Pariisis
 
 
 Lang: IdetIP (IdetQuant which_IQuant NumSg)
@@ -426,7 +426,7 @@ LangEst: mis
 
 
 Lang: PrepIP with_Prep whoSg_IP
-LangEst: kelle koos
+LangEst: koos kellega
 
 
 Lang: QuestIComp (CompIAdv where_IAdv) (UsePron it_Pron)
@@ -438,23 +438,23 @@ LangEst: kes see on
 
 
 Lang: ExistNP (DetCN (DetQuant IndefArt NumSg) (RelCN (UseN woman_N) (UseRCl (TTAnt TPres ASimul) PPos (RelCl (PredVP (UsePN john_PN) (ComplSlash (SlashV2a love_V2) (UsePron she_Pron)))))))
-LangEst: on olemassa naine siten että Juhan armastab teda
+LangEst: on olemas naine nii et Juhan armastab teda
 
 
 Lang: ExistNP (DetCN (DetQuant IndefArt NumSg) (RelCN (UseN woman_N) (UseRCl (TTAnt TPres ASimul) PPos (RelVP IdRP (ComplSlash (SlashV2a love_V2) (UsePN john_PN))))))
-LangEst: on olemassa naine kes armastab Juhani
+LangEst: on olemas naine kes armastab Juhanit
 
 
 Lang: ExistNP (DetCN (DetQuant IndefArt NumSg) (RelCN (UseN woman_N) (UseRCl (TTAnt TPres ASimul) PPos (RelSlash IdRP (SlashVP (UsePN john_PN) (SlashV2a love_V2))))))
-LangEst: on olemassa naine keda Juhan armastab
+LangEst: on olemas naine keda Juhan armastab
 
 
 Lang: ExistNP (DetCN (DetQuant IndefArt NumSg) (RelCN (UseN woman_N) (UseRCl (TTAnt TPres ASimul) PPos (RelSlash (FunRP possess_Prep (DetCN (DetQuant DefArt NumSg) (UseN2 mother_N2)) IdRP) (SlashVP (UsePN john_PN) (SlashV2a love_V2))))))
-LangEst: on olemassa naine kelle ema Juhan armastab
+LangEst: on olemas naine kelle ema Juhan armastab
 
 
 Lang: PredVP (UsePN john_PN) (UseV walk_V)
-LangEst: Juhan kõndib
+LangEst: Juhan kõnnib
 
 
 Lang: PredSCVP (EmbedS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron she_Pron) (UseV go_V)))) (UseComp (CompAP (PositA good_A)))
@@ -470,11 +470,11 @@ LangEst: tüdruk kelle tema näeb täna
 
 
 Lang: RelCN (UseN girl_N) (UseRCl (TTAnt TPres ASimul) PPos (RelSlash IdRP (SlashPrep (PredVP (UsePron he_Pron) (UseV walk_V)) with_Prep)))
-LangEst: tüdruk kelle koos tema kõndib
+LangEst: tüdruk koos kellega tema kõnnib
 
 
 Lang: RelCN (UseN girl_N) (UseRCl (TTAnt TPres ASimul) PPos (RelSlash IdRP (SlashVS (UsePron she_Pron) say_VS (UseSlash (TTAnt TPres ASimul) PPos (SlashVP (UsePron he_Pron) (SlashV2a love_V2))))))
-LangEst: tüdruk keda tema sanb että tema armastab
+LangEst: tüdruk keda tema ütleb et tema armastab
 
 
 Lang: ImpVP (ReflVP (SlashV2a love_V2))
@@ -506,7 +506,7 @@ LangEst: tüdruk kes ei oleks kõndinud
 
 
 Lang: RelCN (UseN girl_N) (UseRCl (TTAnt TCond AAnter) PNeg (RelSlash IdRP (SlashPrep (PredVP (UsePron i_Pron) (UseV walk_V)) with_Prep)))
-LangEst: tüdruk kelle koos mina ei oleks kõndinud
+LangEst: tüdruk koos kellega mina ei oleks kõndinud
 
 
 Lang: RelS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron she_Pron) (UseV sleep_V))) (UseRCl (TTAnt TPres ASimul) PPos (RelVP IdRP (UseComp (CompAP (PositA good_A)))))
@@ -518,7 +518,7 @@ LangEst:
 
 
 Lang: TFullStop (PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePN john_PN) (UseV walk_V)))) NoVoc) TEmpty
-LangEst: Juhan kõndib .
+LangEst: Juhan kõnnib .
 
 
 Lang: TQuestMark (PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (UsePron they_Pron) (UseComp (CompAdv here_Adv)))))) NoVoc) TEmpty
@@ -538,15 +538,15 @@ LangEst: mina tahan joosta
 
 
 Lang: PredVP (UsePron i_Pron) (ComplVS say_VS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron she_Pron) (UseV run_V))))
-LangEst: mina sann et tema jookseb
+LangEst: mina ütlen et tema jookseb
 
 
 Lang: PredVP (UsePron i_Pron) (ComplVQ wonder_VQ (UseQCl (TTAnt TPres ASimul) PPos (QuestVP whoSg_IP (UseV run_V))))
-LangEst: mina ihmeteln kes jookseb
+LangEst: mina arutlen kes jookseb
 
 
 Lang: PredVP (UsePron they_Pron) (ComplVA become_VA (PositA red_A))
-LangEst: nemad muutuvad punasteks
+LangEst: nendest saab punased
 
 
 Lang: PredVP (UsePron i_Pron) (ComplSlash (Slash3V3 give_V3 (UsePron he_Pron)) (UsePron it_Pron))
@@ -554,7 +554,7 @@ LangEst:
 
 
 Lang: PredVP (UsePron i_Pron) (ComplSlash (SlashV2V beg_V2V (UseV go_V)) (UsePron she_Pron))
-LangEst: mina pyytn teda minema
+LangEst: mina palun teda minema
 
 
 Lang: PredVP (UsePron i_Pron) (ComplSlash (SlashV2S answer_V2S (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron it_Pron) (UseComp (CompAP (PositA good_A)))))) (UsePron he_Pron))
@@ -598,7 +598,7 @@ LangEst: meie magame alati
 
 
 Lang: PredVP (UsePron we_Pron) (UseComp (CompAP (PositA small_A)))
-LangEst: meie oleme väikeid
+LangEst: meie oleme väiksed
 
 
 Lang: PredVP (UsePron i_Pron) (UseComp (CompNP (DetCN (DetQuant IndefArt NumSg) (UseN man_N))))
@@ -614,11 +614,11 @@ LangEst:
 
 
 Lang: PhrUtt NoPConj (UttImpSg PPos (ImpVP (AdVVP always_AdV (ComplSlash (SlashV2a listen_V2) (DetCN (DetQuant DefArt NumSg) (UseN sea_N)))))) NoVoc
-LangEst: kuunnel meri
+LangEst: kuula meri
 
 
 Lang: PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (ExistNP (PredetNP only_Predet (DetCN (DetQuant IndefArt (NumCard (NumNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))))) (AdvCN (RelCN (UseN woman_N) (UseRCl (TTAnt TCond ASimul) PPos (RelSlash IdRP (SlashPrep (PredVP (UsePron i_Pron) (ComplVV want_VV (PassV2 see_V2))) with_Prep)))) (PrepNP in_Prep (DetCN (DetQuant DefArt NumSg) (UseN rain_N))))))))) NoVoc
-LangEst: on olemassa ainult kaks naist kelle koos mind tahaks nähakse vihmis
+LangEst: on olemas ainult kaks naist koos kellega mind tahaks nähakse vihmis
 
 
 Lang: PhrUtt NoPConj (UttImpSg PPos (ImpVP (ComplSlash (SlashV2A paint_V2A (ConjAP both7and_DConj (BaseAP (ComparA small_A (DetCN (DetQuant DefArt NumSg) (UseN sun_N))) (ComparA big_A (DetCN (DetQuant DefArt NumSg) (UseN moon_N)))))) (DetCN (DetQuant DefArt NumSg) (UseN earth_N))))) NoVoc
@@ -638,7 +638,7 @@ LangEst: kas siit , seal või kõikjal
 
 
 Lang: PhrUtt NoPConj (UttVP (PassV2 know_V2)) NoVoc
-LangEst: tunttakse
+LangEst: tuntakse
 
 
 Lang: RelCN (UseN bird_N) (UseRCl (TTAnt TPres ASimul) PPos (RelSlash IdRP (SlashVP (UsePron i_Pron) (SlashVV want_VV (SlashV2A paint_V2A (PositA red_A))))))
@@ -646,7 +646,7 @@ LangEst:
 
 
 Lang: UttImpSg PPos (ImpVP (ComplVV want_VV (ComplSlash (SlashV2a buy_V2) (UsePron it_Pron))))
-LangEst: taha osta selle
+LangEst: taha selle osta
 
 
 Lang: UttImpSg PPos (ImpVP (ComplVV want_VV (ComplSlash (SlashV2A paint_V2A (PositA red_A)) (UsePron it_Pron))))
@@ -662,11 +662,11 @@ LangEst:
 
 
 Lang: PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron i_Pron) (ReflVP (SlashV2V beg_V2V (UseV live_V)))))) NoVoc
-LangEst: mina pyytn ennast elama
+LangEst: mina palun ennast elama
 
 
 Lang: PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron i_Pron) (ReflVP (SlashV2S answer_V2S (UseCl (TTAnt TPres ASimul) PPos (ImpersCl (ComplVV must_VV (ReflVP (SlashV2a understand_V2)))))))))) NoVoc
-LangEst: mina vastan endale et pidab saada ise aru
+LangEst: mina vastan endale et peab endast aru saama
 
 
 Lang: PhrUtt NoPConj (UttImpSg PPos (ImpVP (ReflVP (SlashV2Q ask_V2Q (UseQCl (TTAnt TPast ASimul) PPos (QuestVP whoSg_IP (UseV come_V))))))) NoVoc
@@ -678,10 +678,10 @@ LangEst:
 
 
 Lang: UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN grammar_N)) (ComplSlash (SlashV2a speak_V2) (DetCN (DetQuant IndefArt (NumCard (NumNumeral (num (pot2as3 (pot1as2 (pot1to19 n2))))))) (UseN language_N)))))
-LangEst: see grammatika puhb kahte &+ teist keeli
+LangEst: see grammatika rääkib kahte &+ teist keeli
 
 
 Lang: UseCl (TTAnt TPast AAnter) PPos (PredVP (UsePron she_Pron) (ComplSlash (SlashV2a buy_V2) (DetCN (DetQuant IndefArt NumSg) (AdjCN (PositA red_A) (UseN house_N)))))
-LangEst: tema oli ostnud punase maja
+LangEst: tema oli punase maja ostnud
 
 
