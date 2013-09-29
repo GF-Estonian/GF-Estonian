@@ -1,5 +1,3 @@
---# -path=.:abstract:common:prelude
-
 concrete ExtraEst of ExtraEstAbs = CatEst ** 
   open ResEst, MorphoEst, Coordination, Prelude, NounEst, StructuralEst, (R = ParamX) in {
 

@@ -1,5 +1,3 @@
---# -path=.:../abstract:../common:prelude
-
 concrete GrammarEst of Grammar = 
   NounEst, 
   VerbEst, 

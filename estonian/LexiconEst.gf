@@ -1,5 +1,3 @@
---# -path=.:../abstract:../common
-
 concrete LexiconEst of Lexicon = CatEst ** open MorphoEst, ParadigmsEst, Prelude in {
 
 flags 

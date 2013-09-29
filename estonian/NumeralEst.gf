@@ -1,5 +1,3 @@
---# -path=.:../abstract:../common:../../prelude
-
 concrete NumeralEst of Numeral = CatEst [Numeral,Digits] **  open Prelude, ParadigmsEst, MorphoEst in {
 
 -- Notice: possessive forms are not used. They get wrong, since every

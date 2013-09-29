@@ -1,5 +1,3 @@
---# -path=.:../abstract:../common:../../prelude
-
 --1 Estonian Lexical Paradigms
 --
 -- Based on the Finnish Lexical Paradigms by Aarne Ranta 2003--2008

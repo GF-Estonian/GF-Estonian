@@ -1,5 +1,3 @@
---# -path=.:../abstract:../common:../prelude
-
 -- TODO: include the full GrammarEst
 -- The Slash* is currently excluded only for performance reasons.
 concrete LangEst of Lang =

@@ -1,5 +1,3 @@
---# -path=.:../common:../prelude
-
 --1 A Simple Estonian Resource Morphology
 --
 -- Aarne Ranta, Inari Listenmaa, Kaarel Kaljurand

@@ -1,5 +1,3 @@
---# -path=.:../common:../abstract
-
 resource MakeStructuralEst = open CatEst, ParadigmsEst, MorphoEst, Prelude in {
 
 oper 

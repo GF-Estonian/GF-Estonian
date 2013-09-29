@@ -1,5 +1,3 @@
---# -path=.:../abstract:../common:../../prelude
-
 --1 Estonian auxiliary operations.
 
 -- This module contains operations that are needed to make the
