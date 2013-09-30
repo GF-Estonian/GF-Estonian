@@ -1,0 +1,3510 @@
+
+ps "mkText-Phr-Punct-Text-Text"
+
+ps "mkText (mkPhr (mkQS (mkCl she_NP sleep_V))) questMarkPunct (mkText (mkPhr yes_Utt) fullStopPunct)"
+
+cc -one mkText (mkPhr (mkQS (mkCl she_NP sleep_V))) questMarkPunct (mkText (mkPhr yes_Utt) fullStopPunct)
+
+ps "*"
+
+ps "mkText-Utt-Text"
+
+ps "mkText yes_Utt"
+
+cc -one mkText yes_Utt
+
+ps "*"
+
+ps "mkText-S-Text"
+
+ps "mkText (mkS pastTense (mkCl she_NP sleep_V))"
+
+cc -one mkText (mkS pastTense (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "mkText-Cl-Text"
+
+ps "mkText (mkCl she_NP sleep_V)"
+
+cc -one mkText (mkCl she_NP sleep_V)
+
+ps "*"
+
+ps "mkText-QS-Text"
+
+ps "mkText (mkQS pastTense (mkQCl (mkCl she_NP sleep_V)))"
+
+cc -one mkText (mkQS pastTense (mkQCl (mkCl she_NP sleep_V)))
+
+ps "*"
+
+ps "mkText-Pol-Imp-Text"
+
+ps "mkText negativePol (mkImp sleep_V)"
+
+cc -one mkText negativePol (mkImp sleep_V)
+
+ps "*"
+
+ps "mkText-Text-Text-Text"
+
+ps "mkText (mkText (mkPhr (mkUtt where_IAdv)) questMarkPunct (mkText (mkPhr (mkUtt here_Adv)))) (mkText (mkPhr (mkUtt when_IAdv)) questMarkPunct (mkText (mkPhr (mkUtt now_Adv)) exclMarkPunct))"
+
+cc -one mkText (mkText (mkPhr (mkUtt where_IAdv)) questMarkPunct (mkText (mkPhr (mkUtt here_Adv)))) (mkText (mkPhr (mkUtt when_IAdv)) questMarkPunct (mkText (mkPhr (mkUtt now_Adv)) exclMarkPunct))
+
+ps "*"
+
+ps "fullStopPunct-Punct"
+
+ps "mkText (mkPhr yes_Utt) fullStopPunct"
+
+cc -one mkText (mkPhr yes_Utt) fullStopPunct
+
+ps "*"
+
+ps "questMarkPunct-Punct"
+
+ps "mkText (mkPhr yes_Utt) questMarkPunct"
+
+cc -one mkText (mkPhr yes_Utt) questMarkPunct
+
+ps "*"
+
+ps "exclMarkPunct-Punct"
+
+ps "mkText (mkPhr yes_Utt) exclMarkPunct"
+
+cc -one mkText (mkPhr yes_Utt) exclMarkPunct
+
+ps "*"
+
+ps "mkPhr-PConj-Utt-Voc-Phr"
+
+ps "mkPhr but_PConj (mkUtt (mkImp sleep_V)) (mkVoc (mkNP i_Pron friend_N))"
+
+cc -one mkPhr but_PConj (mkUtt (mkImp sleep_V)) (mkVoc (mkNP i_Pron friend_N))
+
+ps "*"
+
+ps "mkPhr-S-Phr"
+
+ps "mkPhr (mkS futureTense negativePol (mkCl she_NP sleep_V))"
+
+cc -one mkPhr (mkS futureTense negativePol (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "mkPhr-Cl-Phr"
+
+ps "mkPhr (mkCl she_NP sleep_V)"
+
+cc -one mkPhr (mkCl she_NP sleep_V)
+
+ps "*"
+
+ps "mkPhr-QS-Phr"
+
+ps "mkPhr (mkQS conditionalTense (mkQCl (mkCl she_NP sleep_V)))  "
+
+cc -one mkPhr (mkQS conditionalTense (mkQCl (mkCl she_NP sleep_V)))  
+
+ps "*"
+
+ps "mkPhr-Imp-Phr"
+
+ps "mkPhr (mkImp sleep_V)"
+
+cc -one mkPhr (mkImp sleep_V)
+
+ps "*"
+
+ps "mkPConj-Conj-PConj"
+
+ps "mkPhr (mkPConj and_Conj) (mkUtt now_Adv)"
+
+cc -one mkPhr (mkPConj and_Conj) (mkUtt now_Adv)
+
+ps "*"
+
+ps "mkVoc-NP-Voc"
+
+ps "mkPhr yes_Utt (mkVoc (mkNP i_Pron friend_N))"
+
+cc -one mkPhr yes_Utt (mkVoc (mkNP i_Pron friend_N))
+
+ps "*"
+
+ps "mkUtt-S-Utt"
+
+ps "mkUtt (mkS pastTense (mkCl she_NP sleep_V))"
+
+cc -one mkUtt (mkS pastTense (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "mkUtt-Cl-Utt"
+
+ps "mkUtt (mkCl she_NP sleep_V)"
+
+cc -one mkUtt (mkCl she_NP sleep_V)
+
+ps "*"
+
+ps "mkUtt-QS-Utt"
+
+ps "mkUtt (mkQS pastTense negativePol (mkQCl who_IP sleep_V))   "
+
+cc -one mkUtt (mkQS pastTense negativePol (mkQCl who_IP sleep_V))   
+
+ps "*"
+
+ps "mkUtt-QCl-Utt"
+
+ps "mkUtt (mkQCl who_IP sleep_V) "
+
+cc -one mkUtt (mkQCl who_IP sleep_V) 
+
+ps "*"
+
+ps "mkUtt-ImpForm-Pol-Imp-Utt"
+
+ps "mkUtt pluralImpForm negativePol (mkImp (mkVP man_N))"
+
+cc -one mkUtt pluralImpForm negativePol (mkImp (mkVP man_N))
+
+ps "*"
+
+ps "mkUtt-IP-Utt"
+
+ps "mkUtt who_IP"
+
+cc -one mkUtt who_IP
+
+ps "*"
+
+ps "mkUtt-IAdv-Utt"
+
+ps "mkUtt why_IAdv"
+
+cc -one mkUtt why_IAdv
+
+ps "*"
+
+ps "mkUtt-NP-Utt"
+
+ps "mkUtt (mkNP this_Det man_N)"
+
+cc -one mkUtt (mkNP this_Det man_N)
+
+ps "*"
+
+ps "mkUtt-Adv-Utt"
+
+ps "mkUtt here_Adv   "
+
+cc -one mkUtt here_Adv   
+
+ps "*"
+
+ps "mkUtt-VP-Utt"
+
+ps "mkUtt (mkVP sleep_V)"
+
+cc -one mkUtt (mkVP sleep_V)
+
+ps "*"
+
+ps "mkUtt-CN-Utt"
+
+ps "mkUtt (mkCN beer_N)      "
+
+cc -one mkUtt (mkCN beer_N)      
+
+ps "*"
+
+ps "mkUtt-AP-Utt"
+
+ps "mkUtt (mkAP good_A)   "
+
+cc -one mkUtt (mkAP good_A)   
+
+ps "*"
+
+ps "mkUtt-Card-Utt"
+
+ps "mkUtt (mkCard (mkNumeral n5_Unit)) "
+
+cc -one mkUtt (mkCard (mkNumeral n5_Unit)) 
+
+ps "*"
+
+ps "lets_Utt-VP-Utt"
+
+ps "mkPhr (lets_Utt (mkVP sleep_V))"
+
+cc -one mkPhr (lets_Utt (mkVP sleep_V))
+
+ps "*"
+
+ps "positivePol-Pol"
+
+ps "mkUtt (mkS positivePol (mkCl she_NP sleep_V))"
+
+cc -one mkUtt (mkS positivePol (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "negativePol-Pol"
+
+ps "mkUtt (mkS negativePol (mkCl she_NP sleep_V))"
+
+cc -one mkUtt (mkS negativePol (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "simultaneousAnt-Ant"
+
+ps "mkUtt (mkS simultaneousAnt (mkCl she_NP sleep_V))"
+
+cc -one mkUtt (mkS simultaneousAnt (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "anteriorAnt-Ant"
+
+ps "mkUtt (mkS anteriorAnt (mkCl she_NP sleep_V))"
+
+cc -one mkUtt (mkS anteriorAnt (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "presentTense-Tense"
+
+ps "mkUtt (mkS presentTense (mkCl she_NP sleep_V))"
+
+cc -one mkUtt (mkS presentTense (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "pastTense-Tense"
+
+ps "mkUtt (mkS pastTense (mkCl she_NP sleep_V))"
+
+cc -one mkUtt (mkS pastTense (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "futureTense-Tense"
+
+ps "mkUtt (mkS futureTense (mkCl she_NP sleep_V))"
+
+cc -one mkUtt (mkS futureTense (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "conditionalTense-Tense"
+
+ps "mkUtt (mkS conditionalTense (mkCl she_NP sleep_V))"
+
+cc -one mkUtt (mkS conditionalTense (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "singularImpForm-ImpForm"
+
+ps "mkUtt singularImpForm (mkImp (mkVP man_N))"
+
+cc -one mkUtt singularImpForm (mkImp (mkVP man_N))
+
+ps "*"
+
+ps "pluralImpForm-ImpForm"
+
+ps "mkUtt pluralImpForm (mkImp (mkVP man_N)) "
+
+cc -one mkUtt pluralImpForm (mkImp (mkVP man_N)) 
+
+ps "*"
+
+ps "politeImpForm-ImpForm"
+
+ps "mkUtt politeImpForm (mkImp (mkVP man_N))"
+
+cc -one mkUtt politeImpForm (mkImp (mkVP man_N))
+
+ps "*"
+
+ps "mkS-Tense-Ant-Pol-Cl-S"
+
+ps "mkUtt (mkS conditionalTense anteriorAnt negativePol (mkCl she_NP sleep_V))"
+
+cc -one mkUtt (mkS conditionalTense anteriorAnt negativePol (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "mkS-Conj-S-S-S"
+
+ps "mkUtt (mkS and_Conj (mkS (mkCl she_NP sleep_V)) (mkS (mkCl i_NP run_V)))"
+
+cc -one mkUtt (mkS and_Conj (mkS (mkCl she_NP sleep_V)) (mkS (mkCl i_NP run_V)))
+
+ps "*"
+
+ps "mkS-Conj-ListS-S"
+
+ps "mkUtt (mkS and_Conj (mkListS (mkS (mkCl she_NP sleep_V)) (mkListS (mkS (mkCl i_NP run_V)) (mkS (mkCl (mkNP youSg_Pron) walk_V)))))"
+
+cc -one mkUtt (mkS and_Conj (mkListS (mkS (mkCl she_NP sleep_V)) (mkListS (mkS (mkCl i_NP run_V)) (mkS (mkCl (mkNP youSg_Pron) walk_V)))))
+
+ps "*"
+
+ps "mkS-Adv-S-S"
+
+ps "mkUtt (mkS today_Adv (mkS (mkCl she_NP sleep_V)))"
+
+cc -one mkUtt (mkS today_Adv (mkS (mkCl she_NP sleep_V)))
+
+ps "*"
+
+ps "mkCl-NP-V-Cl"
+
+ps "mkUtt (mkCl she_NP sleep_V)"
+
+cc -one mkUtt (mkCl she_NP sleep_V)
+
+ps "*"
+
+ps "mkCl-NP-V2-NP-Cl"
+
+ps "mkUtt (mkCl she_NP love_V2 he_NP)"
+
+cc -one mkUtt (mkCl she_NP love_V2 he_NP)
+
+ps "*"
+
+ps "mkCl-NP-V3-NP-NP-Cl"
+
+ps "mkUtt (mkCl she_NP send_V3 it_NP he_NP)"
+
+cc -one mkUtt (mkCl she_NP send_V3 it_NP he_NP)
+
+ps "*"
+
+ps "mkCl-NP-VV-VP-Cl"
+
+ps "mkUtt (mkCl she_NP want_VV (mkVP sleep_V))"
+
+cc -one mkUtt (mkCl she_NP want_VV (mkVP sleep_V))
+
+ps "*"
+
+ps "mkCl-NP-VS-S-Cl"
+
+ps "mkUtt (mkCl she_NP say_VS (mkS (mkCl i_NP sleep_V)))"
+
+cc -one mkUtt (mkCl she_NP say_VS (mkS (mkCl i_NP sleep_V)))
+
+ps "*"
+
+ps "mkCl-NP-VQ-QS-Cl"
+
+ps "mkUtt (mkCl she_NP wonder_VQ (mkQS (mkQCl who_IP sleep_V)))"
+
+cc -one mkUtt (mkCl she_NP wonder_VQ (mkQS (mkQCl who_IP sleep_V)))
+
+ps "*"
+
+ps "mkCl-NP-VA-A-Cl"
+
+ps "mkUtt (mkCl she_NP become_VA old_A)"
+
+cc -one mkUtt (mkCl she_NP become_VA old_A)
+
+ps "*"
+
+ps "mkCl-NP-VA-AP-Cl"
+
+ps "mkUtt (mkCl she_NP become_VA (mkAP very_AdA old_A))"
+
+cc -one mkUtt (mkCl she_NP become_VA (mkAP very_AdA old_A))
+
+ps "*"
+
+ps "mkCl-NP-V2A-NP-A-Cl"
+
+ps "mkUtt (mkCl she_NP paint_V2A it_NP red_A)"
+
+cc -one mkUtt (mkCl she_NP paint_V2A it_NP red_A)
+
+ps "*"
+
+ps "mkCl-NP-V2A-NP-AP-Cl"
+
+ps "mkUtt (mkCl she_NP paint_V2A it_NP (mkAP red_A))"
+
+cc -one mkUtt (mkCl she_NP paint_V2A it_NP (mkAP red_A))
+
+ps "*"
+
+ps "mkCl-NP-V2S-NP-S-Cl"
+
+ps "mkUtt (mkCl she_NP answer_V2S he_NP (mkS (mkCl we_NP sleep_V)))"
+
+cc -one mkUtt (mkCl she_NP answer_V2S he_NP (mkS (mkCl we_NP sleep_V)))
+
+ps "*"
+
+ps "mkCl-NP-V2Q-NP-QS-Cl"
+
+ps "mkUtt (mkCl she_NP ask_V2Q he_NP (mkQS (mkQCl who_IP sleep_V)))"
+
+cc -one mkUtt (mkCl she_NP ask_V2Q he_NP (mkQS (mkQCl who_IP sleep_V)))
+
+ps "*"
+
+ps "mkCl-NP-V2V-NP-VP-Cl"
+
+ps "mkUtt (mkCl she_NP beg_V2V he_NP (mkVP sleep_V))"
+
+cc -one mkUtt (mkCl she_NP beg_V2V he_NP (mkVP sleep_V))
+
+ps "*"
+
+ps "mkCl-NP-A-Cl"
+
+ps "mkUtt (mkCl she_NP old_A)"
+
+cc -one mkUtt (mkCl she_NP old_A)
+
+ps "*"
+
+ps "mkCl-NP-A-NP-Cl"
+
+ps "mkUtt (mkCl she_NP old_A he_NP)"
+
+cc -one mkUtt (mkCl she_NP old_A he_NP)
+
+ps "*"
+
+ps "mkCl-NP-A2-NP-Cl"
+
+ps "mkUtt (mkCl she_NP married_A2 he_NP)"
+
+cc -one mkUtt (mkCl she_NP married_A2 he_NP)
+
+ps "*"
+
+ps "mkCl-NP-AP-Cl"
+
+ps "mkUtt (mkCl she_NP (mkAP very_AdA old_A))"
+
+cc -one mkUtt (mkCl she_NP (mkAP very_AdA old_A))
+
+ps "*"
+
+ps "mkCl-NP-NP-Cl"
+
+ps "mkUtt (mkCl she_NP (mkNP the_Det woman_N))"
+
+cc -one mkUtt (mkCl she_NP (mkNP the_Det woman_N))
+
+ps "*"
+
+ps "mkCl-NP-N-Cl"
+
+ps "mkUtt (mkCl she_NP woman_N)"
+
+cc -one mkUtt (mkCl she_NP woman_N)
+
+ps "*"
+
+ps "mkCl-NP-CN-Cl"
+
+ps "mkUtt (mkCl she_NP (mkCN old_A woman_N))"
+
+cc -one mkUtt (mkCl she_NP (mkCN old_A woman_N))
+
+ps "*"
+
+ps "mkCl-NP-Adv-Cl"
+
+ps "mkUtt (mkCl she_NP here_Adv)"
+
+cc -one mkUtt (mkCl she_NP here_Adv)
+
+ps "*"
+
+ps "mkCl-NP-VP-Cl"
+
+ps "mkUtt (mkCl she_NP (mkVP always_AdV (mkVP sleep_V)))"
+
+cc -one mkUtt (mkCl she_NP (mkVP always_AdV (mkVP sleep_V)))
+
+ps "*"
+
+ps "mkCl-N-Cl"
+
+ps "mkUtt (mkCl house_N)"
+
+cc -one mkUtt (mkCl house_N)
+
+ps "*"
+
+ps "mkCl-CN-Cl"
+
+ps "mkUtt (mkCl (mkCN old_A house_N))"
+
+cc -one mkUtt (mkCl (mkCN old_A house_N))
+
+ps "*"
+
+ps "mkCl-NP-Cl"
+
+ps "mkUtt (mkCl (mkNP many_Det house_N)  )"
+
+cc -one mkUtt (mkCl (mkNP many_Det house_N)  )
+
+ps "*"
+
+ps "mkCl-NP-RS-Cl"
+
+ps "mkUtt (mkCl she_NP (mkRS (mkRCl which_RP (mkVP sleep_V))))"
+
+cc -one mkUtt (mkCl she_NP (mkRS (mkRCl which_RP (mkVP sleep_V))))
+
+ps "*"
+
+ps "mkCl-Adv-S-Cl"
+
+ps "mkUtt (mkCl here_Adv (mkS (mkCl she_NP sleep_V)) )"
+
+cc -one mkUtt (mkCl here_Adv (mkS (mkCl she_NP sleep_V)) )
+
+ps "*"
+
+ps "mkCl-V-Cl"
+
+ps "mkUtt (mkCl rain_V0 )"
+
+cc -one mkUtt (mkCl rain_V0 )
+
+ps "*"
+
+ps "mkCl-VP-Cl"
+
+ps "mkUtt (mkCl (progressiveVP (mkVP rain_V0)))"
+
+cc -one mkUtt (mkCl (progressiveVP (mkVP rain_V0)))
+
+ps "*"
+
+ps "mkCl-SC-VP-Cl"
+
+ps "mkUtt (mkCl (mkSC (mkS (mkCl she_NP sleep_V))) (mkVP good_A))"
+
+cc -one mkUtt (mkCl (mkSC (mkS (mkCl she_NP sleep_V))) (mkVP good_A))
+
+ps "*"
+
+ps "genericCl-VP-Cl"
+
+ps "mkUtt (mkS (genericCl (mkVP sleep_V))              )"
+
+cc -one mkUtt (mkS (genericCl (mkVP sleep_V))              )
+
+ps "*"
+
+ps "mkVP-V-VP"
+
+ps "mkUtt (mkVP sleep_V) "
+
+cc -one mkUtt (mkVP sleep_V) 
+
+ps "*"
+
+ps "mkVP-V2-NP-VP"
+
+ps "mkUtt (mkVP love_V2 he_NP) "
+
+cc -one mkUtt (mkVP love_V2 he_NP) 
+
+ps "*"
+
+ps "mkVP-V3-NP-NP-VP"
+
+ps "mkUtt (mkVP send_V3 it_NP he_NP) "
+
+cc -one mkUtt (mkVP send_V3 it_NP he_NP) 
+
+ps "*"
+
+ps "mkVP-VV-VP-VP"
+
+ps "mkUtt (mkVP want_VV (mkVP sleep_V)) "
+
+cc -one mkUtt (mkVP want_VV (mkVP sleep_V)) 
+
+ps "*"
+
+ps "mkVP-VS-S-VP"
+
+ps "mkUtt (mkVP know_VS (mkS (mkCl she_NP sleep_V))) "
+
+cc -one mkUtt (mkVP know_VS (mkS (mkCl she_NP sleep_V))) 
+
+ps "*"
+
+ps "mkVP-VQ-QS-VP"
+
+ps "mkUtt (mkVP wonder_VQ (mkQS (mkQCl who_IP sleep_V))) "
+
+cc -one mkUtt (mkVP wonder_VQ (mkQS (mkQCl who_IP sleep_V))) 
+
+ps "*"
+
+ps "mkVP-VA-AP-VP"
+
+ps "mkUtt (mkVP become_VA (mkAP red_A))"
+
+cc -one mkUtt (mkVP become_VA (mkAP red_A))
+
+ps "*"
+
+ps "mkVP-V2A-NP-AP-VP"
+
+ps "mkUtt (mkVP paint_V2A it_NP (mkAP red_A))"
+
+cc -one mkUtt (mkVP paint_V2A it_NP (mkAP red_A))
+
+ps "*"
+
+ps "mkVP-V2S-NP-S-VP"
+
+ps "mkUtt (mkVP answer_V2S he_NP (mkS (mkCl she_NP sleep_V))) "
+
+cc -one mkUtt (mkVP answer_V2S he_NP (mkS (mkCl she_NP sleep_V))) 
+
+ps "*"
+
+ps "mkVP-V2Q-NP-QS-VP"
+
+ps "mkUtt (mkVP ask_V2Q he_NP (mkQS (mkQCl who_IP sleep_V))) "
+
+cc -one mkUtt (mkVP ask_V2Q he_NP (mkQS (mkQCl who_IP sleep_V))) 
+
+ps "*"
+
+ps "mkVP-V2V-NP-VP-VP"
+
+ps "mkUtt (mkVP beg_V2V he_NP (mkVP sleep_V))"
+
+cc -one mkUtt (mkVP beg_V2V he_NP (mkVP sleep_V))
+
+ps "*"
+
+ps "mkVP-A-VP"
+
+ps "mkUtt (mkVP old_A) "
+
+cc -one mkUtt (mkVP old_A) 
+
+ps "*"
+
+ps "mkVP-A-NP-VP"
+
+ps "mkUtt (mkVP old_A he_NP) "
+
+cc -one mkUtt (mkVP old_A he_NP) 
+
+ps "*"
+
+ps "mkVP-A2-NP-VP"
+
+ps "mkUtt (mkVP married_A2 he_NP)  "
+
+cc -one mkUtt (mkVP married_A2 he_NP)  
+
+ps "*"
+
+ps "mkVP-AP-VP"
+
+ps "mkUtt (mkVP (mkAP very_AdA old_A)) "
+
+cc -one mkUtt (mkVP (mkAP very_AdA old_A)) 
+
+ps "*"
+
+ps "mkVP-N-VP"
+
+ps "mkUtt (mkVP woman_N) "
+
+cc -one mkUtt (mkVP woman_N) 
+
+ps "*"
+
+ps "mkVP-CN-VP"
+
+ps "mkUtt (mkVP (mkCN old_A woman_N)) "
+
+cc -one mkUtt (mkVP (mkCN old_A woman_N)) 
+
+ps "*"
+
+ps "mkVP-NP-VP"
+
+ps "mkUtt (mkVP (mkNP the_Det woman_N)) "
+
+cc -one mkUtt (mkVP (mkNP the_Det woman_N)) 
+
+ps "*"
+
+ps "mkVP-Adv-VP"
+
+ps "mkUtt (mkVP here_Adv) "
+
+cc -one mkUtt (mkVP here_Adv) 
+
+ps "*"
+
+ps "mkVP-VP-Adv-VP"
+
+ps "mkUtt (mkVP (mkVP sleep_V) here_Adv)"
+
+cc -one mkUtt (mkVP (mkVP sleep_V) here_Adv)
+
+ps "*"
+
+ps "mkVP-AdV-VP-VP"
+
+ps "mkUtt (mkVP always_AdV (mkVP sleep_V))"
+
+cc -one mkUtt (mkVP always_AdV (mkVP sleep_V))
+
+ps "*"
+
+ps "mkVP-VPSlash-NP-VP"
+
+ps "mkUtt (mkVP (mkVPSlash paint_V2A (mkAP black_A)) it_NP)"
+
+cc -one mkUtt (mkVP (mkVPSlash paint_V2A (mkAP black_A)) it_NP)
+
+ps "*"
+
+ps "mkVP-VPSlash-VP"
+
+ps "mkUtt (mkVP (mkVPSlash paint_V2A (mkAP black_A)))"
+
+cc -one mkUtt (mkVP (mkVPSlash paint_V2A (mkAP black_A)))
+
+ps "*"
+
+ps "mkVP-Comp-VP"
+
+ps "mkUtt (mkVP (mkComp (mkAP warm_A)))"
+
+cc -one mkUtt (mkVP (mkComp (mkAP warm_A)))
+
+ps "*"
+
+ps "reflexiveVP-V2-VP"
+
+ps "mkUtt (reflexiveVP love_V2)  "
+
+cc -one mkUtt (reflexiveVP love_V2)  
+
+ps "*"
+
+ps "mkVP-VPSlash-VP"
+
+ps "mkUtt (reflexiveVP (mkVPSlash paint_V2A (mkAP black_A)))"
+
+cc -one mkUtt (reflexiveVP (mkVPSlash paint_V2A (mkAP black_A)))
+
+ps "*"
+
+ps "passiveVP-V2-VP"
+
+ps "mkUtt (passiveVP love_V2)"
+
+cc -one mkUtt (passiveVP love_V2)
+
+ps "*"
+
+ps "passiveVP-V2-NP-VP"
+
+ps "mkUtt (passiveVP love_V2 she_NP)"
+
+cc -one mkUtt (passiveVP love_V2 she_NP)
+
+ps "*"
+
+ps "progressiveVP-VP-VP"
+
+ps "mkUtt (progressiveVP (mkVP sleep_V))"
+
+cc -one mkUtt (progressiveVP (mkVP sleep_V))
+
+ps "*"
+
+ps "mkComp-AP-Comp"
+
+ps "mkUtt (mkVP (mkComp (mkAP old_A)))"
+
+cc -one mkUtt (mkVP (mkComp (mkAP old_A)))
+
+ps "*"
+
+ps "mkComp-NP-Comp"
+
+ps "mkUtt (mkVP (mkComp (mkNP this_Det man_N)))"
+
+cc -one mkUtt (mkVP (mkComp (mkNP this_Det man_N)))
+
+ps "*"
+
+ps "mkComp-Adv-Comp"
+
+ps "mkUtt (mkVP (mkComp here_Adv))"
+
+cc -one mkUtt (mkVP (mkComp here_Adv))
+
+ps "*"
+
+ps "mkSC-S-SC"
+
+ps "mkSC (mkS (mkCl she_NP sleep_V))"
+
+cc -one mkSC (mkS (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "mkSC-QS-SC"
+
+ps "mkSC (mkQS (mkQCl who_IP sleep_V))"
+
+cc -one mkSC (mkQS (mkQCl who_IP sleep_V))
+
+ps "*"
+
+ps "mkSC-VP-SC"
+
+ps "mkSC (mkVP sleep_V)"
+
+cc -one mkSC (mkVP sleep_V)
+
+ps "*"
+
+ps "mkImp-VP-Imp"
+
+ps "mkUtt (mkImp (mkVP (mkVP come_V) (mkAdv to_Prep (mkNP i_Pron house_N))))"
+
+cc -one mkUtt (mkImp (mkVP (mkVP come_V) (mkAdv to_Prep (mkNP i_Pron house_N))))
+
+ps "*"
+
+ps "mkImp-V-Imp"
+
+ps "mkUtt (mkImp come_V)"
+
+cc -one mkUtt (mkImp come_V)
+
+ps "*"
+
+ps "mkImp-V2-NP-Imp"
+
+ps "mkUtt (mkImp buy_V2 it_NP)"
+
+cc -one mkUtt (mkImp buy_V2 it_NP)
+
+ps "*"
+
+ps "mkNP-Quant-N-NP"
+
+ps "mkUtt (mkNP this_Quant man_N)"
+
+cc -one mkUtt (mkNP this_Quant man_N)
+
+ps "*"
+
+ps "mkNP-Quant-CN-NP"
+
+ps "mkUtt (mkNP this_Quant (mkCN old_A man_N))"
+
+cc -one mkUtt (mkNP this_Quant (mkCN old_A man_N))
+
+ps "*"
+
+ps "mkNP-Quant-Num-CN-NP"
+
+ps "mkUtt (mkNP this_Quant (mkNum (mkNumeral n5_Unit)) (mkCN old_A man_N))"
+
+cc -one mkUtt (mkNP this_Quant (mkNum (mkNumeral n5_Unit)) (mkCN old_A man_N))
+
+ps "*"
+
+ps "mkNP-Quant-Num-N-NP"
+
+ps "mkUtt (mkNP this_Quant (mkNum (mkNumeral n5_Unit)) man_N)"
+
+cc -one mkUtt (mkNP this_Quant (mkNum (mkNumeral n5_Unit)) man_N)
+
+ps "*"
+
+ps "mkNP-Det-CN-NP"
+
+ps "mkUtt (mkNP (mkDet the_Quant (mkNum (mkNumeral n5_Unit))) (mkCN old_A man_N))"
+
+cc -one mkUtt (mkNP (mkDet the_Quant (mkNum (mkNumeral n5_Unit))) (mkCN old_A man_N))
+
+ps "*"
+
+ps "mkNP-Det-N-NP"
+
+ps "mkUtt (mkNP (mkDet the_Quant (mkNum (mkNumeral n5_Unit))) man_N)"
+
+cc -one mkUtt (mkNP (mkDet the_Quant (mkNum (mkNumeral n5_Unit))) man_N)
+
+ps "*"
+
+ps "mkNP-Numeral-CN-NP"
+
+ps "mkUtt (mkNP (mkNumeral (tenfoldSub100 n5_Unit)) (mkCN old_A man_N))"
+
+cc -one mkUtt (mkNP (mkNumeral (tenfoldSub100 n5_Unit)) (mkCN old_A man_N))
+
+ps "*"
+
+ps "mkNP-Numeral-N-NP"
+
+ps "mkUtt (mkNP (mkNumeral (tenfoldSub100 n5_Unit)) man_N)"
+
+cc -one mkUtt (mkNP (mkNumeral (tenfoldSub100 n5_Unit)) man_N)
+
+ps "*"
+
+ps "mkNP-Digits-CN-NP"
+
+ps "mkUtt (mkNP (mkDigits n5_Dig (mkDigits n1_Dig)) (mkCN old_A man_N))"
+
+cc -one mkUtt (mkNP (mkDigits n5_Dig (mkDigits n1_Dig)) (mkCN old_A man_N))
+
+ps "*"
+
+ps "mkNP-Digits-N-NP"
+
+ps "mkUtt (mkNP (mkDigits n5_Dig (mkDigits n1_Dig)) man_N)"
+
+cc -one mkUtt (mkNP (mkDigits n5_Dig (mkDigits n1_Dig)) man_N)
+
+ps "*"
+
+ps "mkNP-Pron-CN-NP"
+
+ps "mkUtt (mkNP i_Pron (mkCN old_A man_N))"
+
+cc -one mkUtt (mkNP i_Pron (mkCN old_A man_N))
+
+ps "*"
+
+ps "mkNP-Pron-N-NP"
+
+ps "mkUtt (mkNP i_Pron man_N)"
+
+cc -one mkUtt (mkNP i_Pron man_N)
+
+ps "*"
+
+ps "mkNP-PN-NP"
+
+ps "mkUtt (mkNP paris_PN)"
+
+cc -one mkUtt (mkNP paris_PN)
+
+ps "*"
+
+ps "mkNP-Pron-NP"
+
+ps "mkUtt (mkNP we_Pron)"
+
+cc -one mkUtt (mkNP we_Pron)
+
+ps "*"
+
+ps "mkNP-Quant-NP"
+
+ps "mkUtt (mkNP this_Quant)  "
+
+cc -one mkUtt (mkNP this_Quant)  
+
+ps "*"
+
+ps "mkNP-Quant-Num-NP"
+
+ps "mkUtt (mkNP this_Quant (mkNum (mkNumeral n5_Unit)))"
+
+cc -one mkUtt (mkNP this_Quant (mkNum (mkNumeral n5_Unit)))
+
+ps "*"
+
+ps "mkNP-Det-NP"
+
+ps "mkUtt (mkNP (mkDet the_Quant (mkNum (mkNumeral n5_Unit)) (mkOrd good_A)))"
+
+cc -one mkUtt (mkNP (mkDet the_Quant (mkNum (mkNumeral n5_Unit)) (mkOrd good_A)))
+
+ps "*"
+
+ps "mkNP-CN-NP"
+
+ps "mkUtt (mkNP (mkCN old_A beer_N))"
+
+cc -one mkUtt (mkNP (mkCN old_A beer_N))
+
+ps "*"
+
+ps "mkNP-N-NP"
+
+ps "mkUtt (mkNP beer_N)"
+
+cc -one mkUtt (mkNP beer_N)
+
+ps "*"
+
+ps "mkNP-Predet-NP-NP"
+
+ps "mkUtt (mkNP only_Predet (mkNP this_Det woman_N))"
+
+cc -one mkUtt (mkNP only_Predet (mkNP this_Det woman_N))
+
+ps "*"
+
+ps "mkNP-NP-V2-NP"
+
+ps "mkUtt (mkNP (mkNP the_Det man_N) see_V2)"
+
+cc -one mkUtt (mkNP (mkNP the_Det man_N) see_V2)
+
+ps "*"
+
+ps "mkNP-NP-Adv-NP"
+
+ps "mkUtt (mkNP (mkNP paris_PN) today_Adv)"
+
+cc -one mkUtt (mkNP (mkNP paris_PN) today_Adv)
+
+ps "*"
+
+ps "mkNP-NP-RS-NP"
+
+ps "mkUtt (mkNP (mkNP john_PN) (mkRS (mkRCl which_RP (mkVP walk_V))))"
+
+cc -one mkUtt (mkNP (mkNP john_PN) (mkRS (mkRCl which_RP (mkVP walk_V))))
+
+ps "*"
+
+ps "mkNP-Conj-NP-NP-NP"
+
+ps "mkUtt (mkNP or_Conj (mkNP this_Det woman_N) (mkNP john_PN))"
+
+cc -one mkUtt (mkNP or_Conj (mkNP this_Det woman_N) (mkNP john_PN))
+
+ps "*"
+
+ps "mkNP-Conj-ListNP-NP"
+
+ps "mkUtt (mkNP or_Conj (mkListNP (mkNP this_Det woman_N) (mkListNP (mkNP john_PN) i_NP)))"
+
+cc -one mkUtt (mkNP or_Conj (mkListNP (mkNP this_Det woman_N) (mkListNP (mkNP john_PN) i_NP)))
+
+ps "*"
+
+ps "i_NP-NP"
+
+ps "mkUtt i_NP"
+
+cc -one mkUtt i_NP
+
+ps "*"
+
+ps "you_NP-NP"
+
+ps "mkUtt you_NP"
+
+cc -one mkUtt you_NP
+
+ps "*"
+
+ps "youPol_NP-NP"
+
+ps "mkUtt youPol_NP"
+
+cc -one mkUtt youPol_NP
+
+ps "*"
+
+ps "he_NP-NP"
+
+ps "mkUtt he_NP"
+
+cc -one mkUtt he_NP
+
+ps "*"
+
+ps "she_NP-NP"
+
+ps "mkUtt she_NP"
+
+cc -one mkUtt she_NP
+
+ps "*"
+
+ps "it_NP-NP"
+
+ps "mkUtt it_NP"
+
+cc -one mkUtt it_NP
+
+ps "*"
+
+ps "we_NP-NP"
+
+ps "mkUtt we_NP"
+
+cc -one mkUtt we_NP
+
+ps "*"
+
+ps "youPl_NP-NP"
+
+ps "mkUtt youPl_NP"
+
+cc -one mkUtt youPl_NP
+
+ps "*"
+
+ps "they_NP-NP"
+
+ps "mkUtt they_NP"
+
+cc -one mkUtt they_NP
+
+ps "*"
+
+ps "mkDet-Quant-Det"
+
+ps "mkUtt (mkNP (mkDet this_Quant))"
+
+cc -one mkUtt (mkNP (mkDet this_Quant))
+
+ps "*"
+
+ps "this_NP-NP"
+
+ps "mkUtt this_NP"
+
+cc -one mkUtt this_NP
+
+ps "*"
+
+ps "that_NP-NP"
+
+ps "mkUtt that_NP"
+
+cc -one mkUtt that_NP
+
+ps "*"
+
+ps "these_NP-NP"
+
+ps "mkUtt these_NP"
+
+cc -one mkUtt these_NP
+
+ps "*"
+
+ps "those_NP-NP"
+
+ps "mkUtt those_NP"
+
+cc -one mkUtt those_NP
+
+ps "*"
+
+ps "mkDet-Quant-Card-Det"
+
+ps "mkUtt (mkNP (mkDet this_Quant (mkCard (mkNumeral n5_Unit))))"
+
+cc -one mkUtt (mkNP (mkDet this_Quant (mkCard (mkNumeral n5_Unit))))
+
+ps "*"
+
+ps "mkDet-Quant-Ord-Det"
+
+ps "mkUtt (mkNP (mkDet the_Quant (mkOrd (mkNumeral n5_Unit))))"
+
+cc -one mkUtt (mkNP (mkDet the_Quant (mkOrd (mkNumeral n5_Unit))))
+
+ps "*"
+
+ps "mkDet-Quant-Num-Ord-Det"
+
+ps "mkUtt (mkNP (mkDet the_Quant (mkNum (mkNumeral n5_Unit)) (mkOrd good_A)))"
+
+cc -one mkUtt (mkNP (mkDet the_Quant (mkNum (mkNumeral n5_Unit)) (mkOrd good_A)))
+
+ps "*"
+
+ps "mkDet-Quant-Num-Det"
+
+ps "mkUtt (mkNP (mkDet this_Quant pluralNum))"
+
+cc -one mkUtt (mkNP (mkDet this_Quant pluralNum))
+
+ps "*"
+
+ps "mkDet-Card-Det"
+
+ps "mkUtt (mkNP (mkDet (mkCard (mkNumeral n5_Unit))))"
+
+cc -one mkUtt (mkNP (mkDet (mkCard (mkNumeral n5_Unit))))
+
+ps "*"
+
+ps "mkUtt (mkNP (mkDet (mkNumeral n5_Unit)))"
+
+cc -one mkUtt (mkNP (mkDet (mkNumeral n5_Unit)))
+
+ps "*"
+
+ps "mkDet-Pron-Det"
+
+ps "mkUtt (mkNP (mkDet i_Pron))"
+
+cc -one mkUtt (mkNP (mkDet i_Pron))
+
+ps "*"
+
+ps "mkDet-Pron-Num-Det"
+
+ps "mkUtt (mkNP (mkDet i_Pron  (mkNum (mkNumeral n5_Unit))))"
+
+cc -one mkUtt (mkNP (mkDet i_Pron  (mkNum (mkNumeral n5_Unit))))
+
+ps "*"
+
+ps "the_Det-Det"
+
+ps "mkUtt (mkNP the_Det house_N)"
+
+cc -one mkUtt (mkNP the_Det house_N)
+
+ps "*"
+
+ps "a_Det-Det"
+
+ps "mkUtt (mkNP a_Det house_N)"
+
+cc -one mkUtt (mkNP a_Det house_N)
+
+ps "*"
+
+ps "theSg_Det-Det"
+
+ps "mkUtt (mkNP theSg_Det house_N)"
+
+cc -one mkUtt (mkNP theSg_Det house_N)
+
+ps "*"
+
+ps "thePl_Det-Det"
+
+ps "mkUtt (mkNP thePl_Det house_N)"
+
+cc -one mkUtt (mkNP thePl_Det house_N)
+
+ps "*"
+
+ps "aSg_Det-Det"
+
+ps "mkUtt (mkNP aSg_Det woman_N)"
+
+cc -one mkUtt (mkNP aSg_Det woman_N)
+
+ps "*"
+
+ps "aPl_Det-Det"
+
+ps "mkUtt (mkNP aPl_Det woman_N)"
+
+cc -one mkUtt (mkNP aPl_Det woman_N)
+
+ps "*"
+
+ps "this_Det-Det"
+
+ps "mkUtt (mkNP this_Det woman_N)"
+
+cc -one mkUtt (mkNP this_Det woman_N)
+
+ps "*"
+
+ps "that_Det-Det"
+
+ps "mkUtt (mkNP that_Det woman_N)"
+
+cc -one mkUtt (mkNP that_Det woman_N)
+
+ps "*"
+
+ps "these_Det-Det"
+
+ps "mkUtt (mkNP these_Det woman_N)"
+
+cc -one mkUtt (mkNP these_Det woman_N)
+
+ps "*"
+
+ps "those_Det-Det"
+
+ps "mkUtt (mkNP those_Det woman_N)"
+
+cc -one mkUtt (mkNP those_Det woman_N)
+
+ps "*"
+
+ps "mkQuant-Pron-Quant"
+
+ps "mkUtt (mkNP (mkQuant i_Pron) house_N)"
+
+cc -one mkUtt (mkNP (mkQuant i_Pron) house_N)
+
+ps "*"
+
+ps "the_Quant-Quant"
+
+ps "mkUtt (mkNP the_Quant house_N)"
+
+cc -one mkUtt (mkNP the_Quant house_N)
+
+ps "*"
+
+ps "a_Quant-Quant"
+
+ps "mkUtt (mkNP a_Quant house_N)"
+
+cc -one mkUtt (mkNP a_Quant house_N)
+
+ps "*"
+
+ps "mkNum-Numeral-Num"
+
+ps "mkNum (mkNumeral (tenfoldSub100 n2_Unit))"
+
+cc -one mkNum (mkNumeral (tenfoldSub100 n2_Unit))
+
+ps "*"
+
+ps "mkNum-Digits-Num"
+
+ps "mkNum (mkDigits n2_Dig (mkDigits n1_Dig))"
+
+cc -one mkNum (mkDigits n2_Dig (mkDigits n1_Dig))
+
+ps "*"
+
+ps "mkNum-Card-Num"
+
+ps "mkNum (mkCard almost_AdN (mkCard (mkNumeral n5_Unit)))"
+
+cc -one mkNum (mkCard almost_AdN (mkCard (mkNumeral n5_Unit)))
+
+ps "*"
+
+ps "mkNum-AdN-Card-Num"
+
+ps "mkNum (mkCard almost_AdN (mkCard (mkNumeral n5_Unit)))"
+
+cc -one mkNum (mkCard almost_AdN (mkCard (mkNumeral n5_Unit)))
+
+ps "*"
+
+ps "mkCard-Numeral-Card"
+
+ps "mkUtt (mkCard (mkNumeral n7_Unit))"
+
+cc -one mkUtt (mkCard (mkNumeral n7_Unit))
+
+ps "*"
+
+ps "mkOrd-A-Ord"
+
+ps "mkUtt (mkAP (mkOrd small_A))"
+
+cc -one mkUtt (mkAP (mkOrd small_A))
+
+ps "*"
+
+ps "mkAdN-CAdv-AdN"
+
+ps "mkUtt (mkCard (mkAdN more_CAdv) (mkCard (mkNumeral n8_Unit)))"
+
+cc -one mkUtt (mkCard (mkAdN more_CAdv) (mkCard (mkNumeral n8_Unit)))
+
+ps "*"
+
+ps "mkNumeral-Sub1000-Numeral"
+
+ps "mkUtt (mkCard (mkNumeral (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit))))"
+
+cc -one mkUtt (mkCard (mkNumeral (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit))))
+
+ps "*"
+
+ps "mkNumeral-Sub1000-Sub1000-Numeral"
+
+ps "mkUtt (mkCard (mkNumeral (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit)) (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit))))"
+
+cc -one mkUtt (mkCard (mkNumeral (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit)) (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit))))
+
+ps "*"
+
+ps "thousandfoldNumeral-Sub1000-Numeral"
+
+ps "mkUtt (mkCard (thousandfoldNumeral (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit))))"
+
+cc -one mkUtt (mkCard (thousandfoldNumeral (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit))))
+
+ps "*"
+
+ps "mkSub1000-Sub100-Sub1000"
+
+ps "mkUtt (mkCard (mkNumeral (mkSub1000 (mkSub100 n9_Unit n9_Unit))))"
+
+cc -one mkUtt (mkCard (mkNumeral (mkSub1000 (mkSub100 n9_Unit n9_Unit))))
+
+ps "*"
+
+ps "mkSub1000-Unit-Sub1000"
+
+ps "mkUtt (mkCard (mkNumeral (mkSub1000 n9_Unit)))"
+
+cc -one mkUtt (mkCard (mkNumeral (mkSub1000 n9_Unit)))
+
+ps "*"
+
+ps "mkSub1000-Unit-Sub100-Sub1000"
+
+ps "mkUtt (mkCard (mkNumeral (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit))))"
+
+cc -one mkUtt (mkCard (mkNumeral (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit))))
+
+ps "*"
+
+ps "mkSub100-Unit-Sub100"
+
+ps "mkUtt (mkCard (mkNumeral (mkSub100 n8_Unit)))"
+
+cc -one mkUtt (mkCard (mkNumeral (mkSub100 n8_Unit)))
+
+ps "*"
+
+ps "mkSub100-Unit-Unit-Sub100"
+
+ps "mkUtt (mkCard (mkNumeral (mkSub100 n8_Unit n3_Unit)))"
+
+cc -one mkUtt (mkCard (mkNumeral (mkSub100 n8_Unit n3_Unit)))
+
+ps "*"
+
+ps "tenfoldSub100-Unit-Sub100"
+
+ps "mkUtt (mkCard (mkNumeral (mkSub100 n8_Unit)))"
+
+cc -one mkUtt (mkCard (mkNumeral (mkSub100 n8_Unit)))
+
+ps "*"
+
+ps "n1_Unit-Unit"
+
+ps "mkUtt (mkCard (mkNumeral n1_Unit))"
+
+cc -one mkUtt (mkCard (mkNumeral n1_Unit))
+
+ps "*"
+
+ps "n2_Unit-Unit"
+
+ps "mkUtt (mkCard (mkNumeral n2_Unit))"
+
+cc -one mkUtt (mkCard (mkNumeral n2_Unit))
+
+ps "*"
+
+ps "n3_Unit-Unit"
+
+ps "mkUtt (mkCard (mkNumeral n3_Unit))"
+
+cc -one mkUtt (mkCard (mkNumeral n3_Unit))
+
+ps "*"
+
+ps "n4_Unit-Unit"
+
+ps "mkUtt (mkCard (mkNumeral n4_Unit))"
+
+cc -one mkUtt (mkCard (mkNumeral n4_Unit))
+
+ps "*"
+
+ps "n5_Unit-Unit"
+
+ps "mkUtt (mkCard (mkNumeral n5_Unit))"
+
+cc -one mkUtt (mkCard (mkNumeral n5_Unit))
+
+ps "*"
+
+ps "n6_Unit-Unit"
+
+ps "mkUtt (mkCard (mkNumeral n6_Unit))"
+
+cc -one mkUtt (mkCard (mkNumeral n6_Unit))
+
+ps "*"
+
+ps "n7_Unit-Unit"
+
+ps "mkUtt (mkCard (mkNumeral n7_Unit))"
+
+cc -one mkUtt (mkCard (mkNumeral n7_Unit))
+
+ps "*"
+
+ps "n8_Unit-Unit"
+
+ps "mkUtt (mkCard (mkNumeral n8_Unit))"
+
+cc -one mkUtt (mkCard (mkNumeral n8_Unit))
+
+ps "*"
+
+ps "n9_Unit-Unit"
+
+ps "mkUtt (mkCard (mkNumeral n9_Unit))"
+
+cc -one mkUtt (mkCard (mkNumeral n9_Unit))
+
+ps "*"
+
+ps "mkDigits-Dig-Digits"
+
+ps "mkUtt (mkCard (mkDigits n4_Dig))"
+
+cc -one mkUtt (mkCard (mkDigits n4_Dig))
+
+ps "*"
+
+ps "mkDigits-Dig-Digits-Digits"
+
+ps "mkUtt (mkCard (mkDigits n1_Dig (mkDigits n2_Dig (mkDigits n3_Dig (mkDigits n3_Dig (mkDigits n4_Dig (mkDigits n8_Dig (mkDigits n6_Dig))))))))"
+
+cc -one mkUtt (mkCard (mkDigits n1_Dig (mkDigits n2_Dig (mkDigits n3_Dig (mkDigits n3_Dig (mkDigits n4_Dig (mkDigits n8_Dig (mkDigits n6_Dig))))))))
+
+ps "*"
+
+ps "mkCN-N-CN"
+
+ps "mkUtt (mkCN house_N )"
+
+cc -one mkUtt (mkCN house_N )
+
+ps "*"
+
+ps "mkCN-N2-NP-CN"
+
+ps "mkUtt (mkCN mother_N2 (mkNP the_Det king_N))"
+
+cc -one mkUtt (mkCN mother_N2 (mkNP the_Det king_N))
+
+ps "*"
+
+ps "mkCN-N3-NP-NP-CN"
+
+ps "mkUtt (mkCN distance_N3 (mkNP this_Det city_N) (mkNP paris_PN) )"
+
+cc -one mkUtt (mkCN distance_N3 (mkNP this_Det city_N) (mkNP paris_PN) )
+
+ps "*"
+
+ps "mkCN-N2-CN"
+
+ps "mkUtt (mkCN mother_N2)"
+
+cc -one mkUtt (mkCN mother_N2)
+
+ps "*"
+
+ps "mkCN-N3-CN"
+
+ps "mkUtt (mkCN distance_N3)"
+
+cc -one mkUtt (mkCN distance_N3)
+
+ps "*"
+
+ps "mkCN-A-N-CN"
+
+ps "mkUtt (mkCN big_A house_N  )"
+
+cc -one mkUtt (mkCN big_A house_N  )
+
+ps "*"
+
+ps "mkCN-A-CN-CN"
+
+ps "mkUtt (mkCN big_A (mkCN blue_A house_N))"
+
+cc -one mkUtt (mkCN big_A (mkCN blue_A house_N))
+
+ps "*"
+
+ps "mkCN-AP-N-CN"
+
+ps "mkUtt (mkCN (mkAP very_AdA big_A) house_N  )"
+
+cc -one mkUtt (mkCN (mkAP very_AdA big_A) house_N  )
+
+ps "*"
+
+ps "mkCN-AP-CN-CN"
+
+ps "mkUtt (mkCN (mkAP very_AdA big_A) (mkCN blue_A house_N)  )"
+
+cc -one mkUtt (mkCN (mkAP very_AdA big_A) (mkCN blue_A house_N)  )
+
+ps "*"
+
+ps "mkCN-N-RS-CN"
+
+ps "mkUtt (mkCN man_N (mkRS (mkRCl which_RP she_NP love_V2)))"
+
+cc -one mkUtt (mkCN man_N (mkRS (mkRCl which_RP she_NP love_V2)))
+
+ps "*"
+
+ps "mkCN-CN-RS-CN"
+
+ps "mkUtt (mkCN (mkCN old_A man_N) (mkRS (mkRCl which_RP she_NP love_V2)) )"
+
+cc -one mkUtt (mkCN (mkCN old_A man_N) (mkRS (mkRCl which_RP she_NP love_V2)) )
+
+ps "*"
+
+ps "mkCN-N-Adv-CN"
+
+ps "mkUtt (mkCN house_N (mkAdv on_Prep (mkNP the_Det hill_N)))"
+
+cc -one mkUtt (mkCN house_N (mkAdv on_Prep (mkNP the_Det hill_N)))
+
+ps "*"
+
+ps "mkCN-CN-Adv-CN"
+
+ps "mkUtt (mkCN (mkCN big_A house_N) (mkAdv on_Prep (mkNP the_Det hill_N)))"
+
+cc -one mkUtt (mkCN (mkCN big_A house_N) (mkAdv on_Prep (mkNP the_Det hill_N)))
+
+ps "*"
+
+ps "mkCN-CN-S-CN"
+
+ps "mkUtt (mkCN (mkCN rule_N) (mkS (mkCl she_NP sleep_V)))"
+
+cc -one mkUtt (mkCN (mkCN rule_N) (mkS (mkCl she_NP sleep_V)))
+
+ps "*"
+
+ps "mkCN-CN-QS-CN"
+
+ps "mkUtt (mkCN (mkCN question_N) (mkQS (mkQCl (mkCl she_NP sleep_V))))"
+
+cc -one mkUtt (mkCN (mkCN question_N) (mkQS (mkQCl (mkCl she_NP sleep_V))))
+
+ps "*"
+
+ps "mkCN-CN-VP-CN"
+
+ps "mkUtt (mkCN (mkCN reason_N) (mkVP sleep_V))"
+
+cc -one mkUtt (mkCN (mkCN reason_N) (mkVP sleep_V))
+
+ps "*"
+
+ps "mkCN-CN-SC-CN"
+
+ps "mkUtt (mkCN (mkCN reason_N) (mkVP sleep_V))"
+
+cc -one mkUtt (mkCN (mkCN reason_N) (mkVP sleep_V))
+
+ps "*"
+
+ps "mkCN-N-NP-CN"
+
+ps "mkUtt (mkCN king_N (mkNP john_PN) )"
+
+cc -one mkUtt (mkCN king_N (mkNP john_PN) )
+
+ps "*"
+
+ps "mkCN-CN-NP-CN"
+
+ps "mkUtt (mkCN (mkCN old_A king_N) (mkNP john_PN))"
+
+cc -one mkUtt (mkCN (mkCN old_A king_N) (mkNP john_PN))
+
+ps "*"
+
+ps "mkAP-A-AP"
+
+ps "mkUtt (mkAP warm_A)"
+
+cc -one mkUtt (mkAP warm_A)
+
+ps "*"
+
+ps "mkAP-A-NP-AP"
+
+ps "mkUtt (mkAP warm_A (mkNP paris_PN))"
+
+cc -one mkUtt (mkAP warm_A (mkNP paris_PN))
+
+ps "*"
+
+ps "mkAP-A2-NP-AP"
+
+ps "mkUtt (mkAP married_A2 she_NP )"
+
+cc -one mkUtt (mkAP married_A2 she_NP )
+
+ps "*"
+
+ps "mkAP-A2-AP"
+
+ps "mkUtt (mkAP married_A2)"
+
+cc -one mkUtt (mkAP married_A2)
+
+ps "*"
+
+ps "mkAP-AP-S-AP"
+
+ps "mkUtt (mkCl (mkVP (mkAP (mkAP good_A) (mkS (mkCl she_NP sleep_V)))))"
+
+cc -one mkUtt (mkCl (mkVP (mkAP (mkAP good_A) (mkS (mkCl she_NP sleep_V)))))
+
+ps "*"
+
+ps "mkAP-AP-QS-AP"
+
+ps "mkUtt (mkCl (mkVP (mkAP (mkAP uncertain_A) (mkQS (mkQCl who_IP sleep_V)))))"
+
+cc -one mkUtt (mkCl (mkVP (mkAP (mkAP uncertain_A) (mkQS (mkQCl who_IP sleep_V)))))
+
+ps "*"
+
+ps "mkAP-AP-VP-AP"
+
+ps "mkUtt (mkCl she_NP (mkAP (mkAP ready_A) (mkVP sleep_V)))"
+
+cc -one mkUtt (mkCl she_NP (mkAP (mkAP ready_A) (mkVP sleep_V)))
+
+ps "*"
+
+ps "mkAP-AP-SC-AP"
+
+ps "mkUtt (mkCl she_NP (mkAP (mkAP ready_A) (mkSC (mkVP sleep_V))))"
+
+cc -one mkUtt (mkCl she_NP (mkAP (mkAP ready_A) (mkSC (mkVP sleep_V))))
+
+ps "*"
+
+ps "mkAP-AdA-A-AP"
+
+ps "mkUtt (mkAP very_AdA old_A)"
+
+cc -one mkUtt (mkAP very_AdA old_A)
+
+ps "*"
+
+ps "mkAP-AdA-AP-AP"
+
+ps "mkUtt (mkAP very_AdA (mkAP very_AdA old_A))"
+
+cc -one mkUtt (mkAP very_AdA (mkAP very_AdA old_A))
+
+ps "*"
+
+ps "mkAP-Conj-AP-AP-AP"
+
+ps "mkUtt (mkAP or_Conj (mkAP old_A) (mkAP young_A))"
+
+cc -one mkUtt (mkAP or_Conj (mkAP old_A) (mkAP young_A))
+
+ps "*"
+
+ps "mkAP-Conj-ListAP-AP"
+
+ps "mkUtt (mkAP and_Conj (mkListAP (mkAP old_A) (mkListAP (mkAP big_A) (mkAP warm_A))))"
+
+cc -one mkUtt (mkAP and_Conj (mkListAP (mkAP old_A) (mkListAP (mkAP big_A) (mkAP warm_A))))
+
+ps "*"
+
+ps "mkAP-Ord-AP"
+
+ps "mkUtt (mkAP (mkOrd old_A))"
+
+cc -one mkUtt (mkAP (mkOrd old_A))
+
+ps "*"
+
+ps "mkAP-CAdv-AP-NP-AP"
+
+ps "mkUtt (mkAP as_CAdv (mkAP old_A) she_NP)"
+
+cc -one mkUtt (mkAP as_CAdv (mkAP old_A) she_NP)
+
+ps "*"
+
+ps "reflAP-A2-AP"
+
+ps "mkUtt (reflAP married_A2)"
+
+cc -one mkUtt (reflAP married_A2)
+
+ps "*"
+
+ps "comparAP-A-AP"
+
+ps "mkUtt (comparAP warm_A)"
+
+cc -one mkUtt (comparAP warm_A)
+
+ps "*"
+
+ps "mkAdv-A-Adv"
+
+ps "mkUtt (mkAdv warm_A)"
+
+cc -one mkUtt (mkAdv warm_A)
+
+ps "*"
+
+ps "mkAdv-Prep-NP-Adv"
+
+ps "mkUtt (mkAdv in_Prep (mkNP the_Det house_N))"
+
+cc -one mkUtt (mkAdv in_Prep (mkNP the_Det house_N))
+
+ps "*"
+
+ps "mkAdv-Subj-S-Adv"
+
+ps "mkUtt (mkAdv when_Subj (mkS (mkCl she_NP sleep_V)))"
+
+cc -one mkUtt (mkAdv when_Subj (mkS (mkCl she_NP sleep_V)))
+
+ps "*"
+
+ps "mkAdv-CAdv-A-NP-Adv"
+
+ps "mkUtt (mkAdv more_CAdv warm_A he_NP  )"
+
+cc -one mkUtt (mkAdv more_CAdv warm_A he_NP  )
+
+ps "*"
+
+ps "mkAdv-CAdv-A-S-Adv"
+
+ps "mkUtt (mkAdv more_CAdv warm_A (mkS (mkCl he_NP run_V))  )"
+
+cc -one mkUtt (mkAdv more_CAdv warm_A (mkS (mkCl he_NP run_V))  )
+
+ps "*"
+
+ps "mkAdv-AdA-Adv-Adv"
+
+ps "mkUtt (mkAdv very_AdA (mkAdv warm_A) )"
+
+cc -one mkUtt (mkAdv very_AdA (mkAdv warm_A) )
+
+ps "*"
+
+ps "mkAdv-Conj-Adv-Adv-Adv"
+
+ps "mkUtt (mkAdv and_Conj here_Adv now_Adv)"
+
+cc -one mkUtt (mkAdv and_Conj here_Adv now_Adv)
+
+ps "*"
+
+ps "mkAdv-Conj-ListAdv-Adv"
+
+ps "mkUtt (mkAdv and_Conj (mkListAdv (mkAdv with_Prep she_NP) (mkListAdv here_Adv now_Adv)))"
+
+cc -one mkUtt (mkAdv and_Conj (mkListAdv (mkAdv with_Prep she_NP) (mkListAdv here_Adv now_Adv)))
+
+ps "*"
+
+ps "mkQS-Tense-Ant-Pol-QCl-QS"
+
+ps "mkUtt (mkQS conditionalTense anteriorAnt negativePol (mkQCl who_IP sleep_V))"
+
+cc -one mkUtt (mkQS conditionalTense anteriorAnt negativePol (mkQCl who_IP sleep_V))
+
+ps "*"
+
+ps "mkQS-Cl-QS"
+
+ps "mkUtt (mkQS (mkCl she_NP sleep_V))"
+
+cc -one mkUtt (mkQS (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "mkQCl-Cl-QCl"
+
+ps "mkUtt (mkQCl (mkCl she_NP sleep_V))"
+
+cc -one mkUtt (mkQCl (mkCl she_NP sleep_V))
+
+ps "*"
+
+ps "mkQCl-IP-VP-QCl"
+
+ps "mkUtt (mkQCl who_IP (mkVP (mkVP sleep_V) here_Adv))"
+
+cc -one mkUtt (mkQCl who_IP (mkVP (mkVP sleep_V) here_Adv))
+
+ps "*"
+
+ps "mkQCl-IP-V-QCl"
+
+ps "mkUtt (mkQCl who_IP sleep_V)"
+
+cc -one mkUtt (mkQCl who_IP sleep_V)
+
+ps "*"
+
+ps "mkQCl-IP-V2-NP-QCl"
+
+ps "mkUtt (mkQCl who_IP love_V2 she_NP)"
+
+cc -one mkUtt (mkQCl who_IP love_V2 she_NP)
+
+ps "*"
+
+ps "mkQCl-IP-V3-NP-NP-QCl"
+
+ps "mkUtt (mkQCl who_IP send_V3 it_NP she_NP)"
+
+cc -one mkUtt (mkQCl who_IP send_V3 it_NP she_NP)
+
+ps "*"
+
+ps "mkQCl-IP-VV-VP-QCl"
+
+ps "mkUtt (mkQCl who_IP want_VV (mkVP sleep_V))"
+
+cc -one mkUtt (mkQCl who_IP want_VV (mkVP sleep_V))
+
+ps "*"
+
+ps "mkQCl-IP-VS-S-QCl"
+
+ps "mkUtt (mkQCl who_IP say_VS (mkS (mkCl i_NP sleep_V)))"
+
+cc -one mkUtt (mkQCl who_IP say_VS (mkS (mkCl i_NP sleep_V)))
+
+ps "*"
+
+ps "mkQCl-IP-VQ-QS-QCl"
+
+ps "mkUtt (mkQCl who_IP wonder_VQ (mkQS (mkQCl who_IP sleep_V)))"
+
+cc -one mkUtt (mkQCl who_IP wonder_VQ (mkQS (mkQCl who_IP sleep_V)))
+
+ps "*"
+
+ps "mkQCl-IP-VA-A-QCl"
+
+ps "mkUtt (mkQCl who_IP become_VA old_A)"
+
+cc -one mkUtt (mkQCl who_IP become_VA old_A)
+
+ps "*"
+
+ps "mkQCl-IP-VA-AP-QCl"
+
+ps "mkUtt (mkQCl who_IP become_VA (mkAP very_AdA old_A))"
+
+cc -one mkUtt (mkQCl who_IP become_VA (mkAP very_AdA old_A))
+
+ps "*"
+
+ps "mkQCl-IP-V2A-NP-A-QCl"
+
+ps "mkUtt (mkQCl who_IP paint_V2A it_NP red_A)"
+
+cc -one mkUtt (mkQCl who_IP paint_V2A it_NP red_A)
+
+ps "*"
+
+ps "mkQCl-IP-V2A-NP-AP-QCl"
+
+ps "mkUtt (mkQCl who_IP paint_V2A it_NP (mkAP very_AdA red_A))"
+
+cc -one mkUtt (mkQCl who_IP paint_V2A it_NP (mkAP very_AdA red_A))
+
+ps "*"
+
+ps "mkQCl-IP-V2S-NP-S-QCl"
+
+ps "mkUtt (mkQCl who_IP answer_V2S he_NP (mkS (mkCl we_NP sleep_V)))"
+
+cc -one mkUtt (mkQCl who_IP answer_V2S he_NP (mkS (mkCl we_NP sleep_V)))
+
+ps "*"
+
+ps "mkQCl-IP-V2Q-NP-QS-QCl"
+
+ps "mkUtt (mkQCl who_IP ask_V2Q he_NP (mkQS (mkQCl who_IP sleep_V)))"
+
+cc -one mkUtt (mkQCl who_IP ask_V2Q he_NP (mkQS (mkQCl who_IP sleep_V)))
+
+ps "*"
+
+ps "mkQCl-IP-V2V-NP-VP-QCl"
+
+ps "mkUtt (mkQCl who_IP beg_V2V he_NP (mkVP sleep_V))"
+
+cc -one mkUtt (mkQCl who_IP beg_V2V he_NP (mkVP sleep_V))
+
+ps "*"
+
+ps "mkQCl-IP-A-QCl"
+
+ps "mkUtt (mkQCl who_IP old_A)"
+
+cc -one mkUtt (mkQCl who_IP old_A)
+
+ps "*"
+
+ps "mkQCl-IP-A-NP-QCl"
+
+ps "mkUtt (mkQCl who_IP old_A he_NP)"
+
+cc -one mkUtt (mkQCl who_IP old_A he_NP)
+
+ps "*"
+
+ps "mkQCl-IP-A2-NP-QCl"
+
+ps "mkUtt (mkQCl who_IP married_A2 he_NP)"
+
+cc -one mkUtt (mkQCl who_IP married_A2 he_NP)
+
+ps "*"
+
+ps "mkQCl-IP-AP-QCl"
+
+ps "mkUtt (mkQCl who_IP (mkAP very_AdA old_A))"
+
+cc -one mkUtt (mkQCl who_IP (mkAP very_AdA old_A))
+
+ps "*"
+
+ps "mkQCl-IP-NP-QCl"
+
+ps "mkUtt (mkQCl who_IP (mkNP the_Det woman_N))"
+
+cc -one mkUtt (mkQCl who_IP (mkNP the_Det woman_N))
+
+ps "*"
+
+ps "mkQCl-IP-N-QCl"
+
+ps "mkUtt (mkQCl who_IP woman_N)"
+
+cc -one mkUtt (mkQCl who_IP woman_N)
+
+ps "*"
+
+ps "mkQCl-IP-CN-QCl"
+
+ps "mkUtt (mkQCl who_IP (mkCN old_A woman_N))"
+
+cc -one mkUtt (mkQCl who_IP (mkCN old_A woman_N))
+
+ps "*"
+
+ps "mkQCl-IP-Adv-QCl"
+
+ps "mkUtt (mkQCl who_IP here_Adv)"
+
+cc -one mkUtt (mkQCl who_IP here_Adv)
+
+ps "*"
+
+ps "mkQCl-IP-VP-QCl"
+
+ps "mkUtt (mkQCl who_IP (mkVP always_AdV (mkVP sleep_V)))"
+
+cc -one mkUtt (mkQCl who_IP (mkVP always_AdV (mkVP sleep_V)))
+
+ps "*"
+
+ps "mkQCl-IAdv-Cl-QCl"
+
+ps "mkUtt (mkQCl why_IAdv (mkCl she_NP sleep_V)     )"
+
+cc -one mkUtt (mkQCl why_IAdv (mkCl she_NP sleep_V)     )
+
+ps "*"
+
+ps "mkQCl-Prep-IP-Cl-QCl"
+
+ps "mkUtt (mkQCl with_Prep who_IP (mkCl she_NP sleep_V)      )"
+
+cc -one mkUtt (mkQCl with_Prep who_IP (mkCl she_NP sleep_V)      )
+
+ps "*"
+
+ps "mkQCl-IAdv-NP-QCl"
+
+ps "mkUtt (mkQCl where_IAdv she_NP )"
+
+cc -one mkUtt (mkQCl where_IAdv she_NP )
+
+ps "*"
+
+ps "mkQCl-IComp-NP-QCl"
+
+ps "mkUtt (mkQCl (mkIComp who_IP) (mkNP this_Det man_N))"
+
+cc -one mkUtt (mkQCl (mkIComp who_IP) (mkNP this_Det man_N))
+
+ps "*"
+
+ps "mkQCl-IP-QCl"
+
+ps "mkUtt (mkQCl (mkIP which_IQuant city_N))"
+
+cc -one mkUtt (mkQCl (mkIP which_IQuant city_N))
+
+ps "*"
+
+ps "mkQCl-IP-NP-V2-QCl"
+
+ps "mkUtt (mkQCl who_IP she_NP)"
+
+cc -one mkUtt (mkQCl who_IP she_NP)
+
+ps "*"
+
+ps "mkQCl-IP-ClSlash-QCl"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash (mkClSlash she_NP love_V2) today_Adv))"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash (mkClSlash she_NP love_V2) today_Adv))
+
+ps "*"
+
+ps "mkIP-IDet-CN-IP"
+
+ps "mkUtt (mkIP (mkIDet which_IQuant (mkNum (mkNumeral n5_Unit))) (mkCN big_A city_N)    )"
+
+cc -one mkUtt (mkIP (mkIDet which_IQuant (mkNum (mkNumeral n5_Unit))) (mkCN big_A city_N)    )
+
+ps "*"
+
+ps "mkIP-IDet-N-IP"
+
+ps "mkUtt (mkIP (mkIDet which_IQuant (mkNum (mkNumeral n5_Unit))) city_N    )"
+
+cc -one mkUtt (mkIP (mkIDet which_IQuant (mkNum (mkNumeral n5_Unit))) city_N    )
+
+ps "*"
+
+ps "mkIP-IDet-IP"
+
+ps "mkUtt (mkIP (mkIDet which_IQuant (mkNum (mkNumeral n5_Unit))))"
+
+cc -one mkUtt (mkIP (mkIDet which_IQuant (mkNum (mkNumeral n5_Unit))))
+
+ps "*"
+
+ps "mkIP-IQuant-CN-IP"
+
+ps "mkUtt (mkIP which_IQuant (mkCN big_A city_N)    )"
+
+cc -one mkUtt (mkIP which_IQuant (mkCN big_A city_N)    )
+
+ps "*"
+
+ps "mkIP-IQuant-Num-CN-IP"
+
+ps "mkUtt (mkIP which_IQuant (mkNum (mkNumeral n5_Unit)) (mkCN big_A city_N)    )"
+
+cc -one mkUtt (mkIP which_IQuant (mkNum (mkNumeral n5_Unit)) (mkCN big_A city_N)    )
+
+ps "*"
+
+ps "mkIP-IQuant-N-IP"
+
+ps "mkUtt (mkIP which_IQuant city_N)"
+
+cc -one mkUtt (mkIP which_IQuant city_N)
+
+ps "*"
+
+ps "mkIP-IP-Adv-IP"
+
+ps "mkUtt (mkIP who_IP (mkAdv in_Prep (mkNP paris_PN)))"
+
+cc -one mkUtt (mkIP who_IP (mkAdv in_Prep (mkNP paris_PN)))
+
+ps "*"
+
+ps "what_IP-IP"
+
+ps "mkUtt what_IP"
+
+cc -one mkUtt what_IP
+
+ps "*"
+
+ps "who_IP-IP"
+
+ps "mkUtt who_IP"
+
+cc -one mkUtt who_IP
+
+ps "*"
+
+ps "mkIAdv-Prep-IP-IAdv"
+
+ps "mkUtt (mkIAdv in_Prep (mkIP which_IQuant city_N))"
+
+cc -one mkUtt (mkIAdv in_Prep (mkIP which_IQuant city_N))
+
+ps "*"
+
+ps "mkIAdv-IAdv-Adv-IAdv"
+
+ps "mkUtt (mkIAdv where_IAdv (mkAdv in_Prep (mkNP paris_PN))  )"
+
+cc -one mkUtt (mkIAdv where_IAdv (mkAdv in_Prep (mkNP paris_PN))  )
+
+ps "*"
+
+ps "mkIDet-IQuant-Num-IDet"
+
+ps "mkUtt (mkIP (mkIDet which_IQuant pluralNum) house_N)"
+
+cc -one mkUtt (mkIP (mkIDet which_IQuant pluralNum) house_N)
+
+ps "*"
+
+ps "mkIDet-IQuant-IDet"
+
+ps "mkUtt (mkIP (mkIDet which_IQuant) house_N      )"
+
+cc -one mkUtt (mkIP (mkIDet which_IQuant) house_N      )
+
+ps "*"
+
+ps "which_IDet-IDet"
+
+ps "mkUtt (mkIP which_IDet house_N)"
+
+cc -one mkUtt (mkIP which_IDet house_N)
+
+ps "*"
+
+ps "whichPl_IDet-IDet"
+
+ps "mkUtt (mkIP whichPl_IDet house_N)"
+
+cc -one mkUtt (mkIP whichPl_IDet house_N)
+
+ps "*"
+
+ps "mkRS-Tense-Ant-Pol-RCl-RS"
+
+ps "mkUtt (mkCN woman_N (mkRS conditionalTense anteriorAnt negativePol (mkRCl which_RP sleep_V)))"
+
+cc -one mkUtt (mkCN woman_N (mkRS conditionalTense anteriorAnt negativePol (mkRCl which_RP sleep_V)))
+
+ps "*"
+
+ps "mkRS-RCl-RS"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP sleep_V)))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP sleep_V)))
+
+ps "*"
+
+ps "mkRS-Conj-RS-RS-RS"
+
+ps "mkUtt (mkCN woman_N (mkRS or_Conj (mkRS (mkRCl which_RP sleep_V)) (mkRS (mkRCl which_RP we_NP love_V2))))"
+
+cc -one mkUtt (mkCN woman_N (mkRS or_Conj (mkRS (mkRCl which_RP sleep_V)) (mkRS (mkRCl which_RP we_NP love_V2))))
+
+ps "*"
+
+ps "mkRCl-RP-VP-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkVP (mkVP sleep_V) here_Adv))))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkVP (mkVP sleep_V) here_Adv))))
+
+ps "*"
+
+ps "mkRCl-RP-V-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP sleep_V)))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP sleep_V)))
+
+ps "*"
+
+ps "mkRCl-RP-V2-NP-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP love_V2 he_NP)))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP love_V2 he_NP)))
+
+ps "*"
+
+ps "mkRCl-RP-V3-NP-NP-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP send_V3 it_NP he_NP)))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP send_V3 it_NP he_NP)))
+
+ps "*"
+
+ps "mkRCl-RP-VV-VP-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP want_VV (mkVP sleep_V))))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP want_VV (mkVP sleep_V))))
+
+ps "*"
+
+ps "mkRCl-RP-VS-S-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP say_VS (mkS (mkCl i_NP sleep_V)))))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP say_VS (mkS (mkCl i_NP sleep_V)))))
+
+ps "*"
+
+ps "mkRCl-RP-VQ-QS-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP wonder_VQ (mkQS (mkQCl who_IP sleep_V)))))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP wonder_VQ (mkQS (mkQCl who_IP sleep_V)))))
+
+ps "*"
+
+ps "mkRCl-RP-VA-A-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP become_VA old_A)))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP become_VA old_A)))
+
+ps "*"
+
+ps "mkRCl-RP-VA-AP-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP become_VA (mkAP very_AdA old_A))))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP become_VA (mkAP very_AdA old_A))))
+
+ps "*"
+
+ps "mkRCl-RP-V2A-NP-A-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP paint_V2A it_NP red_A)))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP paint_V2A it_NP red_A)))
+
+ps "*"
+
+ps "mkRCl-RP-V2A-NP-AP-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP paint_V2A it_NP (mkAP very_AdA red_A))))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP paint_V2A it_NP (mkAP very_AdA red_A))))
+
+ps "*"
+
+ps "mkRCl-RP-V2S-NP-S-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP answer_V2S he_NP (mkS (mkCl we_NP sleep_V)))))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP answer_V2S he_NP (mkS (mkCl we_NP sleep_V)))))
+
+ps "*"
+
+ps "mkRCl-RP-V2Q-NP-QS-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP ask_V2Q he_NP (mkQS (mkQCl who_IP sleep_V)))))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP ask_V2Q he_NP (mkQS (mkQCl who_IP sleep_V)))))
+
+ps "*"
+
+ps "mkRCl-RP-V2V-NP-VP-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP beg_V2V he_NP (mkVP sleep_V))))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP beg_V2V he_NP (mkVP sleep_V))))
+
+ps "*"
+
+ps "mkRCl-RP-A-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP old_A)))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP old_A)))
+
+ps "*"
+
+ps "mkRCl-RP-A-NP-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP old_A he_NP)))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP old_A he_NP)))
+
+ps "*"
+
+ps "mkRCl-RP-A2-NP-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP married_A2 he_NP)))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP married_A2 he_NP)))
+
+ps "*"
+
+ps "mkRCl-RP-AP-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkAP very_AdA old_A))))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkAP very_AdA old_A))))
+
+ps "*"
+
+ps "mkRCl-RP-NP-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkNP the_Det woman_N))))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkNP the_Det woman_N))))
+
+ps "*"
+
+ps "mkRCl-RP-N-RCl"
+
+ps "mkUtt (mkCN student_N (mkRS (mkRCl which_RP woman_N)))"
+
+cc -one mkUtt (mkCN student_N (mkRS (mkRCl which_RP woman_N)))
+
+ps "*"
+
+ps "mkRCl-RP-CN-RCl"
+
+ps "mkUtt (mkCN student_N (mkRS (mkRCl which_RP (mkCN old_A woman_N))))"
+
+cc -one mkUtt (mkCN student_N (mkRS (mkRCl which_RP (mkCN old_A woman_N))))
+
+ps "*"
+
+ps "mkRCl-RP-Adv-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP here_Adv)))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP here_Adv)))
+
+ps "*"
+
+ps "mkRCl-RP-VP-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkVP always_AdV (mkVP sleep_V)))))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkVP always_AdV (mkVP sleep_V)))))
+
+ps "*"
+
+ps "mkRCl-RP-NP-V2-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP we_NP love_V2)))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP we_NP love_V2)))
+
+ps "*"
+
+ps "mkRCl-RP-ClSlash-RCl"
+
+ps "mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkClSlash (mkClSlash she_NP love_V2) today_Adv))))"
+
+cc -one mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkClSlash (mkClSlash she_NP love_V2) today_Adv))))
+
+ps "*"
+
+ps "which_RP-RP"
+
+ps "which_RP"
+
+cc -one which_RP
+
+ps "*"
+
+ps "mkRP-Prep-NP-RP-RP"
+
+ps "mkRP in_Prep (mkNP all_Predet (mkNP the_Quant pluralNum city_N)) which_RP"
+
+cc -one mkRP in_Prep (mkNP all_Predet (mkNP the_Quant pluralNum city_N)) which_RP
+
+ps "*"
+
+ps "mkSSlash-Temp-Pol-ClSlash-SSlash"
+
+ps "mkSSlash (mkTemp pastTense anteriorAnt) negativePol (mkClSlash she_NP (mkVPSlash see_V2))"
+
+cc -one mkSSlash (mkTemp pastTense anteriorAnt) negativePol (mkClSlash she_NP (mkVPSlash see_V2))
+
+ps "*"
+
+ps "mkClSlash-NP-VPSlash-ClSlash"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash see_V2)))"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash see_V2)))
+
+ps "*"
+
+ps "mkClSlash-NP-V2-ClSlash"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash she_NP see_V2))"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash she_NP see_V2))
+
+ps "*"
+
+ps "mkClSlash-NP-VV-V2-ClSlash"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash she_NP want_VV see_V2))"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash she_NP want_VV see_V2))
+
+ps "*"
+
+ps "mkClSlash-Cl-Prep-ClSlash"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash (mkCl she_NP sleep_V) with_Prep))"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash (mkCl she_NP sleep_V) with_Prep))
+
+ps "*"
+
+ps "mkClSlash-ClSlash-Adv-ClSlash"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash (mkClSlash she_NP see_V2) today_Adv))"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash (mkClSlash she_NP see_V2) today_Adv))
+
+ps "*"
+
+ps "mkClSlash-NP-VS-SSlash-ClSlash"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash she_NP know_VS (mkSSlash (mkTemp pastTense anteriorAnt) negativePol (mkClSlash we_NP (mkVPSlash see_V2)))))"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash she_NP know_VS (mkSSlash (mkTemp pastTense anteriorAnt) negativePol (mkClSlash we_NP (mkVPSlash see_V2)))))
+
+ps "*"
+
+ps "mkVPSlash-V2-VPSlash"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash see_V2)))"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash see_V2)))
+
+ps "*"
+
+ps "mkVPSlash-V3-NP-VPSlash"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash send_V3 it_NP))  )"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash send_V3 it_NP))  )
+
+ps "*"
+
+ps "mkVPSlash-V2A-AP-VPSlash"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash paint_V2A (mkAP red_A)))  )"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash paint_V2A (mkAP red_A)))  )
+
+ps "*"
+
+ps "mkVPSlash-V2Q-QS-VPSlash"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash ask_V2Q (mkQS (mkQCl where_IAdv (mkCl i_NP sleep_V)))))   )"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash ask_V2Q (mkQS (mkQCl where_IAdv (mkCl i_NP sleep_V)))))   )
+
+ps "*"
+
+ps "mkVPSlash-V2S-S-VPSlash"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash answer_V2S (mkS (mkCl i_NP sleep_V))))   )"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash answer_V2S (mkS (mkCl i_NP sleep_V))))   )
+
+ps "*"
+
+ps "mkVPSlash-V2V-VP-VPSlash"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash beg_V2V (mkVP sleep_V))))"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash beg_V2V (mkVP sleep_V))))
+
+ps "*"
+
+ps "mkVPSlash-VV-VPSlash-VPSlash"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash want_VV (mkVPSlash see_V2))))"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash want_VV (mkVPSlash see_V2))))
+
+ps "*"
+
+ps "mkVPSlash-V2V-NP-VPSlash-VPSlash"
+
+ps "mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash beg_V2V i_NP (mkVPSlash see_V2))))"
+
+cc -one mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash beg_V2V i_NP (mkVPSlash see_V2))))
+
+ps "*"
+
+ps "above_Prep-Prep"
+
+ps "mkUtt (mkAdv above_Prep it_NP)"
+
+cc -one mkUtt (mkAdv above_Prep it_NP)
+
+ps "*"
+
+ps "after_Prep-Prep"
+
+ps "mkUtt (mkAdv after_Prep it_NP)"
+
+cc -one mkUtt (mkAdv after_Prep it_NP)
+
+ps "*"
+
+ps "all_Predet-Predet"
+
+ps "mkUtt (mkNP all_Predet (mkNP thePl_Det man_N))"
+
+cc -one mkUtt (mkNP all_Predet (mkNP thePl_Det man_N))
+
+ps "*"
+
+ps "almost_AdA-AdA"
+
+ps "mkUtt (mkAP almost_AdA red_A)"
+
+cc -one mkUtt (mkAP almost_AdA red_A)
+
+ps "*"
+
+ps "almost_AdN-AdN"
+
+ps "mkUtt (mkCard almost_AdN (mkCard (mkNumeral n8_Unit))    )"
+
+cc -one mkUtt (mkCard almost_AdN (mkCard (mkNumeral n8_Unit))    )
+
+ps "*"
+
+ps "although_Subj-Subj"
+
+ps "mkUtt (mkAdv although_Subj (mkS (mkCl she_NP sleep_V)))"
+
+cc -one mkUtt (mkAdv although_Subj (mkS (mkCl she_NP sleep_V)))
+
+ps "*"
+
+ps "always_AdV-AdV"
+
+ps "always_AdV"
+
+cc -one always_AdV
+
+ps "*"
+
+ps "and_Conj-Conj"
+
+ps "mkUtt (mkAdv and_Conj here_Adv now_Adv)"
+
+cc -one mkUtt (mkAdv and_Conj here_Adv now_Adv)
+
+ps "*"
+
+ps "because_Subj-Subj"
+
+ps "mkUtt (mkAdv because_Subj (mkS (mkCl she_NP sleep_V)))"
+
+cc -one mkUtt (mkAdv because_Subj (mkS (mkCl she_NP sleep_V)))
+
+ps "*"
+
+ps "before_Prep-Prep"
+
+ps "mkUtt (mkAdv before_Prep it_NP)"
+
+cc -one mkUtt (mkAdv before_Prep it_NP)
+
+ps "*"
+
+ps "behind_Prep-Prep"
+
+ps "mkUtt (mkAdv behind_Prep it_NP)"
+
+cc -one mkUtt (mkAdv behind_Prep it_NP)
+
+ps "*"
+
+ps "between_Prep-Prep"
+
+ps "mkUtt (mkAdv between_Prep (mkNP and_Conj you_NP i_NP))"
+
+cc -one mkUtt (mkAdv between_Prep (mkNP and_Conj you_NP i_NP))
+
+ps "*"
+
+ps "both7and_DConj-Conj"
+
+ps "mkUtt (mkAdv both7and_DConj here_Adv there_Adv)"
+
+cc -one mkUtt (mkAdv both7and_DConj here_Adv there_Adv)
+
+ps "*"
+
+ps "but_PConj-PConj"
+
+ps "but_PConj"
+
+cc -one but_PConj
+
+ps "*"
+
+ps "by8agent_Prep-Prep"
+
+ps "mkUtt (mkAdv by8agent_Prep it_NP)"
+
+cc -one mkUtt (mkAdv by8agent_Prep it_NP)
+
+ps "*"
+
+ps "by8means_Prep-Prep"
+
+ps "mkUtt (mkAdv by8means_Prep it_NP)"
+
+cc -one mkUtt (mkAdv by8means_Prep it_NP)
+
+ps "*"
+
+ps "can8know_VV-VV"
+
+ps "mkUtt (mkVP can8know_VV (mkVP sleep_V))"
+
+cc -one mkUtt (mkVP can8know_VV (mkVP sleep_V))
+
+ps "*"
+
+ps "can_VV-VV"
+
+ps "mkUtt (mkVP can_VV (mkVP sleep_V))"
+
+cc -one mkUtt (mkVP can_VV (mkVP sleep_V))
+
+ps "*"
+
+ps "during_Prep-Prep"
+
+ps "mkUtt (mkAdv during_Prep it_NP)"
+
+cc -one mkUtt (mkAdv during_Prep it_NP)
+
+ps "*"
+
+ps "either7or_DConj-Conj"
+
+ps "mkUtt (mkAdv either7or_DConj here_Adv there_Adv)"
+
+cc -one mkUtt (mkAdv either7or_DConj here_Adv there_Adv)
+
+ps "*"
+
+ps "every_Det-Det"
+
+ps "mkUtt (mkNP every_Det woman_N)"
+
+cc -one mkUtt (mkNP every_Det woman_N)
+
+ps "*"
+
+ps "everybody_NP-NP"
+
+ps "mkUtt everybody_NP"
+
+cc -one mkUtt everybody_NP
+
+ps "*"
+
+ps "everything_NP-NP"
+
+ps "mkUtt everything_NP"
+
+cc -one mkUtt everything_NP
+
+ps "*"
+
+ps "everywhere_Adv-Adv"
+
+ps "mkUtt (everywhere_Adv)"
+
+cc -one mkUtt (everywhere_Adv)
+
+ps "*"
+
+ps "few_Det-Det"
+
+ps "mkUtt (mkNP few_Det woman_N)"
+
+cc -one mkUtt (mkNP few_Det woman_N)
+
+ps "*"
+
+ps "for_Prep-Prep"
+
+ps "mkUtt (mkAdv for_Prep it_NP)"
+
+cc -one mkUtt (mkAdv for_Prep it_NP)
+
+ps "*"
+
+ps "from_Prep-Prep"
+
+ps "mkUtt (mkAdv from_Prep it_NP)"
+
+cc -one mkUtt (mkAdv from_Prep it_NP)
+
+ps "*"
+
+ps "he_Pron-Pron"
+
+ps "mkUtt (mkNP he_Pron)"
+
+cc -one mkUtt (mkNP he_Pron)
+
+ps "*"
+
+ps "here_Adv-Adv"
+
+ps "mkUtt (here_Adv)"
+
+cc -one mkUtt (here_Adv)
+
+ps "*"
+
+ps "here7to_Adv-Adv"
+
+ps "mkUtt (here7to_Adv)"
+
+cc -one mkUtt (here7to_Adv)
+
+ps "*"
+
+ps "here7from_Adv-Adv"
+
+ps "mkUtt (here7from_Adv)"
+
+cc -one mkUtt (here7from_Adv)
+
+ps "*"
+
+ps "how_IAdv-IAdv"
+
+ps "mkUtt how_IAdv"
+
+cc -one mkUtt how_IAdv
+
+ps "*"
+
+ps "how8many_IDet-IDet"
+
+ps "mkUtt (mkIP how8many_IDet house_N)"
+
+cc -one mkUtt (mkIP how8many_IDet house_N)
+
+ps "*"
+
+ps "how8much_IAdv-IAdv"
+
+ps "mkUtt how8much_IAdv"
+
+cc -one mkUtt how8much_IAdv
+
+ps "*"
+
+ps "i_Pron-Pron"
+
+ps "mkUtt (mkNP i_Pron)"
+
+cc -one mkUtt (mkNP i_Pron)
+
+ps "*"
+
+ps "if_Subj-Subj"
+
+ps "mkUtt (mkAdv if_Subj (mkS (mkCl she_NP sleep_V)))"
+
+cc -one mkUtt (mkAdv if_Subj (mkS (mkCl she_NP sleep_V)))
+
+ps "*"
+
+ps "in8front_Prep-Prep"
+
+ps "mkUtt (mkAdv in8front_Prep it_NP)"
+
+cc -one mkUtt (mkAdv in8front_Prep it_NP)
+
+ps "*"
+
+ps "in_Prep-Prep"
+
+ps "mkUtt (mkAdv in_Prep it_NP)"
+
+cc -one mkUtt (mkAdv in_Prep it_NP)
+
+ps "*"
+
+ps "it_Pron-Pron"
+
+ps "mkUtt (mkNP it_Pron)"
+
+cc -one mkUtt (mkNP it_Pron)
+
+ps "*"
+
+ps "less_CAdv-CAdv"
+
+ps "less_CAdv"
+
+cc -one less_CAdv
+
+ps "*"
+
+ps "many_Det-Det"
+
+ps "mkUtt (mkNP many_Det house_N)"
+
+cc -one mkUtt (mkNP many_Det house_N)
+
+ps "*"
+
+ps "more_CAdv-CAdv"
+
+ps "more_CAdv"
+
+cc -one more_CAdv
+
+ps "*"
+
+ps "most_Predet-Predet"
+
+ps "most_Predet"
+
+cc -one most_Predet
+
+ps "*"
+
+ps "much_Det-Det"
+
+ps "mkUtt (mkNP much_Det wine_N)"
+
+cc -one mkUtt (mkNP much_Det wine_N)
+
+ps "*"
+
+ps "must_VV-VV"
+
+ps "must_VV"
+
+cc -one must_VV
+
+ps "*"
+
+ps "no_Utt-Utt"
+
+ps "no_Utt"
+
+cc -one no_Utt
+
+ps "*"
+
+ps "on_Prep-Prep"
+
+ps "mkUtt (mkAdv on_Prep it_NP)"
+
+cc -one mkUtt (mkAdv on_Prep it_NP)
+
+ps "*"
+
+ps "only_Predet-Predet"
+
+ps "only_Predet"
+
+cc -one only_Predet
+
+ps "*"
+
+ps "or_Conj-Conj"
+
+ps "mkUtt (mkAdv or_Conj here_Adv there_Adv)"
+
+cc -one mkUtt (mkAdv or_Conj here_Adv there_Adv)
+
+ps "*"
+
+ps "otherwise_PConj-PConj"
+
+ps "otherwise_PConj"
+
+cc -one otherwise_PConj
+
+ps "*"
+
+ps "part_Prep-Prep"
+
+ps "mkUtt (mkAdv part_Prep it_NP)"
+
+cc -one mkUtt (mkAdv part_Prep it_NP)
+
+ps "*"
+
+ps "please_Voc-Voc"
+
+ps "please_Voc"
+
+cc -one please_Voc
+
+ps "*"
+
+ps "possess_Prep-Prep"
+
+ps "mkUtt (mkAdv possess_Prep it_NP)"
+
+cc -one mkUtt (mkAdv possess_Prep it_NP)
+
+ps "*"
+
+ps "quite_Adv-AdA"
+
+ps "quite_Adv"
+
+cc -one quite_Adv
+
+ps "*"
+
+ps "she_Pron-Pron"
+
+ps "mkUtt (mkNP she_Pron)"
+
+cc -one mkUtt (mkNP she_Pron)
+
+ps "*"
+
+ps "so_AdA-AdA"
+
+ps "mkUtt (mkAP so_AdA warm_A)"
+
+cc -one mkUtt (mkAP so_AdA warm_A)
+
+ps "*"
+
+ps "someSg_Det-Det"
+
+ps "mkUtt (mkNP someSg_Det wine_N)"
+
+cc -one mkUtt (mkNP someSg_Det wine_N)
+
+ps "*"
+
+ps "somePl_Det-Det"
+
+ps "mkUtt (mkNP somePl_Det woman_N)"
+
+cc -one mkUtt (mkNP somePl_Det woman_N)
+
+ps "*"
+
+ps "somebody_NP-NP"
+
+ps "mkUtt somebody_NP"
+
+cc -one mkUtt somebody_NP
+
+ps "*"
+
+ps "something_NP-NP"
+
+ps "mkUtt something_NP"
+
+cc -one mkUtt something_NP
+
+ps "*"
+
+ps "somewhere_Adv-Adv"
+
+ps "mkUtt (somewhere_Adv)"
+
+cc -one mkUtt (somewhere_Adv)
+
+ps "*"
+
+ps "that_Quant-Quant"
+
+ps "mkUtt (mkNP that_Quant house_N)"
+
+cc -one mkUtt (mkNP that_Quant house_N)
+
+ps "*"
+
+ps "that_Subj-Subj"
+
+ps "mkUtt (mkAdv that_Subj (mkS (mkCl she_NP sleep_V)))"
+
+cc -one mkUtt (mkAdv that_Subj (mkS (mkCl she_NP sleep_V)))
+
+ps "*"
+
+ps "there_Adv-Adv"
+
+ps "mkUtt (there_Adv)"
+
+cc -one mkUtt (there_Adv)
+
+ps "*"
+
+ps "there7to_Adv-Adv"
+
+ps "mkUtt (there7to_Adv)"
+
+cc -one mkUtt (there7to_Adv)
+
+ps "*"
+
+ps "there7from_Adv-Adv"
+
+ps "mkUtt (there7from_Adv)"
+
+cc -one mkUtt (there7from_Adv)
+
+ps "*"
+
+ps "therefore_PConj-PConj"
+
+ps "therefore_PConj"
+
+cc -one therefore_PConj
+
+ps "*"
+
+ps "they_Pron-Pron"
+
+ps "mkUtt (mkNP they_Pron)"
+
+cc -one mkUtt (mkNP they_Pron)
+
+ps "*"
+
+ps "this_Quant-Quant"
+
+ps "mkUtt (mkNP this_Quant house_N)"
+
+cc -one mkUtt (mkNP this_Quant house_N)
+
+ps "*"
+
+ps "through_Prep-Prep"
+
+ps "mkUtt (mkAdv through_Prep it_NP)"
+
+cc -one mkUtt (mkAdv through_Prep it_NP)
+
+ps "*"
+
+ps "to_Prep-Prep"
+
+ps "mkUtt (mkAdv to_Prep it_NP)"
+
+cc -one mkUtt (mkAdv to_Prep it_NP)
+
+ps "*"
+
+ps "too_AdA-AdA"
+
+ps "mkUtt (mkAP too_AdA warm_A)"
+
+cc -one mkUtt (mkAP too_AdA warm_A)
+
+ps "*"
+
+ps "under_Prep-Prep"
+
+ps "mkUtt (mkAdv under_Prep it_NP)"
+
+cc -one mkUtt (mkAdv under_Prep it_NP)
+
+ps "*"
+
+ps "very_AdA-AdA"
+
+ps "mkUtt (mkAP very_AdA warm_A)"
+
+cc -one mkUtt (mkAP very_AdA warm_A)
+
+ps "*"
+
+ps "want_VV-VV"
+
+ps "mkUtt (mkVP want_VV (mkVP sleep_V))"
+
+cc -one mkUtt (mkVP want_VV (mkVP sleep_V))
+
+ps "*"
+
+ps "we_Pron-Pron"
+
+ps "mkUtt (mkNP we_Pron)"
+
+cc -one mkUtt (mkNP we_Pron)
+
+ps "*"
+
+ps "whatPl_IP-IP"
+
+ps "mkUtt (whatPl_IP)"
+
+cc -one mkUtt (whatPl_IP)
+
+ps "*"
+
+ps "whatSg_IP-IP"
+
+ps "mkUtt (whatSg_IP)"
+
+cc -one mkUtt (whatSg_IP)
+
+ps "*"
+
+ps "when_IAdv-IAdv"
+
+ps "mkUtt when_IAdv"
+
+cc -one mkUtt when_IAdv
+
+ps "*"
+
+ps "when_Subj-Subj"
+
+ps "mkUtt (mkAdv when_Subj (mkS (mkCl she_NP sleep_V)))"
+
+cc -one mkUtt (mkAdv when_Subj (mkS (mkCl she_NP sleep_V)))
+
+ps "*"
+
+ps "where_IAdv-IAdv"
+
+ps "mkUtt where_IAdv"
+
+cc -one mkUtt where_IAdv
+
+ps "*"
+
+ps "which_IQuant-IQuant"
+
+ps "mkUtt (mkIP which_IQuant house_N)"
+
+cc -one mkUtt (mkIP which_IQuant house_N)
+
+ps "*"
+
+ps "whoPl_IP-IP"
+
+ps "mkUtt (whoPl_IP)"
+
+cc -one mkUtt (whoPl_IP)
+
+ps "*"
+
+ps "whoSg_IP-IP"
+
+ps "mkUtt (whoSg_IP)"
+
+cc -one mkUtt (whoSg_IP)
+
+ps "*"
+
+ps "why_IAdv-IAdv"
+
+ps "mkUtt why_IAdv"
+
+cc -one mkUtt why_IAdv
+
+ps "*"
+
+ps "with_Prep-Prep"
+
+ps "mkUtt (mkAdv with_Prep it_NP)"
+
+cc -one mkUtt (mkAdv with_Prep it_NP)
+
+ps "*"
+
+ps "without_Prep-Prep"
+
+ps "mkUtt (mkAdv without_Prep it_NP)"
+
+cc -one mkUtt (mkAdv without_Prep it_NP)
+
+ps "*"
+
+ps "yes_Utt-Utt"
+
+ps "yes_Utt"
+
+cc -one yes_Utt
+
+ps "*"
+
+ps "youSg_Pron-Pron"
+
+ps "mkUtt (mkNP youSg_Pron)"
+
+cc -one mkUtt (mkNP youSg_Pron)
+
+ps "*"
+
+ps "youPl_Pron-Pron"
+
+ps "mkUtt (mkNP youPl_Pron)"
+
+cc -one mkUtt (mkNP youPl_Pron)
+
+ps "*"
+
+ps "youPol_Pron-Pron"
+
+ps "mkUtt (mkNP youPol_Pron)"
+
+cc -one mkUtt (mkNP youPol_Pron)
+
+ps "*"
+
+ps "no_Quant-Quant"
+
+ps "mkUtt (mkNP no_Quant house_N)"
+
+cc -one mkUtt (mkNP no_Quant house_N)
+
+ps "*"
+
+ps "not_Predet-Predet"
+
+ps "mkUtt (mkNP not_Predet everybody_NP)"
+
+cc -one mkUtt (mkNP not_Predet everybody_NP)
+
+ps "*"
+
+ps "if_then_Conj-Conj"
+
+ps "mkUtt (mkAdv if_then_Conj here_Adv there_Adv)"
+
+cc -one mkUtt (mkAdv if_then_Conj here_Adv there_Adv)
+
+ps "*"
+
+ps "at_least_AdN-AdN"
+
+ps "mkUtt (mkCard at_least_AdN (mkCard (mkNumeral n8_Unit)))"
+
+cc -one mkUtt (mkCard at_least_AdN (mkCard (mkNumeral n8_Unit)))
+
+ps "*"
+
+ps "at_most_AdN-AdN"
+
+ps "mkUtt (mkCard at_most_AdN (mkCard (mkNumeral n8_Unit)))"
+
+cc -one mkUtt (mkCard at_most_AdN (mkCard (mkNumeral n8_Unit)))
+
+ps "*"
+
+ps "nobody_NP-NP"
+
+ps "mkUtt nobody_NP"
+
+cc -one mkUtt nobody_NP
+
+ps "*"
+
+ps "nothing_NP-NP"
+
+ps "mkUtt nothing_NP"
+
+cc -one mkUtt nothing_NP
+
+ps "*"
+
+ps "except_Prep-Prep"
+
+ps "mkUtt (mkAdv except_Prep it_NP)"
+
+cc -one mkUtt (mkAdv except_Prep it_NP)
+
+ps "*"
+
+ps "as_CAdv-CAdv"
+
+ps "as_CAdv"
+
+cc -one as_CAdv
+
+ps "*"
+
+ps "have_V2-V2"
+
+ps "mkUtt (mkVP have_V2 it_NP)"
+
+cc -one mkUtt (mkVP have_V2 it_NP)
+
+ps "*"

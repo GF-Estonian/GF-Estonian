@@ -238,7 +238,7 @@ LangEst: kuninga ema
 
 
 Lang: ComplN2 (ComplN3 distance_N3 (DetCN (DetQuant this_Quant NumSg) (UseN city_N))) (UsePN paris_PN)
-LangEst: kaugus sellest linnist Pariisi
+LangEst: kaugus sellest linnast Pariisi
 
 
 Lang: UseN2 mother_N2
@@ -246,7 +246,7 @@ LangEst: ema
 
 
 Lang: ComplN2 (Use2N3 distance_N3) (DetCN (DetQuant this_Quant NumSg) (UseN city_N))
-LangEst: kaugus sellest linnist
+LangEst: kaugus sellest linnast
 
 
 Lang: ComplN2 (Use3N3 distance_N3) (UsePN paris_PN)
@@ -266,7 +266,7 @@ LangEst: maja kelle Juhan ostis
 
 
 Lang: AdvCN (UseN house_N) (PrepNP on_Prep (DetCN (DetQuant DefArt NumSg) (UseN hill_N)))
-LangEst: maja mägil
+LangEst: maja künkal
 
 
 Lang: SentCN (UseN question_N) (EmbedQS (UseQCl (TTAnt TPres ASimul) PPos (QuestIAdv where_IAdv (PredVP (UsePron she_Pron) (UseV sleep_V)))))

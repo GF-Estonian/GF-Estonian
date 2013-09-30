@@ -28,8 +28,8 @@ concrete StructuralEst of Structural = CatEst **
   but_PConj = ss "aga" ;
   by8agent_Prep = postGenPrep "poolt" ;
   by8means_Prep = casePrep adessive ;
-  can8know_VV = mkVV (mkV "oskama") ;
-  can_VV = mkVV (mkV "võima") ;
+  can8know_VV = mkVV (mkV "oskama" "osata") ;
+  can_VV = mkVV (mkV "võima" "võida") ;
   during_Prep = postGenPrep "ajal" ;
   either7or_DConj = sd2 "kas" "või" ** {n = Sg} ;
   everybody_NP = makeNP (mkN "igaüks") Sg ;

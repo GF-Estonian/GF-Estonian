@@ -46,7 +46,7 @@ lin
   cheese_N = mkN "juust" ;
   child_N = mkN "laps" "lapse" "last" "lapsesse" "laste" "lapsi" ;
   church_N = mkN "kirik" ;
-  city_N = mkN "linn" ;
+  city_N = mkN "linn" "linna" "linna" "linna" "linnade" "linnu" ;
   clean_A = mkA (mkN "puhas" "puhta" "puhast" "puhtasse" "puhaste" "puhtaid");
   clever_A = mkA "tark" ;
   close_V2 = mkV2 (mkV "sulgema") ;
@@ -91,7 +91,7 @@ lin
   hate_V2 = mkV2 (mkV "vihkama") cpartitive ;
   hat_N = mkN "müts" ;
   hear_V2 = mkV2 (mkV "kuulma") ;
-  hill_N = mkN "mägi" ;
+  hill_N = mkN "küngas" "künka" "küngast" "künkasse" "küngaste" "künkaid" ;
   hope_VS = mkVS (mkV "lootma") ;
   horse_N = mkN "hobune" ;
   hot_A = mkA "kuum" ;
@@ -121,13 +121,13 @@ lin
   milk_N = mkN "piim" ;
   moon_N = mkN "kuu" ;
   mother_N2 = mkN2 (mkN "ema") ;
-  mountain_N = mkN "mägi" ;
+  mountain_N = mkN "mägi" "mäe" "mäge" "mäkke" "mägede" "mägesid" ;
   music_N = mkN "muusika" ;
   narrow_A = mkA "kitsas" ;
   new_A = mkA (mkN "uus" "uue" "uut" "uude" "uute" "uusi") "uuem" "uusim" ;
   newspaper_N = mkN "aja" (mkN "leht") ;
   oil_N = mkN "õli" ;
-  old_A = mkA "vana" ;
+  old_A = mkA (mkN "vana" "vana" "vana" "vanasse" "vanade" "vanasid") "vanem" "vanim" ;
   open_V2 = mkV2 (mkV "avama") ;
   paint_V2A = mkV2A (mkV "maalima") accPrep (casePrep translative) ;
   paper_N = mkN "paber" ;
@@ -206,7 +206,7 @@ lin
   window_N = mkN "aken" ;
   wine_N = mkN "vein" ;
   win_V2 = mkV2 (mkV "võitma") ;
-  woman_N = mkN "naine" ;
+  woman_N = mkN "naine" "naise" "naist" "naisesse" "naiste" "naisi" ;
   wonder_VQ = mkVQ (mkV "arutlema") ; -- TODO
   wood_N = mkN "puu" ;
   write_V2 = mkV2 (mkV "kirjutama") ;
@@ -223,8 +223,8 @@ lin
   put_V2 = mkV2 (mkV "panema") ;
   stop_V = mkV "peatuma" ;
   jump_V = mkV "hüppama" ;
-  left_Ord = mkOrd (mkN "vasak") ;
-  right_Ord = mkOrd (mkN "parem") ;
+  left_Ord = mkOrd1 (mkN "vasak") ;
+  right_Ord = mkOrd1 (mkN "parem") ;
   far_Adv = mkAdv "kaugel" ;
   correct_A = mkA "õige" ;
   dry_A = mkA "kuiv" ;
@@ -361,8 +361,8 @@ lin
   uncertain_A = mkA "ebakindel" ;
 
  oper
-    mkOrd : N -> Ord ;
-    mkOrd x = {s = x.s ; lock_Ord = <> } ;
+    mkOrd1 : N -> Ord ;
+    mkOrd1 x = {s = x.s ; lock_Ord = <> } ;
     cpartitive = casePrep partitive ;
 
 } ;
