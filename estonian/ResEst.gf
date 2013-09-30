@@ -421,7 +421,7 @@ oper
       Impf Sg P2 => "läksid" ;
       Impf Pl P1 => "läksime" ;
       Impf Pl P2 => "läksite" ;
-      Impf Pl P3 => "läksivad" ;
+      Impf Pl P3 => "läksid" ;
       Imper Sg => "mine" ;
       v => minema.s ! v
       } ;
@@ -553,8 +553,7 @@ oper
     maakas,maaka,maakat,maakasse,maakate,maakaid : Str
     } ;
 
--- worst-case macro
-
+  -- The next 3 opers are only used for the -nud/-tud form generation. (?)
   mkSubst : (x1,_,_,_,_,x6 : Str) -> NounH = 
     \maakas,maaka,maakat,maakasse,maakate,maakaid -> 
     {

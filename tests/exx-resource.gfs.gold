@@ -546,7 +546,7 @@ LangEst: mina arutlen kes jookseb
 
 
 Lang: PredVP (UsePron they_Pron) (ComplVA become_VA (PositA red_A))
-LangEst: nendest saab punased
+LangEst: nemad saavad punasteks
 
 
 Lang: PredVP (UsePron i_Pron) (ComplSlash (Slash3V3 give_V3 (UsePron he_Pron)) (UsePron it_Pron))
@@ -678,7 +678,7 @@ LangEst:
 
 
 Lang: UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN grammar_N)) (ComplSlash (SlashV2a speak_V2) (DetCN (DetQuant IndefArt (NumCard (NumNumeral (num (pot2as3 (pot1as2 (pot1to19 n2))))))) (UseN language_N)))))
-LangEst: see grammatika rääkib kahte &+ teist keeli
+LangEst: see grammatika räägib kahte &+ teist keeli
 
 
 Lang: UseCl (TTAnt TPast AAnter) PPos (PredVP (UsePron she_Pron) (ComplSlash (SlashV2a buy_V2) (DetCN (DetQuant IndefArt NumSg) (AdjCN (PositA red_A) (UseN house_N)))))

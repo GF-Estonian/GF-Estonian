@@ -208,11 +208,11 @@ tema arutleb kes magab
 *
 mkCl-NP-VA-A-Cl
 mkUtt (mkCl she_NP become_VA old_A)
-temast saab vana
+tema saab vanaks
 *
 mkCl-NP-VA-AP-Cl
 mkUtt (mkCl she_NP become_VA (mkAP very_AdA old_A))
-temast saab väga vana
+tema saab väga vanaks
 *
 mkCl-NP-V2A-NP-A-Cl
 mkUtt (mkCl she_NP paint_V2A it_NP red_A)
@@ -328,11 +328,11 @@ teada et tema magab
 *
 mkVP-VQ-QS-VP
 mkUtt (mkVP wonder_VQ (mkQS (mkQCl who_IP sleep_V))) 
-arudelda kes magab
+arutleda kes magab
 *
 mkVP-VA-AP-VP
 mkUtt (mkVP become_VA (mkAP red_A))
-punane saada
+punaseks saada
 *
 mkVP-V2A-NP-AP-VP
 mkUtt (mkVP paint_V2A it_NP (mkAP red_A))
@@ -10798,11 +10798,11 @@ kes arutleb kes magab
 *
 mkQCl-IP-VA-A-QCl
 mkUtt (mkQCl who_IP become_VA old_A)
-kellest saab vana
+kes saab vanaks
 *
 mkQCl-IP-VA-AP-QCl
 mkUtt (mkQCl who_IP become_VA (mkAP very_AdA old_A))
-kellest saab väga vana
+kes saab väga vanaks
 *
 mkQCl-IP-V2A-NP-A-QCl
 mkUtt (mkQCl who_IP paint_V2A it_NP red_A)
@@ -10990,11 +10990,11 @@ naine kes arutleb kes magab
 *
 mkRCl-RP-VA-A-RCl
 mkUtt (mkCN woman_N (mkRS (mkRCl which_RP become_VA old_A)))
-naine kellest saab vana
+naine kes saab vanaks
 *
 mkRCl-RP-VA-AP-RCl
 mkUtt (mkCN woman_N (mkRS (mkRCl which_RP become_VA (mkAP very_AdA old_A))))
-naine kellest saab väga vana
+naine kes saab väga vanaks
 *
 mkRCl-RP-V2A-NP-A-RCl
 mkUtt (mkCN woman_N (mkRS (mkRCl which_RP paint_V2A it_NP red_A)))
@@ -11258,7 +11258,7 @@ kuidas
 *
 how8many_IDet-IDet
 mkUtt (mkIP how8many_IDet house_N)
-kui palju maja
+kui mitu maja
 *
 how8much_IAdv-IAdv
 mkUtt how8much_IAdv

@@ -7,7 +7,7 @@ flags
 lin
   airplane_N = mkN "lennuk" ;
   alas_Interj = ss "paraku" ;
-  answer_V2S = mkV2 (mkV "vastama" "vastata") (casePrep allative) ;
+  answer_V2S = mkV2 (mkV "vastama" "vastata") callative ;
   apartment_N = mkN "korter" ;
   apple_N = mkN "õun" ;
   art_N = mkN "kunst" ;
@@ -16,9 +16,9 @@ lin
   bad_A = mkA (mkN "halb" "halva" "halba" "halba" "halbade" "halbu") "halvem" "halvim" ;
   bank_N = mkN "pank" ;
   beautiful_A = mkA (mkN "kaunis" "kauni" "kaunist" "kaunisse" "kaunite" "kauneid") ;
-  become_VA = mkVA (caseV elative (mkV "saama")) (casePrep nominative) ;
+  become_VA = mkVA (caseV nominative (mkV "saama")) ctranslative ; -- tema saab vanaks
   beer_N = mkN "õlu" ;
-  beg_V2V = mkV2V (mkV "paluma") (casePrep partitive) ;
+  beg_V2V = mkV2V (mkV "paluma") cpartitive ;
   big_A = mkA (mkN "suur" "suure" "suurt" "suurde" "suurte" "suuri");
   bike_N = mkN "ratas" ;
   bird_N = mkN "lind" ;
@@ -59,13 +59,13 @@ lin
   cow_N = mkN "lehm" ;
   die_V = mkV "surema" ;
   dirty_A = mkA "räpane" ;
-  distance_N3 = mkN3 (mkN "kaugus") (casePrep elative) (casePrep illative) ;
+  distance_N3 = mkN3 (mkN "kaugus") celative (casePrep illative) ; -- TODO: terminative
   doctor_N = mkN "arst" ;
   dog_N = mkN "koer" ;
   door_N = mkN "uks" ;
-  drink_V2 = mkV2 (mkV "jooma") (casePrep partitive) ;
-  easy_A2V = mkA2 (mkA (mkN "lihtne")) (casePrep allative) ;
-  eat_V2 = mkV2 (mkV "sööma") (casePrep partitive) ;
+  drink_V2 = mkV2 (mkV "jooma") cpartitive ;
+  easy_A2V = mkA2 (mkA (mkN "lihtne")) callative ;
+  eat_V2 = mkV2 (mkV "sööma") cpartitive ;
   empty_A = mkA "tühi" ;
   enemy_N = mkN "vaenlane" ;
   factory_N = mkN "tehas" ;
@@ -108,7 +108,7 @@ lin
   learn_V2 = mkV2 (mkV "õppima") ;
   leather_N = mkN "nahk" ;
   leave_V2 = mkV2 (mkV "jätma") ;
-  like_V2 = mkV2 (mkV "lugu" (mkV "pidama" "pidada" "peab" "peetakse")) (casePrep elative) ;
+  like_V2 = mkV2 (mkV "lugu" (mkV "pidama" "pidada" "peab" "peetakse")) celative ;
   listen_V2 = mkV2 (mkV "kuulama") partitive ;
   live_V = mkV "elama" ;
   long_A = mkA "pikk" ;
@@ -129,7 +129,7 @@ lin
   oil_N = mkN "õli" ;
   old_A = mkA (mkN "vana" "vana" "vana" "vanasse" "vanade" "vanasid") "vanem" "vanim" ;
   open_V2 = mkV2 (mkV "avama") ;
-  paint_V2A = mkV2A (mkV "maalima") accPrep (casePrep translative) ;
+  paint_V2A = mkV2A (mkV "maalima") accPrep ctranslative ;
   paper_N = mkN "paber" ;
   paris_PN = mkPN (mkN "Pariis") ;
   peace_N = mkN "rahu" ;
@@ -158,8 +158,8 @@ lin
   sea_N = mkN "meri" ;
   seek_V2 = mkV2 (mkV "otsima") cpartitive ;
   see_V2 = mkV2 (mkV "nägema" "näha") ;
-  sell_V3 = mkV3 (mkV "müüma") accPrep (casePrep allative) ;
-  send_V3 = mkV3 (mkV "saatma") accPrep (casePrep allative) ;
+  sell_V3 = mkV3 (mkV "müüma") accPrep callative ;
+  send_V3 = mkV3 (mkV "saatma") accPrep callative ;
   sheep_N = mkN "lammas" ;
   ship_N = mkN "laev" ;
   shirt_N = mkN "särk" ;
@@ -172,7 +172,7 @@ lin
   small_A = mkA (mkN "väike" "väikse" "väikest" "väiksesse" "väikeste" "väikseid") ;
   snake_N = mkN "uss" ;
   sock_N = mkN "sukk" ;
-  speak_V2 = mkV2 (mkV "rääkima") cpartitive ;
+  speak_V2 = mkV2 talk_V cpartitive ;
   star_N = mkN "täht" ;
   steel_N = mkN "teras" ;
   stone_N = mkN "kivi" ;
@@ -183,7 +183,7 @@ lin
   switch8off_V2 = mkV2 (mkV "välja" (mkV "lülitama")) ;
   switch8on_V2 = mkV2 (mkV "sisse" (mkV "lülitama")) ;
   table_N = mkN "laud" ;
-  talk_V3 = mkV3 (mkV "rääkima") (casePrep allative) (casePrep elative) ;
+  talk_V3 = mkV3 talk_V callative celative ;
   teacher_N = mkN "õpetaja" ;
   teach_V2 = mkV2 (mkV "õpetama") ;
   television_N = mkN "televisioon" ;
@@ -193,7 +193,7 @@ lin
   travel_V = mkV "reisima" ;
   tree_N = mkN "puu" ;
   ugly_A = mkA "kole" ;
-  understand_V2 = mkV2 (mkV "aru" (mkV "saama")) (casePrep elative) ;
+  understand_V2 = mkV2 (mkV "aru" (mkV "saama")) celative ;
   university_N = mkN "ülikool" ;
   village_N = mkN "küla" ;
   wait_V2 = mkV2 (mkV "ootama") partitive ;
@@ -207,7 +207,7 @@ lin
   wine_N = mkN "vein" ;
   win_V2 = mkV2 (mkV "võitma") ;
   woman_N = mkN "naine" "naise" "naist" "naisesse" "naiste" "naisi" ;
-  wonder_VQ = mkVQ (mkV "arutlema") ; -- TODO
+  wonder_VQ = mkVQ (mkV "arutlema" "arutleda") ; -- TODO
   wood_N = mkN "puu" ;
   write_V2 = mkV2 (mkV "kirjutama") ;
   yellow_A = mkA "kollane" ;
@@ -218,7 +218,7 @@ lin
   now_Adv = mkAdv "nüüd" ;
   already_Adv = mkAdv "juba" ;
   song_N = mkN "laul" ;
-  add_V3 = mkV3 (mkV "lisama") accPrep (casePrep allative) ;
+  add_V3 = mkV3 (mkV "lisama") accPrep callative ;
   number_N = mkN "number" ;
   put_V2 = mkV2 (mkV "panema") ;
   stop_V = mkV "peatuma" ;
@@ -315,7 +315,7 @@ lin
   flow_V = mkV "voolama" ;
   fly_V = mkV "lendama" ;
   freeze_V = mkV "jäätuma" ;
-  give_V3 = mkV3 (mkV "andma") accPrep (casePrep allative) ;
+  give_V3 = mkV3 (mkV "andma") accPrep callative ;
   hit_V2 = mkV2 (mkV "lööma") cpartitive ;
   hold_V2 = mkV2 (mkV "hoidma") cpartitive ;
   hunt_V2 = mkV2 (mkV "jahti" (mkV "pidama")) cpartitive ;
@@ -360,9 +360,15 @@ lin
   today_Adv = mkAdv "täna" ;
   uncertain_A = mkA "ebakindel" ;
 
+
  oper
     mkOrd1 : N -> Ord ;
     mkOrd1 x = {s = x.s ; lock_Ord = <> } ;
     cpartitive = casePrep partitive ;
+    ctranslative = casePrep translative ;
+    celative = casePrep elative ;
+    callative = casePrep allative ;
+
+    talk_V = mkV "rääkima" "rääkida" "räägib" ;
 
 } ;

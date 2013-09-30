@@ -14,5 +14,8 @@ help:
 compile:
 	time gf +RTS -K100M -RTS --make --path $(path) --preproc=mkPresent estonian/LangEst.gf
 
+try:
+	gf --path=api:estonian --retain api/TryEst.gf
+
 clean:
 	find -name *.gfo | xargs rm -f

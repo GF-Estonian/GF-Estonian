@@ -46,8 +46,11 @@ concrete StructuralEst of Structural = CatEst **
   here7from_Adv = ss "siit" ;
   how_IAdv = ss "kuidas" ;
   how8much_IAdv = ss "kui palju" ;
-  how8many_IDet =
-    {s = \\c => "kui" ++ (mkN "palju").s ! NCase Sg c ; n = Sg ; isNum = False} ;
+  how8many_IDet = {
+    s = \\c => "kui" ++ (mkN "mitu" "mitme" "mitut" "TODO" "TODO" "TODO").s ! NCase Sg c ;
+    n = Sg ;
+    isNum = False
+  } ;
   if_Subj = ss "kui" ;
   in8front_Prep = postGenPrep "ees" ;
   i_Pron  = mkPronoun "mina" "minu" "mind" Sg P1 ;
@@ -141,9 +144,7 @@ concrete StructuralEst of Structural = CatEst **
   when_IAdv = ss "kui" ;
   when_Subj = ss "kui" ;
   where_IAdv = ss "kus" ;
-  which_IQuant = {
-    s = mikaInt
-    } ;
+  which_IQuant = { s = mikaInt } ;
   whoSg_IP = {
     s = table {NPAcc => "keda" ; c => kukaInt ! Sg ! npform2case Sg c} ;
     n = Sg
