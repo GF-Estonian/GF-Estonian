@@ -594,15 +594,19 @@ OK: The parser failed at token "valmim"
 For the other problem, changed ConjAP in ConjunctionEst.
 This is what it does:
 
-lin AP {s = \\b,nf =>
-	 case <adj1.infl, adj2.infl> of {
-	   <False,False> => or.s1 ++ adj1.s ! b ! (NCase Sg Nom) ++ or.s2 ++ adj2.s ! b ! (NCase Sg Nom) ;
-	   <False,True>  => or.s1 ++ adj1.s ! b ! (NCase Sg Nom) ++ or.s2 ++ adj2.s ! b ! nf ;
-	   <True,False>  => or.s1 ++ adj1.s ! b ! nf ++ or.s2 ++ adj2.s ! b ! (NCase Sg Nom) ;
-	   _ => or.s1 ++ adj1.s ! b ! nf ++ or.s2 ++ adj2.s ! b ! nf 
-	} ;
-        infl = True ;
-        lock_AP = <> } ;
+       {s = \\isMod,nf =>	
+          case isMod of { 
+            True => case <ap1.infl, ap2.infl> of {
+                        <False,False> => ap1.s ! isMod ! (NCase Sg Nom) ++ c 
+	                              ++ ap2.s ! isMod ! (NCase Sg Nom) ;   --valmis ja täis kassid
+                        <False,True>  => ap1.s ! isMod ! (NCase Sg Nom) ++ c
+                                      ++ ap2.s ! isMod ! nf ;               --valmis ja suured kassid
+                        <True,False>  => ap1.s ! isMod ! nf ++ c  
+	                              ++ ap2.s ! isMod ! (NCase Sg Nom) ;   --suured ja valmis kassid
+                         _ => ap1.s ! isMod ! nf ++ c ++ ap2.s ! isMod ! nf --suured ja mustad kassid
+                           } ;
+		  False => ap1.s ! isMod ! nf ++ c ++ ap2.s ! isMod ! nf --kassid on valmid ja suured
+                } ;
  
 Lang> p "to ready and big cats" | l
 valmis ja suurtele kassidele
@@ -610,16 +614,8 @@ valmis ja suurtele kassidele
 Lang> p "to big and ready cats" | l
 suurtele ja valmis kassidele
 
-Although now it has problems with conjAPs as predicative.
-
-Lang> p "the cats are big and ready" | l
-kassid on suured ja valmis
-Lang> p "the cats are ready" | l
-kassid on valmid
-
-TODO continue with this. Maybe some overall better solution, that would combine the Bool field in AP -- already used in ComparA to produce "minust suurem" and "suurem kui mina" and retain information also in APs formed with ConjAP. 
-
-(Or make two ready_As, one ready_premod_A that has only "valmis", and one ready_A that contains all forms.)
+Lang> p "big , bad and ready cats are new , small and full" | l
+halvad , valmis ja suured kassid on väiksed , täisid ja uued
 
 _____
 
