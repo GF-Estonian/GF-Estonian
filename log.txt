@@ -566,3 +566,73 @@ TODO: Should not fail.
 
 p -cat=NP "valmim kassile"
 TODO: Should fail.
+
+Inari 1.10.
+-----------
+
+If adjectives can have one inflection type in positive and other in comparative, then infl field should be in 
+  s => Degree => {s :  whatever ; infl : Bool}. 
+
+Or are non-inflecting adjectives always non-inflecting only in positive, but comparative inflects?
+If latter case, then the problem is solved with this:
+
+    UseComparA a = {
+      s = \\_,nf => a.s ! Compar ! AN nf ;
+      infl = True ; --instead of a.infl
+      } ;
+
+Lang> p -cat=NP "valmis kassile"
+OK.
+
+Lang> p -cat=NP "valmimale kassile"
+OK.
+
+Lang> p -cat=NP "valmim kassile"
+OK: The parser failed at token "valmim"
+
+
+For the other problem, changed ConjAP in ConjunctionEst.
+This is what it does:
+
+lin AP {s = \\b,nf =>
+	 case <adj1.infl, adj2.infl> of {
+	   <False,False> => or.s1 ++ adj1.s ! b ! (NCase Sg Nom) ++ or.s2 ++ adj2.s ! b ! (NCase Sg Nom) ;
+	   <False,True>  => or.s1 ++ adj1.s ! b ! (NCase Sg Nom) ++ or.s2 ++ adj2.s ! b ! nf ;
+	   <True,False>  => or.s1 ++ adj1.s ! b ! nf ++ or.s2 ++ adj2.s ! b ! (NCase Sg Nom) ;
+	   _ => or.s1 ++ adj1.s ! b ! nf ++ or.s2 ++ adj2.s ! b ! nf 
+	} ;
+        infl = True ;
+        lock_AP = <> } ;
+ 
+Lang> p "to ready and big cats" | l
+valmis ja suurtele kassidele
+
+Lang> p "to big and ready cats" | l
+suurtele ja valmis kassidele
+
+Although now it has problems with conjAPs as predicative.
+
+Lang> p "the cats are big and ready" | l
+kassid on suured ja valmis
+Lang> p "the cats are ready" | l
+kassid on valmid
+
+TODO continue with this. Maybe some overall better solution, that would combine the Bool field in AP -- already used in ComparA to produce "minust suurem" and "suurem kui mina" and retain information also in APs formed with ConjAP. 
+
+(Or make two ready_As, one ready_premod_A that has only "valmis", and one ready_A that contains all forms.)
+
+_____
+
+Mis doesn't inflect either (http://www.eki.ee/books/ekk09/index.php?p=5&p1=3&id=452
+"asesõnad mis (kui ta ei osuta omadusele, vaid on identifitseerivas funktsioonis) ja kogu, nt Mis keelt te räägite? ")
+
+Changed it in QuestionEst IdetCN, now produces
+
+    to which cat do you sing
+    mis kassile sina laulad
+    
+____
+
+So I'm googling random sentences in Estonian if I'm not sure whether the grammar's output is correct or not. I find some interesting stuff. (Also, all our test sentences are about cats.)
+
+"Andsin kassile kitsepiima, nüüd kass juba 2 aastane, ja sööb tubakat nagu vana lehm ja teeb siukseid imelikke liigutusi oma koonuga. muidugi räägib ta, et teda lüpstaks! andke nõu noh!ei tea enam mis kassiga teha :D:D:D:D:D"

@@ -16,7 +16,7 @@ lin
   bad_A = mkA (mkN "halb" "halva" "halba" "halba" "halbade" "halbu") "halvem" "halvim" ;
   bank_N = mkN "pank" ;
   beautiful_A = mkA (mkN "kaunis" "kauni" "kaunist" "kaunisse" "kaunite" "kauneid") ;
-  become_VA = mkVA (caseV nominative (mkV "saama")) ctranslative ; -- tema saab vanaks
+  become_VA = mkVA (mkV "saama") ctranslative ; -- tema saab vanaks
   beer_N = mkN "õlu" ;
   beg_V2V = mkV2V (mkV "paluma") cpartitive ;
   big_A = mkA (mkN "suur" "suure" "suurt" "suurde" "suurte" "suuri");
@@ -59,7 +59,7 @@ lin
   cow_N = mkN "lehm" ;
   die_V = mkV "surema" ;
   dirty_A = mkA "räpane" ;
-  distance_N3 = mkN3 (mkN "kaugus") celative (casePrep illative) ; -- TODO: terminative
+  distance_N3 = mkN3 (mkN "kaugus") celative (casePrep illative) ; -- TODO: terminative --you can just add (casePrep terminative) :-P or is this a linguistic doubt and not a gf one?
   doctor_N = mkN "arst" ;
   dog_N = mkN "koer" ;
   door_N = mkN "uks" ;
@@ -100,8 +100,8 @@ lin
   industry_N = mkN "tööstus" ;
   iron_N = mkN "raud" ;
   king_N = mkN "kuningas" ;
-  know_VS = mkVS (mkV "teadma" "teada" "teab") ;
-  know_VQ = mkVQ (mkV "teadma" "teada" "teab") ;
+  know_VS = mkVS know_V ;
+  know_VQ = mkVQ know_V ;
   know_V2 = mkV2 (mkV "tundma") ;
   lake_N = mkN "järv" ;
   lamp_N = mkN "lamp" ;
@@ -320,7 +320,7 @@ lin
   hold_V2 = mkV2 (mkV "hoidma") cpartitive ;
   hunt_V2 = mkV2 (mkV "jahti" (mkV "pidama")) cpartitive ;
   kill_V2 = mkV2 (mkV "tapma") ;
-  laugh_V = mkV "nauraa" "naerma" ;
+  laugh_V = mkV "naerma" ;
   lie_V = mkV "lamama" ; -- TODO: maybe: valetama
   play_V = mkV "mängima" ;
   pull_V2 = mkV2 (mkV "tõmbama") ;
@@ -328,7 +328,7 @@ lin
   rub_V2 = mkV2 (mkV "hõõruma") cpartitive ;
   scratch_V2 = mkV2 (mkV "kraapima") cpartitive ;
   sew_V = mkV "külvama" ;
-  sing_V = mkV "laulma" ;
+  sing_V = mkV "laulma" "laulda" "laulab" "lauldakse" ;
   sit_V = mkV "istuma" ;
   smell_V = mk2V "haistma" "haista";
   spit_V = mkV "sülitama" ;
@@ -355,7 +355,7 @@ lin
 
   john_PN = mkPN "Juhan" ;
   question_N = mkN "küsimus" ;
-  ready_A = mkA (mkN "valmis") "valmim" "valmeim" False ; -- 'valmis' is one of the non-inflecting adjectives
+  ready_A = mkA (mkN "valmis" "valmi" "valmit" "valmisse" "valmite" "valmeid") "valmim" "valmeim" False ; -- 'valmis' is one of the non-inflecting adjectives
   reason_N = mkN "põhjus" ;
   today_Adv = mkAdv "täna" ;
   uncertain_A = mkA "ebakindel" ;
@@ -368,7 +368,7 @@ lin
     ctranslative = casePrep translative ;
     celative = casePrep elative ;
     callative = casePrep allative ;
-
+    know_V = (mkV "teadma" "teada" "teab") ;
     talk_V = mkV "rääkima" "rääkida" "räägib" ;
 
 } ;

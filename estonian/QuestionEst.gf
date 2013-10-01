@@ -53,10 +53,10 @@ concrete QuestionEst of Question = CatEst ** open ResEst, Prelude in {
       s = \\c => 
         let 
           k     : Case = npform2case n c ;
-          icase : Case = case k of {
-            (Ess|Abess|Comit|Termin) => Gen ; --mille kolme kassiga --TODO oper for this
-            _  => k
-          } ;
+          icase : Case = Nom ; --case k of {  --mis kassiga
+         --   (Ess|Abess|Comit|Termin) => Gen ; 
+         --   _  => k
+         -- } ;
           ncase : NForm = case <icase,idet.isNum> of {
             <Nom,  True> => NCase Sg Part ; -- mitkä kolme kytkintä
             <_,    True> => NCase Sg k ;    -- miksi kolmeksi kytkimeksi
