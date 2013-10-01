@@ -1,9 +1,12 @@
-Estonian grammar in Grammatical Framework
-=========================================
+Estonian resource grammar for the GF RGL
+========================================
 
 Estonian resource grammar for the Grammatical Framework (GF) Resource Grammar Library (RGL).
 
 __This is work in progress!__
+
+Status
+------
 
 We started out with a fork from the Finnish resource grammar with the general plan to:
 
@@ -11,10 +14,7 @@ We started out with a fork from the Finnish resource grammar with the general pl
   - implement Estonian smart paradigms to replace the Finnish ones
   - tweak the syntax to be Estonian
 
-Status
-------
-
-Current status and immediate future plans.
+This has been mostly accomplished.
 
 ### Nouns
 
@@ -59,9 +59,16 @@ Smart paradigm constructors
     
 ### Lexicon
 
-  - demo lexicon almost translated (TODO: remaining verbs)
-  - TODO: derive large lexicon from WordNet
+  - demo lexicon (`LexiconEst`)
+  - large lexicon (`DictEst`):
+    - ~4000 single-word verbs
+    - TODO: adverbs
+    - TODO: nouns
+    - TODO: adjectives
+    - TODO: multi-word verbs
+  - TODO: large lexicon with language-independent function names
 
 ### Syntax
 
-  - some tweaking of the syntax mainly guided by the needs of the MOLTO Phrasebook and ACE-in-GF applications
+  - most functions ported to Estonian
+  - tested using the MOLTO Phrasebook and ACE-in-GF applications
