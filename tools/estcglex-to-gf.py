@@ -81,6 +81,16 @@ def fix_form(form):
 	form = form.strip()
 	return form.split('|')[0]
 
+def get_lemma_to_forms(filename):
+	if filename is None:
+		return {}
+	lemma_to_forms = {}
+	with open(filename) as f:
+		for line in f:
+			splits = line.split(', ')
+			lemma_to_forms[ splits[0] ] = ' '.join(['"' + fix_form(x) + '"' for x in splits])
+	return lemma_to_forms
+
 def get_args():
     p = argparse.ArgumentParser(description='')
     p.add_argument('-f', '--forms', type=str, action='store', dest='forms', help='forms file')
@@ -89,11 +99,7 @@ def get_args():
 
 args = get_args()
 
-lemma_to_forms = {}
-with open(args.forms) as f:
-	for line in f:
-		splits = line.split(', ')
-		lemma_to_forms[ splits[0] ] = ' '.join(['"' + fix_form(x) + '"' for x in splits])
+lemma_to_forms = get_lemma_to_forms(args.forms)
 
 line_number = 0
 while True:
