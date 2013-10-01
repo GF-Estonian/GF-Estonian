@@ -56,8 +56,6 @@ Smart paradigm constructors
   - 2-arg paradigm: 96% correct
   - 3-arg paradigm: 98% correct
   - 4-arg paradigm: 99% correct
-
-TODO: do we need all past participle inflected forms?
     
 ### Lexicon
 
