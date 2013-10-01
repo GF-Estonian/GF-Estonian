@@ -39,13 +39,18 @@ Constructed in the same way as nouns, but have 3 degree forms.
 
 ### Verbs
 
-94 forms:
-{Present, Imperfect, Conditional} * {P1, P2, P3} * {Sg, Pl}
-Imperative * {P2, P3} * {Sg, Pl} + PlP1 + PlNeg 
-Passive * {Present, Past} * {Pos, Neg}
-Infinitive * 7 cases
-Past participle * {Passive, Active} * 14 cases * {Sg, Pl} + Adv
-Present participle 
+Forms: 37 in total
+
+  - Present : Person * Number
+  - Imperfect : Person * Number
+  - Conditional : Person * Number
+  - Imperative : P2 Sg, P2 Pl, P3, P1 Pl, NegPl
+  - Passive : {Present, Past} * {Pos, Neg}
+  - Past participle : Active, Passive
+  - Present participle
+  - Infinitive : da * 2 cases ; ma * 5 cases
+
+Smart paradigm constructors
 
   - 1-arg paradigm: 90% correct
   - 2-arg paradigm: 96% correct
