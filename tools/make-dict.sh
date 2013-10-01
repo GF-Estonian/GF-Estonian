@@ -24,6 +24,9 @@ cat $data/abileks_utf8.lx | ./estcglex-to-gf.py --forms $data/abileks.verbs.8for
 # Adverbs
 cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash b | ./adv-to-gf.py > out_adv.tsv
 
+# Nouns
+cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash n | ./nouns-to-gf.py --forms $data/nouns.6forms.csv > out_nouns.tsv
+
 # Run some diffs
 diff out.txt out1.txt
 diff err.txt err1.txt
@@ -31,4 +34,4 @@ diff err.txt err1.txt
 # Now manually: mv out1.txt out.txt
 
 # Convert into GF
-cat out.txt out_adv.tsv | LC_ALL=et_EE.utf8 sort -k1 | uniq | cut -f2 | ./wrap_as_gf_module.py --out=${grammar}
+cat out.txt out_adv.tsv out_nouns.tsv | LC_ALL=et_EE.utf8 sort -k1 | uniq | cut -f2 | ./wrap_as_gf_module.py --out=${grammar}
