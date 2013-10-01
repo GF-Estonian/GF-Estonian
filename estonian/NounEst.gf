@@ -17,30 +17,28 @@ concrete NounEst of Noun = CatEst ** open ResEst, HjkEst, MorphoEst, Prelude in 
           let k = npform2case n c 
           in 
           case <n, c, det.isNum, det.isDef> of {
-            <_, NPAcc,      True,_>  => <Nom,NCase Sg Part> ; -- kolme kytkintä
-            <_, NPCase Nom, True,_>  => <Nom,NCase Sg Part> ; -- kolme kytkintä
-            
-            --Estonian special cases, only the last word gets case ending.
-            <_, NPCase Comit, _, _>  => <Gen,NCase n Comit> ; --kolme kassiga
-            <_, NPCase Abess, _, _>  => <Gen,NCase n Abess> ; --kolme kassita
-            <_, NPCase Ess,   _, _>  => <Gen,NCase n Ess> ; --kolme kassina
-            <_, NPCase Termin,_, _>  => <Gen,NCase n Termin> ; --kolme kassini
-            
-            <_, _, True,_>        => <k,  NCase Sg k> ;    -- kolmeksi kytkimeksi
+            <_, NPAcc,      True,_>  => <Nom,NCase Sg Part> ; -- kolm kassi (as object)
+            <_, NPCase Nom, True,_>  => <Nom,NCase Sg Part> ; -- kolm kassi (as subject)
 
-            <Pl,NPCase Nom,  _,False> => <k,  NCase Pl Part> ; -- kytkimiä
-
-            _                           => <k,  NCase n k>       -- kytkin, kytkimen,...
+            --Only the last word gets case ending.
+            <_, NPCase Comit, _, _>  => <Gen,NCase n Comit> ;  -- kolme kassiga
+            <_, NPCase Abess, _, _>  => <Gen,NCase n Abess> ;  -- kolme kassita
+            <_, NPCase Ess,   _, _>  => <Gen,NCase n Ess> ;    -- kolme kassina
+            <_, NPCase Termin,_, _>  => <Gen,NCase n Termin> ; -- kolme kassini
+            
+            <_, _, True,_>           => <k,  NCase Sg k> ;     -- kolmeks kassiks (all other cases)
+            _                        => <k,  NCase n k>        -- kass, kassi, ... (det is not a number)
             }
       in {
       s = \\c => let 
                    k = ncase c ;
                  in
                  det.s ! k.p1 ++ cn.s ! k.p2 ;
-      a = agrP3 (case det.isDef of {
-            False => Sg ;  -- autoja menee; kolme autoa menee
-            _ => det.n
-            }) ;
+      a = agrP3 det.n ;
+--	(case det.isNum of {
+--            True => Sg ;
+--            _ => det.n
+--            }) ;
       isPron = False
       } ;
 
@@ -116,7 +114,7 @@ concrete NounEst of Noun = CatEst ** open ResEst, HjkEst, MorphoEst, Prelude in 
     NumSg = {s = \\_,_ => [] ; isNum = False ; n = Sg} ;
     NumPl = {s = \\_,_ => [] ; isNum = False ; n = Pl} ;
 
-    NumCard n = n ** {isNum = case n.n of {Sg => False ; _ => True}} ;  -- yksi talo/kaksi taloa
+    NumCard n = n ** {isNum = case n.n of {Sg => False ; _ => True}} ;  -- üks raamat/kaks raamatut
 
     NumDigits numeral = {
       s = \\n,c => numeral.s ! NCard (NCase n c) ; 
@@ -147,7 +145,7 @@ concrete NounEst of Noun = CatEst ** open ResEst, HjkEst, MorphoEst, Prelude in 
       } ;
 
     IndefArt = {
-      s = \\_,_ => [] ; -- Nom is Part in Pl: use isDef in DetCN
+      s = \\_,_ => [] ; --use isDef in DetCN
       sp = \\n,c => 
          (nhn (mkSubst "üks" "ühe" "üht" "ühesse" "ühtede" 
          "ühtesid")).s ! NCase n c ; 
@@ -180,9 +178,6 @@ concrete NounEst of Noun = CatEst ** open ResEst, HjkEst, MorphoEst, Prelude in 
       isPre = f.isPre2
       } ;
 
-
---- If a possessive suffix is added here it goes after the complements...
-
     ComplN2 f x = {
       s = \\nf => preOrPost f.isPre (f.s ! nf) (appCompl True Pos f.c2 x)
       } ;
@@ -195,7 +190,7 @@ concrete NounEst of Noun = CatEst ** open ResEst, HjkEst, MorphoEst, Prelude in 
     AdjCN ap cn = {
       s = \\nf => 
         case ap.infl of {
-          False => ap.s ! True ! (NCase Sg Nom) ++ cn.s ! nf ;
+          False => ap.s ! True ! (NCase Sg Nom) ++ cn.s ! nf ; --valmis kassile
           True => case nf of { 
               NCase num (Ess|Abess|Comit|Termin) => ap.s ! True ! (NCase num Gen) ++ cn.s ! nf ; --suure kassiga, not *suurega kassiga 
               _ => ap.s ! True ! nf ++ cn.s ! nf
