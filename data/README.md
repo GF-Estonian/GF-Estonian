@@ -12,6 +12,7 @@ These tools and resources were used:
 
   - Filosoft's (<http://www.filosoft.ee/>) morphology tools
   - Estonian WordNet (<http://www.cl.ut.ee/ressursid/teksaurus/>), version kb67a
+  - Estonian Constraint Grammar (EstCG) verb lexicon (`abileks_utf8.lx`)
 
 Files
 -----
@@ -19,7 +20,7 @@ Files
 In the code examples:
 
   - `etmrf` and `etsyn` are Filosoft's tools;
-  - `estwn-to-etsyn.bash` and `etsyn-to-6forms.py` are included in the tools-directory;
+  - the Bash and Python scripts are included in the tools-directory;
   - other commands are standard Unix commandline tools.
 
 ### nouns.6forms.csv
@@ -77,3 +78,45 @@ Generated with this sequence of steps:
 
 	# Keep only the 6 forms but exclude hyphenated words
 	etsyn-to-6forms.py --tag=A | sort | uniq
+
+### abileks_utf8.lx
+
+Verb lexicon from the Estonian Constraint Grammar parser (EstCG).
+
+Type examples:
+
+	Intr #Ad #El #Kom
+	Intransitive with possible case restrictions on adjuncts
+
+	NGP-P #Tr #Kom
+	Transitive verb with object in either nom, gen, part.
+
+	Part #In #Kom
+	Object must be in partitive
+
+	Part-P #El #In
+	Object can be in partitive
+
+	InfP
+	???
+
+Frequency of the main tag:
+
+	cat abileks_utf8.lx | grep "V_" | cut -f2 -d' ' | sort | uniq -c | sort -nr | head -5
+	3406 >#Intr
+	 486 >#NGP-P
+	 262 >#Part
+	  55 >#Part-P
+	  17 >#InfP
+
+### abileks.verbs.8forms.csv
+
+	# Use the verbs from abileks_utf8.lx
+	# Some fixes were applied (duplicate removal, z^/s^/zh encoding fixes)
+	cat verbs.txt |
+
+	# Generate all the forms
+	etsyn -cio utf8 -GO > verbs.syn
+
+	# Keep only the 8 forms
+	etsyn-to-8forms.py
