@@ -7585,7 +7585,7 @@ naine
 *
 aPl_Det-Det
 mkUtt (mkNP aPl_Det woman_N)
-naisi
+naised
 *
 this_Det-Det
 mkUtt (mkNP this_Det woman_N)
@@ -10706,7 +10706,7 @@ vana või noor
 *
 mkAP-Conj-ListAP-AP
 mkUtt (mkAP and_Conj (mkListAP (mkAP old_A) (mkListAP (mkAP big_A) (mkAP warm_A))))
-vana , suur ja soe
+suur , soe ja vana
 *
 mkAP-Ord-AP
 mkUtt (mkAP (mkOrd old_A))
@@ -10926,7 +10926,7 @@ kes
 *
 mkIAdv-Prep-IP-IAdv
 mkUtt (mkIAdv in_Prep (mkIP which_IQuant city_N))
-milles linnas
+mis linnas
 *
 mkIAdv-IAdv-Adv-IAdv
 mkUtt (mkIAdv where_IAdv (mkAdv in_Prep (mkNP paris_PN))  )
