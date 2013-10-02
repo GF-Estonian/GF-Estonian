@@ -638,7 +638,7 @@ Kaarel 02.10.
 
 Tried parsing with the large lexicon by
 creating a PGF from Grammar + DictEst (~40k entries) and applying it to
-the Ratsep corpus (short simple sentences with single-word verbs).
+the Ratsep corpus (~5-word long sentences with single-word verbs).
 
 Extracted most of the ~4000 sentences from the Ratsep/EstCG korpus using
 the script tools/extract_ratsep_sentences.sh
@@ -687,3 +687,26 @@ direktor jättis kõik asjad asetäitja otsustada|OK (18)
 
 Many failures are due to missing words e.g. ~25% sentences contain a proper name
 which the lexicon does not include.
+
+
+Parsed also with the robust parser:
+
+	cat tools/ratsep.txt | pgf-parse Lang1.pgf Phr Lang1Est
+
+This works reliably 1sec per sentence (max 3 sec, min 0.2 sec).
+
+	cat parse_results.txt | sed "s/ ms).*//" | sed "s/.*(//" | awk '{if(min==""){min=max=$1}; if($1>max) {max=$1}; if($1<min) {min=$1}; total+=$1; count+=1} END {print total/count, max, min}'
+	1004.41 3060 200
+
+Did not parse all the sentences though.
+Results: 52/415 (13%)
+Success means that a tree was found (but only the first tree was generated).
+No trees contained ?-nodes.
+
+Other things to try (with this corpus):
+
+  - eliminate lexicon problems
+    - support compounds nouns
+    - support adjectives (not so many in the corpus though)
+    - allow the parser to skip over unknown words (e.g. proper names)
+  - map trees to English trees, e.g. simply by ???_N -> man_N, ???_V2 -> hit_V2, and linearize them with LangEng or ParseEng
