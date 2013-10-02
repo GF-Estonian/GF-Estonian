@@ -54,7 +54,7 @@ concrete IdiomEst of Idiom = CatEst **
         on  = predV olla
       in {
         s = on.s ;
-        s2 = \\b,p,a => inf ++ vp.s2 ! b ! p ! a ;
+        s2 = \\b,p,a => vp.s2 ! b ! p ! a ++ inf ;
         adv = vp.adv ;
         p = vp.p ;
         ext = vp.ext ;
