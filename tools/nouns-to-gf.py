@@ -8,6 +8,8 @@ import sys
 import re
 import argparse
 
+illegal = set([])
+
 def unicode_to_gfcode(u):
 	u1 = u.decode("utf8")
 	u2 = u1.encode('ascii', 'xmlcharrefreplace')
@@ -39,6 +41,9 @@ def get_lemma_to_forms(filename):
 			lemma_to_forms[ splits[0] ] = ' '.join(['"' + fix_form(x) + '"' for x in splits])
 	return lemma_to_forms
 
+def is_illegal(word):
+	return (word in illegal)
+
 def get_args():
 	p = argparse.ArgumentParser(description='')
 	p.add_argument('-f', '--forms', type=str, action='store', dest='forms', help='forms file')
@@ -55,7 +60,7 @@ for line in sys.stdin:
 	line = line.strip()
 	word = re.sub(' //.*', '', line)
 	word = word.strip()
-	if re.match('^[a-zõäöüšž]+$', word) and len(word) < 11:
+	if re.match('^[a-zõäöüšž]+$', word) and len(word) < 11 and not is_illegal(word):
 		funname = unicode_to_gfcode(word)
 		print '%s\t%s_N = mkN %s ;' % (word, funname, get_forms(word))
 	else:

@@ -25,7 +25,7 @@ cat $data/abileks_utf8.lx | ./estcglex-to-gf.py --forms $data/abileks.verbs.8for
 cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash b | ./adv-to-gf.py > out_adv.tsv
 
 # Nouns
-cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash n | ./nouns-to-gf.py --forms $data/nouns.6forms.csv > out_nouns.tsv
+cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash n | ./nouns-to-gf.py --forms $data/nouns.6forms.csv > out_nouns.tsv 2> err_nouns.txt
 
 # Run some diffs
 diff out.txt out1.txt
