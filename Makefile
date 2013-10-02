@@ -17,5 +17,11 @@ compile:
 try:
 	gf --path=api:estonian --retain api/TryEst.gf
 
+pgf_lang1:
+	time gf +RTS -K50M -RTS --make --path $(path) other/Lang1Est.gf
+
+run_lang1:
+	gf +RTS -K50M -RTS Lang1.pgf
+
 clean:
 	find -name *.gfo | xargs rm -f

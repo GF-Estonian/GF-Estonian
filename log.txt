@@ -632,3 +632,81 @@ ____
 So I'm googling random sentences in Estonian if I'm not sure whether the grammar's output is correct or not. I find some interesting stuff. (Also, all our test sentences are about cats.)
 
 "Andsin kassile kitsepiima, nüüd kass juba 2 aastane, ja sööb tubakat nagu vana lehm ja teeb siukseid imelikke liigutusi oma koonuga. muidugi räägib ta, et teda lüpstaks! andke nõu noh!ei tea enam mis kassiga teha :D:D:D:D:D"
+
+Kaarel 02.10.
+-------------
+
+Tried parsing with the large lexicon by
+creating a PGF from Grammar + DictEst (~40k entries) and applying it to
+the Ratsep corpus (~5-word long sentences with single-word verbs).
+
+Extracted most of the ~4000 sentences from the Ratsep/EstCG korpus using
+the script tools/extract_ratsep_sentences.sh
+
+Then parsed it like this:
+
+	cat tools/ratsep.txt | tools/Parser +RTS -K100M -RTS Lang1.pgf Lang1Est
+
+where `Parser` comes from the ACE-in-GF project.
+
+Parsing got stuck after 217 sentences at
+"direktor käsutas meistri tsehhist oma kabinetti plaani järele"
+having filled all my 16GB of memory.
+
+29 sentences (13%) got a parse (the number of parse trees shown after OK):
+
+abilised kiskusid looma põrandale pikali|OK (252)
+aednik hoolitses taimede eest|OK (72)
+aednik kastis lapi õli sisse|OK (65934)
+agentuur levitas kõikjale uudist|OK (9)
+ametnik hindas raamatu väärtuse kümnele rublale|OK (972)
+ametnik naeratles laua tagant külalistele|OK (216)
+ametnikud lömitasid juhataja ees|OK (78)
+angerjas roomas korvist põrandale|OK (324)
+arhitekt orienteeris kiriku ilmakaarte suhtes|OK (378)
+armee sai juhtimise oma kontrolli alla|OK (1342332)
+arst katkestas ravikuuri|OK (9)
+arst kontrollis koerte kallal preparaati|OK (57690)
+arst kontrollis koertel preparaati|OK (3708)
+arvamused ühtisid selles küsimuses|OK (38)
+astronoom avastas asteroidi|OK (9)
+asutused koordineerisid oma tegevuse|OK (78)
+asutused liitusid|OK (2)
+auto ei saa sellest kohast läbi oja|OK (2376)
+auto jäi invaliidile|OK (36)
+autor märkis tegelaste kohta paar fakti|OK (1944)
+auto sattus miinile|OK (36)
+auto sattus miini peale|OK (756)
+büroo ja tehas kooskõlastasid töö|OK (27)
+büroo pani selles küsimuses vastutuse sekretäri peale|OK (150444)
+daam tõmbas kinda käest|OK (54)
+detektiiv jätkas otsinguid maja juurest|OK (1080)
+direktoril ei lasu selles asjas vastutust|OK (148176)
+direktori tütre vahtimine valmistas autojuhtidele rõõmu|OK (2268)
+direktor jättis kõik asjad asetäitja otsustada|OK (18)
+
+Many failures are due to missing words e.g. ~25% sentences contain a proper name
+which the lexicon does not include.
+
+
+Parsed also with the robust parser:
+
+	cat tools/ratsep.txt | pgf-parse Lang1.pgf Phr Lang1Est
+
+This works reliably 1sec per sentence (max 3 sec, min 0.2 sec).
+
+	cat parse_results.txt | sed "s/ ms).*//" | sed "s/.*(//" | awk '{if(min==""){min=max=$1}; if($1>max) {max=$1}; if($1<min) {min=$1}; total+=$1; count+=1} END {print total/count, max, min}'
+	1004.41 3060 200
+
+Did not parse all the sentences though.
+Results: 52/415 (13%)
+Success means that a tree was found (but only the first tree was generated).
+No trees contained ?-nodes.
+
+Other things to try (with this corpus):
+
+  - eliminate lexicon problems
+    - support compounds nouns
+    - support adjectives (not so many in the corpus though)
+    - allow the parser to skip over unknown words (e.g. proper names)
+  - map trees to English trees, e.g. simply by ???_N -> man_N, ???_V2 -> hit_V2, and linearize them with LangEng or ParseEng
