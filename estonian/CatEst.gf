@@ -38,14 +38,14 @@ concrete CatEst of Cat = CommonX ** open ResEst, Prelude in {
 
 -- Adjective
 
--- The $Bool$ tells whether usage is modifying (as opposed to
--- predicative), e.g. "x on suurempi kuin y" vs. "y:tä suurempi luku".
+-- The $Bool$ in s tells whether usage is modifying (as opposed to
+-- predicative), e.g. "x on suurem kui y" vs. "y:st suurem arv".
+-- The $Bool$ in infl tells whether the adjective inflects as a 
+-- modifier: e.g. "valmis ehitused" vs. "ehitused on valmid". 
 
     AP = {s : Bool => NForm => Str ; infl : Bool} ; 
 
 -- Noun
-
--- The $Bool$ tells if a possessive suffix is attached, which affects the case.
 
     CN   = {s : NForm => Str} ;
     Pron = {s : NPForm => Str ; a : Agr} ;
@@ -55,7 +55,7 @@ concrete CatEst of Cat = CommonX ** open ResEst, Prelude in {
       sp : Case => Str ;       -- se   (substantival form)
       n : Number ;             -- Pl   (agreement feature for verb)
       isNum : Bool ;           -- True (a numeral is present)
-      isDef : Bool             -- True (verb agrees in Pl, Nom is not Part)
+      isDef : Bool             -- True (verb agrees in Pl, Nom is not Part) --I: actually, can we get rid of this? 
       } ;
 ----    QuantSg, QuantPl = {s : Case => Str ;  isDef : Bool} ;
     Ord    = {s : NForm => Str} ;
