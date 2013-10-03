@@ -146,6 +146,7 @@ oper
   mkA : overload {
     mkA : Str -> A ;  -- regular noun made into adjective
     mkA : N -> A ;    -- any noun made into adjective
+    mkA : N -> (infl : Bool) -> A ; -- noun made into adjective, agreement type specified
     mkA : N -> (parem, parim : Str) -> A ; -- deviating comparison forms
     mkA : AW -> A ;  -- adjective from DictEst (WordNet)
   } ;
@@ -155,7 +156,7 @@ oper
   mkA2 : A -> Prep -> A2  -- e.g. "jaollinen" casePrep adessive
     = \a,p -> a ** {c2 = p ; lock_A2 = <>};
 
-
+  genAttrA : Str -> A ; -- genitive attributes ; no agreement to head, no comparison forms. 
 
 --2 Verbs
 --
@@ -410,6 +411,8 @@ oper
 		\n,c,s,infl -> (regAdjective1 n c s) ** {infl = infl ; lock_A = <>} ;
     mkA : (sana : AW) -> A = \w -> noun2adjDeg (nForms2N w.s) ** {infl = True} ;
   } ;
+
+  genAttrA balti = {s = \\_,_ => balti ; infl = False ; lock_A = <>} ;
 
   mkA_1 : Str -> A = \x -> noun2adjDeg (mk1N x) ** {infl = True ; lock_A = <>} ;
 
