@@ -23,8 +23,13 @@ pgf_lang1:
 run_lang1:
 	gf +RTS -K50M -RTS Lang1.pgf
 
+load_dict:
+	gf +RTS -K50M -RTS estonian/DictEst.gf
+
+# Shows the frequency distribution of constructor patterns in DictEst
 count_dict:
-	cat estonian/DictEstAbs.gf | grep " : " | sed "s/.*: //" | sed "s/;//" | sort | uniq -c | sort -nr
+	cat estonian/DictEst.gf | grep " = mk" | wc -l
+	cat estonian/DictEst.gf | grep " = mk" | sed "s/.*= //" | sed 's/"[^"]*"//g' | sed "s/  */ /g" | sed "s/;//" | sort | uniq -c | sort -nr
 
 clean:
 	find -name *.gfo | xargs rm -f

@@ -710,3 +710,20 @@ Other things to try (with this corpus):
     - support adjectives (not so many in the corpus though)
     - allow the parser to skip over unknown words (e.g. proper names)
   - map trees to English trees, e.g. simply by ???_N -> man_N, ???_V2 -> hit_V2, and linearize them with LangEng or ParseEng
+
+Kaarel 05.10.
+-------------
+
+Added some adjectives and some MWVs to DictEst. It now contains 53088 entries with this
+frequency distribution of constructor patterns:
+
+  32157 mkN
+  10197 mkV (mkV )
+   3496 mkAdv
+   3402 mkV
+   3006 mkA (mkN )
+    492 mkV2 (mkV )
+    320 mkV2 (mkV ) cpartitive
+     18 mkVV (mkV )
+
+where "mkV (mkV )" stands for MWVs.

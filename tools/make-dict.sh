@@ -19,7 +19,10 @@ grammar=../estonian/
 resources=../resources/
 
 echo "Verbs"
-cat $data/abileks_utf8.lx | ./estcglex-to-gf.py --forms $data/abileks.verbs.8forms.csv > out1.txt 2> err1.txt
+cat $data/abileks_utf8.lx | ./estcglex-to-gf.py --forms $data/abileks.verbs.8forms.csv > out_estcglex.tsv 2> err_estcglex.txt
+
+echo "Multi-word verbs"
+cat $resources/emwv/DB_EMWV_2008.txt | ./emwv-to-gf.py -f $data/abileks.verbs.8forms.csv > out_mwv.tsv 2> err_mwv.txt
 
 echo "Adverbs"
 cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash b | ./adv-to-gf.py > out_adv.tsv
@@ -30,11 +33,5 @@ cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash n | ./nouns-to-gf.py
 echo "Adjectives"
 cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash a | ./adj-to-gf.py --forms $data/adj.6forms.csv > out_adj.tsv 2> err_adj.txt
 
-# Run some diffs
-diff out.txt out1.txt
-diff err.txt err1.txt
-
-# Now manually: mv out1.txt out.txt
-
 # Convert into GF
-cat out.txt out_adv.tsv out_nouns.tsv out_adj.tsv | LC_ALL=et_EE.utf8 sort -k1 | uniq | cut -f2 | ./wrap_as_gf_module.py --out=${grammar}
+cat out_estcglex.tsv out_mwv.tsv out_adv.tsv out_nouns.tsv out_adj.tsv | LC_ALL=et_EE.utf8 sort -k1 | uniq | cut -f2 | ./wrap_as_gf_module.py --out=${grammar}
