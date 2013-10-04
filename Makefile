@@ -23,5 +23,8 @@ pgf_lang1:
 run_lang1:
 	gf +RTS -K50M -RTS Lang1.pgf
 
+count_dict:
+	cat estonian/DictEstAbs.gf | grep " : " | sed "s/.*: //" | sed "s/;//" | sort | uniq -c | sort -nr
+
 clean:
 	find -name *.gfo | xargs rm -f
