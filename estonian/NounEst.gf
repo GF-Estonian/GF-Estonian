@@ -74,7 +74,7 @@ concrete NounEst of Noun = CatEst ** open ResEst, HjkEst, MorphoEst, Prelude in 
     PPartNP np v2 =
       let 
         num : Number     = complNumAgr np.a ;
-        part : Str       = v2.s ! PastPartPass ; 
+        part : Str       = v2.s ! (PastPart Pass) ; 
         adj : CommonNoun = nhn (sMaakas part) ; 
         partEssive : Str = adj.s ! (NCase num Ess)
       in {

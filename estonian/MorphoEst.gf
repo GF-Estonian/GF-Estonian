@@ -847,10 +847,12 @@ oper
       PassPresn False => tuld_ + "a" ; --da or ta
       PassImpf  True  => tuld_ + "i" ; --di or ti
       PassImpf  False => tuldud ;  
-      --TODO Quotative
-      PresPart => laulev ;
-      PastPartAct => tulnud ;
-      PastPartPass => tuldud ;
+      Quotative Act  => lask_ + "vat" ;
+      Quotative Pass => tuld_ + "avat" ; --d or t
+      PresPart Act  => laulev ;
+      PresPart Pass => tuld_ + "av" ; --d or t
+      PastPart Act  => tulnud ;
+      PastPart Pass => tuldud ;
 --      PastPartAct (AN n)  => lugenud ! n ;
 --      PastPartAct AAdv    => lugenud ! (NCase Sg Ablat) ;
 --      PastPartPass (AN n) => loetud ! n ;

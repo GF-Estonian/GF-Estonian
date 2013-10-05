@@ -85,19 +85,17 @@ param
    | Condit Number Person
    | Imper Number
    | ImperP3 
---   | ImperP3 Number
    | ImperP1Pl
    | ImpNegPl
    | PassPresn Bool
    | PassImpf Bool
---TODO   | Quotative
-   | PresPart
-   | PastPartAct
-   | PastPartPass
---   | PastPartAct  AForm
---   | PastPartPass AForm
+   | Quotative Voice
+   | PresPart Voice
+   | PastPart Voice
    ;
 
+  Voice = Act | Pass ;
+  
   InfForm =
      InfDa     -- lugeda
    | InfDes    -- lugedes 
@@ -193,8 +191,8 @@ oper
         agr = verbAgr agr0 ;
         verbs = verb.s ;
         part  : Str = case vi of {
-          VIPass => verbs ! PastPartPass ; --(AN (NCase agr.n Nom)) ; 
-          _      => verbs ! PastPartAct  --(AN (NCase agr.n Nom))
+          VIPass => verbs ! (PastPart Pass) ; 
+          _      => verbs ! (PastPart Act)
         } ; 
 
         eiv : Str = case agr of {
@@ -450,12 +448,10 @@ oper
 
       tule_ = init tuleb ;
       tull_ = init tulla ;
+      lask_ = Predef.tk 2 tulema ;
       tuld_ = Predef.tk 2 tuldud ;
       tulles = tull_ + "es" ; 
       tulgu = (init tulge) + "e" ;
-
-      lugenud = (nhn (sMaakas tulnud)).s ;
-      loetud = (nhn (sMaakas tuldud)).s ;
     in
     {s = table {
       Inf InfDa => tulla ;
@@ -480,21 +476,19 @@ oper
       Condit Pl P3 => tule_ + "ksid" ;
       Imper Sg   => tule_ ; 
       Imper Pl   => tulge ; 
-      ImperP3   => tulgu ;  
---      ImperP3 Pl => tulgu ; 
+      ImperP3   => tulgu ;   
       ImperP1Pl  => tulge + "m" ;
       ImpNegPl   => tulge ;
       PassPresn True  => tullakse ;
       PassPresn False => tuld_ + "a" ; 
       PassImpf  True  => tuld_ + "i" ; 
       PassImpf  False => tuldud ;  
-      PresPart => tule_ + "v" ;
-      PastPartAct => tulnud ;
-      PastPartPass => tuldud ;
---      PastPartAct (AN n)  => lugenud ! n ;
---      PastPartAct AAdv    => lugenud ! (NCase Sg Ablat) ;
---      PastPartPass (AN n) => loetud ! n ;
---      PastPartPass AAdv   => loetud ! (NCase Sg Ablat) ;
+      Quotative Act  => lask_ + "vat" ;
+      Quotative Pass => tuld_ + "avat" ;
+      PresPart Act => tule_ + "v" ;
+      PresPart Pass => tuld_ + "av" ; --d or t
+      PastPart Act => tulnud ;
+      PastPart Pass => tuldud ;
       Inf InfMa => tulema ;
       Inf InfMas => tulema + "s" ;
       Inf InfMast => tulema + "st" ;
