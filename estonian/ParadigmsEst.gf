@@ -288,52 +288,37 @@ oper
   mkN = overload {
     mkN : (nisu : Str) -> N = mk1N ;
     --  \s -> nForms2N (nForms1 s) ;
-    mkN : (talo,talon : Str) -> N = mk2N ;
+    --mkN : (talo,talon : Str) -> N = mk2N ;
     --  \s,t -> nForms2N (nForms2 s t) ;
-    mkN : (talo,talon,taloja : Str) -> N = mk3N ;
+    --mkN : (talo,talon,taloja : Str) -> N = mk3N ;
     --  \s,t,u -> nForms2N (nForms3 s t u) ;
 
-    mkN : (raamat,raamatu,raamatut,raamatuid : Str) -> N = mk4N ;
-
+    --mkN : (raamat,raamatu,raamatut,raamatuid : Str) -> N = mk4N ;
     mkN : (oun,ouna,ouna,ounasse,ounte,ounu : Str) -> N = mk6N ;
-
-    mkN : (oun,ouna,ouna,ounasse,ounte,ounu,ountesse : Str) -> N = mk7N ;
---    mkN : 
---      (talo,talon,taloa,talona,taloon,talojen,taloja,taloina,taloissa,taloihin
---        : Str) -> N = mk10N ;
     mkN : (sora : Str) -> (tie : N) -> N = mkStrN ;
     mkN : (oma,tunto : N) -> N = mkNN ;
     mkN : (sana : NW) -> N = \w -> nForms2N w.s ;
   } ;
 
   -- Adjective forms (incl. comp and sup) are derived from noun forms
-  mk1A : Str -> A = \jalo -> 
-    let aforms = aForms2A (nforms2aforms (nForms1 jalo)) 
+  mk1A : Str -> A = \suur -> 
+    let aforms = aForms2A (nforms2aforms (n2nforms (hjk_type suur))) 
     in  aforms ** {infl = True} ;
       
-  mkNA : N -> A = \suuri -> 
-    let aforms = aForms2A (nforms2aforms (n2nforms suuri)) ; 
+  mkNA : N -> A = \suur -> 
+    let aforms = aForms2A (nforms2aforms (n2nforms suur)) ; 
     in  aforms ** {infl = True} ;
 
 
   --mk1N : (talo : Str) -> N = \s -> nForms2N (nForms1 s) ;
   mk1N : (talo : Str) -> N = \s -> (hjk_type s) ** { lock_N = <> } ;
-  mk2N : (talo,talon : Str) -> N = \s,t -> nForms2N (nForms2 s t) ;
-  mk3N : (talo,talon,taloja : Str) -> N = \s,t,u -> nForms2N (nForms3 s t u) ;
-  mk4N : (talo,talon,taloa,taloja : Str) -> N = \s,t,u,v -> 
-      nForms2N (nForms4 s t u v) ;
+--  mk2N : (talo,talon : Str) -> N = \s,t -> nForms2N (nForms2 s t) ;
+--  mk3N : (talo,talon,taloja : Str) -> N = \s,t,u -> nForms2N (nForms3 s t u) ;
+--  mk4N : (talo,talon,taloa,taloja : Str) -> N = \s,t,u,v -> 
+--      nForms2N (nForms4 s t u v) ;
 
   mk6N : (oun,ouna,ouna,ounasse,ounte,ounu : Str) -> N =
       \a,b,c,d,e,f -> (nForms6 a b c d e f) ** { lock_N = <> } ;
-  mk7N : (oun,ouna,ouna,ounasse,ounte,ounu,ountesse : Str) -> N = 
-      \a,b,c,d,e,f,g -> nForms2N (nForms7 a b c d e f g) ;
-
-
-  mk10N : 
-      (talo,talon,taloa,talona,taloon,talojen,taloja,taloina,taloissa,taloihin
-        : Str) -> N = \a,b,c,d,e,f,g,h,i,j -> 
-        nForms2N (nForms10 a b c d e f g h i j) ;
-
 
   mkStrN : Str -> N -> N = \sora,tie -> {
     s = \\c => sora + tie.s ! c ; lock_N = <>
@@ -342,7 +327,7 @@ oper
     s = \\c => oma.s ! c + tunto.s ! c ; lock_N = <>
     } ; ---- TODO: oma in possessive suffix forms
 
-  nForms1 : Str -> NForms = \ukko ->
+{-  nForms1 : Str -> NForms = \ukko ->
     let
       ukk = init ukko ;
       uko = weaker ukko ;
@@ -373,7 +358,7 @@ oper
       --<_ + C@("r" | "n" | "l" | "m" | "s" | "t" |"k"), _ + C + "i", _ + C + "i", _> => dSeminar paat ;
       _  => dTuli paat paadi 
       } ;
-
+-}
 
   mkN2 = overload {
     mkN2 : N -> N2 = \n -> mmkN2 n (casePrep genitive) ;

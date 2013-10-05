@@ -1,4 +1,4 @@
-concrete CatEst of Cat = CommonX ** open ResEst, Prelude in {
+concrete CatEst of Cat = CommonX ** open HjkEst, ResEst, Prelude in {
 
   flags optimize=all_subs ; coding=utf8;
 
@@ -88,9 +88,9 @@ concrete CatEst of Cat = CommonX ** open ResEst, Prelude in {
     A  = Adjective ** {infl : Bool} ;
     A2 = A ** {c2 : Compl} ;
 
-    N  = CommonNoun ;
-    N2 = CommonNoun ** {c2 : Compl ; isPre : Bool} ;
-    N3 = CommonNoun ** {c2,c3 : Compl ; isPre,isPre2 : Bool} ;
+    N  = NFS ;
+    N2 = NFS ** {c2 : Compl ; isPre : Bool} ;
+    N3 = NFS ** {c2,c3 : Compl ; isPre,isPre2 : Bool} ;
     PN = {s : Case  => Str} ;
 
 oper Verb1 = Verb ** { sc : NPForm} ; --what is this for? --subject case, i.e. "ma näen kassi"/"mul on kass"

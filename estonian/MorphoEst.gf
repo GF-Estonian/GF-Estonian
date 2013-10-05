@@ -13,7 +13,7 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
   oper    
   --Estonian paradigms
 
-  --Inflection paradigms from tüüpsõnad 
+{-  --Inflection paradigms from tüüpsõnad 
 
   --1: stem vowel in nom, regular endings, concatenative
   -- can combine with 7, only difference is sg.part
@@ -210,7 +210,7 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
 -- Finnish paradigms, here only for not to break ParadigmsEst
 
 -- for adjective comparison
-
+-}
   -- Comparative adjectives inflect in the same way
   -- TODO: confirm this
   dSuurempi : Str -> NForms = \suurem ->
@@ -302,24 +302,6 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
       } ;
     lock_N = <>
     } ;
-
-    -- not needed, just for not breaking things now
-    NFormsFin : Type = Predef.Ints 9 => Str ;
-
-    nForms10 : (x1,_,_,_,_,_,_,_,_,x10 : Str) -> NFormsFin = 
-      \jogi,joe,joge,joena,joesse, -- sg nom, gen, part, ess, ill
-       jogede,jogesid,jogedena,jogedes,jogedesse -> table { -- pl gen, part, ess, ine, ill
-      0 => jogi ;
-      1 => joe ;
-      2 => joge ;
-      3 => joena ;
-      4 => joesse ;
-      5 => jogede ;
-      6 => jogesid ;
-      7 => jogedena ;
-      8 => jogedes ;
-      9 => jogedesse
-      } ;
 
 
 -- Adjective forms
