@@ -287,8 +287,7 @@ oper
 
   mkN = overload {
     mkN : (nisu : Str) -> N = mk1N ;
-    --  \s -> nForms2N (nForms1 s) ;
-    --mkN : (talo,talon : Str) -> N = mk2N ;
+    mkN : (link,lingi : Str) -> N = mk2N ;
     --  \s,t -> nForms2N (nForms2 s t) ;
     --mkN : (talo,talon,taloja : Str) -> N = mk3N ;
     --  \s,t,u -> nForms2N (nForms3 s t u) ;
@@ -311,9 +310,9 @@ oper
 
 
   --mk1N : (talo : Str) -> N = \s -> nForms2N (nForms1 s) ;
-  mk1N : (talo : Str) -> N = \s -> (hjk_type s) ** { lock_N = <> } ;
---  mk2N : (talo,talon : Str) -> N = \s,t -> nForms2N (nForms2 s t) ;
---  mk3N : (talo,talon,taloja : Str) -> N = \s,t,u -> nForms2N (nForms3 s t u) ;
+  mk1N : (link : Str) -> N = \s -> (hjk_type s) ** {lock_N = <> } ;
+  mk2N : (link,lingi : Str) -> N = \s,t -> (nForms2 s t) ** {lock_N = <>} ;
+  mk3N : (tukk,tuku,tukku : Str) -> N = \s,t,u -> (nForms3 s t u)  ** {lock_N = <>} ;
 --  mk4N : (talo,talon,taloa,taloja : Str) -> N = \s,t,u,v -> 
 --      nForms2N (nForms4 s t u v) ;
 
@@ -327,28 +326,43 @@ oper
     s = \\c => oma.s ! c + tunto.s ! c ; lock_N = <>
     } ; ---- TODO: oma in possessive suffix forms
 
-{-  nForms1 : Str -> NForms = \ukko ->
+  nForms2 : (_,_ : Str) -> N = \link,lingi -> 
     let
-      ukk = init ukko ;
-      uko = weaker ukko ;
-      ukon = uko + "n" ;
-      o = case last ukko of {"ä" => "ö" ; "a" => "o"} ; -- only used then 
-      renka = stronger (init ukko) ;
-      rake = stronger ukko ;
+      i = last lingi ;
+      reegl = init lingi ;
     in
-    case ukko of {
-      _ + "lik"        => dKasulik ukko ;
-      _ + ("s"|"ne")   => dSoolane ukko ;
-      _ => dSeminar ukko
-    } ;   
+      case <link,lingi> of { 
+        <_ + "el", _ + #c + "li"> => hjk_type_IVb_audit1 link reegl ;
+        <_ + "er", _ + #c + "ri"> => hjk_type_IVb_audit1 link reegl ;
+        <_ + #c + "el", _ + #c + "eli"> => hjk_type_IVb_audit link i ;
+        <_ + #c + "er", _ + #c + "eri"> => hjk_type_IVb_audit link i ;
+        <_ + "ne", _ + "ne">  => hjk_type_III_ratsu link ;
 
+        <_ + "be", _ + "pe">  => hjk_type_VII_touge link ;
+        <_ + "de", _ + "te">  => hjk_type_VII_touge link ;
+        <_ + "ge", _ + "ke">  => hjk_type_VII_touge link ;
+        
+        --heuristics to catch palk:palga but not maakas:maaka (for longer words, same with more ?s)
+        --didn't work, don't try this
+        --<? + ? + #c, ? + ? + #c + #notI> => hjk_type_IVb_audit link i ; 
+        _ => mk1N link 
+      } ;
 
-  nForms2 : (_,_ : Str) -> NForms = \ukko,ukkoja -> 
-      dNaine ukko  ;
+  nForms3 : (_,_,_ : Str) -> N = \tukk,tuku,tukku ->
+    let u = last tuku ;
+    in  case <tukk,tuku,tukku> of {
+      --cases handled reliablish by 1- and 2-arg opers
+      <_+"ik",_,_> => mk1N tukk ;
+      <_+"as",_,_> => mk1N tukk ;
+      <_+"nd",_,_> => mk1N tukk ;
+      <_+"el",_,_> => mk2N tukk tuku ;
+      <_+"er",_,_> => mk2N tukk tuku ;
 
-  nForms3 : (_,_,_ : Str) -> NForms = \ukko,ukon,ukkoja -> 
-      dOun ukko ;
-
+      <_ + #c, _ + #v, _ + #v> => hjk_type_VI_tukk tukk u ;
+      <_ + #c, _ + #v, _ + #v + "t"> => hjk_type_IVb_audit tukk u ;
+      _ => mk2N tukk tuku 
+    } ;
+{-
   nForms4 : (_,_,_,_ : Str) -> NForms = \paat,paadi,paati,paate -> 
     case <paat,paadi,paati,paate> of {
       <_ + "ne", _+ "se", _+"st", _ + "si"> => dNaine paat ;

@@ -54,6 +54,8 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	-- IVa additionally needs the stem vowel.
 	hjk_type_IVb_audit,
 	hjk_type_IVb_audit1 : Str -> Str -> NFS ;
+	
+	hjk_type_VI_tukk : Str -> Str -> NFS ;
 
 
 	-- Definition of the mapping rules.
@@ -129,6 +131,19 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		in
 		nForms6 x (x_n+"i") (x+"i") (x+"i") (x+"ide") (x+"e") ;
 
+        --like link but variable vowel and -sid for pl.part
+	hjk_type_VI_tukk x v_g =
+		let
+			x_n : Str = weaker_noun x ;
+ 		     {-   pl_part : Str = 
+ 		            case v_g of { 
+ 		                "i" => "e" ; 
+ 		                 _  => v_g + "sid" } ;
+ 		      -}
+
+		in
+		nForms6 x (x_n+v_g) (x+v_g) (x+v_g) (x+v_g+"de") (x+v_g+"sid") ;
+		
 	hjk_type_VI_imelik x =
 		let
 			x_t : Str = stronger_noun x
