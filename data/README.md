@@ -120,3 +120,24 @@ Frequency of the main tag:
 
 	# Keep only the 8 forms
 	etsyn-to-8forms.py
+
+
+### freq.csv
+
+	# Download the file
+	curl http://www.cl.ut.ee/ressursid/sagedused/tabel1.txt |\
+	# Remove DOS newlines
+	tr -d "\r" |\
+	# Keep only the first 3 columns
+	cut -f1,2,3 > /tmp/freq.csv
+
+	# Convert to UTF8
+	recode latin1..utf8 /tmp/freq.csv
+
+	# Fix š and ž
+	cat /tmp/freq.csv |\
+	# Keep lines that have frequency info in them (i.e. exclude the header and the empty lines)
+	grep "[0-9]" |\
+	sed "s/zh/ž/g" | sed "s/^sh/š/" | sed "s/shsh/šš/" | sed "s/þ/ž/g" | sed "s/ð/š/g" |\
+	# Sort
+	LC_ALL=et_EE.utf8 sort -k1 > freq.csv

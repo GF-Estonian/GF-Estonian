@@ -752,4 +752,35 @@ Same for nouns:
     183 xxx
      19 xxxx
 
+Kaarel 07.10
+------------
 
+Added a script that does the
+full outer join of frequency data and smart paradigm coverage evaluation output.
+This gives a more general output that can be used for all kinds of analysis.
+(TODO: Does not work correctly yet with non-ascii letters, don't know why...)
+
+Example 1. Frequent words that are not correctly analyzed:
+
+	./join-freq-diff.bash | grep '[0-9]$' | sort -nr -k3 | head -10
+
+miski	P	2276	5-6
+inimene	S	2268	6
+naine	S	1666	6
+asi	S	1256	2-3-4-5-6
+hea	A/S	1025	6
+noor	A/S	589	2-3-4-5-6
+rahvas	S	542	2-4-6
+nimi	S	522	2-3-4-5-6
+laud	S	438	2-3-4-5-6
+otsus	S	411	6
+
+Example 2. (Same as Inari's cut -f1 verbs.incorrect.frequencies.txt | tr '[0-9]' 'x' | sort | uniq -c)
+
+	./join-freq-diff.bash | grep '[0-9]$' | cut -f3 | tr '[0-9]' 'x' | sort | uniq -c
+
+   1678 #
+     96 x
+    231 xx
+     39 xxx
+      5 xxxx

@@ -27,7 +27,7 @@ correct=`head -1 ${coverage} | sed "s/ *//g"`
 result=`echo "scale=4; ${correct}/${total}" | bc`
 
 #produce list of incorrect results
-egrep [0-9] ${diff} | tr -d '0-9\- \t' > ${incorrect} 
+egrep [0-9] ${diff} | cut -f1 > ${incorrect}
 
 echo "Coverage: ${correct} out of ${total} = ${result}"
 
