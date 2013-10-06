@@ -727,3 +727,29 @@ frequency distribution of constructor patterns:
      18 mkVV (mkV )
 
 where "mkV (mkV )" stands for MWVs.
+
+Inari 06.10
+-----------
+Made test-(noun|verb)-coverage.sh to output a new file, (nouns|verbs).incorrect.txt.
+
+Added new script, test-(noun|verb)-frequency.sh, which looks up the words in http://www.cl.ut.ee/ressursid/sagedused/tabel1.txt and outputs the word and its frequency.
+
+(Note that tabel1 is ISO-8859-1 and uses sh and zh for š and ž; I modified the (nouns|verbs).incorrect.txt files manually before I ran the script. 
+"Modified manually" = open in emacs; C-x RET f <encoding>; then search and replace the funny chars).
+
+cut -f1 verbs.incorrect.frequencies.txt | tr '[0-9]' 'x' | sort | uniq -c
+    311
+     45 x
+    150 xx
+     49 xxx
+     11 xxxx
+      1 xxxxx
+    
+Same for nouns: 
+   1613
+    191 x
+    544 xx
+    183 xxx
+     19 xxxx
+
+

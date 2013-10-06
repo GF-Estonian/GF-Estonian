@@ -853,10 +853,6 @@ oper
       PresPart Pass => tuld_ + "av" ; --d or t
       PastPart Act  => tulnud ;
       PastPart Pass => tuldud ;
---      PastPartAct (AN n)  => lugenud ! n ;
---      PastPartAct AAdv    => lugenud ! (NCase Sg Ablat) ;
---      PastPartPass (AN n) => loetud ! n ;
---      PastPartPass AAdv   => loetud ! (NCase Sg Ablat) ;
       Inf InfMa => tulema ;
       Inf InfMas => tulema + "s" ;
       Inf InfMast => tulema + "st" ;

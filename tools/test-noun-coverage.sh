@@ -5,6 +5,8 @@ out=nouns.6forms.gf.csv
 diff=nouns.6forms.diff.csv
 coverage=nouns.coverage.txt
 
+incorrect=nouns.incorrect.txt
+
 g=../estonian/
 cat ${gold} |\
 sed "s/,.*//" |\
@@ -17,6 +19,9 @@ perl -nal -F",\s+" -e 'print "$F[0], $F[1], $F[2], $F[3], $F[15], $F[16]"' > ${o
 total=`cat ${out} | wc -l`
 correct=`head -1 ${coverage} | sed "s/ *//g"`
 result=`echo "scale=4; ${correct}/${total}" | bc`
+
+#produce list of incorrect results
+egrep [0-9] ${diff} | tr -d '0-9\- \t' > ${incorrect} 
 
 echo "Coverage: ${correct} out of ${total} = ${result}"
 

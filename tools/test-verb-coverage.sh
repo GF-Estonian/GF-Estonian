@@ -1,13 +1,14 @@
 #/bin/sh
 
-gold=verbs.8forms.csv
+gold=../data/verbs.8forms.csv
 out=verbs.8forms.gf.csv
 diff=verbs.8forms.diff.csv
 coverage=verbs.coverage.txt
-incorrect=verbs.incorrect.txt
 #coverage=coverage2.txt
 #coverage=coverage3.txt
 #coverage=coverage4.txt
+
+incorrect=verbs.incorrect.txt
 
 g=../estonian/
 cat ${gold} |\

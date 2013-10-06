@@ -120,6 +120,30 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
     --The reflexive possessive "oma"
     --for "ta näeb oma koera" instead of *"tema koera"
     OmaPoss = {s,sp = \\_,_ => "oma" ; isDef,isNeg,isNum = False} ;
+    
+    ma_Pron = mkPronoun "ma" "mu" "mind" Sg P1 ;
+    sa_Pron = mkPronoun "sa" "su" "sind" Sg P2;
+    ta_Pron = mkPronoun "ta" "ta" "teda" Sg P3 ;
+    me_Pron = 
+    {s = table {
+        NPCase Nom => "me" ;
+        n => (we_Pron.s) ! n 
+        } ;
+     a = Ag Pl P1 } ; 
+
+    te_Pron = 
+    {s = table {
+        NPCase Nom => "te" ;
+        n => (youPl_Pron.s) ! n 
+        } ;
+     a = Ag Pl P2 } ; 
+
+    nad_Pron =
+    {s = table {
+        NPCase Nom => "nad" ;
+        n => (they_Pron.s) ! n 
+        } ;
+     a = Ag Pl P3 } ; 
 
 ---- copied from VerbEst.CompAP, should be shared
     ICompAP ap = {
