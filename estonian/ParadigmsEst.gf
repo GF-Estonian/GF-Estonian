@@ -369,11 +369,15 @@ oper
     let u = last tuku ;
     in  case <tukk,tuku,tukku> of {
       --cases handled reliablish by 1- and 2-arg opers
-      <_+"as",_,_+"ast"> => dHammas tukk tuku ;
-      <_+"as",_,_+"at"> => mk1N tukk ;
       <_+"nd",_,_> => mk1N tukk ;
       <_+"el",_,_> => mk2N tukk tuku ;
       <_+"er",_,_> => mk2N tukk tuku ;
+
+      --distinguishing between hammas and maakas
+      <_+"as",_+"a",_+"ast"> => dHammas tukk tuku ;
+      <_+"es",_+"e",_+"est"> => dHammas tukk tuku ;
+      <_+"us",_+"u",_+"ust"> => dHammas tukk tuku ;
+      <_+"as",_,_+"at"> => hjk_type_IVb_maakas tukk ;
 
       <_ + "ik", _ + "iku", _ + "ikku"> => hjk_type_VI_imelik tukk ; --imelik:_:imelikku caught here
       <_ + #c, _ + #v, _ + #v> => hjk_type_VI_tukk tukk tuku ;
@@ -383,9 +387,14 @@ oper
 
   nForms4 : (_,_,_,_ : Str) -> NFS = \paat,paadi,paati,paate -> 
     case <paat,paadi,paati,paate> of {
-      <_ +"s",  _+"se", _+"st", _+"seid"> => hjk_type_Va_otsene paat ;
---      <_ +"ne", _+"ne", _+"net", _+"sid"> => --distinguish between aine and k6ne
---TODO: distinguish between joonis and segadus
+     -- distinguish between joonis and segadus
+      <_ +("ne"|"s"),  _+"se", _+"st", _+"seid"> => hjk_type_Va_otsene paat ;
+      <_ +("ne"|"s"),  _+"se", _+"st", _+"si"> => hjk_type_Vb_oluline paat ;
+      
+      --distinguish between kõne and aine
+      <_ +"e", _+"e", _+"et", _+"sid"> => hjk_type_III_ratsu paat ; 
+      <_ +"e", _+"e", _+"et", _+"eid"> => hjk_type_VII_touge paat ;
+
       _  => mk3N paat paadi paati 
       } ;
 

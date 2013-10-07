@@ -5,16 +5,19 @@ out=nouns.6forms.gf.csv
 diff=nouns.6forms.diff.csv
 #coverage=nouns.coverage.txt
 #coverage=nouns2.coverage.txt
-coverage=nouns3.coverage.txt
+#coverage=nouns3.coverage.txt
+coverage=nouns4.coverage.txt
 #incorrect=nouns.incorrect.txt
 #incorrect=nouns2.incorrect.txt
-incorrect=nouns3.incorrect.txt
+#incorrect=nouns3.incorrect.txt
+incorrect=nouns4.incorrect.txt
 
 g=../estonian/
 cat ${gold} |\
 #sed "s/,.*//" |\
 #sed -r 's/([^,]*, [^,]*),.*/\1/' |\
 sed -r 's/([^,]*, [^,]*, [^,]*),.*/\1/' |\
+#sed -r 's/([^,]*,) ([^,]*,) ([^,]*,) [^,]*, [^,]*, (.*)$/\1 \2 \3 \4/' |\
 # Rewrite the base forms that use the parallel forms notation because
 # such |-containing forms are not handled by the opers, so the
 # results would be misleading.
@@ -41,4 +44,4 @@ egrep [0-9] ${diff} | cut -f1 > ${incorrect}
 
 echo "Coverage: ${correct} out of ${total} = ${result}"
 
-diff nouns.coverage.prev ${coverage}
+diff nouns3.coverage.prev ${coverage}
