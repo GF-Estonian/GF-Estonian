@@ -1,22 +1,25 @@
 #!/bin/bash
 
-# Make the full outer join merging the frequent word list
-# with the coverage test results.
+# Make the full outer join that merges the frequent word list (w1)
+# with the coverage test results (w2).
 # The result is a table with fields:
 # 1. word
-# 2. frequency (or missing if not a frequent word)
-# 3. diff id (or missing if correctly analyzed or unanalyzed frequent word)
-# Missing fields are marked with '#'.
-
-# TODO: fix matching of non-ascii letters
+# 2. word class (or # if not a frequent word)
+# 3. frequency (or # if not a frequent word)
+# 4. diff id (or # if correctly analyzed or unanalyzed frequent word)
 
 w1=$(mktemp)
 w2=$(mktemp)
 
-# Join wants sorted files
-cat ../data/freq.csv | LC_ALL=et_EE.utf8 sort -k1 > $w1
-cat nouns.6forms.diff.csv | LC_ALL=et_EE.utf8 sort -k1 > $w2
+# This is important, it makes sort and join have the same idea about order.
+# Note that if STDERR contains something like
+#     join: /tmp/tmp.5IFbEbt8iI:3697: is not sorted: hoog	3-4-5-6
+# then there is a problem.
+export LC_ALL=C
 
-#LC_ALL=et_EE.utf8 join -a 1 -a 2 -t $'\t' -e'#' -o '0,1.2,1.3,2.2' $w1 $w2
-#join --nocheck-order -a 1 -a 2 -t $'\t' -e'#' -o '0,1.2,1.3,2.2' $w1 $w2
+# Join wants sorted files
+cat ../data/freq.csv | sort -k1 > $w1
+cat nouns.6forms.diff.csv | sort -k1 > $w2
+
+# Full outer join
 join -a 1 -a 2 -t $'\t' -e'#' -o '0,1.2,1.3,2.2' $w1 $w2

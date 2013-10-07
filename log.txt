@@ -784,3 +784,96 @@ Example 2. (Same as Inari's cut -f1 verbs.incorrect.frequencies.txt | tr '[0-9]'
     231 xx
      39 xxx
       5 xxxx
+
+
+Kaarel 07.10
+------------
+
+Fixed the join. Some tests to verify that it works correctly.
+
+Nouns with 3-arg oper.
+
+  20843
+    264 5-6
+    253 2-3-4-5-6
+    120 6
+     63 2-4-6
+     61 2-4-5-6
+     44 3-5-6
+     36 3
+     36 2-4
+     31 3-4-5-6
+     13 2-3-4-5
+      8 2
+      3 2-3-4
+      1 5
+Coverage: 20843 out of 21776 = .9571
+
+Number of errors = 21776-20843 = 933
+
+Number of errors with join:
+
+	./join-freq-diff.bash | grep '[0-9]$' | wc -l
+	933
+
+Top 20 most frequent words that are incorrectly analyzed.
+
+	./join-freq-diff.bash | grep '[0-9]$' | sort -nr -k3 | head -20
+mees	S	2406	2-3-4-5-6
+miski	P	2276	5-6
+inimene	S	2268	6
+naine	S	1666	6
+käsi	S	1408	2-3-4-5-6
+laps	S	1281	2-3-4-5-6
+iga	P/S	1276	2-4
+asi	S	1256	2-3-4-5-6
+pea	D/S	1253	6
+hea	A/S	1025	6
+nägu	S	685	2-4
+keel	S	643	2-3-4-5-6
+uks	S	613	2-3-4-5-6
+noor	A/S	589	2-3-4-5-6
+hääl	S	575	2-3-4-5-6
+vesi	S	562	2-3-4-5-6
+nimi	S	522	2-3-4-5-6
+meel	S	500	2-3-4-5-6
+õhtu	S	476	5-6
+tuba	S	438	2-4
+
+Out of the total of 933 errors, 580 (62%) are not among the 10k most frequent words.
+
+	./join-freq-diff.bash | grep '[0-9]$' | cut -f3 | tr '[0-9]' 'x' | sort | uniq -c | sort -nr
+    580 #
+    193 xx
+     82 xxx
+     68 x
+     10 xxxx
+
+Distribution of errors that are not frequent words by word length.
+
+	./join-freq-diff.bash | grep '[0-9]$' | cut -f1,3 | grep '#' | cut -f1 | tr '[a-zõäöüšž]' 'x' | sort | uniq -c | sort -nr
+    165 xxxxxx
+    118 xxxxxxx
+    102 xxxxx
+     84 xxxx
+     58 xxxxxxxx
+     19 xxxxxxxxx
+     14 xxx
+     10 xxxxxxxxxx
+      2 xxxxxxxxxxxx
+      2 xxxxxxxxxxx
+      2 xxxx|xxxx
+      1 xxxxxxx|xxxxxxxx
+      1 xxxxxxxxxxxxx
+      1 xxxxx|xxxxxx
+      1 xxx|xxxxx
+
+i.e. the largest group are 6-letter words.
+
+There are lots that end with 'ja'.
+
+	./join-freq-diff.bash | grep '[0-9]$' | cut -f1,3 | grep '#' | cut -f1 | grep 'ja$' | wc -l
+	84
+
+All of them (with one exception: gerilja) are -ja derivations.
+(TODO: put them into AASTA, i.e. kündja -> kündjaid, not kündja -> kündjasid)
