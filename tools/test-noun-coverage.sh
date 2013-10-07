@@ -15,6 +15,16 @@ cat ${gold} |\
 #sed "s/,.*//" |\
 #sed -r 's/([^,]*, [^,]*),.*/\1/' |\
 sed -r 's/([^,]*, [^,]*, [^,]*),.*/\1/' |\
+# Rewrite the base forms that use the parallel forms notation because
+# such |-containing forms are not handled by the opers, so the
+# results would be misleading.
+# The rewriting preserves just the last parallel form and
+# makes the assumption that the correct forms align
+# (palk, palga|palgi, palka|palki) but this might not always hold.
+# This affects 330 forms in case the 1st 3 forms are considered.
+# With just the 1st form (nominative) there are just a couple that contain the '|'.
+#sed "s/|[^,]*//g" |\
+sed "s/[^ ]*|//g" |\
 #python cc.py -r ${g}/HjkEst.gf --oper "hjk_type" |\
 python cc.py -r ${g}/ParadigmsEst.gf --oper "mk3N" |\
 gf --run |\
