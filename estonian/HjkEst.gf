@@ -94,15 +94,21 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		in
 		nForms6 x gen (gen+"t") (gen+"sse") (gen+"te") (gen+"id") ;
 
+
 	--Maakas is for maakas:maaka:maakat, this is for hammas:hamba:hammast
 	--Not sure if this is already covered by some hjk_type,
 	--anyway the grades are explicit with two args, more reliable
 	dHammas : (_,_ : Str) -> NFS ;
 	dHammas hammas hamba =
-		--let
-			--gen = init x
-		--in
 		nForms6 hammas hamba (hammas+"t") (hamba+"sse") (hammas+"te") (hamba+"id") ;
+
+	dMeri : (_,_ : Str) -> NFS ;
+	dMeri meri mere =
+	        let
+		  mer = init mere ;
+	        in
+		nForms6 meri mere (mer+"d") (mere+"sse") (mere+"de") (mere+"sid") ;
+
 
 	-- This rule handles the removal of -ne and -s endings, and the addition of 'e'
 	-- in the case of Cne-nouns (e.g. 'raudne').
@@ -264,7 +270,6 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			_ => x
 		} ;
 
-
 	-- Strengthening of verbs.
 	stronger : Str -> Str ;
 	stronger x =
@@ -332,7 +337,11 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 				=> hjk_type_IVb_maakas x ;
 
 			-- TODO: not in HJKEKS
-			<_, _ + "ia">
+			<_, _ + ("ia"|"ja")> --kündja, not gerilja
+				=> hjk_type_IVa_aasta x ;
+
+			--added by Inari 07.10.
+			<S23, _ + #c + ("la")> --haigla, not gorilla
 				=> hjk_type_IVa_aasta x ;
 
 			<S1, _ + #v + #v>
@@ -542,6 +551,8 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			#v + #c + #c + #v + #c + #c => S2 ; -- astang, ellips
 			#c + #vv + #c + #v + #v => S23 ; -- muumia, raadio, TODO: exclude 'vaarao'
 			#c + #v + #v + #c + #v + #v => S1 ; -- peoleo
+			#c + #v + #v + #c + #c + #v => S23 ; -- haigla --added by Inari, not sure if always correct
+			#c + #v + #c + #c + #c + #v => S23 ; -- vangla --added by Inari, not sure if always correct
 			#c + #v + #c + #vv + #c => S1 ; -- deviis (double vowel in the last syllable)
 			#v + #c + #v + #c + #v + #v => S1 ; -- agoraa
 			#c + #v + #c + #v + #c + #c => S2 ;

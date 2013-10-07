@@ -337,17 +337,28 @@ oper
         <_ + #c + "el", _ + #c + "eli"> => hjk_type_IVb_audit link i ;
         <_ + #c + "er", _ + #c + "eri"> => hjk_type_IVb_audit link i ;
 
-	--removing this made 4 errors disappear
-	--they were of type where "aine" was recognized as "kõne"
-        --<_ + "ne", _ + "ne">  => hjk_type_III_ratsu link ;
-
         <_ + "be", _ + "pe">  => hjk_type_VII_touge link ;
         <_ + "de", _ + "te">  => hjk_type_VII_touge link ;
         <_ + "ge", _ + "ke">  => hjk_type_VII_touge link ;
         <_ + "pe", _ + "ppe">  => hjk_type_VII_touge link ;
         <_ + "te", _ + "tte">  => hjk_type_VII_touge link ;
         <_ + "ke", _ + "kke">  => hjk_type_VII_touge link ;
-        
+        <_ + "nne", _ + "nde">  => hjk_type_VII_touge link ;
+
+	--below 3 don't do much, could just delete
+	--t6uge recognition is easy, because that doesn't introduce lot of other errors
+	--but probably pointless to fill this with all cases
+        <_ + "se", _ + "ske">  => hjk_type_VII_touge link ;
+        <_ + "re", _ + "rde">  => hjk_type_VII_touge link ;
+	<_ + #v + "e", _+"de"> => hjk_type_VII_touge link ; --riie:riide
+
+	--improved total count a little, but introduced new errors
+	--not recommended, not stable and productive word class
+	--<_ + "i", _ + "e">  => dMeri link lingi ;
+
+	--introduced a couple of errors, "aine" recognized as "kõne"
+        --<_ + "ne", _ + "ne">  => hjk_type_III_ratsu link ;
+
         --heuristics to catch palk:palga but not maakas:maaka (for longer words, same with more ?s)
         --didn't work, don't try this
         --<? + ? + #c, ? + ? + #c + #notI> => hjk_type_IVb_audit link i ; 
@@ -372,7 +383,9 @@ oper
 
   nForms4 : (_,_,_,_ : Str) -> NFS = \paat,paadi,paati,paate -> 
     case <paat,paadi,paati,paate> of {
-      <_ + "s", _+ "se", _+"st", _+"seid"> => hjk_type_Va_otsene paat ;
+      <_ +"s",  _+"se", _+"st", _+"seid"> => hjk_type_Va_otsene paat ;
+--      <_ +"ne", _+"ne", _+"net", _+"sid"> => --distinguish between aine and k6ne
+--TODO: distinguish between joonis and segadus
       _  => mk3N paat paadi paati 
       } ;
 

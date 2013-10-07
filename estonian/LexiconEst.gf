@@ -112,7 +112,7 @@ lin
   listen_V2 = mkV2 (mkV "kuulama") partitive ;
   live_V = mkV "elama" ;
   long_A = mkA "pikk" ;
-  lose_V2 = mkV2 (mkV "kaotas") ;
+  lose_V2 = mkV2 (mkV "kaotama") ;
   love_N = mkN "armastus" ;
   love_V2 = mkV2 (mkV "armastama") partitive ;
   man_N = mkN "mees" "mehe" "meest" "mehesse" "meeste" "mehi" ;

@@ -877,3 +877,50 @@ There are lots that end with 'ja'.
 
 All of them (with one exception: gerilja) are -ja derivations.
 (TODO: put them into AASTA, i.e. kündja -> kündjaid, not kündja -> kündjasid)
+
+
+Inari 07.10.
+------------
+added _ + "ja" to 1-arg oper 
+from 20847 to 
+20940  out of    21776 = .9616
+
+Next problem:
+ikebana and gorilla recognized as *ikebanate,ikebanaid -> correct ikebanade,ikebanasid
+haigla recognized as *haiglade,haiglasid -> correct haiglate,haiglaid
+
+Added 
+  <S23, _ + #c + "la"> 
+to 1-arg oper
+20963 out of    21776 = .9626
+
+Added 
+   <_ + "nne", _ + "nde">  => hjk_type_VII_touge link ;  
+to 2-arg oper
+20972 out of    21776 = .9630
+
+The group 2-3-4-5-6 isn't very consistent, there are many irregular words.
+HJK doesn't even support irregular words very well?
+
+
+Added
+   <_ + "i", _ + "e">  => dMeri link lingi ;  
+to 2-arg (and deep constructor dMeri in HjkEst)
+
+20975 out of    21776 = .9632
+but introduced new errors, so commented that out.
+
+Added bunch of new regexps to tõuge. Didn't do much, just changed
+ratios of errors between 2-4-6 and 2-4-5-6.
+
+Tonight's task, check more 3-5-6, 2-4-6 and 2-4-5-6 for common patterns
+If not, just start the damn paper writing. :--P
+
+Some consistencies:
+sõber, pipar not recognized; closed class,
+http://www.eki.ee/dict/qs/index.cgi?Q=37&F=I finds only 32 words
+
+Group 6 is where the paradigm confuses joonis:jooniseid and segadus:segadusi.
+Can't really do much without giving 4th argument.
+Group 5-6 is pretty heterogenous, and same problem with arguments.
+Could do a 4-arg smart paradigm just for completeness.
