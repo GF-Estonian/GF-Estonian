@@ -94,6 +94,16 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		in
 		nForms6 x gen (gen+"t") (gen+"sse") (gen+"te") (gen+"id") ;
 
+	--Maakas is for maakas:maaka:maakat, this is for hammas:hamba:hammast
+	--Not sure if this is already covered by some hjk_type,
+	--anyway the grades are explicit with two args, more reliable
+	dHammas : (_,_ : Str) -> NFS ;
+	dHammas hammas hamba =
+		--let
+			--gen = init x
+		--in
+		nForms6 hammas hamba (hammas+"t") (hamba+"sse") (hammas+"te") (hamba+"id") ;
+
 	-- This rule handles the removal of -ne and -s endings, and the addition of 'e'
 	-- in the case of Cne-nouns (e.g. 'raudne').
 	-- vastus - vastuse - vastust
@@ -131,10 +141,15 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		in
 		nForms6 x (x_n+"i") (x+"i") (x+"i") (x+"ide") (x+"e") ;
 
-        --like link but variable vowel and -sid for pl.part
-	hjk_type_VI_tukk x v_g =
+
+        --like link but 
+	-- gen form given (takes care of vowel and consonant gradation) 
+	-- -sid for pl.part (todo: generate short forms depending on vowel?)
+	hjk_type_VI_tukk x x_gen =
 		let
-			x_n : Str = weaker_noun x ;
+--			x_n : Str = weaker_noun x ;
+			v_g : Str = last x_gen ;
+			
  		     {-   pl_part : Str = 
  		            case v_g of { 
  		                "i" => "e" ; 
@@ -142,7 +157,8 @@ resource HjkEst = open ResEst, Prelude, Predef in {
  		      -}
 
 		in
-		nForms6 x (x_n+v_g) (x+v_g) (x+v_g) (x+v_g+"de") (x+v_g+"sid") ;
+		nForms6 x x_gen (x+v_g) (x+v_g) (x+v_g+"de") (x+v_g+"sid") ;
+--		nForms6 x (x_n+v_g) (x+v_g) (x+v_g) (x+v_g+"de") (x+v_g+"sid") ;
 		
 	hjk_type_VI_imelik x =
 		let

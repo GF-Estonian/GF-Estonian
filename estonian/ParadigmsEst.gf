@@ -312,9 +312,9 @@ oper
   --mk1N : (talo : Str) -> N = \s -> nForms2N (nForms1 s) ;
   mk1N : (link : Str) -> N = \s -> (hjk_type s) ** {lock_N = <> } ;
   mk2N : (link,lingi : Str) -> N = \s,t -> (nForms2 s t) ** {lock_N = <>} ;
-  mk3N : (tukk,tuku,tukku : Str) -> N = \s,t,u -> (nForms3 s t u)  ** {lock_N = <>} ;
---  mk4N : (talo,talon,taloa,taloja : Str) -> N = \s,t,u,v -> 
---      nForms2N (nForms4 s t u v) ;
+  mk3N : (tukk,tuku,tukku : Str) -> N = \s,t,u -> (nForms3 s t u) ** {lock_N = <>} ;
+  mk4N : (paat,paadi,paati,paate : Str) -> N = \s,t,u,v ->  (nForms4 s t u v) ** {lock_N = <>} ;
+
 
   mk6N : (oun,ouna,ouna,ounasse,ounte,ounu : Str) -> N =
       \a,b,c,d,e,f -> (nForms6 a b c d e f) ** { lock_N = <> } ;
@@ -326,7 +326,7 @@ oper
     s = \\c => oma.s ! c + tunto.s ! c ; lock_N = <>
     } ; ---- TODO: oma in possessive suffix forms
 
-  nForms2 : (_,_ : Str) -> N = \link,lingi -> 
+  nForms2 : (_,_ : Str) -> NFS = \link,lingi -> 
     let
       i = last lingi ;
       reegl = init lingi ;
@@ -341,6 +341,9 @@ oper
         <_ + "be", _ + "pe">  => hjk_type_VII_touge link ;
         <_ + "de", _ + "te">  => hjk_type_VII_touge link ;
         <_ + "ge", _ + "ke">  => hjk_type_VII_touge link ;
+        <_ + "pe", _ + "ppe">  => hjk_type_VII_touge link ;
+        <_ + "te", _ + "tte">  => hjk_type_VII_touge link ;
+        <_ + "ke", _ + "kke">  => hjk_type_VII_touge link ;
         
         --heuristics to catch palk:palga but not maakas:maaka (for longer words, same with more ?s)
         --didn't work, don't try this
@@ -348,31 +351,28 @@ oper
         _ => mk1N link 
       } ;
 
-  nForms3 : (_,_,_ : Str) -> N = \tukk,tuku,tukku ->
+  nForms3 : (_,_,_ : Str) -> NFS = \tukk,tuku,tukku ->
     let u = last tuku ;
     in  case <tukk,tuku,tukku> of {
       --cases handled reliablish by 1- and 2-arg opers
-      <_+"ik",_,_> => mk1N tukk ;
-      <_+"as",_,_> => mk1N tukk ;
+      <_+"as",_,_+"ast"> => dHammas tukk tuku ;
+      <_+"as",_,_+"at"> => mk1N tukk ;
       <_+"nd",_,_> => mk1N tukk ;
       <_+"el",_,_> => mk2N tukk tuku ;
       <_+"er",_,_> => mk2N tukk tuku ;
 
-      <_ + #c, _ + #v, _ + #v> => hjk_type_VI_tukk tukk u ;
-      <_ + #c, _ + #v, _ + #v + "t"> => hjk_type_IVb_audit tukk u ;
+      <_ + "ik", _ + "iku", _ + "ikku"> => hjk_type_VI_imelik tukk ; --imelik:_:imelikku caught here
+      <_ + #c, _ + #v, _ + #v> => hjk_type_VI_tukk tukk tuku ;
+      <_ + #c, _ + #v, _ + #v + "t"> => hjk_type_IVb_audit tukk u ;  --voolik:_:voolikut caught here
       _ => mk2N tukk tuku 
     } ;
-{-
-  nForms4 : (_,_,_,_ : Str) -> NForms = \paat,paadi,paati,paate -> 
+
+  nForms4 : (_,_,_,_ : Str) -> NFS = \paat,paadi,paati,paate -> 
     case <paat,paadi,paati,paate> of {
-      <_ + "ne", _+ "se", _+"st", _ + "si"> => dNaine paat ;
-      <_ + "ne", _+ "se", _+"st", _ + "seid"> => dSoolane paat ;
-      -- TODO: make linear
-      --<_ + ("n"|"l"|"r"), _ + V@("a" | "u" | "e"),  _ + V,  _ + "u"> => dOun paat ;
-      --<_ + C@("r" | "n" | "l" | "m" | "s" | "t" |"k"), _ + C + "i", _ + C + "i", _> => dSeminar paat ;
-      _  => dTuli paat paadi 
+      <_ + "s", _+ "se", _+"st", _+"seid"> => hjk_type_Va_otsene paat ;
+      _  => mk3N paat paadi paati 
       } ;
--}
+
 
   mkN2 = overload {
     mkN2 : N -> N2 = \n -> mmkN2 n (casePrep genitive) ;
