@@ -336,7 +336,10 @@ oper
         <_ + "er", _ + #c + "ri"> => hjk_type_IVb_audit1 link reegl ;
         <_ + #c + "el", _ + #c + "eli"> => hjk_type_IVb_audit link i ;
         <_ + #c + "er", _ + #c + "eri"> => hjk_type_IVb_audit link i ;
-        <_ + "ne", _ + "ne">  => hjk_type_III_ratsu link ;
+
+	--removing this made 4 errors disappear
+	--they were of type where "aine" was recognized as "kõne"
+        --<_ + "ne", _ + "ne">  => hjk_type_III_ratsu link ;
 
         <_ + "be", _ + "pe">  => hjk_type_VII_touge link ;
         <_ + "de", _ + "te">  => hjk_type_VII_touge link ;
