@@ -393,7 +393,7 @@ oper
       
       --distinguish between kõne and aine
       <_ +"e", _+"e", _+"et", _+"sid"> => hjk_type_III_ratsu paat ; 
-      <_ +"e", _+"e", _+"et", _+"eid"> => hjk_type_VII_touge paat ;
+      <_ +"e", _+"e", _+"et", _+"eid"> => dTouge2 paat paadi ;
 
       _  => mk3N paat paadi paati 
       } ;

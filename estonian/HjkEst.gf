@@ -109,7 +109,6 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	        in
 		nForms6 meri mere (mer+"d") (mere+"sse") (mere+"de") (mere+"sid") ;
 
-
 	-- This rule handles the removal of -ne and -s endings, and the addition of 'e'
 	-- in the case of Cne-nouns (e.g. 'raudne').
 	-- vastus - vastuse - vastust
@@ -153,7 +152,6 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	-- -sid for pl.part (todo: generate short forms depending on vowel?)
 	hjk_type_VI_tukk x x_gen =
 		let
---			x_n : Str = weaker_noun x ;
 			v_g : Str = last x_gen ;
 			
  		     {-   pl_part : Str = 
@@ -164,7 +162,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 
 		in
 		nForms6 x x_gen (x+v_g) (x+v_g) (x+v_g+"de") (x+v_g+"sid") ;
---		nForms6 x (x_n+v_g) (x+v_g) (x+v_g) (x+v_g+"de") (x+v_g+"sid") ;
+
 		
 	hjk_type_VI_imelik x =
 		let
@@ -187,6 +185,11 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		in
 		nForms6 x x_t (x+"t") (x_t+"sse") (x+"te") (x_t+"id") ;
 
+        --Identical to the above, just taking 2 arguments (nom + gen)
+        --There are 67 cases in test nouns where stronger_noun gets it wrong
+	dTouge2 : (_,_ : Str) -> NFS ;
+	dTouge2 touge touke = 
+	        nForms6 touge touke (touge+"t") (touke+"sse") (touge+"te") (touke+"id") ;
 
 	-- Use this only to weaken the verbs
 	weaker : Str -> Str ;
