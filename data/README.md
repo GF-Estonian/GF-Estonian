@@ -66,8 +66,8 @@ Generated with this sequence of steps:
 	# Use the WordNet tix-file
 	cat kb67a-utf8.tix |
 
-	# Keep only adjectives but exclude hyphenated words
-	estwn-to-etsyn.bash a | grep -v "-" |
+	# Keep only adjectives (exclude entries with spaces and hyphens)
+	estwn-to-etsyn.bash a |
 
 	# Detect the compound structure (but do not guess)
 	sed "s/ \/\/.*//" | sed "s/.* //" | etmrf -cio utf8 -P |
@@ -78,7 +78,7 @@ Generated with this sequence of steps:
 	# Generate all forms (guess if needed)
 	sed 's/$/ \/\/_A_ *, \/\//' | etsyn -cio utf8 -GO |
 
-	# Keep only the 6 forms but exclude hyphenated words
+	# Keep only the 6 forms
 	etsyn-to-6forms.py --tag=A | sort | uniq
 
 ### abileks_utf8.lx
