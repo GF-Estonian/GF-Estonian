@@ -23,9 +23,11 @@ This has been mostly accomplished.
 2 * 14 forms (excluding parallel forms)
 
   - 1-arg (sg nom) paradigm: 90% correct
+  - 2-arg (sg nom gen): 91% correct
+  - 3-arg (sg nom gen part): 96% correct
+  - 4-arg (sg nom gen part, pl part): 97% correct
   - 6-arg paradigm: 100% correct (?)
   - no parallel forms
-  - TODO: add 2-arg paradigm (nom, gen)
 
 ### Adjectives
 
@@ -39,33 +41,34 @@ Constructed in the same way as nouns, but have 3 degree forms.
 
 ### Verbs
 
-Forms: 37 in total
+Forms: 40 in total
 
   - Present : Person * Number
   - Imperfect : Person * Number
   - Conditional : Person * Number
   - Imperative : P2 Sg, P2 Pl, P3, P1 Pl, NegPl
   - Passive : {Present, Past} * {Pos, Neg}
+  - Quotative : Active, Passive 
   - Past participle : Active, Passive
-  - Present participle
+  - Present participle: Active, Passive
   - Infinitive : da * 2 cases ; ma * 5 cases
 
 Smart paradigm constructors
 
-  - 1-arg paradigm: 90% correct
-  - 2-arg paradigm: 96% correct
-  - 3-arg paradigm: 98% correct
-  - 4-arg paradigm: 99% correct
+  - 1-arg paradigm (ma): 90% correct
+  - 2-arg paradigm (ma, da): 96% correct
+  - 3-arg paradigm (ma, da, b): 98% correct
+  - 4-arg paradigm (ma, da, b, takse): 99% correct
     
 ### Lexicon
 
   - demo lexicon (`LexiconEst`)
   - large lexicon (`DictEst`):
+    - ~32000 nouns
+    - ~10000 multi-word verbs
     - ~4000 single-word verbs
-    - TODO: adverbs
-    - TODO: nouns
-    - TODO: adjectives
-    - TODO: multi-word verbs
+    - ~3500 adverbs
+    - ~3000 adjectives
   - TODO: large lexicon with language-independent function names
 
 ### Syntax
