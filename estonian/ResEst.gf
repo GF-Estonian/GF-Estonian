@@ -560,7 +560,7 @@ oper
     } ;
 
   nhn : NounH -> CommonNoun = \nh ->
-    nForms6
+    nForms6hjk
       nh.maakas
       nh.maaka
       nh.maakas
@@ -586,7 +586,7 @@ oper
   --Estonian version started
   reflPron : Agr -> NP = \agr -> 
     let 
-      ise = nForms6 "ise" "enda" "ennast" "endasse" "IGNORE" "IGNORE"
+      ise = nForms6hjk "ise" "enda" "ennast" "endasse" "IGNORE" "IGNORE"
     in {
       s = table {
         NPAcc => "ennast" ;
@@ -596,12 +596,15 @@ oper
       isPron = False -- no special acc form
       } ;
 
-
+    --Inari 08.10.
+    --I want to have separate (x1,_,_,_,_,x6 : Str) -> NForms and then nForms2N
+    --Changing the name of this, using this in hjk and MorphoEst nForms6 in Paradigms
+    --TODO cleanup
     -- Converts 6 given strings (Nom, Gen, Part, Illat, Gen, Part) into CommonNoun
     -- http://www.eki.ee/books/ekk09/index.php?p=3&p1=5&id=226
-    nForms6 : (jogi,joe,joge,joesse,jogede,jogesid : Str) -> CommonNoun ;
+    nForms6hjk : (jogi,joe,joge,joesse,jogede,jogesid : Str) -> CommonNoun ;
 
-    nForms6 jogi joe joge joesse jogede jogesid = 
+    nForms6hjk jogi joe joge joesse jogede jogesid = 
     {s = table {
         NCase Sg Nom    => jogi ;
         NCase Sg Gen    => joe ;
@@ -635,6 +638,77 @@ oper
         }
     } ;
 
+-----CLEAN UP BELOW
+
+    NForms : Type = Predef.Ints 5 => Str ;
+
+    nForms6 : (x1,_,_,_,_,x6 : Str) -> NForms = 
+      \jogi,joe,joge,joesse, -- sg nom, gen, part, ill
+       jogede,jogesid -> table { -- pl gen, part,
+      0 => jogi ;
+      1 => joe ;
+      2 => joge ;
+      3 => joesse ;
+      4 => jogede ;
+      5 => jogesid 
+      } ;
+
+  n2nforms : Noun -> NForms = \ukko -> table {
+    0 => ukko.s ! NCase Sg Nom ;
+    1 => ukko.s ! NCase Sg Gen ;
+    2 => ukko.s ! NCase Sg Part ;
+    3 => ukko.s ! NCase Sg Illat ;
+    4 => ukko.s ! NCase Pl Gen ;
+    5 => ukko.s ! NCase Pl Part 
+  } ;
+
+    Noun = CommonNoun ** {lock_N : {}} ;
+
+    nForms2N : NForms -> Noun = \f -> 
+      let
+        jogi = f ! 0 ;
+        joe = f ! 1 ;
+        joge = f ! 2 ;
+        joesse = f ! 3 ;
+        jogede = f ! 4 ;
+        jogesid = f ! 5 ;
+      in 
+    {s = table {
+      NCase Sg Nom    => jogi ;
+      NCase Sg Gen    => joe ;
+      NCase Sg Part   => joge ;
+      NCase Sg Transl => joe + "ks" ;
+      NCase Sg Ess    => joe + "na" ;
+      NCase Sg Iness  => joe + "s" ;
+      NCase Sg Elat   => joe + "st" ;
+      NCase Sg Illat  => joesse ;
+      NCase Sg Adess  => joe + "l" ;
+      NCase Sg Ablat  => joe + "lt" ;
+      NCase Sg Allat  => joe + "le" ;
+      NCase Sg Abess  => joe + "ta" ;
+      NCase Sg Comit  => joe + "ga" ;
+      NCase Sg Termin => joe + "ni" ;
+
+      NCase Pl Nom    => joe + "d" ;
+      NCase Pl Gen    => jogede ;
+      NCase Pl Part   => jogesid ;
+      NCase Pl Transl => jogede + "ks" ;
+      NCase Pl Ess    => jogede + "na" ;
+      NCase Pl Iness  => jogede + "s" ;
+      NCase Pl Elat   => jogede + "st" ;
+      NCase Pl Illat  => jogede + "sse" ;
+      NCase Pl Adess  => jogede + "l" ;
+      NCase Pl Ablat  => jogede + "lt" ;
+      NCase Pl Allat  => jogede + "le" ;
+      NCase Pl Abess  => jogede + "ta" ;
+      NCase Pl Comit  => jogede + "ga" ;
+      NCase Pl Termin => jogede + "ni" 
+
+      } ;
+    lock_N = <>
+    } ;
+
+-------------CLEAN UP ABOVE
 
 oper
   rp2np : Number -> {s : Number => NPForm => Str ; a : RAgr} -> NP = \n,rp -> {

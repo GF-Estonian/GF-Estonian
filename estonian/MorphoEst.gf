@@ -216,9 +216,9 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
   dSuurempi : Str -> NForms = \suurem ->
     let
       suurema = suurem + "a" ;
-    in nForms7
+    in nForms6
       suurem (suurema) (suurema + "t") (suurema + "sse")
-      (suurema + "te") (suurema + "id") (suurema + "tesse") ;
+      (suurema + "te") (suurema + "id") ;
 
   -- Superlatives follow the exact same pattern as comparatives
   -- TODO: confirm this
@@ -231,19 +231,19 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
 
 -- the maximal set of technical stems
 
-    NForms : Type = Predef.Ints 6 => Str ;
+{- BELOW MOVED TO ResEst
+NForms : Type = Predef.Ints 5 => Str ;
 
     --Estonian
-    nForms7 : (x1,_,_,_,_,_,x7 : Str) -> NForms = 
+    nForms6 : (x1,_,_,_,_,x6 : Str) -> NForms = 
       \jogi,joe,joge,joesse, -- sg nom, gen, part, ill
-       jogede,jogesid,jogedesse -> table { -- pl gen, part, ill
+       jogede,jogesid -> table { -- pl gen, part,
       0 => jogi ;
       1 => joe ;
       2 => joge ;
       3 => joesse ;
       4 => jogede ;
-      5 => jogesid ;
-      6 => jogedesse
+      5 => jogesid 
       } ;
 
   n2nforms : Noun -> NForms = \ukko -> table {
@@ -252,8 +252,7 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
     2 => ukko.s ! NCase Sg Part ;
     3 => ukko.s ! NCase Sg Illat ;
     4 => ukko.s ! NCase Pl Gen ;
-    5 => ukko.s ! NCase Pl Part ;
-    6 => ukko.s ! NCase Pl Illat
+    5 => ukko.s ! NCase Pl Part 
   } ;
   --end Estonian
     Noun = CommonNoun ** {lock_N : {}} ;
@@ -266,7 +265,6 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
         joesse = f ! 3 ;
         jogede = f ! 4 ;
         jogesid = f ! 5 ;
-        jogedesse = f ! 6 ;
       in 
     {s = table {
       NCase Sg Nom    => jogi ;
@@ -291,7 +289,7 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
       NCase Pl Ess    => jogede + "na" ;
       NCase Pl Iness  => jogede + "s" ;
       NCase Pl Elat   => jogede + "st" ;
-      NCase Pl Illat  => jogedesse ;
+      NCase Pl Illat  => jogede + "sse" ;
       NCase Pl Adess  => jogede + "l" ;
       NCase Pl Ablat  => jogede + "lt" ;
       NCase Pl Allat  => jogede + "le" ;
@@ -302,7 +300,7 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
       } ;
     lock_N = <>
     } ;
-
+-}
 
 -- Adjective forms
 
@@ -950,7 +948,7 @@ oper
   -- TODO: fix: Nom => kelled
   -- TODO: mis
   relPron : Number => Case => Str =
-    let kes = nForms6 "kes" "kelle" "keda" "kellesse" "kelle" "keda" in
+    let kes = nForms6hjk "kes" "kelle" "keda" "kellesse" "kelle" "keda" in
     \\n,c => kes.s ! NCase n c ;
 
   ProperName = {s : Case => Str} ;

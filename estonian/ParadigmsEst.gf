@@ -301,7 +301,7 @@ oper
 
   -- Adjective forms (incl. comp and sup) are derived from noun forms
   mk1A : Str -> A = \suur -> 
-    let aforms = aForms2A (nforms2aforms (n2nforms (hjk_type suur))) 
+    let aforms = aForms2A (nforms2aforms (hjk_type suur)) 
     in  aforms ** {infl = True} ;
       
   mkNA : N -> A = \suur -> 
@@ -309,28 +309,32 @@ oper
     in  aforms ** {infl = True} ;
 
 
-  mk1N : (link : Str) -> N = \s -> (hjk_type s) ** {lock_N = <> } ;
-  mk2N : (link,lingi : Str) -> N = \s,t -> (nForms2 s t) ** {lock_N = <>} ;
+  mk1N : (link : Str) -> N = \s -> nForms2N (hjk_type s) ;
+  mk2N : (link,lingi : Str) -> N = \s,t -> nForms2N (nForms2 s t) ;
+  mk3N : (tukk,tuku,tukku : Str) -> N = \s,t,u -> nForms2N (nForms3 s t u) ;
+{-  mk1N : (link : Str) -> N = \s -> (hjk_type s) ** {lock_N = <> } ;
+  mk2N : (link,lingi : Str) -> N = \s,t -> (nForms2 s t)  ** {lock_N = <>} ;
   mk3N : (tukk,tuku,tukku : Str) -> N = \s,t,u -> (nForms3 s t u) ** {lock_N = <>} ;
-
-  --regular mk4N
-  --mk4N : (paat,paadi,paati,paate : Str) -> N = \s,t,u,v -> (nForms4 s t u v) ** {lock_N = <>} ;
   
-  --experimental: making sure that the user specified forms end up in the paradigm, even though the rest is wrong
-  mk4N : (paat,paadi,paati,paate : Str) -> N = \paat,paadi,paati,paate ->  
-    let nforms = (nForms4 paat paadi paati paate).s 
-    in 
-    {s = table {
-           NCase Sg Nom => paat ;
-           NCase Sg Gen => paadi ;
-           NCase Sg Part => paati ;
-           NCase Pl Part => paate ;
-           n => nforms ! n } ; 
-     lock_N = <>} ;
+  --regular mk4N
+  mk4N : (paat,paadi,paati,paate : Str) -> N = \s,t,u,v -> (nForms4 s t u v) ** {lock_N = <>} ;
+-}
+  --experimental: make sure that the user specified forms end up in the paradigm, even though the rest is wrong
+  mk4N : (paat,paadi,paati,paatide : Str) -> N = \paat,paadi,paati,paatide ->  
+    let nforms : NForms = (nForms4 paat paadi paati paatide) ; 
+        nformshax : NForms = table {
+                0 => paat ;
+                1 => paadi ;
+                2 => paati ;
+                3 => nforms ! 3 ;
+                4 => paatide ;
+                5 => nforms ! 5  
+        } ;
+    in nForms2N nformshax ;
 
 
   mk6N : (oun,ouna,ouna,ounasse,ounte,ounu : Str) -> N =
-      \a,b,c,d,e,f -> (nForms6 a b c d e f) ** { lock_N = <> } ;
+      \a,b,c,d,e,f -> (nForms6hjk a b c d e f) ** { lock_N = <> } ;
 
   mkStrN : Str -> N -> N = \sora,tie -> {
     s = \\c => sora + tie.s ! c ; lock_N = <>
@@ -339,7 +343,7 @@ oper
     s = \\c => oma.s ! c + tunto.s ! c ; lock_N = <>
     } ; ---- TODO: oma in possessive suffix forms
 
-  nForms2 : (_,_ : Str) -> NFS = \link,lingi -> 
+  nForms2 : (_,_ : Str) -> NForms = \link,lingi -> 
     let
       i = last lingi ;
       reegl = init lingi ;
@@ -376,16 +380,16 @@ oper
         --heuristics to catch palk:palga but not maakas:maaka (for longer words, same with more ?s)
         --didn't work, don't try this
         --<? + ? + #c, ? + ? + #c + #v> => hjk_type_IVb_audit link i ; 
-        _ => mk1N link 
+        _ => hjk_type link 
       } ;
 
-  nForms3 : (_,_,_ : Str) -> NFS = \tukk,tuku,tukku ->
+  nForms3 : (_,_,_ : Str) -> NForms = \tukk,tuku,tukku ->
     let u = last tuku ;
     in  case <tukk,tuku,tukku> of {
       --cases handled reliabl(ish) by 1- and 2-arg opers
-      <_+"nd",_,_> => mk1N tukk ;
-      <_+"el",_,_> => mk2N tukk tuku ;
-      <_+"er",_,_> => mk2N tukk tuku ;
+      <_+"nd",_,_> => hjk_type tukk ;
+      <_+"el",_,_> => nForms2 tukk tuku ;
+      <_+"er",_,_> => nForms2 tukk tuku ;
 
       --distinguish between hammas and maakas
       <_+"as",_+"a",_+"ast"> => dHammas tukk tuku ;
@@ -396,9 +400,9 @@ oper
       <_ + "ik", _ + "iku", _ + "ikku"> => hjk_type_VI_imelik tukk ; --imelik:_:imelikku caught here
       <_ + #c, _ + #v, _ + #v> => hjk_type_VI_tukk tukk tuku ;
       <_ + #c, _ + #v, _ + #v + "t"> => hjk_type_IVb_audit tukk u ;  --voolik:_:voolikut caught here
-      _ => mk2N tukk tuku 
+      _ => nForms2 tukk tuku 
     } ;
-
+{-
   nForms4 : (_,_,_,_ : Str) -> NFS = \paat,paadi,paati,paate -> 
     case <paat,paadi,paati,paate> of {
      -- distinguish between joonis and segadus
@@ -411,6 +415,23 @@ oper
 
       _  => mk3N paat paadi paati 
       } ;
+-}
+
+  nForms4 : (_,_,_,_ : Str) -> NForms = \paat,paadi,paati,paatide -> 
+    case <paat,paadi,paati,paatide> of {
+     -- pl gen can't distinguish between joonis and segadus
+    --  <_ +("ne"|"s"),  _+"se", _+"st", _+"seid"> => hjk_type_Va_otsene paat ;
+    --  <_ +("ne"|"s"),  _+"se", _+"st", _+"si"> => hjk_type_Vb_oluline paat ;
+      
+      --pl gen can distinguish between kõne and aine
+      --plus side that any noun that is formed with 4-arg,
+      --the user given forms are inserted to the paradigm, 
+      --and more forms are created from pl gen, none from pl part
+      <_ +"e", _+"e", _+"et", _+"de"> => hjk_type_III_ratsu paat ; 
+      <_ +"e", _+"e", _+"et", _+"te"> => hjk_type_VII_touge2 paat paadi ;
+
+      _  => nForms3 paat paadi paati 
+      } ;      
 
 
   mkN2 = overload {
@@ -470,8 +491,8 @@ oper
   regAdjective : Noun -> Str -> Str -> A = \posit,compar,superl ->
     mkAdjective 
       (noun2adj posit) 
-      (noun2adjComp False (hjk_type_IVb_audit compar "a"))
-      (noun2adjComp False (hjk_type_IVb_audit superl "a")) ;
+      (noun2adjComp False (nForms2N (hjk_type_IVb_audit compar "a")))
+      (noun2adjComp False (nForms2N (hjk_type_IVb_audit superl "a"))) ;
 
   -- TODO: this is a temporary hack that converts A ~> Adjective.
   -- The caller needs this otherwise ** fails.

@@ -49,13 +49,14 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	hjk_type_VI_imelik,
 	hjk_type_VI_meeskond,
 	hjk_type_VI_seminar,
-	hjk_type_VII_touge : Str -> NFS ;
+	hjk_type_VII_touge : Str -> NForms ;
+--	hjk_type_VII_touge : Str -> NFS ;
 
 	-- IVa additionally needs the stem vowel.
 	hjk_type_IVb_audit,
-	hjk_type_IVb_audit1 : Str -> Str -> NFS ;
+	hjk_type_IVb_audit1 : Str -> Str -> NForms ; --NFS
 	
-	hjk_type_VI_tukk : Str -> Str -> NFS ;
+	hjk_type_VI_tukk : Str -> Str -> NForms ;
 
 
 	-- Definition of the mapping rules.
@@ -98,11 +99,11 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	--Maakas is for maakas:maaka:maakat, this is for hammas:hamba:hammast
 	--Not sure if this is already covered by some hjk_type,
 	--anyway the grades are explicit with two args, more reliable
-	dHammas : (_,_ : Str) -> NFS ;
+	dHammas : (_,_ : Str) -> NForms ;
 	dHammas hammas hamba =
 		nForms6 hammas hamba (hammas+"t") (hamba+"sse") (hammas+"te") (hamba+"id") ;
 
-	dMeri : (_,_ : Str) -> NFS ;
+	dMeri : (_,_ : Str) -> NForms ;
 	dMeri meri mere =
 	        let
 		  mer = init mere ;
@@ -188,7 +189,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
         --Identical to the above, just taking 2 arguments (nom + gen)
         --There are 67 nouns in test cases where stronger_noun gets it wrong
         --handles liige:liikme as well
-	hjk_type_VII_touge2 : (_,_ : Str) -> NFS ;
+	hjk_type_VII_touge2 : (_,_ : Str) -> NForms ;
 	hjk_type_VII_touge2 touge touke  =
 	        let
 	                liikme : Str = case touke of {

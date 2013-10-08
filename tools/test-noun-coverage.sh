@@ -17,7 +17,7 @@ cat ${gold} |\
 #sed "s/,.*//" |\
 #sed -r 's/([^,]*, [^,]*),.*/\1/' |\
 sed -r 's/([^,]*, [^,]*, [^,]*),.*/\1/' |\
-#sed -r 's/([^,]*,) ([^,]*,) ([^,]*,) [^,]*, [^,]*, (.*)$/\1 \2 \3 \4/' |\
+#sed -r 's/([^,]*,) ([^,]*,) ([^,]*,) ([^,]*), [^,]*, .*$/\1 \2 \3 \4/' |\
 # Rewrite the base forms that use the parallel forms notation because
 # such |-containing forms are not handled by the opers, so the
 # results would be misleading.
