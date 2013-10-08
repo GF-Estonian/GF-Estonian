@@ -897,8 +897,6 @@ Latest coverages for 1-4 arg paradigms:
 
 4-arg: # 21261    % .9763
 
-
-
 Common patterns in nouns unrecognized by 3-arg oper (numbers changed sligtly as I made changes to smart paradigms; not a radical difference anyway):
 
 2-3-4-5-6 
@@ -937,4 +935,43 @@ Biggest number of unrecognized words, with all constructors, in 2-3-4-5-6.
 
 In various classes:
 * words like "mänedžer", "multiplex" ; maybe better foreign detection in 1-arg?
-* "nimega", "käivitumisel"; seems questionable to handle these as nominatives. I didn't notice other than those 2; but there might be more in the correctly inflected set.
+* words like "nimega", "käivitumisel"; also many words that end in "ks" and some of them seem translatives of common words (searched from http://www.eki.ee/dict/qs/ and didn't find nom with ks, e.g. "eluks" just directs to "elu".) Not very large group of the test data though. 
+
+cat *incorrect.txt | grep "ks$" | sort | uniq | wc
+     76      76     578
+cat *incorrect.txt | grep "ga$" | sort | uniq | wc
+     28      28     231
+
+Inari 08.10
+-----------
+
+
+Experiment: made 4-arg paradigm insert all used specified forms (1, 2, 3, 6) to the 6 forms. This leads to following coverage:
+
+21310
+ 256 4-5
+ 166 5
+  44 4
+Coverage: 21310 out of    21776 = .9786
+
+As opposed to
+21261
+ 212 2-3-4-5-6
+ 103 5-6
+  48 3-5-6
+  36 3
+  36 2-4
+  31 3-4-5-6
+  15 3-5
+  13 2-3-4-5
+   8 2
+   5 6
+   5 2-4-6
+   3 2-3-4
+Coverage: 21261 out of    21776 = .9763
+
+Note that the full forms contain more errors, because plural genitive is used as a base for other plural forms, and it is wrong still in the 2.14 % of errors.
+
+Actually might make sense to do this to 2-arg (sg nom + sg gen) oper as well, because sg gen is used as base for all other sg forms except nom, part and ill.
+
+Argh now I just have to do an experiment what if nForms4 gets Pl Gen instead of Pl Part.

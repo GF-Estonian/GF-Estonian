@@ -309,11 +309,24 @@ oper
     in  aforms ** {infl = True} ;
 
 
-  --mk1N : (talo : Str) -> N = \s -> nForms2N (nForms1 s) ;
   mk1N : (link : Str) -> N = \s -> (hjk_type s) ** {lock_N = <> } ;
   mk2N : (link,lingi : Str) -> N = \s,t -> (nForms2 s t) ** {lock_N = <>} ;
   mk3N : (tukk,tuku,tukku : Str) -> N = \s,t,u -> (nForms3 s t u) ** {lock_N = <>} ;
-  mk4N : (paat,paadi,paati,paate : Str) -> N = \s,t,u,v ->  (nForms4 s t u v) ** {lock_N = <>} ;
+
+  --regular mk4N
+  --mk4N : (paat,paadi,paati,paate : Str) -> N = \s,t,u,v -> (nForms4 s t u v) ** {lock_N = <>} ;
+  
+  --experimental: making sure that the user specified forms end up in the paradigm, even though the rest is wrong
+  mk4N : (paat,paadi,paati,paate : Str) -> N = \paat,paadi,paati,paate ->  
+    let nforms = (nForms4 paat paadi paati paate).s 
+    in 
+    {s = table {
+           NCase Sg Nom => paat ;
+           NCase Sg Gen => paadi ;
+           NCase Sg Part => paati ;
+           NCase Pl Part => paate ;
+           n => nforms ! n } ; 
+     lock_N = <>} ;
 
 
   mk6N : (oun,ouna,ouna,ounasse,ounte,ounu : Str) -> N =
