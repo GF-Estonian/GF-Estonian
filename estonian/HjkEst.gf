@@ -186,10 +186,18 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		nForms6 x x_t (x+"t") (x_t+"sse") (x+"te") (x_t+"id") ;
 
         --Identical to the above, just taking 2 arguments (nom + gen)
-        --There are 67 cases in test nouns where stronger_noun gets it wrong
-	dTouge2 : (_,_ : Str) -> NFS ;
-	dTouge2 touge touke = 
-	        nForms6 touge touke (touge+"t") (touke+"sse") (touge+"te") (touke+"id") ;
+        --There are 67 nouns in test cases where stronger_noun gets it wrong
+        --handles liige:liikme as well
+	hjk_type_VII_touge2 : (_,_ : Str) -> NFS ;
+	hjk_type_VII_touge2 touge touke  =
+	        let
+	                liikme : Str = case touke of {
+	                        _ + "me" => touke ;
+	                        _ + "mne" => touke ;
+	                        _ => touge 
+	                }
+	        in
+	        nForms6 touge touke (touge+"t") (touke+"sse") (liikme+"te") (touke+"id") ;
 
 	-- Use this only to weaken the verbs
 	weaker : Str -> Str ;

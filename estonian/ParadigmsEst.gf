@@ -289,10 +289,10 @@ oper
     mkN : (nisu : Str) -> N = mk1N ;
     mkN : (link,lingi : Str) -> N = mk2N ;
     --  \s,t -> nForms2N (nForms2 s t) ;
-    --mkN : (talo,talon,taloja : Str) -> N = mk3N ;
+    mkN : (talo,talon,taloja : Str) -> N = mk3N ;
     --  \s,t,u -> nForms2N (nForms3 s t u) ;
 
-    --mkN : (raamat,raamatu,raamatut,raamatuid : Str) -> N = mk4N ;
+    mkN : (raamat,raamatu,raamatut,raamatuid : Str) -> N = mk4N ;
     mkN : (oun,ouna,ouna,ounasse,ounte,ounu : Str) -> N = mk6N ;
     mkN : (sora : Str) -> (tie : N) -> N = mkStrN ;
     mkN : (oma,tunto : N) -> N = mkNN ;
@@ -337,20 +337,21 @@ oper
         <_ + #c + "el", _ + #c + "eli"> => hjk_type_IVb_audit link i ;
         <_ + #c + "er", _ + #c + "eri"> => hjk_type_IVb_audit link i ;
 
-        <_ + "be", _ + "pe">  => hjk_type_VII_touge link ;
-        <_ + "de", _ + "te">  => hjk_type_VII_touge link ;
-        <_ + "ge", _ + "ke">  => hjk_type_VII_touge link ;
-        <_ + "pe", _ + "ppe">  => hjk_type_VII_touge link ;
-        <_ + "te", _ + "tte">  => hjk_type_VII_touge link ;
-        <_ + "ke", _ + "kke">  => hjk_type_VII_touge link ;
-        <_ + "nne", _ + "nde">  => hjk_type_VII_touge link ;
+        <_ + "be", _ + "pe">  => hjk_type_VII_touge2 link lingi ;
+        <_ + "de", _ + "te">  => hjk_type_VII_touge2 link lingi ;
+        <_ + "ge", _ + "ke">  => hjk_type_VII_touge2 link lingi ;
+        <_ + "pe", _ + "ppe">  => hjk_type_VII_touge2 link lingi ;
+        <_ + "te", _ + "tte">  => hjk_type_VII_touge2 link lingi ;
+        <_ + "ke", _ + "kke">  => hjk_type_VII_touge2 link lingi ;
+        <_ + "nne", _ + "nde">  => hjk_type_VII_touge2 link lingi ;
 
-	--below 3 don't do much, could just delete
+	--below 3 don't add much, could just delete
 	--t6uge recognition is easy, because that doesn't introduce lot of other errors
 	--but probably pointless to fill this with all cases
-        <_ + "se", _ + "ske">  => hjk_type_VII_touge link ;
-        <_ + "re", _ + "rde">  => hjk_type_VII_touge link ;
-	<_ + #v + "e", _+"de"> => hjk_type_VII_touge link ; --riie:riide
+	<_ + "e", _ + #c + "me"> => hjk_type_VII_touge2 link lingi ;
+        <_ + "se", _ + "ske">  => hjk_type_VII_touge2 link lingi ;
+        <_ + "re", _ + "rde">  => hjk_type_VII_touge2 link lingi ;
+	<_ + #v + "e", _+"de"> => hjk_type_VII_touge2 link lingi ; --riie:riide
 
 	--improved total count a little, but introduced new errors
 	--not recommended, not stable and productive word class
@@ -361,19 +362,19 @@ oper
 
         --heuristics to catch palk:palga but not maakas:maaka (for longer words, same with more ?s)
         --didn't work, don't try this
-        --<? + ? + #c, ? + ? + #c + #notI> => hjk_type_IVb_audit link i ; 
+        --<? + ? + #c, ? + ? + #c + #v> => hjk_type_IVb_audit link i ; 
         _ => mk1N link 
       } ;
 
   nForms3 : (_,_,_ : Str) -> NFS = \tukk,tuku,tukku ->
     let u = last tuku ;
     in  case <tukk,tuku,tukku> of {
-      --cases handled reliablish by 1- and 2-arg opers
+      --cases handled reliabl(ish) by 1- and 2-arg opers
       <_+"nd",_,_> => mk1N tukk ;
       <_+"el",_,_> => mk2N tukk tuku ;
       <_+"er",_,_> => mk2N tukk tuku ;
 
-      --distinguishing between hammas and maakas
+      --distinguish between hammas and maakas
       <_+"as",_+"a",_+"ast"> => dHammas tukk tuku ;
       <_+"es",_+"e",_+"est"> => dHammas tukk tuku ;
       <_+"us",_+"u",_+"ust"> => dHammas tukk tuku ;
@@ -393,7 +394,7 @@ oper
       
       --distinguish between kõne and aine
       <_ +"e", _+"e", _+"et", _+"sid"> => hjk_type_III_ratsu paat ; 
-      <_ +"e", _+"e", _+"et", _+"eid"> => dTouge2 paat paadi ;
+      <_ +"e", _+"e", _+"et", _+"eid"> => hjk_type_VII_touge2 paat paadi ;
 
       _  => mk3N paat paadi paati 
       } ;

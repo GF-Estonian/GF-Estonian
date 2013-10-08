@@ -881,46 +881,60 @@ All of them (with one exception: gerilja) are -ja derivations.
 
 Inari 07.10.
 ------------
-added _ + "ja" to 1-arg oper 
-from 20847 to 
-20940  out of    21776 = .9616
+Starting point: 3-arg:  20847 out of 21776 = .9573
 
-Next problem:
-ikebana and gorilla recognized as *ikebanate,ikebanaid -> correct ikebanade,ikebanasid
-haigla recognized as *haiglade,haiglasid -> correct haiglate,haiglaid
+Added -ja and -la => aasta in 1-arg smart paradigm.
+Added bunch of tõuge indicators in 2-arg, don't cover all but don't cause errors in other classes either.
+Added 4-arg smart paradigm: distinguishes between joonis and segadus, and catches reliably all tõuge type words.
 
-Added 
-  <S23, _ + #c + "la"> 
-to 1-arg oper
-20963 out of    21776 = .9626
+Latest coverages for 1-4 arg paradigms:
 
-Added 
-   <_ + "nne", _ + "nde">  => hjk_type_VII_touge link ;  
-to 2-arg oper
-20972 out of    21776 = .9630
+1-arg: # 19845    % .9113
 
-The group 2-3-4-5-6 isn't very consistent, there are many irregular words.
-HJK doesn't even support irregular words very well?
+2-arg: # 20004    % .9186
+
+3-arg: # 21045    % .9664
+
+4-arg: # 21261    % .9763
 
 
-Added
-   <_ + "i", _ + "e">  => dMeri link lingi ;  
-to 2-arg (and deep constructor dMeri in HjkEst)
 
-20975 out of    21776 = .9632
-but introduced new errors, so commented that out.
+Common patterns in nouns unrecognized by 3-arg oper (numbers changed sligtly as I made changes to smart paradigms; not a radical difference anyway):
 
-Added bunch of new regexps to tõuge. Didn't do much, just changed
-ratios of errors between 2-4-6 and 2-4-5-6.
+2-3-4-5-6 
+  * 77 ending in r/l; around half type pipar, küünal
+     (non-productive, http://www.eki.ee/dict/qs/index.cgi?Q=37&F=I finds only 32 words)
+     
+  * 69 ending in i; there are many mägi:mäe, ori:orja; old, non-productive words
+  (heuristic: if I know the word from Finnish, it doesn't make sense to form elaborate rules to handle it and its kind.)
+  
 
-Tonight's task, check more 3-5-6, 2-4-6 and 2-4-5-6 for common patterns
-If not, just start the damn paper writing. :--P
+  
+6 
+  * 115 ending in s, confusion between joonis:jooniseid and segadus:segadusi. This is fixed with 4-arg paradigm.
 
-Some consistencies:
-sõber, pipar not recognized; closed class,
-http://www.eki.ee/dict/qs/index.cgi?Q=37&F=I finds only 32 words
+3-5-6
+5-6 
+  * Very heterogenous. I'm learning funny words ("tohuvabohu").
 
-Group 6 is where the paradigm confuses joonis:jooniseid and segadus:segadusi.
-Can't really do much without giving 4th argument.
-Group 5-6 is pretty heterogenous, and same problem with arguments.
-Could do a 4-arg smart paradigm just for completeness.
+2-4-6 (55)
+2-4-5-6 (59) 
+  * 111 of 114 are 2-syllable and end in e.
+    Added following in 4-arg constructor.
+      <_ +"e", _+"e", _+"et", _+"sid"> => hjk_type_III_ratsu paat ; 
+      <_ +"e", _+"e", _+"et", _+"eid"> => hjk_type_VII_touge2 paat paadi ;
+    Added 2-arg version of hjk_type_VII_touge, because with 1-arg version got still 67 errors due to consonant gradation.
+    
+
+Notes:
+
+2-arg doesn't do much. We get for sure reegel:reegli and paber:paberi, and some of tõuge type words.
+Words like meri:mere and ori:orja could be possible to distinguish (very characteristical nom+gen combination), but they are small and unproductive classes.
+Some bigger classes are indistinguishable in nom and gen, such as
+imelik:imeliku vs. voolik:vooliku ; maakas:maaka vs. hammas:hamba. 
+
+Biggest number of unrecognized words, with all constructors, in 2-3-4-5-6.
+
+In various classes:
+* words like "mänedžer", "multiplex" ; maybe better foreign detection in 1-arg?
+* "nimega", "käivitumisel"; seems questionable to handle these as nominatives. I didn't notice other than those 2; but there might be more in the correctly inflected set.
