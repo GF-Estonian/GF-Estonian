@@ -35,6 +35,8 @@ fi
 grep ":${t1}: " |\
 sed "s/.*:${t1}: //" |\
 sed "s/:.*//" |\
+# Exclude entries that contain spaces or hyphens
+grep -v "[ -]" |\
 sort |\
 uniq |\
 sed "s/$/ \/\/_${t2}_ *, \/\//"
