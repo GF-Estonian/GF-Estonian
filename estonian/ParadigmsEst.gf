@@ -288,12 +288,10 @@ oper
   mkN = overload {
     mkN : (nisu : Str) -> N = mk1N ;
     mkN : (link,lingi : Str) -> N = mk2N ;
-    --  \s,t -> nForms2N (nForms2 s t) ;
-    mkN : (talo,talon,taloja : Str) -> N = mk3N ;
-    --  \s,t,u -> nForms2N (nForms3 s t u) ;
-
-    mkN : (raamat,raamatu,raamatut,raamatuid : Str) -> N = mk4N ;
+    mkN : (tukk,tuku,tukku : Str) -> N = mk3N ;
+    mkN : (paat,paadi,paati,paatide : Str) -> N = mk4N ;
     mkN : (oun,ouna,ouna,ounasse,ounte,ounu : Str) -> N = mk6N ;
+
     mkN : (sora : Str) -> (tie : N) -> N = mkStrN ;
     mkN : (oma,tunto : N) -> N = mkNN ;
     mkN : (sana : NW) -> N = \w -> nForms2N w.s ;
@@ -309,32 +307,33 @@ oper
     in  aforms ** {infl = True} ;
 
 
-  mk1N : (link : Str) -> N = \s -> nForms2N (hjk_type s) ;
-  mk2N : (link,lingi : Str) -> N = \s,t -> nForms2N (nForms2 s t) ;
-  mk3N : (tukk,tuku,tukku : Str) -> N = \s,t,u -> nForms2N (nForms3 s t u) ;
-{-  mk1N : (link : Str) -> N = \s -> (hjk_type s) ** {lock_N = <> } ;
-  mk2N : (link,lingi : Str) -> N = \s,t -> (nForms2 s t)  ** {lock_N = <>} ;
-  mk3N : (tukk,tuku,tukku : Str) -> N = \s,t,u -> (nForms3 s t u) ** {lock_N = <>} ;
+  mk1N : (link : Str) -> N = \s -> nForms2N (hjk_type s) ** {lock_N = <> } ;
+  mk2N : (link,lingi : Str) -> N = \s,t -> nForms2N (nForms2 s t) ** {lock_N = <> } ;
+  mk3N : (tukk,tuku,tukku : Str) -> N = \s,t,u -> nForms2N (nForms3 s t u) ** {lock_N = <> } ;
+{-  mk1N : (link : Str) -> N = \s -> nForms2N (hjk_type s) ** {lock_N = <> } ;
+  mk2N : (link,lingi : Str) -> N = \s,t -> nForms2N (nForms2 s t)  ** {lock_N = <>} ;
+  mk3N : (tukk,tuku,tukku : Str) -> N = \s,t,u -> nForms2N (nForms3 s t u) ** {lock_N = <>} ;
   
   --regular mk4N
-  mk4N : (paat,paadi,paati,paate : Str) -> N = \s,t,u,v -> (nForms4 s t u v) ** {lock_N = <>} ;
+  mk4N : (paat,paadi,paati,paate : Str) -> N = \s,t,u,v -> nForms2N (nForms4 s t u v) ** {lock_N = <>} ;
 -}
+
   --experimental: make sure that the user specified forms end up in the paradigm, even though the rest is wrong
   mk4N : (paat,paadi,paati,paatide : Str) -> N = \paat,paadi,paati,paatide ->  
-    let nforms : NForms = (nForms4 paat paadi paati paatide) ; 
-        nformshax : NForms = table {
+    let nfs : NForms = (nForms4 paat paadi paati paatide) ; 
+        nfs_fixed : NForms = table {
                 0 => paat ;
                 1 => paadi ;
                 2 => paati ;
-                3 => nforms ! 3 ;
+                3 => nfs ! 3 ;
                 4 => paatide ;
-                5 => nforms ! 5  
+                5 => nfs ! 5  
         } ;
-    in nForms2N nformshax ;
+    in nForms2N nfs_fixed ** {lock_N = <> } ;
 
 
   mk6N : (oun,ouna,ouna,ounasse,ounte,ounu : Str) -> N =
-      \a,b,c,d,e,f -> (nForms6hjk a b c d e f) ** { lock_N = <> } ;
+      \a,b,c,d,e,f -> nForms2N (nForms6 a b c d e f) ** {lock_N = <> } ;
 
   mkStrN : Str -> N -> N = \sora,tie -> {
     s = \\c => sora + tie.s ! c ; lock_N = <>

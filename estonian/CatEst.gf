@@ -88,11 +88,12 @@ concrete CatEst of Cat = CommonX ** open HjkEst, ResEst, Prelude in {
     A  = Adjective ** {infl : Bool} ;
     A2 = A ** {c2 : Compl} ;
 
-    N  = NFS ;
-    N2 = NFS ** {c2 : Compl ; isPre : Bool} ;
-    N3 = NFS ** {c2,c3 : Compl ; isPre,isPre2 : Bool} ;
+    N  = Noun  ;
+    N2 = CommonNoun ** {c2 : Compl ; isPre : Bool ; lock_N2 : {}} ;
+    N3 = CommonNoun ** {c2,c3 : Compl ; isPre,isPre2 : Bool ; lock_N3 : {}} ;
     PN = {s : Case  => Str} ;
 
 oper Verb1 = Verb ** { sc : NPForm} ; --what is this for? --subject case, i.e. "ma näen kassi"/"mul on kass"
+--     Noun = CommonNoun ** {lock_N : {}} ;
 
 }

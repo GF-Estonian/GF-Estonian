@@ -195,8 +195,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	                liikme : Str = case touke of {
 	                        _ + "me" => touke ;
 	                        _ + "mne" => touke ;
-	                        _ => touge 
-	                }
+	                        _ => touge }
 	        in
 	        nForms6 touge touke (touge+"t") (touke+"sse") (liikme+"te") (touke+"id") ;
 

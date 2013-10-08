@@ -74,11 +74,12 @@ concrete NounEst of Noun = CatEst ** open ResEst, HjkEst, MorphoEst, Prelude in 
     PPartNP np v2 =
       let 
         num : Number     = complNumAgr np.a ;
-        part : Str       = v2.s ! (PastPart Pass) ; 
-        adj : CommonNoun = nhn (sMaakas part) ; 
-        partEssive : Str = adj.s ! (NCase num Ess)
+        part : Str       = v2.s ! (PastPart Pass) ;
+        adj : NForms     = hjk_type_IVb_maakas part ; 
+        partGen : Str    = adj ! 1 ;
+	partEss : Str    = partGen + "na" 
       in {
-        s = \\c => np.s ! c ++ part ; --partEssive ;
+        s = \\c => np.s ! c ++ part ; --partEss ;
         a = np.a ;
         isPron = np.isPron  -- minun täällä - ni
       } ;
@@ -147,7 +148,7 @@ concrete NounEst of Noun = CatEst ** open ResEst, HjkEst, MorphoEst, Prelude in 
     IndefArt = {
       s = \\_,_ => [] ; --use isDef in DetCN
       sp = \\n,c => 
-         (nhn (mkSubst "üks" "ühe" "üht" "ühesse" "ühtede" 
+         (nForms2N (nForms6 "üks" "ühe" "üht" "ühesse" "ühtede" 
          "ühtesid")).s ! NCase n c ; 
       isNum,isDef = False -- autoja on
       } ;
@@ -167,12 +168,12 @@ concrete NounEst of Noun = CatEst ** open ResEst, HjkEst, MorphoEst, Prelude in 
 
     UseN2 n = n ;
 
-    Use2N3 f = {
+    Use2N3 f = lin N2 {
       s = f.s ;
       c2 = f.c2 ;
       isPre = f.isPre
       } ;
-    Use3N3 f = {
+    Use3N3 f = lin N2 {
       s = f.s ;
       c2 = f.c3 ;
       isPre = f.isPre2
@@ -181,11 +182,14 @@ concrete NounEst of Noun = CatEst ** open ResEst, HjkEst, MorphoEst, Prelude in 
     ComplN2 f x = {
       s = \\nf => preOrPost f.isPre (f.s ! nf) (appCompl True Pos f.c2 x)
       } ;
-    ComplN3 f x = {
+
+
+    ComplN3 f x = lin N2 {
       s = \\nf => preOrPost f.isPre (f.s ! nf) (appCompl True Pos f.c2 x) ;
       c2 = f.c3 ;
       isPre = f.isPre2
       } ;
+
 
     AdjCN ap cn = {
       s = \\nf => 

@@ -10,207 +10,16 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
 
   flags optimize=all ; coding=utf8;
 
-  oper    
-  --Estonian paradigms
+  oper
+    
+----------------------
+-- morph. paradigms --
+----------------------
 
-{-  --Inflection paradigms from tüüpsõnad 
+  --Noun paradigms in HjkEst
 
-  --1: stem vowel in nom, regular endings, concatenative
-  -- can combine with 7, only difference is sg.part
-  -- can combine with 2, only difference is pl.part
-  -- (but maybe not with both)
-  dKoi : Str -> NForms = \koi ->
-    nForms7
-      koi koi (koi + "d") (koi + "sse")            -- sg nom, gen, part, ill
-      (koi + "de") (koi + "sid") (koi + "desse") ; -- pl      gen, part, ill
-
-
-  --2: like 1, but pl.part irregular.
-  dLuu : Str -> NForms = \luu ->
-    let 
-      lui = (init luu) + "i" ;
-    in nForms7
-      luu luu (luu + "d") (luu + "sse")
-      (luu + "de") (lui + "d") (luu + "desse") ;
-
-
-  --3: sg nom,gen,part identical. non-predictable vowel in pl.part.
-  dPesa : (_,_ : Str) -> NForms = \pesa,pesi ->
-    nForms7
-      pesa pesa pesa (pesa + "sse")         -- sg nom, gen, part, ill
-      (pesa + "de") pesi (pesa + "desse") ; -- pl      gen, part, ill
-
-
-  --4: i-e change, sg.part has e (suvi-suve-suve).
-  --5: i-e change, sg.part has d (tuli-tule-tuld).
-  --   sg.part needed to distinguish between tuld and suve.
-  dTuli : (_,_ : Str) -> NForms = \tuli,tuld ->
-    let
-      tule  : Str = init tuli + "e" 
-    in nForms7
-      tuli tule tuld (tule + "sse")
-      (tule + "de") (tule + "sid") (tule + "desse") ;
-
-  --6: loan words, stem vowel always i, sg.nom ends in consonant
-  dSeminar : Str -> NForms = \seminar ->
-    let
-      seminari = seminar + "i" ; 
-    in nForms7
-      seminar seminari seminari (seminari + "sse")
-      (seminari + "de") (seminari + "sid") (seminari + "desse") ; -- pl gen, part, ill
-
-  --7: stem vowel in sg nom, -t in sg part
-  dRatsu : Str -> NForms = \ratsu ->
-    nForms7
-      ratsu ratsu (ratsu + "t") (ratsu + "sse")
-      (ratsu + "de") (ratsu + "sid") (ratsu + "desse") ;
-
-  --8: sg.gen not predictable:  õpik-õpiku,  ohutu-ohutu  or kindel-kindla
-  --   pl.part is just concatenated, no stem changes
-  dKindel : (_,_ : Str) -> NForms = \kindel,kindla ->
-    nForms7
-      kindel kindla (kindla + "t") (kindla + "sse")
-      (kindla + "te") (kindla + "id") (kindla + "tesse");
-
-  --9: like 8, e.g. redel-redeli, väeti-väeti  or  number-numbri
-  --   stem vowel changes in pl.part: i-eid
-  dNumber : (_,_ : Str) -> NForms = \number,numbri ->
-    let
-      numbr = init numbri --the consonant stem
-    in nForms7
-      number numbri (numbri + "t") (numbri + "sse")
-      (numbri + "te") (numbr + "eid") (numbri + "tesse") ;
-
-  --10: ase-aseme-aset ; -me in stem, not in sg.nom and sg.part
-  dAse : Str -> NForms = \ase ->
-    let
-      aseme : Str = ase + "me"
-    in nForms7
-      ase aseme (ase + "t") (aseme + "sse")
-      (aseme + "te") (aseme + "id") (aseme + "tesse") ; 
-
-  --11: like 13, but vowel insertion. Covered in 13.
-
-  --12: -se in stem, pl.part -si
-  --     sg.nom can be -ne or -s (oluline ; peegeldus)
-  -- Kaarel/2011-11-17: added "match all" because otherwise got a linking error
-  dNaine : Str -> NForms = \naine ->
-    let 
-      nais : Str = case naine of {
-        _ + "ne" => Predef.tk 2 naine + "s" ;
-        _ + "s"  => naine ;  -- if nominative ends in s already
-        _        => naine    -- match all
-      } 
-    in nForms7
-      naine (nais + "e") (nais + "t") (nais + "esse")
-      (nais + "te") (nais + "i") (nais + "tesse") ; -- pl gen, part, ill
- 
-  --13: -se in stem, pl.part -eid
-  --     soolane, tehas as in 12. vowel insertion in raudne-raudse-raudset.
-  -- Kaarel/2011-11-17: added "match all" because otherwise got a linking error
-  dSoolane : Str -> NForms = \soolane ->
-    let 
-      soolas : Str = case soolane of {
-        _ + "ne" => Predef.tk 2 soolane + "s" ;
-        _ + "s"  => soolane ;
-        _        => soolane
-      } ;
-      raudse : Str = case soolas of {
-        _ + ("r"|"l"|"d"|"t"|"m"|"p"|"k"|"g") + "s"  => soolas +"e" ;
-        _ => soolas
-      }
-    in nForms7
-      soolane (soolas + "e") (raudse + "t") (soolas + "esse")
-      (raudse + "te") (soolas + "eid") (raudse + "tesse") ; -- pl gen, part, ill
-
-  --14 and 15 are covered in 12 and 13. 
-
-  --16: rida-rea
-
-  --17: jogi-joe
-
-  --18: nali-nalja; sober-sobra-sopra. consonant gradation and other stuff.
-
-  --19: -lik-liku-likku
-  dKasulik : Str -> NForms = \kasulik ->
-    nForms7
-      kasulik (kasulik + "u") (kasulik + "ku") (kasulik + "usse")
-      (kasulik + "e") (kasulik + "ke") (kasulik + "esse") ;
-
-
-  --20: stem vowel not predictable. e in pl.part.
-  --dPaks : (_,_ : Str) -> NForms = \paks,paksu ->
-  --kabinet', kabineti, kabi.netti, kabi.netti ja kabinetisse, kabi.nettide, kabi.net'te (ja 
-  --kabi.nettisid), kabi.nettidesse ja  kabinet'esse
-  -- vs. sepp-sepa-seppa. Maybe some kind of regexp "if V+C@(p|t|k) in nom, treat as V+C+C"
-
-  --21: like 20, i in pl.part.
-  --dTaht : (_,_ : Str) -> NForms = \taht,tahe ->
-
-  --22: like 20, u in pl.part.
-  --dLeib : (_,_ : Str) -> NForms = \leib,leiva ->
-
-  --23:	sai, saia, .saia, .saia ja saiasse, .saiade, .saiu ja .saiasid, .saiadesse ja saiusse
-  --    like 20-22, but sg.nom ends in vowel
-  --20-23 could also be one oper that takes sg.nom, sg.gen and pl.part
-
-
-  --24: pood-poe-poodi. seems irregular, implement later.
-
-  --25: oun-ouna, pl.gen -te instead of -de. Might have some gradation, not yet implemented.
-  dOun : Str -> NForms = \oun ->
-    let 
-      ouna = oun + "a" ;
-    in nForms7
-      oun ouna ouna (ouna + "sse")
-      (oun + "te") (oun + "u") (oun + "tesse") ; -- pl gen, part, ill
-
-  --26: käsi-käe-kätt
-
-  --27: uus-uue-uut ; 28: vars-varre-vart ; 29: kaas-kaane-kaant ; 30: suur-suure-suurt
-  --distinctive features for 2-place mkN: sg nom and gen
-  --default case for noun ending in s probably dSoolane?
-  dKaas : (_,_ : Str) -> NForms = \kaas,kaane ->
-    let
-      kaan : Str = init kaane ;
-      var  : Str = case kaan of {
-        _ + ("ll"|"rr"|"nn")  => init kaan ; -- V@? + C@? + C 
-        _ => kaan  
-      }
-    in nForms7
-      kaas (kaan + "e") (var + "t") (kaan + "esse")
-      (var + "te") (kaas + "i") (var + "tesse") ;
-
-  --31: mote-motte, hinne-hinde. reverse consonant gradation, stem vowel in sg.nom.
-  dHinne : Str -> NForms = \hinne ->
-    let
-      hinde : Str = stronger hinne 
-    in nForms7
-      hinne hinde (hinne + "t") (hinde + "sse")
-      (hinne + "te") (hinde + "id") (hinne + "tesse") ;
-
-  --32: ranne-randme, paase-paasme
-  -- like 10, but -me is added to consonant stem.
-  -- as a side effect, consonant gradation is handled too by giving sg.nom and sg.gen
-  -- diff between 10 and 32: whether (ranne == Predef.tk 2 randme)?
-  dRanne : (_,_ : Str) -> NForms = \ranne,randme ->
-    let
-      rand : Str = Predef.tk 2 randme 
-    in nForms7
-      ranne randme (ranne + "t") (randme + "sse")
-      (randme + "te") (randme + "id") (randme + "tesse") ;
-
-  --33: ratas-ratta-ratast 34: rukis-rukki-rukist 35: armas-armsa-armast
-
-  --36: torges-torksa-torksat~torgest (sober-sobra-sopra? number-numbri-numbrit?)
-  --37: kyynel-kyynla-kyynelt
-  --38: aken-akna-akent.
-
-  
--- Finnish paradigms, here only for not to break ParadigmsEst
-
--- for adjective comparison
--}
+  --Comparative adjectives
+  --(could just use hjk_type_IVb_audit "suurem" "a") 
   -- Comparative adjectives inflect in the same way
   -- TODO: confirm this
   dSuurempi : Str -> NForms = \suurem ->
@@ -224,129 +33,9 @@ resource MorphoEst = ResEst ** open Prelude, Predef, HjkEst in {
   -- TODO: confirm this
   dSuurin : Str -> NForms = \suurim -> dSuurempi suurim ;
 
+  --Verb paradigms
 
--------------------
--- auxiliaries ----
--------------------
 
--- the maximal set of technical stems
-
-{- BELOW MOVED TO ResEst
-NForms : Type = Predef.Ints 5 => Str ;
-
-    --Estonian
-    nForms6 : (x1,_,_,_,_,x6 : Str) -> NForms = 
-      \jogi,joe,joge,joesse, -- sg nom, gen, part, ill
-       jogede,jogesid -> table { -- pl gen, part,
-      0 => jogi ;
-      1 => joe ;
-      2 => joge ;
-      3 => joesse ;
-      4 => jogede ;
-      5 => jogesid 
-      } ;
-
-  n2nforms : Noun -> NForms = \ukko -> table {
-    0 => ukko.s ! NCase Sg Nom ;
-    1 => ukko.s ! NCase Sg Gen ;
-    2 => ukko.s ! NCase Sg Part ;
-    3 => ukko.s ! NCase Sg Illat ;
-    4 => ukko.s ! NCase Pl Gen ;
-    5 => ukko.s ! NCase Pl Part 
-  } ;
-  --end Estonian
-    Noun = CommonNoun ** {lock_N : {}} ;
-
-    nForms2N : NForms -> Noun = \f -> 
-      let
-        jogi = f ! 0 ;
-        joe = f ! 1 ;
-        joge = f ! 2 ;
-        joesse = f ! 3 ;
-        jogede = f ! 4 ;
-        jogesid = f ! 5 ;
-      in 
-    {s = table {
-      NCase Sg Nom    => jogi ;
-      NCase Sg Gen    => joe ;
-      NCase Sg Part   => joge ;
-      NCase Sg Transl => joe + "ks" ;
-      NCase Sg Ess    => joe + "na" ;
-      NCase Sg Iness  => joe + "s" ;
-      NCase Sg Elat   => joe + "st" ;
-      NCase Sg Illat  => joesse ;
-      NCase Sg Adess  => joe + "l" ;
-      NCase Sg Ablat  => joe + "lt" ;
-      NCase Sg Allat  => joe + "le" ;
-      NCase Sg Abess  => joe + "ta" ;
-      NCase Sg Comit  => joe + "ga" ;
-      NCase Sg Termin => joe + "ni" ;
-
-      NCase Pl Nom    => joe + "d" ;
-      NCase Pl Gen    => jogede ;
-      NCase Pl Part   => jogesid ;
-      NCase Pl Transl => jogede + "ks" ;
-      NCase Pl Ess    => jogede + "na" ;
-      NCase Pl Iness  => jogede + "s" ;
-      NCase Pl Elat   => jogede + "st" ;
-      NCase Pl Illat  => jogede + "sse" ;
-      NCase Pl Adess  => jogede + "l" ;
-      NCase Pl Ablat  => jogede + "lt" ;
-      NCase Pl Allat  => jogede + "le" ;
-      NCase Pl Abess  => jogede + "ta" ;
-      NCase Pl Comit  => jogede + "ga" ;
-      NCase Pl Termin => jogede + "ni" 
-
-      } ;
-    lock_N = <>
-    } ;
--}
-
--- Adjective forms
-
-    AForms : Type = {
-      posit  : NForms ;
-      compar : NForms ;
-      superl : NForms ;
-      adv_posit, adv_compar, adv_superl : Str ;
-      } ;
-
-    aForms2A : AForms -> Adjective = \afs -> {
-      s = table {
-        Posit => table {
-          AN n => (nForms2N afs.posit).s ! n ; 
-          AAdv => afs.adv_posit
-          } ;
-        Compar => table {
-          AN n => (nForms2N afs.compar).s ! n ; 
-          AAdv => afs.adv_compar
-          } ;
-        Superl => table {
-          AN n => (nForms2N afs.superl).s ! n ; 
-          AAdv => afs.adv_superl
-          }
-        } ;
-      lock_A = <>
-      } ;
-
-    nforms2aforms : NForms -> AForms = \nforms -> 
-      let
-        suure = init (nforms ! 1) ;
-        suur = Predef.tk 4 (nforms ! 8) ;
-      in {
-        posit = nforms ;
-        compar = dSuurempi (suure ++ "m") ;
-        superl = dSuurin   (suur ++ "im") ;
-        adv_posit = suure + "sti" ;
-        adv_compar = suure + "mmin" ;
-        adv_superl = suur + "immin" ;
-      } ;
-
----------------------
--- Verb morphology --
----------------------
-
-oper
   -- TS 49
   -- d in da, takse, dud ; imperfect 3sg ends in i
   cSaama : (_ : Str) -> VForms = \saama ->
@@ -726,145 +415,72 @@ oper
       (pettu + "nud") -- PastPartAct
       (satu + "tud") ; -- PastPartPass
 
-  -- For regular verbs, paradigm from 4 base forms
-  -- Analoogiaseosed pöördsõna paradigmas
-  -- http://www.eki.ee/books/ekk09/index.php?p=3&p1=5&id=227
-  regVForms : (x1,_,_,x4 : Str) -> VForms = \vestlema,vestelda,vestleb,vesteldakse ->
-    let
-      vestle_ = Predef.tk 2 vestlema ;
-      vesteld_ = init vestelda ;
-      vestel_ = init vesteld_ ;
-      lase_ = init vestleb ;
-      jaet_ = Predef.tk 4 vesteldakse ;
-      g = case (last vesteld_) of { --doesn't work for anda~andke
-        "t" => "k" ;
-        _   => "g"
-      } ;
-      toit_ = case (last vestle_) of {  
-        ("t"|"d") => vesteld_ ; --toit(ma)   -> toitke;
-         _        => vestel_    --vestle(ma) -> vestelge
-      } ;
-      laski_ = case (last vestle_) of { 
-        ("a"|"e"|"i"|"o"|"u"|"õ"|"ä"|"ö"|"ü") 
-            => vestle_ ;      --vestle(ma) -> vestles
-         _  => vestle_ + "i"  --lask(ma)   -> laskis
-      } ;
-    in
-      vForms8
-        vestlema
-        vestelda
-        vestleb
-        vesteldakse
-        (toit_ + g + "e") --da: käskiva kõneviisi ainsuse 3. pööre ja mitmus;
-        (laski_ + "s") --ma: kindla kõneviisi lihtmineviku pöörded;
-        (toit_ + "nud") --da: isikulise tegumoe mineviku kesksõna
-        (jaet_ + "ud"); --takse: ülejäänud umbisikulise tgm vormid
-        
-
-  regVerb : (_,_,_,_ : Str) -> Verb = \kinkima,kinkida,kingib,kingitakse ->
-    vforms2V (regVForms kinkima kinkida kingib kingitakse) ;
 
 
--- auxiliaries
+-----------------
+-- auxiliaries --
+-----------------
 
-    VForms : Type = Predef.Ints 7 => Str ;
-    
-    vForms8 : (x1,_,_,_,_,_,_,x8 : Str) -> VForms =
-      \tulema,tulla,tuleb,tullakse,tulge,tuli,tulnud,tuldud ->
-      table {
-        0 => tulema ;
-        1 => tulla ;
-        2 => tuleb ;
-        3 => tullakse ;
-        4 => tulge ;
-        5 => tuli ;
-        6 => tulnud ;
-        7 => tuldud
+
+{- Noun internal opers moved to ResEst
+
+These used to be here:
+  NForms : Type = Predef.Ints 5 => Str ;
+  Noun : Type   = {s: NForm => Str } ;
+  nForms6  : (x1,_,_,_,_,x6 : Str) -> NForms ;
+  n2nforms : Noun -> NForms ;
+  nForms2N : NForms -> Noun ;
+
+-}
+
+-- Adjective forms
+
+    AForms : Type = {
+      posit  : NForms ;
+      compar : NForms ;
+      superl : NForms ;
+      adv_posit, adv_compar, adv_superl : Str ;
       } ;
 
-    vforms2V : VForms -> Verb = \vh -> 
-    let
-      tulema = vh ! 0 ; 
-      tulla = vh ! 1 ; 
-      tuleb = vh ! 2 ; 
-      tullakse = vh ! 3 ; --juuakse; loetakse 
-      tulge = vh ! 4 ;  --necessary for tulla, surra (otherwise *tulege, *surege) 
-      tuli = vh ! 5 ; --necessary for jooma-juua-jõi
-      tulnud = vh ! 6 ;
-      tuldud = vh ! 7 ; --necessary for t/d in tuldi; loeti
-      
-      tull_ = init tulla ; --juu(a); saad(a); tull(a);
-      tulles = tull_ + "es" ; --juues; saades; tulles;
-      
-      tule_ = init tuleb ;
-      
-      lask_ = Predef.tk 2 tulema ;
-      laulev = case (last lask_) of { --sooma~soov ; laulma~laulev
-          ("a"|"e"|"i"|"o"|"u"|"õ"|"ä"|"ö"|"ü") => lask_ + "v" ;
-          _ => lask_ + "ev" } ; --consonant stem in -ma, add e
-          
-      --imperfect stem
-      kaisi_ = case (Predef.dp 3 tuli) of {
-          "sis"    => lask_ + "i" ; --tõusin, tõusis
-          _ + "i"  => tuli ;        --jõin, jõi
-          _        => lask_ + "si"  --käisin, käis; muutsin, muutis
-         }; 
-            
-      tuld_ = Predef.tk 2 tuldud ; --d/t choice for tuldi etc.
-      tulgu = (init tulge) + "u" ;
-      --lugenud = (hjk_type_IVb_maakas tulnud).s ;
-      --loetud = (hjk_type_IVb_maakas tuldud).s ;
-    in
-    {s = table {
-      Inf InfDa => tulla ;
-      Inf InfDes => tulles ;
-      Presn Sg P1 => tule_ + "n" ;
-      Presn Sg P2 => tule_ + "d" ;
-      Presn Sg P3 => tuleb ;
-      Presn Pl P1 => tule_ + "me" ;
-      Presn Pl P2 => tule_ + "te" ;
-      Presn Pl P3 => tule_ + "vad" ;
-      Impf Sg P1  => kaisi_ + "n" ;   --# notpresent
-      Impf Sg P2  => kaisi_ + "d" ;  --# notpresent
-      Impf Sg P3  => tuli ;  --# notpresent
-      Impf Pl P1  => kaisi_ + "me" ;  --# notpresent
-      Impf Pl P2  => kaisi_ + "te" ;  --# notpresent
-      Impf Pl P3  => kaisi_ + "d" ;  --# notpresent
-      Condit Sg P1 => tule_ + "ksin" ;  --# notpresent
-      Condit Sg P2 => tule_ + "ksid" ;  --# notpresent
-      Condit Sg P3 => tule_ + "ks";  --# notpresent
-      Condit Pl P1 => tule_ + "ksime" ;  --# notpresent
-      Condit Pl P2 => tule_ + "ksite" ;  --# notpresent
-      Condit Pl P3 => tule_ + "ksid" ;  --# notpresent
-      Imper Sg  => tule_ ; -- tule
-      Imper Pl  => tulge ; -- tulge
-      ImperP3   => tulgu ; -- tulgu (ta/nad) 
-      ImperP1Pl => tulge + "m" ; -- tulgem
-      ImpNegPl  => tulge ; -- ärge tulge
-      PassPresn True  => tullakse ;
-      PassPresn False => tuld_ + "a" ; --da or ta
-      PassImpf  True  => tuld_ + "i" ; --di or ti
-      PassImpf  False => tuldud ;  
-      Quotative Act  => lask_ + "vat" ;
-      Quotative Pass => tuld_ + "avat" ; --d or t
-      PresPart Act  => laulev ;
-      PresPart Pass => tuld_ + "av" ; --d or t
-      PastPart Act  => tulnud ;
-      PastPart Pass => tuldud ;
-      Inf InfMa => tulema ;
-      Inf InfMas => tulema + "s" ;
-      Inf InfMast => tulema + "st" ;
-      Inf InfMata => tulema + "ta" ;
-      Inf InfMaks => tulema + "ks" 
+    aForms2A : AForms -> Adjective = \afs -> {
+      s = table {
+        Posit => table {
+          AN n => (nForms2N afs.posit).s ! n ; 
+          AAdv => afs.adv_posit
+          } ;
+        Compar => table {
+          AN n => (nForms2N afs.compar).s ! n ; 
+          AAdv => afs.adv_compar
+          } ;
+        Superl => table {
+          AN n => (nForms2N afs.superl).s ! n ; 
+          AAdv => afs.adv_superl
+          }
+        } ;
+      lock_A = <>
       } ;
-    sc = NPCase Nom ;
-    p = [] ;
-    lock_V = <>
-    } ;
-    
------------------------------------------
--- Auxiliaries
------------------------------------------
+
+    nforms2aforms : NForms -> AForms = \nforms -> 
+      let
+        suure = init (nforms ! 1) ;
+        suur = Predef.tk 4 (nforms ! 8) ;
+      in {
+        posit = nforms ;
+        compar = dSuurempi (suure ++ "m") ;
+        superl = dSuurin   (suur ++ "im") ;
+        adv_posit = suure + "sti" ;
+        adv_compar = suure + "mmin" ;
+        adv_superl = suur + "immin" ;
+      } ;
+
+{-  Verb internal opers moved to ResEst
+
+These used to be here:
+  VForms : Type = Predef.Ints 7 => Str ;
+  vForms8 : (x1,_,_,_,_,_,_,x8 : Str) -> VForms ; 
+  regVForms : (x1,_,_,x4 : Str) -> VForms ;
+  vforms2V : VForms -> Verb ;
+-}
 
 
 -----------------------
@@ -948,7 +564,7 @@ oper
   -- TODO: fix: Nom => kelled
   -- TODO: mis
   relPron : Number => Case => Str =
-    let kes = nForms6hjk "kes" "kelle" "keda" "kellesse" "kelle" "keda" in
+    let kes = nForms2N (nForms6 "kes" "kelle" "keda" "kellesse" "kelle" "keda") in
     \\n,c => kes.s ! NCase n c ;
 
   ProperName = {s : Case => Str} ;
