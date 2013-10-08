@@ -308,26 +308,50 @@ oper
 
 
   mk1N : (link : Str) -> N = \s -> nForms2N (hjk_type s) ** {lock_N = <> } ;
-  mk2N : (link,lingi : Str) -> N = \s,t -> nForms2N (nForms2 s t) ** {lock_N = <> } ;
-  mk3N : (tukk,tuku,tukku : Str) -> N = \s,t,u -> nForms2N (nForms3 s t u) ** {lock_N = <> } ;
+
+  mk2N : (link,lingi : Str) -> N = \link,lingi -> 
+    let nfs : NForms = (nForms2 link lingi) ; 
+        nfs_fixed : NForms = table {
+                0 => link ;
+                1 => lingi ;
+                2 => nfs ! 2 ;
+                3 => nfs ! 3 ;
+                4 => nfs ! 4 ;
+                5 => nfs ! 5 
+        } ;
+    in  nForms2N nfs_fixed ** {lock_N = <> } ;
+
+
+  mk3N : (tukk,tuku,tukku : Str) -> N = \tukk,tuku,tukku -> 
+    let nfs : NForms = (nForms3 tukk tuku tukku) ; 
+        nfs_fixed : NForms = table {
+                0 => tukk ;
+                1 => tuku ;
+                2 => tukku ;
+                3 => nfs ! 3 ;
+                4 => nfs ! 4 ;
+                5 => nfs ! 5  
+        } ;
+    in nForms2N nfs_fixed ** {lock_N = <> } ;
+
 {-  mk1N : (link : Str) -> N = \s -> nForms2N (hjk_type s) ** {lock_N = <> } ;
   mk2N : (link,lingi : Str) -> N = \s,t -> nForms2N (nForms2 s t)  ** {lock_N = <>} ;
-  mk3N : (tukk,tuku,tukku : Str) -> N = \s,t,u -> nForms2N (nForms3 s t u) ** {lock_N = <>} ;
-  
+  mk3N : (tukk,tuku,tukku : Str) -> N = \s,t,u -> nForms2N (nForms3 s t u) ** {lock_N = <>} ;  
   --regular mk4N
   mk4N : (paat,paadi,paati,paate : Str) -> N = \s,t,u,v -> nForms2N (nForms4 s t u v) ** {lock_N = <>} ;
 -}
 
   --experimental: make sure that the user specified forms end up in the paradigm, even though the rest is wrong
-  mk4N : (paat,paadi,paati,paatide : Str) -> N = \paat,paadi,paati,paatide ->  
-    let nfs : NForms = (nForms4 paat paadi paati paatide) ; 
+  --this is using pl part
+  mk4N : (paat,paadi,paati,paatide : Str) -> N = \paat,paadi,paati,paate ->  
+    let nfs : NForms = (nForms4 paat paadi paati paate) ; 
         nfs_fixed : NForms = table {
                 0 => paat ;
                 1 => paadi ;
                 2 => paati ;
                 3 => nfs ! 3 ;
-                4 => paatide ;
-                5 => nfs ! 5  
+                4 => nfs ! 4 ; 
+                5 => paate 
         } ;
     in nForms2N nfs_fixed ** {lock_N = <> } ;
 
@@ -401,8 +425,8 @@ oper
       <_ + #c, _ + #v, _ + #v + "t"> => hjk_type_IVb_audit tukk u ;  --voolik:_:voolikut caught here
       _ => nForms2 tukk tuku 
     } ;
-{-
-  nForms4 : (_,_,_,_ : Str) -> NFS = \paat,paadi,paati,paate -> 
+
+  nForms4 : (_,_,_,_ : Str) -> NForms = \paat,paadi,paati,paate -> 
     case <paat,paadi,paati,paate> of {
      -- distinguish between joonis and segadus
       <_ +("ne"|"s"),  _+"se", _+"st", _+"seid"> => hjk_type_Va_otsene paat ;
@@ -412,10 +436,10 @@ oper
       <_ +"e", _+"e", _+"et", _+"sid"> => hjk_type_III_ratsu paat ; 
       <_ +"e", _+"e", _+"et", _+"eid"> => hjk_type_VII_touge2 paat paadi ;
 
-      _  => mk3N paat paadi paati 
+      _  => nForms3 paat paadi paati 
       } ;
--}
-
+{-
+  --Version that uses pl gen instead of pl part
   nForms4 : (_,_,_,_ : Str) -> NForms = \paat,paadi,paati,paatide -> 
     case <paat,paadi,paati,paatide> of {
      -- pl gen can't distinguish between joonis and segadus
@@ -431,7 +455,7 @@ oper
 
       _  => nForms3 paat paadi paati 
       } ;      
-
+-}
 
   mkN2 = overload {
     mkN2 : N -> N2 = \n -> mmkN2 n (casePrep genitive) ;

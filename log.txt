@@ -974,4 +974,41 @@ Note that the full forms contain more errors, because plural genitive is used as
 
 Actually might make sense to do this to 2-arg (sg nom + sg gen) oper as well, because sg gen is used as base for all other sg forms except nom, part and ill.
 
-Argh now I just have to do an experiment what if nForms4 gets Pl Gen instead of Pl Part.
+Inari 08.10
+-----------
+
+Experiment 2: what if nForms4 gets Pl Gen instead of Pl Part.
+Result: Identical to 3-arg.
+So apparently tõuge type words get recognized already at previous stages.
+The increase of ~300 words that comes from 4-arg Pl Part is from joonis/segadus words.
+
+
+Ran tests again with updated data + using the smart paradigms where
+user-specified forms are added
+
+1-arg
+Before changing place of rule ja/ia/la:
+Coverage: 19814 out of    21734 = .9116
+After:
+Coverage: 19748 out of    21734 = .9086
+
+2-arg
+Before:
+Coverage: 19992 out of    21734 = .9198
+After:
+Coverage: 19926 out of    21734 = .9168
+
+3-arg
+Before:
+Coverage: 21056 out of    21734 = .9688
+After:
+Coverage: 20990 out of    21734 = .9657
+
+4-arg
+(both After:)
+using pl gen
+Coverage: 20990 out of    21734 = .9657
+
+using pl part
+Coverage: 21208 out of    21734 = .9757
+

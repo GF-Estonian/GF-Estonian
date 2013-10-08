@@ -347,14 +347,6 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<_, _ + ("ngas"|"kas"|"jas"|"nud"|"tud")>
 				=> hjk_type_IVb_maakas x ;
 
-			-- TODO: not in HJKEKS
-			<_, _ + ("ia"|"ja")> --kündja, not gerilja
-				=> hjk_type_IVa_aasta x ;
-
-			--added by Inari 07.10.
-			<S23, _ + #c + ("la")> --haigla, not gorilla
-				=> hjk_type_IVa_aasta x ;
-
 			<S1, _ + #v + #v>
 				=> hjk_type_I_koi x ;
 
@@ -496,6 +488,14 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			-- catch all that end with consonant
 			<_, _ + #c>
 				=> hjk_type_IVb_audit x "i" ;
+
+			-- TODO: not in HJKEKS
+			<_, _ + ("ia"|"ja")> --kündja, not gerilja
+				=> hjk_type_IVa_aasta x ;
+
+			--added by Inari 07.10.
+			<S23, _ + #c + ("la")> --haigla, not gorilla
+				=> hjk_type_IVa_aasta x ;
 
 			-- catch all
 			<_, _>
