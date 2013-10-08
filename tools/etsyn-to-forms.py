@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-# Picks 6 noun forms out of the Filosoft morph. synth. (etsyn) output format.
+# Picks base forms out of the Filosoft morph. synth. (etsyn) output format.
 #
 # Usage:
 #
-# cat file.etsyn | ./etsyn-to-6forms.py --tag A | sort | uniq
+# cat file.etsyn | ./etsyn-to-forms.py --tag A | sort | uniq
 #
 # Note that we use sort|uniq to avoid duplicate lines. These can occur
 # even if unique lemmas were given to etsyn, e.g. etsyn maps
@@ -12,7 +12,7 @@
 # thus creating a duplicate line.
 #
 # @author Kaarel Kaljurand
-# @version 2013-09-10
+# @version 2013-10-08
 
 import sys
 import re
@@ -21,13 +21,33 @@ import argparse
 forms = {}
 prev_line = ""
 
-def show(f):
+def show(tag, f):
 	"""
 	This throws an exception if a form is missing.
 	Some words have no analysis (####), i.e. already 'sg n' is missing.
 	For some words (e.g. 'ecstasy'), the plural forms are missing.
 	In total there are ~400 entries (out of 18k) that fail to get a full analysis.
 	"""
+	if tag == 'V':
+		show_verb(f)
+	else:
+		show_noun(f)
+
+
+def show_verb(f):
+	print '%s, %s, %s, %s, %s, %s, %s, %s' % (
+		'|'.join(f['ma']),
+		'|'.join(f['da']),
+		'|'.join(f['b']),
+		'|'.join(f['takse']),
+		'|'.join(f['ge']),
+		'|'.join(f['s']),
+		'|'.join(f['nud']),
+		'|'.join(f['tud'])
+		)
+
+
+def show_noun(f):
 	print '%s, %s, %s, %s, %s, %s' % (
 		'|'.join(f['sg n']),
 		'|'.join(f['sg g']),
@@ -36,6 +56,7 @@ def show(f):
 		'|'.join(f['pl g']),
 		'|'.join(f['pl p'])
 		)
+
 
 def get_ill_adt(f):
 	"""
@@ -74,7 +95,7 @@ for line in sys.stdin:
 		add_to_forms(args.tag, forms, line)
 	else:
 		try:
-			show(forms)
+			show(args.tag, forms)
 		except Exception as e:
 			print >> sys.stderr, 'Error: {:}: {:}'.format(prev_line, e.message)
 		forms = {}

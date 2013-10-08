@@ -50,7 +50,7 @@ Generated with this sequence of steps:
 	sed 's/$/ \/\/_S_ *, \/\//' | etsyn -cio utf8 -GO |
 
 	# Keep only the 6 forms
-	etsyn-to-6forms.py | sort | uniq
+	etsyn-to-forms.py | sort | uniq
 
 
 ### adj.6forms.csv
@@ -79,7 +79,28 @@ Generated with this sequence of steps:
 	sed 's/$/ \/\/_A_ *, \/\//' | etsyn -cio utf8 -GO |
 
 	# Keep only the 6 forms
-	etsyn-to-6forms.py --tag=A | sort | uniq
+	etsyn-to-forms.py --tag=A | sort | uniq
+
+### verbs.8forms.csv
+
+The 8 forms of verbs. Alternative forms are separated by "|".
+This file is useful for regression testing the verb opers.
+Do not use it for a lexicon because it does not contain multi-word verbs,
+and does not specify which of the alternative forms is the default.
+
+Generated with this sequence of steps:
+
+	# Use the WordNet tix-file
+	cat kb67a-utf8.tix |
+
+	# Keep only adjectives (exclude entries with spaces and hyphens)
+	estwn-to-etsyn.bash v |
+
+	# Generate all forms (guess if needed)
+	etsyn -cio utf8 -GO |
+
+	# Keep only the 8 forms
+	etsyn-to-forms.py --tag=V | sort | uniq
 
 ### abileks_utf8.lx
 
@@ -118,10 +139,10 @@ Frequency of the main tag:
 	cat verbs.txt |
 
 	# Generate all the forms
-	etsyn -cio utf8 -GO > verbs.syn
+	etsyn -cio utf8 -GO |
 
 	# Keep only the 8 forms
-	etsyn-to-8forms.py
+	etsyn-to-forms.py --tag=V | sort | uniq
 
 
 ### freq.csv
