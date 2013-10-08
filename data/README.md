@@ -11,6 +11,8 @@ External tools/resources
 These tools and resources were used:
 
   - Filosoft's (<http://www.filosoft.ee/>) morphology tools
+    - etsyn: v1285M
+    - etmrf: v1291
   - Estonian WordNet (<http://www.cl.ut.ee/ressursid/teksaurus/>), version kb67a
   - Estonian Constraint Grammar (EstCG) verb lexicon (`abileks_utf8.lx`)
 
@@ -35,7 +37,7 @@ Generated with this sequence of steps:
 	# Use the WordNet tix-file
 	cat kb67a-utf8.tix |
 
-	# Keep only nouns
+	# Keep only nouns (exclude entries with spaces and hyphens)
 	estwn-to-etsyn.bash n |
 
 	# Detect the compound structure (but do not guess)
@@ -47,8 +49,8 @@ Generated with this sequence of steps:
 	# Generate all forms (guess if needed)
 	sed 's/$/ \/\/_S_ *, \/\//' | etsyn -cio utf8 -GO |
 
-	# Keep only the 6 forms but exclude hyphenated words
-	etsyn-to-6forms.py | grep -v "-" | sort | uniq
+	# Keep only the 6 forms
+	etsyn-to-6forms.py | sort | uniq
 
 
 ### adj.6forms.csv
