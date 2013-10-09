@@ -1110,3 +1110,36 @@ Coverage: 2935 out of 3382 = .8678
     345 4-5
       4 4
 Coverage: 2552 out of 3382 = .7545
+
+
+
+
+Fixed mk3N and mk4N to not handle -nud/-tud and some forms of -ne.
+
+Adjectives:
+
+3-arg pattern: (@F[0..2])
+   3141
+    143 4-5-6
+     64 6
+     19 5-6
+     14 4-6
+      1 5
+Coverage: 3141 out of 3382 = .9287
+
+4-arg pattern: (@F[0..2], @F[5])
+   3219
+    139 4-5
+     20 5
+      4 4
+Coverage: 3219 out of 3382 = .9518
+
+
+Nouns:
+
+4-arg pattern: (@F[0..2], @F[5])
+  21217
+    254 4-5
+    219 5
+     44 4
+Coverage: 21217 out of 21734 = .9762

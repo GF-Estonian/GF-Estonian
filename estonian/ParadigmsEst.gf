@@ -421,7 +421,9 @@ oper
       <_+"as",_,_+"at"> => hjk_type_IVb_maakas tukk ;
 
       <_ + "ik", _ + "iku", _ + "ikku"> => hjk_type_VI_imelik tukk ; --imelik:_:imelikku caught here
+
       <_ + #c, _ + #v, _ + #v> => hjk_type_VI_tukk tukk tuku ;
+      <_ + "ud", _ + "u", _ + "ut"> => nForms2 tukk tuku ;  -- -nud/-tud participles are not like 'voolik'
       <_ + #c, _ + #v, _ + #v + "t"> => hjk_type_IVb_audit tukk u ;  --voolik:_:voolikut caught here
       _ => nForms2 tukk tuku 
     } ;
@@ -432,6 +434,8 @@ oper
       <_ +("ne"|"s"),  _+"se", _+"st", _+"seid"> => hjk_type_Va_otsene paat ;
       <_ +("ne"|"s"),  _+"se", _+"st", _+"si"> => hjk_type_Vb_oluline paat ;
       
+      <_ +"ne", _+"se", _+"set", _+"seid"> => nForms3 paat paadi paati ; -- -ne adjectives ('algne') are not like 'tõuge'
+
       --distinguish between kõne and aine
       <_ +"e", _+"e", _+"et", _+"sid"> => hjk_type_III_ratsu paat ; 
       <_ +"e", _+"e", _+"et", _+"eid"> => hjk_type_VII_touge2 paat paadi ;
