@@ -1012,3 +1012,101 @@ Coverage: 20990 out of    21734 = .9657
 using pl part
 Coverage: 21208 out of    21734 = .9757
 
+
+Kaarel 09.10
+------------
+
+Refactored the script that tests mkN.
+
+Nouns.
+./test-mkN.bash ../data/nouns.6forms.csv
+
+1-arg pattern: (@F[0])
+  19748
+    797 2-3-4-5-6
+    357 2-3-4-5
+    164 3-5-6
+    148 5-6
+    136 2-4-6
+    118 6
+     88 2-4-5-6
+     79 3-4-5-6
+     36 2-4
+     35 3
+     19 2
+      5 3-5
+      3 2-3-4
+      1 5
+Coverage: 19748 out of 21734 = .9086
+2-arg pattern: (@F[0..1])
+  19926
+    792 3-4-5-6
+    357 3-4-5
+    179 3-5-6
+    150 5-6
+    118 6
+     98 4-6
+     36 4
+     35 4-5-6
+     35 3
+      5 3-5
+      3 3-4
+Coverage: 19926 out of 21734 = .9168
+3-arg pattern: (@F[0..2])
+  20990
+    309 4-5-6
+    240 5-6
+    121 6
+     39 4
+     22 4-6
+     13 4-5
+Coverage: 20990 out of 21734 = .9657
+4-arg pattern: (@F[0..2], @F[5])
+  21208
+    254 4-5
+    228 5
+     44 4
+Coverage: 21208 out of 21734 = .9757
+
+
+Adjectives don't benefit from the extra arguments.
+./test-mkN.bash ../data/adj.6forms.csv
+
+1-arg pattern: (@F[0])
+   3023
+    211 2-3-4-5-6
+     64 6
+     34 2-4-6
+     18 5-6
+     15 2-4-5-6
+      8 2-3-4-5
+      3 3-5-6
+      3 3-5
+      2 3-4-5-6
+      1 2
+Coverage: 3023 out of 3382 = .8938
+2-arg pattern: (@F[0..1])
+   3024
+    213 3-4-5-6
+     64 6
+     34 4-6
+     18 5-6
+     15 4-5-6
+      8 3-4-5
+      3 3-5-6
+      3 3-5
+Coverage: 3024 out of 3382 = .8941
+3-arg pattern: (@F[0..2])
+   2935
+    349 4-5-6
+     64 6
+     19 5-6
+     14 4-6
+      1 5
+Coverage: 2935 out of 3382 = .8678
+4-arg pattern: (@F[0..2], @F[5])
+   2552
+    481 5
+    345 4-5
+      4 4
+Coverage: 2552 out of 3382 = .7545
