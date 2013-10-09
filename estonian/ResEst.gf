@@ -49,6 +49,8 @@ resource ResEst = ParamX ** open Prelude in {
 param
   AForm = AN NForm | AAdv ;
 
+  Infl = Regular | Participle | Invariable ;
+
 oper
   Adjective : Type = {s : Degree => AForm => Str; lock_A : {}} ;
 

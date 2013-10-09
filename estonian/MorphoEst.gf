@@ -1,6 +1,6 @@
 --1 A Simple Estonian Resource Morphology
 --
--- Aarne Ranta, Inari Listenmaa, Kaarel Kaljurand
+-- Inari Listenmaa, Kaarel Kaljurand, based on Aarne Ranta's Finnish grammar
 --
 -- This resource morphology contains definitions needed in the resource
 -- syntax. To build a lexicon, it is better to use $ParadigmsEst$, which

@@ -43,7 +43,7 @@ concrete CatEst of Cat = CommonX ** open HjkEst, ResEst, Prelude in {
 -- The $Bool$ in infl tells whether the adjective inflects as a 
 -- modifier: e.g. "valmis ehitused" vs. "ehitused on valmid". 
 
-    AP = {s : Bool => NForm => Str ; infl : Bool} ; 
+    AP = {s : Bool => NForm => Str ; infl : Infl} ; 
 
 -- Noun
 
@@ -85,7 +85,7 @@ concrete CatEst of Cat = CommonX ** open HjkEst, ResEst, Prelude in {
     V2V = Verb1 ** {c2 : Compl ; vi : InfForm} ; ---- infinitive form
     V3 = Verb1 ** {c2, c3 : Compl} ;
 
-    A  = Adjective ** {infl : Bool} ;
+    A  = Adjective ** {infl : Infl} ;
     A2 = A ** {c2 : Compl} ;
 
     N  = Noun  ;
@@ -94,6 +94,6 @@ concrete CatEst of Cat = CommonX ** open HjkEst, ResEst, Prelude in {
     PN = {s : Case  => Str} ;
 
 oper Verb1 = Verb ** { sc : NPForm} ; --what is this for? --subject case, i.e. "ma näen kassi"/"mul on kass"
---     Noun = CommonNoun ** {lock_N : {}} ;
+
 
 }

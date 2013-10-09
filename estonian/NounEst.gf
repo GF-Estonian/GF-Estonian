@@ -77,7 +77,7 @@ concrete NounEst of Noun = CatEst ** open ResEst, HjkEst, MorphoEst, Prelude in 
         part : Str       = v2.s ! (PastPart Pass) ;
         adj : NForms     = hjk_type_IVb_maakas part ; 
         partGen : Str    = adj ! 1 ;
-	partEss : Str    = partGen + "na" 
+	partEss : Str    = partGen + "na"
       in {
         s = \\c => np.s ! c ++ part ; --partEss ;
         a = np.a ;
@@ -194,8 +194,8 @@ concrete NounEst of Noun = CatEst ** open ResEst, HjkEst, MorphoEst, Prelude in 
     AdjCN ap cn = {
       s = \\nf => 
         case ap.infl of {
-          False => ap.s ! True ! (NCase Sg Nom) ++ cn.s ! nf ; --valmis kassile
-          True => case nf of { 
+          (Invariable|Participle) => ap.s ! True ! (NCase Sg Nom) ++ cn.s ! nf ; --valmis kassile; väsinud kassile
+          Regular => case nf of { 
               NCase num (Ess|Abess|Comit|Termin) => ap.s ! True ! (NCase num Gen) ++ cn.s ! nf ; --suure kassiga, not *suurega kassiga 
               _ => ap.s ! True ! nf ++ cn.s ! nf
               } 

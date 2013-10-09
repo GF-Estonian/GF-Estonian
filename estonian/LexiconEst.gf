@@ -229,7 +229,7 @@ lin
   correct_A = mkA "õige" ;
   dry_A = mkA "kuiv" ;
   dull_A = mkA "igav" ;
-  full_A = mkA (mkN "täis") "täiem" "täiim" False ; -- 'täis' is one of the non-inflecting adjectives
+  full_A = mkA (mkN "täis") "täiem" "täiim" Invariable ; -- 'täis' is one of the non-inflecting adjectives
   heavy_A = mkA "raske" ;
   near_A = mkA "lähedane" ;
   rotten_A = mkA "mäda" ;
@@ -355,7 +355,7 @@ lin
 
   john_PN = mkPN "Juhan" ;
   question_N = mkN "küsimus" ;
-  ready_A = mkA (mkN "valmis" "valmi" "valmit" "valmisse" "valmite" "valmeid") "valmim" "valmeim" False ; -- 'valmis' is one of the non-inflecting adjectives
+  ready_A = mkA (mkN "valmis" "valmi" "valmit" "valmisse" "valmite" "valmeid") "valmim" "valmeim" Invariable ; -- 'valmis' is one of the non-inflecting adjectives
   reason_N = mkN "põhjus" ;
   today_Adv = mkAdv "täna" ;
   uncertain_A = mkA "ebakindel" ;

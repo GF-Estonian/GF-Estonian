@@ -43,7 +43,7 @@ concrete ConjunctionEst of Conjunction =
     [S] = {s1,s2 : Str} ;
     [Adv] = {s1,s2 : Str} ;
     [NP] = {s1,s2 : NPForm => Str ; a : Agr} ;
-    [AP] = {s1,s2 : {s : Bool => NForm => Str ; infl : Bool }} ; 
+    [AP] = {s1,s2 : {s : Bool => NForm => Str ; infl : Infl }} ; 
     [RS] = {s1,s2 : Agr => Str ; c : NPForm} ;
     
   oper
@@ -55,7 +55,7 @@ concrete ConjunctionEst of Conjunction =
       lock_ListAP = <>
     } ; 
     
-    consrTableAdj : Str -> [AP] -> {s : Bool => NForm => Str ; infl : Bool} -> [AP] = \c,xs,x ->
+    consrTableAdj : Str -> [AP] -> {s : Bool => NForm => Str ; infl : Infl} -> [AP] = \c,xs,x ->
       let
         ap1 = xs.s1 ; 
         ap2 = xs.s2 
@@ -64,17 +64,17 @@ concrete ConjunctionEst of Conjunction =
              {s = \\isMod,nf =>
 	        case isMod of { 
 	          True => case <ap1.infl, ap2.infl> of {
-                             <False,False> => ap1.s ! isMod ! (NCase Sg Nom) ++ c 
-	          	                   ++ ap2.s ! isMod ! (NCase Sg Nom) ;   --valmis ja täis kassid
-                             <False,True>  => ap1.s ! isMod ! (NCase Sg Nom) ++ c
-	 		                   ++ ap2.s ! isMod ! nf ;               --valmis ja suured kassid
-                             <True,False>  => ap1.s ! isMod ! nf ++ c  
-			                   ++ ap2.s ! isMod ! (NCase Sg Nom) ;   --suured ja valmis kassid
+                             <(Participle|Invariable),(Participle|Invariable)> => 
+			       ap1.s ! isMod ! (NCase Sg Nom) ++ c ++ ap2.s ! isMod ! (NCase Sg Nom) ; --valmis ja täis kassid
+                             <(Participle|Invariable),Regular>  => 
+			       ap1.s ! isMod ! (NCase Sg Nom) ++ c++ ap2.s ! isMod ! nf ;    --valmis ja suured kassid
+                             <Regular,(Participle|Invariable)>  => 
+			       ap1.s ! isMod ! nf ++ c ++ ap2.s ! isMod ! (NCase Sg Nom) ;   --suured ja valmis kassid
                               _ => ap1.s ! isMod ! nf ++ c ++ ap2.s ! isMod ! nf --suured ja mustad kassid
                            } ;
 		  False => ap1.s ! isMod ! nf ++ c ++ ap2.s ! isMod ! nf --kassid on valmid ja suured
                 } ;
-              infl = True ;
+              infl = Regular ;
               lock_AP = <> } ;
        s2 = x ;
        lock_ListAP = <>
@@ -89,17 +89,20 @@ concrete ConjunctionEst of Conjunction =
       lin AP {s = \\isMod,nf =>
                 case isMod of { 
 		  True => case <ap1.infl, ap2.infl> of {
-                             <False,False> => or.s1 ++ ap1.s ! isMod ! (NCase Sg Nom) ++ 
-		                              or.s2 ++ ap2.s ! isMod ! (NCase Sg Nom) ;
-                             <False,True>  => or.s1 ++ ap1.s ! isMod ! (NCase Sg Nom) ++ 
-		                              or.s2 ++ ap2.s ! isMod ! nf ;
-                             <True,False>  => or.s1 ++ ap1.s ! isMod ! nf ++ 
-                                              or.s2 ++ ap2.s ! isMod ! (NCase Sg Nom) ;
+                             <(Participle|Invariable),(Participle|Invariable)> =>
+			           or.s1 ++ ap1.s ! isMod ! (NCase Sg Nom) ++ 
+		                   or.s2 ++ ap2.s ! isMod ! (NCase Sg Nom) ;
+                             <(Participle|Invariable),Regular>  =>
+			           or.s1 ++ ap1.s ! isMod ! (NCase Sg Nom) ++ 
+		                   or.s2 ++ ap2.s ! isMod ! nf ;
+                             <Regular,(Participle|Invariable)>  => 
+		                   or.s1 ++ ap1.s ! isMod ! nf ++ 
+                                   or.s2 ++ ap2.s ! isMod ! (NCase Sg Nom) ;
                               _ => or.s1 ++ ap1.s ! isMod ! nf ++ or.s2 ++ ap2.s ! isMod ! nf 
                            } ;
                   False => or.s1 ++ ap1.s ! isMod ! nf ++ or.s2 ++ ap2.s ! isMod ! nf 
                 } ;
-              infl = True ;
+              infl = Regular ;
               lock_AP = <> 
              } ;    
 

@@ -300,11 +300,11 @@ oper
   -- Adjective forms (incl. comp and sup) are derived from noun forms
   mk1A : Str -> A = \suur -> 
     let aforms = aForms2A (nforms2aforms (hjk_type suur)) 
-    in  aforms ** {infl = True} ;
+    in  aforms ** {infl = Regular } ;
       
   mkNA : N -> A = \suur -> 
     let aforms = aForms2A (nforms2aforms (n2nforms suur)) ; 
-    in  aforms ** {infl = True} ;
+    in  aforms ** {infl = Regular } ;
 
 
   mk1N : (link : Str) -> N = \s -> nForms2N (hjk_type s) ** {lock_N = <> } ;
@@ -485,18 +485,18 @@ oper
 
   mkA = overload {
     mkA : Str -> A  = mkA_1 ;
-    mkA : N -> A = \n -> noun2adjDeg n ** {infl = True ; lock_A = <>} ;
+    mkA : N -> A = \n -> noun2adjDeg n ** {infl = Regular ; lock_A = <>} ;
     mkA : N -> (parem,parim : Str) -> A = regAdjective ;
-    mkA : N -> (infl : Bool) -> A = \n,infl -> noun2adjDeg n ** {infl = infl ; lock_A = <>} ;
+    mkA : N -> (infl : Infl) -> A = \n,infl -> noun2adjDeg n ** {infl = infl ; lock_A = <>} ;
     -- TODO: temporary usage of regAdjective1
-    mkA : N -> (valmim,valmeim : Str) -> (infl : Bool) -> A =
+    mkA : N -> (valmim,valmeim : Str) -> (infl : Infl) -> A =
 		\n,c,s,infl -> (regAdjective1 n c s) ** {infl = infl ; lock_A = <>} ;
-    mkA : (sana : AW) -> A = \w -> noun2adjDeg (nForms2N w.s) ** {infl = True} ;
+    mkA : (sana : AW) -> A = \w -> noun2adjDeg (nForms2N w.s) ** {infl = Regular} ;
   } ;
 
-  genAttrA balti = {s = \\_,_ => balti ; infl = False ; lock_A = <>} ;
+  genAttrA balti = {s = \\_,_ => balti ; infl = Invariable ; lock_A = <>} ;
 
-  mkA_1 : Str -> A = \x -> noun2adjDeg (mk1N x) ** {infl = True ; lock_A = <>} ;
+  mkA_1 : Str -> A = \x -> noun2adjDeg (mk1N x) ** {infl = Regular  ; lock_A = <>} ;
 
 -- auxiliaries
   mkAdjective : (_,_,_ : Adj) -> A = \hea,parem,parim -> 
@@ -505,7 +505,7 @@ oper
       Compar => parem.s ;
       Superl => parim.s
       } ;
-     infl = True ;
+     infl = Regular ;
      lock_A = <>
     } ;
 

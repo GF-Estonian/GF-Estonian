@@ -14,7 +14,7 @@ concrete AdjectiveEst of Adjective = CatEst ** open ResEst, Prelude in {
         True => np.s ! NPCase Elat ++ a.s ! Compar ! AN af ;        -- minust suurem
         _    => a.s ! Compar ! AN af ++ "kui" ++ np.s ! NPCase Nom  -- suurem kui mina
         } ;
-      infl = True ; --a.infl
+      infl = Regular ; --a.infl
       } ;
       
     CAdvAP ad ap np = {
@@ -23,13 +23,13 @@ concrete AdjectiveEst of Adjective = CatEst ** open ResEst, Prelude in {
       } ;
     UseComparA a = {
       s = \\_,nf => a.s ! Compar ! AN nf ;
-      infl = True ; --a.infl
+      infl = Regular ; --a.infl
       } ;
 
 -- $SuperlA$ belongs to determiner syntax in $Noun$.
     AdjOrd ord = {
       s = \\_ => ord.s ;
-      infl = True
+      infl = Regular
       } ;
 
 
