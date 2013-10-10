@@ -532,6 +532,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			#c + #v + #v + #v => S22 ; -- muie, neiu, riie
 			? + ? + ? + ? => S1 ;
 			-- all 5-letters
+			_ + #c + "ia" => S2 ; -- aaria, minia, orgia, kirurgia, nostalgia
 			#v + #c + #c + #v + #v => S1 ; -- armee
 			#c + #v + #c + #v + #v => S1 ; -- depoo
 			#c + #c + #v + #c + #c => S1 ; -- tramm
@@ -604,7 +605,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			_ + #c + #c + #v + #c + #c + #v + #c + #c => S3 ; -- ampersand
 			_ + #c + #v + #c + #v + #c + #c => S1 ; -- dividend
 			_ + #v + #c + #c + #c + #v + #v => S1 ; -- displei
-			_ + #c + #v + #c + #c + #v + #v => S1 ; -- politsei, nostalgia (?)
+			_ + #c + #v + #c + #c + #v + #v => S1 ; -- politsei
 			     _ + #c + #v + #c + #v + #v => S1 ; -- defilee, kompanii
 			_ => S2 -- the default is S2, but the above rules should catch most of the words
 		} ;

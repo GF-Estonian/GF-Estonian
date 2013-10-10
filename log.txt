@@ -1174,3 +1174,25 @@ $ cat prev/mkN1.diff.txt | ./freq_err.bash
 
 $ cat prev/mkV1.diff.txt | ./freq_err.bash
 311 rare words among 567 errors = .5485
+
+
+Also, improved the handling of -ia words.
+
+input: ../data/nouns.6forms.csv
+mkN 1-arg pattern: (@F[0])
+  19797
+    797 2-3-4-5-6
+    357 2-3-4-5
+    148 5-6
+    136 2-4-6
+    118 6
+    115 3-5-6
+     88 2-4-5-6
+     79 3-4-5-6
+     36 2-4
+     35 3
+     19 2
+      5 3-5
+      3 2-3-4
+      1 5
+coverage: 19797 out of 21734 = .9108

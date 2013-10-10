@@ -24,6 +24,8 @@
 sed=/bin/sed
 g=../estonian/
 
+max=3
+
 class=""
 gold=""
 
@@ -63,7 +65,7 @@ fi
 mk="mk"$class
 
 echo "input: ${gold}"
-for i in `seq 0 3`
+for i in `seq 0 $max`
 do
 	pat="${pattern[$i]}"
 	hi=$(($i+1))
