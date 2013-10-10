@@ -33,7 +33,7 @@ Picks 8 verb forms out of the Filosoft morph. synth. output format.
 
 Runs various morph. generation tests saving the results as gold-files into the test-directory.
 
-### test-mk(N|V).sh
+### test-mk.sh
 
 Runs the morph. generation test for variable number of input arguments,
 given a forms-file from the data-directory.
