@@ -7,6 +7,10 @@
 # 2. word class (or # if not a frequent word)
 # 3. frequency (or # if not a frequent word)
 # 4. diff id (or # if correctly analyzed or unanalyzed frequent word)
+#
+# Usage:
+#
+# cat mkV4.diff.txt | ./join-freq-diff.bash
 
 w1=$(mktemp)
 w2=$(mktemp)
@@ -18,8 +22,8 @@ w2=$(mktemp)
 export LC_ALL=C
 
 # Join wants sorted files
+sort -k1 > $w2
 cat ../data/freq.csv | sort -k1 > $w1
-cat nouns.6forms.diff.csv | sort -k1 > $w2
 
 # Full outer join
 join -a 1 -a 2 -t $'\t' -e'#' -o '0,1.2,1.3,2.2' $w1 $w2

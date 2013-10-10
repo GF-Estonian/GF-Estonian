@@ -1143,3 +1143,34 @@ Nouns:
     219 5
      44 4
 Coverage: 21217 out of 21734 = .9762
+
+
+Kaarel 10.10
+------------
+
+Refactored the smart paradigms testing scripts.
+Compared the errors with frequent words.
+
+$ cat mkV4.diff.txt | ./join-freq-diff.bash | grep '[0-9]$'
+jooma	V	221	5-6-7-8
+jääma	V	2421	6
+kaitsma	V	202	6
+käima	V	1250	5-7-8
+looma	V	262	5-6-7-8
+lööma	V	533	5-6-7-8
+maitsma	V	39	6
+minema	V	3115	3-6-7
+müüma	V	305	5-7-8
+olema	V	44904	3
+pooma	V	17	5-7-8
+saama	V	5894	6
+sööma	V	298	5-6-7-8
+taaslooma	#	#	5-6-7-8
+tooma	V	834	5-6-7-8
+viima	V	802	5-7-8
+
+$ cat prev/mkN1.diff.txt | ./freq_err.bash
+1188 rare words among 1986 errors = .5981
+
+$ cat prev/mkV1.diff.txt | ./freq_err.bash
+311 rare words among 567 errors = .5485
