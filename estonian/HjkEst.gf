@@ -411,7 +411,12 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			<_, _ + ("v"|"tav")>
 				=> hjk_type_IVb_audit x "a" ;
 
-			<_, _ + ("line"|"lane"|"mine"|"kene")>
+			-- The choice between Va (pl part: -seid) and Vb (pl part: -si)
+			-- is based on checking the derivational ending.
+			-- We just check the ending of the word and require at least 2 letters
+			-- to precede the ending.
+			-- We added also -tine and -ldane (which occur with adjectives).
+			<_, _ + ? + ? + ("line"|"lane"|"mine"|"kene"|"tine"|"ldane")>
 				=> hjk_type_Vb_oluline x ;
 
 			-- k6ne
@@ -420,7 +425,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 
 			-- Many adjectives end with "ne" (40% in WordNet)
 			-- We require them to be at least 5 letters long (excluding 'öine'),
-			-- to give a change to VII_touge (next rule).
+			-- to give a chance to VII_touge (next rule).
 			<_, _ + ? + ? + ? + "ne">
 				=> hjk_type_Va_otsene x ;
 
