@@ -40,8 +40,8 @@ concrete CatEst of Cat = CommonX ** open HjkEst, ResEst, Prelude in {
 
 -- The $Bool$ in s tells whether usage is modifying (as opposed to
 -- predicative), e.g. "x on suurem kui y" vs. "y:st suurem arv".
--- The $Bool$ in infl tells whether the adjective inflects as a 
--- modifier: e.g. "valmis ehitused" vs. "ehitused on valmid". 
+-- The $Infl$ in infl tells whether the adjective inflects as a 
+-- modifier: e.g. "väsinud mehele" vs. "mees muutus väsinuks".
 
     AP = {s : Bool => NForm => Str ; infl : Infl} ; 
 
