@@ -75,3 +75,10 @@ Smart paradigm constructors
 
   - most functions ported to Estonian
   - tested using the MOLTO Phrasebook and ACE-in-GF applications
+
+Projects that use GF-Estonian
+-----------------------------
+
+  - [Speech grammars](https://github.com/Kaljurand/Grammars)
+  - [ACE-in-GF](https://github.com/Attempto/ACE-in-GF)
+  - [MOLTO Phrasebook in Estonian](https://github.com/Kaljurand/PhrasebookEst)
