@@ -292,7 +292,7 @@ see on siin kus tema magab
 *
 mkCl-V-Cl
 mkUtt (mkCl rain_V0 )
-sadab
+sajab
 *
 mkCl-VP-Cl
 mkUtt (mkCl (progressiveVP (mkVP rain_V0)))
@@ -392,11 +392,11 @@ alati magada
 *
 mkVP-VPSlash-NP-VP
 mkUtt (mkVP (mkVPSlash paint_V2A (mkAP black_A)) it_NP)
-selle mustiks maalida
+selle mustaks maalida
 *
 mkVP-VPSlash-VP
 mkUtt (mkVP (mkVPSlash paint_V2A (mkAP black_A)))
-ennast mustiks maalida
+ennast mustaks maalida
 *
 mkVP-Comp-VP
 mkUtt (mkVP (mkComp (mkAP warm_A)))
@@ -408,7 +408,7 @@ ennast armastada
 *
 mkVP-VPSlash-VP
 mkUtt (reflexiveVP (mkVPSlash paint_V2A (mkAP black_A)))
-ennast mustiks maalida
+ennast mustaks maalida
 *
 passiveVP-V2-VP
 mkUtt (passiveVP love_V2)
@@ -10594,7 +10594,7 @@ kuninga ema
 *
 mkCN-N3-NP-NP-CN
 mkUtt (mkCN distance_N3 (mkNP this_Det city_N) (mkNP paris_PN) )
-kaugus sellest linnast Pariisi
+kaugus sellest linnast Pariisini
 *
 mkCN-N2-CN
 mkUtt (mkCN mother_N2)

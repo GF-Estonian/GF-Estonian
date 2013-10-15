@@ -22,7 +22,7 @@ lin
   big_A = mkA (mkN "suur" "suure" "suurt" "suurde" "suurte" "suuri");
   bike_N = mkN "ratas" ;
   bird_N = mkN "lind" ;
-  black_A = mkA "must" ;
+  black_A = mkA (mkN "must" "musta" "musta") ;
   blue_A = mkA "sinine" ;
   boat_N = mkN "paat" ;
   book_N = mkN "raamat" "raamatu" "raamatut" "raamatusse" "raamatute" "raamatuid" ;
@@ -59,7 +59,11 @@ lin
   cow_N = mkN "lehm" ;
   die_V = mkV "surema" ;
   dirty_A = mkA "räpane" ;
-  distance_N3 = mkN3 (mkN "kaugus") celative (casePrep illative) ; -- TODO: terminative --you can just add (casePrep terminative) :-P or is this a linguistic doubt and not a gf one?
+  -- Using 'terminative' for the destination works better with nouns.
+  -- And also with placenames, as one does not need to decide between
+  -- illative (Tartusse) and allative (Põltsamaale).
+  -- Unfortunately, we cannot use a similar trick for the source (*Põltsamaast vs Põltsamaalt).
+  distance_N3 = mkN3 (mkN "kaugus") celative (casePrep terminative) ;
   doctor_N = mkN "arst" ;
   dog_N = mkN "koer" ;
   door_N = mkN "uks" ;
@@ -142,7 +146,7 @@ lin
   probable_AS = mkAS (mkA (mkN "tõenäoline")) ;
   queen_N = mkN "kuninganna" ;
   radio_N = mkN "raadio" ;
-  rain_V0 = mkV0 (mkV "sadama") ;
+  rain_V0 = mkV0 (mkV "sadama" "sadada" "sajab") ;
   read_V2 = mkV2 (mkV "lugema" "lugeda" "loeb") ;
   red_A = mkA "punane" ;
   religion_N = mkN "usk" ;
