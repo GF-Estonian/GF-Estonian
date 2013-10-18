@@ -196,7 +196,7 @@ oper
 -- Three-place (ditransitive) verbs need two prepositions, of which
 -- the first one or both can be absent.
 
-  mkV3     : V -> Prep -> Prep -> V3 ;  -- e.g. räägima, allative, elative
+  mkV3     : V -> Prep -> Prep -> V3 ;  -- e.g. rääkima, allative, elative
   dirV3    : V -> Case -> V3 ;          -- liigutama, (accusative), illative
   dirdirV3 : V         -> V3 ;          -- andma, (accusative), (allative)
 
