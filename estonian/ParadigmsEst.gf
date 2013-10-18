@@ -70,7 +70,7 @@ oper
 -- of many-place verbs and adjective. A complement can be defined by
 -- just a case, or a pre/postposition and a case.
 
-  prePrep     : Case -> Str -> Prep ;  -- preposition, e.g. comitative "koos"
+  prePrep     : Case -> Str -> Prep ;  -- preposition, e.g. abessive "ilma"
   postPrep    : Case -> Str -> Prep ;  -- postposition, e.g. genitive "taga"
   postGenPrep :         Str -> Prep ;  -- genitive postposition, e.g. "taga"
   casePrep    : Case ->        Prep ;  -- just case, e.g. adessive
