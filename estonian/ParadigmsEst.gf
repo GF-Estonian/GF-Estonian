@@ -59,7 +59,7 @@ oper
   comitative  : Case ; -- e.g. "karbiga"
 
   infDa : InfForm ; -- e.g. "lugeda"
-  infDes : InfForm ;
+  infDes : InfForm ; --e.g. "lugedes"
   infMa : InfForm ; -- e.g. "lugema"
   infMas : InfForm ; -- e.g. "lugemas"
   infMaks : InfForm ; -- e.g. "lugemaks"
@@ -75,11 +75,6 @@ oper
   postGenPrep :         Str -> Prep ;  -- genitive postposition, e.g. "taga"
   casePrep    : Case ->        Prep ;  -- just case, e.g. adessive
 
-  -- TODO build the dict 
-  NW : Type ;   -- Noun from DictEst (WordNet)
-  AW : Type ;   -- Adjective from DictEst (WordNet)
-  VW : Type ;   -- Verb from DictEst (WordNet)
-  AdvW : Type ; -- Adverb from DictEst (WordNet)
 
 --2 Nouns
 
@@ -102,17 +97,14 @@ oper
 -- "auto - audon".
 
   mkN : overload {
-    mkN : (kukko : Str) -> N ;  -- predictable nouns, covers 82%
-    mkN : (savi,savia : Str) -> N ; -- different pl.part
-    mkN : (vesi,veden,vesia : Str) -> N ; -- also different sg.gen
+    mkN : (ema : Str) -> N ;  -- predictable nouns, covers 90%
+    mkN : (tukk,tuku : Str) -> N ; -- sg nom,gen: unpredictable stem vowel
+    mkN : (tukk,tuku,tukku : Str) -> N ; -- sg nom,gen,part
     mkN : (pank,panga,panka,panku : Str) -> N ; -- sg nom,gen,part, pl.part
 
---    mkN : (olo,n,a,na,oon,jen,ja,ina,issa,ihin : Str) -> N ; -- worst case, 10 forms
     mkN : (oun,ouna,ouna,ounasse,ounte,ounu : Str) -> N ; -- worst case, 6 forms
-    mkN : (oun,ouna,ouna,ounasse,ounte,ounu,ountesse : Str) -> N ; -- worst case, 7 forms
-    mkN : (pika : Str) -> (juna  : N) -> N ; -- compound with invariable prefix
-    mkN : (oma : N)    -> (tunto : N) -> N ; -- compound with inflecting prefix
-    mkN : NW -> N ;  -- noun from DictEst (WordNet)
+--    mkN : (pika : Str) -> (juna  : N) -> N ; -- compound with invariable prefix
+--    mkN : (oma : N)    -> (tunto : N) -> N ; -- compound with inflecting prefix
   } ;
 
 -- Nouns used as functions need a case, of which the default is
@@ -146,17 +138,16 @@ oper
   mkA : overload {
     mkA : Str -> A ;  -- regular noun made into adjective
     mkA : N -> A ;    -- any noun made into adjective
-    mkA : N -> (infl : Bool) -> A ; -- noun made into adjective, agreement type specified
+    mkA : N -> (infl : Infl) -> A ; -- noun made into adjective, agreement type specified
     mkA : N -> (parem, parim : Str) -> A ; -- deviating comparison forms
-    mkA : AW -> A ;  -- adjective from DictEst (WordNet)
   } ;
 
 -- Two-place adjectives need a case for the second argument.
 
-  mkA2 : A -> Prep -> A2  -- e.g. "jaollinen" casePrep adessive
+  mkA2 : A -> Prep -> A2  -- e.g. "vihane" (postGenPrep "peale")
     = \a,p -> a ** {c2 = p ; lock_A2 = <>};
 
-  genAttrA : Str -> A ; -- genitive attributes ; no agreement to head, no comparison forms. 
+  invA : Str -> A ; -- invariable adjectives, such as genitive attributes ; no agreement to head, no comparison forms. 
 
 --2 Verbs
 --
@@ -166,19 +157,18 @@ oper
 -- The worst case needs eight forms, as shown in the following.
 
   mkV : overload {
-    mkV : (lugema : Str) -> V ;     -- predictable verbs, covers n %
-    mkV : (lugema,lugeda : Str) -> V ; -- deviating past 3sg
-    mkV : (lugema,loeb,lugeda : Str) -> V ; -- also deviating pres. 1sg
-    mkV : (lugema,lugeda,loeb,loetakse : Str) -> V ;
-    mkV : (tegema,teha,teeb,tehakse,tehke,tegi,teinud,tehtud : Str) -> V ; -- worst-case verb
-    mkV : (saama : V) -> (aru : Str) -> V ; -- püsiühendid TODO
-    mkV : VW -> V ;  -- verb from DictEst (WordNet)
+    mkV : (lugema : Str) -> V ;     -- predictable verbs, covers 90 %
+    mkV : (lugema,lugeda : Str) -> V ; -- ma infinitive, da infinitive
+    mkV : (lugema,loeb,lugeda : Str) -> V ; -- ma, da, present sg 3 
+    mkV : (lugema,lugeda,loeb,loetakse : Str) -> V ; --ma, da, pres sg 3, pres passive
+    mkV : (tegema,teha,teeb,tehakse,tehke,tegi,teinud,tehtud : Str) -> V ; -- worst-case verb, 8 forms
+    mkV : (saama : V) -> (aru : Str) -> V ; -- multi-word verbs
   } ;
 
 -- All the patterns above have $nominative$ as subject case.
 -- If another case is wanted, use the following.
 
-  caseV : Case -> V -> V ;  -- deviating subj. case, e.g. genitive "täytyä"
+  caseV : Case -> V -> V ;  -- deviating subj. case, e.g. allative "meeldima"
 
 -- The verbs "be" and "go" are special.
 
@@ -206,9 +196,9 @@ oper
 -- Three-place (ditransitive) verbs need two prepositions, of which
 -- the first one or both can be absent.
 
-  mkV3     : V -> Prep -> Prep -> V3 ;  -- e.g. puhua, allative, elative
-  dirV3    : V -> Case -> V3 ;          -- siirtää, (accusative), illative
-  dirdirV3 : V         -> V3 ;          -- antaa, (accusative), (allative)
+  mkV3     : V -> Prep -> Prep -> V3 ;  -- e.g. räägima, allative, elative
+  dirV3    : V -> Case -> V3 ;          -- liigutama, (accusative), illative
+  dirdirV3 : V         -> V3 ;          -- andma, (accusative), (allative)
 
 
 --3 Other complement patterns
@@ -218,15 +208,15 @@ oper
 
   mkV0  : V -> V0 ; --%
   mkVS  : V -> VS ;
-  mkV2S : V -> Prep -> V2S ; -- e.g. "sanoa" allative
-  mkVV  : V -> VV ;  -- e.g. "alkaa"
+  mkV2S : V -> Prep -> V2S ; -- e.g. "ütlema" allative
+  mkVV  : V -> VV ;  -- e.g. "hakkama"
   mkVVf : V -> InfForm -> VV ; -- e.g. "hakkama" infMa
-  mkV2V : V -> Prep -> V2V ;  -- e.g. "käskeä" genitive
-  mkV2Vf : V -> Prep -> InfForm -> V2V ; -- e.g. "kieltää" partitive infMast  
-  mkVA  : V -> Prep -> VA ; -- e.g. "maistua" ablative
-  mkV2A : V -> Prep -> Prep -> V2A ; -- e.g. "maalata" accusative translative
+  mkV2V : V -> Prep -> V2V ;  -- e.g. "käskima" adessive
+  mkV2Vf : V -> Prep -> InfForm -> V2V ; -- e.g. "keelama" partitive infMast  
+  mkVA  : V -> Prep -> VA ; -- e.g. "muutuma" translative
+  mkV2A : V -> Prep -> Prep -> V2A ; -- e.g. "värvima" genitive translative
   mkVQ  : V -> VQ ; 
-  mkV2Q : V -> Prep -> V2Q ; -- e.g. "kysyä" ablative 
+  mkV2Q : V -> Prep -> V2Q ; -- e.g. "küsima" ablative 
 
   mkAS  : A -> AS ; --%
   mkA2S : A -> Prep -> A2S ; --%
@@ -279,11 +269,6 @@ oper
     \c -> {c = NPCase c ; s = [] ; isPre = True ; lock_Prep = <>} ;
   accPrep =  {c = NPAcc ; s = [] ; isPre = True ; lock_Prep = <>} ;
 
-  NW = {s : NForms ; lock_NW : {}} ;
-  AW = {s : NForms ; lock_AW : {}} ;
-  VW = {s : VForms ; lock_VW : {}} ;
-  AdvW = {s : Str ; lock_AdvW : {}} ;
-
 
   mkN = overload {
     mkN : (nisu : Str) -> N = mk1N ;
@@ -294,7 +279,6 @@ oper
 
     mkN : (sora : Str) -> (tie : N) -> N = mkStrN ;
     mkN : (oma,tunto : N) -> N = mkNN ;
-    mkN : (sana : NW) -> N = \w -> nForms2N w.s ;
   } ;
 
   -- Adjective forms (incl. comp and sup) are derived from noun forms
@@ -495,10 +479,9 @@ oper
     -- TODO: temporary usage of regAdjective1
     mkA : N -> (valmim,valmeim : Str) -> (infl : Infl) -> A =
 		\n,c,s,infl -> (regAdjective1 n c s) ** {infl = infl ; lock_A = <>} ;
-    mkA : (sana : AW) -> A = \w -> noun2adjDeg (nForms2N w.s) ** {infl = Regular} ;
   } ;
 
-  genAttrA balti = {s = \\_,_ => balti ; infl = Invariable ; lock_A = <>} ;
+  invA balti = {s = \\_,_ => balti ; infl = Invariable ; lock_A = <>} ;
 
   mkA_1 : Str -> A = \x -> noun2adjDeg (mk1N x) ** {infl = Regular  ; lock_A = <>} ;
 
@@ -550,7 +533,6 @@ oper
     mkV : (lugema,lugeda,loeb,loetakse : Str) -> V = mk4V ;
     mkV : (tegema,teha,teeb,tehakse,tehke,tegi,teinud,tehtud : Str) -> V = mk8V ;
     mkV : (aru : Str) -> (saama : V) -> V = mkPV ; -- particle verbs
-    mkV : (sana : VW) -> V = \w -> vforms2V w.s ** {sc = NPCase Nom ; lock_V = <>} ;
   } ;
 
   mk1V : Str -> V = \s -> 
@@ -742,7 +724,6 @@ oper
 
   mkAdv = overload { 
     mkAdv : Str -> Adv = \s -> {s = s ; lock_Adv = <>} ;
-    mkAdv : AdvW -> Adv = \s -> {s = s.s ; lock_Adv = <>} ;
     } ;
 
   mkV2 = overload {
