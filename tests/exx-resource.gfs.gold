@@ -410,7 +410,7 @@ LangEst: kus Juhan on
 
 
 Lang: IdetCN (IdetQuant which_IQuant (NumCard (NumNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))))) (UseN song_N)
-LangEst: mis viis lauli
+LangEst: mis viis laulu
 
 
 Lang: IdetIP (IdetQuant which_IQuant (NumCard (NumNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5))))))))
@@ -614,11 +614,11 @@ LangEst:
 
 
 Lang: PhrUtt NoPConj (UttImpSg PPos (ImpVP (AdVVP always_AdV (ComplSlash (SlashV2a listen_V2) (DetCN (DetQuant DefArt NumSg) (UseN sea_N)))))) NoVoc
-LangEst: kuula meri
+LangEst: kuula merd
 
 
 Lang: PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (ExistNP (PredetNP only_Predet (DetCN (DetQuant IndefArt (NumCard (NumNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))))) (AdvCN (RelCN (UseN woman_N) (UseRCl (TTAnt TCond ASimul) PPos (RelSlash IdRP (SlashPrep (PredVP (UsePron i_Pron) (ComplVV want_VV (PassV2 see_V2))) with_Prep)))) (PrepNP in_Prep (DetCN (DetQuant DefArt NumSg) (UseN rain_N))))))))) NoVoc
-LangEst: on olemas ainult kaks naist koos kellega mind tahaks nähakse vihmis
+LangEst: on olemas ainult kaks naist koos kellega mind tahaks nähakse vihmas
 
 
 Lang: PhrUtt NoPConj (UttImpSg PPos (ImpVP (ComplSlash (SlashV2A paint_V2A (ConjAP both7and_DConj (BaseAP (ComparA small_A (DetCN (DetQuant DefArt NumSg) (UseN sun_N))) (ComparA big_A (DetCN (DetQuant DefArt NumSg) (UseN moon_N)))))) (DetCN (DetQuant DefArt NumSg) (UseN earth_N))))) NoVoc
@@ -678,7 +678,7 @@ LangEst:
 
 
 Lang: UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN grammar_N)) (ComplSlash (SlashV2a speak_V2) (DetCN (DetQuant IndefArt (NumCard (NumNumeral (num (pot2as3 (pot1as2 (pot1to19 n2))))))) (UseN language_N)))))
-LangEst: see grammatika räägib kahte &+ teist keeli
+LangEst: see grammatika räägib kahte &+ teist keelt
 
 
 Lang: UseCl (TTAnt TPast AAnter) PPos (PredVP (UsePron she_Pron) (ComplSlash (SlashV2a buy_V2) (DetCN (DetQuant IndefArt NumSg) (AdjCN (PositA red_A) (UseN house_N)))))
