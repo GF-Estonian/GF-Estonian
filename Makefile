@@ -22,6 +22,9 @@ help:
 	@echo
 	@echo "count_dict: show the frequency distribution of constructor patterns in DictEst"
 	@echo
+	@echo "  diff_rgl: compare the GF RGL version of Estonian with the current version"
+	@echo "            (set GF_SRC to the root of the GF source distribution, it is currently '$(GF_SRC)')"
+	@echo
 	@echo "     clean: remove gfo-files"
 
 # -v: verbose (gives some idea of what slows down the linking)
@@ -43,6 +46,14 @@ load_dict:
 count_dict:
 	cat estonian/DictEst.gf | grep " = mk" | wc -l
 	cat estonian/DictEst.gf | grep " = mk" | sed "s/.*= //" | sed 's/"[^"]*"//g' | sed "s/  */ /g" | sed "s/;//" | sort | uniq -c | sort -nr
+
+diff_rgl:
+	diff $(GF_SRC)/lib/src/api/CombinatorsEst.gf api/CombinatorsEst.gf
+	diff $(GF_SRC)/lib/src/api/ConstructorsEst.gf api/ConstructorsEst.gf
+	diff $(GF_SRC)/lib/src/api/SyntaxEst.gf api/SyntaxEst.gf
+	diff $(GF_SRC)/lib/src/api/SymbolicEst.gf api/SymbolicEst.gf
+	diff $(GF_SRC)/lib/src/api/TryEst.gf api/TryEst.gf
+	diff -r $(GF_SRC)/lib/src/estonian/ estonian
 
 clean:
 	find -name *.gfo | xargs rm -f
