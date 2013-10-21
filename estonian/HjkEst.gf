@@ -148,9 +148,8 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		nForms6 x (x_n+"i") (x+"i") (x+"i") (x+"ide") (x+"e") ;
 
 
-        --like link but 
-	-- gen form given (takes care of vowel and consonant gradation) 
-	-- -sid for pl.part (todo: generate short forms depending on vowel?)
+	-- like link but gen form given (takes care of vowel and consonant gradation)
+	-- TODO: -sid for pl.part (generate short forms depending on vowel?)
 	hjk_type_VI_tukk x x_gen =
 		let
 			v_g : Str = last x_gen ;

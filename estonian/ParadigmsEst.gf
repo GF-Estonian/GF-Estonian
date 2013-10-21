@@ -16,8 +16,12 @@
 --
 -- The structure of functions for each word class $C$ is the following:
 -- there is a polymorphic constructor $mkC$, which takes one or
--- a few arguments. In Estonian, one argument is enough in ??? % of
+-- a few arguments. In Estonian, one argument is enough in 90% of
 -- cases in average.
+--
+-- @author Inari Listenmaa
+-- @author Kaarel Kaljurand
+-- @version 2013-10-21
 
 resource ParadigmsEst = open 
   (Predef=Predef), 
@@ -59,7 +63,7 @@ oper
   comitative  : Case ; -- e.g. "karbiga"
 
   infDa : InfForm ; -- e.g. "lugeda"
-  infDes : InfForm ; --e.g. "lugedes"
+  infDes : InfForm ; -- e.g. "lugedes"
   infMa : InfForm ; -- e.g. "lugema"
   infMas : InfForm ; -- e.g. "lugemas"
   infMaks : InfForm ; -- e.g. "lugemaks"
@@ -78,23 +82,12 @@ oper
 
 --2 Nouns
 
--- The worst case gives six forms.
--- In practice just a couple of forms are needed to define the different
--- stems, vowel alternation, and vowel harmony.
-
 oper
 
 -- The regular noun heuristic takes just one form (singular
 -- nominative) and analyses it to pick the correct paradigm.
--- It does automatic grade alternation, and is hence not usable
--- for words like "auto" (whose genitive would become "audon").
---
--- If the one-argument paradigm does not give the correct result, one can try and give 
--- two or three forms. Most notably, the two-argument variant is used
--- for nouns like "kivi - kiviä", which would otherwise become like
--- "rivi - rivejä". Three arguments are used e.g. for 
--- "auto - auton - autoja", which would otherwise become
--- "auto - audon".
+-- If the 1-argument paradigm does not give the correct result,
+-- one can try and give 2, 3, 4, or 6 forms.
 
   mkN : overload {
     mkN : (ema : Str) -> N ;  -- predictable nouns, covers 90%
@@ -133,7 +126,6 @@ oper
 -- The comparative and the superlative
 -- are always inflected in the same way, so the nominative of them is actually
 -- enough (TODO: confirm).
--- TODO: update these types to include the new boolean non-inflection marker
 
   mkA : overload {
     mkA : Str -> A ;  -- regular noun made into adjective
@@ -159,7 +151,7 @@ oper
   mkV : overload {
     mkV : (lugema : Str) -> V ;     -- predictable verbs, covers 90 %
     mkV : (lugema,lugeda : Str) -> V ; -- ma infinitive, da infinitive
-    mkV : (lugema,loeb,lugeda : Str) -> V ; -- ma, da, present sg 3 
+    mkV : (lugema,lugeda,loeb : Str) -> V ; -- ma, da, present sg 3
     mkV : (lugema,lugeda,loeb,loetakse : Str) -> V ; --ma, da, pres sg 3, pres passive
     mkV : (tegema,teha,teeb,tehakse,tehke,tegi,teinud,tehtud : Str) -> V ; -- worst-case verb, 8 forms
     mkV : (saama : V) -> (aru : Str) -> V ; -- multi-word verbs
@@ -274,7 +266,7 @@ oper
     mkN : (nisu : Str) -> N = mk1N ;
     mkN : (link,lingi : Str) -> N = mk2N ;
     mkN : (tukk,tuku,tukku : Str) -> N = mk3N ;
-    mkN : (paat,paadi,paati,paatide : Str) -> N = mk4N ;
+    mkN : (paat,paadi,paati,paate : Str) -> N = mk4N ;
     mkN : (oun,ouna,ouna,ounasse,ounte,ounu : Str) -> N = mk6N ;
 
     mkN : (sora : Str) -> (tie : N) -> N = mkStrN ;
@@ -293,6 +285,8 @@ oper
 
   mk1N : (link : Str) -> N = \s -> nForms2N (hjk_type s) ** {lock_N = <> } ;
 
+  -- mk2N, mk3N, mk4N make sure that the user specified forms end up in the paradigm,
+  -- even though the rest is wrong
   mk2N : (link,lingi : Str) -> N = \link,lingi -> 
     let nfs : NForms = (nForms2 link lingi) ; 
         nfs_fixed : NForms = table {
@@ -318,24 +312,16 @@ oper
         } ;
     in nForms2N nfs_fixed ** {lock_N = <> } ;
 
-{-  mk1N : (link : Str) -> N = \s -> nForms2N (hjk_type s) ** {lock_N = <> } ;
-  mk2N : (link,lingi : Str) -> N = \s,t -> nForms2N (nForms2 s t)  ** {lock_N = <>} ;
-  mk3N : (tukk,tuku,tukku : Str) -> N = \s,t,u -> nForms2N (nForms3 s t u) ** {lock_N = <>} ;  
-  --regular mk4N
-  mk4N : (paat,paadi,paati,paate : Str) -> N = \s,t,u,v -> nForms2N (nForms4 s t u v) ** {lock_N = <>} ;
--}
 
-  --experimental: make sure that the user specified forms end up in the paradigm, even though the rest is wrong
-  --this is using pl part
-  mk4N : (paat,paadi,paati,paatide : Str) -> N = \paat,paadi,paati,paate ->  
-    let nfs : NForms = (nForms4 paat paadi paati paate) ; 
+  mk4N : (paat,paadi,paati,paate : Str) -> N = \paat,paadi,paati,paate ->
+    let nfs : NForms = (nForms4 paat paadi paati paate) ;
         nfs_fixed : NForms = table {
                 0 => paat ;
                 1 => paadi ;
                 2 => paati ;
                 3 => nfs ! 3 ;
                 4 => nfs ! 4 ; 
-                5 => paate 
+                5 => paate
         } ;
     in nForms2N nfs_fixed ** {lock_N = <> } ;
 
@@ -412,7 +398,7 @@ oper
       _ => nForms2 tukk tuku 
     } ;
 
-  nForms4 : (_,_,_,_ : Str) -> NForms = \paat,paadi,paati,paate -> 
+  nForms4 : (_,_,_,_ : Str) -> NForms = \paat,paadi,paati,paate ->
     case <paat,paadi,paati,paate> of {
      -- distinguish between joonis and segadus
       <_ +("ne"|"s"),  _+"se", _+"st", _+"seid"> => hjk_type_Va_otsene paat ;
@@ -426,6 +412,7 @@ oper
 
       _  => nForms3 paat paadi paati 
       } ;
+
 {-
   --Version that uses pl gen instead of pl part
   nForms4 : (_,_,_,_ : Str) -> NForms = \paat,paadi,paati,paatide -> 
@@ -452,7 +439,7 @@ oper
 
   mmkN2 : N -> Prep -> N2 = \n,c -> n ** {c2 = c ; isPre = mkIsPre c ; lock_N2 = <>} ;
   mkN3 = \n,c,e -> n ** {c2 = c ; c3 = e ; 
-    isPre = mkIsPre c  ; -- matka Lontoosta Pariisiin
+    isPre = mkIsPre c  ; -- matka Londonist Pariisi
     isPre2 = mkIsPre e ;          -- Suomen voitto Ruotsista
     lock_N3 = <>
     } ;
