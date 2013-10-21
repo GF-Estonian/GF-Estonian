@@ -23,8 +23,6 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 
   oper
 
-	NFS = {s : NForm => Str} ;
-
 	foreign : pattern Str = #("z" | "ž" | "š") ;
 	-- Foreign vowel endings
 	foreign_v : pattern Str = #("ko" | "po" | "to" | "fo" | "ka" | "pa" | "ta" | "fa" | "ku" | "pu" | "tu" | "fu") ;
@@ -50,13 +48,12 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	hjk_type_VI_meeskond,
 	hjk_type_VI_seminar,
 	hjk_type_VII_touge : Str -> NForms ;
---	hjk_type_VII_touge : Str -> NFS ;
 
 	-- IVa additionally needs the stem vowel.
 	hjk_type_IVb_audit,
-	hjk_type_IVb_audit1 : Str -> Str -> NForms ; --NFS
+	hjk_type_IVb_audit1 : Str -> Str -> NForms ;
 	
-	hjk_type_VI_tukk : Str -> Str -> NForms ;
+	hjk_type_VI_link2 : Str -> Str -> NForms ;
 
 	hjk_type2 : Str -> Str -> NForms ;
 
@@ -149,23 +146,19 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		in
 		nForms6 x (x_n+"i") (x+"i") (x+"i") (x+"ide") (x+"e") ;
 
-
-	-- like link but gen form given (takes care of vowel and consonant gradation)
-	-- TODO: -sid for pl.part (generate short forms depending on vowel?)
-	hjk_type_VI_tukk x x_gen =
+	-- same as hjk_type_VI_link but additionally takes the genitive ending
+	hjk_type_VI_link2 x i =
 		let
-			v_g : Str = last x_gen ;
-			
- 		     {-   pl_part : Str = 
- 		            case v_g of { 
- 		                "i" => "e" ; 
- 		                 _  => v_g + "sid" } ;
- 		      -}
-
+			x_n : Str = weaker_noun x ;
+			-- TODO: think about it
+			e : Str = case i of {
+				"a" => "asid" ; -- pikk/pika -> pikkasid
+				_ => "e"
+			}
 		in
-		nForms6 x x_gen (x+v_g) (x+v_g) (x+v_g+"de") (x+v_g+"sid") ;
+		nForms6 x (x_n+i) (x+i) (x+i) (x+i+"de") (x+e) ;
 
-		
+
 	hjk_type_VI_imelik x =
 		let
 			x_t : Str = stronger_noun x
@@ -354,26 +347,26 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 				=> hjk_type_I_koi x ;
 
 			-- 'statiiv' (not like 'karjuv')
-			<S1, _ + #vv + #c, _>
-				=> hjk_type_VI_link x ;
+			<S1, _ + #vv + #c, i>
+				=> hjk_type_VI_link2 x i ;
 
 			<S3, _ + #c + #v + #lmnr, _>
 				=> hjk_type_VI_seminar x ;
 
-			<S1, _ + #v + #v + #c, _>
-				=> hjk_type_VI_link x ;
+			<S1, _ + #v + #v + #c, i>
+				=> hjk_type_VI_link2 x i ;
 
 			<_, _ + ("us"|"is"), _>
 				=> hjk_type_Vb_oluline x ;
 
-			<S3, _ + #v + #v + #c, _>
-				=> hjk_type_VI_link x ;
+			<S3, _ + #v + #v + #c, i>
+				=> hjk_type_VI_link2 x i ;
 
-			<(S1|S3), _ + #v + #c + #c, _>
-				=> hjk_type_VI_link x ;
+			<(S1|S3), _ + #v + #c + #c, i>
+				=> hjk_type_VI_link2 x i ;
 
-			<(S1|S3), _ + #v + #c + #c + #c, _>
-				=> hjk_type_VI_link x ;
+			<(S1|S3), _ + #v + #c + #c + #c, i>
+				=> hjk_type_VI_link2 x i ;
 
 			<_, _ + "nna", _>
 				=> hjk_type_III_ratsu x ;
@@ -396,16 +389,16 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 
 			-- TODO: next 3 rules: last syllable must be long
 			-- portfell, TODO: not 'karask'
-			<S2, _ + #v + #c + #c, _>
-				=> hjk_type_VI_link x ;
+			<S2, _ + #v + #c + #c, i>
+				=> hjk_type_VI_link2 x i ;
 
 			-- rostbiif, not viiul
-			<S2, _ + #c + #v + #v + #c, _>
-				=> hjk_type_VI_link x ;
+			<S2, _ + #c + #v + #v + #c, i>
+				=> hjk_type_VI_link2 x i ;
 
 			-- impulss
-			<S2, _ + #v + #c + #c + #c, _>
-				=> hjk_type_VI_link x ;
+			<S2, _ + #v + #c + #c + #c, i>
+				=> hjk_type_VI_link2 x i ;
 
 			-- TODO: sometimes masked by 'maakas'
 			<_, _ + #v + "s", _>

@@ -392,7 +392,6 @@ oper
 
       <_ + "ik", _ + "iku", _ + "ikku"> => hjk_type_VI_imelik tukk ; --imelik:_:imelikku caught here
 
-      <_ + #c, _ + #v, _ + #v> => hjk_type_VI_tukk tukk tuku ;
       <_ + "ud", _ + "u", _ + "ut"> => nForms2 tukk tuku ;  -- -nud/-tud participles are not like 'voolik'
       <_ + #c, _ + #v, _ + #v + "t"> => hjk_type_IVb_audit tukk u ;  --voolik:_:voolikut caught here
       _ => nForms2 tukk tuku 
