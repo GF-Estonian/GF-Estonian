@@ -373,7 +373,7 @@ oper
         --heuristics to catch palk:palga but not maakas:maaka (for longer words, same with more ?s)
         --didn't work, don't try this
         --<? + ? + #c, ? + ? + #c + #v> => hjk_type_IVb_audit link i ; 
-        _ => hjk_type link 
+        _ => hjk_type2 link i
       } ;
 
   nForms3 : (_,_,_ : Str) -> NForms = \tukk,tuku,tukku ->
