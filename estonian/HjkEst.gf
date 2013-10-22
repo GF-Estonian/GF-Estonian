@@ -85,6 +85,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		nForms6 x (x+v_g) (x+v_g+"t") (x+v_g+"sse") (x+v_g+"te") (x+v_pl+"id") ;
 
 	-- TODO: clean this up
+	-- 2nd argument is sg gen without the final vowel
 	hjk_type_IVb_audit1 x y =
 		nForms6 x (y + "i") (y+"it") (y+"isse") (y+"ite") (y+"eid") ;
 

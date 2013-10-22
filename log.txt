@@ -1196,3 +1196,101 @@ mkN 1-arg pattern: (@F[0])
       3 2-3-4
       1 5
 coverage: 19797 out of 21734 = .9108
+
+
+Kaarel 22.10
+------------
+
+Did some cleanup and generalization of the 2-arg noun oper.
+Highlights: 2-arg on nouns improved 4%, and on adjectves 3%.
+For some reason lost 0.5% on 3- and 0.2% on 4-arg opers, TODO: investigate.
+
+NOUNS
+input: ../data/nouns.6forms.csv
+mkN 1-arg pattern: (@F[0])
+  19798 
+    797 2-3-4-5-6
+    357 2-3-4-5
+    148 5-6
+    136 2-4-6
+    117 6
+    115 3-5-6
+     88 2-4-5-6
+     79 3-4-5-6
+     36 2-4
+     35 3
+     19 2
+      5 3-5
+      3 2-3-4
+      1 5
+coverage: 19798 out of 21734 = .9109
+mkN 2-arg pattern: (@F[0..1])
+  20670 
+    360 3-4-5-6
+    183 6
+    150 5-6
+    140 3-5-6
+    101 4-6
+     36 4
+     35 4-5-6
+     35 3
+     16 3-4-5
+      5 3-5
+      3 3-4
+coverage: 20670 out of 21734 = .9510
+mkN 3-arg pattern: (@F[0..2])
+  20947 
+    267 4-5-6
+    256 5-6
+    186 6
+     39 4
+     25 4-6
+     14 4-5
+coverage: 20947 out of 21734 = .9637
+mkN 4-arg pattern: (@F[0..2], @F[5])
+  21242 
+    232 5
+    216 4-5
+     44 4
+coverage: 21242 out of 21734 = .9773
+
+
+ADJECTIVES
+input: ../data/adj.6forms.csv
+mkN 1-arg pattern: (@F[0])
+   3045 
+    211 2-3-4-5-6
+     42 6
+     34 2-4-6
+     18 5-6
+     15 2-4-5-6
+      8 2-3-4-5
+      3 3-5-6
+      3 3-5
+      2 3-4-5-6
+      1 2
+coverage: 3045 out of 3382 = .9003
+mkN 2-arg pattern: (@F[0..1])
+   3166 
+    101 3-4-5-6
+     42 6
+     34 4-6
+     18 5-6
+     15 4-5-6
+      3 3-5-6
+      3 3-5
+coverage: 3166 out of 3382 = .9361
+mkN 3-arg pattern: (@F[0..2])
+   3221 
+     85 4-5-6
+     42 6
+     19 5-6
+     14 4-6
+      1 5
+coverage: 3221 out of 3382 = .9523
+mkN 4-arg pattern: (@F[0..2], @F[5])
+   3277 
+     81 4-5
+     20 5
+      4 4
+coverage: 3277 out of 3382 = .9689
