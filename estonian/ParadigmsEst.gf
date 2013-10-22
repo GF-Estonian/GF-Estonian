@@ -400,9 +400,14 @@ oper
         --introduced a couple of errors, "aine" recognized as "kõne"
         --<_ + "ne", _ + "ne">  => hjk_type_III_ratsu link ;
 
-        --heuristics to catch palk:palga but not maakas:maaka (for longer words, same with more ?s)
-        --didn't work, don't try this
-        --<? + ? + #c, ? + ? + #c + #v> => hjk_type_IVb_audit link i ;
+        -- Selecting the correct vowel for IVa_audit.
+        -- visin/visina, pidžin/pidžini
+        -- TODO: we could cover more cases here, e.g. tudeng/tudengi
+        <_ + #c + "in", _ + #c + "in" + #v> =>
+            case (syl_type link) of {
+                S2 => hjk_type_IVb_audit link i ;
+                 _ => hjk_type2 link i
+            } ;
 
         -- catch all calls hjk_type with the correct stem vowel
         _ => hjk_type2 link i
@@ -411,6 +416,12 @@ oper
   nForms3 : (_,_,_ : Str) -> NForms = \tukk,tuku,tukku ->
     let u = last tuku ;
     in  case <tukk,tuku,tukku> of {
+
+      -- koi/koi/koid
+      <_ + #v + #v, _ + #v + #v, _ + #v + #v + "d"> => hjk_type_I_koi tukk ;
+
+      -- ema/ema/ema
+      <_ + #v, _ + #v, _ + #v> => hjk_type_II_ema tukk ;
 
       --distinguish between hammas and maakas
       <_+"as",_+"a",_+"ast"> => dHammas tukk tuku ;

@@ -154,6 +154,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			-- TODO: think about it
 			e : Str = case i of {
 				"a" => "asid" ; -- pikk/pika -> pikkasid
+				"e" => "i" ; -- sulg/sule -> sulgi
 				_ => "e"
 			}
 		in
@@ -181,9 +182,9 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		in
 		nForms6 x x_t (x+"t") (x_t+"sse") (x+"te") (x_t+"id") ;
 
-        --Identical to the above, just taking 2 arguments (nom + gen)
-        --There are 67 nouns in test cases where stronger_noun gets it wrong
-        --handles liige:liikme as well
+	--Identical to the above, just taking 2 arguments (nom + gen)
+	--There are 67 nouns in test cases where stronger_noun gets it wrong
+	--handles liige:liikme as well
 	hjk_type_VII_touge2 : (_,_ : Str) -> NForms ;
 	hjk_type_VII_touge2 touge touke  =
 	        let
