@@ -436,6 +436,16 @@ oper
       -- cases handled reliabl(ish) by 1- and 2-arg opers
       <_ + ("nd"|"el"|"er"), _, _> => nForms2 tukk tuku ;
 
+      -- Type VI (sg gen and sg part end with a vowel)
+      -- Note that we use the sg part as the argument for the constructor
+      -- because it's more informative than sg nom, compare:
+      -- link/lingi/linki
+      -- kabinet/kabineti/kabinetti
+      -- TODO: check that the genitive is actually weaker
+      -- TODO: distinguish between the subtypes of VI
+      -- TODO: do this also in nForms2
+      <_ + #c, _ + #v, _ + #v> => hjk_type_VI_link2 (init tukku) u ;
+
       -- voolik/vooliku/voolikut
       <_ + #c, _ + #v, _ + #v + "t"> => hjk_type_IVb_audit tukk u ;
 

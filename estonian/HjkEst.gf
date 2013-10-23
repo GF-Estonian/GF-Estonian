@@ -141,6 +141,9 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 		in
 		nForms6 x (f+"e") (f+"t") (f+"esse") (f+"te") (f+"i") ;
 
+	-- Examples:
+	-- siid, link, president, romanss, tendents
+	-- rostbiif, portfell, seersant, impulss
 	hjk_type_VI_link x =
 		let
 			x_n : Str = weaker_noun x
