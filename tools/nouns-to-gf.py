@@ -21,7 +21,8 @@ def get_funname(word):
 
 def fix_form(form):
 	"""
-	In some cases there are parallel forms, we keep just one (randomly)
+	In the case of parallel forms, we keep just the first.
+	TODO: improve this
 	"""
 	form = form.strip()
 	return form.split('|')[0]
