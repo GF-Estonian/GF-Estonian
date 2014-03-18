@@ -1,15 +1,7 @@
-resource HjkEst = open ResEst, Prelude, Predef in {
+resource HjkClassify = open ResEst, Prelude, Predef in {
 
--- Implementation of the noun inflection rules from
--- Heiki-Jaan Kaalep. "Eesti käänamissüsteemi seaduspärasused" (2012)
---
--- @author Kaarel Kaljurand
--- @version 2013-09-09
-
-  flags
-	coding = utf8 ;
-
-  -- TODO: change the name of this file and the names of the opers in this file
+-- Based on HjkEst.js (version 2014-03-19)
+-- TODO: find a better way to share code with HjkEst.js
 
   param
 	-- S1: stress on the last syllable
@@ -47,68 +39,38 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	hjk_type_VI_imelik,
 	hjk_type_VI_meeskond,
 	hjk_type_VI_seminar,
-	hjk_type_VII_touge : Str -> NForms ;
+	hjk_type_VII_touge : Str -> Str ;
 
 	-- IVa additionally needs the stem vowel.
 	hjk_type_IVb_audit,
-	hjk_type_IVb_audit1 : Str -> Str -> NForms ;
+	hjk_type_IVb_audit1 : Str -> Str -> Str ;
 
-	hjk_type_VI_link2 : Str -> Str -> NForms ;
+	hjk_type_VI_link2 : Str -> Str -> Str ;
 
-	hjk_type2 : Str -> Str -> NForms ;
+	hjk_type2 : Str -> Str -> Str ;
 
 
 	-- Definition of the mapping rules.
 	-- Verbatim from HJKEKS.
-	hjk_type_I_koi x =
-		nForms6 x x (x+"d") (x+"sse") (x+"de") (x+"sid") ;
+	hjk_type_I_koi x = "I_koi" ;
 
-	hjk_type_II_ema x =
-		nForms6 x x x (x+"sse") (x+"de") (x+"sid") ;
+	hjk_type_II_ema x = "II_ema" ;
 
-	hjk_type_III_ratsu x =
-		nForms6 x x (x+"t") (x+"sse") (x+"de") (x+"sid") ;
+	hjk_type_III_ratsu x = "III_ratsu" ;
 
 	-- if ends with 'i' ('arvuti') then last form is 'arvut' + 'e' + 'id'
 	-- There are ~50 such words in the WordNet.
-	hjk_type_IVa_aasta x =
-		let
-			x1 : Str = case x of { _ + "i" => (init x) + "e" ; _ => x }
-		in
-		nForms6 x x (x+"t") (x+"sse") (x+"te") (x1+"id") ;
+	hjk_type_IVa_aasta x = "IVa_aasta" ;
 
 	-- (audit "a") can be used with comparative and superlative adjectives.
-	hjk_type_IVb_audit x v_g =
-		let
-			v_pl = case v_g of { "i" => "e" ; _ => v_g }
-		in
-		nForms6 x (x+v_g) (x+v_g+"t") (x+v_g+"sse") (x+v_g+"te") (x+v_pl+"id") ;
+	hjk_type_IVb_audit x v_g = "IVb_audit_" + v_g ;
 
 	-- TODO: clean this up
 	-- 2nd argument is sg gen without the final vowel
-	hjk_type_IVb_audit1 x y =
-		nForms6 x (y + "i") (y+"it") (y+"isse") (y+"ite") (y+"eid") ;
+	hjk_type_IVb_audit1 x y = "IVb_audit1" ;
 
-	hjk_type_IVb_maakas x =
-		let
-			gen = init x
-		in
-		nForms6 x gen (gen+"t") (gen+"sse") (gen+"te") (gen+"id") ;
+	hjk_type_IVb_maakas x = "IVb_maakas" ;
 
-
-	--Maakas is for maakas:maaka:maakat, this is for hammas:hamba:hammast
-	--Not sure if this is already covered by some hjk_type,
-	--anyway the grades are explicit with two args, more reliable
-	dHammas : (_,_ : Str) -> NForms ;
-	dHammas hammas hamba =
-		nForms6 hammas hamba (hammas+"t") (hamba+"sse") (hammas+"te") (hamba+"id") ;
-
-	dMeri : (_,_ : Str) -> NForms ;
-	dMeri meri mere =
-	        let
-		  mer = init mere ;
-	        in
-		nForms6 meri mere (mer+"d") (mere+"sse") (mere+"de") (mere+"sid") ;
 
 	-- This rule handles the removal of -ne and -s endings, and the addition of 'e'
 	-- in the case of Cne-nouns (e.g. 'raudne').
@@ -116,186 +78,32 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	-- otsene - otsese - otsest
 	-- raudne - raudse - raudsEt - raudsesse - raudsEte - raudseid (additional 'e')
 	-- TODO: variant: vastusesse | vastusse
-	hjk_type_Va_otsene x =
-		let
-			f : Str = case x of {
-				y + c@(#c) + "ne" => y + c + "se" ;
-				y + "ne" => y + "s" ;
-				_ => x
-			} ;
-			f1 : Str = case x of {
-				y + "ne" => y + "s" ;
-				_ => x
-			}
-		in
-		nForms6 x (f1+"e") (f+"t") (f1+"esse") (f+"te") (f1+"eid") ;
+	hjk_type_Va_otsene x = "Va_otsene" ;
 
 	-- TODO: variant: olulisesse | olulisse
-	hjk_type_Vb_oluline x =
-		let
-			f : Str = case x of {
-				y + "ne" => y + "s" ;
-				y + "ke" => y + "kes" ;
-				_ => x
-			}
-		in
-		nForms6 x (f+"e") (f+"t") (f+"esse") (f+"te") (f+"i") ;
+	hjk_type_Vb_oluline x = "Vb_oluline" ;
 
 	-- Examples:
 	-- siid, link, president, romanss, tendents
 	-- rostbiif, portfell, seersant, impulss
-	-- TODO: remove: never called
-	hjk_type_VI_link x =
-		let
-			x_n : Str = weaker_noun x
-		in
-		nForms6 x (x_n+"i") (x+"i") (x+"i") (x+"ide") (x+"e") ;
+	hjk_type_VI_link x = "VI_link" ;
 
 	-- same as hjk_type_VI_link but additionally takes the genitive ending
-	hjk_type_VI_link2 x i =
-		let
-			x_n : Str = weaker_noun x ;
-			-- TODO: think about it
-			e : Str = case i of {
-				"a" => "asid" ; -- pikk/pika -> pikkasid
-				"e" => "i" ; -- sulg/sule -> sulgi
-				_ => "e"
-			}
-		in
-		nForms6 x (x_n+i) (x+i) (x+i) (x+i+"de") (x+e) ;
+	hjk_type_VI_link2 x i = "VI_link2_" + i;
 
+	hjk_type_VI_imelik x = "VI_imelik" ;
 
-	hjk_type_VI_imelik x =
-		let
-			x_t : Str = stronger_noun x
-		in
-		nForms6 x (x+"u") (x_t+"u") (x_t+"u") (x+"e") (x_t+"e") ;
+	hjk_type_VI_meeskond x = "VI_meeskond" ;
 
-	hjk_type_VI_meeskond x =
-		let
-			x_n : Str = weaker_noun x
-		in
-		nForms6 x (x_n+"a") (x+"a") (x+"a") (x+"ade") (x+"i") ;
+	hjk_type_VI_seminar x = "VI_seminar" ;
 
-	hjk_type_VI_seminar x =
-		nForms6 x (x+"i") (x+"i") (x+"i") (x+"ide") (x+"e") ;
-
-	hjk_type_VII_touge x =
-		let
-			x_t : Str = (stronger_noun (init x)) + "e"
-		in
-		nForms6 x x_t (x+"t") (x_t+"sse") (x+"te") (x_t+"id") ;
+	hjk_type_VII_touge x = "VII_tõuge" ;
 
 	--Identical to the above, just taking 2 arguments (nom + gen)
 	--There are 67 nouns in test cases where stronger_noun gets it wrong
 	--handles liige:liikme as well
-	hjk_type_VII_touge2 : (_,_ : Str) -> NForms ;
-	hjk_type_VII_touge2 touge touke =
-	        let
-	                liikme : Str = case touke of {
-	                        _ + "me" => touke ;
-	                        _ + "mne" => touke ;
-	                        _ => touge }
-	        in
-	        nForms6 touge touke (touge+"t") (touke+"sse") (liikme+"te") (touke+"id") ;
-
-	-- Use this only to weaken the verbs
-	weaker : Str -> Str ;
-	weaker link =
-		let
-			li = Predef.tk 2 link ;
-			nk = Predef.dp 2 link
-		in
-		case nk of {
-			"kk" => li + "k" ;
-			"pp" => li + "p" ;
-			"tt" => li + "t" ;
-			"ff" => li + "f" ;
-			("üt"|"üs") => li + "ö" ; --süsi,söe ; ütlema,öelda
-			--"ad" => li + "aj" ; --sada,saja; maybe remove
-			V@(#v) + "k" => li + V + "g" ;
-			V@(#v) + "p" => li + V + "b" ;
-			V@(#v) + "t" => li + V + "d" ;
-			V@(#v) + "g" => li + V ; --liuglema,liuelda
-			V@(#v) + "b" => li + V + "v" ; --leib,leiva
-			V@(#v) + "d" => li + V ; --hoidma,hoiab
-			N@(#lmnr) + "k" => li + N + "g" ;
-			N@(#lmnr) + "p" => li + N + "b" ;
-			N@(#lmnr) + "t" => li + N + "d" ;
-			N@(#lmnr) + "d" => li + N + N ;
-			N@(#lmnr) + "b" => li + N + N ;
-			N@("l"|"r") + "g" => li + N ; --algama,alata
-			"sk" => li + "s" ;
-			"h" + #kpt => li + "h" ;
-			_ => link
-	} ;
-
-
-	-- Weakening of nouns.
-	-- Only the very stable weakening that happens to nouns.
-	-- TODO: verify correctness/completeness based on some other implementation.
-	weaker_noun : Str -> Str ;
-	weaker_noun link =
-		case link of {
-			li + "kk" => li + "k" ;
-			li + "pp" => li + "p" ;
-			li + "tt" => li + "t" ;
-			li + "ff" => li + "f" ;
-			li + "šš" => li + "š" ;
-			li + N@(#lmnr) + "ss" => li + N + "s" ;
-			li + V@(#v) + "k" => li + V + "g" ;
-			li + V@(#v) + "p" => li + V + "b" ;
-			li + V@(#v) + "t" => li + V + "d" ;
-			li + N@(#lmnr) + "k" => li + N + "g" ;
-			li + N@(#lmnr) + "p" => li + N + "b" ;
-			li + N@(#lmnr) + "t" => li + N + "d" ;
-			li + "h" + #kpt => li + "h" ;
-			li + "kond" => li + "konn" ;
-			_ => link
-	} ;
-
-	-- Strengthening of nouns.
-	-- Input must not have the last vowel.
-	stronger_noun : Str -> Str ;
-	stronger_noun x =
-		case x of {
-			y + "lg" => y + "lg" ;
-			y + "hk" => y + "hk" ; -- tahke
-			y + "tk" => y + "tk" ; -- katke
-			y + "rs" => y + "rs" ; -- morse
-			y + "rr" => y + "rd" ; -- murre
-			y + "ks" => y + "ks" ; -- makse
-			y + "us" => y + "us" ; -- lause
-			y + "sk" => y + "sk" ; -- raske (?)
-			y + "ts" => y + "ts" ; -- katse
-			y + "ps" => y + "psm" ; -- ripse -> ripsme
-			y + "nt" => y + "nt" ; -- tante
-			y + "st" => y + "st" ; -- TODO: sometimes stm: iste, kaste
-			y + k@("k"|"p"|"t"|"s") => y + k + k ;
-			y + "g" => y + "k" ;
-			y + "d" => y + "t" ;
-			y + "b" => y + "p" ;
-			y + v@(#v) + "v" => y + v + "b" ; -- works for 'iive' but not 'irve'
-			y + "mm" => y + "mb" ; -- komme -> kombe
-			y + "nn" => y + "nd" ;
-			_ => x
-		} ;
-
-	-- Strengthening of verbs.
-	stronger : Str -> Str ;
-	stronger x =
-		let
-			beginning = tk 2 x ;
-			ending = dp 2 x
-		in
-		beginning + case ending of {
-			y + k@("k"|"p"|"t"|"s") + e => y + k + k + e ;
-			y + "g" + e => y + "k" + e ;
-			y + "d" + e => y + "t" + e ;
-			y + "b" + e => y + "p" + e ;
-			_ => ending
-		} ;
-
+	hjk_type_VII_touge2 : (_,_ : Str) -> Str ;
+	hjk_type_VII_touge2 touge touke = "VII_tõuge2" ;
 
 	-- Mapping of singular nominative to HJKEKS types.
 	-- This implements the patterns from HJKEKS section 8 but

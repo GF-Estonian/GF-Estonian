@@ -1376,3 +1376,54 @@ Notes:
     generate a lexicon entry for every paradigm. In case of compound words it would
     result in overgeneration, but the correct forms would then be also generated which
     is OK for parsing applications.
+
+2014-03-19 (Kaarel)
+-------------------
+
+Frequency distribution of HJK noun classes based on the current implementation.
+
+::
+
+	cat data/nouns.6forms.csv | sed "s/,.*//" | python tools/cc.py -r estonian/HjkClassify.gf --oper hjk_type | gf --run | sort | uniq -c | sort -nr
+   7908 Vb_oluline
+   5035 IVa_aasta
+   4537 VI_link2_i
+   1080 IVb_audit_i
+    515 III_ratsu
+    469 IVb_audit_u
+    447 II_ema
+    296 IVb_audit1
+    241 VI_imelik
+    229 Va_otsene
+    215 I_koi
+    209 VII_tõuge
+    159 IVb_maakas
+    144 IVb_audit_a
+    127 VI_seminar
+    123 VI_meeskond
+
+Only main types::
+
+   7908 Vb
+   5035 IVa
+   5028 VI
+   2148 IVb
+    515 III
+    447 II
+    229 Va
+    215 I
+    209 VII
+
+   7908 Vb_oluline
+   5035 IVa_aasta
+   4537 VI_link
+   1989 IVb_audit
+    515 III_ratsu
+    447 II_ema
+    241 VI_imelik
+    229 Va_otsene
+    215 I_koi
+    209 VII_tõuge
+    159 IVb_maakas
+    127 VI_seminar
+    123 VI_meeskond
