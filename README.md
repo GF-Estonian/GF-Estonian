@@ -79,13 +79,19 @@ Frequency distribution of constructor patterns:
     81839 total number of entries in DictEst
 
 TODO:
-    - fix comparison forms of adjectives
-    - language-independent function names (`DictEngEst`)
+
+  - fix comparison forms of adjectives
+  - language-independent function names (`DictEngEst`)
 
 ### Syntax
 
   - most functions ported to Estonian
   - tested using the MOLTO Phrasebook and ACE-in-GF applications
+
+Papers about GF-Estonian
+------------------------
+
+  - Inari Listenmaa and Kaarel Kaljurand. Computational Estonian Grammar in Grammatical Framework. 9th SaLTMiL Workshop on "Free/open-Source Language Resources for the Machine Translation of Less-Resourced Languages", LREC 2014, Reykjavík, Iceland, 27 May 2014. [PDF](http://siuc01.si.ehu.es/~jipsagak/SALTMIL/LREC_2014_Workshop_Proceedings_Saltmil.pdf)
 
 Projects that use GF-Estonian
 -----------------------------
