@@ -21,7 +21,8 @@
 # (palk, palga|palgi, palka|palki) but this might not always hold.
 
 
-sed=/bin/sed
+#sed=/bin/sed
+sed=gsed
 g=../estonian/
 
 max=3
