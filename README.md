@@ -51,7 +51,7 @@ Forms: 40 in total
   - Conditional : Person * Number
   - Imperative : P2 Sg, P2 Pl, P3, P1 Pl, NegPl
   - Passive : {Present, Past} * {Pos, Neg}
-  - Quotative : Active, Passive 
+  - Quotative : Active, Passive
   - Past participle : Active, Passive
   - Present participle: Active, Passive
   - Infinitive : da * 2 cases ; ma * 5 cases
@@ -62,24 +62,36 @@ Smart paradigm constructors
   - 2-arg paradigm (ma, da): 96% correct
   - 3-arg paradigm (ma, da, b): 98% correct
   - 4-arg paradigm (ma, da, b, takse): 99% correct
-    
+
 ### Large lexicon (DictEst)
 
-  - word classes:
-    - ~32000 nouns
-    - ~10000 multi-word verbs
-    - ~4000 single-word verbs
-    - ~3500 adverbs
-    - ~3000 adjectives
-  - TODO:
-    - support compound words
-    - fix comparison forms of adjectives
-    - language-independent function names (`DictEngEst`)
+Frequency distribution of constructor patterns:
+
+    33409 mkN (mkN )
+    27599 mkN
+    10197 mkV (mkV )
+     3402 mkV
+     3396 mkAdv
+     3006 mkA (mkN )
+      492 mkV2 (mkV )
+      320 mkV2 (mkV ) cpartitive
+       18 mkVV (mkV )
+    81839 total number of entries in DictEst
+
+TODO:
+
+  - fix comparison forms of adjectives
+  - language-independent function names (`DictEngEst`)
 
 ### Syntax
 
   - most functions ported to Estonian
   - tested using the MOLTO Phrasebook and ACE-in-GF applications
+
+Papers about GF-Estonian
+------------------------
+
+  - Inari Listenmaa and Kaarel Kaljurand. Computational Estonian Grammar in Grammatical Framework. 9th SaLTMiL Workshop on "Free/open-Source Language Resources for the Machine Translation of Less-Resourced Languages", LREC 2014, Reykjavík, Iceland, 27 May 2014. [PDF](http://siuc01.si.ehu.es/~jipsagak/SALTMIL/LREC_2014_Workshop_Proceedings_Saltmil.pdf)
 
 Projects that use GF-Estonian
 -----------------------------

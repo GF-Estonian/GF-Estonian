@@ -7,7 +7,7 @@
 #
 # ./test-mk.bash N ../data/nouns.6forms.csv
 # ./test-mk.bash N ../data/adj.6forms.csv
-# ./test-mk.bash V ../data/verbs.6forms.csv
+# ./test-mk.bash V ../data/verbs.8forms.csv
 #
 # Kaarel Kaljurand
 # 2013-10-10

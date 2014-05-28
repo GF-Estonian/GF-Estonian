@@ -55,5 +55,11 @@ diff_rgl:
 	diff $(GF_SRC)/lib/src/api/TryEst.gf api/TryEst.gf
 	diff -r $(GF_SRC)/lib/src/estonian/ estonian
 
+hjk_classes:
+	cat data/nouns.6forms.csv | sed "s/,.*//" | python tools/cc.py -r estonian/HjkClassify.gf --oper hjk_type | gf --run
+
+hjk_classes_freq:
+	cat data/nouns.6forms.csv | sed "s/,.*//" | python tools/cc.py -r estonian/HjkClassify.gf --oper hjk_type | gf --run | sort | uniq -c | sort -nr
+
 clean:
 	find -name *.gfo | xargs rm -f

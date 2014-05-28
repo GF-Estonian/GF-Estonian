@@ -16,6 +16,12 @@
 data=../data/
 grammar=../estonian/
 # The resources directory is currently not under version control
+# It needs to have the files:
+#   - emwv/DB_EMWV_2008.txt (Estonian multi-word units DB)
+#     http://www.cl.ut.ee/ressursid/pysiyhendid/DB_EMWV_2008.zip
+#   - kb67a/kb67a-utf8.tix (Estonian WordNet)
+#     http://www.cl.ut.ee/ressursid/teksaurus/viimane/estwn-last.zip
+#   - morfessor/nouns.seg (Morfessor noun segmentation trained on all WordNet nouns)
 resources=../resources/
 
 echo "Verbs"
@@ -28,7 +34,8 @@ echo "Adverbs"
 cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash b | ./adv-to-gf.py > out_adv.tsv
 
 echo "Nouns"
-cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash n | ./nouns-to-gf.py --forms $data/nouns.6forms.csv > out_nouns.tsv 2> err_nouns.txt
+#cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash n | ./nouns-to-gf.py --forms $data/nouns.6forms.csv > out_nouns.tsv 2> err_nouns.txt
+cat $resources/morfessor/nouns.seg | ./nouns-to-gf.py --forms $data/nouns.6forms.csv > out_nouns.tsv 2> err_nouns.txt
 
 echo "Adjectives"
 cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash a | ./adj-to-gf.py --forms $data/adj.6forms.csv > out_adj.tsv 2> err_adj.txt

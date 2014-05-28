@@ -52,7 +52,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	-- IVa additionally needs the stem vowel.
 	hjk_type_IVb_audit,
 	hjk_type_IVb_audit1 : Str -> Str -> NForms ;
-	
+
 	hjk_type_VI_link2 : Str -> Str -> NForms ;
 
 	hjk_type2 : Str -> Str -> NForms ;
@@ -144,6 +144,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	-- Examples:
 	-- siid, link, president, romanss, tendents
 	-- rostbiif, portfell, seersant, impulss
+	-- TODO: remove: never called
 	hjk_type_VI_link x =
 		let
 			x_n : Str = weaker_noun x
@@ -189,7 +190,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	--There are 67 nouns in test cases where stronger_noun gets it wrong
 	--handles liige:liikme as well
 	hjk_type_VII_touge2 : (_,_ : Str) -> NForms ;
-	hjk_type_VII_touge2 touge touke  =
+	hjk_type_VII_touge2 touge touke =
 	        let
 	                liikme : Str = case touke of {
 	                        _ + "me" => touke ;
