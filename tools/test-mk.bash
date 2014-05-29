@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # Smart paradigm correctness testing script.
 # Runs tests for 1,2,3,4 arguments.
@@ -9,8 +9,14 @@
 # ./test-mk.bash N ../data/adj.6forms.csv
 # ./test-mk.bash V ../data/verbs.8forms.csv
 #
+# The script generates 3 files for each number of input arguments:
+#
+#   - .coverage.txt: frequency distribution of difference types
+#   - .diff.txt: 2-column (tab-separated) format that relates the 1st form to the difference type (if any)
+#   - .forms.csv: all generated forms (comma-separated)
+#
 # Kaarel Kaljurand
-# 2013-10-10
+# 2014-05-29
 
 # Note about rewriting.
 # Rewrite the base forms that use the parallel forms notation because
@@ -20,9 +26,6 @@
 # makes the assumption that the correct forms align
 # (palk, palga|palgi, palka|palki) but this might not always hold.
 
-
-#sed=/bin/sed
-sed=gsed
 g=../estonian/
 
 max=3
@@ -40,7 +43,10 @@ else
 fi
 
 # Noun/adjective patterns
+# Pattern that is applied to the output of cc.py for testing purposes,
+# i.e. the output contains all forms, but only some are needed for comparison.
 n_gpat='(@F[0..3], @F[15..16])'
+# Patterns that can be used as input to the smart paradigm operators.
 n_pattern[0]='(@F[0])'
 n_pattern[1]='(@F[0..1])'
 n_pattern[2]='(@F[0..2])'
@@ -79,7 +85,7 @@ do
 	cat ${gold} |\
 	perl -nal -F",\s+" -e "print join ', ', ${pat}" |\
 	# Rewriting
-	$sed "s/[^ ]*|//g" |\
+	perl -npe 's/[^ ]*\|//g' |\
 	python cc.py -r ${g}/ParadigmsEst.gf --oper ${mk} |\
 	gf --run |\
 	perl -nal -F",\s+" -e "print join ', ', $gpat" > ${out}
@@ -88,7 +94,7 @@ do
 	python diff-list-set.py ${gold} ${out} | tee ${diff} | cut -f2 | sort | uniq -c | sort -nr > ${coverage}
 
 	total=`cat ${out} | wc -l`
-	correct=`head -1 ${coverage} | sed "s/ *//g"`
+	correct=`head -1 ${coverage} | perl -npe 's/ *//g'`
 	result=`echo "scale=4; ${correct}/${total}" | bc`
 	echo "coverage: ${correct} out of ${total} = ${result}" >> ${coverage}
 	cat ${coverage}
