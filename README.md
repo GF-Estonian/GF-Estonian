@@ -93,6 +93,8 @@ Papers about GF-Estonian
 
   - Inari Listenmaa and Kaarel Kaljurand. Computational Estonian Grammar in Grammatical Framework. 9th SaLTMiL Workshop on "Free/open-Source Language Resources for the Machine Translation of Less-Resourced Languages", LREC 2014, Reykjavík, Iceland, 27 May 2014. [PDF](http://siuc01.si.ehu.es/~jipsagak/SALTMIL/LREC_2014_Workshop_Proceedings_Saltmil.pdf)
 
+See also the [talks](docs/talks/).
+
 Projects that use GF-Estonian
 -----------------------------
 
