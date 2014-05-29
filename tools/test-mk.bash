@@ -94,7 +94,11 @@ do
 	python diff-list-set.py ${gold} ${out} | tee ${diff} | cut -f2 | sort | uniq -c | sort -nr > ${coverage}
 
 	total=`cat ${out} | wc -l`
-	correct=`head -1 ${coverage} | perl -npe 's/ *//g'`
+	# Remove leading and trailing whitespace and if there is whitespace left
+	# then it means that no input line was correctly handled.
+	# If there is no whitespace left then the remaining string representes the number
+	# of correctly handled inputs.
+	correct=`head -1 ${coverage} | perl -npe 's/^ *//' | perl -npe 's/ *$//' | perl -npe 's/.* .*/0/'`
 	result=`echo "scale=4; ${correct}/${total}" | bc`
 	echo "coverage: ${correct} out of ${total} = ${result}" >> ${coverage}
 	cat ${coverage}

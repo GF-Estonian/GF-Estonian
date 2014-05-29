@@ -24,6 +24,26 @@ into the Filosoft morph. synthesizer input format.
 ### etsyn-to-forms.py
 
 Picks the base forms out of the Filosoft morph. synth. output format.
+The 6 noun base forms:
+
+  - `sg n`
+  - `sg g`
+  - `sg p`
+  - `sg ill`
+  - `pl g`
+  - `pl p`
+
+The 8 verb base forms are:
+
+  - `ma`
+  - `da`
+  - `b`
+  - `takse`
+  - `ge`
+  - `s`
+  - `nud`
+  - `tud`
+
 See the usage examples in [data/README](../data/README.md).
 
 ### run_hjk_tests
