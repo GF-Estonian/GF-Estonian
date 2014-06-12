@@ -969,17 +969,17 @@ ps "*"
 
 ps "mkNP-Numeral-CN-NP"
 
-ps "mkUtt (mkNP (mkNumeral (tenfoldSub100 n5_Unit)) (mkCN old_A man_N))"
+ps "mkUtt (mkNP (mkNumeral (n5_Unit)) (mkCN old_A man_N))"
 
-cc -one mkUtt (mkNP (mkNumeral (tenfoldSub100 n5_Unit)) (mkCN old_A man_N))
+cc -one mkUtt (mkNP (mkNumeral (n5_Unit)) (mkCN old_A man_N))
 
 ps "*"
 
 ps "mkNP-Numeral-N-NP"
 
-ps "mkUtt (mkNP (mkNumeral (tenfoldSub100 n5_Unit)) man_N)"
+ps "mkUtt (mkNP (mkNumeral (n5_Unit)) man_N)"
 
-cc -one mkUtt (mkNP (mkNumeral (tenfoldSub100 n5_Unit)) man_N)
+cc -one mkUtt (mkNP (mkNumeral (n5_Unit)) man_N)
 
 ps "*"
 

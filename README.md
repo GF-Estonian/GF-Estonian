@@ -18,6 +18,23 @@ If the building fails with an error message, then compile `ResEst.gf` first:
     gf estonian/ResEst.gf
     make pgf_lang
 
+
+Testing
+-------
+
+Running morphology tests:
+
+    cd tools/
+    bash test-mk.bash N ../data/nouns.6forms.csv
+    bash test-mk.bash N ../data/adj.6forms.csv
+    bash test-mk.bash V ../data/verbs.8forms.csv
+
+Running syntax tests:
+
+    make clean
+    cd tests/
+    sh run_tests.sh
+
 Status
 ------
 

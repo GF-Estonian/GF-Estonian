@@ -3,23 +3,23 @@ LangEst: soe
 
 
 Lang: ComparA warm_A (UsePron i_Pron)
-LangEst: minust soojem
+LangEst: soojem kui mina
 
 
 Lang: ComplA2 married_A2 (UsePron she_Pron)
-LangEst: temaga abielus
+LangEst: abielus temaga
 
 
 Lang: ComplA2 married_A2 (DetNP (DetQuant (PossPron she_Pron) NumPl))
-LangEst: tema abielus
+LangEst: abielus tema
 
 
 Lang: ComplA2 married_A2 (DetNP (DetQuant (PossPron she_Pron) NumSg))
-LangEst: tema abielus
+LangEst: abielus tema
 
 
 Lang: ReflA2 married_A2
-LangEst: endaga abielus
+LangEst: abielus endaga
 
 
 Couldn't match expected type A

@@ -19,6 +19,8 @@ echo "Running the tests..."
 #gf --path $path --run < test_v.gfs > test_v_out.txt
 #gf --run < test_vforms8.gfs > test_v8_out.txt
 #gf --run < test_vforms4.gfs > test_v4_out.txt
+
+# Tests from ${GF}/testsuite/libraries/
 gf --run $path/LangEst.gf < $mydir/exx-resource.gfs > $mydir/exx-resource.gfs.gold
 
 # API examples from ${GF}/lib/doc/
