@@ -5,6 +5,19 @@ Estonian resource grammar for the Grammatical Framework (GF) Resource Grammar Li
 
 __This is work in progress!__
 
+Building
+--------
+
+To build the PGF run:
+
+    make pgf_lang
+
+If the building fails with an error message, then compile `ResEst.gf` first:
+
+    make clean
+    gf estonian/ResEst.gf
+    make pgf_lang
+
 Status
 ------
 
