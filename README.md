@@ -5,6 +5,17 @@ Estonian resource grammar for the Grammatical Framework (GF) Resource Grammar Li
 
 __This is work in progress!__
 
+Downloading
+-----------
+
+Tagged versions and zip-files with external resources are available at <https://github.com/GF-Estonian/GF-Estonian/releases>
+
+To download only the GF files relevant for the resource grammar, execute:
+
+    mkdir -p api estonian
+    curl https://raw.githubusercontent.com/GF-Estonian/GF-Estonian/master/tools/download-gf-estonian.py | python
+
+
 Building
 --------
 
