@@ -19,8 +19,8 @@ def quote_funname(name):
     """
     Quote funnames which contain characters other than [^_A-Za-z0-9]
     """
-    #if not re.search(r'[\']', name) and re.search(r'[^_A-Za-z0-9]', name):
-    #    return "'" + name + "'"
+    if not re.search(r'[\']', name) and re.search(r'[^_A-Za-z0-9]', name):
+        return "'" + name + "'"
     return unicode_to_gfcode(name)
 
 def get_funname(word, pos=None):
