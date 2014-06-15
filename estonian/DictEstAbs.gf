@@ -1,3 +1,4 @@
+--# -coding=utf8
 -- This file has been automatically compiled from multiple sources.
 -- Do not manually edit!
 abstract DictEstAbs =

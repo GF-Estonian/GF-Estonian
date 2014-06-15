@@ -13,8 +13,8 @@
 
 import sys
 import re
-import argparse
 from itertools import islice
+import gfutils
 
 def get_rektion(tag):
 	splits = re.split('\s+', tag)
@@ -23,17 +23,6 @@ def get_rektion(tag):
 	if not splits[0] == "_V_":
 		raise Exception("Unsupported POS tag: '" + tag + "'")
 	return splits[1:]
-
-def unicode_to_gfcode(u):
-    """
-    """
-    u1 = u.decode("utf8")
-    u2 = u1.encode('ascii', 'xmlcharrefreplace')
-    u3 = re.sub(r'[^A-Za-z0-9\']', '_', u2)
-    return u3
-
-def get_funname(word):
-	return unicode_to_gfcode(word)
 
 def fix_word(word):
 	"""
@@ -71,35 +60,12 @@ def get_lin(word, rektion):
 
 def format_gf_lexicon_entry(word, rektion):
 	verbtype,lin = get_lin(word, rektion)
-	funname = get_funname(word)
-	print '%s\t%s_%s = mk%s %s ;' % (word, funname, verbtype, verbtype, lin)
+	funname = gfutils.get_funname(word, verbtype)
+	print '%s\t%s = mk%s %s ;' % (word, funname, verbtype, lin)
 
-def fix_form(form):
-	"""
-	In a few cases (1%) there are parallel forms, we keep just one (randomly)
-	"""
-	form = form.strip()
-	return form.split('|')[0]
+args = gfutils.get_args()
 
-def get_lemma_to_forms(filename):
-	if filename is None:
-		return {}
-	lemma_to_forms = {}
-	with open(filename) as f:
-		for line in f:
-			splits = line.split(', ')
-			lemma_to_forms[ splits[0] ] = ' '.join(['"' + fix_form(x) + '"' for x in splits])
-	return lemma_to_forms
-
-def get_args():
-    p = argparse.ArgumentParser(description='')
-    p.add_argument('-f', '--forms', type=str, action='store', dest='forms', help='forms file')
-    p.add_argument('-v', '--version', action='version', version='%(prog)s v0.1')
-    return p.parse_args()
-
-args = get_args()
-
-lemma_to_forms = get_lemma_to_forms(args.forms)
+lemma_to_forms = gfutils.get_lemma_to_forms(args.forms)
 
 line_number = 0
 while True:

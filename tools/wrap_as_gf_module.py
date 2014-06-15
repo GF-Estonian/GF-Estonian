@@ -7,7 +7,7 @@
 # UTF8 encoded, etc.
 
 # @author Kaarel Kaljurand
-# @version 2013-10-01
+# @version 2014-06-15
 #
 # TODO:
 #
@@ -20,7 +20,8 @@ import argparse
 from string import Template
 
 template_header_abstract = Template(
-"""-- This file has been automatically compiled from multiple sources.
+"""--# -coding=utf8
+-- This file has been automatically compiled from multiple sources.
 -- Do not manually edit!
 abstract ${name} =
 	Cat ** {
@@ -29,12 +30,11 @@ fun
 """)
 
 template_header_concrete = Template(
-"""-- This file has been automatically compiled from multiple sources.
+"""--# -coding=utf8
+-- This file has been automatically compiled from multiple sources.
 -- Do not manually edit!
 concrete ${name_concrete} of ${name_abstract} =
 	CatEst ** open ParadigmsEst in {
-
-flags coding=utf8;
 
 -- Some helper opers to optimize the file size
 oper
@@ -78,5 +78,7 @@ with open(os.path.join(args.out, name_abstract + ".gf"), 'w') as f:
 	f.write(template_header_abstract.substitute(name = name_abstract))
 	for name in fun_names:
 		tag = re.sub('.*_', '', name)
+		# Remove quotes from tag names (hack)
+		tag = re.sub('\'', '', tag)
 		f.write('{:} : {:};\n'.format(name, tag))
 	f.write(get_footer())
