@@ -2,7 +2,7 @@
 
 # Segments the words in the input file where every word is on a separate line.
 # The segment border is a space character.
-# The segmentation is done using Morfessor (http://www.cis.hut.fi/projects/morpho/)
+# The segmentation is done using Morfessor (http://www.cis.hut.fi/projects/morpho/, tested with v2.0.1)
 # and based on the given model,
 # or if missing then on a model learned from the input file.
 #

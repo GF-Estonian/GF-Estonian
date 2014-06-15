@@ -19,6 +19,9 @@ help:
 	@echo " load_dict: load DictEst (to use 'cc')"
 	@echo "            e.g."
 	@echo "            > cc -table koer_N"
+	@echo "            > cc -table valmis_A"
+	@echo "            > cc -table abi_andma_V"
+	@echo "            > cc -table kohe_Adv"
 	@echo
 	@echo "count_dict: show the frequency distribution of constructor patterns in DictEst"
 	@echo

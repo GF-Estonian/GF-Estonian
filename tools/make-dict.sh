@@ -16,11 +16,12 @@
 data=../data/
 grammar=../estonian/
 # The resources directory is currently not under version control
-# It needs to have the files:
+# It needs to have the files (see also get-resources.bash):
 #   - emwv/DB_EMWV_2008.txt (Estonian multi-word units DB)
 #     http://www.cl.ut.ee/ressursid/pysiyhendid/DB_EMWV_2008.zip
 #   - kb67a/kb67a-utf8.tix (Estonian WordNet)
-#     http://www.cl.ut.ee/ressursid/teksaurus/viimane/estwn-last.zip
+#     http://www.cl.ut.ee/ressursid/teksaurus/failid/kb67a.zip
+#     (latest: http://www.cl.ut.ee/ressursid/teksaurus/viimane/estwn-last.zip)
 #   - morfessor/nouns.seg (Morfessor noun segmentation trained on all WordNet nouns)
 resources=../resources/
 

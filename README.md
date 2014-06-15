@@ -97,8 +97,8 @@ Smart paradigm constructors
 
 Frequency distribution of constructor patterns:
 
-    33409 mkN (mkN )
-    27599 mkN
+    33335 mkN (mkN )
+    27673 mkN
     10197 mkV (mkV )
      3402 mkV
      3396 mkAdv
