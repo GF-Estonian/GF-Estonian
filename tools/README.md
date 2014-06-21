@@ -54,3 +54,13 @@ Runs various morph. generation tests saving the results as gold-files into the t
 
 Runs the morph. generation test for variable number of input arguments,
 given a forms-file from the data-directory.
+
+### split-nouns-vabamorf.py
+
+Splits compound nouns using Vabamorf (<https://github.com/Filosoft/vabamorf>).
+Requires pyvabamorf (<https://github.com/brainscauseminds/pyvabamorf>).
+
+    $ echo "öökullisilm" | ./split-nouns-vabamorf.py
+    öö kulli silm
+
+The output is in the form assumed by [make-dict.sh](make-dict.sh).
