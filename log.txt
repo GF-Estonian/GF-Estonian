@@ -1427,3 +1427,11 @@ Only main types::
     159 IVb_maakas
     127 VI_seminar
     123 VI_meeskond
+
+2014-06-22 (Kaarel)
+-------------------
+
+Generate DictEst.gf based on Vabamorf noun splits
+
+3k (out of 61k) nouns changed compared to Morfessor's splits.
+Typically the change was for the better, thus checked it in.
