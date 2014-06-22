@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Compiles the large lexicon from multiple sources.
+# Compiles the large lexicon (DictEst) from multiple sources.
 # TODO: work in progress
 
 # The lexicon must be sorted according to the Estonian locale
@@ -22,7 +22,7 @@ grammar=../estonian/
 #   - kb67a/kb67a-utf8.tix (Estonian WordNet)
 #     http://www.cl.ut.ee/ressursid/teksaurus/failid/kb67a.zip
 #     (latest: http://www.cl.ut.ee/ressursid/teksaurus/viimane/estwn-last.zip)
-#   - segments/nouns.morfessor (Morfessor noun segmentation trained on all WordNet nouns)
+#   - segments/nouns.morfessor (not used, Morfessor noun segmentation trained on all WordNet nouns)
 #   - segments/nouns.vabamorf (Vabamorf segmentation)
 #   - segments/adj.vabamorf (Vabamorf segmentation)
 resources=../resources/

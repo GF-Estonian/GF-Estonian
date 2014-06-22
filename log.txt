@@ -1431,7 +1431,10 @@ Only main types::
 2014-06-22 (Kaarel)
 -------------------
 
-Generate DictEst.gf based on Vabamorf noun splits
+Generate DictEst.gf based on Vabamorf splits.
 
 3k (out of 61k) nouns changed compared to Morfessor's splits.
 Typically the change was for the better, thus checked it in.
+
+Also added ~2000 compunds nouns to DictEst.gf +
+~500 WordNet adjectives that had not been added before (not sure why).

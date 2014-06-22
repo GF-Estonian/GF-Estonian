@@ -93,7 +93,7 @@ Generated with this sequence of steps:
 	# Use the WordNet tix-file
 	cat kb67a-utf8.tix |
 
-	# Keep only adjectives (exclude entries with spaces and hyphens)
+	# Keep only verbs (exclude entries with spaces and hyphens)
 	estwn-to-etsyn.bash v |
 
 	# Generate all forms (guess if needed)

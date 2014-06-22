@@ -106,18 +106,24 @@ Smart paradigm constructors
 
 ### Large lexicon (DictEst)
 
+The large lexicon has been automatically created by taking the words
+from various sources (Estonian WordNet, Estonian multi-word units database,
+Estonian Constraint Grammar verb lexicon) and applying ESTMORF/Vabamorf
+to generate their wordforms.
+
 Frequency distribution of constructor patterns:
 
-    33335 mkN (mkN )
-    27673 mkN
+    34813 mkN (mkN )
+    26195 mkN
     10197 mkV (mkV )
+     3558 mkA (mkN )
      3402 mkV
      3396 mkAdv
-     3006 mkA (mkN )
+     2153 mkA (mkN (mkN ))
       492 mkV2 (mkV )
       320 mkV2 (mkV ) cpartitive
        18 mkVV (mkV )
-    81839 total number of entries in DictEst
+    84544 total number of entries in DictEst
 
 TODO:
 
