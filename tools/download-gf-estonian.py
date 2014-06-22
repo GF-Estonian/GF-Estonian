@@ -40,7 +40,7 @@ estonian/SymbolEst.gf
 estonian/VerbEst.gf'''.split('\n')
 
 default_repo = 'https://raw.githubusercontent.com/GF-Estonian/GF-Estonian/'
-default_tag = 'v1.0.0-alpha'
+default_tag = 'v1.0.0-alpha.1'
 
 p = argparse.ArgumentParser(description='Downloads GF RG files from the GF-Estonian repository and stores them into subdirectories "api" and "estonian" (which must exist)')
 p.add_argument('--repo', type=str, action='store', dest='repo', default=default_repo, help='GF-Estonian repository URL, defaults to: ' + default_repo)
