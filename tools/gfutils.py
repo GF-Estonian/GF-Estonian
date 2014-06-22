@@ -57,5 +57,6 @@ def is_illegal(lemma_to_forms, word):
 def get_args():
 	p = argparse.ArgumentParser(description='')
 	p.add_argument('-f', '--forms', type=str, action='store', dest='forms', help='forms file')
+	p.add_argument('--pos', type=str, action='store', dest='pos', default='N', help='part of speech')
 	p.add_argument('-v', '--version', action='version', version='%(prog)s v0.1')
 	return p.parse_args()

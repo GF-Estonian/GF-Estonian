@@ -37,10 +37,11 @@ cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash b | ./adv-to-gf.py >
 echo "Nouns"
 #cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash n | ./nouns-to-gf.py --forms $data/nouns.6forms.csv > out_nouns.tsv 2> err_nouns.txt
 #cat $resources/segments/nouns.morfessor | ./nouns-to-gf.py --forms $data/nouns.6forms.csv > out_nouns.tsv 2> err_nouns.txt
-cat $resources/segments/nouns.vabamorf | ./nouns-to-gf.py --forms $data/nouns.6forms.csv > out_nouns.tsv 2> err_nouns.txt
+cat $resources/segments/nouns.vabamorf | ./words-to-gf.py --forms $data/nouns.6forms.csv > out_nouns.tsv 2> err_nouns.txt
 
 echo "Adjectives"
-cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash a | ./adj-to-gf.py --forms $data/adj.6forms.csv > out_adj.tsv 2> err_adj.txt
+cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash a > adj.txt
+cat adj.txt | ./adj-to-gf.py --forms $data/adj.6forms.csv > out_adj.tsv 2> err_adj.txt
 
 # Convert into GF
 cat out_estcglex.tsv out_mwv.tsv out_adv.tsv out_nouns.tsv out_adj.tsv | LC_ALL=et_EE.utf8 sort -k1 | uniq | cut -f2 | ./wrap_as_gf_module.py --out=${grammar}
