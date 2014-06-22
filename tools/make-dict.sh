@@ -22,7 +22,9 @@ grammar=../estonian/
 #   - kb67a/kb67a-utf8.tix (Estonian WordNet)
 #     http://www.cl.ut.ee/ressursid/teksaurus/failid/kb67a.zip
 #     (latest: http://www.cl.ut.ee/ressursid/teksaurus/viimane/estwn-last.zip)
-#   - morfessor/nouns.seg (Morfessor noun segmentation trained on all WordNet nouns)
+#   - segments/nouns.morfessor (Morfessor noun segmentation trained on all WordNet nouns)
+#   - segments/nouns.vabamorf (Vabamorf segmentation)
+#   - segments/adj.vabamorf (Vabamorf segmentation)
 resources=../resources/
 
 echo "Verbs"
@@ -40,8 +42,8 @@ echo "Nouns"
 cat $resources/segments/nouns.vabamorf | ./words-to-gf.py --forms $data/nouns.6forms.csv > out_nouns.tsv 2> err_nouns.txt
 
 echo "Adjectives"
-cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash a > adj.txt
-cat adj.txt | ./adj-to-gf.py --forms $data/adj.6forms.csv > out_adj.tsv 2> err_adj.txt
+#cat $resources/kb67a/kb67a-utf8.tix | ./estwn-to-etsyn.bash a > adj.txt
+cat $resources/segments/adj.vabamorf | ./words-to-gf.py --pos=A --forms $data/adj.6forms.csv > out_adj.tsv 2> err_adj.txt
 
 # Convert into GF
 cat out_estcglex.tsv out_mwv.tsv out_adv.tsv out_nouns.tsv out_adj.tsv | LC_ALL=et_EE.utf8 sort -k1 | uniq | cut -f2 | ./wrap_as_gf_module.py --out=${grammar}
