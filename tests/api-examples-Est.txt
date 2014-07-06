@@ -24,7 +24,7 @@ mkText negativePol (mkImp sleep_V)
 *
 mkText-Text-Text-Text
 mkText (mkText (mkPhr (mkUtt where_IAdv)) questMarkPunct (mkText (mkPhr (mkUtt here_Adv)))) (mkText (mkPhr (mkUtt when_IAdv)) questMarkPunct (mkText (mkPhr (mkUtt now_Adv)) exclMarkPunct))
-kus ? siin . kui ? nüüd !
+kus ? siin . millal ? nüüd !
 *
 fullStopPunct-Punct
 mkText (mkPhr yes_Utt) fullStopPunct
@@ -1726,7 +1726,7 @@ mis
 *
 when_IAdv-IAdv
 mkUtt when_IAdv
-kui
+millal
 *
 when_Subj-Subj
 mkUtt (mkAdv when_Subj (mkS (mkCl she_NP sleep_V)))
