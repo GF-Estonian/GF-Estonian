@@ -27,6 +27,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 	-- Foreign vowel endings
 	foreign_v : pattern Str = #("ko" | "po" | "to" | "fo" | "ka" | "pa" | "ta" | "fa" | "ku" | "pu" | "tu" | "fu") ;
 	v : pattern Str = #("a" | "e" | "i" | "o" | "u" | "õ" | "ä" | "ö" | "ü" | "w") ;
+	uml : pattern Str = #("õ" | "ä" | "ö" | "ü") ;
 	vv : pattern Str = #("aa" | "ee" | "ii" | "oo" | "uu" | "õõ" | "ää" | "öö" | "üü") ;
 	c : pattern Str = #("m" | "n" | "p" | "b" | "t" | "d" | "k" | "g" | "f" | "v" | "s" | "h" | "l" | "j" | "r" | "z" | "ž" | "š" | "c" | "q") ;
 	lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
@@ -596,6 +597,10 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			#c + #v + #c + #c + #v + #v + #c => S2 ; -- pension
 			#c + #v + #c + #v + #c + #v + #c => S3 ; -- seminar
 			#c + #c + #v + #c + #c + #v + #c => S2 ; -- kringel, plastik
+
+            -- TODO: generalize this even more
+            _ + #uml + #c => S3 ; -- aktsionär, komandör, kontrolör, miljardär, pensionär (type_VI_seminar)
+
 			_ + #v + #c + #v + #kpt + #kpt + #v + #c => S2 ; -- elekter, adapter
 			_ + #c + #v + #lmnr + #gbd + #v + #c => S2 ; -- (k)alender, (dets)ember
 			_ + #c + #v + #lmnr + #kpt + #v + #c => S2 ; -- (re)porter
