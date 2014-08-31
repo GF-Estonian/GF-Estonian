@@ -442,7 +442,7 @@ LangEst: on olemas naine nii et Juhan armastab teda
 
 
 Lang: ExistNP (DetCN (DetQuant IndefArt NumSg) (RelCN (UseN woman_N) (UseRCl (TTAnt TPres ASimul) PPos (RelVP IdRP (ComplSlash (SlashV2a love_V2) (UsePN john_PN))))))
-LangEst: on olemas naine kes armastab Juhanit
+LangEst: on olemas naine kes armastab Juhani
 
 
 Lang: ExistNP (DetCN (DetQuant IndefArt NumSg) (RelCN (UseN woman_N) (UseRCl (TTAnt TPres ASimul) PPos (RelSlash IdRP (SlashVP (UsePN john_PN) (SlashV2a love_V2))))))
