@@ -4,7 +4,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 -- Heiki-Jaan Kaalep. "Eesti käänamissüsteemi seaduspärasused" (2012)
 --
 -- @author Kaarel Kaljurand
--- @version 2014-08-28
+-- @version 2014-09-01
 
   flags
 	coding = utf8 ;
@@ -537,14 +537,14 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			? + ? + ? + ? => S1 ;
 			-- at least 5-letters
 			#c + #c + #v + #c + #c => S1 ; -- tramm
-			#c + #v + #c + #c + #c => S1 ;
+			_ + #c + #v + #c + #c + #c => S1 ; -- inerts, transs
 			#c + #v + #vv     + #c => S1 ; -- poeem
 			#c + #v + #v + #v + #c => S2 ; -- hoius, laius, maius
 			#c + #v + #c + #v + #c => S2 ; -- redel
 			#c + #v + #c + #gbd + "e" => S23 ; -- valge, k6rge; p6rge, hange
 			#c + #v + #v + #gbd + "e" => S22 ; -- haige, kauge; t6uge
 			#c + ? + ? + "ja" => S23 ; -- looja, sööja (TODO: derived from verb)
-			#c + #v + #v + #c + #v => S22 ; -- lause, beebi, juuni; TODO: leitu, voodi (S23)
+			_ + #c + #v + #v + #c + #v => S22 ; -- lause, beebi, juuni, kraana; TODO: leitu, voodi (S23)
 			#c + #v + #c + #c + #v => S22 ; -- ratsu; not: surnu
 			#c + #c + #v + #vv => S1 ; -- TODO
 			#c + #c + #v + #v + #v => S22 ; -- proua
@@ -569,6 +569,9 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			-- at least 6-letters
 			_ + #v + #v + #c + #c + #c + #v => S23 ; -- aardla, maardla
 			#v + #c + #c + #v + #v + #c => S1 ; -- aplaus
+			#c + #c + #c + #v + ? + #c => S1 ; -- sprint, streik
+			#c + #c + #v + #v + #c + #c => S1 ; -- klient
+			#c + #v + #v + #c + #c + #c => S1 ; -- paavst, nüanss
 			#v + #c + #c + #v + #c + #c => S2 ; -- astang, ellips
 
 			#c + #v + #v + #c + #c + #v => S23 ; -- haigla --added by Inari, not sure if always correct
@@ -612,6 +615,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			_ + #c + #v + "s" + #kpt + #v + #c => S2 ; -- (k)anister
 
 			_ + #c + #v + #c + #c + #v + #c => S3 ; -- apelsin, talisman, emissar
+			_ + #v + #v + #v + #c + #c + #v + #c => S3 ; -- raiesmik
 			_ + #v + #c + #v + #c => S3 ; -- seminar
 
 			#c + #c + #v + #c + #v + #c + #c => S2 ; -- klopits
@@ -620,6 +624,7 @@ resource HjkEst = open ResEst, Prelude, Predef in {
 			-- other
 			_ + #c + #c + #v + #c + #c + #v + #c + #c => S3 ; -- ampersand
 			_ + #c + #v + #c + #v + #c + #c => S3 ; -- dividend
+			_ + #v => S22 ;
 			_ => S2 -- the default is S2, but the above rules should catch most of the words
 		} ;
 
