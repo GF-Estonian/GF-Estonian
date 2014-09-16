@@ -467,7 +467,6 @@ algamine, algamise, algamist, algamisesse|algamisse, algamiste, algamisi
 algataja, algataja, algatajat, algatajasse, algatajate, algatajaid
 algatamine, algatamise, algatamist, algatamisesse|algatamisse, algatamiste, algatamisi
 algatus, algatuse, algatust, algatusesse|algatusse, algatuste, algatusi
-alge, alge, alget, algesse, algete, algeid
 alge, alge|algme, alget, algesse|algmesse, algete|algmete, algeid|algmeid
 algebra, algebra, algebrat, algebrasse, algebrate, algebraid
 algelisus, algelisuse, algelisust, algelisusesse|algelisusse, algelisuste, algelisusi
@@ -3468,7 +3467,7 @@ helmintoloogia, helmintoloogia, helmintoloogiat, helmintoloogiasse, helmintoloog
 helmintoos, helmintoosi, helmintoosi, helmintoosisse|helmintoosi, helmintooside, helmintoose|helmintoosisid
 helpija, helpija, helpijat, helpijasse, helpijate, helpijaid
 helpimine, helpimise, helpimist, helpimisesse|helpimisse, helpimiste, helpimisi
-helve|helves, helbe, helvet|helvest, helbesse, helvete|helveste, helbeid
+helve, helbe, helvet, helbesse, helvete, helbeid
 helves, helbe, helvest, helbesse, helveste, helbeid
 helvet, helveti, helvetit, helvetisse, helvetite, helveteid
 hematoom, hematoomi, hematoomi, hematoomisse|hematoomi, hematoomide, hematoome|hematoomisid
@@ -4906,7 +4905,6 @@ kääksutus, kääksutuse, kääksutust, kääksutusesse|kääksutusse, kääksu
 kaalikas, kaalika, kaalikat, kaalikasse, kaalikate, kaalikaid
 kaalium, kaaliumi, kaaliumi|kaaliumit, kaaliumisse|kaaliumi, kaaliumide|kaaliumite, kaaliume|kaaliumeid|kaaliumisid
 kaal, kaali|kaalu, kaali|kaalu, kaalisse|kaalusse|kaali|kaalu, kaalide|kaalude, kaale|kaalisid|kaalusid
-kaal, kaalu, kaalu, kaalusse|kaalu, kaalude, kaale|kaalusid
 kaaluja, kaaluja, kaalujat, kaalujasse, kaalujate, kaalujaid
 kaalulisus, kaalulisuse, kaalulisust, kaalulisusesse|kaalulisusse, kaalulisuste, kaalulisusi|kaalulisuseid
 kaalumine, kaalumise, kaalumist, kaalumisesse|kaalumisse, kaalumiste, kaalumisi
@@ -5416,7 +5414,6 @@ kannibalism, kannibalismi, kannibalismi, kannibalismisse|kannibalismi, kannibali
 kannibal, kannibali, kannibali, kannibalisse|kannibali, kannibalide, kannibale|kannibalisid
 kannikas, kannika, kannikat, kannikasse, kannikate, kannikaid
 kannike, kannikese, kannikest, kannikesesse|kannikesse, kannikeste, kannikesi
-kann, kanni, kanni, kannisse|kanni, kannide, kanne|kannisid
 kann, kanni|kannu, kanni|kannu, kannisse|kannusse|kanni|kannu, kannide|kannude, kanne|kannisid|kannusid
 kannus, kannuse, kannust, kannusesse, kannuste, kannuseid
 kannustaja, kannustaja, kannustajat, kannustajasse, kannustajate, kannustajaid
@@ -6240,7 +6237,6 @@ kiniin, kiniini, kiniini, kiniinisse|kiniini, kiniinide, kiniine|kiniinisid
 kinkija, kinkija, kinkijat, kinkijasse, kinkijate, kinkijaid
 kinkimine, kinkimise, kinkimist, kinkimisesse|kinkimisse, kinkimiste, kinkimisi
 kink, kingi|kingu, kinki|kinku, kingisse|kingusse|kinki|kinku, kinkide|kinkude, kinke|kinkisid|kinkusid
-kink, kingu, kinku, kingusse|kinku, kinkude, kinke|kinkusid
 kinnas, kinda, kinnast, kindasse, kinnaste, kindaid
 kinner, kindra, kinnert, kindrasse, kinnerde, kindraid
 kinnistaja, kinnistaja, kinnistajat, kinnistajasse, kinnistajate, kinnistajaid
@@ -7283,7 +7279,6 @@ koogutamine, koogutamise, koogutamist, koogutamisesse|koogutamisse, koogutamiste
 köögutamine, köögutamise, köögutamist, köögutamisesse|köögutamisse, köögutamiste, köögutamisi
 kook, koogi|koogu, kooki|kooku, koogisse|koogusse|kooki|kooku, kookide|kookude, kooke|kookisid|kookusid
 köök, köögi, kööki, köögisse|kööki, köökide, kööke|köökisid
-kook, koogu, kooku, koogusse|kooku, kookude, kooke|kookusid
 kõõksataja, kõõksataja, kõõksatajat, kõõksatajasse, kõõksatajate, kõõksatajaid
 kõõksatamine, kõõksatamise, kõõksatamist, kõõksatamisesse|kõõksatamisse, kõõksatamiste, kõõksatamisi
 kõõksatus, kõõksatuse, kõõksatust, kõõksatusesse|kõõksatusse, kõõksatuste, kõõksatusi
@@ -7310,7 +7305,6 @@ kõõlus, kõõluse, kõõlust, kõõlusesse, kõõluste, kõõluseid
 koolutaja, koolutaja, koolutajat, koolutajasse, koolutajate, koolutajaid
 koolutamine, koolutamise, koolutamist, koolutamisesse|koolutamisse, koolutamiste, koolutamisi
 kooma, kooma, koomat, koomasse, koomade, koomasid
-kööme|köömen, köömne, köömet|köömnet, köömnesse, köömnete, köömneid
 kööme, köömne, köömet, köömnesse, köömnete, köömneid
 köömen, köömne, köömnet, köömnesse, köömnete, köömneid
 köömes, kööme, köömest, köömesse, köömeste, köömeid
@@ -8006,7 +8000,6 @@ kulgeja, kulgeja, kulgejat, kulgejasse, kulgejate, kulgejaid
 kulgemine, kulgemise, kulgemist, kulgemisesse|kulgemisse, kulgemiste, kulgemisi
 külg, külje, külge, küljesse|külge, külgede, külgi|külgesid
 kulg, kulu, kulgu, kulusse|kulgu, kulgude, kulge|kulgusid
-kulg|kulu, kulu, kulgu|kulu, kulusse|kulgu, kulgude|kulude, kulge|kulgusid|kulusid
 kulgla, kulgla, kulglat, kulglasse, kulglate, kulglaid
 külgnemine, külgnemise, külgnemist, külgnemisesse|külgnemisse, külgnemiste, külgnemisi
 külgsus, külgsuse, külgsust, külgsusesse|külgsusse, külgsuste, külgsusi|külgsuseid
@@ -9174,7 +9167,6 @@ liigutus, liigutuse, liigutust, liigutusesse|liigutusse, liigutuste, liigutusi
 liikleja, liikleja, liiklejat, liiklejasse, liiklejate, liiklejaid
 liiklemine, liiklemise, liiklemist, liiklemisesse|liiklemisse, liiklemiste, liiklemisi
 liik, liigi|liigu, liiki|liiku, liigisse|liigusse|liiki|liiku, liikide|liikude, liike|liikisid|liikusid
-liik, liigu, liiku, liigusse|liiku, liikude, liike|liikusid
 liiklus, liikluse, liiklust, liiklusesse|liiklusse, liikluste, liiklusi|liikluseid
 liikmeskond, liikmeskonna, liikmeskonda, liikmeskonnasse|liikmeskonda, liikmeskondade, liikmeskondi|liikmeskondasid
 liikuja, liikuja, liikujat, liikujasse, liikujate, liikujaid
@@ -9393,7 +9385,7 @@ lõdvestus, lõdvestuse, lõdvestust, lõdvestusesse|lõdvestusse, lõdvestuste,
 lõdvik, lõdviku, lõdvikut, lõdvikusse, lõdvikute, lõdvikuid
 lodža, lodža, lodžat, lodžasse, lodžade, lodžasid
 loe, loode, loet, loodesse, loete, loodeid
-loe|loode, loode, loet|loodet, loodesse, loete|loodete, loodeid
+loode, loode|loote, loodet, loodesse|lootesse, loodete, loodeid|looteid
 loendaja, loendaja, loendajat, loendajasse, loendajate, loendajaid
 loendamine, loendamise, loendamist, loendamisesse|loendamisse, loendamiste, loendamisi
 loend, loendi, loendit, loendisse|loendi, loendite, loendeid
@@ -9521,7 +9513,6 @@ lokatiiv, lokatiivi, lokatiivi, lokatiivisse|lokatiivi, lokatiivide, lokatiive|l
 lokatsioon, lokatsiooni, lokatsiooni, lokatsioonisse|lokatsiooni, lokatsioonide, lokatsioone|lokatsioonisid
 lokaut, lokaudi, lokauti, lokaudisse|lokauti, lokautide, lokaute|lokautisid
 lõke, lõkke|lõkme, lõket, lõkkesse|lõkmesse, lõkete|lõkmete, lõkkeid|lõkmeid
-lõke, lõkme, lõket, lõkmesse, lõkmete, lõkmeid
 lõkendamine, lõkendamise, lõkendamist, lõkendamisesse|lõkendamisse, lõkendamiste, lõkendamisi
 lõkerdaja, lõkerdaja, lõkerdajat, lõkerdajasse, lõkerdajate, lõkerdajaid
 lõkerdamine, lõkerdamise, lõkerdamist, lõkerdamisesse|lõkerdamisse, lõkerdamiste, lõkerdamisi
@@ -9594,7 +9585,6 @@ lööbimine, lööbimise, lööbimist, lööbimisesse|lööbimisse, lööbimiste
 loobuja, loobuja, loobujat, loobujasse, loobujate, loobujaid
 loobumine, loobumise, loobumist, loobumisesse|loobumisse, loobumiste, loobumisi
 loobumus, loobumuse, loobumust, loobumusesse|loobumusse, loobumuste, loobumusi
-loode, loode|loote, loodet, loodesse|lootesse, loodete, loodeid|looteid
 looderdaja, looderdaja, looderdajat, looderdajasse, looderdajate, looderdajaid
 looderdamine, looderdamise, looderdamist, looderdamisesse|looderdamisse, looderdamiste, looderdamisi
 looder, loodri, loodrit, loodrisse, loodrite, loodreid
@@ -10339,7 +10329,6 @@ märkija, märkija, märkijat, märkijasse, märkijate, märkijaid
 märkimine, märkimise, märkimist, märkimisesse|märkimisse, märkimiste, märkimisi
 mark, marga|margi, marka|marki, margasse|margisse|marka|marki, markade|markide, marke|marku|markasid|markisid
 märk, märgi|märgu, märki|märku, märgisse|märgusse|märki|märku, märkide|märkude, märke|märkisid|märkusid
-märk, märgi, märki, märgisse|märki, märkide, märke|märkisid
 märkmik, märkmiku, märkmikku, märkmikusse|märkmikku, märkmike|märkmikkude, märkmikke|märkmikkusid
 marksism, marksismi, marksismi, marksismisse|marksismi, marksismide, marksisme|marksismisid
 marksist, marksisti, marksisti, marksistisse|marksisti, marksistide, marksiste|marksistisid
@@ -11997,7 +11986,6 @@ nuiamine, nuiamise, nuiamist, nuiamisesse|nuiamisse, nuiamiste, nuiamisi
 nui, nuia, nuia, nuiasse|nuia, nuiade, nuie|nuiasid
 nukits, nukitsa, nukitsat, nukitsasse, nukitsate, nukitsaid
 nukk, nuka|nuki|nuku, nukka|nukki|nukku, nukasse|nukisse|nukusse|nukka|nukki|nukku, nukkade|nukkide|nukkude, nukke|nukki|nukkasid|nukkisid|nukkusid
-nukk, nuki, nukki, nukisse|nukki, nukkide, nukke|nukkisid
 nükk, nüki, nükki, nükisse|nükki, nükkide, nükke|nükkisid
 nukkumine, nukkumise, nukkumist, nukkumisesse|nukkumisse, nukkumiste, nukkumisi
 nukrus, nukruse, nukrust, nukrusesse|nukrusse, nukruste, nukrusi|nukruseid
@@ -12800,7 +12788,6 @@ pakitsemine, pakitsemise, pakitsemist, pakitsemisesse|pakitsemisse, pakitsemiste
 pakkija, pakkija, pakkijat, pakkijasse, pakkijate, pakkijaid
 pakkimine, pakkimise, pakkimist, pakkimisesse|pakkimisse, pakkimiste, pakkimisi
 päkk, päka, päkka, päkasse|päkka, päkkade, päkki|päkkasid
-pakk, paki, pakki, pakisse|pakki, pakkide, pakke|pakkisid
 pakk, paki|paku, pakki|pakku, pakisse|pakusse|pakki|pakku, pakkide|pakkude, pakke|pakkisid|pakkusid
 pakkuja, pakkuja, pakkujat, pakkujasse, pakkujate, pakkujaid
 pakkumine, pakkumise, pakkumist, pakkumisesse|pakkumisse, pakkumiste, pakkumisi
@@ -13470,7 +13457,6 @@ pihtija, pihtija, pihtijat, pihtijasse, pihtijate, pihtijaid
 pihtimine, pihtimise, pihtimist, pihtimisesse|pihtimisse, pihtimiste, pihtimisi
 pihtimus, pihtimuse, pihtimust, pihtimusesse|pihtimusse, pihtimuste, pihtimusi
 piht, piha|pihi, pihta|pihti, pihasse|pihisse|pihta|pihti, pihtade|pihtide, pihte|pihtu|pihtasid|pihtisid
-piht, pihi, pihti, pihisse|pihti, pihtide, pihte|pihtisid
 pihunemine, pihunemise, pihunemist, pihunemisesse|pihunemisse, pihunemiste, pihunemisi
 pihustaja, pihustaja, pihustajat, pihustajasse, pihustajate, pihustajaid
 pihustamine, pihustamise, pihustamist, pihustamisesse|pihustamisse, pihustamiste, pihustamisi
@@ -13921,7 +13907,7 @@ poegija, poegija, poegijat, poegijasse, poegijate, poegijaid
 poegimine, poegimise, poegimist, poegimisesse|poegimisse, poegimiste, poegimisi
 poegkond, poegkonna, poegkonda, poegkonnasse|poegkonda, poegkondade, poegkondi|poegkondasid
 poeg, poja, poega, pojasse|poega, poegade, poegi|poegasid
-poeg|poja, poja, poega|poja, pojasse|poega, poegade|pojade, poegi|poegasid|pojasid
+poja, poja, poja, pojasse, pojade, pojasid
 poetaja, poetaja, poetajat, poetajasse, poetajate, poetajaid
 põetaja, põetaja, põetajat, põetajasse, põetajate, põetajaid
 poetamine, poetamise, poetamist, poetamisesse|poetamisse, poetamiste, poetamisi
@@ -13975,7 +13961,6 @@ poisike, poisikese, poisikest, poisikesesse|poisikesse, poisikeste, poisikesi
 põis, põie, põit, põiesse|põide, põite, põisi
 poiss, poisi, poissi, poisisse|poissi, poiste|poisside, poisse|poissisid
 pojake, pojakese, pojakest, pojakesesse|pojakesse, pojakeste, pojakesi
-poja, poja, poja, pojasse, pojade, pojasid
 pojeng, pojengi, pojengi, pojengisse|pojengi, pojengide, pojenge|pojengisid
 poju, poju, poju, pojusse, pojude, pojusid
 pokaal, pokaali, pokaali, pokaalisse|pokaali, pokaalide, pokaale|pokaalisid
@@ -16021,7 +16006,7 @@ rünnak, rünnaku, rünnakut, rünnakusse, rünnakute, rünnakuid
 rünne, ründe, rünnet, ründesse, rünnete, ründeid
 rünt, ründi, rünti, ründisse|rünti, rüntide, rünte|rüntisid
 rüpp, rüpe, rüppe, rüpesse|rüppe, rüppede, rüppi|rüppesid
-rupski, rupski, rupskit, rupskisse, rupskite, rupskeid
+rups|rupski, rupsi|rupski, rupsi|rupskit, rupsisse|rupskisse|rupsi, rupside|rupskite, rupse|rupsisid|rupskeid
 rups, rupsi, rupsi, rupsisse|rupsi, rupside, rupse|rupsisid
 rüseleja, rüseleja, rüselejat, rüselejasse, rüselejate, rüselejaid
 rüselemine, rüselemise, rüselemist, rüselemisesse|rüselemisse, rüselemiste, rüselemisi
@@ -16261,7 +16246,6 @@ sakslanna, sakslanna, sakslannat, sakslannasse, sakslannade, sakslannasid
 sakslus, saksluse, sakslust, sakslusesse|sakslusse, saksluste, sakslusi|saksluseid
 saksofonist, saksofonisti, saksofonisti, saksofonistisse|saksofonisti, saksofonistide, saksofoniste|saksofonistisid
 saksofon, saksofoni, saksofoni, saksofonisse|saksofoni, saksofonide, saksofone|saksofonisid
-saks, saksa, saksa, saksasse|saksa, sakste|saksade, saksu|saksasid
 saks, saksa|saksi, saksa|saksi, saksasse|saksisse|saksa|saksi, sakste|saksade|sakside, sakse|saksu|saksasid|saksisid
 sakumm, sakummi, sakummi, sakummisse|sakummi, sakummide, sakumme|sakummisid
 sakuska, sakuska, sakuskat, sakuskasse, sakuskade, sakuskasid
@@ -16329,7 +16313,7 @@ samastuja, samastuja, samastujat, samastujasse, samastujate, samastujaid
 samastumine, samastumise, samastumist, samastumisesse|samastumisse, samastumiste, samastumisi
 samasus, samasuse, samasust, samasusesse|samasusse, samasuste, samasusi
 samba, samba, sambat, sambasse, sambade, sambasid
-samba|sammas, samba, sambat|sammast, sambasse, sambade|sammaste, sambaid|sambasid
+sammas, samba, sammast, sambasse, sammaste, sambaid
 samblik, sambliku, samblikku, samblikusse|samblikku, samblike|samblikkude, samblikke|samblikkusid
 sambo, sambo, sambot, sambosse, sambode, sambosid
 samet, sameti, sametit, sametisse, sametite, sameteid
@@ -16337,7 +16321,6 @@ sammaldaja, sammaldaja, sammaldajat, sammaldajasse, sammaldajate, sammaldajaid
 sammaldamine, sammaldamise, sammaldamist, sammaldamisesse|sammaldamisse, sammaldamiste, sammaldamisi
 sammaldumine, sammaldumise, sammaldumist, sammaldumisesse|sammaldumisse, sammaldumiste, sammaldumisi
 sammal, sambla, sammalt, samblasse, sammalde, samblaid
-sammas, samba, sammast, sambasse, sammaste, sambaid
 sammastik, sammastiku, sammastikku, sammastikusse|sammastikku, sammastike|sammastikkude, sammastikke|sammastikkusid
 samm, sammu, sammu, sammusse|sammu, sammude, samme|sammusid
 sammuja, sammuja, sammujat, sammujasse, sammujate, sammujaid
@@ -16481,7 +16464,6 @@ savi, savi, savi, savisse|savvi, savide, savisid
 savistumine, savistumise, savistumist, savistumisesse|savistumisse, savistumiste, savistumisi
 seadeldis, seadeldise, seadeldist, seadeldisesse|seadeldisse, seadeldiste, seadeldisi
 seade, seade|seadme, seadet, seadesse|seadmesse, seadete|seadmete, seadeid|seadmeid
-seade, seadme, seadet, seadmesse, seadmete, seadmeid
 seadis, seadise, seadist, seadisesse, seadiste, seadiseid
 seadistaja, seadistaja, seadistajat, seadistajasse, seadistajate, seadistajaid
 seadistamine, seadistamise, seadistamist, seadistamisesse|seadistamisse, seadistamiste, seadistamisi
@@ -16910,7 +16892,6 @@ silmaja, silmaja, silmajat, silmajasse, silmajate, silmajaid
 silmamine, silmamise, silmamist, silmamisesse|silmamisse, silmamiste, silmamisi
 silmitseja, silmitseja, silmitsejat, silmitsejasse, silmitsejate, silmitsejaid
 silmitsemine, silmitsemise, silmitsemist, silmitsemisesse|silmitsemisse, silmitsemiste, silmitsemisi
-silm, silma, silma, silmasse|silma, silmade|silme, silmi|silmasid
 silm, silma|silmu, silma|silmu, silmasse|silmusse|silma|silmu, silmade|silme|silmude, silme|silmi|silmasid|silmusid
 silmsus, silmsuse, silmsust, silmsusesse|silmsusse, silmsuste, silmsusi|silmsuseid
 silmus, silmuse, silmust, silmusesse, silmuste, silmuseid
@@ -17341,7 +17322,6 @@ soolikas, soolika, soolikat, soolikasse, soolikate, soolikaid
 soolisus, soolisuse, soolisust, soolisusesse|soolisusse, soolisuste, soolisusi
 soolo, soolo, soolot, soolosse, soolode, soolosid
 sool, soola|soole|sooli, soolt|soola|sooli, soolasse|soolesse|soolisse|soolde|soola|sooli, soolte|soolade|soolide, soole|sooli|soolasid|soolisid
-sool, soole, soolt, soolesse|soolde, soolte, sooli
 söömar, söömari, söömarit, söömarisse, söömarite, söömareid
 soomendaja, soomendaja, soomendajat, soomendajasse, soomendajate, soomendajaid
 soomendamine, soomendamise, soomendamist, soomendamisesse|soomendamisse, soomendamiste, soomendamisi
@@ -17800,7 +17780,6 @@ sulgimine, sulgimise, sulgimist, sulgimisesse|sulgimisse, sulgimiste, sulgimisi
 sulgseis, sulgseisu, sulgseisu, sulgseisusse|sulgseisu, sulgseisude, sulgseise|sulgseisusid
 sulg, sule|sulu, sulge|sulgu, sulesse|sulusse|sulge|sulgu, sulgede|sulgude, sulge|sulgi|sulgesid|sulgusid
 sülg, sülje, sülge, süljesse|sülge, sülgede, sülgi|sülgesid
-sulg, sulu, sulgu, sulusse|sulgu, sulgude, sulge|sulgusid
 sulguja, sulguja, sulgujat, sulgujasse, sulgujate, sulgujaid
 sulgumine, sulgumise, sulgumist, sulgumisesse|sulgumisse, sulgumiste, sulgumisi
 sulgur, sulguri, sulgurit, sulgurisse, sulgurite, sulgureid
@@ -21683,7 +21662,6 @@ vuristamine, vuristamise, vuristamist, vuristamisesse|vuristamisse, vuristamiste
 vurritaja, vurritaja, vurritajat, vurritajasse, vurritajate, vurritajaid
 vurritamine, vurritamise, vurritamist, vurritamisesse|vurritamisse, vurritamiste, vurritamisi
 vurr, vurri|vurru, vurri|vurru, vurrisse|vurrusse|vurri|vurru, vurride|vurrude, vurre|vurrisid|vurrusid
-vurr, vurru, vurru, vurrusse|vurru, vurrude, vurre|vurrusid
 vürstkond, vürstkonna, vürstkonda, vürstkonnasse|vürstkonda, vürstkondade, vürstkondi|vürstkondasid
 vürst, vürsti, vürsti, vürstisse|vürsti, vürstide, vürste|vürstisid
 vurtsaja, vurtsaja, vurtsajat, vurtsajasse, vurtsajate, vurtsajaid
