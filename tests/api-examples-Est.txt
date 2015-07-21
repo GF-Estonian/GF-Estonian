@@ -492,11 +492,11 @@ viis meest
 *
 mkNP-Digits-CN-NP
 mkUtt (mkNP (mkDigits n5_Dig (mkDigits n1_Dig)) (mkCN old_A man_N))
-5 1 vana meest
+5 Predef.BIND 1 vana meest
 *
 mkNP-Digits-N-NP
 mkUtt (mkNP (mkDigits n5_Dig (mkDigits n1_Dig)) man_N)
-5 1 meest
+5 Predef.BIND 1 meest
 *
 mkNP-Pron-CN-NP
 mkUtt (mkNP i_Pron (mkCN old_A man_N))
@@ -704,7 +704,7 @@ table Predef.PBool ["kümme"; "kaks" ++ Predef.BIND ++ "kümmend"]
 *
 mkNum-Digits-Num
 mkNum (mkDigits n2_Dig (mkDigits n1_Dig))
-2 1
+2 Predef.BIND 1
 *
 mkNum-Card-Num
 mkNum (mkCard almost_AdN (mkCard (mkNumeral n5_Unit)))
@@ -866,7 +866,7 @@ mkUtt (mkCard (mkDigits n4_Dig))
 *
 mkDigits-Dig-Digits-Digits
 mkUtt (mkCard (mkDigits n1_Dig (mkDigits n2_Dig (mkDigits n3_Dig (mkDigits n3_Dig (mkDigits n4_Dig (mkDigits n8_Dig (mkDigits n6_Dig))))))))
-1 2 3 3 4 8 6
+1 Predef.BIND 2 Predef.BIND 3 Predef.BIND 3 Predef.BIND 4 Predef.BIND 8 Predef.BIND 6
 *
 mkCN-N-CN
 mkUtt (mkCN house_N )

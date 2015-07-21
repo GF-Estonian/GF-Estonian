@@ -4,6 +4,7 @@ import sys
 import argparse
 import urllib
 
+# find . -name "*.gf" | sort | sed "s/\.\///"
 gf_files='''api/CombinatorsEst.gf
 api/ConstructorsEst.gf
 api/SymbolicEst.gf
@@ -15,8 +16,12 @@ estonian/AllEstAbs.gf
 estonian/AllEst.gf
 estonian/CatEst.gf
 estonian/ConjunctionEst.gf
+estonian/ConstructionEst.gf
 estonian/DictEstAbs.gf
 estonian/DictEst.gf
+estonian/DocumentationEstEng.gf
+estonian/DocumentationEstFunctor.gf
+estonian/DocumentationEst.gf
 estonian/ExtraEstAbs.gf
 estonian/ExtraEst.gf
 estonian/GrammarEst.gf
@@ -37,6 +42,7 @@ estonian/ResEst.gf
 estonian/SentenceEst.gf
 estonian/StructuralEst.gf
 estonian/SymbolEst.gf
+estonian/TerminologyEst.gf
 estonian/VerbEst.gf'''.split('\n')
 
 default_repo = 'https://raw.githubusercontent.com/GF-Estonian/GF-Estonian/'

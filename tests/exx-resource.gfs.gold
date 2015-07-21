@@ -174,7 +174,7 @@ LangEst: viis
 
 
 Lang: NumCard (NumDigits (IIDig D_5 (IDig D_1)))
-LangEst: 5 1
+LangEst: 5 &+ 1
 
 
 Lang: NumCard (NumNumeral (num (pot2as3 (pot1as2 (pot1plus n5 pot01)))))
@@ -182,11 +182,11 @@ LangEst: viis &+ kümmend üks
 
 
 Lang: NumCard (AdNum almost_AdN (NumDigits (IIDig D_5 (IDig D_1))))
-LangEst: peaaegu 5 1
+LangEst: peaaegu 5 &+ 1
 
 
 Lang: OrdDigits (IIDig D_5 (IDig D_1))
-LangEst: 5 1.
+LangEst: 5 &+ 1.
 
 
 Lang: OrdNumeral (num (pot2as3 (pot1as2 (pot1plus n5 pot01))))
@@ -334,7 +334,7 @@ LangEst: 8
 
 
 Lang: IIDig D_8 (IIDig D_0 (IIDig D_0 (IIDig D_1 (IIDig D_7 (IIDig D_8 (IDig D_9))))))
-LangEst: 8 0 0 1 7 8 9
+LangEst: 8 &+ 0 &+ 0 &+ 1 &+ 7 &+ 8 &+ 9
 
 
 Lang: PhrUtt but_PConj (UttImpSg PPos (ImpVP (AdvVP (UseV come_V) here_Adv))) (VocNP (DetCN (DetQuant (PossPron i_Pron) NumSg) (UseN friend_N)))

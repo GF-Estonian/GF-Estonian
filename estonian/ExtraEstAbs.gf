@@ -1,5 +1,6 @@
 abstract ExtraEstAbs = Extra [
-  GenNP,
+  GenNP,GenIP,GenRP,
+  PassVPSlash, PassAgentVPSlash,
   VPI,ListVPI,BaseVPI,ConsVPI,MkVPI,ComplVPIVV,ConjVPI,
   VPS,ListVPS,BaseVPS,ConsVPS,ConjVPS,MkVPS,PredVPS,ConjVPS,Tense,Temp,Pol,S,
   VV,VP,Conj,NP,Quant,IAdv,IComp,ICompAP,IAdvAdv,Adv,AP, Pron, ProDrop] ** {
@@ -62,7 +63,5 @@ abstract ExtraEstAbs = Extra [
     ClPlusWithObj : ClPlusObj -> ClPlus ;   -- to make non-fronted obj focusable
     ClPlusWithAdv : ClPlusAdv -> ClPlus ;   -- to make non-fronted adv focusable
 
-    noPart, han_Part, pa_Part, pas_Part, ko_Part, kos_Part, 
-      kohan_Part, pahan_Part : Part ; 
-
+    gi_Part : Part ;
 }

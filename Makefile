@@ -59,6 +59,11 @@ diff_rgl:
 	diff $(GF_SRC)/lib/src/api/TryEst.gf api/TryEst.gf
 	diff -r $(GF_SRC)/lib/src/estonian/ estonian
 
+# Show latest changes to Estonian in the GF repository
+changes_rgl:
+	cd $(GF_SRC)
+	git log --name-status -15 -- lib/src/estonian/
+
 hjk_classes:
 	cat data/nouns.6forms.csv | sed "s/,.*//" | python tools/cc.py -r estonian/HjkClassify.gf --oper hjk_type | gf --run
 
