@@ -1,5 +1,13 @@
 
+PROBSFILE=$(GF_SRC)/treebanks/PennTreebank/ParseEngAbs.probs
+TPROBSFILE=$(GF_SRC)/lib/src/translator/translate.probs
+
+TRANSLATE2=TranslateEng.pgf TranslateEst.pgf
 path=present:estonian
+path_translator=estonian:chunk:translator:$(GF_SRC)/lib/src/translator/:$(GF_SRC)/lib/src/chunk/
+
+S=-s
+GFMKT=gf $S -make -literal=PN,Symb -probs=$(TPROBSFILE) -path=$(path_translator) -gfo-dir $(GF_SRC)/lib/src/translator
 
 
 all: help
@@ -72,3 +80,21 @@ hjk_classes_freq:
 
 clean:
 	find -name *.gfo | xargs rm -f
+
+
+
+TranslateEng: TranslateEng.pgf
+# Without dependencies:
+Translate2:
+	$(GFMKT) -name=Translate2 $(TRANSLATE2) +RTS -K200M
+
+# With dependencies:
+Translate2.pgf: $(TRANSLATE2)
+	$(GFMKT) -name=Translate2 $(TRANSLATE2) +RTS -K200M
+
+# Translate grammars for individual languages
+TranslateEng.pgf:: ; $(GFMKT) -name=TranslateEng translator/TranslateEng.gf
+TranslateEst.pgf:: ; $(GFMKT) -name=TranslateEst translator/TranslateEst.gf +RTS -K200M
+
+# Selected language pairs:
+TranslateEngFin: ; $(GFMKT) -name=TranslateEngFin TranslateEng.pgf TranslateFin.pgf

@@ -1492,3 +1492,27 @@ mkN 4-arg pattern: (@F[0..2], @F[5])
      47 4
 coverage: 21362 out of 21734 = .9828
 ```
+
+2015-07-23 (Kaarel)
+-------------------
+
+Experiments with wide-coverage parsing.
+Focus on translation Eng->Est (i.e. the Estonian lexicon does not contain variants).
+The ~3 extra files needed by the wide-coverage parser taken from German and Finnish, but many functions commented out.
+Eng-Est lexicon taken from GF repository but variants removed + duplicates removed + some words changed/added.
+Using the first 100 sentences form the APE regression test set for regression testing (parse+linearize takes ~40 seconds)
+parse errors: 22; at least 1 function not linearized: 60; fully translated: 18
+Testing using the Python-based PGF API (tools/translate.py)
+
+Missing functions:
+
+    108 [SelfAdvVP]
+     68 [he_Pron]
+     56 [every_Det]
+     48 [of_Prep]
+     45 [it_Pron]
+     43 [whoSg_IP]
+     43 [that_Subj]
+     42 [in_Prep]
+     41 [for_Prep]
+     34 [ExistNPAdv]

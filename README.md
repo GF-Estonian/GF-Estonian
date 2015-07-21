@@ -29,6 +29,15 @@ If the building fails with an error message, then compile `ResEst.gf` first:
     gf estonian/ResEst.gf
     make pgf_lang
 
+Wide-coverage grammar (very experimental): compiling Estonian
+
+    make TranslateEst.pgf
+    # make TranslateEng.pgf ${GF_SRC}/lib/src/
+    cp ${GF_SRC}/lib/src/TranslateEng.pgf .
+    make Translate2
+    cat in.txt | translate.py --pgf Translate2.pgf > out.txt
+    # or: pgf-translate Translate2.pgf Phr TranslateEng TranslateEst
+
 
 Testing
 -------
