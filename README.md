@@ -35,7 +35,7 @@ Wide-coverage grammar (very experimental): compiling Estonian
     # make TranslateEng.pgf ${GF_SRC}/lib/src/
     cp ${GF_SRC}/lib/src/TranslateEng.pgf .
     make Translate2
-    cat in.txt | translate.py --pgf Translate2.pgf > out.txt
+    cat in.txt | translate.py --pgf Translate2.pgf --tokenize --source TranslateEng --target TranslateEst > out.tsv
     # or: pgf-translate Translate2.pgf Phr TranslateEng TranslateEst
 
 
