@@ -1516,3 +1516,18 @@ Missing functions:
      42 [in_Prep]
      41 [for_Prep]
      34 [ExistNPAdv]
+
+
+2015-08-02 (Kaarel)
+-------------------
+
+Replaced 55% of the entries in the multilingual lexicon with calls to the estonian/DictEst.gf
+
+    cat DictionaryEst.gf | grep "^lin" | wc -l
+    32304
+    cat DictionaryEst.gf | grep "^lin" | grep "D\." | wc -l
+    17632
+
+The remaining entries could not be replaced either because of errors in the multilingual lexicon or missing
+entries in the large lexicon. If there are improvements the the script tools/lexicon/replace-with-d.py
+could be run again.
