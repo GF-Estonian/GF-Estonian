@@ -33,7 +33,7 @@ concrete TranslateEst of Translate =
 --}
 
   DictionaryEst ** 
-open MorphoEst, ResEst, ParadigmsEst, SyntaxEst, CommonScand, (E = ExtraEst), Prelude in {
+open MorphoEst, ResEst, ParadigmsEst, SyntaxEst, (E = ExtraEst), Prelude in {
 
 flags
   literal=Symb ;

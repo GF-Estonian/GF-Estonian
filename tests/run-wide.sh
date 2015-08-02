@@ -1,10 +1,16 @@
 
-#cat wide.in.txt | egrep -v "#|\*" | head -100 | pgf-translate ../Translate2.pgf Phr TranslateEng TranslateEst | grep -v "^>" > wide.out.txt
+# Dependencies:
+#   - translate.py from https://github.com/Kaljurand/GF-Utils
+#   - test-suite from https://github.com/GF-Estonian/test-suite
 
-# cat wide.in.txt | egrep -v "(X|Y|Z|'|:|#|\*)" | head -100 | python ../tools/translate.py --pgf ../Translate2.pgf > wide.out.tsv
+tests_in="../../test-suite/translate_eng_est/tests.in.txt"
+tests_out="../../test-suite/translate_eng_est/tests.out.tsv"
+tests_gold="../../test-suite/translate_eng_est/tests.gold.tsv"
 
-# translate.py comes from https://github.com/Kaljurand/GF-Utils
+pgf="../Translate2.pgf"
 
-# cat wide.in100.txt | translate.py --pgf ../Translate2.pgf --tokenize --source TranslateEng --target TranslateEst > wide.out.tsv
+# Run this only if the English parser has changed
+#time cat ${tests_in} | translate.py --pgf $pgf --tokenize --source TranslateEng --target TranslateEst > ${tests_out}
 
-cat wide.gold.tsv | translate.py --pgf ../Translate2.pgf --source TranslateEng --target TranslateEst --type=gold > wide.out.tsv
+# Otherwise run only the linearization
+time cat ${tests_gold} | translate.py --pgf $pgf --source TranslateEng --target TranslateEst --type=gold > ${tests_out}
