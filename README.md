@@ -55,6 +55,13 @@ Running syntax tests:
     cd tests/
     sh run_tests.sh
 
+Running wide-coverage tests (test suit is <https://github.com/GF-Estonian/test-suite>):
+
+    make TranslateEst.pgf
+    make Translate2
+    cd tests/
+    sh run-wide.sh
+
 Status
 ------
 
