@@ -69,7 +69,7 @@ concrete ExtraEst of ExtraEstAbs = CatEst **
 
    PassVPSlash vp = vp ; --passVP vp vp.c2 ;
 
-
+   -- TODO: np dropped
    PassAgentVPSlash vp np = vp ;
  {-
       s = {s = vp.s.s ; h = vp.s.h ; p = vp.s.p ; sc = npform2subjcase vp.c2.c} ; 

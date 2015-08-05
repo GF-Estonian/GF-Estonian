@@ -71,6 +71,30 @@ concrete IdiomEst of Idiom = CatEst **
          vp.s2 ! True ! Pos ! Ag Pl P1 ++ vp.p ++ vp.ext
     } ;
 
+  -- TODO: copied from Fin, uncommented because did not compile
+  --SelfAdvVP vp = insertAdv (\\_ => "itse") vp ;
+  --SelfAdVVP vp = insertAdv (\\_ => "itse") vp ;
+
+  SelfNP np = {
+      s = \\c => np.s ! c ++ (reflPron np.a).s ! c ;
+      a = np.a ;
+      isPron = False ;  -- minun toloni --> minun itseni talo
+      isNeg = np.isNeg
+      } ;
+
+  ExistNPAdv np adv =
+      mkClause (\_ -> adv.s) np.a (insertObj 
+        (\\_,b,_ => np.s ! (NPCase Nom)) (predV olla)) ; -- TODO: introduce NPSep like in Fin?
+
+  ExistIPAdv ip adv =
+      let 
+        c  = case ip.n of {Sg => Nom ; Pl => Part} ;
+        cl = mkClause (\_ -> ip.s ! NPCase c ++ adv.s) (agrP3 Sg)  -- kuka täällä on ; keitä täällä on
+                      (predV olla) ;
+      in {
+        s = \\t,a,p => cl.s ! t ! a ! p ! SDecl
+        } ;
+
   oper
     olla = verbOlema ** {sc = NPCase Nom} ;
 

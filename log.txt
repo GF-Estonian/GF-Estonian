@@ -1534,3 +1534,5 @@ could be run again, like this:
 
     cat translator/DictionaryEst.gf | python ../tools/lexicon/replace-with-d.py -l estonian/DictEstAbs.gf > out.txt
     mv out.txt translator/DictionaryEst.gf
+
+Tested with GF 745808e50d8c20340ac8d261c4dbca60516a4293

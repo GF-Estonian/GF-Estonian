@@ -23,14 +23,12 @@ concrete TranslateEst of Translate =
   DocumentationEst,
 
   ChunkEst,
-{--
   ExtensionsEst [
     ListVPS,BaseVPS,ConsVPS,ConjVPS,ListVPI,BaseVPI,ConsVPI,ConjVPI,
     CompoundN,AdAdV,UttAdV,ApposNP,MkVPI, MkVPS, PredVPS, PassVPSlash, PassAgentVPSlash, CompoundAP
     , PastPartAP, PastPartAgentAP, PresPartAP, GerundNP, GerundAdv
     , WithoutVP, InOrderToVP, ByVP
     ],
---}
 
   DictionaryEst ** 
 open MorphoEst, ResEst, ParadigmsEst, SyntaxEst, (E = ExtraEst), Prelude in {
