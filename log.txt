@@ -1521,7 +1521,7 @@ Missing functions:
 2015-08-02 (Kaarel)
 -------------------
 
-Replaced 55% of the entries in the multilingual lexicon with calls to the estonian/DictEst.gf
+Replaced 55% of the entries in the multilingual lexicon with calls to the estonian/DictEstAbs.gf
 
     cat DictionaryEst.gf | grep "^lin" | wc -l
     32304
@@ -1530,4 +1530,7 @@ Replaced 55% of the entries in the multilingual lexicon with calls to the estoni
 
 The remaining entries could not be replaced either because of errors in the multilingual lexicon or missing
 entries in the large lexicon. If there are improvements the the script tools/lexicon/replace-with-d.py
-could be run again.
+could be run again, like this:
+
+    cat translator/DictionaryEst.gf | python ../tools/lexicon/replace-with-d.py -l estonian/DictEstAbs.gf > out.txt
+    mv out.txt translator/DictionaryEst.gf
