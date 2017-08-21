@@ -128,6 +128,7 @@ Frequency distribution of constructor patterns:
 TODO:
 
   - fix comparison forms of adjectives
+  - improve arg generation of compound words, e.g. currently the genitive of "nukk" is always "nuka", but sometimes "nuki" or "nuku" is correct
   - language-independent function names (`DictEngEst`)
 
 ### Syntax
