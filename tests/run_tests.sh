@@ -39,3 +39,8 @@ diff --brief $mydir/api-examples-Est.txt $mydir/api-examples-Est.out
 #echo "Comparing the results..."
 #diff test_gold.txt test_out.txt
 #diff test_v8_out.txt test_v4_out.txt
+
+echo
+echo "View the diffs e.g. using:"
+echo "vimdiff $mydir/exx-resource.gfs.gold $mydir/exx-resource.gfs.out"
+echo "vimdiff $mydir/api-examples-Est.txt $mydir/api-examples-Est.out"
