@@ -1,42 +1,42 @@
 mkText-Phr-Punct-Text-Text
 mkText (mkPhr (mkQS (mkCl she_NP sleep_V))) questMarkPunct (mkText (mkPhr yes_Utt) fullStopPunct)
-kas tema magab ? jah .
+kas tema magab Predef.SOFT_BIND ? jah Predef.SOFT_BIND .
 *
 mkText-Utt-Text
 mkText yes_Utt
-jah .
+jah Predef.SOFT_BIND .
 *
 mkText-S-Text
 mkText (mkS pastTense (mkCl she_NP sleep_V))
-tema magas .
+tema magas Predef.SOFT_BIND .
 *
 mkText-Cl-Text
 mkText (mkCl she_NP sleep_V)
-tema magab .
+tema magab Predef.SOFT_BIND .
 *
 mkText-QS-Text
 mkText (mkQS pastTense (mkQCl (mkCl she_NP sleep_V)))
-kas tema magas ?
+kas tema magas Predef.SOFT_BIND ?
 *
 mkText-Pol-Imp-Text
 mkText negativePol (mkImp sleep_V)
-ära maga !
+ära maga Predef.SOFT_BIND !
 *
 mkText-Text-Text-Text
 mkText (mkText (mkPhr (mkUtt where_IAdv)) questMarkPunct (mkText (mkPhr (mkUtt here_Adv)))) (mkText (mkPhr (mkUtt when_IAdv)) questMarkPunct (mkText (mkPhr (mkUtt now_Adv)) exclMarkPunct))
-kus ? siin . millal ? nüüd !
+kus Predef.SOFT_BIND ? siin Predef.SOFT_BIND . millal Predef.SOFT_BIND ? nüüd Predef.SOFT_BIND !
 *
 fullStopPunct-Punct
 mkText (mkPhr yes_Utt) fullStopPunct
-jah .
+jah Predef.SOFT_BIND .
 *
 questMarkPunct-Punct
 mkText (mkPhr yes_Utt) questMarkPunct
-jah ?
+jah Predef.SOFT_BIND ?
 *
 exclMarkPunct-Punct
 mkText (mkPhr yes_Utt) exclMarkPunct
-jah !
+jah Predef.SOFT_BIND !
 *
 mkPhr-PConj-Utt-Voc-Phr
 mkPhr but_PConj (mkUtt (mkImp sleep_V)) (mkVoc (mkNP i_Pron friend_N))
