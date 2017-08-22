@@ -1,6 +1,9 @@
 Tools
 =====
 
+Note: some of these scripts are obsolete and some have been migrated to
+https://github.com/GF-Estonian/tools
+
 Files
 -----
 
