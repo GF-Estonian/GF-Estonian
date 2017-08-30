@@ -24,8 +24,6 @@ help:
 	@echo "            > cc -table abi_andma_V"
 	@echo "            > cc -table kohe_Adv"
 	@echo
-	@echo "count_dict: show the frequency distribution of constructor patterns in DictEst"
-	@echo
 	@echo "  diff_rgl: compare the GF RGL version of Estonian with the current version"
 	@echo "            (set GF_SRC to the root of the GF source distribution, it is currently '$(GF_SRC)')"
 	@echo
@@ -46,10 +44,6 @@ run_lang1:
 
 load_dict:
 	gf +RTS -K50M -RTS --retain estonian/DictEst.gf
-
-count_dict:
-	cat estonian/DictEst.gf | grep " = mk" | wc -l
-	cat estonian/DictEst.gf | grep " = mk" | sed "s/.*= //" | sed 's/"[^"]*"//g' | sed "s/  */ /g" | sed "s/;//" | sort | uniq -c | sort -nr
 
 diff_rgl:
 	diff $(GF_SRC)/lib/src/api/CombinatorsEst.gf api/CombinatorsEst.gf
