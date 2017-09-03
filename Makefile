@@ -16,14 +16,6 @@ help:
 	@echo "            > cc -one mkS negativePol (mkCl (mkNP this_Quant (mkN \"värv\")) (mkA \"tume\"))"
 	@echo "            see värv ei ole tume"
 	@echo
-	@echo " load_dict: load DictEst (to use 'cc')"
-	@echo "            e.g."
-	@echo "            > cc -table 'küberspionaaž_N'"
-	@echo "            > cc -table valmis_A"
-	@echo "            > cc -table abivalmis_A"
-	@echo "            > cc -table abi_andma_V"
-	@echo "            > cc -table kohe_Adv"
-	@echo
 	@echo "  diff_rgl: compare the GF RGL version of Estonian with the current version"
 	@echo "            (set GF_SRC to the root of the GF source distribution, it is currently '$(GF_SRC)')"
 	@echo
@@ -41,9 +33,6 @@ try:
 
 run_lang1:
 	gf +RTS -K50M -RTS Lang1.pgf
-
-load_dict:
-	gf +RTS -K50M -RTS --retain estonian/DictEst.gf
 
 diff_rgl:
 	diff $(GF_SRC)/lib/src/api/CombinatorsEst.gf api/CombinatorsEst.gf
