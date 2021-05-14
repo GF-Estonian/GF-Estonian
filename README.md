@@ -1,9 +1,10 @@
 Estonian resource grammar for the GF RGL
 ========================================
 
-Estonian resource grammar for the Grammatical Framework (GF) Resource Grammar Library (RGL).
+Estonian resource grammar for the [Resource Grammar Library (RGL)](https://github.com/GrammaticalFramework/gf-rgl) of [Grammatical Framework (GF)](https://www.grammaticalframework.org/).
 
-__This is work in progress!__
+__Note__: This project is currently not being maintained, and the grammar is being improved directly in the RGL project (see
+https://github.com/GrammaticalFramework/gf-rgl/tree/master/src/estonian).
 
 Downloading
 -----------
